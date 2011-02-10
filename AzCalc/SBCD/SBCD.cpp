@@ -700,10 +700,13 @@ void formatterGroupingSeparator( NSString *zGroupSeparator )
 		 }
 		 
 //----------------------------------------------------------------------------------------
-static char __formatterGroupingSize = 3;
-void formatterGroupingSize( int iGroupSize )				// Default[3]
+// (0)   123 123  International
+// (1) 12 12 123  India
+// (2) 1234 1234  Kanji zone
+static char __formatterGroupingType = 0;
+void formatterGroupingType( int iGroupType )
 {
-	__formatterGroupingSize = iGroupSize;
+	__formatterGroupingType = iGroupType;
 }
 
 //----------------------------------------------------------------------------------------
@@ -720,6 +723,11 @@ void formatterDecimalSeparator( NSString *zDecimalSeparator )
 	}
 }
 
+NSString *getFormatterDecimalSeparator( void )
+{
+	return __formatterDecimalSeparator;
+}
+
 //----------------------------------------------------------------------------------------
 /*static bool __formatterDecimalZeroCut = true;
 void formatterDecimalZeroCut( bool bZeroCut )
@@ -728,12 +736,64 @@ void formatterDecimalZeroCut( bool bZeroCut )
 }*/
 
 //----------------------------------------------------------------------------------------
-// strNum : NS数値文字列（使用文字は、[+][-][.][0〜9]のみ、スペース無しであることを前提とする）
-// bZeroCut : YES=小数点以下、不要な[0][.]を除いて最適化する。 NO=entry行などで全て表示したいとき
-NSString *stringFormatter( NSString *strNum, BOOL bZeroCut )
+// 文字列から数値成分だけを切り出す。（数値関連外の文字があれば終端）
+// Az数値文字列を返す（使用文字は、[+][-][.][0〜9]のみ、スペース無し）
+NSString *stringAzNum( NSString *zNum )
 {
-	if ([strNum hasPrefix:@"@"]) {  // @Message
-		return [strNum substringFromIndex:1]; // 先頭の"@"を除いたMessageを返す
+	if (zNum==nil || [zNum length]<=0) return @"";
+	
+	NSString *str = [NSString stringWithString:zNum];
+	NSString *zDeci = getFormatterDecimalSeparator();
+	if ([zDeci isEqualToString:@"·"]) { // ミドル・ドット（英米式小数点）⇒ 標準小数点[.]ピリオドにする
+		// ミドル・ドットだけはUnicodeにつきNSASCIIStringEncodingできないので事前に変換が必要
+		str = [str stringByReplacingOccurrencesOfString:@"·" withString:@"."]; // ミドル・ドット ⇒ 小数点
+	}
+	else if ([zDeci isEqualToString:@","]) { // コンマ（独仏式小数点）⇒ 標準小数点[.]ピリオドにする
+		str = [str stringByReplacingOccurrencesOfString:@"." withString:@""];  // [.]⇒[]
+		str = [str stringByReplacingOccurrencesOfString:@"," withString:@"."]; // [,]⇒[.]
+	}
+	// 文字列から数値成分だけを切り出す。（数値関連外の文字があれば即終了）
+	// NS数値文字列にする（使用文字は、[+][-][.][0〜9]のみ、スペース無しであることを前提とする）
+	char cNum[SBCD_PRECISION+1], *pNum;
+	char cAns[SBCD_PRECISION+1], *pAns;
+	pNum = cNum;
+	pAns = cAns;
+	[str getCString:cNum maxLength:SBCD_PRECISION encoding:NSASCIIStringEncoding];
+	while (*pNum != 0x00) 
+	{
+		if (*pNum==' ' || *pNum==',' || *pNum==0x27) {
+			// スルー文字 [ ][,][']=(0x27)
+		}
+		else if ('0' <= *pNum && *pNum <= '9') {
+			*pAns++ = *pNum;
+		}
+		else if (*pNum=='+' || *pNum=='-') {
+			if (cAns == pAns) *pAns++ = *pNum; // 最初の文字ならばOK
+				else break; // END
+		}
+		else if (*pNum=='.') {	// 標準小数点[.]ピリオド
+			if (cAns < pAns) *pAns++ = *pNum; // 2文字目以降ならばOK
+				else break; // END
+		}
+		else {
+			break; // END 数値関連外の文字があれば即終了
+		}
+		pNum++;
+	}
+	*pAns = 0x00; // END
+	return [NSString stringWithCString:(char *)cAns encoding:NSASCIIStringEncoding];
+}
+
+//----------------------------------------------------------------------------------------
+// strAzNum : Az数値文字列（使用文字は、[+][-][.][0〜9]のみ、スペース無し）
+// bZeroCut : YES=小数点以下、不要な[0][.]を除いて最適化する。 NO=entry行などで全て表示したいとき
+NSString *stringFormatter( NSString *strAzNum, BOOL bZeroCut )
+{
+	if ([strAzNum length]<=0) {
+		return @"";
+	}
+	else if ([strAzNum hasPrefix:@"@"]) {  // @Message
+		return [strAzNum substringFromIndex:1]; // 先頭の"@"を除いたMessageを返す
 	}
 
 	char cNum[SBCD_PRECISION+1+1];
@@ -744,7 +804,7 @@ NSString *stringFormatter( NSString *strNum, BOOL bZeroCut )
 #endif
 	
 	int iAnsPos = 0;
-	strcpy(cNum, (char *)[strNum cStringUsingEncoding:NSASCIIStringEncoding]); 
+	strcpy(cNum, (char *)[strAzNum cStringUsingEncoding:NSASCIIStringEncoding]); 
 
 	int iPosIntS = 0;
 	int iPosIntE = -1;
@@ -778,18 +838,50 @@ NSString *stringFormatter( NSString *strNum, BOOL bZeroCut )
 	if ( iPosIntS <= iPosIntE ) 
 	{	// 整数部あり
 		int iCnt = iPosIntE - iPosIntS + 1; // 整数部の桁数
-		int iGpCnt = (iCnt-1) / __formatterGroupingSize;  // GroupSeparatorの数
-		int iGpTop = iCnt - __formatterGroupingSize * iGpCnt; // 最初(最上位)の文字数（iGroupSize以下になる）
-		int iGp = __formatterGroupingSize - iGpTop;
-		for ( int i=iPosIntS; i <= iPosIntE; i++ ) {
-			cAns[iAnsPos++] = cNum[i];
-			iGp++;
-			if (iGp == __formatterGroupingSize && i < iPosIntE) {
-				cAns[iAnsPos++] = SBCD_GROUP_SEPARATOR; // 区切り文字
-				iGp = 0;
+		if (__formatterGroupingType == 1) { // 12 12 123 India type
+			if (iCnt <= 3) {
+				// 3桁以下：区切りなし
+				for ( int idx=iPosIntS; idx <= iPosIntE; idx++ )  cAns[iAnsPos++] = cNum[idx];
+			} 
+			else {
+				// 4桁以上あり：1桁目を無いものとして、2桁目以降を2桁区切りする
+				int i4GpCnt = (iCnt-1-1) / 2; // GroupSeparatorの数
+				int i4GpTop = (iCnt-1) - (2 * i4GpCnt);	// 最初(最上位)の文字数（iGroupSize以下になる）
+				int i4Gp = 2 - i4GpTop;
+				int idx = iPosIntS;
+				for ( ; idx <= iPosIntE-1; idx++ ) {
+					cAns[iAnsPos++] = cNum[idx];
+					i4Gp++;
+					if (i4Gp == 2 && idx < iPosIntE-1) {
+						cAns[iAnsPos++] = SBCD_GROUP_SEPARATOR; // 区切り文字。最後に置換している(Unicodeにも対応するため)
+						i4Gp = 0;
+					}
+				}
+				// 最後の1桁
+				cAns[iAnsPos++] = cNum[iPosIntE];
+			}
+		} 
+		else {
+			int iStep;
+			if (__formatterGroupingType == 2) {
+				iStep = 4; // 1234 1234 Kanji zone type
+			} else {
+				iStep = 3; // 123 123 International type
+			}
+			int iGpCnt = (iCnt-1) / iStep; // GroupSeparatorの数
+			int iGpTop = iCnt - iStep * iGpCnt;	// 最初(最上位)の文字数（iGroupSize以下になる）
+			int iGp = iStep - iGpTop;
+			for ( int idx=iPosIntS; idx <= iPosIntE; idx++ ) {
+				cAns[iAnsPos++] = cNum[idx];
+				iGp++;
+				if (iGp == iStep && idx < iPosIntE) {
+					cAns[iAnsPos++] = SBCD_GROUP_SEPARATOR; // 区切り文字。最後に置換している(Unicodeにも対応するため)
+					iGp = 0;
+				}
 			}
 		}
-	} else {
+	}
+	else {
 		// 整数部なし
 		cAns[iAnsPos++] = '0'; // 小数部がある可能性あり
 	}
@@ -807,6 +899,7 @@ NSString *stringFormatter( NSString *strNum, BOOL bZeroCut )
 	assert( iAnsPos <= SBCD_PRECISION );
 	assert( cNum[SBCD_PRECISION+1] == PROVE1_VAL );
 	assert( cAns[SBCD_PRECISION+1] == PROVE2_VAL );
+    //printf("stringFormatter: cAns=[%s]\n", cAns);
 #endif
 
 	// NS文字列化

@@ -19,6 +19,12 @@
     [super dealloc];
 }
 
+// 回転サポート
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	if (700 < self.view.frame.size.height) return YES; // iPad
+	return NO;
+}
 
 // viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　
 - (void)viewWillAppear:(BOOL)animated 
@@ -32,6 +38,10 @@
 	ibSegDecimal.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_Decimal];
 	ibSegRound.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_Round];
 	ibSegReverseDrum.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_ReverseDrum];
+
+	ibSegGroupingSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingSeparator];
+	ibSegGroupingType.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingType];
+	ibSegDecimalSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_DecimalSeparator];
 }
 // viewDidAppear はView表示直後に呼ばれる
 
@@ -62,11 +72,43 @@
 	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_ReverseDrum];
 }
 
+
+- (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_GroupingSeparator];
+}
+
+- (IBAction)ibSegGroupingType:(UISegmentedControl *)segment
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_GroupingType];
+}
+
+- (IBAction)ibSegDecimalSeparator:(UISegmentedControl *)segment
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_DecimalSeparator];
+}
+
+
+
 - (IBAction)ibBuOK:(UIButton *)button
 {
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	[userDefaults synchronize]; // plistへ書き出す
 
+	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.bChangeKeyboard = NO;
+
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)ibBuKeyboardEdit:(UIButton *)button
+{
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	[userDefaults synchronize]; // plistへ書き出す
+	
+	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.bChangeKeyboard = YES;
+	
 	[self dismissModalViewControllerAnimated:YES];
 }
 

@@ -57,10 +57,13 @@ void stringRounding( char *strAnswer, char *strNum, int iPrecision, int iDecimal
 
 
 void formatterGroupingSeparator( NSString *zGroupSeparator );	// Default:@","
-void formatterGroupingSize( int iGroupSize );					// Default:3
+void formatterGroupingType( int iGroupType );					// Default:0
 void formatterDecimalSeparator( NSString *zDecimalSeparator );	// Default:@"."
 //void formatterDecimalZeroCut( bool bZeroCut );
-NSString *stringFormatter( NSString *strNum, BOOL bZeroCut );
+NSString *stringFormatter( NSString *strAzNum, BOOL bZeroCut );
+NSString *stringAzNum( NSString *zNum );
+
+NSString *getFormatterDecimalSeparator( void );
 
 #endif
 

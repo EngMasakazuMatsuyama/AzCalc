@@ -50,7 +50,7 @@
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
 	ibSegGroupingSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingSeparator];
-	ibSegGroupingSize.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingSize];
+	ibSegGroupingType.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingType];
 	ibSegDecimalSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_DecimalSeparator];
 }
 // viewDidAppear はView表示直後に呼ばれる
@@ -59,16 +59,26 @@
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_GroupingSeparator];
+	// (0) 9,9
+	// (1) 9'9
+	// (2) 9 9
+	// (3) 9.9
 }
 
-- (IBAction)ibSegGroupingSize:(UISegmentedControl *)segment
+- (IBAction)ibSegGroupingType:(UISegmentedControl *)segment
 {
-	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_GroupingSize];
+	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_GroupingType];
+	// (0)   123 123  International
+	// (1) 12 12 123  India
+	// (2) 1234 1234  Kanji zone
 }
 
 - (IBAction)ibSegDecimalSeparator:(UISegmentedControl *)segment
 {
 	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_DecimalSeparator];
+	// (0) 0.0
+	// (1) 0·0
+	// (2) 0,0
 }
 
 - (IBAction)ibBuOK:(UIButton *)button

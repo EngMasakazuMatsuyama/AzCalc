@@ -8,7 +8,7 @@
 
 #import "Global.h"
 #import "AzCalcAppDelegate.h"
-#import "AzCalcVC.h"
+#import "AzCalcViewController.h"
 #import "SettingVC.h"
 #import "InformationVC.h"
 #import "OptionVC.h"
@@ -16,11 +16,12 @@
 @implementation AzCalcAppDelegate
 
 @synthesize window;
-@synthesize ibAzCalcVC;
+@synthesize viewController;
 @synthesize ibSettingVC;
 @synthesize ibInformationVC;
 @synthesize ibOptionVC;
-@synthesize dMemory;
+//@synthesize dMemory;
+@synthesize bChangeKeyboard;
 
 
 #pragma mark -
@@ -28,10 +29,6 @@
 
 - (void)dealloc 
 {
-	[ibOptionVC release];
-	[ibInformationVC release];
-	[ibSettingVC release];
-    [ibAzCalcVC release];
     [window release];
     [super dealloc];
 }
@@ -53,7 +50,7 @@
 							  @"3",		GUD_Round,
 							  @"1",		GUD_ReverseDrum,
 							  NSLocalizedString(@"GUD_GroupingSeparator",nil),	GUD_GroupingSeparator,
-							  @"3",		GUD_GroupingSize,
+							  NSLocalizedString(@"GUD_GroupingType",nil),	GUD_GroupingType,
 							  NSLocalizedString(@"GUD_DecimalSeparator",nil),	GUD_DecimalSeparator,
 							  nil];
 
@@ -62,15 +59,16 @@
 	[userDefaults synchronize]; // plistへ書き出す
 	[azOptDef release];
 	
-	dMemory = 0.0;
+	//dMemory = 0.0;
+	bChangeKeyboard = NO;
 	
 	// Add the view controller's view to the window and display.
-//	[window addSubview:ibOptionVC.view];
-//	[window addSubview:ibInformationVC.view];
-//	[window addSubview:ibSettingVC.view];
-	[window addSubview:ibAzCalcVC.view];
+//	[window addSubview:ibOptionVC.view];		[ibOptionVC release];
+//	[window addSubview:ibInformationVC.view];	[ibInformationVC release];
+//	[window addSubview:ibSettingVC.view];		[ibSettingVC release];
+	[window addSubview:viewController.view];    [viewController release];
 	// TopView
-	//	[window bringSubviewToFront:ibAzCalcVC.view];
+	//	[window bringSubviewToFront:viewController.view];
 	// 
     [window makeKeyAndVisible];
 
@@ -78,46 +76,36 @@
 }
 
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    /*
-     Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-     Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-     */
+- (void)applicationWillResignActive:(UIApplication *)application 
+{	//iOS4: アプリケーションがアクティブでなくなる直前に呼ばれる
 }
 
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    /*
-     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-     If your application supports background execution, called instead of applicationWillTerminate: when the user quits.
-     */
-	
-	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-	[userDefaults synchronize]; // plistへ書き出す
+- (void)applicationDidEnterBackground:(UIApplication *)application 
+{	//iOS4: アプリケーションがバックグラウンドになったら呼ばれる
+	[self applicationWillTerminate:application]; //iOS3以前の終了処理
 }
 
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    /*
-     Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
-     */
+- (void)applicationWillEnterForeground:(UIApplication *)application 
+{	//iOS4: アプリケーションがバックグラウンドから復帰する直前に呼ばれる
 }
 
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
+- (void)applicationDidBecomeActive:(UIApplication *)application 
+{	//iOS4: アプリケーションがアクティブになったら呼ばれる。起動時にもviewDidLoadの後にコールされる。
+	// この時点で viewController.view は表示されている。
+	[viewController vMemoryLoad]; // メモリボタン関係を復帰させる
 }
 
 
 - (void)applicationWillTerminate:(UIApplication *)application 
-{
-    /*
-     Called when the application is about to terminate.
-     See also applicationDidEnterBackground:.
-     */
-
+{	// バックグラウンド実行中にアプリが終了された場合に呼ばれる。
+	// ただしアプリがサスペンド状態の場合アプリを終了してもこのメソッドは呼ばれない。
+	
+	// iOS3互換のためにはここが必要。　iOS4以降、applicationDidEnterBackground から呼び出される。
+	[viewController vMemorySave]; // メモリボタン関係を保存する
+	
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	[userDefaults synchronize]; // plistへ書き出す
 }

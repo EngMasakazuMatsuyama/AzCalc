@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class AzCalcVC;
+@class AzCalcViewController;
 @class SettingVC;
 @class InformationVC;
 @class OptionVC;
@@ -16,22 +16,25 @@
 @interface AzCalcAppDelegate : NSObject <UIApplicationDelegate> 
 {
     UIWindow		*window;
-    AzCalcVC		*ibAzCalcVC;
+    AzCalcViewController *viewController;
 	SettingVC		*ibSettingVC;
 	InformationVC	*ibInformationVC;
 	OptionVC		*ibOptionVC;
 	
 	// Drumオブジェクト共有変数
-	double			dMemory;		// [103:MRC] [104:M-] [105:M+]
+	//double			dMemory;		// [103:MRC] [104:M-] [105:M+]
+
+	BOOL			bChangeKeyboard;	// YES=キー変更モード
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet AzCalcVC *ibAzCalcVC;
+@property (nonatomic, retain) IBOutlet AzCalcViewController *viewController;
 @property (nonatomic, retain) IBOutlet SettingVC *ibSettingVC;
 @property (nonatomic, retain) IBOutlet InformationVC *ibInformationVC;
 @property (nonatomic, retain) IBOutlet OptionVC *ibOptionVC;
 
-@property (nonatomic, assign) double	dMemory;
+//@property (nonatomic, assign) double	dMemory;
+@property (nonatomic, assign) BOOL		bChangeKeyboard;
 
 @end
 

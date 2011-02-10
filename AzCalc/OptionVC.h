@@ -12,12 +12,12 @@
 @interface OptionVC : UIViewController 
 {
 	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
-	IBOutlet UISegmentedControl	*ibSegGroupingSize;
+	IBOutlet UISegmentedControl	*ibSegGroupingType;
 	IBOutlet UISegmentedControl	*ibSegDecimalSeparator;
 }
 
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment;
-- (IBAction)ibSegGroupingSize:(UISegmentedControl *)segment;
+- (IBAction)ibSegGroupingType:(UISegmentedControl *)segment;
 - (IBAction)ibSegDecimalSeparator:(UISegmentedControl *)segment;
 - (IBAction)ibBuOK:(UIButton *)button;
 

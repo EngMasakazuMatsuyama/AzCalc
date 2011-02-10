@@ -153,7 +153,7 @@ MDEwIEF6dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</s
 					<object class="IBUILabel" id="950357638">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{20, 312}, {290, 95}}</string>
+						<string key="NSFrame">{{20, 312}, {289, 95}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
@@ -161,7 +161,7 @@ MDEwIEF6dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</s
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">* Disclaimer   このアプリにより発生した損害について製作者やAzukiSoft関係者は、いかなる責任も負いかねます。 あらかじめご了承の上、ご利用ください。 * セキュリティ警告   このアプリは、情報を暗号化しません。機密情報は記入しないでください。（パスワードは、安全なキーチェーンに暗号記録されます）</string>
+						<string key="IBUIText">* Disclaimer   このアプリにより発生した損害について製作者やAzukiSoft関係者は、いかなる責任も負いかねます。 あらかじめご了承の上、ご利用ください。 * セキュリティ警告   このアプリは、情報を暗号化しません。機密情報は記入しないでください。</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">11</double>
@@ -169,7 +169,7 @@ MDEwIEF6dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</s
 						</object>
 						<reference key="IBUITextColor" ref="999047234"/>
 						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">1</int>
+						<string key="IBUIShadowOffset">{0, 0}</string>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">9</int>
@@ -269,10 +269,10 @@ MDEwIEF6dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</s
 							<reference ref="152662311"/>
 							<reference ref="165156831"/>
 							<reference ref="300878591"/>
-							<reference ref="950357638"/>
 							<reference ref="440502072"/>
 							<reference ref="896633924"/>
 							<reference ref="534004765"/>
+							<reference ref="950357638"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Information</string>
@@ -639,7 +639,7 @@ MDEwIEF6dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</s
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../AzCalc-0.0.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../AzCalc-0.2.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">Icon.png</string>

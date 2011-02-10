@@ -50,9 +50,11 @@
 
  -----------------------------------------------------------------------*/
 
-#define DECIMAL_Float	6			// Setting:GUD_Decimal 値がこれ以上ならば浮動小数点処理する　 ＜SettingVC設定に関連＞
+#define GUD_KeyboardSet					@"GUD_KeyboardSet"  // NSMutableDictionary
+#define GUD_KeyMemorys					@"GUD_KeyMemorys"	// NSMutableDictionary
 
 // SettingVC
+#define DECIMAL_Float	6		// Setting:GUD_Decimal 値がこれ以上ならば浮動小数点処理する　 ＜SettingVC設定に関連＞
 #define GUD_Drums						@"GUD_Drums"
 #define GUD_CalcMethod					@"GUD_CalcMethod"
 #define GUD_Decimal						@"GUD_Decimal"
@@ -62,7 +64,7 @@
 // OptionVC
 #define GUD_RoundOption					@"GUD_RoundOption"
 #define GUD_GroupingSeparator			@"GUD_GroupingSeparator"
-#define GUD_GroupingSize				@"GUD_GroupingSize"
+#define GUD_GroupingType				@"GUD_GroupingType"
 #define GUD_DecimalSeparator			@"GUD_DecimalSeparator"
 
 

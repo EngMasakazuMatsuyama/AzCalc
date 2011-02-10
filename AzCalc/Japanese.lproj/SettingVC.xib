@@ -254,7 +254,7 @@
 					<object class="IBUISegmentedControl" id="920031392">
 						<reference key="NSNextResponder" ref="854183509"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 31}, {221, 44}}</string>
+						<string key="NSFrame">{{10, 31}, {172, 44}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -572,7 +572,7 @@
 					<object class="IBUIButton" id="733847252">
 						<reference key="NSNextResponder" ref="854183509"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{246, 10}, {54, 32}}</string>
+						<string key="NSFrame">{{198, 10}, {112, 35}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -597,6 +597,29 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MC41AA</bytes>
 						</object>
+					</object>
+					<object class="IBUIButton" id="322538501">
+						<reference key="NSNextResponder" ref="854183509"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{198, 61}, {112, 30}}</string>
+						<reference key="NSSuperview" ref="854183509"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">12</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">キー配置変更</string>
+						<reference key="IBUIHighlightedTitleColor" ref="148247690"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="830121434"/>
 					</object>
 					<object class="IBUIButton" id="254637656">
 						<reference key="NSNextResponder" ref="854183509"/>
@@ -745,6 +768,15 @@
 					</object>
 					<int key="connectionID">51</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">ibBuKeyboardEdit:</string>
+						<reference key="source" ref="322538501"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">63</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -772,7 +804,6 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="556385368"/>
-							<reference ref="733847252"/>
 							<reference ref="784483987"/>
 							<reference ref="739418122"/>
 							<reference ref="657257844"/>
@@ -793,6 +824,8 @@
 							<reference ref="38732314"/>
 							<reference ref="185287702"/>
 							<reference ref="407806827"/>
+							<reference ref="733847252"/>
+							<reference ref="322538501"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Setting</string>
@@ -907,6 +940,11 @@
 						<reference key="object" ref="407806827"/>
 						<reference key="parent" ref="854183509"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">61</int>
+						<reference key="object" ref="322538501"/>
+						<reference key="parent" ref="854183509"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -936,6 +974,7 @@
 					<string>59.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
 					<string>60.IBPluginDependency</string>
+					<string>61.IBPluginDependency</string>
 					<string>7.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -956,7 +995,8 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{90, 384}, {320, 480}}</string>
+					<string>{{114, 251}, {320, 480}}</string>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -986,7 +1026,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">60</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -998,6 +1038,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibBuKeyboardEdit:</string>
 							<string>ibBuOK:</string>
 							<string>ibBuPageFlip:</string>
 							<string>ibSegCalcMethod:</string>
@@ -1008,6 +1049,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UISegmentedControl</string>
@@ -1021,6 +1063,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibBuKeyboardEdit:</string>
 							<string>ibBuOK:</string>
 							<string>ibBuPageFlip:</string>
 							<string>ibSegCalcMethod:</string>
@@ -1031,6 +1074,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">ibBuKeyboardEdit:</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">ibBuOK:</string>
 								<string key="candidateClassName">UIButton</string>
@@ -1330,7 +1377,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../AzCalc-0.0.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../AzCalc-0.2.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">icon32-PageFilp.png</string>

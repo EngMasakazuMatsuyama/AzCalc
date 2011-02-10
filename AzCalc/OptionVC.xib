@@ -53,10 +53,10 @@
 						<int key="IBSelectedSegmentIndex">1</int>
 						<object class="NSArray" key="IBSegmentTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>1,000</string>
-							<string>1'000</string>
-							<string>1 000</string>
-							<string>1.000</string>
+							<string>9,9</string>
+							<string>9'9</string>
+							<string>9 9</string>
+							<string>9.9</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentWidths">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -90,26 +90,20 @@
 					<object class="IBUISegmentedControl" id="391816721">
 						<reference key="NSNextResponder" ref="854183509"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 274}, {300, 44}}</string>
+						<string key="NSFrame">{{10, 276}, {300, 44}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<int key="IBNumberOfSegments">6</int>
-						<int key="IBSelectedSegmentIndex">3</int>
+						<int key="IBNumberOfSegments">3</int>
+						<int key="IBSelectedSegmentIndex">0</int>
 						<object class="NSArray" key="IBSegmentTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>0</string>
-							<string>1</string>
-							<string>2</string>
-							<string>3</string>
-							<string>4</string>
-							<string>5</string>
+							<string>123 123</string>
+							<string>12 12 123</string>
+							<string>1234 1234</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentWidths">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<real value="0.0"/>
-							<real value="0.0"/>
-							<real value="0.0"/>
 							<real value="0.0"/>
 							<real value="0.0"/>
 							<real value="0.0"/>
@@ -119,24 +113,15 @@
 							<boolean value="YES"/>
 							<boolean value="YES"/>
 							<boolean value="YES"/>
-							<boolean value="YES"/>
-							<boolean value="YES"/>
-							<boolean value="YES"/>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentContentOffsets">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>{0, 0}</string>
 							<string>{0, 0}</string>
 							<string>{0, 0}</string>
-							<string>{0, 0}</string>
-							<string>{0, 0}</string>
-							<string>{0, 0}</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentImages">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="4"/>
-							<reference ref="4"/>
-							<reference ref="4"/>
 							<reference ref="4"/>
 							<reference ref="4"/>
 							<reference ref="4"/>
@@ -172,9 +157,9 @@
 						<int key="IBSelectedSegmentIndex">0</int>
 						<object class="NSArray" key="IBSegmentTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>0.1</string>
-							<string>0·1</string>
-							<string>0,1</string>
+							<string>0.0</string>
+							<string>0·0</string>
+							<string>0,0</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentWidths">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -227,7 +212,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Grouping Size</string>
+						<string key="IBUIText">Grouping Type</string>
 						<reference key="IBUITextColor" ref="170086321"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -299,14 +284,6 @@
 					<int key="connectionID">51</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">ibSegGroupingSize</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="391816721"/>
-					</object>
-					<int key="connectionID">52</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">ibSegDecimalSeparator:</string>
 						<reference key="source" ref="309967325"/>
@@ -326,21 +303,29 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">ibSegGroupingSize:</string>
-						<reference key="source" ref="391816721"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">13</int>
-					</object>
-					<int key="connectionID">55</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">ibBuOK:</string>
 						<reference key="source" ref="733847252"/>
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">56</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ibSegGroupingType</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="391816721"/>
+					</object>
+					<int key="connectionID">62</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">ibSegGroupingType:</string>
+						<reference key="source" ref="391816721"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">13</int>
+					</object>
+					<int key="connectionID">63</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -369,12 +354,12 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="769992071"/>
-							<reference ref="391816721"/>
 							<reference ref="309546585"/>
 							<reference ref="309967325"/>
 							<reference ref="531973576"/>
 							<reference ref="739418122"/>
 							<reference ref="733847252"/>
+							<reference ref="391816721"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Option</string>
@@ -442,7 +427,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<string>{{144, 418}, {320, 480}}</string>
+					<string>{{63, 146}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -463,7 +448,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">61</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -478,13 +463,11 @@
 							<string>ibBuOK:</string>
 							<string>ibSegDecimalSeparator:</string>
 							<string>ibSegGroupingSeparator:</string>
-							<string>ibSegGroupingSize:</string>
-							<string>ibSegRoundOption:</string>
+							<string>ibSegGroupingType:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UIButton</string>
-							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
@@ -497,8 +480,7 @@
 							<string>ibBuOK:</string>
 							<string>ibSegDecimalSeparator:</string>
 							<string>ibSegGroupingSeparator:</string>
-							<string>ibSegGroupingSize:</string>
-							<string>ibSegRoundOption:</string>
+							<string>ibSegGroupingType:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -515,11 +497,7 @@
 								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 							<object class="IBActionInfo">
-								<string key="name">ibSegGroupingSize:</string>
-								<string key="candidateClassName">UISegmentedControl</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">ibSegRoundOption:</string>
+								<string key="name">ibSegGroupingType:</string>
 								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 						</object>
@@ -530,12 +508,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibSegDecimalSeparator</string>
 							<string>ibSegGroupingSeparator</string>
-							<string>ibSegGroupingSize</string>
-							<string>ibSegRoundOption</string>
+							<string>ibSegGroupingType</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
@@ -547,8 +523,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibSegDecimalSeparator</string>
 							<string>ibSegGroupingSeparator</string>
-							<string>ibSegGroupingSize</string>
-							<string>ibSegRoundOption</string>
+							<string>ibSegGroupingType</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -561,11 +536,7 @@
 								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">ibSegGroupingSize</string>
-								<string key="candidateClassName">UISegmentedControl</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">ibSegRoundOption</string>
+								<string key="name">ibSegGroupingType</string>
 								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 						</object>
@@ -786,7 +757,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">AzCalc-0.0.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">AzCalc-0.2.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<string key="IBCocoaTouchPluginVersion">117</string>
 	</data>

@@ -16,6 +16,11 @@
 	IBOutlet UISegmentedControl	*ibSegDecimal;
 	IBOutlet UISegmentedControl	*ibSegRound;
 	IBOutlet UISegmentedControl	*ibSegReverseDrum;
+
+	// Option-iPad
+	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
+	IBOutlet UISegmentedControl	*ibSegGroupingType;
+	IBOutlet UISegmentedControl	*ibSegDecimalSeparator;
 }
 
 - (IBAction)ibSegDrums:(UISegmentedControl *)segment;
@@ -24,7 +29,13 @@
 - (IBAction)ibSegRound:(UISegmentedControl *)segment;
 - (IBAction)ibSegReverseDrum:(UISegmentedControl *)segment;
 - (IBAction)ibBuOK:(UIButton *)button;
+- (IBAction)ibBuKeyboardEdit:(UIButton *)button;
 - (IBAction)ibBuPageFlip:(UIButton *)button;
+
+// Option-iPad
+- (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment;
+- (IBAction)ibSegGroupingType:(UISegmentedControl *)segment;
+- (IBAction)ibSegDecimalSeparator:(UISegmentedControl *)segment;
 
 @end
 
