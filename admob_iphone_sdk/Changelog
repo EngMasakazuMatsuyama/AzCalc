@@ -1,0 +1,188 @@
+Version: 2010-11-08
+-------------------
+* Built with Base SDK 4.2 (iPhone OS Deployment Target remains 2.0 for device; now 3.0 for simulator) 
+
+Version: 2010-09-08
+-------------------
+* Built with Base SDK 4.1 (iPhone OS Deployment Target remains 2.0 for device; now 3.0 for simulator)
+
+Version: 2010-08-18
+-------------------
+* Library built with 4.1 beta 3 available in the extras/ folder for 4.1 development (not for release!)
+* Close the in-app browser when entering the background on a 4.0+ device
+* Fixed rare crash where "-[NSURLResponse statusCode]: unrecognized selector" would appear in the crash logs
+* Fixed rare crash caused by misconfigured video ads
+* All ads auto-refresh on 4.0; previously one class of ads would not
+* No longer cache files ~/Documents/admob (AdMob files will no longer appear in the iTunes file sharing feature)
+* Added an OpenGL sample
+
+Version: 2010-06-14
+-------------------
+* Built with Base SDK 4.0 (iPhone OS Deployment Target remains 2.0)
+* Replaced README text files with a PDF that includes screenshots
+* Changed behavior of the Interactive Video ad unit to stop the video ad when user touches a button that obscures the video
+
+Version: 2010-06-02
+-------------------
+* *** IMPORTANT: please refer to README_iPad for special integration instructions related to Popovers. ***
+* New ad sizes available for the iPad (320x270, 748x110, and 488x80)
+    Added to AdMobView.h
+      - (AdMobView *)requestAdSize:(CGSize)size withDelegate:(id<AdMobDelegate>)delegate;
+* Moved AdMobInterstitialAd.h and AdMobInterstitialDelegateProtocol.h from the extras folder to the main AdMob folder
+* Changed AdMobDelegateProtocol.h methods to take an AdMobView parameter to easily handle multiple ads from one delegate object
+    - (NSString *)publisherIdForAd:(AdMobView *)adView;
+    - (UIViewController *)currentViewControllerForAd:(AdMobView *)adView;
+    - (void)willPresentFullScreenModalFromAd:(AdMobView *)adView;
+    - (void)didPresentFullScreenModalFromAd:(AdMobView *)adView;
+    - (void)willDismissFullScreenModalFromAd:(AdMobView *)adView;
+    - (void)didDismissFullScreenModalFromAd:(AdMobView *)adView;
+    - (void)applicationWillTerminateFromAd:(AdMobView *)adView;
+    - (UIColor *)adBackgroundColorForAd:(AdMobView *)adView;
+    - (UIColor *)primaryTextColorForAd:(AdMobView *)adView;
+    - (UIColor *)secondaryTextColorForAd:(AdMobView *)adView;
+* Changed sample projects
+    * Merged previous sample projects for iPhone (InterstitialSample project is now part of the AdMobSampleAds project)
+    * Added iPad-specific sample project AdMobSampleAdsiPad
+    * IMPORTANT: The IBSupport class AdViewController no longer retains itself. It must be retained by an owning view or controller. See README for instructions.
+* Upgrade TouchJSON to 1.0.8 (released April 23, 2010)
+
+Version: 2010-04-12
+-------------------
+* Fixed: Memory leaks from ad requests
+* Built with Base SDK 3.2 (iPhone OS Deployment Target remains 2.0)
+
+Version: 2010-03-22
+-------------------
+* Built as a universal binary
+    * libAdMobSimulator[3_0].a and libAdMobDevice[3_0].a have been merged into libAdMob.a
+       * Note the linker will strip out simulator code when building for a device so the binary will not bloat in size
+    * Continues to work will iPhone OS 2.0+ by conforming to Apple's recommendation of:
+       * Built against the iPhone OS 3.0 SDK
+       * The "iPhone OS Deployment Target" is set to "iPhone OS 2.0"
+* TouchJSON is now distributed as source and not compiled into the libraries to allow better compatibility
+* Samples updated to reflect build changes
+* Decreased the minimum interval for refreshing new ads from 30 seconds to 12
+* Changed how to get test ads back (to prevent accidentally publishing to the Market with test ads enabled)
+    * Removed -(BOOL)useTestAd
+    * Added -(NSArray *)testDevices
+* Added new notifications to the AdMobDelegate protocol
+    Added:
+      - (void)didPresentFullScreenModal;
+      - (void)willDismissFullScreenModal;
+      - (void)applicationWillTerminateFromAd;
+      - (void)didReceiveRefreshedAd:(AdMobView *)adView;
+      - (void)didFailToReceiveRefreshedAd:(AdMobView *)adView;
+* Changed how location information is passed in through the AdMobDelegate protocol
+    Added:
+      - (double)locationLatitude;
+      - (double)locationLongitude;
+      - (NSDate *)locationTimestamp;
+    Removed:
+      - (BOOL)mayAskForLocation;
+      - (CLLocation *)location;
+      - Dependency on the CoreLocation.framework
+* Removed support for click-to-contacts ad unit
+    * No longer required to link against the AddressBook.framework
+* Device identifiers are now one way hashed for additional user privacy
+* Fixed: various in-app video player bugs
+* Removed useGraySpinner delegate method.
+
+    HOW TO UPGRADE PROJECTS WITH 2.X SUPPORT TO THIS RELEASE:
+      * Copy all new .h files and libAdMob.a into your project to replace the old AdMob SDK
+      * Delete references to libAdMobDevice.a and libAdMobSimulator.a
+      * Drag the TouchJSON source directory into the project
+      * In the Info page for the project, under the Build tab:
+         * Make sure the "Base SDK" is set to "iPhone Device 3.0" or above (not 2.x)
+         * Set "iPhone OS Deployment Target" to the minimum supported version such as "iPhone OS 2.2.1"
+      * In the Info page for each Target, under the General tab:
+         * Make sure libAdMobDevice.a and libAdMobSimulator.a are deleted
+         * If missing add the MessageUI.framework and set the Type column to "Weak"
+
+Version: 2009-11-19
+-------------------
+* Added interstitial timeout to prevent hangs on application open.
+* Fixed: bugs in in-app video player
+* No longer respect "test mode" if iTunes metadata is detected with the assumption being an application was accidentally submitted to the App Store with test mode still active
+* Lowered network timeouts from 60 seconds to 15 for extremely rare cases where the client could wait that long (ad requests time out server-side so they never appear to take more than a couple of seconds)
+* Fixed: bug with interstitial ad statistics tracking
+
+Version: 2009-10-23
+-------------------
+* Fixed: bug with interstitial ad tracking
+
+Version: 2009-10-21
+--------------------
+* Added optional APIs for interstitial ads (see AdMobInterstitialAd.h and AdMobInterstitialDelegateProtocol.h in the AdMob folder)
+* In-app movie player for interstitials and showing movie links from the browser
+* Mailto links in the 3.0 libraries are handled in-app and no longer force your application to close
+* Fixed: Orientation bug where clicking on an ad, going to the in-app browser, rotating the device, then dismissing the browser rotated the original screen even if it did not allow rotations
+* Changed AdMobDelegateProtocol to remove customization of the in-app browser
+    REMOVED:
+      - (UIBarStyle)embeddedWebViewBarStyle;
+      - (UIColor *)embeddedWebViewTintColor;
+
+Version: 2009-06-17
+--------------------
+* Fixed AdMobDelegate protocol to be notified when the screen is taken over by an ad click
+    REMOVED:
+      - (void)willPresentModalCanvas;
+      - (void)willPresentWebView;
+      - (void)didDismissModalCanvas;
+      - (void)didDismissWebView;
+    ADDED:
+      - (void)willPresentFullScreenModal;
+      - (void)didDismissFullScreenModal;
+* Fixed in-app browser to use the stylings set by AdMobDelegate protocol
+
+Version: 2009-06-09
+--------------------
+* Unified the sample projects into one project showing all three sample integrations
+* Autosliders renamed to refreshTimers in the sample projects
+* 3.0 libraries are now built with 3.0 GM SDK and can be used for AppStore submission; the libraries are still located in the extras folder
+* Changed AdMobDelegateProtocol.
+    REMOVED:
+      - (BOOL)useEmbeddedWebView;
+      - (void)presentWebView:(NSURL *)adLandingPage;
+* Fixed some minor search ad unit UI bugs
+* Click-to-call confirmation is now handled by the OS in 3.0
+
+Version: 2009-06-04
+--------------------
+* Changed AdMobDelegateProtocol.
+    REMOVED:
+      - (UIColor *)adTextColor;
+    ADDED:
+      - (UIColor *)primaryTextColor;
+      - (UIColor *)secondaryTextColor;
+* Updated TouchJSON to 1.0.6 release
+* Added search ad unit (test by returning YES from -useTestAd and @"search_web" from -testAction)
+* Made ad unit appearance more flexible
+* Better handling of rotations of in-app browser
+* Improved 3.0 support
+
+Version: 2009-04-02
+--------------------
+* Added a version method to AdMobView to be able easily determine the version of the binary.
+* Added the ability for AdMob to display messages (e.g. notifications of SDK updates) in your Xcode debug console, when using the Simulator only.
+* Added support for a click-to-contacts ad unit.
+* Location is only ascertained once every 24 hours (instead of every 5 minutes) to conserve CPU and battery.
+* User is shown a dialog before making a click-to-call phone call to prevent accidental phone calls.
+* i18n: translation support for all strings present in the AdMob SDK. Will initially support the same languages as www.admob.com.
+* Fixed: Dismissing an embedded browser when the keyboard is up no longer causes a crash. (This is actually a workaround
+  a UIWebView bug.) Thanks to Aaron Miller for the bug report.
+* Minor documentation clarifications.
+
+Version: 2009-02-03
+--------------------
+* Added no thumb device build.
+* Fixed: When a transform was applied to an AdMobView, touch detection did not occur correctly.
+  IMPORTANT: If you are applying transforms to your AdMobView, this fix may cause the ad to render in a different
+  location than it used to! Please double check your ad placement!
+* Fixed: Under rare race conditions, rogue timers could in theory cause crashes. (No reports of this occurring, just being careful.)
+* Code cleanup to prevent URL download memory leaks. (None actually occur with code as it exists, just do things right so they don't arise in the future.)
+* Fixed: Location updating code was not always respecting cache ttls.
+* Improved AppStore/iTunes link detection in embedded browser.
+* Fixed: If the AdMobView was released while a user was using the embedded browser, some actions would cause a crash.
+* Tweaked the UI of the embedded browser to better follow Apple HIGs.
+* Sometimes on the simulator a UUID is not available -- handle that more gracefully.
+* Started changelog. :)

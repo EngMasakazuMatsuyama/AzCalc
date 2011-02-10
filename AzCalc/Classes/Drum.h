@@ -31,6 +31,7 @@
 
 @interface Drum : NSObject 
 {
+@private
 	NSMutableArray		*formulaOperators;	// entryOperatorをaddする
 	NSMutableArray		*formulaNumbers;	// entryNumberをaddする
 	NSMutableArray		*formulaUnits;		// entryUnit をaddする
@@ -42,7 +43,6 @@
 	NSMutableString		*entryUnit;			// 単位 [%][‰] [mm][cm][m][km] [￥][＄]
 	NSInteger			entryRow;			// 現在選択行　>=0 And <= [aOperators count];
 
-@private
 	// Setting
 	NSInteger	MiSegCalcMethod;
 	NSInteger	MiSegDecimal;
@@ -69,7 +69,7 @@
 - (void)entryKeyTag:(NSInteger)iKeyTag keyButton:(KeyButton *)keyButton;  // キー入力処理
 - (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
 - (void)vCalcing:(NSString *)zNextOperator;
-- (NSString *)zformulaToRpnCalc;
+- (NSString *)zAnswerDrum;
 
 //+ (NSString *)strNumber:(NSString *)sender;
 

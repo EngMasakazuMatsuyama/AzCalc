@@ -17,11 +17,11 @@
 	IBOutlet ADBannerView	*ibADBannerView;
 	IBOutlet UIPickerView	*ibPicker;
 	IBOutlet UILabel		*ibLbEntry;
-	//IBOutlet UILabel		*ibLbMemory;
 	IBOutlet UIButton		*ibBuMemory;
 	IBOutlet UIButton		*ibBuSetting;
 	IBOutlet UIButton		*ibBuInformation;
-	IBOutlet UIScrollView	*ibScrollView;
+	IBOutlet UIScrollView	*ibScrollUpper; //[0.3]
+	IBOutlet UIScrollView	*ibScrollLower;
 	
 @private
 	NSArray				*aDrums;

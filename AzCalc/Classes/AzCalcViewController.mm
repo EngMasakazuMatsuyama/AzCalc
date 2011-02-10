@@ -40,7 +40,7 @@
 - (void)vPadKeysDisplay;
 - (void)vKeyboardPage:(NSInteger)iPage;
 - (void)vKeyboardPage1Alook0;
-- (void)vDrumButtonDown:(UIButton *)button;
+- (void)vDrumButtonTouchUp:(UIButton *)button;
 - (void)vDrumButtonDragEnter:(UIButton *)button;
 - (void)iAdOn;
 - (void)iAdOff;
@@ -82,6 +82,15 @@
     [super viewDidLoad];
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
+	//========================================================== Upper ==============
+	// ScrollUpper  (0)Pickerドラム  (1)TextView数式
+	CGRect rect = ibScrollUpper.frame;
+	ibScrollUpper.contentSize = CGSizeMake(rect.size.width * 2, rect.size.height); 
+	ibScrollUpper.scrollsToTop = NO;
+	rect.origin.x = 0; //rect.size.width * MiScrollViewPage;
+	[ibScrollUpper scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
+
+	//-----------------------------------------------------(0)ドラム ページ
 	if (aDrumButtons) {
 		[aDrumButtons release];	// viewDidUnloadされた後、ここを通る
 		aDrumButtons = nil;
@@ -97,16 +106,17 @@
 		//bu.hidden = YES;   vDrumButtonDisplayで変更しているため効果なし
 #else
 		bu.alpha = 0.3; // 半透明 (0.0)透明にするとクリック検出されなくなる
-		[bu addTarget:self action:@selector(vDrumButtonDown:) forControlEvents:UIControlEventTouchDown];
+		[bu addTarget:self action:@selector(vDrumButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
 #endif
 		[maButtons addObject:bu];
-		[self.view addSubview:bu];
+		//[self.view addSubview:bu];
+		[ibScrollUpper addSubview:bu];
 		//[bu release];
 	}
 	aDrumButtons = [[NSArray alloc] initWithArray:maButtons];	
 	[maButtons release];
 	[self.view bringSubviewToFront:ibBuMemory];		// ibBuMemory を最後の bu よりも上にする
-	[self.view bringSubviewToFront:ibScrollView];	// さらに ibScrollView を ibBuMemory の上にする
+	[self.view bringSubviewToFront:ibScrollLower];	// さらに ibScrollLower を ibBuMemory の上にする
 	
 	if (!aDrums) {
 		// Drumオブジェクトは、SubViewではないので、最初に1度だけ生成し、viewDidUnloadでは破棄しない。
@@ -131,19 +141,31 @@
 	ibPicker.dataSource = self;
 	ibPicker.showsSelectionIndicator = NO;
 	
+	// iAd
 	CGRect theBannerFrame = self.view.frame;
 	theBannerFrame.origin.y = -52;  // viewの外へ出す
 	ibADBannerView.frame = theBannerFrame;	
-	
 	//[self iAdOff];
 	bADbannerIsVisible = NO;
 	bADbannerFirstTime = YES;
 
+	//-----------------------------------------------------(1)数式 ページ
+	// UITextView
+	
+	
+	
+	
+	
+	
+	
+
+	//========================================================== Lower ==============
+	
 	if (700 < self.view.frame.size.height) { // iPad
 		iKeyPages = 3;
 		iKeyCols = 7;	iKeyOffsetCol = 0; // AzdicKeys.plist C 開始位置
 		iKeyRows = 7;	iKeyOffsetRow = 0;
-		fKeyGap = 4.0;
+		fKeyGap = 3.0;
 		fKeyFontZoom = 1.5;
 		//
 		[self vPadKeysDisplay]; // iPad専用 メモリー20キー配置 および 回転処理
@@ -151,17 +173,17 @@
 		iKeyPages = 3;
 		iKeyCols = 5;	iKeyOffsetCol = 1; // AzdicKeys.plist C 開始位置
 		iKeyRows = 5;	iKeyOffsetRow = 1;
-		fKeyGap = 2.0;
+		fKeyGap = 0.5;
 		fKeyFontZoom = 1.0;
 	}
 
-	// ScrollView 	(0)Memorys (1〜)Buttons
+	// ScrollLower 	(0)Memorys (1〜)Buttons
 	MiScrollViewPage = 1; // DEFAULT PAGE
-	CGRect rect = ibScrollView.frame;
-	ibScrollView.contentSize = CGSizeMake(rect.size.width * iKeyPages, rect.size.height); 
-	ibScrollView.scrollsToTop = NO;
+	rect = ibScrollLower.frame;
+	ibScrollLower.contentSize = CGSizeMake(rect.size.width * iKeyPages, rect.size.height); 
+	ibScrollLower.scrollsToTop = NO;
 	rect.origin.x = rect.size.width * MiScrollViewPage;
-	[ibScrollView scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
+	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
 
 #ifdef AzMAKE_SPLASHFACE
 	ibPicker.alpha = 0.7;
@@ -194,13 +216,13 @@
 	
 	// ibPickerは、画面左下を基点にしている。
 	//float fYtop = 0;  //ibPicker.frame.size.height + 20;
-	//float fYbot = ibScrollView.frame.size.height; // self.view.frame.size.height;
+	//float fYbot = ibScrollLower.frame.size.height; // self.view.frame.size.height;
 	
 	// ボタンの縦横比を「黄金率」にして余白をGapにする
 	fKeyWidGap = 0;
 	fKeyHeiGap = 0;
-	fKeyWidth = ibScrollView.frame.size.width / iKeyCols;  // 均等割り
-	fKeyHeight = ibScrollView.frame.size.height / iKeyRows; 
+	fKeyWidth = ibScrollLower.frame.size.width / iKeyCols;  // 均等割り
+	fKeyHeight = ibScrollLower.frame.size.height / iKeyRows; 
 	float ff = (fKeyWidth - fKeyGap*2) / GOLDENPER;
 	if (ff < fKeyHeight) {
 		fKeyHeiGap = (fKeyHeight - ff) / 2.0;
@@ -223,7 +245,7 @@
 	
 	for (int page=0; page<iKeyPages; page++ ) 
 	{
-		float fx = ibScrollView.frame.size.width * page + fKeyWidGap;
+		float fx = ibScrollLower.frame.size.width * page + fKeyWidGap;
 		for (int col=0; col<iKeyCols && col<100; col++ ) 
 		{
 			float fy = fKeyHeiGap;
@@ -233,8 +255,8 @@
 				KeyButton *bu = [[KeyButton alloc] initWithFrame:CGRectMake(fx,fy, fKeyWidth,fKeyHeight)];
 				//bu.contentMode = UIViewContentModeScaleToFill;
 				//bu.contentStretch = CGRectMake(0.5, 0.5, 0.0, 0.0);  変化なしだった。
-				[bu setBackgroundImage:[UIImage imageNamed:@"KeyButton.png"] forState:UIControlStateNormal];
-				[bu setBackgroundImage:[UIImage imageNamed:@"KeyButtonHigh.png"] forState:UIControlStateHighlighted];
+				[bu setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
+				[bu setBackgroundImage:[UIImage imageNamed:@"Icon-DrumPush.png"] forState:UIControlStateHighlighted];
 				bu.iPage = page;
 				bu.iCol = iKeyOffsetCol + col;
 				bu.iRow = iKeyOffsetRow + row;
@@ -317,7 +339,7 @@
 
 				// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 
-				[ibScrollView addSubview:bu];
+				[ibScrollLower addSubview:bu];
 				[bu release]; // init だから
 				[zPCR release];
 				
@@ -405,7 +427,7 @@
 	//formatterGroupingSize( (int)[defaults integerForKey:GUD_GroupingSize] );				// Default[3]
 	formatterGroupingType( (int)[defaults integerForKey:GUD_GroupingType] );				// Default[3]
 	
-	id obj = [ibScrollView viewWithTag:KeyTAG_DECIMAL]; // (KeyTAG_DECIMAL)[.]小数点
+	id obj = [ibScrollLower viewWithTag:KeyTAG_DECIMAL]; // (KeyTAG_DECIMAL)[.]小数点
 	if (obj && [obj isMemberOfClass:[KeyButton class]]) {
 		KeyButton *bu = (KeyButton *)obj;
 		switch ((NSInteger)[defaults integerForKey:GUD_DecimalSeparator]) {
@@ -454,7 +476,7 @@
 		}
 		 
 		// キー再表示：連結されたキーがあれば独立させる
-		NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+		NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 		for (id obj in [aKeys reverseObjectEnumerator]) {  // 最後にaddSubViewしたのが先頭[0]になるから逆順で
 			if ([obj isMemberOfClass:[KeyButton class]]) {
 				KeyButton *bu = (KeyButton *)obj;
@@ -534,7 +556,7 @@
 		[self ibBuMemoryDisplay];
 
 		// キー再表示
-		NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+		NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 		// タテ連結処理
 		for (id obj in [aKeys reverseObjectEnumerator]) {  // 最後にaddSubViewしたのが先頭[0]になるから逆順で
 			if ([obj isMemberOfClass:[KeyButton class]]) {
@@ -606,7 +628,7 @@
 	if (buChangeKey) {
 		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
 		// 復帰
-		[buChangeKey setBackgroundImage:[UIImage imageNamed:@"KeyButton.png"] forState:UIControlStateNormal];
+		[buChangeKey setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
 		buChangeKey = nil;
 	}
 }
@@ -618,7 +640,7 @@
 	if (buChangeKey) {
 		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
 		// 復帰
-		[buChangeKey setBackgroundImage:[UIImage imageNamed:@"KeyButton.png"] forState:UIControlStateNormal];
+		[buChangeKey setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
 		buChangeKey = nil;
 	}
 }
@@ -657,10 +679,10 @@
 	CGRect rc = ibBuMemory.frame;
 	if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
 		// ヨコ ⇒ W1024 H768-20 縦20行1列表示
-		rc.origin.y = 768 - ibScrollView.frame.size.height;
+		rc.origin.y = 768 - ibScrollLower.frame.size.height;
 	} else {
 		// タテ ⇒ W768 H1024-20 縦7行3列表示
-		rc.origin.y = 1024 - ibScrollView.frame.size.height;
+		rc.origin.y = 1024 - ibScrollLower.frame.size.height;
 	}
 	ibBuMemory.frame = rc;
 	[self ibBuMemoryDisplay]; // 改めて表示
@@ -734,14 +756,14 @@
 		[ibBuMemory setTitle:zTitle forState:UIControlStateNormal];
 		// ボタンを出現させる
 		CGRect rc = ibBuMemory.frame;
-		rc.origin.y = ibScrollView.frame.origin.y; // 定位置：ibScrollViewの裏に隠れている
+		rc.origin.y = ibScrollLower.frame.origin.y; // 定位置：ibScrollLowerの裏に隠れている
 		// 文字数からボタンの幅を調整する
 		CGSize sz = [zTitle sizeWithFont:ibBuMemory.titleLabel.font];
 		AzLOG(@"sizeWithFont = W%f, H%f", sz.width, sz.height);
 		rc.size.width = sz.width + 20;
 		if (260 < rc.size.width) rc.size.width = 260; // Over
 		rc.origin.x = (ibPicker.frame.size.width - rc.size.width) / 2.0;
-//		if (ibBuMemory.frame.origin.y < ibScrollView.frame.origin.y) return; // 既に出現している
+//		if (ibBuMemory.frame.origin.y < ibScrollLower.frame.origin.y) return; // 既に出現している
 		// アニメ準備
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -751,15 +773,15 @@
 		ibBuMemory.frame = rc;
 	} 
 	else {
-		if (ibScrollView.frame.origin.y <= ibBuMemory.frame.origin.y) return; // 既に隠れている
-		// ボタンをibScrollViewの裏に隠す
+		if (ibScrollLower.frame.origin.y <= ibBuMemory.frame.origin.y) return; // 既に隠れている
+		// ボタンをibScrollLowerの裏に隠す
 		// アニメ準備
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 		[UIView setAnimationDuration:1.0];
 		// アニメ終了時の位置をセット
 		CGRect rc = ibBuMemory.frame;
-		rc.origin.y = ibScrollView.frame.origin.y; // 定位置：ibScrollViewの裏に隠れている
+		rc.origin.y = ibScrollLower.frame.origin.y; // 定位置：ibScrollLowerの裏に隠れている
 		ibBuMemory.frame = rc;
 	}
 	// アニメ開始
@@ -771,7 +793,7 @@
 	bDrumButtonTap1 = NO;
 }
 
-- (void)vDrumButtonDown:(UIButton *)button
+- (void)vDrumButtonTouchUp:(UIButton *)button
 {
 	if (aKeyMaster) {
 		// キーレイアウト変更モード
@@ -874,7 +896,7 @@
 		}
 		BOOL bSave = NO;
 		// bu.bDirty == YES だけ更新する
-		NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+		NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 		for (id obj in aKeys) {
 			//AzLOG(@"aKeys:obj class=%@", [[obj class] description]); // "KeyButton" が得られる
 			assert([obj isMemberOfClass:[KeyButton class]]);
@@ -1337,7 +1359,7 @@
 				}
 				if (KeyTAG_MSTORE_Start <= ibBuMemory.tag && ibBuMemory.tag <= KeyTAG_MSTROE_End) {
 					// MemoryKey へ登録する
-					NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+					NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 					for (id obj in aKeys) {
 						if ([obj isMemberOfClass:[KeyButton class]]) {
 							KeyButton *bu = (KeyButton *)obj;
@@ -1382,7 +1404,7 @@
 				if (0 < [[UIPasteboard generalPasteboard].string length]) {
 					// [UIPasteboard generalPasteboard].string を 未使用メモリーKey へ登録する
 					ibBuMemory.tag = 0; // MClear
-					NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+					NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 					NSInteger iSavedTag = (-1);
 
 					if (aPadKeyButtons) { // iPad専用メモリー優先にセットする　＜＜たいていiPhoneメモリ数より多いから＞＞
@@ -1492,7 +1514,7 @@
 						// 計算処理する
 						[drum.entryOperator setString:OP_ANS];
 						// entry行に、この[=]が入るので、数値部に計算結果を入れる
-						[drum.entryNumber setString:[drum zformulaToRpnCalc]]; 
+						[drum.entryNumber setString:[drum zAnswerDrum]]; 
 					}
 					zCopyNumber = [NSString stringWithString:drum.entryNumber];
 				}
@@ -1552,7 +1574,7 @@
 									}
 								}
 							}
-							NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+							NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 							for (id obj in aKeys) {
 								if ([obj isMemberOfClass:[KeyButton class]]) {
 									KeyButton *bu = (KeyButton *)obj;
@@ -1646,7 +1668,7 @@
 		}
 	}
 	// 主にiPhone 初期の0ページにあるメモリボタンを保存
-	NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+	NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 	for (id obj in aKeys) {  // どこに配置されているか解らないので全て探す
 		if ([obj isMemberOfClass:[KeyButton class]]) {
 			KeyButton *bu = (KeyButton *)obj;
@@ -1716,7 +1738,7 @@
 		}
 	}
 	// 主にiPhone 初期の0ページにあるメモリボタンを保存
-	NSArray *aKeys = [ibScrollView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+	NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 	for (id obj in aKeys) {  // どこに配置されているか解らないので全て探す
 		if ([obj isMemberOfClass:[KeyButton class]]) {
 			KeyButton *bu = (KeyButton *)obj;
@@ -1741,16 +1763,16 @@
 		NSNumber *num = [dicMkeys objectForKey:@"KB_PAGE"];
 		if (num && 0<=[num integerValue]) {
 			MiScrollViewPage = [num integerValue];
-			CGRect rc = ibScrollView.frame;
+			CGRect rc = ibScrollLower.frame;
 			rc.origin.x = rc.size.width * MiScrollViewPage;
-			[ibScrollView scrollRectToVisible:rc animated:NO];
+			[ibScrollLower scrollRectToVisible:rc animated:NO];
 		} else {
 			MiScrollViewPage = 1; // DEFAULT PAGE
 		}
 	}
 }
 
-// ibScrollView DELEGATE:実際に画面が静止したときに呼ばれる
+// ibScrollLower DELEGATE:実際に画面が静止したときに呼ばれる
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView
 {
     MiScrollViewPage = (NSInteger)(_scrollView.contentOffset.x / _scrollView.frame.size.width);
@@ -1758,21 +1780,21 @@
 
 - (void)vKeyboardPage:(NSInteger)iPage
 {
-	//if (ibScrollView.frame.origin.x / ibScrollView.frame.size.width == iPage) return; // 既にiPageである。
-	CGRect rc = ibScrollView.frame;
+	//if (ibScrollLower.frame.origin.x / ibScrollLower.frame.size.width == iPage) return; // 既にiPageである。
+	CGRect rc = ibScrollLower.frame;
 	rc.origin.x = rc.size.width * iPage;
-	[ibScrollView scrollRectToVisible:rc animated:YES];
+	[ibScrollLower scrollRectToVisible:rc animated:YES];
 }
 
 - (void)vKeyboardPage1Alook0 // 1ページから0ページを「ちょっと見せる」アニメーション
 {
-	//AzLOG(@"ibScrollView: x=%f w=%f", ibScrollView.frame.origin.x, ibScrollView.frame.size.width);
-	//if (ibScrollView.  .frame.origin.x / ibScrollView.frame.size.width != 1) return; // 1ページ限定
-	CGRect rc = ibScrollView.frame;
+	//AzLOG(@"ibScrollLower: x=%f w=%f", ibScrollLower.frame.origin.x, ibScrollLower.frame.size.width);
+	//if (ibScrollLower.  .frame.origin.x / ibScrollLower.frame.size.width != 1) return; // 1ページ限定
+	CGRect rc = ibScrollLower.frame;
 	rc.origin.x = rc.size.width - 17; // 0Page方向へ「ちょっと見せる」だけ戻す
-	[ibScrollView scrollRectToVisible:rc animated:NO];
+	[ibScrollLower scrollRectToVisible:rc animated:NO];
 	rc.origin.x = rc.size.width * 1; // 1Pageに復帰
-	[ibScrollView scrollRectToVisible:rc animated:YES];
+	[ibScrollLower scrollRectToVisible:rc animated:YES];
 }
 
 - (void)vPadKeysDisplay // iPad専用 メモリー20キー配置 および 回転処理
@@ -1786,8 +1808,8 @@
 		{
 			//UIButton *bu = [UIButton buttonWithType:UIButtonTypeCustom];
 			KeyButton *bu = [[KeyButton alloc] initWithFrame:CGRectZero];
-			[bu setBackgroundImage:[UIImage imageNamed:@"KeyButton.png"] forState:UIControlStateNormal];
-			[bu setBackgroundImage:[UIImage imageNamed:@"KeyButtonHigh.png"] forState:UIControlStateHighlighted];
+			[bu setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
+			[bu setBackgroundImage:[UIImage imageNamed:@"Icon-DrumPush.png"] forState:UIControlStateHighlighted];
 			bu.iPage = 9;
 			bu.iCol = 0;
 			bu.iRow = 0;
@@ -1901,7 +1923,7 @@
 //----------------------------------------------------------------Touch
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	CGPoint po = [[touches anyObject] locationInView:ibScrollView];
+	CGPoint po = [[touches anyObject] locationInView:ibScrollLower];
 	AzLOG(@"---touchesBegan:(%f, %f)", po.x, po.y);
 	
 	
@@ -1926,19 +1948,19 @@
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	CGPoint po = [[touches anyObject] locationInView:ibScrollView];
+	CGPoint po = [[touches anyObject] locationInView:ibScrollLower];
 	AzLOG(@"---touchesMoved:(%f, %f)", po.x, po.y);
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	CGPoint po = [[touches anyObject] locationInView:ibScrollView];
+	CGPoint po = [[touches anyObject] locationInView:ibScrollLower];
 	AzLOG(@"---touchesEnded:(%f, %f)", po.x, po.y);
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
 {
-	CGPoint po = [[touches anyObject] locationInView:ibScrollView];
+	CGPoint po = [[touches anyObject] locationInView:ibScrollLower];
 	AzLOG(@"--------------touchesCancelled:(%f, %f)", po.x, po.y);
 }
 

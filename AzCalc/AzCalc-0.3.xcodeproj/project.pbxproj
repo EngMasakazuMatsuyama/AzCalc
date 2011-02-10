@@ -1,0 +1,641 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D3623260D0F684500981E51 /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */; };
+		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		2899E5220DE3E06400AC0155 /* AzCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */; };
+		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		28D7ACF80DDB3853001CB0EB /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */; };
+		441D242511F3056200A3B68A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
+		4422DA4B122114EF00F70E2E /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 4422DA4A122114EF00F70E2E /* Icon72.png */; };
+		44418703120E8ECB00DE74B0 /* AzKeySet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44418702120E8ECB00DE74B0 /* AzKeySet.plist */; };
+		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
+		445183D3130398D6002820EA /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183B8130398D6002820EA /* CDataScanner.m */; };
+		445183D4130398D6002820EA /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183BB130398D6002820EA /* CDataScanner_Extensions.m */; };
+		445183D5130398D6002820EA /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183BD130398D6002820EA /* NSCharacterSet_Extensions.m */; };
+		445183D6130398D6002820EA /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183BF130398D6002820EA /* NSDictionary_JSONExtensions.m */; };
+		445183D7130398D6002820EA /* NSScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C1130398D6002820EA /* NSScanner_Extensions.m */; };
+		445183D8130398D6002820EA /* CJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C4130398D6002820EA /* CJSONDataSerializer.m */; };
+		445183D9130398D6002820EA /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C6130398D6002820EA /* CJSONDeserializer.m */; };
+		445183DA130398D6002820EA /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C8130398D6002820EA /* CJSONScanner.m */; };
+		445183DB130398D6002820EA /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183CA130398D6002820EA /* CJSONSerializer.m */; };
+		445183DC130398D6002820EA /* CSerializedJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183CC130398D6002820EA /* CSerializedJSONData.m */; };
+		445183DD130398D6002820EA /* libAdMob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 445183D2130398D6002820EA /* libAdMob.a */; };
+		445184411303B7A4002820EA /* Icon-DrumPush.png in Resources */ = {isa = PBXBuildFile; fileRef = 4451843F1303B7A4002820EA /* Icon-DrumPush.png */; };
+		445184421303B7A4002820EA /* Icon-Drum.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184401303B7A4002820EA /* Icon-Drum.png */; };
+		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
+		449E6B98121FA34100338E7F /* AzKeySet-iPad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */; };
+		449F71C811F546E600B778F1 /* Drum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 449F71C711F546E600B778F1 /* Drum.mm */; };
+		44A20A381212D96F000A315E /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A20A371212D96F000A315E /* KeyButton.m */; };
+		44A3D38211F31E4C0001BF89 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A3D38011F31E4C0001BF89 /* InformationVC.m */; };
+		44A3D4BE11F354FB0001BF89 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4BB11F354FB0001BF89 /* SettingVC.xib */; };
+		44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
+		44A3D4FB11F364360001BF89 /* Setting-icon16.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4F811F364360001BF89 /* Setting-icon16.png */; };
+		44A3D52D11F365D80001BF89 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D52C11F365D80001BF89 /* Icon.png */; };
+		44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */; };
+		44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
+		44A8B24711F3EC87007D6FA0 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B24511F3EC87007D6FA0 /* OptionVC.xib */; };
+		44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
+		44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		44ABB2C01201DFD400A3F2EB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABB2BF1201DFD400A3F2EB /* Default.png */; };
+		44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; };
+		44AFE96511F2DEDF00F6C8C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44AFE96311F2DEDF00F6C8C2 /* Localizable.strings */; };
+		44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
+		44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
+		44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
+		44EF5DE112099FB200BB87B6 /* Information-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DE012099FB200BB87B6 /* Information-iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D3623240D0F684500981E51 /* AzCalcAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalcAppDelegate.h; sourceTree = "<group>"; };
+		1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AzCalcAppDelegate.m; sourceTree = "<group>"; };
+		1D6058910D05DD3D006BFB54 /* AzCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AzCalcViewController.xib; sourceTree = "<group>"; };
+		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		28D7ACF60DDB3853001CB0EB /* AzCalcViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalcViewController.h; sourceTree = "<group>"; };
+		28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AzCalcViewController.mm; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		32CA4F630368D1EE00C91783 /* AzCalc_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalc_Prefix.pch; sourceTree = "<group>"; };
+		441D242311F3056200A3B68A /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		441D242411F3056200A3B68A /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4422DA4A122114EF00F70E2E /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		44418702120E8ECB00DE74B0 /* AzKeySet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeySet.plist; sourceTree = "<group>"; };
+		444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeyMaster.plist; sourceTree = "<group>"; };
+		445183B7130398D6002820EA /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
+		445183B8130398D6002820EA /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
+		445183BA130398D6002820EA /* CDataScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner_Extensions.h; sourceTree = "<group>"; };
+		445183BB130398D6002820EA /* CDataScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner_Extensions.m; sourceTree = "<group>"; };
+		445183BC130398D6002820EA /* NSCharacterSet_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSCharacterSet_Extensions.h; sourceTree = "<group>"; };
+		445183BD130398D6002820EA /* NSCharacterSet_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSCharacterSet_Extensions.m; sourceTree = "<group>"; };
+		445183BE130398D6002820EA /* NSDictionary_JSONExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionary_JSONExtensions.h; sourceTree = "<group>"; };
+		445183BF130398D6002820EA /* NSDictionary_JSONExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionary_JSONExtensions.m; sourceTree = "<group>"; };
+		445183C0130398D6002820EA /* NSScanner_Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSScanner_Extensions.h; sourceTree = "<group>"; };
+		445183C1130398D6002820EA /* NSScanner_Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSScanner_Extensions.m; sourceTree = "<group>"; };
+		445183C3130398D6002820EA /* CJSONDataSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDataSerializer.h; sourceTree = "<group>"; };
+		445183C4130398D6002820EA /* CJSONDataSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDataSerializer.m; sourceTree = "<group>"; };
+		445183C5130398D6002820EA /* CJSONDeserializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONDeserializer.h; sourceTree = "<group>"; };
+		445183C6130398D6002820EA /* CJSONDeserializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONDeserializer.m; sourceTree = "<group>"; };
+		445183C7130398D6002820EA /* CJSONScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONScanner.h; sourceTree = "<group>"; };
+		445183C8130398D6002820EA /* CJSONScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONScanner.m; sourceTree = "<group>"; };
+		445183C9130398D6002820EA /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
+		445183CA130398D6002820EA /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
+		445183CB130398D6002820EA /* CSerializedJSONData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSerializedJSONData.h; sourceTree = "<group>"; };
+		445183CC130398D6002820EA /* CSerializedJSONData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSerializedJSONData.m; sourceTree = "<group>"; };
+		445183CE130398D6002820EA /* AdMobDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobDelegateProtocol.h; sourceTree = "<group>"; };
+		445183CF130398D6002820EA /* AdMobInterstitialAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobInterstitialAd.h; sourceTree = "<group>"; };
+		445183D0130398D6002820EA /* AdMobInterstitialDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobInterstitialDelegateProtocol.h; sourceTree = "<group>"; };
+		445183D1130398D6002820EA /* AdMobView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdMobView.h; sourceTree = "<group>"; };
+		445183D2130398D6002820EA /* libAdMob.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdMob.a; sourceTree = "<group>"; };
+		4451843F1303B7A4002820EA /* Icon-DrumPush.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-DrumPush.png"; path = "Image/Icon-DrumPush.png"; sourceTree = "<group>"; };
+		445184401303B7A4002820EA /* Icon-Drum.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum.png"; path = "Image/Icon-Drum.png"; sourceTree = "<group>"; };
+		445184431303B8BE002820EA /* Icon16-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting.png"; path = "Image/Icon16-Setting.png"; sourceTree = "<group>"; };
+		449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzKeySet-iPad.plist"; sourceTree = "<group>"; };
+		449EBC6911E57EA900E2AABD /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		449F71C611F546E600B778F1 /* Drum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drum.h; sourceTree = "<group>"; };
+		449F71C711F546E600B778F1 /* Drum.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Drum.mm; sourceTree = "<group>"; };
+		44A20A361212D96F000A315E /* KeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyButton.h; sourceTree = "<group>"; };
+		44A20A371212D96F000A315E /* KeyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyButton.m; sourceTree = "<group>"; };
+		44A3D37F11F31E4C0001BF89 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InformationVC.h; path = ../InformationVC.h; sourceTree = "<group>"; };
+		44A3D38011F31E4C0001BF89 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InformationVC.m; path = ../InformationVC.m; sourceTree = "<group>"; };
+		44A3D4BC11F354FB0001BF89 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/SettingVC.xib; sourceTree = "<group>"; };
+		44A3D4BD11F354FB0001BF89 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/SettingVC.xib; sourceTree = "<group>"; };
+		44A3D4CB11F355400001BF89 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/InformationVC.xib; sourceTree = "<group>"; };
+		44A3D4CC11F355400001BF89 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/InformationVC.xib; sourceTree = "<group>"; };
+		44A3D4F811F364360001BF89 /* Setting-icon16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Setting-icon16.png"; path = "Image/Setting-icon16.png"; sourceTree = "<group>"; };
+		44A3D52C11F365D80001BF89 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon32-PageFilp.png"; path = "Image/icon32-PageFilp.png"; sourceTree = "<group>"; };
+		44A8B24311F3EC87007D6FA0 /* OptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionVC.h; path = ../OptionVC.h; sourceTree = "<group>"; };
+		44A8B24411F3EC87007D6FA0 /* OptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionVC.m; path = ../OptionVC.m; sourceTree = "<group>"; };
+		44A8B24511F3EC87007D6FA0 /* OptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionVC.xib; sourceTree = "<group>"; };
+		44AB054012258878005E11A7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
+		44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		44ABB2BF1201DFD400A3F2EB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		44AF8CB811FC5FED00D4B206 /* SBCD.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SBCD.h; path = SBCD/SBCD.h; sourceTree = "<group>"; };
+		44AF8D5911FC8F0700D4B206 /* SBCD.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SBCD.cpp; path = SBCD/SBCD.cpp; sourceTree = "<group>"; };
+		44AFE96411F2DEDF00F6C8C2 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44AFE96611F2DF5A00F6C8C2 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44AFE96711F2E0E600F6C8C2 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44AFE96811F2E0F800F6C8C2 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44CB363511F0AA9F0057E9F3 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
+		44CB363611F0AA9F0057E9F3 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "AzCalcViewController-iPad.xib"; path = "Resources-iPad/AzCalcViewController-iPad.xib"; sourceTree = "<group>"; };
+		44EF5DDD12099F6000BB87B6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
+		44EF5DE012099FB200BB87B6 /* Information-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "Information-iPad.xib"; path = "Resources-iPad/Information-iPad.xib"; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* AzCalc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
+				44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */,
+				445183DD130398D6002820EA /* libAdMob.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				449EBC6911E57EA900E2AABD /* Global.h */,
+				1D3623240D0F684500981E51 /* AzCalcAppDelegate.h */,
+				1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */,
+				449F71C611F546E600B778F1 /* Drum.h */,
+				449F71C711F546E600B778F1 /* Drum.mm */,
+				44A20A361212D96F000A315E /* KeyButton.h */,
+				44A20A371212D96F000A315E /* KeyButton.m */,
+				28D7ACF60DDB3853001CB0EB /* AzCalcViewController.h */,
+				28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */,
+				44CB363511F0AA9F0057E9F3 /* SettingVC.h */,
+				44CB363611F0AA9F0057E9F3 /* SettingVC.m */,
+				44A3D37F11F31E4C0001BF89 /* InformationVC.h */,
+				44A3D38011F31E4C0001BF89 /* InformationVC.m */,
+				44A8B24311F3EC87007D6FA0 /* OptionVC.h */,
+				44A8B24411F3EC87007D6FA0 /* OptionVC.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* AzCalc.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				445183B6130398D6002820EA /* TouchJSON */,
+				445183CD130398D6002820EA /* AdMob */,
+				44AF8CB111FC5E2200D4B206 /* SBCD */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				44A2E47411EB29F5009FB007 /* Images */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				44EF5D9A12099A1F00BB87B6 /* Resources-iPad */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* AzCalc_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */,
+				44418702120E8ECB00DE74B0 /* AzKeySet.plist */,
+				441D242211F3056200A3B68A /* InfoPlist.strings */,
+				44AFE96311F2DEDF00F6C8C2 /* Localizable.strings */,
+				8D1107310486CEB800E47090 /* AzCalc-Info.plist */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */,
+				44A3D4BB11F354FB0001BF89 /* SettingVC.xib */,
+				44A3D4CA11F355400001BF89 /* InformationVC.xib */,
+				44A8B24511F3EC87007D6FA0 /* OptionVC.xib */,
+				44ABB2BF1201DFD400A3F2EB /* Default.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
+				44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		445183B6130398D6002820EA /* TouchJSON */ = {
+			isa = PBXGroup;
+			children = (
+				445183B7130398D6002820EA /* CDataScanner.h */,
+				445183B8130398D6002820EA /* CDataScanner.m */,
+				445183B9130398D6002820EA /* Extensions */,
+				445183C2130398D6002820EA /* JSON */,
+			);
+			name = TouchJSON;
+			path = ../admob_iphone_sdk/TouchJSON;
+			sourceTree = SOURCE_ROOT;
+		};
+		445183B9130398D6002820EA /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				445183BA130398D6002820EA /* CDataScanner_Extensions.h */,
+				445183BB130398D6002820EA /* CDataScanner_Extensions.m */,
+				445183BC130398D6002820EA /* NSCharacterSet_Extensions.h */,
+				445183BD130398D6002820EA /* NSCharacterSet_Extensions.m */,
+				445183BE130398D6002820EA /* NSDictionary_JSONExtensions.h */,
+				445183BF130398D6002820EA /* NSDictionary_JSONExtensions.m */,
+				445183C0130398D6002820EA /* NSScanner_Extensions.h */,
+				445183C1130398D6002820EA /* NSScanner_Extensions.m */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		445183C2130398D6002820EA /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				445183C3130398D6002820EA /* CJSONDataSerializer.h */,
+				445183C4130398D6002820EA /* CJSONDataSerializer.m */,
+				445183C5130398D6002820EA /* CJSONDeserializer.h */,
+				445183C6130398D6002820EA /* CJSONDeserializer.m */,
+				445183C7130398D6002820EA /* CJSONScanner.h */,
+				445183C8130398D6002820EA /* CJSONScanner.m */,
+				445183C9130398D6002820EA /* CJSONSerializer.h */,
+				445183CA130398D6002820EA /* CJSONSerializer.m */,
+				445183CB130398D6002820EA /* CSerializedJSONData.h */,
+				445183CC130398D6002820EA /* CSerializedJSONData.m */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
+		445183CD130398D6002820EA /* AdMob */ = {
+			isa = PBXGroup;
+			children = (
+				445183CE130398D6002820EA /* AdMobDelegateProtocol.h */,
+				445183CF130398D6002820EA /* AdMobInterstitialAd.h */,
+				445183D0130398D6002820EA /* AdMobInterstitialDelegateProtocol.h */,
+				445183D1130398D6002820EA /* AdMobView.h */,
+				445183D2130398D6002820EA /* libAdMob.a */,
+			);
+			name = AdMob;
+			path = ../admob_iphone_sdk/AdMob;
+			sourceTree = SOURCE_ROOT;
+		};
+		44A2E47411EB29F5009FB007 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				445184401303B7A4002820EA /* Icon-Drum.png */,
+				4451843F1303B7A4002820EA /* Icon-DrumPush.png */,
+				445184431303B8BE002820EA /* Icon16-Setting.png */,
+				44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */,
+				44A3D52C11F365D80001BF89 /* Icon.png */,
+				4422DA4A122114EF00F70E2E /* Icon72.png */,
+				44A3D4F811F364360001BF89 /* Setting-icon16.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		44AF8CB111FC5E2200D4B206 /* SBCD */ = {
+			isa = PBXGroup;
+			children = (
+				44AF8CB811FC5FED00D4B206 /* SBCD.h */,
+				44AF8D5911FC8F0700D4B206 /* SBCD.cpp */,
+			);
+			name = SBCD;
+			sourceTree = "<group>";
+		};
+		44EF5D9A12099A1F00BB87B6 /* Resources-iPad */ = {
+			isa = PBXGroup;
+			children = (
+				449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */,
+				44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */,
+				44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */,
+				44AB053E1225886E005E11A7 /* Setting-iPad.xib */,
+				44EF5DE012099FB200BB87B6 /* Information-iPad.xib */,
+			);
+			name = "Resources-iPad";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* AzCalc */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "AzCalc" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AzCalc;
+			productName = AzCalc;
+			productReference = 1D6058910D05DD3D006BFB54 /* AzCalc.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = AzukiSoft;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AzCalc-0.3" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				"",
+				AzCalc,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* AzCalc */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				2899E5220DE3E06400AC0155 /* AzCalcViewController.xib in Resources */,
+				44AFE96511F2DEDF00F6C8C2 /* Localizable.strings in Resources */,
+				441D242511F3056200A3B68A /* InfoPlist.strings in Resources */,
+				44A3D4BE11F354FB0001BF89 /* SettingVC.xib in Resources */,
+				44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */,
+				44A3D4FB11F364360001BF89 /* Setting-icon16.png in Resources */,
+				44A3D52D11F365D80001BF89 /* Icon.png in Resources */,
+				44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */,
+				44A8B24711F3EC87007D6FA0 /* OptionVC.xib in Resources */,
+				44ABB2C01201DFD400A3F2EB /* Default.png in Resources */,
+				44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */,
+				44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */,
+				44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */,
+				44EF5DE112099FB200BB87B6 /* Information-iPad.xib in Resources */,
+				44418703120E8ECB00DE74B0 /* AzKeySet.plist in Resources */,
+				444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */,
+				449E6B98121FA34100338E7F /* AzKeySet-iPad.plist in Resources */,
+				4422DA4B122114EF00F70E2E /* Icon72.png in Resources */,
+				445184411303B7A4002820EA /* Icon-DrumPush.png in Resources */,
+				445184421303B7A4002820EA /* Icon-Drum.png in Resources */,
+				445184441303B8BE002820EA /* Icon16-Setting.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				1D3623260D0F684500981E51 /* AzCalcAppDelegate.m in Sources */,
+				28D7ACF80DDB3853001CB0EB /* AzCalcViewController.mm in Sources */,
+				44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */,
+				44A3D38211F31E4C0001BF89 /* InformationVC.m in Sources */,
+				44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */,
+				449F71C811F546E600B778F1 /* Drum.mm in Sources */,
+				44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */,
+				44A20A381212D96F000A315E /* KeyButton.m in Sources */,
+				445183D3130398D6002820EA /* CDataScanner.m in Sources */,
+				445183D4130398D6002820EA /* CDataScanner_Extensions.m in Sources */,
+				445183D5130398D6002820EA /* NSCharacterSet_Extensions.m in Sources */,
+				445183D6130398D6002820EA /* NSDictionary_JSONExtensions.m in Sources */,
+				445183D7130398D6002820EA /* NSScanner_Extensions.m in Sources */,
+				445183D8130398D6002820EA /* CJSONDataSerializer.m in Sources */,
+				445183D9130398D6002820EA /* CJSONDeserializer.m in Sources */,
+				445183DA130398D6002820EA /* CJSONScanner.m in Sources */,
+				445183DB130398D6002820EA /* CJSONSerializer.m in Sources */,
+				445183DC130398D6002820EA /* CSerializedJSONData.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		441D242211F3056200A3B68A /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				441D242311F3056200A3B68A /* English */,
+				441D242411F3056200A3B68A /* Japanese */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		44A3D4BB11F354FB0001BF89 /* SettingVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44A3D4BC11F354FB0001BF89 /* Japanese */,
+				44A3D4BD11F354FB0001BF89 /* English */,
+			);
+			name = SettingVC.xib;
+			sourceTree = "<group>";
+		};
+		44A3D4CA11F355400001BF89 /* InformationVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44A3D4CB11F355400001BF89 /* Japanese */,
+				44A3D4CC11F355400001BF89 /* English */,
+			);
+			name = InformationVC.xib;
+			sourceTree = "<group>";
+		};
+		44AB053E1225886E005E11A7 /* Setting-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44AB054012258878005E11A7 /* Japanese */,
+				44EF5DDD12099F6000BB87B6 /* English */,
+			);
+			name = "Setting-iPad.xib";
+			sourceTree = "<group>";
+		};
+		44AFE96311F2DEDF00F6C8C2 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44AFE96411F2DEDF00F6C8C2 /* English */,
+				44AFE96611F2DF5A00F6C8C2 /* Japanese */,
+				44AFE96711F2E0E600F6C8C2 /* German */,
+				44AFE96811F2E0F800F6C8C2 /* French */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = AzDEBUG;
+				INFOPLIST_FILE = "AzCalc-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
+					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
+				);
+				PRODUCT_NAME = AzCalc;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				INFOPLIST_FILE = "AzCalc-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
+					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
+				);
+				PRODUCT_NAME = AzCalc;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96279E59-F65A-4AB9-A391-B61886BAA9E2";
+				SDKROOT = iphoneos4.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		44D60ECC11F307DD00DD0317 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masakazu Matsuyama";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B5B77FF-6208-4ECB-9980-DDA0DAB3AC7B";
+				SDKROOT = iphoneos4.1;
+			};
+			name = Distribution;
+		};
+		44D60ECD11F307DD00DD0317 /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masakazu Matsuyama";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				INFOPLIST_FILE = "AzCalc-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
+					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
+				);
+				PRODUCT_NAME = AzCalc;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B5B77FF-6208-4ECB-9980-DDA0DAB3AC7B";
+				SDKROOT = iphoneos4.1;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_PREPROCESSOR_DEFINITIONS = AzDEBUG;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "CE34FA7A-5B88-4F4E-A308-02B724D962EF";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.5;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PREBINDING = NO;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96279E59-F65A-4AB9-A391-B61886BAA9E2";
+				SDKROOT = iphoneos4.1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "AzCalc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+				44D60ECD11F307DD00DD0317 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AzCalc-0.3" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+				44D60ECC11F307DD00DD0317 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
