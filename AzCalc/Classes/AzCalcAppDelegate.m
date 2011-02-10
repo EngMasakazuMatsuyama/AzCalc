@@ -8,7 +8,7 @@
 
 #import "Global.h"
 #import "AzCalcAppDelegate.h"
-#import "AzCalcViewController.h"
+#import "AzCalcVC.h"
 #import "SettingVC.h"
 #import "InformationVC.h"
 #import "OptionVC.h"
@@ -16,7 +16,7 @@
 @implementation AzCalcAppDelegate
 
 @synthesize window;
-@synthesize viewController;
+@synthesize ibAzCalcVC;
 @synthesize ibSettingVC;
 @synthesize ibInformationVC;
 @synthesize ibOptionVC;
@@ -31,7 +31,7 @@
 	[ibOptionVC release];
 	[ibInformationVC release];
 	[ibSettingVC release];
-    [viewController release];
+    [ibAzCalcVC release];
     [window release];
     [super dealloc];
 }
@@ -65,12 +65,12 @@
 	dMemory = 0.0;
 	
 	// Add the view controller's view to the window and display.
-	[window addSubview:ibOptionVC.view];
-	[window addSubview:ibInformationVC.view];
-	[window addSubview:ibSettingVC.view];
-	[window addSubview:viewController.view];
+//	[window addSubview:ibOptionVC.view];
+//	[window addSubview:ibInformationVC.view];
+//	[window addSubview:ibSettingVC.view];
+	[window addSubview:ibAzCalcVC.view];
 	// TopView
-	//	[window bringSubviewToFront:viewController.view];
+	//	[window bringSubviewToFront:ibAzCalcVC.view];
 	// 
     [window makeKeyAndVisible];
 

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class AzCalcViewController;
+@class AzCalcVC;
 @class SettingVC;
 @class InformationVC;
 @class OptionVC;
@@ -16,7 +16,7 @@
 @interface AzCalcAppDelegate : NSObject <UIApplicationDelegate> 
 {
     UIWindow		*window;
-    AzCalcViewController *viewController;
+    AzCalcVC		*ibAzCalcVC;
 	SettingVC		*ibSettingVC;
 	InformationVC	*ibInformationVC;
 	OptionVC		*ibOptionVC;
@@ -26,7 +26,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet AzCalcViewController *viewController;
+@property (nonatomic, retain) IBOutlet AzCalcVC *ibAzCalcVC;
 @property (nonatomic, retain) IBOutlet SettingVC *ibSettingVC;
 @property (nonatomic, retain) IBOutlet InformationVC *ibInformationVC;
 @property (nonatomic, retain) IBOutlet OptionVC *ibOptionVC;
