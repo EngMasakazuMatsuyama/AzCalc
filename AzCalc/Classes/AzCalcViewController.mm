@@ -64,32 +64,43 @@
 {
     [super viewDidLoad];
 
+	// arrayButtonsオブジェクトは、SubViewなので、毎回生成する。 viewDidUnloadで破棄する。
+	assert(arrayButtons==nil);
+	NSMutableArray *maButtons = [NSMutableArray new];
+	// 初期ドラム生成：常にDRUMS_MAX個生成し、表示はその一部または全部
+	for (int i=0; i<DRUMS_MAX; i++) {
+		// ドラム切り替えボタン(透明)をaddSubView
+		UIButton *bu = [UIButton buttonWithType:UIButtonTypeCustom];
+		bu.tag = i;
+		//bu.superview.alpha = 0.0; // 透明
+		bu.alpha = 0.3; // 半透明 (0.0)透明にするとクリック検出されなくなる
+		[bu addTarget:self action:@selector(vDrumButton:) forControlEvents:UIControlEventTouchUpInside];
+		[maButtons addObject:bu];
+		[self.view addSubview:bu];
+		[bu release];
+	}
+	arrayButtons = [[NSArray alloc] initWithArray:maButtons];	
+	[maButtons release];
+
 	if (!arrayDrums) {
+		// Drumオブジェクトは、SubViewではないので、最初に1度だけ生成し、viewDidUnloadでは破棄しない。
 		NSMutableArray *maDrums	= [NSMutableArray new];
-		NSMutableArray *maButtons = [NSMutableArray new];
 		// 初期ドラム生成：常にDRUMS_MAX個生成し、表示はその一部または全部
 		for (int i=0; i<DRUMS_MAX; i++) {
 			// ドラムインスタンス生成
 			Drum *drum = [Drum new];
 			[maDrums addObject:drum];
 			[drum release];
-			// ドラム切り替えボタン(透明)をaddSubView
-			UIButton *bu = [UIButton buttonWithType:UIButtonTypeCustom];
-			bu.tag = i;
-			//bu.superview.alpha = 0.0; // 透明
-			bu.alpha = 0.3; // 半透明 (0.0)透明にするとクリック検出されなくなる
-			[bu addTarget:self action:@selector(vDrumButton:) forControlEvents:UIControlEventTouchUpInside];
-			[maButtons addObject:bu];
-			[self.view addSubview:bu];
-			[bu release];
 		}
-		arrayDrums = [[NSArray alloc] initWithArray:maDrums];		[maDrums release];
-		arrayButtons = [[NSArray alloc] initWithArray:maButtons];	[maButtons release];
+		arrayDrums = [[NSArray alloc] initWithArray:maDrums];		
+		[maDrums release];
+		
+		entryComponent = 0;
+		bDramRevers = NO;
+		bZoomEntryComponent = NO;
 	}
-	entryComponent = 0;
-	bDramRevers = NO;
-	bZoomEntryComponent = NO;
 
+	// IBコントロールの初期化
 	ibPicker.delegate = self;
 	ibPicker.dataSource = self;
 	ibPicker.showsSelectionIndicator = NO;
@@ -97,9 +108,24 @@
 	CGRect theBannerFrame = self.view.frame;
 	theBannerFrame.origin.y = -52;  // viewの外へ出す
 	ibADBannerView.frame = theBannerFrame;	
+	
 	//[self iAdOff];
 	bADbannerIsVisible = NO;
 	bADbannerFirstTime = YES;
+}
+
+// 裏画面(非表示)状態のときにメモリ不足が発生するとコールされるので、viewDidLoadで生成したOBJを解放する
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+	// IB(xib)で生成されたOBJは自動的に解放＆再生成されるので触れないこと。
+	
+	// [arrayButtons release];不要　SubViewなので自動的に破棄されている。 viewDidLoadにて生成
+	arrayButtons = nil;  // 自動的に破棄されているが、この変数は不燃なのでここで無効(nil)にしておく。
+	
+	// arrayDrums は、SubViewではないから破棄しない。
+	
+	// この後、viewDidLoadがコールされて、改めてOBJ生成される
 }
 
 // viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　// viewDidAppear はView表示直後に呼ばれる
@@ -276,19 +302,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
-
-- (void)didReceiveMemoryWarning {
-	AzLOG(@"===== didReceiveMemoryWarning =====");
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	AzLOG(@"===== viewDidUnload =====");
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
 
 
 - (IBAction)ibBuSetting:(UIButton *)button
@@ -568,7 +581,7 @@
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDuration:3.0];
 	
 	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) { // ヨコ
 	//	ibADBannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
