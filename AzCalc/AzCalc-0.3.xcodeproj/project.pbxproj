@@ -47,6 +47,11 @@
 		44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
 		44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		44ABB2C01201DFD400A3F2EB /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABB2BF1201DFD400A3F2EB /* Default.png */; };
+		44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44AF898213052F3D00D3594C /* CalcFunctions.mm */; };
+		44AF8AA2130578BF00D3594C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA1130578BF00D3594C /* AudioToolbox.framework */; };
+		44AF8AA4130578BF00D3594C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA3130578BF00D3594C /* MediaPlayer.framework */; };
+		44AF8AA6130578BF00D3594C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA5130578BF00D3594C /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA7130578BF00D3594C /* QuartzCore.framework */; };
 		44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; };
 		44AFE96511F2DEDF00F6C8C2 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44AFE96311F2DEDF00F6C8C2 /* Localizable.strings */; };
 		44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
@@ -122,6 +127,12 @@
 		44AB054012258878005E11A7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
 		44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		44ABB2BF1201DFD400A3F2EB /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		44AF898213052F3D00D3594C /* CalcFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CalcFunctions.mm; sourceTree = "<group>"; };
+		44AF898313052F3D00D3594C /* CalcFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcFunctions.h; sourceTree = "<group>"; };
+		44AF8AA1130578BF00D3594C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		44AF8AA3130578BF00D3594C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		44AF8AA5130578BF00D3594C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		44AF8AA7130578BF00D3594C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		44AF8CB811FC5FED00D4B206 /* SBCD.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SBCD.h; path = SBCD/SBCD.h; sourceTree = "<group>"; };
 		44AF8D5911FC8F0700D4B206 /* SBCD.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SBCD.cpp; path = SBCD/SBCD.cpp; sourceTree = "<group>"; };
 		44AFE96411F2DEDF00F6C8C2 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -147,6 +158,10 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */,
 				445183DD130398D6002820EA /* libAdMob.a in Frameworks */,
+				44AF8AA2130578BF00D3594C /* AudioToolbox.framework in Frameworks */,
+				44AF8AA4130578BF00D3594C /* MediaPlayer.framework in Frameworks */,
+				44AF8AA6130578BF00D3594C /* MessageUI.framework in Frameworks */,
+				44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +174,8 @@
 				449EBC6911E57EA900E2AABD /* Global.h */,
 				1D3623240D0F684500981E51 /* AzCalcAppDelegate.h */,
 				1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */,
+				44AF898313052F3D00D3594C /* CalcFunctions.h */,
+				44AF898213052F3D00D3594C /* CalcFunctions.mm */,
 				449F71C611F546E600B778F1 /* Drum.h */,
 				449F71C711F546E600B778F1 /* Drum.mm */,
 				44A20A361212D96F000A315E /* KeyButton.h */,
@@ -234,6 +251,10 @@
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,
 				44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */,
+				44AF8AA1130578BF00D3594C /* AudioToolbox.framework */,
+				44AF8AA3130578BF00D3594C /* MediaPlayer.framework */,
+				44AF8AA5130578BF00D3594C /* MessageUI.framework */,
+				44AF8AA7130578BF00D3594C /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -435,6 +456,7 @@
 				445183DA130398D6002820EA /* CJSONScanner.m in Sources */,
 				445183DB130398D6002820EA /* CJSONSerializer.m in Sources */,
 				445183DC130398D6002820EA /* CSerializedJSONData.m in Sources */,
+				44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,7 +553,7 @@
 				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "96279E59-F65A-4AB9-A391-B61886BAA9E2";
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -571,7 +593,7 @@
 				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "2B5B77FF-6208-4ECB-9980-DDA0DAB3AC7B";
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

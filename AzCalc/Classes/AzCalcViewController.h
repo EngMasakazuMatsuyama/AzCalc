@@ -8,33 +8,45 @@
 
 #import <UIKit/UIKit.h>
 #import <iAd/iAd.h>
+#import "AdMobDelegateProtocol.h"
 
 @class KeyButton;
 
-@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, 
-														UIScrollViewDelegate, ADBannerViewDelegate>
+@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate,
+														UIScrollViewDelegate, ADBannerViewDelegate, AdMobDelegate>
 {
-	IBOutlet ADBannerView	*ibADBannerView;
-	IBOutlet UIPickerView	*ibPicker;
+	IBOutlet ADBannerView	*ibAdBanner;
+	IBOutlet UIPickerView	*ibPvDrum;
 	IBOutlet UILabel		*ibLbEntry;
 	IBOutlet UIButton		*ibBuMemory;
 	IBOutlet UIButton		*ibBuSetting;
 	IBOutlet UIButton		*ibBuInformation;
-	IBOutlet UIScrollView	*ibScrollUpper; //[0.3]
 	IBOutlet UIScrollView	*ibScrollLower;
+	IBOutlet UIScrollView	*ibScrollUpper; //[0.3]
+	IBOutlet UITextView		*ibTvFormula;	//[0.3]
+	IBOutlet UILabel		*ibLbFormAnswer;
+	IBOutlet UIButton		*ibBuFormLeft;
+	IBOutlet UIButton		*ibBuFormRight;
+	IBOutlet UIButton		*ibBuGetDrum;
 	
 @private
+	//----------------------------------------------dealloc時にrelese
 	NSArray				*aDrums;
 	NSArray				*aDrumButtons;
-	//NSMutableArray		*maMemorys;		// in NSString
 	NSArray				*aPadKeyButtons;
-	
+	NSArray				*aKeyMaster;	// !=nil キーレイアウト変更モード
+	AdMobView			*RoAdMobView;
+
+	//----------------------------------------------Owner移管につきdealloc時のrelese不要
+
+	//----------------------------------------------assign
 	NSInteger			entryComponent;
-	BOOL				bDramRevers;	// これにより、ドラム逆転やりなおしモード時のキー連打不具合に対処している。
-	BOOL				bZoomEntryComponent;  // YES= entryComponentの幅を最大にする
-	BOOL				bADbannerIsVisible;  // iAd 広告内容があればYES
-	BOOL				bADbannerFirstTime;  // iAd 広告内容があれば、起動時に表示するため
+	BOOL				bDramRevers;		// これにより、ドラム逆転やりなおしモード時のキー連打不具合に対処している。
+	BOOL				bZoomEntryComponent; // YES= entryComponentの幅を最大にする
+	BOOL				bADbannerIsVisible; // iAd 広告内容があればYES
+	BOOL				bADbannerFirstTime; // iAd 広告内容があれば、起動時に表示するため
 	BOOL				bDrumButtonTap1;	// 最初のタップでYES
+	BOOL				bDrumRefresh;		// =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
 	
 	// Keyboard spec
 	int					iKeyPages;
@@ -47,13 +59,8 @@
 	float				fKeyWidth;		// キートップの幅
 	float				fKeyHeight;		// キートップの高さ
 
-//	int					iMemoryCols;	// 行数や高さは、iKeyRows,fKeyHeight を使用
-//	float				fMemoryWidth;	// Memoryキートップの幅
-	
 	// Change Keyboard
-	NSArray				*aKeyMaster;	// !=nil キーレイアウト変更モード
 	KeyButton			*buChangeKey;	// 選択中のキー
-	//NSMutableDictionary *mdKeyboard;	// viewDidLoadではローカルNSDictionaryを使っている。キー配置変更時にだけこれを使用。
 	
 	// Setting
 	NSInteger  MiSegDrums;		// ドラム数 ＜＜セグメント値に +1 している＞＞
@@ -61,18 +68,16 @@
 	NSInteger  MiSegDecimal;
 	NSInteger  MiSegRound;
 	NSInteger  MiSegReverseDrum;
-	// Option
-	//NSString	*MzGroupingSeparator;
-	//NSInteger	MiGroupingSize;
-	//NSString	*MzDecimalSeparator;
 
-	NSInteger  MiScrollViewPage;	// ibScrollViewの現在表示ページを常に保持
+	NSInteger  MiSvLowerPage;	// ibScrollLower の現在表示ページを常に保持
+	NSInteger  MiSvUpperPage;	// ibScrollUpper の現在表示ページを常に保持
 }
 
 - (IBAction)ibBuMemory:(UIButton *)button;
 - (IBAction)ibBuSetting:(UIButton *)button;
 - (IBAction)ibBuInformation:(UIButton *)button;
 - (IBAction)ibButton:(UIButton *)button; // 全電卓ボタンを割り当てている。.tag により識別
+- (IBAction)ibBuGetDrum:(UIButton *)button;
 
 - (void)vMemorySave; // AzCalcViewController:applicationWillTerminateからコールされる
 - (void)vMemoryLoad; // AzCalcViewController:applicationDidBecomeActiveからコールされる

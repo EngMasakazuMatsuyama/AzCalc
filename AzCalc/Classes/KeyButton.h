@@ -18,6 +18,9 @@
 #define KeyTAG_PERC				 30	// [%]
 #define KeyTAG_PERM				 31	// [‰]パーミル
 #define KeyTAG_ROOT				 32	// [√]
+#define KeyTAG_LEFT				 33 // [(]
+#define KeyTAG_RIGHT			 34 // [)]
+
 
 #define KeyTAG_ANSWER			100	// [=]回答
 #define KeyTAG_PLUS				101	// [+]
@@ -45,6 +48,7 @@
 
 #define KeyTAG_UNIT_Start		1000
 #define KeyTAG_UNIT_End			2999
+
 
 //----------------------------------------------------Alpha
 #define KeyALPHA_DEFAULT_ON		0.8	// 標準ボタン

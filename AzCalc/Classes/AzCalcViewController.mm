@@ -7,14 +7,16 @@
 //
 
 #import "Global.h"
+#import "CalcFunctions.h"
 #import "AzCalcAppDelegate.h"
 #import	"Drum.h"
 #import "AzCalcViewController.h"
 #import "SettingVC.h"
 #import "OptionVC.h"
 #import "InformationVC.h"
-#include "SBCD.h"  // BCD固定小数点演算 ＜＜この.cpp関数を利用するファイルの拡張子は .m ⇒ .mm にすること＞＞
 #import "KeyButton.h"
+#import "AdMobView.h"
+
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
 #define	PICKER_COMPONENT_WiMIN	40		// 1コンポーネントの表示最小幅
@@ -67,6 +69,13 @@
 
 - (void)dealloc 
 {
+#ifdef GD_AdMob_ENABLED
+	if (RoAdMobView) {
+		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
+		[RoAdMobView release];
+		//NG//RoAdMobView = nil; これすると cell更新あれば落ちる。cell側での破棄に任せる。
+	}
+#endif
 	//[maMemorys release];
 	[aPadKeyButtons release];
 	[aKeyMaster release];
@@ -84,12 +93,14 @@
 
 	//========================================================== Upper ==============
 	// ScrollUpper  (0)Pickerドラム  (1)TextView数式
+	ibScrollUpper.delegate = self;
 	CGRect rect = ibScrollUpper.frame;
 	ibScrollUpper.contentSize = CGSizeMake(rect.size.width * 2, rect.size.height); 
 	ibScrollUpper.scrollsToTop = NO;
-	rect.origin.x = 0; //rect.size.width * MiScrollViewPage;
+	MiSvUpperPage = 0;
+	rect.origin.x = rect.size.width * MiSvUpperPage;
 	[ibScrollUpper scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
-
+	
 	//-----------------------------------------------------(0)ドラム ページ
 	if (aDrumButtons) {
 		[aDrumButtons release];	// viewDidUnloadされた後、ここを通る
@@ -137,27 +148,46 @@
 	}
 
 	// IBコントロールの初期化
-	ibPicker.delegate = self;
-	ibPicker.dataSource = self;
-	ibPicker.showsSelectionIndicator = NO;
+	ibPvDrum.delegate = self;
+	ibPvDrum.dataSource = self;
+	ibPvDrum.showsSelectionIndicator = NO;
 	
 	// iAd
+	ibAdBanner.delegate = self;
 	CGRect theBannerFrame = self.view.frame;
 	theBannerFrame.origin.y = -52;  // viewの外へ出す
-	ibADBannerView.frame = theBannerFrame;	
+	ibAdBanner.frame = theBannerFrame;	
+	ibAdBanner.hidden = YES;
 	//[self iAdOff];
 	bADbannerIsVisible = NO;
 	bADbannerFirstTime = YES;
-
+	
+	if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
+		// iOS4.2より前
+		ibAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
+													  ADBannerContentSizeIdentifier320x50,
+													  ADBannerContentSizeIdentifier480x32, nil];
+	} else {
+		// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
+		ibAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
+													  ADBannerContentSizeIdentifierPortrait,
+													  ADBannerContentSizeIdentifierLandscape, nil];
+	}
+	
 	//-----------------------------------------------------(1)数式 ページ
 	// UITextView
-	
-	
-	
-	
-	
-	
-	
+	ibTvFormula.text = @"";
+	ibLbFormAnswer.text = @"=";
+	ibTvFormula.delegate = self;
+	ibTvFormula.font = [UIFont systemFontOfSize:14];
+	ibTvFormula.text = NSLocalizedString(@"Formula mode", nil);
+	float dx = ibScrollUpper.frame.size.width;
+	rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
+	rect = ibLbFormAnswer.frame;	rect.origin.x += dx;	ibLbFormAnswer.frame = rect;
+	rect = ibBuFormLeft.frame;		rect.origin.x += dx;	ibBuFormLeft.frame = rect;
+	rect = ibBuFormRight.frame;		rect.origin.x += dx;	ibBuFormRight.frame = rect;
+	rect = ibBuGetDrum.frame;		rect.origin.x += dx;	ibBuGetDrum.frame = rect;
+
 
 	//========================================================== Lower ==============
 	
@@ -173,23 +203,23 @@
 		iKeyPages = 3;
 		iKeyCols = 5;	iKeyOffsetCol = 1; // AzdicKeys.plist C 開始位置
 		iKeyRows = 5;	iKeyOffsetRow = 1;
-		fKeyGap = 0.5;
+		fKeyGap = 1.5;
 		fKeyFontZoom = 1.0;
 	}
 
 	// ScrollLower 	(0)Memorys (1〜)Buttons
-	MiScrollViewPage = 1; // DEFAULT PAGE
+	MiSvLowerPage = 1; // DEFAULT PAGE
 	rect = ibScrollLower.frame;
 	ibScrollLower.contentSize = CGSizeMake(rect.size.width * iKeyPages, rect.size.height); 
 	ibScrollLower.scrollsToTop = NO;
-	rect.origin.x = rect.size.width * MiScrollViewPage;
+	rect.origin.x = rect.size.width * MiSvLowerPage;
 	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
 
 #ifdef AzMAKE_SPLASHFACE
-	ibPicker.alpha = 0.7;
+	ibPvDrum.alpha = 0.7;
 	ibBuMemory.hidden = YES;
 	ibLbEntry.hidden = YES;
-	ibADBannerView.hidden = YES;
+	ibAdBanner.hidden = YES;
 	ibBuSetting.hidden = YES;
 	ibBuInformation.hidden = YES;
 	NSDictionary *dicKeys = [NSDictionary new];
@@ -214,8 +244,8 @@
 	}	
 #endif
 	
-	// ibPickerは、画面左下を基点にしている。
-	//float fYtop = 0;  //ibPicker.frame.size.height + 20;
+	// ibPvDrumは、画面左下を基点にしている。
+	//float fYtop = 0;  //ibPvDrum.frame.size.height + 20;
 	//float fYbot = ibScrollLower.frame.size.height; // self.view.frame.size.height;
 	
 	// ボタンの縦横比を「黄金率」にして余白をGapにする
@@ -330,7 +360,7 @@
 					bu.alpha = KeyALPHA_DEFAULT_OFF;
 				}
 				
-				//bu.contentMode = UIViewContentModeBottomLeft; // ibPickerは、画面左下を基点にしている。
+				//bu.contentMode = UIViewContentModeBottomLeft; // ibPvDrumは、画面左下を基点にしている。
 				// 上と右のマージンが自動調整されるように。つまり、左下基点になる。
 				bu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin; 
 				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -360,16 +390,32 @@
 	// Memory Display ドラム下部に隠しておく
 	ibBuMemory.hidden = NO;
 	CGRect rc = ibBuMemory.frame;
-	rc.origin.y = ibPicker.frame.origin.y + ibPicker.frame.size.height;
+	rc.origin.y = ibPvDrum.frame.origin.y + ibPvDrum.frame.size.height;
 	ibBuMemory.frame = rc;
 	//
 	//[self vMemoryLoad]; このviewDidLoad後、applicationDidBecomeActiveがコールされるため不要。
 
-	if (ibADBannerView) {
-		[self.view bringSubviewToFront:ibADBannerView]; // iAdをaDrumButtonsより上にする
+	if (ibAdBanner) {
+		[self.view bringSubviewToFront:ibAdBanner]; // iAdをaDrumButtonsより上にする
 	}
 	
 	[pool release]; // autorelease
+
+#ifdef GD_AdMob_ENABLED
+	if (RoAdMobView==nil) {
+		RoAdMobView = [AdMobView requestAdWithDelegate:self];
+		AzRETAIN_CHECK(@"viewDidLoad -1- RoAdMobView", RoAdMobView, 0)
+		[RoAdMobView retain];
+		AzRETAIN_CHECK(@"viewDidLoad -2- RoAdMobView", RoAdMobView, 0)
+		CGRect rc = RoAdMobView.frame;
+		rc.origin.x = ibScrollUpper.frame.size.width; // 1ページ幅
+		rc.origin.y = 0;
+		RoAdMobView.frame = rc;
+	}
+	//[self.view addSubview:RoAdMobView];
+	[ibScrollUpper addSubview:RoAdMobView];
+	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
+#endif
 }
 
 // 裏画面(非表示)状態のときにメモリ不足が発生するとコールされるので、viewDidLoadで生成したOBJを解放する
@@ -401,9 +447,15 @@
 #endif
 	if (DRUMS_MAX < MiSegDrums) MiSegDrums = DRUMS_MAX;  // 生成数を超えないように
 	MiSegCalcMethod = (NSInteger)[defaults integerForKey:GUD_CalcMethod];
+	[CalcFunctions setCalcMethod:MiSegCalcMethod];
+	
 	MiSegDecimal = (NSInteger)[defaults integerForKey:GUD_Decimal];
 	if (DECIMAL_Float <= MiSegDecimal) MiSegDecimal = PRECISION; // [F]小数桁制限なし
+	[CalcFunctions setDecimal:MiSegDecimal];
+
 	MiSegRound = (NSInteger)[defaults integerForKey:GUD_Round];
+	[CalcFunctions setRound:MiSegRound];
+
 	MiSegReverseDrum = (NSInteger)[defaults integerForKey:GUD_ReverseDrum];
 	// Option
 	switch ((NSInteger)[defaults integerForKey:GUD_GroupingSeparator]) {
@@ -468,11 +520,11 @@
 		
 		ibBuMemory.hidden = YES;
 		ibLbEntry.hidden = YES;
-		ibPicker.showsSelectionIndicator = YES;
-		[ibPicker reloadAllComponents];
+		ibPvDrum.showsSelectionIndicator = YES;
+		[ibPvDrum reloadAllComponents];
 		// 全ドラム選択行を0にする
 		for (int i=0; i<[aKeyMaster count]; i++) {
-			[ibPicker selectRow:0 inComponent:i animated:NO];
+			[ibPvDrum selectRow:0 inComponent:i animated:NO];
 		}
 		 
 		// キー再表示：連結されたキーがあれば独立させる
@@ -535,7 +587,7 @@
 		}
 		ibBuMemory.hidden = NO;
 		ibLbEntry.hidden = NO;
-		ibPicker.showsSelectionIndicator = NO;
+		ibPvDrum.showsSelectionIndicator = NO;
 		
 		// reSetting
 		for (Drum *drum in aDrums) {
@@ -543,11 +595,11 @@
 		}
 		
 		// 表示ドラム数(component数)が変わったときの処理
-		if (MiSegDrums != ibPicker.numberOfComponents) {
+		if (MiSegDrums != ibPvDrum.numberOfComponents) {
 			if (MiSegDrums <= entryComponent) { // entryComponentが表示ドラムを超えないように補正する
 				entryComponent = MiSegDrums - 1;
 			}
-			// [ibPicker reloadAllComponents];  vDrumButtonDisplay内で呼び出している
+			// [ibPvDrum reloadAllComponents];  vDrumButtonDisplay内で呼び出している
 		}
 		
 		// Entryセル表示
@@ -655,7 +707,8 @@
 // 回転サポート
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	if (700 < self.view.frame.size.height) return YES; // iPad
+	if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) return YES; // タテは常にOK
+	else if (700 < self.view.frame.size.height) return YES; // iPad
 	return NO;
 }
 
@@ -702,7 +755,7 @@
 {
 	assert(0 <= MiSegDrums);
 	//float fWid = self.view.frame.size.width - DRUM_LEFT_OFFSET*2;
-	float fWid = ibPicker.frame.size.width - DRUM_LEFT_OFFSET*2;
+	float fWid = ibPvDrum.frame.size.width - DRUM_LEFT_OFFSET*2;
 	float fWiMin, fWiMax;
 	if (bZoomEntryComponent) {  // entryComponentを拡大する
 		fWiMin = PICKER_COMPONENT_WiMIN; // 1コンポーネントの表示最小幅
@@ -712,7 +765,7 @@
 		fWiMax = fWiMin; // 均等
 	}
 	float fX = DRUM_LEFT_OFFSET + 4.0;
-	float fY = ibPicker.frame.origin.y;
+	float fY = ibPvDrum.frame.origin.y;
 	int i = 0;
 	for ( ; i<MiSegDrums ; i++) {
 		UIButton *bu = [aDrumButtons objectAtIndex:i];
@@ -723,7 +776,7 @@
 			// Next
 			fX += (fWiMax + DRUM_GAP);
 		} else {
-			bu.frame = CGRectMake(fX,fY, fWiMin-6,fY+ibPicker.frame.size.height);  // 非選択時
+			bu.frame = CGRectMake(fX,fY, fWiMin-6,fY+ibPvDrum.frame.size.height);  // 非選択時
 			//bu.backgroundColor = [UIColor yellowColor];  //DEBUG
 			bu.backgroundColor = [UIColor clearColor];
 			// Next
@@ -734,7 +787,7 @@
 		UIButton *bu = [aDrumButtons objectAtIndex:i];
 		bu.hidden = YES;
 	}
-	[ibPicker reloadAllComponents];
+	[ibPvDrum reloadAllComponents];
 }
 
 // [M]ラベル表示
@@ -762,7 +815,7 @@
 		AzLOG(@"sizeWithFont = W%f, H%f", sz.width, sz.height);
 		rc.size.width = sz.width + 20;
 		if (260 < rc.size.width) rc.size.width = 260; // Over
-		rc.origin.x = (ibPicker.frame.size.width - rc.size.width) / 2.0;
+		rc.origin.x = (ibPvDrum.frame.size.width - rc.size.width) / 2.0;
 //		if (ibBuMemory.frame.origin.y < ibScrollLower.frame.origin.y) return; // 既に出現している
 		// アニメ準備
 		[UIView beginAnimations:nil context:NULL];
@@ -793,7 +846,7 @@
 	bDrumButtonTap1 = NO;
 }
 
-- (void)vDrumButtonTouchUp:(UIButton *)button
+- (void)vDrumButtonTouchUp:(UIButton *)button	// ドラム切り替え
 {
 	if (aKeyMaster) {
 		// キーレイアウト変更モード
@@ -831,9 +884,9 @@
 	// 以下の処理をしないと pickerView が再描画されない。
 	NSInteger iDrums = MiSegDrums;
 	MiSegDrums = 0;
-	[ibPicker reloadAllComponents];
+	[ibPvDrum reloadAllComponents];
 	MiSegDrums = iDrums;
-	// ibPicker は、以下のアニメーションに対応しない。
+	// ibPvDrum は、以下のアニメーションに対応しない。
 
 	// アニメ準備
 	[UIView beginAnimations:nil context:NULL];
@@ -846,13 +899,6 @@
 
 	// アニメ開始
 	[UIView commitAnimations];
-
-/*上のとおりアニメ式にした。	
-	if (bTouchAction) {
-		NSInteger iRow = [ibPicker selectedRowInComponent:entryComponent];
-		[ibPicker selectRow:iRow+1 inComponent:entryComponent animated:NO]; // 1行びっくらポン
-		[ibPicker selectRow:iRow inComponent:entryComponent animated:YES];
-	}*/
 }
 
 - (void)vDrumButtonDragEnter:(UIButton *)button;
@@ -999,7 +1045,7 @@
 - (CGFloat)pickerView:(UIPickerView *)pickerView widthForComponent:(NSInteger)component
 {
 	//float fWid = self.view.frame.size.width - DRUM_LEFT_OFFSET*2; // DRUM_LEFT_OFFSET*2 = ドラム左右余白
-	float fWid = ibPicker.frame.size.width - DRUM_LEFT_OFFSET*2; // DRUM_LEFT_OFFSET*2 = ドラム左右余白
+	float fWid = ibPvDrum.frame.size.width - DRUM_LEFT_OFFSET*2; // DRUM_LEFT_OFFSET*2 = ドラム左右余白
 
 	if (aKeyMaster) {
 		return (fWid / [aKeyMaster count]) - DRUM_GAP;
@@ -1201,7 +1247,7 @@
 		// 他リセット
 		for (int i=0; i<[aKeyMaster count]; i++) {
 			if (i != component) {
-				[ibPicker selectRow:0 inComponent:i animated:YES];
+				[ibPvDrum selectRow:0 inComponent:i animated:YES];
 			}
 		}
 		return;
@@ -1227,90 +1273,478 @@
 }
 */
 
-- (IBAction)ibButton:(KeyButton *)button   // 全ボタンを割り当てている
+- (void)vButtonMaster:(KeyButton *)button   // キーレイアウト変更モード // ドラム選択中のキーを割り当てる
 {
-	BOOL bDrumRefresh = YES; // =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
-	
-	if (aKeyMaster) {
-		// キーレイアウト変更モード // ドラム選択中のキーを割り当てる
-		int iComponent = 0;
-		int iRow = 0;  // 見出し行
-		for (int i=0; i<[aKeyMaster count]; i++) {
-			iRow = [ibPicker selectedRowInComponent:i];
-			if (0 < iRow) {
-				iComponent = i;
-				break;
-			}
+	int iComponent = 0;
+	int iRow = 0;  // 見出し行
+	for (int i=0; i<[aKeyMaster count]; i++) {
+		iRow = [ibPvDrum selectedRowInComponent:i];
+		if (0 < iRow) {
+			iComponent = i;
+			break;
 		}
-		if (iComponent==0 && iRow==0) { // ドラム選択が無い場合、押したキーの選択にする
-			int iComp = 0;
-			for (NSArray *aComponent in aKeyMaster) {
-				int iDict = 0;
-				for (NSDictionary *dic in aComponent) {
-					if ([[dic objectForKey:@"Tag"] integerValue] == button.tag) {
-						[ibPicker selectRow:iDict inComponent:iComp animated:YES];
-						// 他リセット
-						for (int i=0; i<[aKeyMaster count]; i++) {
-							if (i != iComp) [ibPicker selectRow:0 inComponent:i animated:YES];
-						} break;
-					} iDict++;
-				} iComp++;
-			} 
-			return;
-		}
-		// iRow==0 ならば .tag=(-1)未定義になる
-		NSDictionary *dic = [[aKeyMaster objectAtIndex:iComponent] objectAtIndex:iRow];
-		if (dic==nil) return;
-		// Tag
-		button.tag = [[dic objectForKey:@"Tag"] integerValue];
-		if (button.tag == -1) { // Nothing Space
-			button.bDirty = YES; // 変更あり ⇒ 保存される
-			// Text
-			[button setTitle:@"" forState:UIControlStateNormal];
-			// Color
-			button.iColorNo = 0;
-			//button.titleLabel.textColor = [UIColor clearColor];
-			[button setTitleColor:[UIColor clearColor]	forState:UIControlStateNormal];
-			// Size
-			button.fFontSize = 5;
-			button.titleLabel.font = [UIFont boldSystemFontOfSize:5];
-			// Alpha
-			button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
-		} else {
-			button.bDirty = YES; // 変更あり ⇒ 保存される
-			// Text
-			[button setTitle:[dic objectForKey:@"Text"] forState:UIControlStateNormal];
-			// Color
-			button.iColorNo = [[dic objectForKey:@"Color"] integerValue];
-			switch (button.iColorNo) {
-				case 1:	[button setTitleColor:[UIColor blackColor]	forState:UIControlStateNormal];	break;
-				case 2:	[button setTitleColor:[UIColor redColor]	forState:UIControlStateNormal];	break;
-				case 3:	[button setTitleColor:[UIColor blueColor]	forState:UIControlStateNormal];	break;
-				default:[button setTitleColor:[UIColor clearColor]	forState:UIControlStateNormal];	break;
-			}
-			// Size
-			float fSize = [[dic objectForKey:@"Size"] floatValue]; 
-			button.fFontSize = fSize; 
-			if (700 < self.view.frame.size.height) fSize *= 1.5; // iPadやや拡大
-			button.titleLabel.font = [UIFont boldSystemFontOfSize:fSize];
-			// Alpha
-			button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
-		}
+	}
+	if (iComponent==0 && iRow==0) { // ドラム選択が無い場合、押したキーの選択にする
+		int iComp = 0;
+		for (NSArray *aComponent in aKeyMaster) {
+			int iDict = 0;
+			for (NSDictionary *dic in aComponent) {
+				if ([[dic objectForKey:@"Tag"] integerValue] == button.tag) {
+					[ibPvDrum selectRow:iDict inComponent:iComp animated:YES];
+					// 他リセット
+					for (int i=0; i<[aKeyMaster count]; i++) {
+						if (i != iComp) [ibPvDrum selectRow:0 inComponent:i animated:YES];
+					} break;
+				} iDict++;
+			} iComp++;
+		} 
 		return;
 	}
+	// iRow==0 ならば .tag=(-1)未定義になる
+	NSDictionary *dic = [[aKeyMaster objectAtIndex:iComponent] objectAtIndex:iRow];
+	if (dic==nil) return;
+	// Tag
+	button.tag = [[dic objectForKey:@"Tag"] integerValue];
+	if (button.tag == -1) { // Nothing Space
+		button.bDirty = YES; // 変更あり ⇒ 保存される
+		// Text
+		[button setTitle:@"" forState:UIControlStateNormal];
+		// Color
+		button.iColorNo = 0;
+		//button.titleLabel.textColor = [UIColor clearColor];
+		[button setTitleColor:[UIColor clearColor]	forState:UIControlStateNormal];
+		// Size
+		button.fFontSize = 5;
+		button.titleLabel.font = [UIFont boldSystemFontOfSize:5];
+		// Alpha
+		button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
+	} else {
+		button.bDirty = YES; // 変更あり ⇒ 保存される
+		// Text
+		[button setTitle:[dic objectForKey:@"Text"] forState:UIControlStateNormal];
+		// Color
+		button.iColorNo = [[dic objectForKey:@"Color"] integerValue];
+		switch (button.iColorNo) {
+			case 1:	[button setTitleColor:[UIColor blackColor]	forState:UIControlStateNormal];	break;
+			case 2:	[button setTitleColor:[UIColor redColor]	forState:UIControlStateNormal];	break;
+			case 3:	[button setTitleColor:[UIColor blueColor]	forState:UIControlStateNormal];	break;
+			default:[button setTitleColor:[UIColor clearColor]	forState:UIControlStateNormal];	break;
+		}
+		// Size
+		float fSize = [[dic objectForKey:@"Size"] floatValue]; 
+		button.fFontSize = fSize; 
+		if (700 < self.view.frame.size.height) fSize *= 1.5; // iPadやや拡大
+		button.titleLabel.font = [UIFont boldSystemFontOfSize:fSize];
+		// Alpha
+		button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
+	}
+}
 
-	//-----------------------------------ここから、ドラタク通常モード処理
-/*	if (button.tag < 0) {
-		[self vKeyboardPage:1]; // キー1ページへ
-		return;
-	}*/
+- (void)vButtonFormula:(NSInteger)iKeyTag  // 数式へのキー入力処理
+{
+	AzLOG(@"vButtonFormula: iKeyTag=(%d)", iKeyTag);
 	
-	// ドラム逆回転時の処理
+	// これ以降、localPool管理エリア
+	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
+	@try {
+		if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+			ibTvFormula.text = @"";
+			ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
+			ibBuGetDrum.hidden = YES;
+		}
+		//
+		switch (iKeyTag) { // .Tag は、AzKeyMaster.plist の定義が元になる。
+				//---------------------------------------------[0]-[99] Numbers
+			case 0:
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+			case 5:
+			case 6:
+			case 7:
+			case 8:
+			case 9:
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingFormat:@"%d", (int)iKeyTag];
+				// 再計算
+				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				break;
+				
+				/*	case 10: // [A]  ＜＜HEX対応のため保留＞＞
+				 case 11: // [B]
+				 case 12: // [C]
+				 case 13: // [D]
+				 case 14: // [E]
+				 case 15: // [F]
+				 [entryNumber appendFormat:@"%d", (int)iKeyTag];
+				 break; */
+				
+			case KeyTAG_DECIMAL: // [.]小数点
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:NUM_DECI];
+				break;
+				
+			case KeyTAG_00: // [00]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"00"];
+				// 再計算
+				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				break;
+				
+			case KeyTAG_000: // [000]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"000"];
+				// 再計算
+				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				break;
+				
+			case KeyTAG_SIGN: // [+/-]
+				break;
+				
+			case KeyTAG_PERC: // [%]パーセント ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
+				break;
+			case KeyTAG_PERM: // [‰]パーミル ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
+				break;
+			case KeyTAG_ROOT: // [√]ルート
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:NUM_ROOT];
+				break;
+			case KeyTAG_LEFT: // [(]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"("];
+				break;
+			case KeyTAG_RIGHT: // [)]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@")"];
+				// 再計算
+				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				break;
+				
+				//---------------------------------------------[100]-[199] Operators
+			case KeyTAG_ANSWER: // [=]
+				// 再計算
+				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				break;
+				
+			case KeyTAG_PLUS: // [+]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ADD];	break;
+			case KeyTAG_MINUS: // [-]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_SUB];	break;
+			case KeyTAG_MULTI: // [×]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_MULT];	break;
+			case KeyTAG_DIVID: // [÷]
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_DIVI];	break;
+				
+			case KeyTAG_GT: // [GT] Ground Total: 1ドラムの全[=]回答値の合計
+				break;
+				
+				//---------------------------------------------[200]-[299] Functions
+			case KeyTAG_AC: // [AC]
+				ibTvFormula.text = @"";
+				ibLbFormAnswer.text = @"=";
+				break;
+				
+			case KeyTAG_BS: { // [BS]
+				if (0 < [ibTvFormula.text length]) {
+					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1];
+					// 再計算
+					ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+										   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				}
+			} break;
+				
+		}
+		//
+		if ([ibTvFormula.text length]<=0) {
+			ibTvFormula.font = [UIFont systemFontOfSize:14];
+			ibTvFormula.text = NSLocalizedString(@"Formula mode", nil);
+			ibBuGetDrum.hidden = NO;
+		}
+	}
+	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
+		[localPool release];
+	}
+}
+
+// Memory関係キー入力処理
+- (void)vButtonMemory:(Drum *)drum withTag:(NSInteger)iKeyTag withCopyNumber:(NSString *)zCopyNumber
+{
+	switch (iKeyTag) {
+		case KeyTAG_MCLEAR: // [MClear]
+			if (0 < [[UIPasteboard generalPasteboard].string length]) {
+				[UIPasteboard generalPasteboard].string = @"";
+			} 
+			else if (MiSvUpperPage==0 && ![drum.entryOperator hasPrefix:OP_ANS]) { // [=]でない
+				[drum.entryNumber setString:@""];
+			}
+			
+			if (KeyTAG_MSTORE_Start <= ibBuMemory.tag && ibBuMemory.tag <= KeyTAG_MSTROE_End) {
+				// MemoryKey へ登録する
+				NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+				for (id obj in aKeys) {
+					if ([obj isMemberOfClass:[KeyButton class]]) {
+						KeyButton *bu = (KeyButton *)obj;
+						if (bu.tag == ibBuMemory.tag) {
+							//bu.titleLabel.text = [NSString stringWithFormat:@"M%d", (int)(bu.tag - 350)];
+							[bu setTitle:[NSString stringWithFormat:@"M%d", (int)(bu.tag - KeyTAG_MSTORE_Start)]
+								forState:UIControlStateNormal];
+							bu.alpha = KeyALPHA_MSTORE_OFF; // Memory nothing
+							//2個以上連結しているため最後まで調べて全て更新する
+						}
+					}
+				}
+				if (aPadKeyButtons) { // iPad専用メモリーもクリアする
+					for (KeyButton *bu in aPadKeyButtons) {
+						if (bu.tag == ibBuMemory.tag) {
+							[bu setTitle:[NSString stringWithFormat:@"M%d", (int)(bu.tag - KeyTAG_MSTORE_Start)]
+								forState:UIControlStateNormal];
+							bu.alpha = KeyALPHA_MSTORE_OFF; // Memory nothing
+							//break; 同じキーが複数割り当てられている可能性があるので最後までいく
+						}
+					}
+				} else {
+					[self vKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
+				}
+				ibBuMemory.tag = 0; // MClear
+			}
+			break;
+			
+		case KeyTAG_MCOPY: // [Copy]  ＜＜同じ値を続けて登録することも可とした＞＞
+			if (0 < [zCopyNumber length]) {
+				// ドラムを逆回転させた行の数値 zCopyNumber が有効ならば優先コピー
+				[UIPasteboard generalPasteboard].string = stringFormatter(zCopyNumber, YES);
+				bDrumRefresh = NO; // =NO:[Copy]後などドラムを動かしたくないとき
+			}
+			else if (MiSvUpperPage==0 && 0 < [drum.entryNumber length]) {
+				// entry値をコピーする　　＜＜stringFormatterを通すため、Mutable ⇒ NSString 変換が必要＞＞
+				[UIPasteboard generalPasteboard].string = stringFormatter([NSString stringWithString:drum.entryNumber], YES);
+			}
+			else if	(MiSvUpperPage==1 && 2 < [ibLbFormAnswer.text length]) {
+				[UIPasteboard generalPasteboard].string = [ibLbFormAnswer.text substringFromIndex:2]; // 先頭の"= "を除く
+			}
+			else break;
+			//
+			if (0 < [[UIPasteboard generalPasteboard].string length]) {
+				// [UIPasteboard generalPasteboard].string を 未使用メモリーKey へ登録する
+				ibBuMemory.tag = 0; // MClear
+				NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+				NSInteger iSavedTag = (-1);
+				
+				if (aPadKeyButtons) { // iPad専用メモリー優先にセットする　＜＜たいていiPhoneメモリ数より多いから＞＞
+					for (KeyButton *bu in aPadKeyButtons) {
+						if ([bu.titleLabel.text hasPrefix:@"M"]) { // 未使用メモリを探す
+							iSavedTag = bu.tag;  // 未使用メモリ発見
+							// アニメーション
+							{
+								CGRect rcEnd = bu.frame; // 最終位置
+								UIButton *buEntry = [aDrumButtons objectAtIndex:entryComponent];
+								CGRect rc = buEntry.frame; // 開始位置
+								rc.origin.x += (rc.size.width - bu.frame.size.width);
+								bu.frame = rc;
+								// アニメ準備
+								[UIView beginAnimations:nil context:NULL];
+								[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+								[UIView setAnimationDuration:0.7];
+								// アニメ終了時の位置をセット
+								bu.frame = rcEnd;
+								// アニメ開始
+								[UIView commitAnimations];
+							}
+							break;
+						}
+					}
+				}
+				
+				if (iSavedTag < 0) { // iPad専用メモリーになければKeybord上を探す
+					for (NSInteger iTag=KeyTAG_MSTORE_Start; iTag<=KeyTAG_MSTROE_End && iSavedTag<0; iTag++) {
+						for (id obj in aKeys) {
+							if ([obj isMemberOfClass:[KeyButton class]]) {
+								KeyButton *bu = (KeyButton *)obj;
+								if (bu.tag == iTag) {
+									if ([bu.titleLabel.text hasPrefix:@"M"]) {
+										iSavedTag = bu.tag;  // 未使用メモリ発見
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+				if (iSavedTag < 0) {
+					AzLOG(@"Memory Key Fill.");
+					break;
+				}
+				// コピー先を記録
+				ibBuMemory.tag = iSavedTag; // コピー完了
+				// 未使用メモリにコピーする
+				for (id obj in aKeys) {
+					if ([obj isMemberOfClass:[KeyButton class]]) {
+						KeyButton *bu = (KeyButton *)obj;
+						if (bu.tag == iSavedTag) {
+							[bu setTitle:[UIPasteboard generalPasteboard].string
+								forState:UIControlStateNormal];
+							bu.alpha = KeyALPHA_MSTORE_ON; // Memory OK
+							//break; 2個以上連結しているため最後まで調べて全て更新する
+						}
+					}
+				}
+				if (aPadKeyButtons) { // iPad専用メモリーにセットする
+					for (KeyButton *bu in aPadKeyButtons) {
+						if (bu.tag == iSavedTag) {
+							[bu setTitle:[UIPasteboard generalPasteboard].string
+								forState:UIControlStateNormal];
+							bu.alpha = KeyALPHA_MSTORE_ON; // Memory OK
+							//break; 2個以上連結しているため最後まで調べて全て更新する
+						}
+					}
+				} else {
+					[self vKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
+				}
+			}
+			break;
+			
+		case KeyTAG_MPASTE: { // [Paste]　　＜＜ibBuMemoryから呼び出しているので.tagの変更に注意＞＞
+			if (MiSvUpperPage==0) {
+				if ([drum.entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
+					if (![drum vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
+				}
+				NSString *str = stringAzNum([UIPasteboard generalPasteboard].string);
+				[drum.entryNumber setString:str]; // Az数値文字列をセット
+			}
+			else if (MiSvUpperPage==1) {
+				if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+					ibTvFormula.text = @"";
+					ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
+					ibBuGetDrum.hidden = YES;
+				}
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:
+									stringAzNum([UIPasteboard generalPasteboard].string)];
+				// 再計算
+				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+			}
+			// アニメーション不要
+		}	break;
+			
+		case KeyTAG_M_PLUS: // [M+]
+		case KeyTAG_M_MINUS: // [M-]
+		case KeyTAG_M_MULTI: // [M×]
+		case KeyTAG_M_DIVID: // [M÷]
+			if (MiSvUpperPage != 0) break; // Drumのみ
+			AzLOG(@"entryOperator=[%@]", drum.entryOperator);
+			if (0 < [zCopyNumber length]) {
+				// ドラムを逆回転させた行の数値 zCopyNumber が有効
+				bDrumRefresh = NO; // =NO:[Copy]後などドラムを動かしたくないとき
+			}
+			else if ([drum.entryOperator isEqualToString:OP_ANS] && [drum.entryNumber doubleValue]!=0.0) {
+				// OK : entryNumber
+				zCopyNumber = [NSString stringWithString:drum.entryNumber];
+			}
+			else if ([drum.entryOperator isEqualToString:@""] OR [drum.entryOperator isEqualToString:OP_START]) {
+				// [][>]であれば、OK : entryNumber
+				zCopyNumber = [NSString stringWithString:drum.entryNumber];
+			}
+			else {
+				if (![drum.entryOperator isEqualToString:OP_ANS] && [drum.entryNumber doubleValue]!=0.0) {
+					// 演算中　entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
+					[drum vCalcing:OP_ANS];
+				} else {
+					// 計算処理する
+					[drum.entryOperator setString:OP_ANS];
+					// entry行に、この[=]が入るので、数値部に計算結果を入れる
+					[drum.entryNumber setString:[drum zAnswerDrum]]; 
+				}
+				zCopyNumber = [NSString stringWithString:drum.entryNumber];
+			}
+			// 0でなければそれを Ｍ−＋ する
+			//if ([drum.entryNumber doubleValue] != 0.0) {
+			if ([zCopyNumber doubleValue] != 0.0) 
+			{
+				NSString *zMem = stringAzNum([UIPasteboard generalPasteboard].string);
+				char cNum1[SBCD_PRECISION+100];
+				char cNum2[SBCD_PRECISION+100];
+				char cAns[SBCD_PRECISION+100];
+				sprintf(cNum1, "%s", (char *)[zMem cStringUsingEncoding:NSASCIIStringEncoding]); 
+				sprintf(cNum2, "%s", (char *)[zCopyNumber cStringUsingEncoding:NSASCIIStringEncoding]); 
+				switch (iKeyTag) {
+					case KeyTAG_M_PLUS: // [M+]
+						stringAddition( cAns, cNum1, cNum2 );
+						break;
+					case KeyTAG_M_MINUS: // [M-]
+						stringSubtract( cAns, cNum1, cNum2 );
+						break;
+					case KeyTAG_M_MULTI: // [M×]
+						stringMultiply( cAns, cNum1, cNum2 );
+						break;
+					case KeyTAG_M_DIVID: // [M÷]
+						stringDivision( cAns, cNum1, cNum2 );
+						break;
+					default:
+						exit(-1); // iKeyTag 番号まちがい
+						break;
+				}
+				NSString *zAns = [NSString stringWithCString:(char *)cAns encoding:NSASCIIStringEncoding];
+				if ([zAns hasPrefix:@"@"]) {
+					if ([zAns hasPrefix:@"@0"]) {
+						[UIPasteboard generalPasteboard].string = NSLocalizedString(@"@Divide by zero", nil);
+					} else {
+						[UIPasteboard generalPasteboard].string = zAns; // ERROR
+					}
+				} 
+				else {
+					// 丸め処理
+					char cNum[SBCD_PRECISION+100];
+					char cAns[SBCD_PRECISION+100];
+					strcpy(cNum, (char *)[zAns cStringUsingEncoding:NSASCIIStringEncoding]); 
+					stringRounding( cAns, cNum, PRECISION, MiSegDecimal, MiSegRound );
+					AzLOG(@"BCD> stringRounding() cAns=%s", cAns);
+					zAns = [NSString stringWithCString:(char *)cAns encoding:NSASCIIStringEncoding];
+					// ペーストボードへ
+					[UIPasteboard generalPasteboard].string = stringFormatter(zAns, YES);
+					if (KeyTAG_MSTORE_Start <= ibBuMemory.tag && ibBuMemory.tag <= KeyTAG_MSTROE_End) {
+						// MemoryKey へ登録する
+						if (aPadKeyButtons) { // iPad専用メモリー優先にセットする　＜＜たいていiPhoneメモリ数より多いから＞＞
+							for (KeyButton *bu in aPadKeyButtons) {
+								if (bu.tag == ibBuMemory.tag) {
+									[bu setTitle:[UIPasteboard generalPasteboard].string
+										forState:UIControlStateNormal];
+									//2個以上連結しているため最後まで調べて全て更新する
+								}
+							}
+						}
+						NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+						for (id obj in aKeys) {
+							if ([obj isMemberOfClass:[KeyButton class]]) {
+								KeyButton *bu = (KeyButton *)obj;
+								if (bu.tag == ibBuMemory.tag) {
+									[bu setTitle:[UIPasteboard generalPasteboard].string
+										forState:UIControlStateNormal];
+									//2個以上連結しているため最後まで調べて全て更新する
+								}
+							}
+						}
+					}
+				}
+			}
+			break;
+	}
+}
+
+- (IBAction)ibButton:(KeyButton *)button   // KeyButton TouchUpInside処理メソッド
+{
+	bDrumRefresh = YES;
+	
+	if (aKeyMaster) {				// キーレイアウト変更モード // ドラム選択中のキーを割り当てる
+		[self vButtonMaster:button];
+		return;
+	}
+	
 	NSString *zCopyNumber = nil; // 遡って数値を[Copy]するのに備えて保持する
 	Drum *drum = [aDrums objectAtIndex:entryComponent];
-	if (MiSegReverseDrum==1 && bDramRevers) {
+
+	// ドラム逆回転時の処理
+	if (MiSvUpperPage==0 && MiSegReverseDrum==1 && bDramRevers) {
 		//bDramRevers = NO;  [Copy]後、遡った行が維持されるようにリマークした
-		NSInteger iRow = [ibPicker selectedRowInComponent:entryComponent]; // 現在の選択行
+		NSInteger iRow = [ibPvDrum selectedRowInComponent:entryComponent]; // 現在の選択行
 		if (0 <= iRow && iRow < [drum count]) 
 		{	// ドラム逆回転やりなおしモード ⇒ formulaとentryを選択行まで戻す
 			// 遡った行の数値を「数値文字化」して copy autorelese object として保持する。
@@ -1346,250 +1780,15 @@
 	
 	// キー入力処理   先に if (button.tag < 0) return; 処理済み
 	if (button.tag <= KeyTAG_STANDARD_End) { //[KeyTAG_STANDARD_Start-KeyTAG_STANDARD_End]---------Standard Keys
-		[drum entryKeyTag:button.tag keyButton:button];
+		if (MiSvUpperPage==0) {
+			[drum entryKeyTag:button.tag keyButton:button];
+		} 
+		else if (MiSvUpperPage==1) {
+			[self vButtonFormula:button.tag];
+		}
 	} 
 	else if (button.tag <= KeyTAG_MEMORY_End) { //[KeyTAG_MEMORY_Start-KeyTAG_MEMORY_End]----------Memory Keys
-		switch (button.tag) {
-			case KeyTAG_MCLEAR: // [MClear]
-				if (0 < [[UIPasteboard generalPasteboard].string length]) {
-					[UIPasteboard generalPasteboard].string = @"";
-				} 
-				else if (![drum.entryOperator hasPrefix:OP_ANS]) { // [=]でない
-					[drum.entryNumber setString:@""];
-				}
-				if (KeyTAG_MSTORE_Start <= ibBuMemory.tag && ibBuMemory.tag <= KeyTAG_MSTROE_End) {
-					// MemoryKey へ登録する
-					NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
-					for (id obj in aKeys) {
-						if ([obj isMemberOfClass:[KeyButton class]]) {
-							KeyButton *bu = (KeyButton *)obj;
-							if (bu.tag == ibBuMemory.tag) {
-								//bu.titleLabel.text = [NSString stringWithFormat:@"M%d", (int)(bu.tag - 350)];
-								[bu setTitle:[NSString stringWithFormat:@"M%d", (int)(bu.tag - KeyTAG_MSTORE_Start)]
-									forState:UIControlStateNormal];
-								bu.alpha = KeyALPHA_MSTORE_OFF; // Memory nothing
-								//2個以上連結しているため最後まで調べて全て更新する
-							}
-						}
-					}
-					if (aPadKeyButtons) { // iPad専用メモリーもクリアする
-						for (KeyButton *bu in aPadKeyButtons) {
-							if (bu.tag == ibBuMemory.tag) {
-								[bu setTitle:[NSString stringWithFormat:@"M%d", (int)(bu.tag - KeyTAG_MSTORE_Start)]
-									forState:UIControlStateNormal];
-								bu.alpha = KeyALPHA_MSTORE_OFF; // Memory nothing
-								//break; 同じキーが複数割り当てられている可能性があるので最後までいく
-							}
-						}
-					} else {
-						[self vKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
-					}
-					ibBuMemory.tag = 0; // MClear
-				}
-				break;
-				
-			case KeyTAG_MCOPY: // [Copy]  ＜＜同じ値を続けて登録することも可とした＞＞
-				if (0 < [zCopyNumber length]) {
-					// ドラムを逆回転させた行の数値 zCopyNumber が有効ならば優先コピー
-					[UIPasteboard generalPasteboard].string = stringFormatter(zCopyNumber, YES);
-					bDrumRefresh = NO; // =NO:[Copy]後などドラムを動かしたくないとき
-				}
-				else if (0 < [drum.entryNumber length]) {
-					// entry値をコピーする　　＜＜stringFormatterを通すため、Mutable ⇒ NSString 変換が必要＞＞
-					NSString *zNum = stringFormatter([NSString stringWithString:drum.entryNumber], YES);
-					[UIPasteboard generalPasteboard].string = zNum;
-				}
-				else break;
-				//
-				if (0 < [[UIPasteboard generalPasteboard].string length]) {
-					// [UIPasteboard generalPasteboard].string を 未使用メモリーKey へ登録する
-					ibBuMemory.tag = 0; // MClear
-					NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
-					NSInteger iSavedTag = (-1);
-
-					if (aPadKeyButtons) { // iPad専用メモリー優先にセットする　＜＜たいていiPhoneメモリ数より多いから＞＞
-						for (KeyButton *bu in aPadKeyButtons) {
-							if ([bu.titleLabel.text hasPrefix:@"M"]) { // 未使用メモリを探す
-								iSavedTag = bu.tag;  // 未使用メモリ発見
-								// アニメーション
-								{
-									CGRect rcEnd = bu.frame; // 最終位置
-									UIButton *buEntry = [aDrumButtons objectAtIndex:entryComponent];
-									CGRect rc = buEntry.frame; // 開始位置
-									rc.origin.x += (rc.size.width - bu.frame.size.width);
-									bu.frame = rc;
-									// アニメ準備
-									[UIView beginAnimations:nil context:NULL];
-									[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-									[UIView setAnimationDuration:0.7];
-									// アニメ終了時の位置をセット
-									bu.frame = rcEnd;
-									// アニメ開始
-									[UIView commitAnimations];
-								}
-								break;
-							}
-						}
-					}
-					
-					if (iSavedTag < 0) { // iPad専用メモリーになければKeybord上を探す
-						for (NSInteger iTag=KeyTAG_MSTORE_Start; iTag<=KeyTAG_MSTROE_End && iSavedTag<0; iTag++) {
-							for (id obj in aKeys) {
-								if ([obj isMemberOfClass:[KeyButton class]]) {
-									KeyButton *bu = (KeyButton *)obj;
-									if (bu.tag == iTag) {
-										if ([bu.titleLabel.text hasPrefix:@"M"]) {
-											iSavedTag = bu.tag;  // 未使用メモリ発見
-											break;
-										}
-									}
-								}
-							}
-						}
-					}
-					if (iSavedTag < 0) {
-						AzLOG(@"Memory Key Fill.");
-						break;
-					}
-					// コピー先を記録
-					ibBuMemory.tag = iSavedTag; // コピー完了
-					// 未使用メモリにコピーする
-					for (id obj in aKeys) {
-						if ([obj isMemberOfClass:[KeyButton class]]) {
-							KeyButton *bu = (KeyButton *)obj;
-							if (bu.tag == iSavedTag) {
-								[bu setTitle:[UIPasteboard generalPasteboard].string
-									forState:UIControlStateNormal];
-								bu.alpha = KeyALPHA_MSTORE_ON; // Memory OK
-								//break; 2個以上連結しているため最後まで調べて全て更新する
-							}
-						}
-					}
-					if (aPadKeyButtons) { // iPad専用メモリーにセットする
-						for (KeyButton *bu in aPadKeyButtons) {
-							if (bu.tag == iSavedTag) {
-								[bu setTitle:[UIPasteboard generalPasteboard].string
-									forState:UIControlStateNormal];
-								bu.alpha = KeyALPHA_MSTORE_ON; // Memory OK
-								//break; 2個以上連結しているため最後まで調べて全て更新する
-							}
-						}
-					} else {
-						[self vKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
-					}
-				}
-				break;
-				
-			case KeyTAG_MPASTE: { // [Paste]　　＜＜ibBuMemoryから呼び出しているので.tagの変更に注意＞＞
-				if ([drum.entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
-					if (![drum vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
-				}
-				NSString *str = stringAzNum([UIPasteboard generalPasteboard].string);
-				[drum.entryNumber setString:str]; // Az数値文字列をセット
-				// アニメーション不要
-			}	break;
-				
-			case KeyTAG_M_PLUS: // [M+]
-			case KeyTAG_M_MINUS: // [M-]
-			case KeyTAG_M_MULTI: // [M×]
-			case KeyTAG_M_DIVID: // [M÷]
-				AzLOG(@"entryOperator=[%@]", drum.entryOperator);
-				if (0 < [zCopyNumber length]) {
-					// ドラムを逆回転させた行の数値 zCopyNumber が有効
-					bDrumRefresh = NO; // =NO:[Copy]後などドラムを動かしたくないとき
-				}
-				else if ([drum.entryOperator isEqualToString:OP_ANS] && [drum.entryNumber doubleValue]!=0.0) {
-					// OK : entryNumber
-					zCopyNumber = [NSString stringWithString:drum.entryNumber];
-				}
-				else if ([drum.entryOperator isEqualToString:@""] OR [drum.entryOperator isEqualToString:OP_START]) {
-					// [][>]であれば、OK : entryNumber
-					zCopyNumber = [NSString stringWithString:drum.entryNumber];
-				}
-				else {
-					if (![drum.entryOperator isEqualToString:OP_ANS] && [drum.entryNumber doubleValue]!=0.0) {
-						// 演算中　entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
-						[drum vCalcing:OP_ANS];
-					} else {
-						// 計算処理する
-						[drum.entryOperator setString:OP_ANS];
-						// entry行に、この[=]が入るので、数値部に計算結果を入れる
-						[drum.entryNumber setString:[drum zAnswerDrum]]; 
-					}
-					zCopyNumber = [NSString stringWithString:drum.entryNumber];
-				}
-				// 0でなければそれを Ｍ−＋ する
-				//if ([drum.entryNumber doubleValue] != 0.0) {
-				if ([zCopyNumber doubleValue] != 0.0) 
-				{
-					NSString *zMem = stringAzNum([UIPasteboard generalPasteboard].string);
-					char cNum1[SBCD_PRECISION+100];
-					char cNum2[SBCD_PRECISION+100];
-					char cAns[SBCD_PRECISION+100];
-					sprintf(cNum1, "%s", (char *)[zMem cStringUsingEncoding:NSASCIIStringEncoding]); 
-					sprintf(cNum2, "%s", (char *)[zCopyNumber cStringUsingEncoding:NSASCIIStringEncoding]); 
-					switch (button.tag) {
-						case KeyTAG_M_PLUS: // [M+]
-							stringAddition( cAns, cNum1, cNum2 );
-							break;
-						case KeyTAG_M_MINUS: // [M-]
-							stringSubtract( cAns, cNum1, cNum2 );
-							break;
-						case KeyTAG_M_MULTI: // [M×]
-							stringMultiply( cAns, cNum1, cNum2 );
-							break;
-						case KeyTAG_M_DIVID: // [M÷]
-							stringDivision( cAns, cNum1, cNum2 );
-							break;
-						default:
-							exit(-1); // iKeyTag 番号まちがい
-							break;
-					}
-					NSString *zAns = [NSString stringWithCString:(char *)cAns encoding:NSASCIIStringEncoding];
-					if ([zAns hasPrefix:@"@"]) {
-						if ([zAns hasPrefix:@"@0"]) {
-							[UIPasteboard generalPasteboard].string = NSLocalizedString(@"@Divide by zero", nil);
-						} else {
-							[UIPasteboard generalPasteboard].string = zAns; // ERROR
-						}
-					} 
-					else {
-						// 丸め処理
-						char cNum[SBCD_PRECISION+100];
-						char cAns[SBCD_PRECISION+100];
-						strcpy(cNum, (char *)[zAns cStringUsingEncoding:NSASCIIStringEncoding]); 
-						stringRounding( cAns, cNum, PRECISION, MiSegDecimal, MiSegRound );
-						AzLOG(@"BCD> stringRounding() cAns=%s", cAns);
-						zAns = [NSString stringWithCString:(char *)cAns encoding:NSASCIIStringEncoding];
-						// ペーストボードへ
-						[UIPasteboard generalPasteboard].string = stringFormatter(zAns, YES);
-						if (KeyTAG_MSTORE_Start <= ibBuMemory.tag && ibBuMemory.tag <= KeyTAG_MSTROE_End) {
-							// MemoryKey へ登録する
-							if (aPadKeyButtons) { // iPad専用メモリー優先にセットする　＜＜たいていiPhoneメモリ数より多いから＞＞
-								for (KeyButton *bu in aPadKeyButtons) {
-									if (bu.tag == ibBuMemory.tag) {
-										[bu setTitle:[UIPasteboard generalPasteboard].string
-											forState:UIControlStateNormal];
-										//2個以上連結しているため最後まで調べて全て更新する
-									}
-								}
-							}
-							NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
-							for (id obj in aKeys) {
-								if ([obj isMemberOfClass:[KeyButton class]]) {
-									KeyButton *bu = (KeyButton *)obj;
-									if (bu.tag == ibBuMemory.tag) {
-										[bu setTitle:[UIPasteboard generalPasteboard].string
-											forState:UIControlStateNormal];
-										//2個以上連結しているため最後まで調べて全て更新する
-									}
-								}
-							}
-						}
-					}
-				}
-				break;
-		}
+		[self vButtonMemory:drum  withTag:button.tag  withCopyNumber:zCopyNumber];
 	}
 	else if (button.tag <= KeyTAG_MSTROE_End) { //[KeyTAG_MSTORE_Start-KeyTAG_MSTROE_End]-------Memory STORE Keys
 		if (button && ![button.titleLabel.text hasPrefix:@"M"]) {
@@ -1597,60 +1796,57 @@
 			[UIPasteboard generalPasteboard].string = button.titleLabel.text;
 			ibBuMemory.tag = button.tag;
 			// [Paste]
-			if ([drum.entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
-				// entryをarrayに追加し、entryを新規作成する
-				if ([drum vNewLine:OP_START]==NO) return; // ERROR
+			if (MiSvUpperPage==0) {
+				if ([drum.entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
+					// entryをarrayに追加し、entryを新規作成する
+					if ([drum vNewLine:OP_START]==NO) return; // ERROR
+				}
+				[drum.entryNumber setString:stringAzNum([UIPasteboard generalPasteboard].string)]; // Az数値文字列をセット
 			}
-			NSString *str = stringAzNum([UIPasteboard generalPasteboard].string);
-			[drum.entryNumber setString:str]; // Az数値文字列をセット
+			else if (MiSvUpperPage==1) {
+				if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+					ibTvFormula.text = @"";
+					ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
+					ibBuGetDrum.hidden = YES;
+				}
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:
+									stringAzNum([UIPasteboard generalPasteboard].string)];
+				// 再計算
+				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+			}
 			// アニメーション：他のボタン同様にentryに際してはアニメなし
 		}
 	}
-/*	else if (KeyTAG_UNIT_Start <= button.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End]--------------Unit Keys
-		if (button.tag <= 1099) { // [1000-1099]/100=(10)長さ
-			
-		}
-		else if (button.tag <= 1199) { // [1100-1199]/100=(11)面積
-			
-		}
-		else if (button.tag <= 1299) { // [1200-1299]/100=(12)体積
-			
-		}
-		else if (button.tag <= 1399) { // [1300-1399]/100=(13)質量
-			
-		}
-		else if (button.tag <= 1499) { // [1400-1499]/100=(14)角度
-			
-		}
-		else if (button.tag <= 1599) { // [1500-1599]/100=(15)時間
-			
-		}
-		else if (button.tag <= 1699) { // [1600-1699]/100=(16)速度
-			
-		}
-		else if (button.tag <= 1799) { // [1700-1799]/100=(17)温度
-			
-		}
-	}*/
+//	else if (KeyTAG_UNIT_Start <= button.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End]--------------Unit Keys
+//	}
 
-/*Option選択にするか改めて検討	
-	// 常にキーボードの1ページを表示する
-	[self vKeyboardPage:1]; // キー1ページへ
-*/
-	if (bDrumRefresh) { // ドラム再表示
-		[ibPicker reloadComponent:entryComponent];
-		[ibPicker selectRow:[drum count] inComponent:entryComponent animated:YES];
+	if (MiSvUpperPage==0 && bDrumRefresh) { // ドラム再表示
+		[ibPvDrum reloadComponent:entryComponent];
+		[ibPvDrum selectRow:[drum count] inComponent:entryComponent animated:YES];
 	}
 	// [M]ラベル表示
 	[self ibBuMemoryDisplay];
 
 	// iAd
-	if (NSClassFromString(@"ADBannerView")) {
+	if (MiSvUpperPage==0 && NSClassFromString(@"ADBannerView")) {
 		if (button.tag==KeyTAG_AC) { // [AC]
 			[self iAdOn];
 		} else {
 			[self iAdOff];
 		}
+	}
+}
+
+- (IBAction)ibBuGetDrum:(UIButton *)button	// ドラム ⇒ 数式 転記
+{
+	//[0.3]ドラム式を数式にして ibTvFormula へ送る
+	Drum *drum = [aDrums objectAtIndex:entryComponent];
+	NSString *str = [drum stringFormula:ibLbFormAnswer];
+	if (0 < [str length]) {
+		ibTvFormula.text = str;
+		ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
+		ibBuGetDrum.hidden = YES;
 	}
 }
 
@@ -1687,7 +1883,7 @@
 		[mdMk setObject:[UIPasteboard generalPasteboard].string  forKey:@"PB_TEXT"];
 	}
 	// Keyboard ページ保存
-	[mdMk setObject:[NSNumber numberWithInteger:MiScrollViewPage]  forKey:@"KB_PAGE"];
+	[mdMk setObject:[NSNumber numberWithInteger:MiSvLowerPage]  forKey:@"KB_PAGE"];
 	
 	// SAVE
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -1762,20 +1958,14 @@
 	{
 		NSNumber *num = [dicMkeys objectForKey:@"KB_PAGE"];
 		if (num && 0<=[num integerValue]) {
-			MiScrollViewPage = [num integerValue];
+			MiSvLowerPage = [num integerValue];
 			CGRect rc = ibScrollLower.frame;
-			rc.origin.x = rc.size.width * MiScrollViewPage;
+			rc.origin.x = rc.size.width * MiSvLowerPage;
 			[ibScrollLower scrollRectToVisible:rc animated:NO];
 		} else {
-			MiScrollViewPage = 1; // DEFAULT PAGE
+			MiSvLowerPage = 1; // DEFAULT PAGE
 		}
 	}
-}
-
-// ibScrollLower DELEGATE:実際に画面が静止したときに呼ばれる
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)_scrollView
-{
-    MiScrollViewPage = (NSInteger)(_scrollView.contentOffset.x / _scrollView.frame.size.width);
 }
 
 - (void)vKeyboardPage:(NSInteger)iPage
@@ -1856,8 +2046,8 @@
 
 - (void)vPickerRefresh
 {
-	[ibPicker reloadComponent:1]; // 1つ前になる？？
-	[ibPicker reloadComponent:2];
+	[ibPvDrum reloadComponent:1]; // 1つ前になる？？
+	[ibPvDrum reloadComponent:2];
 }
 
 // iAd取得できたときに呼ばれる　⇒　表示する
@@ -1883,21 +2073,21 @@
 - (void)iAdOn
 {
 	//AzLOG(@"=== iAdOn ===");
-	if (!NSClassFromString(@"ADBannerView")) return;
-	if (ibADBannerView==nil) return;
-	if (bADbannerIsVisible==NO) return; // 内容ないので表示しない ＜＜しばらく後、内容が無くなっている場合もある＞＞
+	if (!NSClassFromString(@"ADBannerView") || !ibAdBanner || !bADbannerIsVisible) return; // iAd無効
 	
+	ibAdBanner.hidden = NO;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:3.0];
 	
-	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) { // ヨコ
-	//	ibADBannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
-	//	ibADBannerView.frame = CGRectMake(0, 320 - 32, 0,0);
+	ibAdBanner.frame = ibPvDrum.frame;
+/*	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) { // ヨコ
+		//	ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
+		//	ibAdBanner.frame = CGRectMake(0, 320 - 32, 0,0);
 	} else {
-		ibADBannerView.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-		ibADBannerView.frame = CGRectMake(0,0, 0,0);
-	}
+		ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+		ibAdBanner.frame = CGRectMake(0,0, 0,0);
+	}*/
 
 	[UIView commitAnimations];
 }
@@ -1905,46 +2095,29 @@
 - (void)iAdOff
 {
 	AzLOG(@"=== iAdOff ===");
-	if (!NSClassFromString(@"ADBannerView")) return;
-	if (ibADBannerView==nil) return;
+	if (!NSClassFromString(@"ADBannerView") || !ibAdBanner) return; // iAd無効
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.0];
 	
-	CGRect theBannerFrame = self.view.frame;
-	theBannerFrame.origin.y = -52;  // viewの外へ出す
-	ibADBannerView.frame = theBannerFrame;	
+	//CGRect theBannerFrame = self.view.frame;
+	//theBannerFrame.origin.y = -52;  // viewの外へ出す
+	//ibAdBanner.frame = theBannerFrame;	
+	ibAdBanner.frame = CGRectMake(0,-52, 0,0);
 	
 	[UIView commitAnimations];
+	ibAdBanner.hidden = YES;
 }
 
 
-//----------------------------------------------------------------Touch
+//=================================================================Touch delegate
+/*
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	CGPoint po = [[touches anyObject] locationInView:ibScrollLower];
 	AzLOG(@"---touchesBegan:(%f, %f)", po.x, po.y);
-	
-	
-//	[self.nextResponder touchesBegan:touches withEvent:event]; // ibPickerへ受け流す
-/*	CGPoint po = [[touches anyObject] locationInView:self.view];
-	
-	if (CGRectContainsPoint(ibPicker.frame, po)) { // ドラム内をタッチした
-		assert(0 <= MiSegDrums);
-		float fSpan = (ibPicker.frame.size.width - DRUM_LEFT_OFFSET*2) / (float)(1 + MiSegDrums);
-		int iComponent = (int)floor((po.x - 14.0) / fSpan);
-		if (iComponent < 0 OR MiSegDrums < iComponent) return;
-		entryComponent = iComponent;
-		// ドラムアクティブカーソル表示
-		[self vDrumButtonDisplay];
-		//
-		NSInteger iRow = [ibPicker selectedRowInComponent:entryComponent];
-		[ibPicker selectRow:iRow+1 inComponent:entryComponent animated:NO];
-		[ibPicker selectRow:iRow inComponent:entryComponent animated:YES];
-	}*/
 }
-
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -1963,6 +2136,146 @@
 	CGPoint po = [[touches anyObject] locationInView:ibScrollLower];
 	AzLOG(@"--------------touchesCancelled:(%f, %f)", po.x, po.y);
 }
+*/
+
+//=================================================================ibScrollUpper delegate
+// スクロール開始したときに呼ばれる
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+	[ibTvFormula resignFirstResponder]; // キーボードを隠す
+}
+
+// スクロールして画面が静止したときに呼ばれる
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+	NSInteger iPrevUpper = MiSvUpperPage;
+	if (scrollView==ibScrollUpper) {
+		MiSvUpperPage = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+
+		if (iPrevUpper!=1 && MiSvUpperPage==1) {
+			[CalcFunctions setCalcMethod:1]; // 数式側：常に (1)Formula にする
+		}
+		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			MiSegCalcMethod = (NSInteger)[defaults integerForKey:GUD_CalcMethod];
+			[CalcFunctions setCalcMethod:MiSegCalcMethod];	// ドラム側：設定方式に戻す
+		}
+	}
+	else {
+		MiSvLowerPage = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+	}
+}
+
+
+//=================================================================ibTvFormula delegate
+- (void)textViewDidBeginEditing:(UITextView *)textView
+{
+	// アニメ開始時の位置をセット
+	// アニメ準備
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:1.5];
+	// アニメ終了時の位置をセット
+	CGRect rc = ibBuFormLeft.frame;
+	rc.origin.x -= 100;
+	ibBuFormLeft.frame = rc;
+
+	rc = ibBuFormRight.frame;
+	rc.origin.x += 100;
+	ibBuFormRight.frame = rc;
+
+	rc = ibScrollLower.frame;
+	rc.origin.y += 100;
+	ibScrollLower.frame = rc;
+
+	if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+		ibTvFormula.text = @"";
+		ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
+		ibBuGetDrum.hidden = YES;
+	}
+	// アニメ開始
+	[UIView commitAnimations];
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView
+{
+	// アニメ開始時の位置をセット
+	// アニメ準備
+	[UIView beginAnimations:nil context:NULL];
+	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+	[UIView setAnimationDuration:0.6];	// 戻りは早く
+	// アニメ終了時の位置をセット
+	CGRect rc = ibBuFormLeft.frame;
+	rc.origin.x += 100;
+	ibBuFormLeft.frame = rc;
+	
+	rc = ibBuFormRight.frame;
+	rc.origin.x -= 100;
+	ibBuFormRight.frame = rc;
+	
+	rc = ibScrollLower.frame;
+	rc.origin.y -= 100;
+	ibScrollLower.frame = rc;
+	// アニメ開始
+	[UIView commitAnimations];
+}
+
+- (void)textViewDidChange:(UITextView *)textView
+{
+	AzLOG(@"--textViewDidChange:");
+	// 再計算
+	ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+						   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
+{
+	//AzLOG(@"--shouldChangeTextInRange:%@", text);
+	const NSString *zList = @" 0123456789.+-×÷*/()";  // 入力許可文字
+	
+	NSLog(@"textField-----[%@]", text);
+	if ([text length]<=0) return YES; // [BS]
+	
+	NSRange rg = [zList rangeOfString:text];
+	if (rg.length==1) return YES; // 入力許可文字
+
+	if ([text hasPrefix:@"\n"]) { // [Done]
+		[textView resignFirstResponder]; // キーボードを隠す 
+	}
+	return NO;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView
+{
+	AzLOG(@"--textViewShouldEndEditing");
+	[ibTvFormula resignFirstResponder]; // キーボードを隠す
+	return YES;
+}
+
+
+//=================================================================AdMob delegate
+// 必要なFramework
+// AudioToolbox.framework
+// MediaPlayer.framework
+// MessageUI.framework ⇒ 役割 "Weak" 変更すること
+// QuartzCore.framework
+//------------------------------------------------
+- (NSString *)publisherIdForAd:(AdMobView *)adView {
+	return @"a14d4cec7480f76"; // ドラタク　パブリッシャー ID
+}
+// AdMob
+- (UIViewController *)currentViewControllerForAd:(AdMobView *)adView {
+	return self;
+}
+// AdMob
+- (void)didReceiveAd:(AdMobView *)adView {
+	NSLog(@"AdMob: Did receive ad");
+}
+// AdMob
+- (void)didFailToReceiveAd:(AdMobView *)adView {
+	NSLog(@"AdMob: Did fail to receive ad");
+}
+
 
 
 @end

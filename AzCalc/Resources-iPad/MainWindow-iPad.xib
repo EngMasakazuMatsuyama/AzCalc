@@ -381,12 +381,12 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ibADBannerView</string>
+							<string>ibAdBanner</string>
 							<string>ibBuInformation</string>
 							<string>ibBuMemory</string>
 							<string>ibBuSetting</string>
 							<string>ibLbEntry</string>
-							<string>ibPicker</string>
+							<string>ibPvDrum</string>
 							<string>ibScrollLower</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -404,18 +404,18 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ibADBannerView</string>
+							<string>ibAdBanner</string>
 							<string>ibBuInformation</string>
 							<string>ibBuMemory</string>
 							<string>ibBuSetting</string>
 							<string>ibLbEntry</string>
-							<string>ibPicker</string>
+							<string>ibPvDrum</string>
 							<string>ibScrollLower</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBToOneOutletInfo">
-								<string key="name">ibADBannerView</string>
+								<string key="name">ibAdBanner</string>
 								<string key="candidateClassName">ADBannerView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -435,7 +435,7 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">ibPicker</string>
+								<string key="name">ibPvDrum</string>
 								<string key="candidateClassName">UIPickerView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
