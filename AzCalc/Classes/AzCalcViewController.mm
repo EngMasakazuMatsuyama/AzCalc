@@ -126,8 +126,6 @@
 	}
 	aDrumButtons = [[NSArray alloc] initWithArray:maButtons];	
 	[maButtons release];
-	[self.view bringSubviewToFront:ibBuMemory];		// ibBuMemory を最後の bu よりも上にする
-	[self.view bringSubviewToFront:ibScrollLower];	// さらに ibScrollLower を ibBuMemory の上にする
 	
 	if (!aDrums) {
 		// Drumオブジェクトは、SubViewではないので、最初に1度だけ生成し、viewDidUnloadでは破棄しない。
@@ -181,6 +179,7 @@
 	ibTvFormula.delegate = self;
 	ibTvFormula.font = [UIFont systemFontOfSize:14];
 	ibTvFormula.text = NSLocalizedString(@"Formula mode", nil);
+	ibBuGetDrum.titleLabel.text = NSLocalizedString(@"Formula Quote", nil);
 	float dx = ibScrollUpper.frame.size.width;
 	rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
 	rect = ibLbFormAnswer.frame;	rect.origin.x += dx;	ibLbFormAnswer.frame = rect;
@@ -387,13 +386,10 @@
 		aKeyMaster = nil;
 	}
 
-	// Memory Display ドラム下部に隠しておく
+	// Memory Display
 	ibBuMemory.hidden = NO;
-	CGRect rc = ibBuMemory.frame;
-	rc.origin.y = ibPvDrum.frame.origin.y + ibPvDrum.frame.size.height;
-	ibBuMemory.frame = rc;
-	//
-	//[self vMemoryLoad]; このviewDidLoad後、applicationDidBecomeActiveがコールされるため不要。
+	ibBuMemory.alpha = 0.0; // 透明にして隠す
+	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 
 	if (ibAdBanner) {
 		[self.view bringSubviewToFront:ibAdBanner]; // iAdをaDrumButtonsより上にする
@@ -728,16 +724,8 @@
 	// aDrumButtons
 	[self vDrumButtonDisplay];
 	
-	// ibBuMemory：定位置(隠れる位置)に、後で改めて ibBuMemoryDisplay する
-	CGRect rc = ibBuMemory.frame;
-	if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-		// ヨコ ⇒ W1024 H768-20 縦20行1列表示
-		rc.origin.y = 768 - ibScrollLower.frame.size.height;
-	} else {
-		// タテ ⇒ W768 H1024-20 縦7行3列表示
-		rc.origin.y = 1024 - ibScrollLower.frame.size.height;
-	}
-	ibBuMemory.frame = rc;
+	// ibBuMemory：透明にして隠す。その後、改めて ibBuMemoryDisplay する
+	ibBuMemory.alpha = 0;
 	[self ibBuMemoryDisplay]; // 改めて表示
 }
 
@@ -816,14 +804,12 @@
 		rc.size.width = sz.width + 20;
 		if (260 < rc.size.width) rc.size.width = 260; // Over
 		rc.origin.x = (ibPvDrum.frame.size.width - rc.size.width) / 2.0;
-//		if (ibBuMemory.frame.origin.y < ibScrollLower.frame.origin.y) return; // 既に出現している
 		// アニメ準備
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 		[UIView setAnimationDuration:1.0];
-		// アニメ終了時の位置をセット
-		rc.origin.y -= (ibBuMemory.frame.size.height + 1.0); // 出現位置
-		ibBuMemory.frame = rc;
+		// アニメ終了時の状態をセット
+		ibBuMemory.alpha = 1.0;
 	} 
 	else {
 		if (ibScrollLower.frame.origin.y <= ibBuMemory.frame.origin.y) return; // 既に隠れている
@@ -832,10 +818,8 @@
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 		[UIView setAnimationDuration:1.0];
-		// アニメ終了時の位置をセット
-		CGRect rc = ibBuMemory.frame;
-		rc.origin.y = ibScrollLower.frame.origin.y; // 定位置：ibScrollLowerの裏に隠れている
-		ibBuMemory.frame = rc;
+		// アニメ終了時の状態をセット
+		ibBuMemory.alpha = 0.0;	// 透明
 	}
 	// アニメ開始
 	[UIView commitAnimations];
@@ -1685,7 +1669,7 @@
 				NSString *zAns = [NSString stringWithCString:(char *)cAns encoding:NSASCIIStringEncoding];
 				if ([zAns hasPrefix:@"@"]) {
 					if ([zAns hasPrefix:@"@0"]) {
-						[UIPasteboard generalPasteboard].string = NSLocalizedString(@"@Divide by zero", nil);
+						[UIPasteboard generalPasteboard].string = NSLocalizedString(@"Divide by zero", nil);
 					} else {
 						[UIPasteboard generalPasteboard].string = zAns; // ERROR
 					}
@@ -1842,11 +1826,12 @@
 {
 	//[0.3]ドラム式を数式にして ibTvFormula へ送る
 	Drum *drum = [aDrums objectAtIndex:entryComponent];
-	NSString *str = [drum stringFormula:ibLbFormAnswer];
-	if (0 < [str length]) {
-		ibTvFormula.text = str;
+	NSString *zFormula = [drum stringFormula];
+	if (0 < [zFormula length]) {
+		ibTvFormula.text = zFormula;
 		ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
 		ibBuGetDrum.hidden = YES;
+		ibLbFormAnswer.text = stringFormatter([CalcFunctions zAnswerFromFormula:zFormula], YES);
 	}
 }
 
@@ -2170,52 +2155,46 @@
 //=================================================================ibTvFormula delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+	CGRect rc;
 	// アニメ開始時の位置をセット
 	// アニメ準備
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.5];
 	// アニメ終了時の位置をセット
-	CGRect rc = ibBuFormLeft.frame;
-	rc.origin.x -= 100;
-	ibBuFormLeft.frame = rc;
-
-	rc = ibBuFormRight.frame;
-	rc.origin.x += 100;
-	ibBuFormRight.frame = rc;
-
-	rc = ibScrollLower.frame;
-	rc.origin.y += 100;
-	ibScrollLower.frame = rc;
+	rc = ibBuFormLeft.frame;	rc.origin.x -= 100;		ibBuFormLeft.frame = rc;
+	rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;
+	rc = ibScrollLower.frame;	rc.origin.y += 100;		ibScrollLower.frame = rc;
+	rc = ibTvFormula.frame;		rc.size.height += 30;	ibTvFormula.frame = rc;
+	rc = ibLbFormAnswer.frame;	rc.origin.y += 30;		ibLbFormAnswer.frame = rc;
+	rc = ibBuMemory.frame;		rc.origin.y += 27;		ibBuMemory.frame = rc;
 
 	if ([ibTvFormula.text hasPrefix:@"Formula"]) {
 		ibTvFormula.text = @"";
 		ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
 		ibBuGetDrum.hidden = YES;
 	}
+
 	// アニメ開始
 	[UIView commitAnimations];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+	CGRect rc;
 	// アニメ開始時の位置をセット
 	// アニメ準備
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.6];	// 戻りは早く
 	// アニメ終了時の位置をセット
-	CGRect rc = ibBuFormLeft.frame;
-	rc.origin.x += 100;
-	ibBuFormLeft.frame = rc;
-	
-	rc = ibBuFormRight.frame;
-	rc.origin.x -= 100;
-	ibBuFormRight.frame = rc;
-	
-	rc = ibScrollLower.frame;
-	rc.origin.y -= 100;
-	ibScrollLower.frame = rc;
+	rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;
+	rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;
+	rc = ibScrollLower.frame;	rc.origin.y -= 100;		ibScrollLower.frame = rc;
+	rc = ibTvFormula.frame;		rc.size.height -= 30;	ibTvFormula.frame = rc;
+	rc = ibLbFormAnswer.frame;	rc.origin.y -= 30;		ibLbFormAnswer.frame = rc;
+	rc = ibBuMemory.frame;		rc.origin.y -= 27;		ibBuMemory.frame = rc;
+
 	// アニメ開始
 	[UIView commitAnimations];
 }

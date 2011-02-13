@@ -161,7 +161,7 @@
 							<object class="IBUIButton" id="479167029">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{1, 182}, {40, 32}}</string>
+								<string key="NSFrame">{{1, 182}, {45, 32}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">33</int>
@@ -195,7 +195,7 @@
 							<object class="IBUIButton" id="302747404">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{280, 182}, {40, 32}}</string>
+								<string key="NSFrame">{{275, 182}, {45, 32}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">34</int>
@@ -525,15 +525,6 @@
 					<int key="connectionID">291</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchEventConnection" key="connection">
-						<string key="label">ibButton:</string>
-						<reference key="source" ref="852859351"/>
-						<reference key="destination" ref="372490531"/>
-						<int key="IBEventType">7</int>
-					</object>
-					<int key="connectionID">293</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">ibBuGetDrum</string>
 						<reference key="source" ref="372490531"/>
@@ -724,7 +715,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AQAAAABDWAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+UAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -754,7 +745,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AULiAABC0AAAA</bytes>
 					</object>
-					<string>{{930, 626}, {320, 480}}</string>
+					<string>{{1390, 521}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>

@@ -490,24 +490,15 @@
  1000 + 20 % ⇒ 1000 + (1000 * 0.20)  　＜＜シャープ電卓方式
 
 */
-- (NSString *)stringFormula:(UILabel *)lbAnswer	// ドラム ⇒ ibTvFormula数式
+- (NSString *)stringFormula	// ドラム ⇒ ibTvFormula数式
 {
 	// 再計算
 	NSString *zFormula = [self zFormulaFromDrum];
 	if (0 < [zFormula length]) {
-		if ([entryOperator hasPrefix:OP_ANS]) {	//[=]を含めないようにする
-			lbAnswer.text = stringFormatter([CalcFunctions zAnswerFromFormula:zFormula], YES);
-			return zFormula;
-		} 
-		else if (0 < [entryOperator length]) {
+		if (0 < [entryOperator length] && ![entryOperator hasPrefix:OP_ANS] ) {	//[=]を含めないようにする
 			zFormula = [NSString stringWithFormat:@"%@%@%@", zFormula, entryOperator, entryNumber];
-			lbAnswer.text = stringFormatter([CalcFunctions zAnswerFromFormula:zFormula], YES);
-			return zFormula;
 		} 
-		else {
-			lbAnswer.text = stringFormatter([CalcFunctions zAnswerFromFormula:zFormula], YES);
-			return zFormula;
-		}
+		return zFormula;
 	}
 	else if (0 < [entryOperator length]) {
 		if ([entryOperator hasPrefix:OP_START]) { // 開始行
@@ -516,14 +507,11 @@
 				return [NSString stringWithFormat:@"%@%@", [entryOperator substringFromIndex:1], entryNumber];
 			}
 		}
-		lbAnswer.text = entryNumber;
 		return entryNumber;
 	}
 	else if (0 < [entryNumber length]) {
-		lbAnswer.text = entryNumber;
 		return entryNumber;
 	}
-	lbAnswer.text = @"=";
 	return @"";
 }
 

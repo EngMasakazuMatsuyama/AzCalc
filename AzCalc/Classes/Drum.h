@@ -55,7 +55,7 @@
 - (void)vCalcing:(NSString *)zNextOperator;
 - (NSString *)zFormulaFromDrum;	// ドラム ⇒ 数式
 - (NSString *)zAnswerDrum;
-- (NSString *)stringFormula:(UILabel *)lbAnswer;	// ドラム ⇒ ibTvFormula数式
+- (NSString *)stringFormula;	// ドラム ⇒ ibTvFormula数式
 
 //+ (NSString *)strNumber:(NSString *)sender;
 

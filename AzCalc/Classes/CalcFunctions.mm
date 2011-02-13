@@ -185,17 +185,17 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 		}
 		// 数値と演算子の数チェック
 		if (iCntNumber < iCntOperator + 1) {
-			@throw NSLocalizedString(@"Too many operators", nil); // 演算子が多すぎる
+			@throw @"Too many operators"; // 演算子が多すぎる
 		}
 		else if (iCntNumber > iCntOperator + 1) {
-			@throw NSLocalizedString(@"Insufficient operator", nil); // 演算子が足らない
+			@throw @"Insufficient operator"; // 演算子が足らない
 		}
 		// 括弧チェック
 		if (iCapLeft < iCapRight) {
-			@throw NSLocalizedString(@"Closing parenthesis is excessive", nil); // 括弧が閉じ過ぎ
+			@throw @"Closing parenthesis is excessive"; // 括弧が閉じ過ぎ
 		}
 		else if (iCapLeft > iCapRight) {
-			@throw NSLocalizedString(@"Unclosed parenthesis", nil); // 括弧が閉じていない
+			@throw @"Unclosed parenthesis"; // 括弧が閉じていない
 		}
 #ifdef AzDEBUG
 		for (int index = 0; index < [maRpn count]; index++) 
@@ -226,7 +226,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 					strcpy(cNum1, (char *)[zNum cStringUsingEncoding:NSASCIIStringEncoding]); 
 					// 倍精度実数演算で近似値を求める
 					double d = [zNum doubleValue];
-					if (d < 0) return NSLocalizedString(@"@Complex", nil); // 虚数(複素数)になる
+					if (d < 0) return @"@Complex"; // 虚数(複素数)になる
 					d = sqrt( d );
 					zNum = [NSString stringWithFormat:@"%.9f", d];
 					strcpy(cAns, (char *)[zNum cStringUsingEncoding:NSASCIIStringEncoding]); 
@@ -286,7 +286,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 					AzLOG(@"-[/]- zAns=%@", zAns);
 					if ([zAns hasPrefix:@"@"]) {
 						if ([zAns hasPrefix:@"@0"]) {
-							@throw NSLocalizedString(@"@Divide by zero", nil);
+							@throw @"Divide by zero";
 						}
 					}
 					[maStack push:zAns];	// スタックPUSH
@@ -358,7 +358,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			}
 			if ([zNum hasPrefix:OP_SUB]) iIntLen--;
 			if (PRECISION < iIntLen) {
-				@throw NSLocalizedString(@"@Overflow", nil);
+				@throw @"@Overflow";
 			}
 			// 丸め処理
 			strcpy(cNum1, (char *)[zNum cStringUsingEncoding:NSASCIIStringEncoding]); 
