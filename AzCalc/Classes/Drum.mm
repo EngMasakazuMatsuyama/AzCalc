@@ -468,16 +468,10 @@
 	if ([zNextOperator isEqualToString:OP_ANS]) { 
 		// [=]が押されたならば、計算結果表示
 		[entryNumber setString:[self zAnswerDrum]]; 
-		//[0.3]ドラム式を数式にして ibTvFormula へ送る
-		zFormula = [NSString stringWithFormat:@"%@=%@", [self zFormulaFromDrum], entryNumber];
-		zAnswer = entryNumber;
 	}
 	else {
 		// ここまでの回答を演算子の前に表示する
 		[entryAnswer setString:[self zAnswerDrum]]; 
-		//[0.3]ドラム式を数式にして ibTvFormula へ送る
-		zFormula = [self zFormulaFromDrum];
-		zAnswer = entryAnswer;
 	}
 	NSLog(@"***zFormula=%@\n***zAnswer=%@\n", zFormula, zAnswer);
 	
@@ -575,18 +569,18 @@
 			if ([zUni isEqualToString:NUM_PERC]) {
 				if ([zOpe hasPrefix:OP_ADD]) {
 					// ＋％増　＜＜シャープ式： a[+]b[%] = aのb%増＞＞
-					zFormula = [zFormula stringByAppendingFormat:@"×(1+(%@×0.01))", OP_MULT, zNum];
+					zFormula = [zFormula stringByAppendingFormat:@"×(100+%@)÷100", zNum];
 				}
 				else if ([zOpe hasPrefix:OP_SUB]) {
 					// ー％減　＜＜シャープ式： a[-]b[%] = aのb%減＞＞
-					zFormula = [zFormula stringByAppendingFormat:@"×(1-(%@×0.01))", zNum];
+					zFormula = [zFormula stringByAppendingFormat:@"×100÷(100+%@)", zNum];
 				}
 				else {
-					zFormula = [zFormula stringByAppendingFormat:@"%@(%@×0.01)", zOpe, zNum];	// 1/100
+					zFormula = [zFormula stringByAppendingFormat:@"%@(%@÷100)", zOpe, zNum];	// 1/100
 				}
 			} 
 			else if ([zUni isEqualToString:NUM_PERM]) {
-				zFormula = [zFormula stringByAppendingFormat:@"%@(%@×0.001)", zOpe, zNum];	// 1/1000 
+				zFormula = [zFormula stringByAppendingFormat:@"%@(%@÷1000)", zOpe, zNum];	// 1/1000 
 			} 
 			else {
 				zFormula = [zFormula stringByAppendingFormat:@"%@%@", zOpe, zNum];

@@ -29,7 +29,7 @@
 #define GOLDENPER				1.618	// 黄金比
 
 #define MINUS_SIGN				@"−"	// Unicode[2212] 表示用文字　[002D]より大きくするため
-
+#define FORMULA_BLANK			@"〓 "	// Formula calc が空のとき表示するメッセージの先頭文字（判定に使用）
 
 
 
@@ -174,12 +174,14 @@
 	
 	//-----------------------------------------------------(1)数式 ページ
 	// UITextView
-	ibTvFormula.text = @"";
 	ibLbFormAnswer.text = @"=";
 	ibTvFormula.delegate = self;
+	ibTvFormula.text = [NSString stringWithFormat:@"%@%@", FORMULA_BLANK, NSLocalizedString(@"Formula mode", nil)];
 	ibTvFormula.font = [UIFont systemFontOfSize:14];
-	ibTvFormula.text = NSLocalizedString(@"Formula mode", nil);
-	ibBuGetDrum.titleLabel.text = NSLocalizedString(@"Formula Quote", nil);
+	[ibBuGetDrum setTitle:NSLocalizedString(@"Formula Quote", nil) forState:UIControlStateNormal];
+	ibBuGetDrum.titleLabel.textAlignment = UITextAlignmentCenter;
+	ibBuGetDrum.titleLabel.font = [UIFont systemFontOfSize:20];
+	//
 	float dx = ibScrollUpper.frame.size.width;
 	rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
 	rect = ibLbFormAnswer.frame;	rect.origin.x += dx;	ibLbFormAnswer.frame = rect;
@@ -244,9 +246,6 @@
 #endif
 	
 	// ibPvDrumは、画面左下を基点にしている。
-	//float fYtop = 0;  //ibPvDrum.frame.size.height + 20;
-	//float fYbot = ibScrollLower.frame.size.height; // self.view.frame.size.height;
-	
 	// ボタンの縦横比を「黄金率」にして余白をGapにする
 	fKeyWidGap = 0;
 	fKeyHeiGap = 0;
@@ -359,12 +358,9 @@
 					bu.alpha = KeyALPHA_DEFAULT_OFF;
 				}
 				
-				//bu.contentMode = UIViewContentModeBottomLeft; // ibPvDrumは、画面左下を基点にしている。
 				// 上と右のマージンが自動調整されるように。つまり、左下基点になる。
 				bu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin; 
 				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
-				//[bu addTarget:self action:@selector(vButtonDrag:) forControlEvents:UIControlEventTouchDragExit];
-				//[bu addTarget:self action:@selector(vButtonDragUp:) forControlEvents:UIControlEventTouchUpOutside];
 
 				// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 
@@ -377,8 +373,6 @@
 			fx += (fKeyWidth + fKeyWidGap*2);
 		}
 	}
-	//arrayKeys = [[NSArray alloc] initWithArray:maKeys];	
-	//[maKeys release];
 	[dicKeys release];
 
 	if (aKeyMaster) {
@@ -400,15 +394,12 @@
 #ifdef GD_AdMob_ENABLED
 	if (RoAdMobView==nil) {
 		RoAdMobView = [AdMobView requestAdWithDelegate:self];
-		AzRETAIN_CHECK(@"viewDidLoad -1- RoAdMobView", RoAdMobView, 0)
 		[RoAdMobView retain];
-		AzRETAIN_CHECK(@"viewDidLoad -2- RoAdMobView", RoAdMobView, 0)
 		CGRect rc = RoAdMobView.frame;
 		rc.origin.x = ibScrollUpper.frame.size.width; // 1ページ幅
 		rc.origin.y = 0;
 		RoAdMobView.frame = rc;
 	}
-	//[self.view addSubview:RoAdMobView];
 	[ibScrollUpper addSubview:RoAdMobView];
 	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 #endif
@@ -760,7 +751,7 @@
 		bu.hidden = NO;
 		if (i == entryComponent) {
 			bu.frame = CGRectMake(fX,fY+155, fWiMax-6,28); // 選択中
-			bu.backgroundColor = [UIColor greenColor];
+			bu.backgroundColor = [UIColor greenColor];	// 追加
 			// Next
 			fX += (fWiMax + DRUM_GAP);
 		} else {
@@ -1123,12 +1114,12 @@
 				case -2:
 					lb.textAlignment = UITextAlignmentLeft;
 					lb.font = [UIFont systemFontOfSize:20];
-					lb.text =  NSLocalizedString(@"Drum Calculator",nil);
+					lb.text =  NSLocalizedString(@"Product Title",nil);
 					break;
 				case -1:
 					lb.textAlignment = UITextAlignmentLeft;
 					lb.font = [UIFont systemFontOfSize:14];
-					lb.text =  NSLocalizedString(@"Azukid",nil);
+					lb.text =  NSLocalizedString(@" Azukid",nil);
 					break;
 				default:
 					lb.text =  @"";
@@ -1331,7 +1322,7 @@
 	// これ以降、localPool管理エリア
 	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
 	@try {
-		if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+		if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
 			ibTvFormula.text = @"";
 			ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
 			ibBuGetDrum.hidden = YES;
@@ -1440,7 +1431,7 @@
 		//
 		if ([ibTvFormula.text length]<=0) {
 			ibTvFormula.font = [UIFont systemFontOfSize:14];
-			ibTvFormula.text = NSLocalizedString(@"Formula mode", nil);
+			ibTvFormula.text = [NSString stringWithFormat:@"%@%@", FORMULA_BLANK, NSLocalizedString(@"Formula mode", nil)];
 			ibBuGetDrum.hidden = NO;
 		}
 	}
@@ -1595,7 +1586,7 @@
 				[drum.entryNumber setString:str]; // Az数値文字列をセット
 			}
 			else if (MiSvUpperPage==1) {
-				if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+				if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
 					ibTvFormula.text = @"";
 					ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
 					ibBuGetDrum.hidden = YES;
@@ -1788,7 +1779,7 @@
 				[drum.entryNumber setString:stringAzNum([UIPasteboard generalPasteboard].string)]; // Az数値文字列をセット
 			}
 			else if (MiSvUpperPage==1) {
-				if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+				if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
 					ibTvFormula.text = @"";
 					ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
 					ibBuGetDrum.hidden = YES;
@@ -1831,7 +1822,9 @@
 		ibTvFormula.text = zFormula;
 		ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
 		ibBuGetDrum.hidden = YES;
-		ibLbFormAnswer.text = stringFormatter([CalcFunctions zAnswerFromFormula:zFormula], YES);
+		// 再計算
+		ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+							   stringFormatter([CalcFunctions zAnswerFromFormula:zFormula], YES)];
 	}
 }
 
@@ -2169,7 +2162,7 @@
 	rc = ibLbFormAnswer.frame;	rc.origin.y += 30;		ibLbFormAnswer.frame = rc;
 	rc = ibBuMemory.frame;		rc.origin.y += 27;		ibBuMemory.frame = rc;
 
-	if ([ibTvFormula.text hasPrefix:@"Formula"]) {
+	if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
 		ibTvFormula.text = @"";
 		ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
 		ibBuGetDrum.hidden = YES;
@@ -2213,11 +2206,22 @@
 	const NSString *zList = @" 0123456789.+-×÷*/()";  // 入力許可文字
 	
 	NSLog(@"textField-----[%@]", text);
-	if ([text length]<=0) return YES; // [BS]
+	if ([text length]<=0) {
+		// [BS] "9+" が一緒に削除されてしまうので、オリジナルの[BS]処理する
+		[self vButtonFormula:KeyTAG_BS];
+		return NO;
+	}
 	
 	NSRange rg = [zList rangeOfString:text];
-	if (rg.length==1) return YES; // 入力許可文字
-
+	if (rg.length==1) {
+		if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
+			ibTvFormula.text = @"";
+			ibTvFormula.font = [UIFont boldSystemFontOfSize:20];
+			ibBuGetDrum.hidden = YES;
+		}
+		return YES; // 入力許可文字
+	}
+	
 	if ([text hasPrefix:@"\n"]) { // [Done]
 		[textView resignFirstResponder]; // キーボードを隠す 
 	}

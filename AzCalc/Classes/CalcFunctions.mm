@@ -18,15 +18,18 @@
 @implementation NSMutableArray (StackAdditions)
 - (void)push:(id)obj
 {
-	[self addObject: obj];
+	@synchronized(self){
+		[self addObject:obj];
+	}
 }
 
 - (id)pop
 {
-    // nil if [self count] == 0
-    id lastObject = [[[self lastObject] retain] autorelease];
-    if (lastObject) [self removeLastObject];
-    return lastObject;
+	@synchronized(self){
+		id lastObject = [[[self lastObject] retain] autorelease];
+		if (lastObject) [self removeLastObject];
+		return lastObject;	// nil if [self count] == 0
+	}
 }
 @end
 //----------------------------------------------------------NSMutableArray Stack Method
@@ -43,7 +46,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 {
 	if (MiSegCalcMethod==0) return 0; // 電卓方式につき優先順位なし
 
-	if ([zOpe isEqualToString:@"*"] || [zOpe isEqualToString:@"/"]) {
+	if ([zOpe isEqualToString:@"*"] || [zOpe isEqualToString:@"/"]) { // この優先付けでは、有理化はできない。
 		return 1;
 	}
 	else if ([zOpe isEqualToString:@"+"] || [zOpe isEqualToString:@"-"]) {
@@ -71,8 +74,8 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
  "(1 + 4) * (3 + 7) / 5" ⇒ "1 4 + 3 7 + 5 * /" OR "1 4 + 3 7 + * 5 /"
  "T ( 5 + 2 )" ⇒ "5 2 + T"
  
- "1000 + 5%" ⇒ "(1000 * 1.05)" ⇒ "1000 1.05 *"		＜＜1000の5%増：税込み＞＞　シャープ式
- "1000 - 5%" ⇒ "(1000 / 1.05)" ⇒ "1000 1.05 /"		＜＜1000の5%減：税抜き＞＞　シャープ式
+ "1000 + 5%" ⇒ "1000 * (100 + 5) / 100"	＜＜1000の5%増：税込み＞＞　シャープ式
+ "1000 - 5%" ⇒ "1000 * 100 / (100 + 5)"	＜＜1000の5%減：税抜き＞＞　シャープ式
  
  "1000 * √2" ⇒ "1000 * (√2)" ⇒ "1000 1.4142 *"		＜＜ルート対応
  */
@@ -154,10 +157,14 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 				//[maStack addObject:zTokn];  iStackIdx++; // スタックPUSH
 				[maStack push:zTokn]; // スタックPUSH
 			}
-			else if ([zTokn isEqualToString:@")"]) {	// "("までスタックから取り出してRPNへ追加、両括弧は破棄する
+			else if ([zTokn isEqualToString:@")"]) {
 				iCapRight++;
-				while (zz = [maStack pop]) {
-					if ([zz isEqualToString:@"("]) break; // 両カッコは、破棄する
+				NSLog(@"maStack=%@", maStack);
+				while (zz = [maStack pop]) {	// "("までスタックから取り出してRPNへ追加、両括弧は破棄する
+					NSLog(@"zz=%@", zz);
+					if ([zz isEqualToString:@"("]) {
+						break; // 両カッコは、破棄する
+					}
 					[maRpn push:zz];
 				}
 			}
@@ -169,7 +176,8 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 				while (0 < [maStack count]) {
 					//			 スタック最上位の演算子優先順位 ＜ トークンの演算子優先順位
 					if (levelOperator([maStack lastObject]) <= levelOperator(zTokn)) {
-						[maRpn push:[maStack pop]];  // スタックから取り出して、それをRPNへ追加
+						zz = [maStack pop];
+						[maRpn push:zz];  // スタックから取り出して、それをRPNへ追加
 					} else {
 						break;
 					}

@@ -140,12 +140,10 @@
 									<bytes key="NSRGB">MSAxIDEAA</bytes>
 								</object>
 								<bool key="IBUIClipsSubviews">YES</bool>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 								<string key="IBUIText">Formula</string>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
-									<int key="IBUIAutocapitalizationType">1</int>
 									<int key="IBUIAutocorrectionType">1</int>
 									<int key="IBUIKeyboardType">2</int>
 									<int key="IBUIReturnKeyType">9</int>
@@ -290,7 +288,7 @@
 							<object class="IBUIButton" id="182193294">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{334, 104}, {100, 43}}</string>
+								<string key="NSFrame">{{322, 114}, {124, 32}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">33</int>
@@ -299,7 +297,7 @@
 								<int key="IBUIContentVerticalAlignment">0</int>
 								<reference key="IBUIFont" ref="61189286"/>
 								<int key="IBUIButtonType">1</int>
-								<string key="IBUINormalTitle">from Drum</string>
+								<string key="IBUINormalTitle">Quote</string>
 								<reference key="IBUIHighlightedTitleColor" ref="246203102"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
 									<int key="NSColorSpace">1</int>
@@ -308,7 +306,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="444524143"/>
 							</object>
 						</object>
-						<string key="NSFrame">{{0, 256}, {768, 216}}</string>
+						<string key="NSFrame">{{0, 254}, {768, 216}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="IBUIBackgroundColor" ref="299652835"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -323,7 +321,7 @@
 					<object class="IBUIButton" id="961341632">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{296, 444}, {177, 27}}</string>
+						<string key="NSFrame">{{296, 443}, {177, 27}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -344,14 +342,8 @@
 							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="444524143"/>
-						<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">KeyButtonHigh.png</string>
-						</object>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">KeyButton.png</string>
-						</object>
+						<reference key="IBUIHighlightedBackgroundImage" ref="355521215"/>
+						<reference key="IBUINormalBackgroundImage" ref="389191721"/>
 					</object>
 				</object>
 				<string key="NSFrameSize">{768, 1004}</string>
@@ -584,9 +576,9 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="91753831"/>
-							<reference ref="675808578"/>
 							<reference ref="961341632"/>
 							<reference ref="495439200"/>
+							<reference ref="675808578"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Calc</string>
@@ -756,7 +748,7 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AQAAAABDgAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+sAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -1257,14 +1249,10 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>Icon-Drum.png</string>
 				<string>Icon-DrumPush.png</string>
-				<string>KeyButton.png</string>
-				<string>KeyButtonHigh.png</string>
 				<string>Setting-icon16.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{128, 79}</string>
-				<string>{128, 79}</string>
 				<string>{128, 79}</string>
 				<string>{128, 79}</string>
 				<string>{16, 16}</string>
