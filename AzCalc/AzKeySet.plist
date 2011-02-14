@@ -373,5 +373,19 @@
 		<key>Text</key>
 		<string>GT</string>
 	</dict>
+	<key>P2C2R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>210</integer>
+		<key>Text</key>
+		<string>+Tax</string>
+	</dict>
+	<key>P2C2R2</key>
+	<dict>
+		<key>Tag</key>
+		<integer>211</integer>
+		<key>Text</key>
+		<string>-Tax</string>
+	</dict>
 </dict>
 </plist>

@@ -26,8 +26,12 @@
 - (id)pop
 {
 	@synchronized(self){
-		id lastObject = [[[self lastObject] retain] autorelease];
-		if (lastObject) [self removeLastObject];
+		//id lastObject = [[[self lastObject] retain] autorelease];
+		id lastObject = [self lastObject];
+		if (lastObject) {
+			[[lastObject retain] autorelease];
+			[self removeLastObject];
+		}
 		return lastObject;	// nil if [self count] == 0
 	}
 }
@@ -44,15 +48,14 @@ static NSInteger  MiSegRound;
 
 int levelOperator( NSString *zOpe )  // 演算子の優先順位
 {
-	if (MiSegCalcMethod==0) return 0; // 電卓方式につき優先順位なし
-
 	if ([zOpe isEqualToString:@"*"] || [zOpe isEqualToString:@"/"]) { // この優先付けでは、有理化はできない。
 		return 1;
 	}
 	else if ([zOpe isEqualToString:@"+"] || [zOpe isEqualToString:@"-"]) {
+		if (MiSegCalcMethod==0) return 1; // 電卓方式につき四則同順
 		return 2;
 	}
-	return 99;
+	return 3; // "(" ")" その他の演算子
 }
 
 + (void)setCalcMethod:(NSInteger)i {
@@ -84,12 +87,12 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 	AzLOG(@"zFormula=%@", zFormula);
 	if ([zFormula length]<2) return @""; // nilにすると、戻り値を使った setString:で落ちる
 	
-	NSMutableArray *maStack = [NSMutableArray new];	// - Stack Method
-	NSMutableArray *maRpn = [NSMutableArray new]; // 逆ポーランド記法結果
+	NSMutableArray *maStack = [[NSMutableArray alloc] init];	// - Stack Method
+	NSMutableArray *maRpn = [[NSMutableArray alloc] init]; // 逆ポーランド記法結果
 	NSString *zAnswer = @"";  // nilにすると、戻り値を使った setString:で落ちる
 	
 	//-------------------------------------------------localPool BEGIN >>> @finaly release
-	NSAutoreleasePool *autoPool = [[NSAutoreleasePool alloc] init];
+	//NSAutoreleasePool *autoPool = [[NSAutoreleasePool alloc] init];
 	@try {
 		// 数式整理
 		NSString *zTemp = [zFormula stringByReplacingOccurrencesOfString:@" " withString:@""]; // [ ]スペース除去
@@ -122,7 +125,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 		zTemp = [zTemp stringByReplacingOccurrencesOfString:@"/"	withString:@" / "]; // 前後スペース
 		zTemp = [zTemp stringByReplacingOccurrencesOfString:OP_MULT withString:@" * "]; // "×"半角文字化
 		zTemp = [zTemp stringByReplacingOccurrencesOfString:OP_DIVI withString:@" / "]; // "÷"半角文字化
-		zTemp = [zTemp stringByReplacingOccurrencesOfString:NUM_ROOT withString:@" √ "]; // 前後スペース挿入
+		zTemp = [zTemp stringByReplacingOccurrencesOfString:OP_ROOT withString:@" √ "]; // 前後スペース挿入
 		zTemp = [zTemp stringByReplacingOccurrencesOfString:@"+"	withString:@" + "]; // [-]は演算子ではない
 		zTemp = [zTemp stringByReplacingOccurrencesOfString:@"("	withString:@" ( "];
 		zTemp = [zTemp stringByReplacingOccurrencesOfString:@")"	withString:@" ) "];
@@ -154,14 +157,11 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 				[maRpn push:zTokn];
 			}
 			else if ([zTokn isEqualToString:@"√"]) {
-				//[maStack addObject:zTokn];  iStackIdx++; // スタックPUSH
 				[maStack push:zTokn]; // スタックPUSH
 			}
 			else if ([zTokn isEqualToString:@")"]) {
 				iCapRight++;
-				NSLog(@"maStack=%@", maStack);
 				while (zz = [maStack pop]) {	// "("までスタックから取り出してRPNへ追加、両括弧は破棄する
-					NSLog(@"zz=%@", zz);
 					if ([zz isEqualToString:@"("]) {
 						break; // 両カッコは、破棄する
 					}
@@ -175,10 +175,13 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			else {
 				while (0 < [maStack count]) {
 					//			 スタック最上位の演算子優先順位 ＜ トークンの演算子優先順位
+					NSLog(@"+++++[maStack lastObject]=(%@) <= (%@)", [maStack lastObject], zTokn);
 					if (levelOperator([maStack lastObject]) <= levelOperator(zTokn)) {
+						NSLog(@"+++++ YES");
 						zz = [maStack pop];
 						[maRpn push:zz];  // スタックから取り出して、それをRPNへ追加
 					} else {
+						NSLog(@"+++++ NO");
 						break;
 					}
 				}
@@ -205,6 +208,8 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 		else if (iCapLeft > iCapRight) {
 			@throw @"Unclosed parenthesis"; // 括弧が閉じていない
 		}
+		
+		NSLog(@"***maRpn=%@\n", maRpn);
 #ifdef AzDEBUG
 		for (int index = 0; index < [maRpn count]; index++) 
 		{
@@ -373,7 +378,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			stringRounding( cAns, cNum1, PRECISION, MiSegDecimal, MiSegRound );
 			AzLOG(@"BCD> stringRounding() cAns=%s", cAns);
 			zAnswer = [NSString stringWithCString:(char *)cAns encoding:NSASCIIStringEncoding];
-			[zAnswer retain]; // retainCount=1
+			//[zAnswer retain]; // retainCount=1
 		}
 		else {
 			@throw @"[maStack count] != 1";
@@ -388,13 +393,13 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 		zAnswer = @"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@finally {
-		[autoPool release];
+		//[autoPool release];
 		//-------------------------------------------------localPool END
 		[maRpn release];
 		[maStack release];
 	}
-	if ([zAnswer retainCount]==1) 
-		[zAnswer autorelease];  // @""ならば不要だから
+	//if ([zAnswer retainCount]==1) 
+	//	[zAnswer autorelease];  // @""ならば不要だから
 	return zAnswer;
 }
 

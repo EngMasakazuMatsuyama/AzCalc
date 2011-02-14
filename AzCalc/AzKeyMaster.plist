@@ -355,6 +355,30 @@
 			<key>Alpha</key>
 			<real>0.8</real>
 		</dict>
+		<dict>
+			<key>Tag</key>
+			<integer>210</integer>
+			<key>Text</key>
+			<string>+Tax</string>
+			<key>Size</key>
+			<integer>18</integer>
+			<key>Color</key>
+			<integer>1</integer>
+			<key>Alpha</key>
+			<real>0.8</real>
+		</dict>
+		<dict>
+			<key>Tag</key>
+			<integer>211</integer>
+			<key>Text</key>
+			<string>-Tax</string>
+			<key>Size</key>
+			<integer>18</integer>
+			<key>Color</key>
+			<integer>1</integer>
+			<key>Alpha</key>
+			<real>0.8</real>
+		</dict>
 	</array>
 	<array>
 		<dict>

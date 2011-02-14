@@ -18,13 +18,17 @@
 #define OP_DIVI		@"÷" // 割算
 #define OP_ANS		@"=" // 答え
 #define OP_GT		@">GT" // 総計 ＜＜1字目を OP_START にして「開始行」扱いすることを示す＞＞
+#define OP_ROOT		@"√"	// ルート
 
 // Number String
 #define NUM_0		@"0"
 #define NUM_DECI	@"."	// 小数点
-#define NUM_PERC	@"%"	// パーセント
-#define NUM_PERM	@"‰"	// パーミル
-#define NUM_ROOT	@"√"	// ルート
+
+// Unit String
+#define UNI_PERC	@"%"	// パーセント
+#define UNI_PERML	@"‰"	// パーミル
+#define UNI_AddTAX	@"+Tax"	// 税込み
+#define UNI_SubTAX	@"-Tax"	// 税抜き
 
 
 @interface CalcFunctions : NSObject {

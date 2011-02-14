@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="274"/>
+			<integer value="6"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -148,7 +148,7 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
-								<string key="IBUIText">Formula</string>
+								<string key="IBUIText">Formula 123×45÷(67-8)+9</string>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<int key="IBUIAutocorrectionType">1</int>
 									<int key="IBUIKeyboardType">2</int>
@@ -214,7 +214,7 @@
 							<object class="IBUIButton" id="56282944">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{297, 195}, {18, 19}}</string>
+								<string key="NSFrame">{{300, 182}, {18, 19}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -242,7 +242,7 @@
 							<object class="IBUIButton" id="934331105">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 193}, {24, 24}}</string>
+								<string key="NSFrame">{{-1, 180}, {24, 24}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -588,11 +588,11 @@
 							<reference ref="445255124"/>
 							<reference ref="56282944"/>
 							<reference ref="934331105"/>
-							<reference ref="175504206"/>
 							<reference ref="479167029"/>
 							<reference ref="302747404"/>
 							<reference ref="584210161"/>
 							<reference ref="852859351"/>
+							<reference ref="175504206"/>
 						</object>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">ScrollUpper</string>
@@ -628,12 +628,6 @@
 						<string key="objectName">BuSetting</string>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">276</int>
-						<reference key="object" ref="175504206"/>
-						<reference key="parent" ref="157882084"/>
-						<string key="objectName">TvFormula</string>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">279</int>
 						<reference key="object" ref="302747404"/>
 						<reference key="parent" ref="157882084"/>
@@ -662,6 +656,12 @@
 						<reference key="object" ref="852859351"/>
 						<reference key="parent" ref="157882084"/>
 						<string key="objectName">BuGetDrum</string>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">276</int>
+						<reference key="object" ref="175504206"/>
+						<reference key="parent" ref="157882084"/>
+						<string key="objectName">TvFormula</string>
 					</object>
 				</object>
 			</object>
@@ -725,7 +725,7 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUI0AABB+AAAA</bytes>
+						<bytes key="NSTransformStruct">AQAAAABCQAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
@@ -743,7 +743,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABC3AAAwxEAAA</bytes>
 					</object>
-					<string>{{1390, 521}, {320, 480}}</string>
+					<string>{{1269, 449}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>

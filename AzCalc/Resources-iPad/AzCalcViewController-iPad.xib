@@ -103,37 +103,10 @@
 								<reference key="IBUIBackgroundColor" ref="944389813"/>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<object class="IBADBannerView" id="459829299">
-								<reference key="NSNextResponder" ref="675808578"/>
-								<int key="NSvFlags">268</int>
-								<string key="NSFrameSize">{768, 66}</string>
-								<reference key="NSSuperview" ref="675808578"/>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">4</int>
-								<bool key="IBUIMultipleTouchEnabled">YES</bool>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<object class="NSMutableSet" key="IBADRequiredContentSizeIdentifiers">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<object class="NSArray" key="set.sortedObjects">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<string>ADBannerContentSize320x50</string>
-										<string>ADBannerContentSize480x32</string>
-									</object>
-								</object>
-								<object class="NSSet" key="IBADModernRequiredContentSizeIdentifiers">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<object class="NSArray" key="set.sortedObjects">
-										<bool key="EncodedWithXMLCoder">YES</bool>
-										<string>ADBannerContentSizeLandscape</string>
-										<string>ADBannerContentSizePortrait</string>
-									</object>
-								</object>
-							</object>
 							<object class="IBUITextView" id="698131813">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{10, 63}, {748, 90}}</string>
+								<string key="NSFrame">{{0, 48}, {767, 105}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="181270399">
 									<int key="NSColorSpace">1</int>
@@ -211,7 +184,7 @@
 							<object class="IBUIButton" id="320010956">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{745, 196}, {18, 19}}</string>
+								<string key="NSFrame">{{749, 181}, {18, 19}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -239,7 +212,7 @@
 							<object class="IBUIButton" id="934331105">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{1, 188}, {28, 28}}</string>
+								<string key="NSFrame">{{0, 177}, {28, 28}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -266,7 +239,7 @@
 							<object class="IBUILabel" id="617674397">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">268</int>
-								<string key="NSFrame">{{10, 155}, {748, 22}}</string>
+								<string key="NSFrame">{{0, 155}, {767, 22}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">1</int>
@@ -500,14 +473,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">ibAdBanner</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="459829299"/>
-					</object>
-					<int key="connectionID">281</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">ibPvDrum</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="171654030"/>
@@ -607,14 +572,13 @@
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="171654030"/>
-							<reference ref="459829299"/>
 							<reference ref="638055911"/>
 							<reference ref="573457145"/>
-							<reference ref="320010956"/>
 							<reference ref="934331105"/>
 							<reference ref="698131813"/>
 							<reference ref="617674397"/>
 							<reference ref="182193294"/>
+							<reference ref="320010956"/>
 						</object>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">ScrollUpper</string>
@@ -624,12 +588,6 @@
 						<reference key="object" ref="171654030"/>
 						<reference key="parent" ref="675808578"/>
 						<string key="objectName">PvDrum</string>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">268</int>
-						<reference key="object" ref="459829299"/>
-						<reference key="parent" ref="675808578"/>
-						<string key="objectName">AdBanner</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">262</int>
@@ -695,8 +653,6 @@
 					<string>264.IBViewBoundsToFrameTransform</string>
 					<string>267.IBPluginDependency</string>
 					<string>267.IBViewBoundsToFrameTransform</string>
-					<string>268.IBPluginDependency</string>
-					<string>268.IBViewBoundsToFrameTransform</string>
 					<string>274.IBPluginDependency</string>
 					<string>274.IBViewBoundsToFrameTransform</string>
 					<string>276.IBPluginDependency</string>
@@ -744,21 +700,17 @@
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AQAAAABDgAAAA</bytes>
-					</object>
-					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+sAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">AUQzAABDMQAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABEOkAAw1UAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDqAAAwxEAAA</bytes>
 					</object>
-					<string>{{110, 88}, {768, 1024}}</string>
+					<string>{{79, 88}, {768, 1024}}</string>
 					<object class="NSMutableDictionary">
 						<string key="NS.key.0">IBCocoaTouchFramework</string>
 						<integer value="0" key="NS.object.0"/>

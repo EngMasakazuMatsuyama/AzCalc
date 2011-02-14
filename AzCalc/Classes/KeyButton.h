@@ -31,6 +31,8 @@
 
 #define KeyTAG_AC				200	// [AC]
 #define KeyTAG_BS				201	// [BS]
+#define KeyTAG_AddTAX			210	// [+Tax]
+#define KeyTAG_SubTAX			211	// [-Tax]
 #define KeyTAG_STANDARD_End		299
 
 #define KeyTAG_MEMORY_Start		300

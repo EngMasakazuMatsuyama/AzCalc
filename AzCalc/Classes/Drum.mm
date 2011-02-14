@@ -203,11 +203,11 @@
 					if (![self vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
 					// 新セクション
 					[entryNumber setString:zNum]; // Az数値文字列をセット
-					[entryUnit setString:NUM_PERC];
+					[entryUnit setString:UNI_PERC];
 					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
 				}
 				else {
-					[entryUnit setString:NUM_PERC];
+					[entryUnit setString:UNI_PERC];
 					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
 				}
 				break;
@@ -219,13 +219,9 @@
 					if (![self vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
 					// 新セクション
 					[entryNumber setString:zNum]; // Az数値文字列をセット
-					[entryUnit setString:NUM_PERM];
-					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
 				}
-				else {
-					[entryUnit setString:NUM_PERM];
-					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
-				}
+				[entryUnit setString:UNI_PERML];
+				[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
 				break;
 			case KeyTAG_ROOT: // [√]ルート
 				if ([entryOperator hasPrefix:OP_ANS] && 0 < [entryNumber length]) {
@@ -233,14 +229,14 @@
 					NSString *zNum = [NSString stringWithString:entryNumber]; // copy autolease
 					if (![self vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
 					// 新セクション
-					[entryOperator appendString:NUM_ROOT]; // 演算子の末尾へ
+					[entryOperator appendString:OP_ROOT]; // 演算子の末尾へ
 					[entryNumber setString:zNum]; // Az数値文字列をセット
 					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
 				}
 				else {
 					// 演算子後部に[√]を追加して計算式の一部にする
-					if (![entryOperator hasSuffix:NUM_ROOT]) {
-						[entryOperator appendString:NUM_ROOT]; // 演算子の末尾へ
+					if (![entryOperator hasSuffix:OP_ROOT]) {
+						[entryOperator appendString:OP_ROOT]; // 演算子の末尾へ
 					}
 				}
 				break;
@@ -355,7 +351,25 @@
 				else if (1 < [entryOperator length]) {
 					[entryOperator substringToIndex:1]; // 演算子は消さない
 				}
-			} break;
+			}	break;
+
+			case KeyTAG_AddTAX: // [+Tax] 税込み
+			case KeyTAG_SubTAX: // [-Tax] 税抜き
+				if ([entryNumber length]<=0) break; // 数値なし無効
+				if ([entryOperator hasPrefix:OP_ANS]) {
+					// [=]回答行である場合、改行して結果を表示する
+					NSString *zNum = [NSString stringWithString:entryNumber]; // copy autolease
+					if (![self vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
+					// 新セクション
+					[entryNumber setString:zNum]; // Az数値文字列をセット
+				}
+				if (iKeyTag==KeyTAG_AddTAX) {
+					[entryUnit setString:UNI_AddTAX];
+				} else {
+					[entryUnit setString:UNI_SubTAX];
+				}
+				[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
+				break;
 		}
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
@@ -550,7 +564,8 @@
 		for (NSInteger idx = iRowStart; idx <= iRowEnd; idx++) 
 		{
 			zOpe = [formulaOperators objectAtIndex:idx];
-			zNum = [formulaNumbers objectAtIndex:idx];
+			// stringFormatter(小数末尾のZero除去) さらに stringAzNum(区切記号を除去)
+			zNum = stringAzNum(stringFormatter([formulaNumbers objectAtIndex:idx], YES));
 			zUni = [formulaUnits objectAtIndex:idx];
 
 			// 演算子部
@@ -566,21 +581,37 @@
 			
 			// 数値部 ＆ 単位部
 			AzLOG(@"******************(%d)[%@]*****************", idx, zUni);
-			if ([zUni isEqualToString:NUM_PERC]) {
+			if ([zUni isEqualToString:UNI_PERC]) {
 				if ([zOpe hasPrefix:OP_ADD]) {
-					// ＋％増　＜＜シャープ式： a[+]b[%] = aのb%増＞＞
-					zFormula = [zFormula stringByAppendingFormat:@"×(100+%@)÷100", zNum];
+					// ＋％増　＜＜シャープ式： a[+]b[%] = aのb%増し「税込」と同じ＞＞ 100+5% = 100*(1+5/100) = 105
+					zFormula = [zFormula stringByAppendingFormat:@"×(1+(%@÷100))", zNum];
 				}
 				else if ([zOpe hasPrefix:OP_SUB]) {
-					// ー％減　＜＜シャープ式： a[-]b[%] = aのb%減＞＞
-					zFormula = [zFormula stringByAppendingFormat:@"×100÷(100+%@)", zNum];
+					// ー％減　＜＜シャープ式： a[-]b[%] = aのb%引き「税抜」と違う！＞＞ 100-5% = 100*(1-5/100) = 95
+					zFormula = [zFormula stringByAppendingFormat:@"×(1-(%@÷100))", zNum];
 				}
 				else {
 					zFormula = [zFormula stringByAppendingFormat:@"%@(%@÷100)", zOpe, zNum];	// 1/100
 				}
 			} 
-			else if ([zUni isEqualToString:NUM_PERM]) {
-				zFormula = [zFormula stringByAppendingFormat:@"%@(%@÷1000)", zOpe, zNum];	// 1/1000 
+			else if ([zUni isEqualToString:UNI_PERML]) {
+				if ([zOpe hasPrefix:OP_ADD]) {
+					// ＋‰増　＜＜シャープ式： a[+]b[‰] = aのb%増し＞＞
+					zFormula = [zFormula stringByAppendingFormat:@"×(1+(%@÷1000))", zNum];
+				}
+				else if ([zOpe hasPrefix:OP_SUB]) {
+					// ー‰減　＜＜シャープ式： a[-]b[‰] = aのb%引き＞＞
+					zFormula = [zFormula stringByAppendingFormat:@"×(1-(%@÷1000))", zNum];
+				}
+				else {
+					zFormula = [zFormula stringByAppendingFormat:@"%@(%@÷1000)", zOpe, zNum];	// 1/1000 
+				}
+			} 
+			else if ([zUni isEqualToString:UNI_AddTAX]) {
+				zFormula = [zFormula stringByAppendingFormat:@"%@×(100+%d)÷100", zNum, 5];	// *105/100 
+			} 
+			else if ([zUni isEqualToString:UNI_SubTAX]) {
+				zFormula = [zFormula stringByAppendingFormat:@"%@×100÷(100+%d)", zNum, 5];	// *100/105 
 			} 
 			else {
 				zFormula = [zFormula stringByAppendingFormat:@"%@%@", zOpe, zNum];

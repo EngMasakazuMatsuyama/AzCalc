@@ -31,10 +31,10 @@
 	
 @private
 	//----------------------------------------------dealloc時にrelese
-	NSArray				*aDrums;
-	NSArray				*aDrumButtons;
-	NSArray				*aPadKeyButtons;
-	NSArray				*aKeyMaster;	// !=nil キーレイアウト変更モード
+	NSArray				*RaDrums;
+	NSArray				*RaDrumButtons;
+	NSArray				*RaPadKeyButtons;
+	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
 	AdMobView			*RoAdMobView;
 
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
@@ -79,8 +79,8 @@
 - (IBAction)ibButton:(UIButton *)button; // 全電卓ボタンを割り当てている。.tag により識別
 - (IBAction)ibBuGetDrum:(UIButton *)button;
 
-- (void)vMemorySave; // AzCalcViewController:applicationWillTerminateからコールされる
-- (void)vMemoryLoad; // AzCalcViewController:applicationDidBecomeActiveからコールされる
+- (void)GvMemorySave; // AzCalcViewController:applicationWillTerminateからコールされる
+- (void)GvMemoryLoad; // AzCalcViewController:applicationDidBecomeActiveからコールされる
 
 @end
 

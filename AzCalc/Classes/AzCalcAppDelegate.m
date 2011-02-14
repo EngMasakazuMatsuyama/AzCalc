@@ -95,7 +95,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application 
 {	//iOS4: アプリケーションがアクティブになったら呼ばれる。起動時にもviewDidLoadの後にコールされる。
 	// この時点で viewController.view は表示されている。
-	[viewController vMemoryLoad]; // メモリボタン関係を復帰させる
+	[viewController GvMemoryLoad]; // メモリボタン関係を復帰させる
 }
 
 
@@ -104,7 +104,7 @@
 	// ただしアプリがサスペンド状態の場合アプリを終了してもこのメソッドは呼ばれない。
 	
 	// iOS3互換のためにはここが必要。　iOS4以降、applicationDidEnterBackground から呼び出される。
-	[viewController vMemorySave]; // メモリボタン関係を保存する
+	[viewController GvMemorySave]; // メモリボタン関係を保存する
 	
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	[userDefaults synchronize]; // plistへ書き出す
