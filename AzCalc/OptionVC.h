@@ -11,11 +11,18 @@
 
 @interface OptionVC : UIViewController 
 {
+	IBOutlet UILabel			*ibLbTax;
+	IBOutlet UISlider			*ibSliderTax;
 	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
 	IBOutlet UISegmentedControl	*ibSegGroupingType;
 	IBOutlet UISegmentedControl	*ibSegDecimalSeparator;
+@private
+	float		MfTaxRate;
+	float		MfTaxRateModify;
 }
 
+- (IBAction)ibSliderTaxChange:(UISlider *)slider;
+- (IBAction)ibSliderTaxTouchUp:(UISlider *)slider;
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment;
 - (IBAction)ibSegGroupingType:(UISegmentedControl *)segment;
 - (IBAction)ibSegDecimalSeparator:(UISegmentedControl *)segment;

@@ -49,12 +49,32 @@
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	
+	MfTaxRate = [defaults floatForKey:GUD_TaxRate];
+	MfTaxRateModify = MfTaxRate;
+	ibLbTax.text = [NSString stringWithFormat:@"%.1f%%", MfTaxRate];
+	
 	ibSegGroupingSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingSeparator];
 	ibSegGroupingType.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingType];
 	ibSegDecimalSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_DecimalSeparator];
 }
 // viewDidAppear はView表示直後に呼ばれる
 
+
+- (IBAction)ibSliderTaxChange:(UISlider *)slider
+{
+	float f = MfTaxRate + floor(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする
+	if (0<=f && f<=99.9) {
+		MfTaxRateModify = f;
+		ibLbTax.text = [NSString stringWithFormat:@"%.1f%%", MfTaxRateModify];
+	}
+}
+
+- (IBAction)ibSliderTaxTouchUp:(UISlider *)slider
+{
+	MfTaxRate = MfTaxRateModify;
+	[[NSUserDefaults standardUserDefaults] setFloat:MfTaxRate forKey:GUD_TaxRate];
+	ibSliderTax.value = 0; // Center
+}
 
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment
 {

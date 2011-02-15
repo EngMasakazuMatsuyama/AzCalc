@@ -65,6 +65,7 @@
 #define GUD_ReverseDrum					@"GUD_ReverseDrum"
 
 // OptionVC
+#define GUD_TaxRate						@"GUD_TaxRate"
 #define GUD_RoundOption					@"GUD_RoundOption"
 #define GUD_GroupingSeparator			@"GUD_GroupingSeparator"
 #define GUD_GroupingType				@"GUD_GroupingType"

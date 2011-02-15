@@ -50,8 +50,9 @@
 							  @"3",		GUD_Round,
 							  @"1",		GUD_ReverseDrum,
 							  NSLocalizedString(@"GUD_GroupingSeparator",nil),	GUD_GroupingSeparator,
-							  NSLocalizedString(@"GUD_GroupingType",nil),	GUD_GroupingType,
+							  NSLocalizedString(@"GUD_GroupingType",nil),		GUD_GroupingType,
 							  NSLocalizedString(@"GUD_DecimalSeparator",nil),	GUD_DecimalSeparator,
+							  NSLocalizedString(@"GUD_TaxRate",nil),			GUD_TaxRate,
 							  nil];
 
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

@@ -8,7 +8,8 @@
 #import <Foundation/Foundation.h>
 #import "SBCD.h"  // BCD固定小数点演算 ＜＜この.cpp関数を利用するファイルの拡張子は .m ⇒ .mm にすること＞＞
 
-#define PRECISION		 15	// 有効桁数＝整数桁＋小数桁（小数点は含まない）
+#define PRECISION				15		// 有効桁数＝整数桁＋小数桁（小数点は含まない）
+#define FORMULA_MAX_LENGTH		200		// 数式文字列の最大長
 
 // Operator String
 #define OP_START	@">" // 願いましては

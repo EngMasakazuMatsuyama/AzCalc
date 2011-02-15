@@ -18,9 +18,15 @@
 	IBOutlet UISegmentedControl	*ibSegReverseDrum;
 
 	// Option-iPad
+	IBOutlet UILabel			*ibLbTax;
+	IBOutlet UISlider			*ibSliderTax;
 	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
 	IBOutlet UISegmentedControl	*ibSegGroupingType;
 	IBOutlet UISegmentedControl	*ibSegDecimalSeparator;
+@private
+	// Option-iPad
+	float		MfTaxRate;
+	float		MfTaxRateModify;
 }
 
 - (IBAction)ibSegDrums:(UISegmentedControl *)segment;
@@ -33,6 +39,8 @@
 - (IBAction)ibBuPageFlip:(UIButton *)button;
 
 // Option-iPad
+- (IBAction)ibSliderTaxChange:(UISlider *)slider;
+- (IBAction)ibSliderTaxTouchUp:(UISlider *)slider;
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment;
 - (IBAction)ibSegGroupingType:(UISegmentedControl *)segment;
 - (IBAction)ibSegDecimalSeparator:(UISegmentedControl *)segment;

@@ -12,7 +12,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="6"/>
+			<integer value="274"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -159,7 +159,7 @@
 							<object class="IBUIButton" id="479167029">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{1, 182}, {45, 32}}</string>
+								<string key="NSFrame">{{1, 178}, {45, 30}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">33</int>
@@ -193,7 +193,7 @@
 							<object class="IBUIButton" id="302747404">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{275, 182}, {45, 32}}</string>
+								<string key="NSFrame">{{275, 178}, {45, 30}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">34</int>
@@ -297,7 +297,11 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<reference key="IBUIFont" ref="61189286"/>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">12</double>
+									<int key="NSfFlags">16</int>
+								</object>
 								<int key="IBUIButtonType">1</int>
 								<string key="IBUINormalTitle">Quote</string>
 								<reference key="IBUIHighlightedTitleColor" ref="246203102"/>
@@ -743,7 +747,7 @@
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABC3AAAwxEAAA</bytes>
 					</object>
-					<string>{{1269, 449}, {320, 480}}</string>
+					<string>{{1142, 564}, {320, 480}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSMutableArray">
 						<bool key="EncodedWithXMLCoder">YES</bool>

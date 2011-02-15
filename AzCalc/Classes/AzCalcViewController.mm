@@ -32,12 +32,11 @@
 #define FORMULA_BLANK			@"〓 "	// Formula calc が空のとき表示するメッセージの先頭文字（判定に使用）
 
 
-
 //================================================================================AzCalcViewController
 @interface AzCalcViewController (PrivateMethods)
 - (void)MvDrumButtonShow;
 - (void)MvMemoryShow;
-- (void)MvFormulaReset;
+- (void)MvFormulaBlankMessage:(BOOL)bBlank;
 - (void)MvPadKeysShow;
 - (void)MvKeyboardPage:(NSInteger)iPage;
 - (void)MvKeyboardPage1Alook0;
@@ -90,6 +89,8 @@
     [super viewDidLoad];
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+	
 	//========================================================== Upper ==============
 	// ScrollUpper  (0)Pickerドラム  (1)TextView数式
 	ibScrollUpper.delegate = self;
@@ -185,7 +186,7 @@
 	ibTvFormula.font = [UIFont systemFontOfSize:14];
 	[ibBuGetDrum setTitle:NSLocalizedString(@"Formula Quote", nil) forState:UIControlStateNormal];
 	ibBuGetDrum.titleLabel.textAlignment = UITextAlignmentCenter;
-	ibBuGetDrum.titleLabel.font = [UIFont systemFontOfSize:20];
+	ibBuGetDrum.titleLabel.font = [UIFont systemFontOfSize:14];
 	//
 	float dx = ibScrollUpper.frame.size.width;
 	rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
@@ -232,7 +233,7 @@
 	ibBuInformation.hidden = YES;
 	NSDictionary *dicKeys = [NSDictionary new];
 #else
-	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+
 	// standardUserDefaults からキー配置読み込む
 	NSDictionary *dicKeys = [userDef objectForKey:GUD_KeyboardSet];
 	if (dicKeys==nil) {
@@ -433,6 +434,7 @@
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
 	// Setting
 #ifdef AzMAKE_SPLASHFACE
 	MiSegDrums = 1; // Default.png ドラム数
@@ -451,7 +453,10 @@
 	[CalcFunctions setRound:MiSegRound];
 
 	MiSegReverseDrum = (NSInteger)[defaults integerForKey:GUD_ReverseDrum];
+
 	// Option
+	MfTaxRate = 1.0 + [defaults floatForKey:GUD_TaxRate] / 100.0; // 1 + 消費税率%/100
+
 	switch ((NSInteger)[defaults integerForKey:GUD_GroupingSeparator]) {
 		case 0:
 			formatterGroupingSeparator( @"," );
@@ -1311,28 +1316,34 @@
 	}
 }
 
-- (void)MvFormulaReset
+- (void)MvFormulaBlankMessage:(BOOL)bBlank
 {
-	if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
-		ibTvFormula.text = @"";
-		ibTvFormula.font = [UIFont systemFontOfSize:20];
-		ibBuGetDrum.hidden = YES;
-	}
-	else if ([ibTvFormula.text length]<=0) {
-		ibTvFormula.font = [UIFont systemFontOfSize:14];
-		ibTvFormula.text = [NSString stringWithFormat:@"%@%@", FORMULA_BLANK, NSLocalizedString(@"Formula mode", nil)];
-		ibBuGetDrum.hidden = NO;
+	if (bBlank) {
+		// 入力なければブランクメッセージ表示する
+		if ([ibTvFormula.text length]<=0) {
+			ibTvFormula.font = [UIFont systemFontOfSize:14];
+			ibTvFormula.text = [NSString stringWithFormat:@"%@%@", FORMULA_BLANK, NSLocalizedString(@"Formula mode", nil)];
+			ibBuGetDrum.hidden = NO;
+		}
+	} else {
+		// ブランクメッセージ表示中ならばクリアする
+		if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
+			ibTvFormula.text = @"";
+			ibTvFormula.font = [UIFont systemFontOfSize:20];
+			ibBuGetDrum.hidden = YES;
+		}
 	}
 }
 
-- (void)vButtonFormula:(NSInteger)iKeyTag  // 数式へのキー入力処理
+- (void)MvButtonFormula:(NSInteger)iKeyTag  // 数式へのキー入力処理
 {
-	AzLOG(@"vButtonFormula: iKeyTag=(%d)", iKeyTag);
+	AzLOG(@"MvButtonFormula: iKeyTag=(%d)", iKeyTag);
 	
 	// これ以降、localPool管理エリア
 	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
 	@try {
-		[self MvFormulaReset];
+		BOOL bCalcing = NO; // YES=再計算する
+		[self MvFormulaBlankMessage:NO];
 		//
 		switch (iKeyTag) { // .Tag は、AzKeyMaster.plist の定義が元になる。
 				//---------------------------------------------[0]-[99] Numbers
@@ -1347,9 +1358,7 @@
 			case 8:
 			case 9:
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingFormat:@"%d", (int)iKeyTag];
-				// 再計算
-				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
-									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				bCalcing = YES; // 再計算する
 				break;
 				
 				/*	case 10: // [A]  ＜＜HEX対応のため保留＞＞
@@ -1367,24 +1376,68 @@
 				
 			case KeyTAG_00: // [00]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"00"];
-				// 再計算
-				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
-									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_000: // [000]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"000"];
-				// 再計算
-				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
-									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_SIGN: // [+/-]
+				if ([ibTvFormula.text hasSuffix:OP_ADD]) { // [+] ⇒ [-]
+					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1]; // BS
+					ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_SUB];
+				}
+				else if ([ibTvFormula.text hasSuffix:OP_SUB]) { // [-] ⇒ [+]
+					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1]; // BS
+					ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ADD];
+				}
+				else {
+					NSInteger i = [ibTvFormula.text length]-1;
+					NSRange rg;
+					for ( ; 0<i ; i-- ) {
+						rg = NSMakeRange(i, 1);
+						NSString *z = [ibTvFormula.text substringWithRange:rg];
+						if ([z compare:@"0"]==NSOrderedAscending || [z compare:@"9"]==NSOrderedDescending) { // <"0" or "9"<
+							if ([z isEqualToString:OP_ADD]) {
+								// [+] ⇒ [-]置換
+								rg = NSMakeRange(i, 1);
+								ibTvFormula.text = [ibTvFormula.text stringByReplacingCharactersInRange:rg 
+																							 withString:OP_SUB];
+							}
+							else if ([z isEqualToString:OP_SUB]) { 
+								// [-] ⇒ [+]置換
+								rg = NSMakeRange(i, 1);
+								ibTvFormula.text = [ibTvFormula.text stringByReplacingCharactersInRange:rg 
+																							 withString:OP_ADD];
+							}
+							else {
+								// [-]挿入
+								rg = NSMakeRange(i+1, 0);
+								ibTvFormula.text = [ibTvFormula.text stringByReplacingCharactersInRange:rg 
+																							 withString:OP_SUB];
+							}
+							break;
+						}
+						else if (i==0) {
+							// [-]挿入
+							rg = NSMakeRange(0, 0);
+							ibTvFormula.text = [ibTvFormula.text stringByReplacingCharactersInRange:rg 
+																						 withString:OP_SUB];
+						}
+					}
+				}
+				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_PERC: // [%]パーセント ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"÷100"];
+				bCalcing = YES; // 再計算する
 				break;
 			case KeyTAG_PERM: // [‰]パーミル ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"÷1000"];
+				bCalcing = YES; // 再計算する
 				break;
 			case KeyTAG_ROOT: // [√]ルート
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ROOT];
@@ -1394,16 +1447,12 @@
 				break;
 			case KeyTAG_RIGHT: // [)]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@")"];
-				// 再計算
-				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
-									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				bCalcing = YES; // 再計算する
 				break;
 				
 				//---------------------------------------------[100]-[199] Operators
 			case KeyTAG_ANSWER: // [=]
-				// 再計算
-				ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
-									   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_PLUS: // [+]
@@ -1416,6 +1465,14 @@
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_DIVI];	break;
 				
 			case KeyTAG_GT: // [GT] Ground Total: 1ドラムの全[=]回答値の合計
+				if ([ibTvFormula.text hasPrefix:@"("] && [ibTvFormula.text hasSuffix:@")"]) {
+					// 大外カッコを外す
+					NSRange rg = NSMakeRange(1, [ibTvFormula.text length]-2);
+					ibTvFormula.text = [ibTvFormula.text substringWithRange:rg];
+				} else {
+					// 大外カッコを付ける
+					ibTvFormula.text = [NSString stringWithFormat:@"(%@)", ibTvFormula.text];
+				}
 				break;
 				
 				//---------------------------------------------[200]-[299] Functions
@@ -1427,15 +1484,31 @@
 			case KeyTAG_BS: { // [BS]
 				if (0 < [ibTvFormula.text length]) {
 					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1];
-					// 再計算
-					ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
-										   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+					bCalcing = YES; // 再計算する
 				}
 			} break;
 				
+			case KeyTAG_AddTAX: // [+Tax] 税込み
+			case KeyTAG_SubTAX: // [-Tax] 税抜き
+			{
+				NSString *zAns = stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES);
+				if (zAns) {
+					if (iKeyTag==KeyTAG_AddTAX) {
+						ibTvFormula.text = [NSString stringWithFormat:@"(%@)×%.3f", ibTvFormula.text, MfTaxRate];
+					} else {
+						ibTvFormula.text = [NSString stringWithFormat:@"(%@)÷%.3f", ibTvFormula.text, MfTaxRate];
+					}
+					bCalcing = YES; // 再計算する
+				}
+			}	break;
 		}
-		//
-		[self MvFormulaReset];
+		
+		if (bCalcing) {
+			// 再計算
+			ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
+								   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
+		}
+		[self MvFormulaBlankMessage:YES];
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
 		[localPool release];
@@ -1588,7 +1661,7 @@
 				[drum.entryNumber setString:str]; // Az数値文字列をセット
 			}
 			else if (MiSvUpperPage==1) {
-				[self MvFormulaReset];
+				[self MvFormulaBlankMessage:NO];
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:
 									stringAzNum([UIPasteboard generalPasteboard].string)];
 				// 再計算
@@ -1757,7 +1830,7 @@
 			[drum entryKeyTag:button.tag keyButton:button];
 		} 
 		else if (MiSvUpperPage==1) {
-			[self vButtonFormula:button.tag];
+			[self MvButtonFormula:button.tag];
 		}
 	} 
 	else if (button.tag <= KeyTAG_MEMORY_End) { //[KeyTAG_MEMORY_Start-KeyTAG_MEMORY_End]----------Memory Keys
@@ -1777,7 +1850,7 @@
 				[drum.entryNumber setString:stringAzNum([UIPasteboard generalPasteboard].string)]; // Az数値文字列をセット
 			}
 			else if (MiSvUpperPage==1) {
-				[self MvFormulaReset];
+				[self MvFormulaBlankMessage:NO];
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:
 									stringAzNum([UIPasteboard generalPasteboard].string)];
 				// 再計算
@@ -1813,7 +1886,7 @@
 	Drum *drum = [RaDrums objectAtIndex:entryComponent];
 	NSString *zFormula = [drum stringFormula];
 	if (0 < [zFormula length]) {
-		[self MvFormulaReset];
+		[self MvFormulaBlankMessage:NO];
 		ibTvFormula.text = zFormula;
 		// 再計算
 		ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
@@ -2151,8 +2224,7 @@
 	rc = ibLbFormAnswer.frame;	rc.origin.y += 30;		ibLbFormAnswer.frame = rc;
 	rc = ibBuMemory.frame;		rc.origin.y += 27;		ibBuMemory.frame = rc;
 
-	[self MvFormulaReset];
-
+	[self MvFormulaBlankMessage:NO];
 	// アニメ開始
 	[UIView commitAnimations];
 }
@@ -2175,6 +2247,7 @@
 	rc = ibLbFormAnswer.frame;	rc.origin.y -= 30;		ibLbFormAnswer.frame = rc;
 	rc = ibBuMemory.frame;		rc.origin.y -= 27;		ibBuMemory.frame = rc;
 
+	[self MvFormulaBlankMessage:YES];
 	// アニメ開始
 	[UIView commitAnimations];
 }
@@ -2190,23 +2263,31 @@
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
 	//AzLOG(@"--shouldChangeTextInRange:%@", text);
-	const NSString *zList = @" 0123456789.+-×÷*/()";  // 入力許可文字
-	
 	NSLog(@"textField-----[%@]", text);
+	
 	if ([text length]<=0) {
 		// [BS] "9+" が一緒に削除されてしまうので、オリジナルの[BS]処理する
-		[self vButtonFormula:KeyTAG_BS];
+		[self MvButtonFormula:KeyTAG_BS];
 		return NO;
 	}
-	
-	NSRange rg = [zList rangeOfString:text];
-	if (rg.length==1) {
-		[self MvFormulaReset];
-		return YES; // 入力許可文字
-	}
-	
 	if ([text hasPrefix:@"\n"]) { // [Done]
 		[textView resignFirstResponder]; // キーボードを隠す 
+		return NO;
+	}
+	if (FORMULA_MAX_LENGTH < [textView.text length] + [text length]) {
+		ibLbFormAnswer.text = @"= Game Over =";
+		return NO;
+	}
+	if (1 < [text length]) {
+		// ペーストによる文字列ならば無条件許可する
+		return YES;
+	}
+	
+	const NSString *zList = @" 0123456789.+-×÷*/()";  // 入力許可文字
+	NSRange rg = [zList rangeOfString:text];
+	if (rg.length==1) {
+		[self MvFormulaBlankMessage:NO];
+		return YES; // 入力許可文字
 	}
 	return NO;
 }

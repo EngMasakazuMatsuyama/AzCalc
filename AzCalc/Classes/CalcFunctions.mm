@@ -85,7 +85,12 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 + (NSString *)zAnswerFromFormula:(NSString *)zFormula	// 数式 ⇒ 逆ポーランド記法(Reverse Polish Notation) ⇒ 答え
 {
 	AzLOG(@"zFormula=%@", zFormula);
-	if ([zFormula length]<2) return @""; // nilにすると、戻り値を使った setString:で落ちる
+	if ([zFormula length]<2) {
+		return @""; // nilにすると、戻り値を使った setString:で落ちる
+	}
+	if (FORMULA_MAX_LENGTH < [zFormula length]) {
+		return  @"@Game Over =";  // 先頭を@にすると stringFormatter() で変換されずに@以降が返される。
+	}
 	
 	NSMutableArray *maStack = [[NSMutableArray alloc] init];	// - Stack Method
 	NSMutableArray *maRpn = [[NSMutableArray alloc] init]; // 逆ポーランド記法結果

@@ -72,6 +72,7 @@
 	if (DECIMAL_Float <= MiSegDecimal) MiSegDecimal = PRECISION; // [F]小数桁制限なし
 	MiSegRound = (NSInteger)[defaults integerForKey:GUD_Round];
 	MiSegReverseDrum = (NSInteger)[defaults integerForKey:GUD_ReverseDrum];
+	MfTaxRate = 1.0 + [defaults floatForKey:GUD_TaxRate] / 100.0; // 1 + 消費税率%/100
 }
 
 
@@ -608,10 +609,10 @@
 				}
 			} 
 			else if ([zUni isEqualToString:UNI_AddTAX]) {
-				zFormula = [zFormula stringByAppendingFormat:@"%@×(100+%d)÷100", zNum, 5];	// *105/100 
+				zFormula = [zFormula stringByAppendingFormat:@"%@×%.3f", zNum, MfTaxRate];
 			} 
 			else if ([zUni isEqualToString:UNI_SubTAX]) {
-				zFormula = [zFormula stringByAppendingFormat:@"%@×100÷(100+%d)", zNum, 5];	// *100/105 
+				zFormula = [zFormula stringByAppendingFormat:@"%@÷%.3f", zNum, MfTaxRate]; 
 			} 
 			else {
 				zFormula = [zFormula stringByAppendingFormat:@"%@%@", zOpe, zNum];

@@ -32,6 +32,7 @@
 	NSInteger	MiSegDecimal;
 	NSInteger	MiSegRound;
 	NSInteger	MiSegReverseDrum;
+	float		MfTaxRate;
 }
 
 @property (nonatomic, readonly) NSMutableArray	*formulaOperators;	// picker view 表示のためRO
