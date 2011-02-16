@@ -39,6 +39,7 @@
 + (void)setCalcMethod:(NSInteger)i;
 + (void)setDecimal:(NSInteger)i;
 + (void)setRound:(NSInteger)i;
-+ (NSString *)zAnswerFromFormula:(NSString *)zFormula; // 数式 ⇒ 逆ポーランド記法(Reverse Polish Notation) ⇒ 答え
++ (NSString *)zFormulaFilter:(NSString *)zForm;
++ (NSString *)zAnswerFromFormula:(NSString *)zFormula;
 
 @end

@@ -47,7 +47,8 @@
 	BOOL				bADbannerFirstTime; // iAd 広告内容があれば、起動時に表示するため
 	BOOL				bDrumButtonTap1;	// 最初のタップでYES
 	BOOL				bDrumRefresh;		// =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
-	float				MfTaxRate;
+	BOOL                bFormulaFilter;     // =YES:ペーストされたのでフィルタ処理する
+    float				MfTaxRate;
 	
 	// Keyboard spec
 	int					iKeyPages;

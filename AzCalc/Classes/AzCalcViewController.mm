@@ -1335,6 +1335,7 @@
 	}
 }
 
+
 - (void)MvButtonFormula:(NSInteger)iKeyTag  // 数式へのキー入力処理
 {
 	AzLOG(@"MvButtonFormula: iKeyTag=(%d)", iKeyTag);
@@ -2208,6 +2209,7 @@
 //=================================================================ibTvFormula delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
+	AzLOG(@"--textViewDidBeginEditing:");
 	ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
 
 	CGRect rc;
@@ -2256,14 +2258,17 @@
 {
 	AzLOG(@"--textViewDidChange:");
 	// 再計算
+    if (bFormulaFilter) {
+        bFormulaFilter = NO;
+        ibTvFormula.text = [CalcFunctions zFormulaFilter:ibTvFormula.text];
+    }
 	ibLbFormAnswer.text = [NSString stringWithFormat:@"= %@",
 						   stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES)];
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
 {
-	//AzLOG(@"--shouldChangeTextInRange:%@", text);
-	NSLog(@"textField-----[%@]", text);
+	NSLog(@"--shouldChangeTextInRange-----[%@]", text);
 	
 	if ([text length]<=0) {
 		// [BS] "9+" が一緒に削除されてしまうので、オリジナルの[BS]処理する
@@ -2274,16 +2279,18 @@
 		[textView resignFirstResponder]; // キーボードを隠す 
 		return NO;
 	}
-	if (FORMULA_MAX_LENGTH < [textView.text length] + [text length]) {
+    if (FORMULA_MAX_LENGTH < [textView.text length] + [text length] - range.length) {
 		ibLbFormAnswer.text = @"= Game Over =";
-		return NO;
-	}
-	if (1 < [text length]) {
-		// ペーストによる文字列ならば無条件許可する
-		return YES;
+        return NO;
+    }
+    if (1 < [text length]) {
+        // ペーストによる文字列ならば無条件許可する
+        bFormulaFilter = YES;   // [CalcFunctions zFormulaFilter:]処理必要
+        // この直後、textViewDidChange が呼び出される。
+        return YES;
 	}
 	
-	const NSString *zList = @" 0123456789.+-×÷*/()";  // 入力許可文字
+	const NSString *zList = @"0123456789. +-×÷*/()";  // 入力許可文字
 	NSRange rg = [zList rangeOfString:text];
 	if (rg.length==1) {
 		[self MvFormulaBlankMessage:NO];

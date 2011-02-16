@@ -70,6 +70,23 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 	MiSegRound = i;
 }
 
++ (NSString *)zFormulaFilter:(NSString *)zForm      // 数式許可文字だけにするフィルタ
+{
+	const NSString *zList = @"0123456789. +-×÷*/()";  // 数式入力許可文字
+    NSString *z, *zOuts = @"";
+    NSRange rg;
+    for (NSInteger i=0; i<[zForm length]; i++)
+    {
+        z = [zForm substringWithRange:NSMakeRange(i, 1)];
+        rg = [zList rangeOfString:z];
+        if (rg.length==1) {
+            // 許可文字
+            zOuts = [zOuts stringByAppendingString:z];
+        }
+    }
+    return zOuts;
+}
+
 /*
  数式 ⇒ 逆ポーランド記法(Reverse Polish Notation)
  "5 + 4 - 3"	⇒ "5 4 3 - +"
@@ -166,7 +183,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			}
 			else if ([zTokn isEqualToString:@")"]) {
 				iCapRight++;
-				while (zz = [maStack pop]) {	// "("までスタックから取り出してRPNへ追加、両括弧は破棄する
+				while ((zz = [maStack pop])) {	// "("までスタックから取り出してRPNへ追加、両括弧は破棄する
 					if ([zz isEqualToString:@"("]) {
 						break; // 両カッコは、破棄する
 					}
@@ -196,7 +213,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			}
 		}
 		// スタックに残っているトークンを全て逆ポーランドPUSH
-		while (zz = [maStack pop]) {
+		while ((zz = [maStack pop])) {
 			[maRpn push:zz];
 		}
 		// 数値と演算子の数チェック

@@ -735,6 +735,7 @@ void formatterDecimalZeroCut( bool bZeroCut )
 	__formatterDecimalZeroCut = bZeroCut;
 }*/
 
+
 //----------------------------------------------------------------------------------------
 // 文字列から数値成分だけを切り出す。（数値関連外の文字があれば終端）
 // Az数値文字列を返す（使用文字は、[+][-][.][0〜9]のみ、スペース無し）
@@ -742,16 +743,20 @@ NSString *stringAzNum( NSString *zNum )
 {
 	if (zNum==nil || [zNum length]<=0) return @"";
 	
-	NSString *str = [NSString stringWithString:zNum];
+	NSString *str; // = [NSString stringWithString:zNum];
 	NSString *zDeci = getFormatterDecimalSeparator();
 	if ([zDeci isEqualToString:@"·"]) { // ミドル・ドット（英米式小数点）⇒ 標準小数点[.]ピリオドにする
 		// ミドル・ドットだけはUnicodeにつきNSASCIIStringEncodingできないので事前に変換が必要
-		str = [str stringByReplacingOccurrencesOfString:@"·" withString:@"."]; // ミドル・ドット ⇒ 小数点
+		str = [zNum stringByReplacingOccurrencesOfString:@"·" withString:@"."]; // ミドル・ドット ⇒ 小数点
 	}
 	else if ([zDeci isEqualToString:@","]) { // コンマ（独仏式小数点）⇒ 標準小数点[.]ピリオドにする
-		str = [str stringByReplacingOccurrencesOfString:@"." withString:@""];  // [.]⇒[]
+		str = [zNum stringByReplacingOccurrencesOfString:@"." withString:@""];  // [.]⇒[]
 		str = [str stringByReplacingOccurrencesOfString:@"," withString:@"."]; // [,]⇒[.]
 	}
+    else {
+        str = [NSString stringWithString:zNum];
+    }
+    
 	// 文字列から数値成分だけを切り出す。（数値関連外の文字があれば即終了）
 	// NS数値文字列にする（使用文字は、[+][-][.][0〜9]のみ、スペース無しであることを前提とする）
 	char cNum[SBCD_PRECISION+1], *pNum;
@@ -769,11 +774,11 @@ NSString *stringAzNum( NSString *zNum )
 		}
 		else if (*pNum=='+' || *pNum=='-') {
 			if (cAns == pAns) *pAns++ = *pNum; // 最初の文字ならばOK
-				else break; // END
+            else break; // END
 		}
 		else if (*pNum=='.') {	// 標準小数点[.]ピリオド
 			if (cAns < pAns) *pAns++ = *pNum; // 2文字目以降ならばOK
-				else break; // END
+            else break; // END
 		}
 		else {
 			break; // END 数値関連外の文字があれば即終了
@@ -804,7 +809,8 @@ NSString *stringFormatter( NSString *strAzNum, BOOL bZeroCut )
 #endif
 	
 	int iAnsPos = 0;
-	strcpy(cNum, (char *)[strAzNum cStringUsingEncoding:NSASCIIStringEncoding]); 
+	//strcpy(cNum, (char *)[strAzNum cStringUsingEncoding:NSASCIIStringEncoding]); 
+	[strAzNum getCString:cNum maxLength:SBCD_PRECISION encoding:NSASCIIStringEncoding];
 
 	int iPosIntS = 0;
 	int iPosIntE = -1;
