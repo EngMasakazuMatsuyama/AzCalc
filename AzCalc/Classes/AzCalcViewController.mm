@@ -183,7 +183,7 @@
 	ibLbFormAnswer.text = @"=";
 	ibTvFormula.delegate = self;
 	ibTvFormula.text = [NSString stringWithFormat:@"%@%@", FORMULA_BLANK, NSLocalizedString(@"Formula mode", nil)];
-	ibTvFormula.font = [UIFont systemFontOfSize:14];
+	//ibTvFormula.font = [UIFont systemFontOfSize:14];
 	[ibBuGetDrum setTitle:NSLocalizedString(@"Formula Quote", nil) forState:UIControlStateNormal];
 	ibBuGetDrum.titleLabel.textAlignment = UITextAlignmentCenter;
 	ibBuGetDrum.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -404,7 +404,11 @@
 		RoAdMobView = [AdMobView requestAdWithDelegate:self];
 		[RoAdMobView retain];
 		CGRect rc = RoAdMobView.frame;
-		rc.origin.x = ibScrollUpper.frame.size.width; // 1ページ幅
+        if (700 < self.view.frame.size.height) { // iPad
+            rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
+        } else {
+            rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
+        }
 		rc.origin.y = 0;
 		RoAdMobView.frame = rc;
 	}
@@ -431,7 +435,7 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
 	[super viewWillAppear:animated];
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
+    //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
@@ -440,6 +444,14 @@
 	MiSegDrums = 1; // Default.png ドラム数
 #else
 	MiSegDrums = 1 + (NSInteger)[defaults integerForKey:GUD_Drums];	// ドラム数 ＜＜セグメント値に +1 している＞＞
+	if (MiSegDrums<=0) {
+		if (700 < self.view.frame.size.height) { 
+			MiSegDrums = 3;	// iPad初期ドラム数
+		} else {
+			MiSegDrums = 2;	// iPhone初期ドラム数
+		}
+		[defaults setInteger:MiSegDrums-1 forKey:GUD_Drums];
+	}
 #endif
 	if (DRUMS_MAX < MiSegDrums) MiSegDrums = DRUMS_MAX;  // 生成数を超えないように
 	MiSegCalcMethod = (NSInteger)[defaults integerForKey:GUD_CalcMethod];
@@ -502,6 +514,7 @@
 	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (appDelegate.bChangeKeyboard) {
 		// キーレイアウト変更モード
+		ibScrollUpper.scrollEnabled = NO; // レイアウト中は固定する
 		if (RaKeyMaster==nil) {
 			// AzKeyMaster.plistからマスターキー一覧読み込む
 			NSString *zFile = [[NSBundle mainBundle] pathForResource:@"AzKeyMaster" ofType:@"plist"];
@@ -580,6 +593,7 @@
 	} 
 	else {
 		// ドラタク通常モード
+		ibScrollUpper.scrollEnabled = YES;
 		if (RaKeyMaster) {
 			[RaKeyMaster release];
 			RaKeyMaster = nil;
@@ -669,8 +683,7 @@
 		//[self MvAppleAdOn];
 		//[self.view becomeFirstResponder];
 	}
-
-	[pool release];
+	//[pool release];
 }
 
 - (void)viewDidAppear:(BOOL)animated // 画面表示された後にコールされる
@@ -1321,7 +1334,7 @@
 	if (bBlank) {
 		// 入力なければブランクメッセージ表示する
 		if ([ibTvFormula.text length]<=0) {
-			ibTvFormula.font = [UIFont systemFontOfSize:14];
+			//ibTvFormula.font = [UIFont systemFontOfSize:14];  iPadのXIBで、フォントサイズを大きくしているため
 			ibTvFormula.text = [NSString stringWithFormat:@"%@%@", FORMULA_BLANK, NSLocalizedString(@"Formula mode", nil)];
 			ibBuGetDrum.hidden = NO;
 		}
@@ -1329,7 +1342,7 @@
 		// ブランクメッセージ表示中ならばクリアする
 		if ([ibTvFormula.text hasPrefix:FORMULA_BLANK]) {
 			ibTvFormula.text = @"";
-			ibTvFormula.font = [UIFont systemFontOfSize:20];
+			//ibTvFormula.font = [UIFont systemFontOfSize:20];
 			ibBuGetDrum.hidden = YES;
 		}
 	}
@@ -1574,6 +1587,7 @@
 			}
 			else break;
 			//
+    
 			if (0 < [[UIPasteboard generalPasteboard].string length]) {
 				// [UIPasteboard generalPasteboard].string を 未使用メモリーKey へ登録する
 				ibBuMemory.tag = 0; // MClear
@@ -1585,21 +1599,21 @@
 						if ([bu.titleLabel.text hasPrefix:@"M"]) { // 未使用メモリを探す
 							iSavedTag = bu.tag;  // 未使用メモリ発見
 							// アニメーション
-							{
-								CGRect rcEnd = bu.frame; // 最終位置
-								UIButton *buEntry = [RaDrumButtons objectAtIndex:entryComponent];
-								CGRect rc = buEntry.frame; // 開始位置
-								rc.origin.x += (rc.size.width - bu.frame.size.width);
-								bu.frame = rc;
-								// アニメ準備
-								[UIView beginAnimations:nil context:NULL];
-								[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-								[UIView setAnimationDuration:0.7];
-								// アニメ終了時の位置をセット
-								bu.frame = rcEnd;
-								// アニメ開始
-								[UIView commitAnimations];
-							}
+							CGRect rcEnd = bu.frame; // 最終位置
+                            //UIButton *buEntry = [RaDrumButtons objectAtIndex:entryComponent];
+                            //CGRect rc = buEntry.frame; // 開始位置
+                            //rc.origin.x += (rc.size.width - bu.frame.size.width);
+                            //bu.frame = rc;
+							bu.frame = ibBuMemory.frame;
+                            
+							// アニメ準備
+							[UIView beginAnimations:nil context:NULL];
+							[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+							[UIView setAnimationDuration:0.7];
+							// アニメ終了時の位置をセット
+							bu.frame = rcEnd;
+							// アニメ開始
+							[UIView commitAnimations];
 							break;
 						}
 					}
@@ -2217,14 +2231,22 @@
 	// アニメ準備
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:1.5];
+	[UIView setAnimationDuration:0.9];
 	// アニメ終了時の位置をセット
-	rc = ibBuFormLeft.frame;	rc.origin.x -= 100;		ibBuFormLeft.frame = rc;
-	rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;
-	rc = ibScrollLower.frame;	rc.origin.y += 100;		ibScrollLower.frame = rc;
-	rc = ibTvFormula.frame;		rc.size.height += 30;	ibTvFormula.frame = rc;
-	rc = ibLbFormAnswer.frame;	rc.origin.y += 30;		ibLbFormAnswer.frame = rc;
-	rc = ibBuMemory.frame;		rc.origin.y += 27;		ibBuMemory.frame = rc;
+	if (700 < self.view.frame.size.height) { // iPad
+        rc = ibScrollLower.frame;	rc.origin.y += 280;     ibScrollLower.frame = rc;
+        rc = ibScrollUpper.frame;	rc.size.height += 260;     ibScrollUpper.frame = rc;
+		rc = ibTvFormula.frame;		rc.size.height += 260;  ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y += 260;     ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y += 260;     ibBuMemory.frame = rc;
+    } else {
+        rc = ibBuFormLeft.frame;    rc.origin.x -= 100;		ibBuFormLeft.frame = rc;
+        rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;
+        rc = ibScrollLower.frame;	rc.origin.y += 100;		ibScrollLower.frame = rc;
+        rc = ibTvFormula.frame;		rc.size.height += 30;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y += 30;		ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y += 27;		ibBuMemory.frame = rc;
+    }
 
 	[self MvFormulaBlankMessage:NO];
 	// アニメ開始
@@ -2240,14 +2262,22 @@
 	// アニメ準備
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:0.6];	// 戻りは早く
+	[UIView setAnimationDuration:0.5];	// 戻りは早く
 	// アニメ終了時の位置をセット
-	rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;
-	rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;
-	rc = ibScrollLower.frame;	rc.origin.y -= 100;		ibScrollLower.frame = rc;
-	rc = ibTvFormula.frame;		rc.size.height -= 30;	ibTvFormula.frame = rc;
-	rc = ibLbFormAnswer.frame;	rc.origin.y -= 30;		ibLbFormAnswer.frame = rc;
-	rc = ibBuMemory.frame;		rc.origin.y -= 27;		ibBuMemory.frame = rc;
+	if (700 < self.view.frame.size.height) { // iPad
+        rc = ibScrollLower.frame;	rc.origin.y -= 280;		ibScrollLower.frame = rc;
+        rc = ibScrollUpper.frame;	rc.size.height -= 260;     ibScrollUpper.frame = rc;
+        rc = ibTvFormula.frame;		rc.size.height -= 260;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y -= 260;		ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y -= 260;		ibBuMemory.frame = rc;
+    } else {
+        rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;
+        rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;
+        rc = ibScrollLower.frame;	rc.origin.y -= 100;		ibScrollLower.frame = rc;
+        rc = ibTvFormula.frame;		rc.size.height -= 30;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y -= 30;		ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y -= 27;		ibBuMemory.frame = rc;
+    }
 
 	[self MvFormulaBlankMessage:YES];
 	// アニメ開始

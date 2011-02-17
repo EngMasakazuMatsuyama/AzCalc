@@ -36,9 +36,9 @@
 #define KeyTAG_STANDARD_End		299
 
 #define KeyTAG_MEMORY_Start		300
-#define KeyTAG_MCLEAR			300
-#define KeyTAG_MCOPY			301
-#define KeyTAG_MPASTE			302
+#define KeyTAG_MCLEAR			300	// [MClear]
+#define KeyTAG_MCOPY			301	// [Memory]
+#define KeyTAG_MPASTE			302	// [Paste] ibBuMemory
 #define KeyTAG_M_PLUS			311	// [M+]
 #define KeyTAG_M_MINUS			312	// [M-]
 #define KeyTAG_M_MULTI			313	// [M×]

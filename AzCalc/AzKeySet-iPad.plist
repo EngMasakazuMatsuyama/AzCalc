@@ -2,21 +2,28 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>P1C0R1</key>
+	<key>P1C0R0</key>
 	<dict>
 		<key>Tag</key>
 		<integer>200</integer>
 		<key>Text</key>
 		<string>AC</string>
 	</dict>
-	<key>P1C0R2</key>
+	<key>P1C0R1</key>
 	<dict>
 		<key>Tag</key>
 		<integer>201</integer>
 		<key>Text</key>
 		<string>BS</string>
 	</dict>
-	<key>P1C0R3</key>
+	<key>P1C1R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>201</integer>
+		<key>Text</key>
+		<string>BS</string>
+	</dict>
+	<key>P0C6R3</key>
 	<dict>
 		<key>Tag</key>
 		<integer>32</integer>
@@ -26,25 +33,25 @@
 	<key>P1C0R4</key>
 	<dict>
 		<key>Tag</key>
-		<integer>31</integer>
+		<integer>30</integer>
 		<key>Text</key>
-		<string>‰</string>
+		<string>%</string>
 	</dict>
-	<key>P1C0R5</key>
+	<key>P1C1R3</key>
 	<dict>
 		<key>Tag</key>
 		<integer>18</integer>
 		<key>Text</key>
 		<string>000</string>
 	</dict>
-	<key>P1C1R1</key>
+	<key>P1C1R0</key>
 	<dict>
 		<key>Tag</key>
 		<integer>300</integer>
 		<key>Text</key>
 		<string>MClear</string>
 	</dict>
-	<key>P1C1R3</key>
+	<key>P1C0R3</key>
 	<dict>
 		<key>Tag</key>
 		<integer>20</integer>
@@ -54,23 +61,16 @@
 	<key>P1C1R4</key>
 	<dict>
 		<key>Tag</key>
-		<integer>30</integer>
-		<key>Text</key>
-		<string>%</string>
-	</dict>
-	<key>P1C1R5</key>
-	<dict>
-		<key>Tag</key>
 		<integer>17</integer>
 		<key>Text</key>
 		<string>00</string>
 	</dict>
-	<key>P1C2R1</key>
+	<key>P1C2R0</key>
 	<dict>
 		<key>Tag</key>
 		<integer>301</integer>
 		<key>Text</key>
-		<string>Copy</string>
+		<string>Memory</string>
 	</dict>
 	<key>P1C2R2</key>
 	<dict>
@@ -100,14 +100,14 @@
 		<key>Text</key>
 		<string>0</string>
 	</dict>
-	<key>P1C2R6</key>
+	<key>P1C1R5</key>
 	<dict>
 		<key>Tag</key>
 		<integer>0</integer>
 		<key>Text</key>
 		<string>0</string>
 	</dict>
-	<key>P1C3R1</key>
+	<key>P1C3R0</key>
 	<dict>
 		<key>Tag</key>
 		<integer>311</integer>
@@ -142,7 +142,7 @@
 		<key>Text</key>
 		<string>.</string>
 	</dict>
-	<key>P1C4R1</key>
+	<key>P1C4R0</key>
 	<dict>
 		<key>Tag</key>
 		<integer>312</integer>
@@ -177,14 +177,7 @@
 		<key>Text</key>
 		<string>=</string>
 	</dict>
-	<key>P1C4R6</key>
-	<dict>
-		<key>Tag</key>
-		<integer>100</integer>
-		<key>Text</key>
-		<string>=</string>
-	</dict>
-	<key>P1C5R1</key>
+	<key>P1C5R0</key>
 	<dict>
 		<key>Tag</key>
 		<integer>313</integer>
@@ -201,6 +194,20 @@
 	<key>P1C5R3</key>
 	<dict>
 		<key>Tag</key>
+		<integer>103</integer>
+		<key>Text</key>
+		<string>×</string>
+	</dict>
+	<key>P1C6R4</key>
+	<dict>
+		<key>Tag</key>
+		<integer>102</integer>
+		<key>Text</key>
+		<string>-</string>
+	</dict>
+	<key>P1C6R5</key>
+	<dict>
+		<key>Tag</key>
 		<integer>102</integer>
 		<key>Text</key>
 		<string>-</string>
@@ -208,9 +215,9 @@
 	<key>P1C5R4</key>
 	<dict>
 		<key>Tag</key>
-		<integer>102</integer>
+		<integer>101</integer>
 		<key>Text</key>
-		<string>-</string>
+		<string>+</string>
 	</dict>
 	<key>P1C5R5</key>
 	<dict>
@@ -219,14 +226,7 @@
 		<key>Text</key>
 		<string>+</string>
 	</dict>
-	<key>P1C5R6</key>
-	<dict>
-		<key>Tag</key>
-		<integer>101</integer>
-		<key>Text</key>
-		<string>+</string>
-	</dict>
-	<key>P1C6R1</key>
+	<key>P1C6R0</key>
 	<dict>
 		<key>Tag</key>
 		<integer>314</integer>
@@ -240,12 +240,40 @@
 		<key>Text</key>
 		<string>÷</string>
 	</dict>
-	<key>P1C6R5</key>
+	<key>P1C6R3</key>
+	<dict>
+		<key>Tag</key>
+		<integer>104</integer>
+		<key>Text</key>
+		<string>÷</string>
+	</dict>
+	<key>P1C0R5</key>
 	<dict>
 		<key>Tag</key>
 		<integer>105</integer>
 		<key>Text</key>
 		<string>GT</string>
+	</dict>
+	<key>P0C6R4</key>
+	<dict>
+		<key>Tag</key>
+		<integer>31</integer>
+		<key>Text</key>
+		<string>‰</string>
+	</dict>
+	<key>P1C5R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>210</integer>
+		<key>Text</key>
+		<string>+Tax</string>
+	</dict>
+	<key>P1C6R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>211</integer>
+		<key>Text</key>
+		<string>-Tax</string>
 	</dict>
 </dict>
 </plist>

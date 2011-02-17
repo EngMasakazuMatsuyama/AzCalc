@@ -44,7 +44,7 @@
 	// ここで，appDefaultsは環境設定で初期値となるキー・バリューペアのNSDictonaryオブジェクトです。
 	// このメソッドは，すでに同じキーの環境設定が存在する場合，上書きしないので，環境設定の初期値を定めることに使えます。
 	NSDictionary *azOptDef = [[NSDictionary alloc] initWithObjectsAndKeys: // 直後にreleaseしている
-							  @"1",		GUD_Drums,		// "0"⇒(1) "1"⇒(2)
+							  @"-1",	GUD_Drums,		// "-1"⇒ 初期値：iPhone="1" iPad="2"
 							  @"0",		GUD_CalcMethod,
 							  @"3",		GUD_Decimal,
 							  @"3",		GUD_Round,
@@ -64,13 +64,7 @@
 	bChangeKeyboard = NO;
 	
 	// Add the view controller's view to the window and display.
-//	[window addSubview:ibOptionVC.view];		[ibOptionVC release];
-//	[window addSubview:ibInformationVC.view];	[ibInformationVC release];
-//	[window addSubview:ibSettingVC.view];		[ibSettingVC release];
 	[window addSubview:viewController.view];    [viewController release];
-	// TopView
-	//	[window bringSubviewToFront:viewController.view];
-	// 
     [window makeKeyAndVisible];
 
     return YES;
