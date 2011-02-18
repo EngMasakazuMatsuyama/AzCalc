@@ -91,6 +91,8 @@
 
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 	
+	bPad = (700 < self.view.frame.size.height);
+	
 	//========================================================== Upper ==============
 	// ScrollUpper  (0)Pickerドラム  (1)TextView数式
 	ibScrollUpper.delegate = self;
@@ -198,7 +200,7 @@
 
 	//========================================================== Lower ==============
 	
-	if (700 < self.view.frame.size.height) { // iPad
+	if (bPad) { // iPad
 		iKeyPages = 3;
 		iKeyCols = 7;	iKeyOffsetCol = 0; // AzdicKeys.plist C 開始位置
 		iKeyRows = 7;	iKeyOffsetRow = 0;
@@ -239,7 +241,7 @@
 	if (dicKeys==nil) {
 		// AzKeySet.plistからキー配置読み込む
 		NSString *zKeySetFile;
-		if (700 < self.view.frame.size.height) { // iPad
+		if (bPad) { // iPad
 			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
 		} else {
 			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
@@ -307,6 +309,8 @@
 					NSNumber *numSize = [dicKey objectForKey:@"Size"];
 					NSNumber *numColor = [dicKey objectForKey:@"Color"];
 					NSNumber *numAlpha = [dicKey objectForKey:@"Alpha"];
+					// UNIT
+					NSString *strUnit = [dicKey objectForKey:@"Unit"];
 					
 					if (strText==nil OR numSize==nil OR numAlpha==nil OR numColor==nil) {
 						// AzKeyMaster 引用
@@ -325,6 +329,8 @@
 									numSize = [dic objectForKey:@"Size"];
 									numColor = [dic objectForKey:@"Color"];
 									numAlpha = [dic objectForKey:@"Alpha"];
+									// UNIT
+									strUnit = [dic objectForKey:@"Unit"];
 								}
 							}
 						}
@@ -346,6 +352,7 @@
 							case 1:	[bu setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];	break;
 							case 2:	[bu setTitleColor:[UIColor redColor] forState:UIControlStateNormal];	break;
 							case 3:	[bu setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];	break;
+							case 4:	[bu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];	break; // UNIT
 							default:[bu setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];	break;
 						}
 					} else {
@@ -358,6 +365,10 @@
 					} else {
 						bu.alpha = KeyALPHA_DEFAULT_ON;
 					}
+					
+					// UNIT		"@" ⇒ "%@"
+					bu.RzUnit = [strUnit stringByReplacingOccurrencesOfString:@"@" 
+																   withString:@"%@"];
 					
 				} else {
 					bu.tag = -1; // Function No.
@@ -404,7 +415,7 @@
 		RoAdMobView = [AdMobView requestAdWithDelegate:self];
 		[RoAdMobView retain];
 		CGRect rc = RoAdMobView.frame;
-        if (700 < self.view.frame.size.height) { // iPad
+        if (bPad) { // iPad
             rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
         } else {
             rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
@@ -445,7 +456,7 @@
 #else
 	MiSegDrums = 1 + (NSInteger)[defaults integerForKey:GUD_Drums];	// ドラム数 ＜＜セグメント値に +1 している＞＞
 	if (MiSegDrums<=0) {
-		if (700 < self.view.frame.size.height) { 
+		if (bPad) { 
 			MiSegDrums = 3;	// iPad初期ドラム数
 		} else {
 			MiSegDrums = 2;	// iPhone初期ドラム数
@@ -577,7 +588,7 @@
 								// Size
 								float fSize = [[dic objectForKey:@"Size"] floatValue]; 
 								bu.fFontSize = fSize; 
-								if (700 < self.view.frame.size.height) fSize *= 1.5; // iPadやや拡大
+								if (bPad) fSize *= 1.5; // iPadやや拡大
 								bu.titleLabel.font = [UIFont boldSystemFontOfSize:fSize];
 								// Alpha
 								bu.alpha = [[dic objectForKey:@"Alpha"] floatValue];
@@ -720,7 +731,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) return YES; // タテは常にOK
-	else if (700 < self.view.frame.size.height) return YES; // iPad
+	else if (bPad) return YES; // iPad
 	return NO;
 }
 
@@ -732,7 +743,7 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
 										 duration:(NSTimeInterval)duration
 {
-	if (self.view.frame.size.height < 700) return; // iPhone
+	if (!bPad) return; // iPhone
 
 	// iPad専用 メモリー20キー配置 および 回転処理
 	[self MvPadKeysShow]; 
@@ -749,7 +760,7 @@
 // 回転が完了したときにコールされる。
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
-	if (self.view.frame.size.height < 700) return; // iPhone
+	if (!bPad) return; // iPhone
 }
 */
 
@@ -930,7 +941,7 @@
 		//
 		// AzKeySet.plistからキー配置を読み込む
 		NSString *zKeySetFile;
-		if (700 < self.view.frame.size.height) { // iPad
+		if (bPad) { // iPad
 			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
 		} else {
 			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
@@ -1185,10 +1196,16 @@
 					lb.textColor = [UIColor blackColor];
 				}
 				lb.font = [UIFont systemFontOfSize:30];
-				//lb.text = [NSString stringWithFormat:@"%@ %@%@", zOpe, 
+
+				// [;]で区切られたコンポーネント(部分文字列)を切り出す
+				NSString *zUnit = [drum.formulaUnits objectAtIndex:iRow];
+				NSArray *arUnit = [zUnit componentsSeparatedByString:@";"]; 
+				if (0 < [arUnit count]) {
+					zUnit = [arUnit objectAtIndex:0]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+				}
 				lb.text = [NSString stringWithFormat:@"%@%@%@", zOpe, 
 						   stringFormatter([drum.formulaNumbers objectAtIndex:iRow], YES),
-						   [drum.formulaUnits objectAtIndex:iRow]];
+						   zUnit];
 			}
 		} else {			// drum.entry 表示
 			NSString *zOpe = drum.entryOperator;
@@ -1198,11 +1215,13 @@
 				} else {
 					zOpe = [zOpe substringFromIndex:1]; // OP_STARTより後の文字 [√]
 				}
-			} else if ([zOpe hasPrefix:OP_SUB]) {  // Unicode[002D]
+			}
+			else if ([zOpe hasPrefix:OP_SUB]) {  // Unicode[002D]
 				//zOpe = MINUS_SIGN; // Unicode[2212]
 				// 演算子（OP_SUB=Unicode[002D]）を表示文字（MINUS_SIGN=Unicode[002D]）に置換する
 				zOpe = [zOpe stringByReplacingOccurrencesOfString:OP_SUB withString:MINUS_SIGN];
 			}
+			//
 			if ([drum.entryNumber length] <= 0) {
 				lb.textColor = [UIColor blackColor];
 				lb.font = [UIFont systemFontOfSize:30];
@@ -1223,16 +1242,33 @@
 					lb.textColor = [UIColor blackColor];
 				}
 				lb.font = [UIFont systemFontOfSize:30];
-				if ([drum.entryOperator isEqualToString:OP_ANS]) {
+				
+				NSString *zUnitRevers = nil;
+				NSString *zNum = drum.entryNumber;
+				// [;]で区切られたコンポーネント(部分文字列)を切り出す
+				NSString *zUnit = drum.entryUnit;
+				NSArray *arUnit = [zUnit componentsSeparatedByString:@";"]; 
+				if (0 < [arUnit count]) {
+					zUnit = [arUnit objectAtIndex:0]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+				}
+				if (3 < [arUnit count]) {
+					zUnitRevers = [arUnit objectAtIndex:3]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+				}
+				if ([zOpe isEqualToString:OP_ANS]) {
+					if (zUnitRevers) {
+						// 単位変換する
+						zNum = [NSString stringWithFormat:zUnitRevers, zNum]; // 逆変換式
+						zNum = [CalcFunctions zAnswerFromFormula:zNum];
+					}
 					lb.text = [NSString stringWithFormat:@"%@%@%@",
 							   zOpe, 
-							   stringFormatter(drum.entryNumber, YES),
-							   drum.entryUnit];
+							   stringFormatter(zNum, YES),
+							   zUnit];
 				} else {
 					lb.text = [NSString stringWithFormat:@"%@%@%@",
 							   zOpe, 
-							   stringFormatter(drum.entryNumber, NO), // NO:入力どおり表示するため
-							   drum.entryUnit];
+							   stringFormatter(zNum, NO), // NO:入力どおり表示するため
+							   zUnit];
 				}
 			}
 		}
@@ -1322,7 +1358,7 @@
 		// Size
 		float fSize = [[dic objectForKey:@"Size"] floatValue]; 
 		button.fFontSize = fSize; 
-		if (700 < self.view.frame.size.height) fSize *= 1.5; // iPadやや拡大
+		if (bPad) fSize *= 1.5; // iPadやや拡大
 		button.titleLabel.font = [UIFont boldSystemFontOfSize:fSize];
 		// Alpha
 		button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
@@ -1502,6 +1538,22 @@
 				}
 			} break;
 				
+			case KeyTAG_SC: { // [SC] Section Clear：数式では1セクション（直前の演算子まで）クリア
+				NSString *z;
+				NSRange rg;
+				NSInteger idx = [ibTvFormula.text length] - 1;
+				for ( ; 0<=idx ; idx--) {
+					z = [ibTvFormula.text substringWithRange:NSMakeRange(idx,1)];
+					rg = [@"0123456789." rangeOfString:z];
+					if (rg.length==0) break;
+				}
+				if (0<idx) {
+					ibTvFormula.text = [ibTvFormula.text substringToIndex:idx];
+				} else {
+					ibTvFormula.text = @"";
+				}
+			}	break;
+
 			case KeyTAG_AddTAX: // [+Tax] 税込み
 			case KeyTAG_SubTAX: // [-Tax] 税抜き
 			{
@@ -1875,8 +1927,11 @@
 			// アニメーション：他のボタン同様にentryに際してはアニメなし
 		}
 	}
-//	else if (KeyTAG_UNIT_Start <= button.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End]--------------Unit Keys
-//	}
+	else if (KeyTAG_UNIT_Start <= button.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End
+		if (MiSvUpperPage==0) {
+			[drum entryUnitKey:button];
+		} 
+	}
 
 	if (MiSvUpperPage==0 && bDrumRefresh) { // ドラム再表示
 		[ibPvDrum reloadComponent:entryComponent];
@@ -2048,7 +2103,7 @@
 
 - (void)MvPadKeysShow // iPad専用 メモリー20キー配置 および 回転処理
 {
-	assert(700 < self.view.frame.size.height); // iPad
+	assert(bPad); // iPad
 	
 	if (RaPadKeyButtons==nil) {
 		// 生成
@@ -2233,7 +2288,7 @@
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.9];
 	// アニメ終了時の位置をセット
-	if (700 < self.view.frame.size.height) { // iPad
+	if (bPad) { // iPad
         rc = ibScrollLower.frame;	rc.origin.y += 280;     ibScrollLower.frame = rc;
         rc = ibScrollUpper.frame;	rc.size.height += 260;     ibScrollUpper.frame = rc;
 		rc = ibTvFormula.frame;		rc.size.height += 260;  ibTvFormula.frame = rc;
@@ -2264,7 +2319,7 @@
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5];	// 戻りは早く
 	// アニメ終了時の位置をセット
-	if (700 < self.view.frame.size.height) { // iPad
+	if (bPad) { // iPad
         rc = ibScrollLower.frame;	rc.origin.y -= 280;		ibScrollLower.frame = rc;
         rc = ibScrollUpper.frame;	rc.size.height -= 260;     ibScrollUpper.frame = rc;
         rc = ibTvFormula.frame;		rc.size.height -= 260;	ibTvFormula.frame = rc;

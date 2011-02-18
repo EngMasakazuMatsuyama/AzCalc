@@ -359,6 +359,18 @@
 			<key>Alpha</key>
 			<real>0.8</real>
 			<key>Color</key>
+			<integer>2</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>202</integer>
+			<key>Text</key>
+			<string>SC</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
 			<integer>1</integer>
 			<key>Size</key>
 			<integer>18</integer>
@@ -378,6 +390,48 @@
 			<integer>211</integer>
 			<key>Text</key>
 			<string>-Tax</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.6</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1000</integer>
+			<key>Text</key>
+			<string>m</string>
+			<key>Unit</key>
+			<string>m;@;@</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.6</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1001</integer>
+			<key>Text</key>
+			<string>cm</string>
+			<key>Unit</key>
+			<string>m;(@*0.01);(@*100)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.6</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1003</integer>
+			<key>Text</key>
+			<string>km</string>
+			<key>Unit</key>
+			<string>m;(@*1000);(@*0.001)</string>
 		</dict>
 	</array>
 	<array>

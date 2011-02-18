@@ -48,7 +48,8 @@
 	BOOL				bDrumButtonTap1;	// 最初のタップでYES
 	BOOL				bDrumRefresh;		// =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
 	BOOL                bFormulaFilter;     // =YES:ペーストされたのでフィルタ処理する
-    float				MfTaxRate;
+    BOOL				bPad;				// =YES:iPad  =NO:iPhone
+	float				MfTaxRate;
 	
 	// Keyboard spec
 	int					iKeyPages;

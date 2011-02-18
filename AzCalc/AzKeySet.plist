@@ -215,9 +215,9 @@
 	<key>P1C2R1</key>
 	<dict>
 		<key>Tag</key>
-		<integer>300</integer>
+		<integer>202</integer>
 		<key>Text</key>
-		<string>MClear</string>
+		<string>SC</string>
 	</dict>
 	<key>P1C2R2</key>
 	<dict>
@@ -352,21 +352,21 @@
 		<key>Text</key>
 		<string>+</string>
 	</dict>
-	<key>P2C1R1</key>
+	<key>P2C1R2</key>
 	<dict>
 		<key>Tag</key>
 		<integer>32</integer>
 		<key>Text</key>
 		<string>√</string>
 	</dict>
-	<key>P2C1R2</key>
+	<key>P2C1R3</key>
 	<dict>
 		<key>Tag</key>
 		<integer>31</integer>
 		<key>Text</key>
 		<string>‰</string>
 	</dict>
-	<key>P2C1R3</key>
+	<key>P2C1R4</key>
 	<dict>
 		<key>Tag</key>
 		<integer>105</integer>
@@ -386,6 +386,20 @@
 		<integer>211</integer>
 		<key>Text</key>
 		<string>-Tax</string>
+	</dict>
+	<key>P2C3R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1000</integer>
+		<key>Text</key>
+		<string>m</string>
+	</dict>
+	<key>P2C3R2</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1001</integer>
+		<key>Text</key>
+		<string>cm</string>
 	</dict>
 </dict>
 </plist>

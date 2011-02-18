@@ -354,6 +354,15 @@
 				}
 			}	break;
 
+			case KeyTAG_SC: { // [SC] Section Clear：ドラムでは1行クリア
+				if ([entryOperator hasPrefix:OP_START]==NO) { // OP_START ならば消さないこと
+					[entryOperator setString:@""];
+				}
+				[entryNumber setString:@""];
+				[entryUnit setString:@""];
+				[entryAnswer setString:@""];
+			}	break;
+
 			case KeyTAG_AddTAX: // [+Tax] 税込み
 			case KeyTAG_SubTAX: // [-Tax] 税抜き
 				if ([entryNumber length]<=0) break; // 数値なし無効
@@ -377,6 +386,25 @@
 		[localPool release];
 	}
 }
+
+
+- (void)entryUnitKey:(KeyButton *)keybu  // 単位キー処理
+{
+	if ([keybu.RzUnit length]<=0) return;
+	
+	// これ以降、localPool管理エリア
+	//NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
+	@try {
+		[entryUnit setString:keybu.titleLabel.text]; // 単位表示
+		[entryUnit appendString:@";"];				// ;
+		[entryUnit appendString:keybu.RzUnit];		// SI基本単位;への変換式;戻す式
+		NSLog(@"entryUnit=%@", entryUnit);
+	}
+	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
+		//[localPool release];
+	}
+}
+
 
 - (BOOL)vNewLine:(NSString *)zNextOperator		// entryをarrayに追加し、entryを新規作成する
 {
@@ -561,7 +589,8 @@
 		}
 		assert(iRowStart <= iRowEnd);
 		
-		NSString *zOpe, *zNum, *zUni;
+		NSString *zOpe, *zNum, *zUni, *zUnitFormat;
+		NSRange rg;
 		for (NSInteger idx = iRowStart; idx <= iRowEnd; idx++) 
 		{
 			zOpe = [formulaOperators objectAtIndex:idx];
@@ -582,7 +611,10 @@
 			
 			// 数値部 ＆ 単位部
 			AzLOG(@"******************(%d)[%@]*****************", idx, zUni);
-			if ([zUni isEqualToString:UNI_PERC]) {
+			if (zUni==nil || [zUni length]<=0) {
+				zFormula = [zFormula stringByAppendingFormat:@"%@%@", zOpe, zNum];
+			}
+			else if ([zUni isEqualToString:UNI_PERC]) {
 				if ([zOpe hasPrefix:OP_ADD]) {
 					// ＋％増　＜＜シャープ式： a[+]b[%] = aのb%増し「税込」と同じ＞＞ 100+5% = 100*(1+5/100) = 105
 					zFormula = [zFormula stringByAppendingFormat:@"×(1+(%@÷100))", zNum];
@@ -615,8 +647,15 @@
 				zFormula = [zFormula stringByAppendingFormat:@"%@÷%.3f", zNum, MfTaxRate]; 
 			} 
 			else {
-				zFormula = [zFormula stringByAppendingFormat:@"%@%@", zOpe, zNum];
+				// UNIT  SI基本単位変換
+				NSArray *arUnit = [zUni componentsSeparatedByString:@";"]; 
+				if (2 < [arUnit count]) {
+					zUnitFormat = [arUnit objectAtIndex:2]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+					zFormula = [zFormula stringByAppendingString:zOpe];
+					zFormula = [zFormula stringByAppendingFormat:zUnitFormat, zNum];
+				}
 			}
+			
 			//AzLOG(@"--zFormula=%@", zFormula);
 		}
 		// 数値と演算子の間のスペースはあってもなくても大丈夫

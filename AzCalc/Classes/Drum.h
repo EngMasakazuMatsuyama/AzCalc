@@ -52,6 +52,7 @@
 - (void)reSetting;									// Settingリセット
 - (NSInteger)count;			// = [formulaOperators count];
 - (void)entryKeyTag:(NSInteger)iKeyTag keyButton:(KeyButton *)keyButton;  // キー入力処理
+- (void)entryUnitKey:(KeyButton *)keybu;  // 単位キー処理
 - (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
 - (void)vCalcing:(NSString *)zNextOperator;
 - (NSString *)zFormulaFromDrum;	// ドラム ⇒ 数式

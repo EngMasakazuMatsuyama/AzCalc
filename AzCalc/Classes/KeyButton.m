@@ -12,12 +12,18 @@
 
 @implementation KeyButton
 
-@synthesize iPage, iCol, iRow, iColorNo, fFontSize, bDirty;
+@synthesize iPage, iCol, iRow, iColorNo, fFontSize, bDirty, RzUnit;
 
+
+- (void)dealloc 
+{
+	[RzUnit release];
+    [super dealloc];
+}
 
 - (KeyButton *)initWithFrame:(CGRect)frame 
 {
-    if (self = [super initWithFrame:frame]) {
+    if ((self = [super initWithFrame:frame])) {
 		// OK
 		iPage = 0;
 		iCol = 0;
@@ -29,50 +35,5 @@
     return self;
 }
 
-/*
-// KeyButton *kb = [button copy]; するために必要。 「萩原本 cf.P310」
-- (id)copyWithZone:(NSZone *)zone
-{
-	//KeyButton *kb = [[[self class] allocWithZone:zone] init];
-	KeyButton *kb = NSCopyObject(self, 0, zone);
-	if (kb) {
-		kb.iPage = iPage;
-		kb.iCol = iCol;
-		kb.iRow = iRow;
-		kb.iColorNo = iColorNo;
-		kb.fFontSize = fFontSize;
-		kb.bDirty = bDirty;
-	}
-	return kb;
-}
-*/
-
-/*
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	[self.nextResponder touchesBegan:touches withEvent:event]; // 受け流す
-	
-	CGPoint po = [[touches anyObject] locationInView:self];
-	AzLOG(@"---KeyButton:touchesBegan:(%f, %f)", po.x, po.y);
-}	
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	CGPoint po = [[touches anyObject] locationInView:self];
-	AzLOG(@"---KeyButton:touchesMoved:(%f, %f)", po.x, po.y);
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	CGPoint po = [[touches anyObject] locationInView:self];
-	AzLOG(@"---KeyButton:touchesEnded:(%f, %f)", po.x, po.y);
-}
-
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	CGPoint po = [[touches anyObject] locationInView:self];
-	AzLOG(@"--------------KeyButton:touchesCancelled:(%f, %f)", po.x, po.y);
-}
-*/
 
 @end
