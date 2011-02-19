@@ -53,28 +53,28 @@
 #define KeyTAG_MSTROE_End		499
 
 #define KeyTAG_UNIT_Start		1000 //-----------------SI基本単位換算
-#define KeyTAG_UNIT_m			1000 // [m]				1m
-#define KeyTAG_UNIT_cm			1001 // [cm]			0.01m
-#define KeyTAG_UNIT_mm			1002 // [mm]			0.001m
-#define KeyTAG_UNIT_km			1003 // [km]			1000m
-#define KeyTAG_UNIT_Adm			1010 // [Adm]	海里		1852m
-#define KeyTAG_UNIT_yard		1011 // [yd]	ヤード	0.9144m
-#define KeyTAG_UNIT_foot		1012 // [ft]	フィート	0.3048m
-#define KeyTAG_UNIT_inch		1013 // [in]	インチ	0.254m
-#define KeyTAG_UNIT_mile		1014 // [mi]	マイル	1609.344m
-#define KeyTAG_UNIT_SHAKU		1015 // [尺]		曲尺		0.303m
-#define KeyTAG_UNIT_SUNN		1016 // [寸]		曲寸		0.0303m
-#define KeyTAG_UNIT_RI			1017 // [里]		里		3927m
+#define KeyTAG_UNIT_kg			1000 // [kg]			1kg
+#define KeyTAG_UNIT_g			1001 // [g]				0.001kg = 1000mg
+#define KeyTAG_UNIT_mg			1002 // [mg]			0.00001kg = 0.001g
+#define KeyTAG_UNIT_t			1003 // [t]		トン		1000kg
+#define KeyTAG_UNIT_kt			1010 // [kt]	カラット	0.0002kg
+#define KeyTAG_UNIT_ozav		1011 // [oz] オンス常用	0.028349523125kg
+#define KeyTAG_UNIT_lbav		1012 // [lb] ポンド常用	0.45359237kg
+#define KeyTAG_UNIT_KANN		1013 // [貫]				3.75kg
+#define KeyTAG_UNIT_MONN		1014 // [匁]				0.00375kg
 
-#define KeyTAG_UNIT_kg			1100 // [kg]			1kg
-#define KeyTAG_UNIT_g			1101 // [g]				0.001kg = 1000mg
-#define KeyTAG_UNIT_mg			1102 // [mg]			0.00001kg = 0.001g
-#define KeyTAG_UNIT_t			1103 // [t]		トン		1000kg
-#define KeyTAG_UNIT_kt			1110 // [kt]	カラット	0.0002kg
-#define KeyTAG_UNIT_ozav		1111 // [oz] オンス常用	0.028349523125kg
-#define KeyTAG_UNIT_lbav		1112 // [lb] ポンド常用	0.45359237kg
-#define KeyTAG_UNIT_KANN		1113 // [貫]				3.75kg
-#define KeyTAG_UNIT_MONN		1114 // [匁]				0.00375kg
+#define KeyTAG_UNIT_m			1100 // [m]				1m
+#define KeyTAG_UNIT_cm			1101 // [cm]			0.01m
+#define KeyTAG_UNIT_mm			1102 // [mm]			0.001m
+#define KeyTAG_UNIT_km			1103 // [km]			1000m
+#define KeyTAG_UNIT_Adm			1110 // [Adm]	海里		1852m
+#define KeyTAG_UNIT_yard		1111 // [yd]	ヤード	0.9144m
+#define KeyTAG_UNIT_foot		1112 // [ft]	フィート	0.3048m
+#define KeyTAG_UNIT_inch		1113 // [in]	インチ	0.254m
+#define KeyTAG_UNIT_mile		1114 // [mi]	マイル	1609.344m
+#define KeyTAG_UNIT_SHAKU		1115 // [尺]		曲尺		0.303m
+#define KeyTAG_UNIT_SUNN		1116 // [寸]		曲寸		0.0303m
+#define KeyTAG_UNIT_RI			1117 // [里]		里		3927m
 
 #define KeyTAG_UNIT_m2			1200 // [㎡]				1㎡
 #define KeyTAG_UNIT_cm2			1201 // [c㎡]			0.0001㎡
@@ -98,8 +98,8 @@
 #define KeyTAG_UNIT_cuft		1311 // [cuft]	立方ft	0.028316846592㎡
 #define KeyTAG_UNIT_galus		1312 // [galus]	ガロン	0.003785411784㎡
 #define KeyTAG_UNIT_bbl			1313 // [bbl] バレル石油	1.58987294928㎡
-#define KeyTAG_UNIT_MASU		1314 // [升]				0.0018039㎡
-#define KeyTAG_UNIT_GOU			1315 // [合]				0.00018039㎡
+#define KeyTAG_UNIT_GOU			1314 // [合]				0.00018039㎡
+#define KeyTAG_UNIT_MASU		1315 // [升]				0.0018039㎡
 #define KeyTAG_UNIT_TOU			1316 // [斗]				0.018039㎡
 
 #define KeyTAG_UNIT_rad			1400 // [rad]			1rad

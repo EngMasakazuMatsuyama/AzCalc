@@ -432,6 +432,7 @@
 #endif
 }
 
+/*
 // 同系列キーをハイライトにする
 - (void)MvKeyUnitGroup:(KeyButton *)keyUnit // =nil:ハイライト解除
 {
@@ -445,18 +446,19 @@
 	}
 	[self GvKeyUnitGroupSI:zSI];
 }
+*/
 
-- (void)GvKeyUnitGroupSI:(NSString *)unitSI // =nil:ハイライト解除
+- (void)GvKeyUnitGroupSI:(NSString *)unitSI andSI:(NSString *)unitSi2 // =nil:ハイライト解除
 {
 	for (id obj in ibScrollLower.subviews)
 	{
 		if ([obj isMemberOfClass:[KeyButton class]]) {
 			KeyButton *kb = obj;
 			if (kb.RzUnit) {
-				if (unitSI) {
-					if ([kb.RzUnit hasPrefix:unitSI]) {
+				if (unitSI || unitSi2) {		// 注意 ↓ nil ↓ 渡すとエラーになる
+					if ((unitSI && [kb.RzUnit hasPrefix:unitSI]) 
+					 || (unitSi2 && [kb.RzUnit hasPrefix:unitSi2])) {
 						// 同系列ハイライト
-						//[kb setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 						kb.enabled = YES;
 					} else {
 						// 異系列グレーアウト
@@ -465,7 +467,6 @@
 					}
 				} else {
 					// ノーマル
-					//[kb setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
 					kb.enabled = YES;
 				}
 			}
@@ -934,11 +935,9 @@
 	//	CGRect rc = ibScrollLower.frame;
 	//	rc.origin.x = rc.size.width * 1;
 	//	[ibScrollLower scrollRectToVisible:rc animated:YES];
-		// UNIT系列
+		// UNIT系列 再構成
 		Drum *drum = [RaDrums objectAtIndex:entryComponent];
-		NSString *zUnitSI = [drum zUnitSiFromDrum];
-		NSLog(@"zUnitSiFromDrum: zUnitSI=%@", zUnitSI);
-		[self GvKeyUnitGroupSI:zUnitSI]; // nil ならば全単位をノーマルに戻す
+		[drum zUnitRebuild];
 	}
 	
 	// 以下の処理をしないと pickerView が再描画されない。
@@ -1215,111 +1214,56 @@
 		}
 	}
 	else {
+		assert(0<=iRow);
 		Drum *drum = [RaDrums objectAtIndex:component];
 		lb.textAlignment = UITextAlignmentRight;
 		
-		if (iRow < [drum count]) {			// drum.formula 表示
-			NSString *zOpe = [drum.formulaOperators objectAtIndex:iRow]; // 計算セクション開始行では常に" "スペース
-			if ([zOpe hasPrefix:OP_START]) {
+		NSString *zOpe = [drum zOperator:iRow];
+		if ([zOpe hasPrefix:OP_START]) {
 #ifndef AzDEBUG
-				if ([zOpe length]<=1) {
-					zOpe = @"";  // 開始行の記号は非表示
-				} else {
-					zOpe = [zOpe substringFromIndex:1]; // OP_STARTより後の文字 [√]
-				}
+			if ([zOpe length]<=1) {
+				zOpe = @"";  // 開始行の記号は非表示
+			} else {
+				zOpe = [zOpe substringFromIndex:1]; // OP_STARTより後の文字 [√]
+			}
 #endif
-			} else if ([zOpe hasPrefix:OP_SUB]) {  // Unicode[002D]
-				zOpe = MINUS_SIGN; // Unicode[2212]
-			}
-			if ([[drum.formulaNumbers objectAtIndex:iRow] length] <= 0) {
-				lb.textColor = [UIColor blackColor];
-				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
-				//lb.text = [NSString stringWithFormat:@"%@ ", zOpe];
+		} else if ([zOpe hasPrefix:OP_SUB]) {  // Unicode[002D]
+			//zOpe = MINUS_SIGN; // Unicode[2212]
+			// 演算子（OP_SUB=Unicode[002D]）を表示文字（MINUS_SIGN=Unicode[002D]）に置換する
+			zOpe = [zOpe stringByReplacingOccurrencesOfString:OP_SUB withString:MINUS_SIGN];
+		}
+		
+		NSString *zNum = [drum zNumber:iRow];
+		if ([zNum length] <= 0) {
+			lb.textColor = [UIColor blackColor];
+			lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
+			if (iRow < [drum count]) {	// drum.formula 表示
 				lb.text = [NSString stringWithFormat:@"%@", zOpe];
-			} 
-			else {
-				double dNum = [[drum.formulaNumbers objectAtIndex:iRow] doubleValue];
-				if (dNum < 0) {
-					lb.textColor = [UIColor redColor];
-				} else {
-					lb.textColor = [UIColor blackColor];
-				}
-				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
-
-				// [;]で区切られたコンポーネント(部分文字列)を切り出す
-				NSString *zUnit = [drum.formulaUnits objectAtIndex:iRow];
-				NSArray *arUnit = [zUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
-				if (0 < [arUnit count]) {
-					zUnit = [arUnit objectAtIndex:0]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
-				}
-				lb.text = [NSString stringWithFormat:@"%@%@%@", zOpe, 
-						   stringFormatter([drum.formulaNumbers objectAtIndex:iRow], YES),
-						   zUnit];
-			}
-		} else {			// drum.entry 表示
-			NSString *zOpe = drum.entryOperator;
-			if ([zOpe hasPrefix:OP_START]) {
-				if ([zOpe length]<=1) {
-					zOpe = @"";  // 開始行の記号は非表示
-				} else {
-					zOpe = [zOpe substringFromIndex:1]; // OP_STARTより後の文字 [√]
-				}
-			}
-			else if ([zOpe hasPrefix:OP_SUB]) {  // Unicode[002D]
-				//zOpe = MINUS_SIGN; // Unicode[2212]
-				// 演算子（OP_SUB=Unicode[002D]）を表示文字（MINUS_SIGN=Unicode[002D]）に置換する
-				zOpe = [zOpe stringByReplacingOccurrencesOfString:OP_SUB withString:MINUS_SIGN];
-			}
-			//
-			if ([drum.entryNumber length] <= 0) {
-				lb.textColor = [UIColor blackColor];
-				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
+			} else {
 				lb.text = [NSString stringWithFormat:@"%@%@ ", 
-						   stringFormatter(drum.entryAnswer, YES), zOpe]; // 回答＆演算子
-			} 
-			else if ([drum.entryNumber hasPrefix:@"@"]) {
-				// 先頭が"@"ならば以降の文字列をそのまま表示する（エラーメッセージ表示）
-				lb.textColor = [UIColor blackColor];
-				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MSG];
-				lb.text = [drum.entryNumber substringFromIndex:1];
-			} 
-			else {
-				double dNum = [drum.entryNumber doubleValue];
-				if (dNum < 0) {
-					lb.textColor = [UIColor redColor];
-				} else {
-					lb.textColor = [UIColor blackColor];
-				}
-				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
-				
-				NSString *zUnitRevers = nil;
-				NSString *zNum = drum.entryNumber;
-				// [;]で区切られたコンポーネント(部分文字列)を切り出す
-				NSString *zUnit = drum.entryUnit;
-				NSArray *arUnit = [zUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
-				if (0 < [arUnit count]) {
-					zUnit = [arUnit objectAtIndex:0]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
-				}
-				if (3 < [arUnit count]) {
-					zUnitRevers = [arUnit objectAtIndex:3]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
-				}
-				if ([zOpe isEqualToString:OP_ANS]) {
-					if (zUnitRevers) {
-						// 単位変換する
-						zNum = [NSString stringWithFormat:zUnitRevers, zNum]; // 逆変換式
-						zNum = [CalcFunctions zAnswerFromFormula:zNum];
-					}
-					lb.text = [NSString stringWithFormat:@"%@%@%@",
-							   zOpe, 
-							   stringFormatter(zNum, YES),
-							   zUnit];
-				} else {
-					lb.text = [NSString stringWithFormat:@"%@%@%@",
-							   zOpe, 
-							   stringFormatter(zNum, NO), // NO:入力どおり表示するため
-							   zUnit];
-				}
+						   stringFormatter([drum zAnswer], YES), zOpe]; // 回答＆演算子
 			}
+		} 
+		else if ([zNum hasPrefix:@"@"]) {
+			// 先頭が"@"ならば以降の文字列をそのまま表示する（エラーメッセージ表示）
+			lb.textColor = [UIColor blackColor];
+			lb.font = [UIFont systemFontOfSize:DRUM_FONT_MSG];
+			lb.text = [zNum substringFromIndex:1]; // 先頭の"@"を除いて表示
+		} 
+		else {
+			if ([zNum doubleValue] < 0.0) {
+				lb.textColor = [UIColor redColor];
+			} else {
+				lb.textColor = [UIColor blackColor];
+			}
+			lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
+			
+			BOOL bFormat = (iRow < [drum count]) || [zOpe hasPrefix:OP_ANS];
+			NSString *zUnit = [drum zUnit:iRow withPara:0]; // (0)表示単位
+			lb.text = [NSString stringWithFormat:@"%@%@%@",
+					   zOpe, 
+					   stringFormatter(zNum, bFormat), // bFormat=NO ⇒ 入力通りに表示させる
+					   zUnit];
 		}
 	}
 	return vi;
@@ -1910,7 +1854,7 @@
 		if (0 <= iRow && iRow < [drum count]) 
 		{	// ドラム逆回転やりなおしモード ⇒ formulaとentryを選択行まで戻す
 			// 遡った行の数値を「数値文字化」して copy autorelese object として保持する。
-			zCopyNumber = stringAzNum([drum.formulaNumbers objectAtIndex:iRow]);
+			zCopyNumber = stringAzNum([drum zNumber:iRow]);
 			//
 			switch (button.tag) {
 				case KeyTAG_ANSWER:	// [=]
@@ -1918,20 +1862,10 @@
 				case KeyTAG_MINUS:	// [-]
 				case KeyTAG_MULTI:	// [×]
 				case KeyTAG_DIVID:	// [÷]
+				case KeyTAG_SC:		// [SC]
+				case KeyTAG_BS:		// [BS]
 					// 上記の演算子ボタンがが押されたときだけ、遡った行以降の範囲削除
-					if ([[drum.formulaOperators objectAtIndex:iRow] hasPrefix:OP_START]) {
-						[drum.entryOperator setString:OP_START];
-					} else {
-						[drum.entryOperator setString:@""];
-					}
-					//
-					NSRange range = NSMakeRange(iRow, [drum count] - iRow);
-					[drum.formulaOperators removeObjectsInRange:range];
-					[drum.formulaNumbers removeObjectsInRange:range];		
-					[drum.formulaUnits removeObjectsInRange:range]; //BugFix!これが抜けていたために[Drum vNewLine]にてassertエラー発生した。
-					// entry値クリア
-					[drum.entryNumber setString:@""]; 
-					[drum.entryAnswer setString:@""]; 
+					[drum vRemoveFromRow:iRow];	// iRow以降削除＆リセット
 					break;
 			}
 		}
@@ -1943,7 +1877,7 @@
 	// キー入力処理   先に if (button.tag < 0) return; 処理済み
 	if (button.tag <= KeyTAG_STANDARD_End) { //[KeyTAG_STANDARD_Start-KeyTAG_STANDARD_End]---------Standard Keys
 		if (MiSvUpperPage==0) {
-			[drum entryKeyTag:button.tag keyButton:button];
+			[drum entryKeyButton:button];
 		} 
 		else if (MiSvUpperPage==1) {
 			[self MvButtonFormula:button.tag];
@@ -2004,7 +1938,7 @@
 {
 	//[0.3]ドラム式を数式にして ibTvFormula へ送る
 	Drum *drum = [RaDrums objectAtIndex:entryComponent];
-	NSString *zFormula = [drum stringFormula];
+	NSString *zFormula = [drum zFormulaCalculator];
 	if (0 < [zFormula length]) {
 		[self MvFormulaBlankMessage:NO];
 		ibTvFormula.text = zFormula;

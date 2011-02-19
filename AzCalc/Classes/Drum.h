@@ -35,31 +35,37 @@
 	float		MfTaxRate;
 }
 
-@property (nonatomic, readonly) NSMutableArray	*formulaOperators;	// picker view 表示のためRO
-@property (nonatomic, readonly) NSMutableArray	*formulaNumbers;	// picker view 表示のためRO
-@property (nonatomic, readonly) NSMutableArray	*formulaUnits;		// picker view 表示のためRO
-
 @property (nonatomic, retain) NSMutableString	*entryAnswer;	
 @property (nonatomic, retain) NSMutableString	*entryOperator;	
 @property (nonatomic, retain) NSMutableString	*entryNumber;	
 @property (nonatomic, retain) NSMutableString	*entryUnit;
-
 @property (nonatomic, assign) NSInteger			entryRow;
-//@property (nonatomic, assign) double			dMemory;
-
 
 - (id)init;											// 初期化
 - (void)reSetting;									// Settingリセット
 - (NSInteger)count;			// = [formulaOperators count];
-- (void)entryKeyTag:(NSInteger)iKeyTag keyButton:(KeyButton *)keyButton;  // キー入力処理
+- (void)entryKeyButton:(KeyButton *)keyButton;  // キー入力処理
 - (void)entryUnitKey:(KeyButton *)keybu;  // 単位キー処理
 - (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
 - (void)vCalcing:(NSString *)zNextOperator;
 
-- (NSString *)zUnitSiFromDrum;	// 現在のドラムで使われているUNIT-SI基本単位
 - (NSString *)zFormulaFromDrum;	// ドラム ⇒ 数式
 - (NSString *)zAnswerDrum;
-- (NSString *)stringFormula;	// ドラム ⇒ ibTvFormula数式
+- (NSString *)zFormulaCalculator;	// ドラム ⇒ ibTvFormula用の数式文字列
+
+// UNIT Convert
+//- (NSString *)zUnitSiFromDrum;	// 現在のドラムで使われているUNIT-SI基本単位
+- (NSString *)zUnitRebuild;		// UNITを使用している場合、その系列に従ってキーやドラム表示を変更する
+
+// formulaOperators,formulaNumbers,formulaUnits を隠匿するためのメソッド
+- (NSString *)zOperator:(NSInteger)iRow;
+- (NSString *)zNumber:(NSInteger)iRow;
+- (NSString *)zUnit:(NSInteger)iRow;	// 表示単位
+- (NSString *)zUnit:(NSInteger)iRow withPara:(NSInteger)iPara; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+- (NSString *)zAnswer;
+- (void)vRemoveFromRow:(NSInteger)iRow; // iRow以降削除
+
+
 
 //+ (NSString *)strNumber:(NSString *)sender;
 

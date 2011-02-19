@@ -352,6 +352,20 @@
 		<key>Text</key>
 		<string>+</string>
 	</dict>
+	<key>P2C1R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>210</integer>
+		<key>Text</key>
+		<string>+Tax</string>
+	</dict>
+	<key>P2C1R2</key>
+	<dict>
+		<key>Tag</key>
+		<integer>211</integer>
+		<key>Text</key>
+		<string>-Tax</string>
+	</dict>
 	<key>P2C1R3</key>
 	<dict>
 		<key>Tag</key>
@@ -373,122 +387,108 @@
 		<key>Text</key>
 		<string>GT</string>
 	</dict>
-	<key>P2C1R1</key>
-	<dict>
-		<key>Tag</key>
-		<integer>210</integer>
-		<key>Text</key>
-		<string>+Tax</string>
-	</dict>
-	<key>P2C1R2</key>
-	<dict>
-		<key>Tag</key>
-		<integer>211</integer>
-		<key>Text</key>
-		<string>-Tax</string>
-	</dict>
 	<key>P2C2R1</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1100</integer>
+		<integer>1000</integer>
 		<key>Text</key>
 		<string>kg</string>
 	</dict>
 	<key>P2C2R2</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1101</integer>
+		<integer>1001</integer>
 		<key>Text</key>
 		<string>g</string>
 	</dict>
 	<key>P2C2R3</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1110</integer>
+		<integer>1010</integer>
 		<key>Text</key>
 		<string>kt</string>
 	</dict>
 	<key>P2C2R4</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1111</integer>
+		<integer>1011</integer>
 		<key>Text</key>
 		<string>oz</string>
 	</dict>
 	<key>P2C2R5</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1113</integer>
+		<integer>1013</integer>
 		<key>Text</key>
 		<string>貫</string>
 	</dict>
 	<key>P2C3R1</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1000</integer>
+		<integer>1100</integer>
 		<key>Text</key>
 		<string>m</string>
 	</dict>
 	<key>P2C3R2</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1001</integer>
+		<integer>1101</integer>
 		<key>Text</key>
 		<string>cm</string>
 	</dict>
 	<key>P2C3R3</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1003</integer>
+		<integer>1103</integer>
 		<key>Text</key>
 		<string>km</string>
 	</dict>
 	<key>P2C3R4</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1011</integer>
+		<integer>1111</integer>
 		<key>Text</key>
 		<string>yd</string>
 	</dict>
 	<key>P2C3R5</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1012</integer>
+		<integer>1112</integer>
 		<key>Text</key>
 		<string>ft</string>
 	</dict>
 	<key>P2C4R1</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1013</integer>
+		<integer>1113</integer>
 		<key>Text</key>
 		<string>in</string>
 	</dict>
 	<key>P2C4R2</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1014</integer>
+		<integer>1114</integer>
 		<key>Text</key>
 		<string>mi</string>
 	</dict>
 	<key>P2C4R3</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1015</integer>
+		<integer>1115</integer>
 		<key>Text</key>
 		<string>尺</string>
 	</dict>
 	<key>P2C4R4</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1016</integer>
+		<integer>1116</integer>
 		<key>Text</key>
 		<string>寸</string>
 	</dict>
 	<key>P2C4R5</key>
 	<dict>
 		<key>Tag</key>
-		<integer>1017</integer>
+		<integer>1117</integer>
 		<key>Text</key>
 		<string>里</string>
 	</dict>
@@ -502,9 +502,100 @@
 	<key>P2C5R2</key>
 	<dict>
 		<key>Tag</key>
+		<integer>1201</integer>
+		<key>Text</key>
+		<string>c㎡</string>
+	</dict>
+	<key>P2C5R3</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1202</integer>
+		<key>Text</key>
+		<string>a</string>
+	</dict>
+	<key>P2C5R4</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1203</integer>
+		<key>Text</key>
+		<string>ha</string>
+	</dict>
+	<key>P2C5R5</key>
+	<dict>
+		<key>Tag</key>
 		<integer>1213</integer>
 		<key>Text</key>
 		<string>坪</string>
+	</dict>
+	<key>P3C1R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1300</integer>
+		<key>Text</key>
+		<string>㎥</string>
+	</dict>
+	<key>P3C1R2</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1302</integer>
+		<key>Text</key>
+		<string>L</string>
+	</dict>
+	<key>P3C1R3</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1303</integer>
+		<key>Text</key>
+		<string>dL</string>
+	</dict>
+	<key>P3C1R4</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1304</integer>
+		<key>Text</key>
+		<string>mL</string>
+	</dict>
+	<key>P3C1R5</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1305</integer>
+		<key>Text</key>
+		<string>cc</string>
+	</dict>
+	<key>P3C2R1</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1310</integer>
+		<key>Text</key>
+		<string>cuin</string>
+	</dict>
+	<key>P3C2R2</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1312</integer>
+		<key>Text</key>
+		<string>galus</string>
+	</dict>
+	<key>P3C2R3</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1313</integer>
+		<key>Text</key>
+		<string>bbl</string>
+	</dict>
+	<key>P3C2R4</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1314</integer>
+		<key>Text</key>
+		<string>合</string>
+	</dict>
+	<key>P3C2R5</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1315</integer>
+		<key>Text</key>
+		<string>升</string>
 	</dict>
 </dict>
 </plist>

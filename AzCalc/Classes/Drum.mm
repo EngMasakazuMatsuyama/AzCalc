@@ -23,7 +23,7 @@
 
 @implementation Drum
 
-@synthesize formulaOperators, formulaNumbers, formulaUnits;
+//@synthesize formulaOperators, formulaNumbers, formulaUnits;
 @synthesize entryAnswer, entryOperator, entryNumber, entryUnit, entryRow;
 
 
@@ -83,9 +83,10 @@
 }
 
 
-- (void)entryKeyTag:(NSInteger)iKeyTag keyButton:(KeyButton *)keyButton  // キー入力処理
+//- (void)entryKeyTag:(NSInteger)iKeyTag keyButton:(KeyButton *)keyButton  // キー入力処理
+- (void)entryKeyButton:(KeyButton *)keyButton  // キー入力処理
 {
-	AzLOG(@"entryKeyTag: (%d)", iKeyTag);
+	AzLOG(@"entryKeyButton: (%d)", keyButton.tag);
 	
 	// これ以降、localPool管理エリア
 	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
@@ -93,7 +94,7 @@
 	//AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	@try {
-		switch (iKeyTag) { // .Tag は、AzKeyMaster.plist の定義が元になる。
+		switch (keyButton.tag) { // .Tag は、AzKeyMaster.plist の定義が元になる。
 				//---------------------------------------------[0]-[99] Numbers
 			case 0:
 			case 1:
@@ -107,9 +108,6 @@
 			case 9:
 				if ([entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
 					if (![self vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
-					// UNIT Reset
-					AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-					[app.viewController  GvKeyUnitGroupSI:nil]; // 全UNITリセット
 				}
 				if (PRECISION-2 <= [entryNumber length]) { // [-][.]を考慮して(-2)
 					// 改めて[-][.]を除いた有効桁数を調べる
@@ -120,12 +118,12 @@
 				if ([entryNumber hasPrefix:@"0"] OR [entryNumber hasPrefix:@"-0"]) {
 					NSRange rg = [entryNumber rangeOfString:NUM_DECI];
 					if (rg.location==NSNotFound) { // 小数点が無い ⇒ 整数部である
-						if (0 < iKeyTag) { // 末尾の[0]を削除して数値を追加する
+						if (0 < keyButton.tag) { // 末尾の[0]を削除して数値を追加する
 							[entryNumber deleteCharactersInRange:NSMakeRange([entryNumber length]-1, 1)]; // 末尾より1字削除
 						} else break; // 2個目以降の[0]は無効
 					}
 				}
-				[entryNumber appendFormat:@"%d", (int)iKeyTag];
+				[entryNumber appendFormat:@"%d", (int)keyButton.tag];
 				break;
 				
 				/*	case 10: // [A]  ＜＜HEX対応のため保留＞＞
@@ -134,7 +132,7 @@
 				 case 13: // [D]
 				 case 14: // [E]
 				 case 15: // [F]
-				 [entryNumber appendFormat:@"%d", (int)iKeyTag];
+				 [entryNumber appendFormat:@"%d", (int)keyButton.tag];
 				 break; */
 				
 			case KeyTAG_DECIMAL: // [.]小数点
@@ -344,8 +342,8 @@
 				[formulaUnits removeAllObjects];		[entryUnit setString:@""];
 				entryRow = 0;							[entryAnswer setString:@""];
 				// UNIT Reset
-				AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-				[app.viewController  GvKeyUnitGroupSI:nil]; // 全UNITリセット
+//				AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+//				[app.viewController  GvKeyUnitGroupSI:nil]; // 全UNITリセット
 			}	break;
 				
 			case KeyTAG_BS: { // [BS]
@@ -380,7 +378,7 @@
 					// 新セクション
 					[entryNumber setString:zNum]; // Az数値文字列をセット
 				}
-				if (iKeyTag==KeyTAG_AddTAX) {
+				if (keyButton.tag==KeyTAG_AddTAX) {
 					[entryUnit setString:UNI_AddTAX];
 				} else {
 					[entryUnit setString:UNI_SubTAX];
@@ -405,11 +403,89 @@
 		[entryUnit setString:keybu.titleLabel.text]; // 単位表示
 		[entryUnit appendString:KeyUNIT_DELIMIT];	// ;
 		[entryUnit appendString:keybu.RzUnit];		// SI基本単位;への変換式;戻す式
-		NSLog(@"entryUnit=%@", entryUnit);
+		NSLog(@"entryUnitKey: entryUnit=%@", entryUnit);
+		
+		if ([entryOperator hasPrefix:OP_ANS]) {
+			// 再計算して単位表示する			    (-1)entryUnit
+			NSString *zUnitRevers = [self zUnit:(-1) withPara:3]; // (3)逆変換式
+			if (zUnitRevers) {
+				// ドラムから計算式作成
+				NSString *zForm = [self zFormulaFromDrum];
+				// 逆変換式を加える
+				zForm = [NSString stringWithFormat:zUnitRevers, zForm]; // 逆変換式
+				// 単位変換後に丸め処理される
+				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+				NSLog(@"entryUnitKey: entryNumber=%@", entryNumber);
+			}
+			
+		}
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
 		//[localPool release];
 	}
+}
+
+- (NSString *)zOperator:(NSInteger)iRow
+{
+	if (0 <= iRow && iRow < [formulaOperators count]) {
+		return [formulaOperators objectAtIndex:iRow];
+	}
+	return entryOperator;
+}
+
+- (NSString *)zNumber:(NSInteger)iRow
+{
+	if (0 <= iRow && iRow < [formulaNumbers count]) {
+		return [formulaNumbers objectAtIndex:iRow];
+	}
+	return entryNumber;
+}
+
+- (NSString *)zUnit:(NSInteger)iRow	// 表示単位
+{
+	return [self zUnit:iRow withPara:0];
+}
+
+// iPara = (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+- (NSString *)zUnit:(NSInteger)iRow withPara:(NSInteger)iPara
+{
+	NSString *zUni;
+	if (0 <= iRow && iRow < [formulaUnits count]) {
+		zUni = [formulaUnits objectAtIndex:iRow];
+	} else {
+		zUni = entryUnit;
+	}
+	// [;]で区切られたコンポーネント(部分文字列)を切り出す
+	NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
+	if (iPara < [arUnit count]) {
+		return [arUnit objectAtIndex:iPara];
+	}
+	return nil;
+}
+
+- (NSString *)zAnswer
+{
+	return entryAnswer;
+}
+
+- (void)vRemoveFromRow:(NSInteger)iRow // iRow以降削除（ドラム逆回転時に使用）
+{
+	assert([formulaOperators count]==[formulaNumbers count]);
+	assert([formulaOperators count]==[formulaUnits count]);
+
+	if ([[self zOperator:iRow] hasPrefix:OP_START]) { // 削除する前に処理すること！
+		[entryOperator setString:OP_START];
+	} else {
+		[entryOperator setString:@""];
+	}
+	
+	NSRange range = NSMakeRange(iRow, [formulaOperators count] - iRow);
+	[formulaOperators removeObjectsInRange:range];
+	[formulaNumbers removeObjectsInRange:range];		
+	[formulaUnits removeObjectsInRange:range];
+	// entry値クリア
+	[entryNumber setString:@""]; 
+	[entryAnswer setString:@""]; 
 }
 
 
@@ -509,26 +585,18 @@
 		return;
 	}
 
-	NSString *zUnitSI = nil;
-	if (0<[entryUnit length]) {
-		// UNIT  SI基本単位変換
-		NSArray *arUnit = [entryUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
-		if (1 < [arUnit count]) {
-			zUnitSI = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
-			AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-			[app.viewController  GvKeyUnitGroupSI:zUnitSI];
-		}
-	}
-	
 	//AzLOG(@"********************************entryUnit=1=[%@]", entryUnit);
 	// 新しい行を追加する
 	if (![self vNewLine:zNextOperator]) return; // NO=行数オーバーで追加できなかった。
+	
+	// UNIT系列 再構成
+	[self zUnitRebuild];
 	
 	if ([zNextOperator isEqualToString:OP_ANS]) { 
 		// [=]が押されたならば、計算結果表示
 		[entryNumber setString:[self zAnswerDrum]]; 
 		
-		zUnitSI = [self zUnitSiFromDrum];
+		NSString *zUnitSI = [self zUnitRebuild];
 		if (zUnitSI) {
 			[entryUnit setString:zUnitSI]; // UNIT利用中ならばSI基本単位を表示する
 		}
@@ -540,13 +608,7 @@
 }
 
 
-/*
- ドラム ⇒ 数式
- 1000 - 20 % ⇒ 1000 - (1000 * 0.20)  　＜＜シャープ電卓方式
- 1000 + 20 % ⇒ 1000 + (1000 * 0.20)  　＜＜シャープ電卓方式
-
-*/
-- (NSString *)stringFormula	// ドラム ⇒ ibTvFormula数式
+- (NSString *)zFormulaCalculator	// ドラム ⇒ ibTvFormula用の数式文字列
 {
 	// 再計算
 	NSString *zFormula = [self zFormulaFromDrum];
@@ -571,12 +633,12 @@
 	return @"";
 }
 
-- (NSString *)zUnitSiFromDrum	// 現在のドラムで使われているUNIT-SI基本単位
+//- (NSString *)zUnitSiFromDrum	// 現在のドラムで使われているUNIT-SI基本単位
+- (NSString *)zUnitRebuild		// UNITを使用している場合、その系列に従ってキーやドラム表示を変更する
 {
-	// Entry行だけの場合、nil
+	// Entry行だけの場合
 	if (entryRow <= 0 OR [formulaOperators count] < entryRow) return nil;
 
-	NSString *zUnitSI = nil;
 	@try {
 		NSInteger iRowStart = 0; // 最初から
 		if (2 <= entryRow) {
@@ -598,12 +660,16 @@
 		if ([formulaOperators count] <= iRowEnd) {
 			iRowEnd = [formulaOperators count] - 1;
 		}
-		AzLOG(@"zAnswerDrum: Drum Row[ %d >>> %d ]", iRowStart, iRowEnd);
 		if (iRowEnd < iRowStart) {
 			@throw @"iRowEnd < iRowStart";
 		}
-		assert(iRowStart <= iRowEnd);
+		// UNIT を利用しているか調べる
+		NSString *zUnitSI = nil;
 		NSString *zUni;
+//		int iDimens = 0;
+		int iM = 0;
+		int iMprev = 0;
+		int iMmax = 0;
 		for (NSInteger idx = iRowStart; idx <= iRowEnd; idx++) 
 		{
 			zUni = [formulaUnits objectAtIndex:idx];
@@ -612,20 +678,84 @@
 				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
 				if (1 < [arUnit count]) {
 					zUnitSI = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
-					break;
+					NSString *zOpe = [formulaOperators objectAtIndex:idx];
+					if ([zUnitSI hasPrefix:@"m"]) {
+						iM = 1;
+					}
+					else if ([zUnitSI hasPrefix:@"㎡"]) {	// 平方
+						iM = 2;
+					}
+					else if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
+						iM = 3;
+					}
+					else {
+						iM = 0;
+						if (iMmax != 0) {
+							[formulaUnits replaceObjectAtIndex:idx withObject:@"NG"];
+						}
+						iMmax = (-1); // m系でない
+					}
+					//
+					if (0 < iM) {
+						if (iMmax < 0 || 3 <= iMprev) {
+							[formulaUnits replaceObjectAtIndex:idx withObject:@"NG"];
+						} else {
+							if ([zOpe hasPrefix:OP_MULT] || [zOpe hasPrefix:OP_DIVI]) {
+								iMprev += iM;
+								if (iMmax < iMprev) iMmax = iMprev;
+							} else {
+								iMprev = iM;
+							}
+						}
+					}
+					//
+					if (3 < iMmax) {
+						[formulaUnits replaceObjectAtIndex:idx withObject:@"NG"];
+						iMmax = 3;	// 立方
+					}
 				}
 			}
 		}
+		// キーボード　単位系列表示
+		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+		switch (iMmax) {
+			case -1:
+				[app.viewController  GvKeyUnitGroupSI:zUnitSI andSI:nil];
+				return zUnitSI;
+				
+			case 1:
+				[app.viewController  GvKeyUnitGroupSI:@"m" andSI:@"㎡"];	// メートル
+				return @"m";	// メートル
+				
+			case 2:
+				[app.viewController  GvKeyUnitGroupSI:@"m" andSI:nil];	// 平方
+				return @"㎡";	// 平方
+				
+			case 3:
+				[app.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 無効
+				return @"㎥";	// 立方
+				
+			default:
+				[app.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 無効
+				return nil;
+		}
+		return nil;
 	}
 	@catch (NSException * errEx) {
-		NSLog(@"zFormulaFromDrum:Exception: %@: %@\n", [errEx name], [errEx reason]);
+		NSLog(@"vUnitRebuild:Exception: %@: %@\n", [errEx name], [errEx reason]);
 	}
 	@catch (NSString *msg) {
-		NSLog(@"zFormulaFromDrum:@throw: %@\n", msg);
+		NSLog(@"vUnitRebuild:@throw: %@\n", msg);
 	}
-	return zUnitSI;
+	return nil;
 }
 
+/*
+ ドラム ⇒ 数式
+ 1000 - 20 % ⇒ 1000 - (1000 * 0.20)  　＜＜シャープ電卓方式
+ 1000 + 20 % ⇒ 1000 + (1000 * 0.20)  　＜＜シャープ電卓方式
+ 
+ */
 - (NSString *)zFormulaFromDrum	// ドラム ⇒ 数式
 {
 	// 現在行より前にある[=][GT]行の次から計算する　＜＜セクション単位に計算する
