@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+
+#define KeyUNIT_DELIMIT			@";"	// "SI基本単位;変換式;逆変換式"
+
 //---------------------------------------------------------Tag
 //----------AzKeyMaster.plist の Tag 定義と一致させること。
 #define KeyTAG_STANDARD_Start	  0

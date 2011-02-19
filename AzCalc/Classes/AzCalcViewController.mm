@@ -23,6 +23,9 @@
 
 #define DRUM_LEFT_OFFSET		11.0	// ドラム左側の余白（右側も同じになるようにする）
 #define DRUM_GAP				 2.0	// ドラム幅指定との差
+#define DRUM_FONT_MAX			27.0	// 数式表示フォントサイズの最大
+#define DRUM_FONT_MSG			24.0	// メッセージ表示フォントサイズ
+#define DRUM_FONT_MIN			 6.0	// 数式表示フォントサイズの最小
 
 #define ROWOFFSET				2
 #define DECIMALMAX				12
@@ -38,6 +41,7 @@
 - (void)MvMemoryShow;
 - (void)MvFormulaBlankMessage:(BOOL)bBlank;
 - (void)MvPadKeysShow;
+- (void)MvKeyUnitGroup:(KeyButton *)keyUnit;
 - (void)MvKeyboardPage:(NSInteger)iPage;
 - (void)MvKeyboardPage1Alook0;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
@@ -201,7 +205,7 @@
 	//========================================================== Lower ==============
 	
 	if (bPad) { // iPad
-		iKeyPages = 3;
+		iKeyPages = 4;
 		iKeyCols = 7;	iKeyOffsetCol = 0; // AzdicKeys.plist C 開始位置
 		iKeyRows = 7;	iKeyOffsetRow = 0;
 		fKeyGap = 3.0;
@@ -209,7 +213,7 @@
 		//
 		[self MvPadKeysShow]; // iPad専用 メモリー20キー配置 および 回転処理
 	} else { // iPhone
-		iKeyPages = 3;
+		iKeyPages = 4;
 		iKeyCols = 5;	iKeyOffsetCol = 1; // AzdicKeys.plist C 開始位置
 		iKeyRows = 5;	iKeyOffsetRow = 1;
 		fKeyGap = 1.5;
@@ -352,7 +356,7 @@
 							case 1:	[bu setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];	break;
 							case 2:	[bu setTitleColor:[UIColor redColor] forState:UIControlStateNormal];	break;
 							case 3:	[bu setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];	break;
-							case 4:	[bu setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];	break; // UNIT
+							case 4:	[bu setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];	break; // UNIT
 							default:[bu setTitleColor:[UIColor clearColor] forState:UIControlStateNormal];	break;
 						}
 					} else {
@@ -427,6 +431,48 @@
 	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 #endif
 }
+
+// 同系列キーをハイライトにする
+- (void)MvKeyUnitGroup:(KeyButton *)keyUnit // =nil:ハイライト解除
+{
+	NSString *zSI = nil;
+	if (keyUnit) {
+		// [;]で区切られたコンポーネント(部分文字列)を切り出す
+		NSArray *arUnit = [keyUnit.RzUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
+		if (0 < [arUnit count]) {
+			zSI = [arUnit objectAtIndex:0]; // (0)SI基本単位　(1)変換式　(2)逆変換式
+		}
+	}
+	[self GvKeyUnitGroupSI:zSI];
+}
+
+- (void)GvKeyUnitGroupSI:(NSString *)unitSI // =nil:ハイライト解除
+{
+	for (id obj in ibScrollLower.subviews)
+	{
+		if ([obj isMemberOfClass:[KeyButton class]]) {
+			KeyButton *kb = obj;
+			if (kb.RzUnit) {
+				if (unitSI) {
+					if ([kb.RzUnit hasPrefix:unitSI]) {
+						// 同系列ハイライト
+						//[kb setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+						kb.enabled = YES;
+					} else {
+						// 異系列グレーアウト
+						kb.enabled = NO;
+						//NSLog(@"***kb.RzUnit=%@", kb.RzUnit);
+					}
+				} else {
+					// ノーマル
+					//[kb setTitleColor:[UIColor brownColor] forState:UIControlStateNormal];
+					kb.enabled = YES;
+				}
+			}
+		}
+	}
+}
+
 
 // 裏画面(非表示)状態のときにメモリ不足が発生するとコールされるので、viewDidLoadで生成したOBJを解放する
 - (void)viewDidUnload
@@ -786,7 +832,8 @@
 		UIButton *bu = [RaDrumButtons objectAtIndex:i];
 		bu.hidden = NO;
 		if (i == entryComponent) {
-			bu.frame = CGRectMake(fX,fY+155, fWiMax-6,28); // 選択中
+			//bu.frame = CGRectMake(fX,fY+155, fWiMax-6,28); // 選択中
+			bu.frame = CGRectMake(fX,fY+153, fWiMax-6,32); // 選択中
 			bu.backgroundColor = [UIColor greenColor];	// 追加
 			// Next
 			fX += (fWiMax + DRUM_GAP);
@@ -877,19 +924,21 @@
 		bDrumButtonTap1 = YES;
 		[self performSelector:@selector(vDrumButtonTap1Clear) withObject:nil afterDelay:0.5f]; // 0.5秒後にクリアする
 	}
-/*
-	// シングルタップ式
-	if (entryComponent == button.tag) {
-		// ドラム幅を拡大する
-		bZoomEntryComponent = !bZoomEntryComponent;  // 拡大／均等トグル式
-	}
-*/
 
 	BOOL bTouchAction = NO;
 	if (entryComponent != button.tag) {
 		entryComponent = button.tag;	// ドラム切り替え
 		bZoomEntryComponent = NO;  // 均等サイズに戻す
 		bTouchAction = YES;
+		// ドラム切り替え時に、キーボードをページ(1)にする
+	//	CGRect rc = ibScrollLower.frame;
+	//	rc.origin.x = rc.size.width * 1;
+	//	[ibScrollLower scrollRectToVisible:rc animated:YES];
+		// UNIT系列
+		Drum *drum = [RaDrums objectAtIndex:entryComponent];
+		NSString *zUnitSI = [drum zUnitSiFromDrum];
+		NSLog(@"zUnitSiFromDrum: zUnitSI=%@", zUnitSI);
+		[self GvKeyUnitGroupSI:zUnitSI]; // nil ならば全単位をノーマルに戻す
 	}
 	
 	// 以下の処理をしないと pickerView が再描画されない。
@@ -1120,7 +1169,7 @@
 		lb.backgroundColor = [UIColor clearColor];
 		
 		lb.textColor = [UIColor blackColor];
-		lb.font = [UIFont boldSystemFontOfSize:30];
+		lb.font = [UIFont boldSystemFontOfSize:DRUM_FONT_MAX];
 		lb.text = [[[RaKeyMaster objectAtIndex:component] objectAtIndex:row] objectForKey:@"Text"];
 		
 		return vi;
@@ -1129,9 +1178,9 @@
 	// ドラタク通常モード
 	assert(component < MiSegDrums);
 	if (vi == nil) {
-		vi = [[[UIView alloc] initWithFrame:CGRectMake(0,0,sz.width,30)] autorelease];
+		vi = [[[UIView alloc] initWithFrame:CGRectMake(0,0,sz.width,32)] autorelease];
 		// addSubview
-		lb = [[UILabel alloc] initWithFrame:CGRectMake(5,0,sz.width-10,30)];
+		lb = [[UILabel alloc] initWithFrame:CGRectMake(5,0,sz.width-10,32)];
 		lb.tag = 991;
 		lb.backgroundColor = [UIColor clearColor];
 		lb.adjustsFontSizeToFitWidth = YES;
@@ -1184,7 +1233,7 @@
 			}
 			if ([[drum.formulaNumbers objectAtIndex:iRow] length] <= 0) {
 				lb.textColor = [UIColor blackColor];
-				lb.font = [UIFont systemFontOfSize:30];
+				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
 				//lb.text = [NSString stringWithFormat:@"%@ ", zOpe];
 				lb.text = [NSString stringWithFormat:@"%@", zOpe];
 			} 
@@ -1195,11 +1244,11 @@
 				} else {
 					lb.textColor = [UIColor blackColor];
 				}
-				lb.font = [UIFont systemFontOfSize:30];
+				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
 
 				// [;]で区切られたコンポーネント(部分文字列)を切り出す
 				NSString *zUnit = [drum.formulaUnits objectAtIndex:iRow];
-				NSArray *arUnit = [zUnit componentsSeparatedByString:@";"]; 
+				NSArray *arUnit = [zUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
 				if (0 < [arUnit count]) {
 					zUnit = [arUnit objectAtIndex:0]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
 				}
@@ -1224,14 +1273,14 @@
 			//
 			if ([drum.entryNumber length] <= 0) {
 				lb.textColor = [UIColor blackColor];
-				lb.font = [UIFont systemFontOfSize:30];
+				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
 				lb.text = [NSString stringWithFormat:@"%@%@ ", 
 						   stringFormatter(drum.entryAnswer, YES), zOpe]; // 回答＆演算子
 			} 
 			else if ([drum.entryNumber hasPrefix:@"@"]) {
 				// 先頭が"@"ならば以降の文字列をそのまま表示する（エラーメッセージ表示）
 				lb.textColor = [UIColor blackColor];
-				lb.font = [UIFont systemFontOfSize:26];
+				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MSG];
 				lb.text = [drum.entryNumber substringFromIndex:1];
 			} 
 			else {
@@ -1241,13 +1290,13 @@
 				} else {
 					lb.textColor = [UIColor blackColor];
 				}
-				lb.font = [UIFont systemFontOfSize:30];
+				lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
 				
 				NSString *zUnitRevers = nil;
 				NSString *zNum = drum.entryNumber;
 				// [;]で区切られたコンポーネント(部分文字列)を切り出す
 				NSString *zUnit = drum.entryUnit;
-				NSArray *arUnit = [zUnit componentsSeparatedByString:@";"]; 
+				NSArray *arUnit = [zUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
 				if (0 < [arUnit count]) {
 					zUnit = [arUnit objectAtIndex:0]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
 				}
@@ -1930,6 +1979,7 @@
 	else if (KeyTAG_UNIT_Start <= button.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End
 		if (MiSvUpperPage==0) {
 			[drum entryUnitKey:button];
+			//[self MvKeyUnitGroup:button]; // 同系列単位のボタンをハイライト ＆ 以外をノーマルに戻す
 		} 
 	}
 
@@ -2121,7 +2171,7 @@
 			bu.alpha = KeyALPHA_MSTORE_OFF;
 			bu.tag = KeyTAG_MSTORE_Start + 1 + i;
 			[bu setTitle:[NSString stringWithFormat:@"M%d", (int)1+i] forState:UIControlStateNormal];
-			bu.titleLabel.font = [UIFont boldSystemFontOfSize:26];
+			bu.titleLabel.font = [UIFont boldSystemFontOfSize:DRUM_FONT_MSG];
 			[bu setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
 			[self.view addSubview:bu];

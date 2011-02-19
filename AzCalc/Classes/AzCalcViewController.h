@@ -84,6 +84,7 @@
 
 - (void)GvMemorySave; // AzCalcViewController:applicationWillTerminateからコールされる
 - (void)GvMemoryLoad; // AzCalcViewController:applicationDidBecomeActiveからコールされる
+- (void)GvKeyUnitGroupSI:(NSString *)unitSI; // =nil:ハイライト解除
 
 @end
 

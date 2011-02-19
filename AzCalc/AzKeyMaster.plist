@@ -393,7 +393,119 @@
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.6</real>
+			<real>1</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1100</integer>
+			<key>Text</key>
+			<string>kg</string>
+			<key>Unit</key>
+			<string>kg;@;@</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1101</integer>
+			<key>Text</key>
+			<string>g</string>
+			<key>Unit</key>
+			<string>kg;(@/1000);(@*1000)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1103</integer>
+			<key>Text</key>
+			<string>t</string>
+			<key>Unit</key>
+			<string>kg;(@*1000);(@/1000)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1110</integer>
+			<key>Text</key>
+			<string>kt</string>
+			<key>Unit</key>
+			<string>kg;(@/20000);(@*20000)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1111</integer>
+			<key>Text</key>
+			<string>oz</string>
+			<key>Unit</key>
+			<string>kg;(@/35.2739619558);(@*35.2739619558)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1112</integer>
+			<key>Text</key>
+			<string>lb</string>
+			<key>Unit</key>
+			<string>kg;(@/2.20462262184);(@*2.20462262184)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1113</integer>
+			<key>Text</key>
+			<string>貫</string>
+			<key>Unit</key>
+			<string>kg;(@*3.75);(@/3.75)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1114</integer>
+			<key>Text</key>
+			<string>匁</string>
+			<key>Unit</key>
+			<string>kg;(@*0.00375);(@/0.00375)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<integer>1</integer>
 			<key>Color</key>
 			<integer>4</integer>
 			<key>Size</key>
@@ -407,7 +519,7 @@
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.6</real>
+			<real>0.8</real>
 			<key>Color</key>
 			<integer>4</integer>
 			<key>Size</key>
@@ -417,11 +529,11 @@
 			<key>Text</key>
 			<string>cm</string>
 			<key>Unit</key>
-			<string>m;(@*0.01);(@*100)</string>
+			<string>m;(@/100);(@*100)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.6</real>
+			<real>0.8</real>
 			<key>Color</key>
 			<integer>4</integer>
 			<key>Size</key>
@@ -431,7 +543,133 @@
 			<key>Text</key>
 			<string>km</string>
 			<key>Unit</key>
-			<string>m;(@*1000);(@*0.001)</string>
+			<string>m;(@*1000);(@/1000)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1011</integer>
+			<key>Text</key>
+			<string>yd</string>
+			<key>Unit</key>
+			<string>m;(@*0.9144);(@/0.9144)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1012</integer>
+			<key>Text</key>
+			<string>ft</string>
+			<key>Unit</key>
+			<string>m;(@*0.3048);(@/0.3048)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1013</integer>
+			<key>Text</key>
+			<string>in</string>
+			<key>Unit</key>
+			<string>m;(@*0.254);(@/0.254)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1014</integer>
+			<key>Text</key>
+			<string>mi</string>
+			<key>Unit</key>
+			<string>m;(@*1609.344);(@/1609.344)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1015</integer>
+			<key>Text</key>
+			<string>尺</string>
+			<key>Unit</key>
+			<string>m;(@*0.303);(@/0.303)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1016</integer>
+			<key>Text</key>
+			<string>寸</string>
+			<key>Unit</key>
+			<string>m;(@*0.0303);(@/0.0303)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1017</integer>
+			<key>Text</key>
+			<string>里</string>
+			<key>Unit</key>
+			<string>m;(@*3927);(@/3927)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<integer>1</integer>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1200</integer>
+			<key>Text</key>
+			<string>㎡</string>
+			<key>Unit</key>
+			<string>㎡;@;@</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1213</integer>
+			<key>Text</key>
+			<string>坪</string>
+			<key>Unit</key>
+			<string>㎡;(@*3.305785);(@/3.305785)</string>
 		</dict>
 	</array>
 	<array>

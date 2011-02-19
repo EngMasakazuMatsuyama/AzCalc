@@ -55,6 +55,8 @@
 - (void)entryUnitKey:(KeyButton *)keybu;  // 単位キー処理
 - (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
 - (void)vCalcing:(NSString *)zNextOperator;
+
+- (NSString *)zUnitSiFromDrum;	// 現在のドラムで使われているUNIT-SI基本単位
 - (NSString *)zFormulaFromDrum;	// ドラム ⇒ 数式
 - (NSString *)zAnswerDrum;
 - (NSString *)stringFormula;	// ドラム ⇒ ibTvFormula数式

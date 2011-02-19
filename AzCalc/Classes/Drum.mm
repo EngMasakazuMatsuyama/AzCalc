@@ -10,6 +10,7 @@
 #import "CalcFunctions.h"
 #import "AzCalcAppDelegate.h"
 #import "Drum.h"
+#import "AzCalcViewController.h"
 #import "KeyButton.h"
 
 
@@ -106,6 +107,9 @@
 			case 9:
 				if ([entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
 					if (![self vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
+					// UNIT Reset
+					AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+					[app.viewController  GvKeyUnitGroupSI:nil]; // 全UNITリセット
 				}
 				if (PRECISION-2 <= [entryNumber length]) { // [-][.]を考慮して(-2)
 					// 改めて[-][.]を除いた有効桁数を調べる
@@ -334,12 +338,15 @@
 
 				
 				//---------------------------------------------[200]-[299] Functions
-			case KeyTAG_AC: // [AC]
+			case KeyTAG_AC: { // [AC]
 				[formulaOperators removeAllObjects];	[entryOperator setString:OP_START];
 				[formulaNumbers removeAllObjects];		[entryNumber setString:@""];
 				[formulaUnits removeAllObjects];		[entryUnit setString:@""];
 				entryRow = 0;							[entryAnswer setString:@""];
-				break;
+				// UNIT Reset
+				AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+				[app.viewController  GvKeyUnitGroupSI:nil]; // 全UNITリセット
+			}	break;
 				
 			case KeyTAG_BS: { // [BS]
 				if (0 < [entryUnit length]) {
@@ -396,7 +403,7 @@
 	//NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
 	@try {
 		[entryUnit setString:keybu.titleLabel.text]; // 単位表示
-		[entryUnit appendString:@";"];				// ;
+		[entryUnit appendString:KeyUNIT_DELIMIT];	// ;
 		[entryUnit appendString:keybu.RzUnit];		// SI基本単位;への変換式;戻す式
 		NSLog(@"entryUnit=%@", entryUnit);
 	}
@@ -502,22 +509,34 @@
 		return;
 	}
 
+	NSString *zUnitSI = nil;
+	if (0<[entryUnit length]) {
+		// UNIT  SI基本単位変換
+		NSArray *arUnit = [entryUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
+		if (1 < [arUnit count]) {
+			zUnitSI = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
+			AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+			[app.viewController  GvKeyUnitGroupSI:zUnitSI];
+		}
+	}
+	
 	//AzLOG(@"********************************entryUnit=1=[%@]", entryUnit);
 	// 新しい行を追加する
-	if (![self vNewLine:zNextOperator]) return;
-
-	NSString *zFormula = @"";
-	NSString *zAnswer = @"";
+	if (![self vNewLine:zNextOperator]) return; // NO=行数オーバーで追加できなかった。
+	
 	if ([zNextOperator isEqualToString:OP_ANS]) { 
 		// [=]が押されたならば、計算結果表示
 		[entryNumber setString:[self zAnswerDrum]]; 
+		
+		zUnitSI = [self zUnitSiFromDrum];
+		if (zUnitSI) {
+			[entryUnit setString:zUnitSI]; // UNIT利用中ならばSI基本単位を表示する
+		}
 	}
 	else {
 		// ここまでの回答を演算子の前に表示する
 		[entryAnswer setString:[self zAnswerDrum]]; 
 	}
-	NSLog(@"***zFormula=%@\n***zAnswer=%@\n", zFormula, zAnswer);
-	
 }
 
 
@@ -550,6 +569,61 @@
 		return entryNumber;
 	}
 	return @"";
+}
+
+- (NSString *)zUnitSiFromDrum	// 現在のドラムで使われているUNIT-SI基本単位
+{
+	// Entry行だけの場合、nil
+	if (entryRow <= 0 OR [formulaOperators count] < entryRow) return nil;
+
+	NSString *zUnitSI = nil;
+	@try {
+		NSInteger iRowStart = 0; // 最初から
+		if (2 <= entryRow) {
+			if ([formulaOperators count] <= entryRow) {
+				iRowStart = [formulaOperators count] - 1;
+			} else {
+				iRowStart = entryRow;
+			}
+			for ( ; 0 < iRowStart; iRowStart--) {
+				if ([[formulaOperators objectAtIndex:iRowStart] hasPrefix:OP_ANS]	// 直前の[=]の次にする
+					OR [[formulaOperators objectAtIndex:iRowStart] hasPrefix:OP_GT]) {	// 直前の[>GT]の次にする
+					iRowStart++;
+					break;
+				}
+			}
+		}
+		// 計算対象範囲は、iRowStart 〜 iRowEnd まで
+		NSInteger iRowEnd = entryRow;
+		if ([formulaOperators count] <= iRowEnd) {
+			iRowEnd = [formulaOperators count] - 1;
+		}
+		AzLOG(@"zAnswerDrum: Drum Row[ %d >>> %d ]", iRowStart, iRowEnd);
+		if (iRowEnd < iRowStart) {
+			@throw @"iRowEnd < iRowStart";
+		}
+		assert(iRowStart <= iRowEnd);
+		NSString *zUni;
+		for (NSInteger idx = iRowStart; idx <= iRowEnd; idx++) 
+		{
+			zUni = [formulaUnits objectAtIndex:idx];
+			if (zUni) {
+				// UNIT  SI基本単位変換
+				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
+				if (1 < [arUnit count]) {
+					zUnitSI = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
+					break;
+				}
+			}
+		}
+	}
+	@catch (NSException * errEx) {
+		NSLog(@"zFormulaFromDrum:Exception: %@: %@\n", [errEx name], [errEx reason]);
+	}
+	@catch (NSString *msg) {
+		NSLog(@"zFormulaFromDrum:@throw: %@\n", msg);
+	}
+	return zUnitSI;
 }
 
 - (NSString *)zFormulaFromDrum	// ドラム ⇒ 数式
@@ -648,7 +722,7 @@
 			} 
 			else {
 				// UNIT  SI基本単位変換
-				NSArray *arUnit = [zUni componentsSeparatedByString:@";"]; 
+				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
 				if (2 < [arUnit count]) {
 					zUnitFormat = [arUnit objectAtIndex:2]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
 					zFormula = [zFormula stringByAppendingString:zOpe];
