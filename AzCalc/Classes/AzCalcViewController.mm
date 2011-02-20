@@ -784,7 +784,12 @@
 
 //- (void)willAnimateSecondHalfOfRotationFromInterfaceOrientation: ＜＜OS 3.0以降は非推奨×××
 // 回転の開始前にコールされる。 ＜＜OS 3.0以降の推奨＞＞
-//- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
+{
+	if (!bPad) return; // iPhone
+	// このタイミングでなければ、配置がズレる
+	[ibTvFormula resignFirstResponder]; // キーボードを隠す
+}
 
 // 回転アニメーションの開始直前に呼ばれる。 この直前の配置から、ここでの配置までの移動がアニメーション表示される。
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
@@ -801,6 +806,7 @@
 	// ibBuMemory：透明にして隠す。その後、改めて MvMemoryShow する
 	ibBuMemory.alpha = 0;
 	[self MvMemoryShow]; // 改めて表示
+
 }
 
 /*
@@ -1291,7 +1297,7 @@
 	}
 }
 
-- (void)vButtonMaster:(KeyButton *)button   // キーレイアウト変更モード // ドラム選択中のキーを割り当てる
+- (void)MvKeyLayoute:(KeyButton *)button   // キーレイアウト変更モード // ドラム選択中のキーを割り当てる
 {
 	int iComponent = 0;
 	int iRow = 0;  // 見出し行
@@ -1336,7 +1342,10 @@
 		button.titleLabel.font = [UIFont boldSystemFontOfSize:5];
 		// Alpha
 		button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
-	} else {
+		// Unit
+		button.RzUnit = @"";
+	}
+	else {
 		button.bDirty = YES; // 変更あり ⇒ 保存される
 		// Text
 		[button setTitle:[dic objectForKey:@"Text"] forState:UIControlStateNormal];
@@ -1346,7 +1355,8 @@
 			case 1:	[button setTitleColor:[UIColor blackColor]	forState:UIControlStateNormal];	break;
 			case 2:	[button setTitleColor:[UIColor redColor]	forState:UIControlStateNormal];	break;
 			case 3:	[button setTitleColor:[UIColor blueColor]	forState:UIControlStateNormal];	break;
-			default:[button setTitleColor:[UIColor clearColor]	forState:UIControlStateNormal];	break;
+			case 4:	[button setTitleColor:[UIColor brownColor]	forState:UIControlStateNormal];	break;
+			default:[button setTitleColor:[UIColor yellowColor]	forState:UIControlStateNormal];	break;
 		}
 		// Size
 		float fSize = [[dic objectForKey:@"Size"] floatValue]; 
@@ -1355,6 +1365,8 @@
 		button.titleLabel.font = [UIFont boldSystemFontOfSize:fSize];
 		// Alpha
 		button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
+		// Unit
+		button.RzUnit = [dic objectForKey:@"Unit"];
 	}
 }
 
@@ -1840,7 +1852,7 @@
 	bDrumRefresh = YES;
 	
 	if (RaKeyMaster) {				// キーレイアウト変更モード // ドラム選択中のキーを割り当てる
-		[self vButtonMaster:button];
+		[self MvKeyLayoute:button];
 		return;
 	}
 	
@@ -2246,11 +2258,16 @@
 
 		if (iPrevUpper!=1 && MiSvUpperPage==1) {
 			[CalcFunctions setCalcMethod:1]; // 数式側：常に (1)Formula にする
+			// 全単位ボタンを無効にする
+			[self GvKeyUnitGroupSI:@"" andSI:@""];
 		}
 		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 			MiSegCalcMethod = (NSInteger)[defaults integerForKey:GUD_CalcMethod];
 			[CalcFunctions setCalcMethod:MiSegCalcMethod];	// ドラム側：設定方式に戻す
+			// 現ドラムの状態に従って、単位ボタンを有効にする
+			Drum *drum = [RaDrums objectAtIndex:entryComponent];
+			[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
 		}
 	}
 	else {
@@ -2273,11 +2290,13 @@
 	[UIView setAnimationDuration:0.9];
 	// アニメ終了時の位置をセット
 	if (bPad) { // iPad
-        rc = ibScrollLower.frame;	rc.origin.y += 280;     ibScrollLower.frame = rc;
-        rc = ibScrollUpper.frame;	rc.size.height += 260;     ibScrollUpper.frame = rc;
-		rc = ibTvFormula.frame;		rc.size.height += 260;  ibTvFormula.frame = rc;
-        rc = ibLbFormAnswer.frame;	rc.origin.y += 260;     ibLbFormAnswer.frame = rc;
-        rc = ibBuMemory.frame;		rc.origin.y += 260;     ibBuMemory.frame = rc;
+		int iMove = 260;
+		if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) iMove = 170; // ヨコ
+        rc = ibScrollLower.frame;	rc.origin.y += (iMove+20);	ibScrollLower.frame = rc;
+        rc = ibScrollUpper.frame;	rc.size.height += iMove;	ibScrollUpper.frame = rc;
+		rc = ibTvFormula.frame;		rc.size.height += iMove;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y += iMove;		ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y += iMove;		ibBuMemory.frame = rc;
     } else {
         rc = ibBuFormLeft.frame;    rc.origin.x -= 100;		ibBuFormLeft.frame = rc;
         rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;
@@ -2304,11 +2323,13 @@
 	[UIView setAnimationDuration:0.5];	// 戻りは早く
 	// アニメ終了時の位置をセット
 	if (bPad) { // iPad
-        rc = ibScrollLower.frame;	rc.origin.y -= 280;		ibScrollLower.frame = rc;
-        rc = ibScrollUpper.frame;	rc.size.height -= 260;     ibScrollUpper.frame = rc;
-        rc = ibTvFormula.frame;		rc.size.height -= 260;	ibTvFormula.frame = rc;
-        rc = ibLbFormAnswer.frame;	rc.origin.y -= 260;		ibLbFormAnswer.frame = rc;
-        rc = ibBuMemory.frame;		rc.origin.y -= 260;		ibBuMemory.frame = rc;
+		int iMove = 260;
+		if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) iMove = 170; // ヨコ
+        rc = ibScrollLower.frame;	rc.origin.y -= (iMove+20);	ibScrollLower.frame = rc;
+        rc = ibScrollUpper.frame;	rc.size.height -= iMove;    ibScrollUpper.frame = rc;
+        rc = ibTvFormula.frame;		rc.size.height -= iMove;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y -= iMove;		ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y -= iMove;		ibBuMemory.frame = rc;
     } else {
         rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;
         rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;

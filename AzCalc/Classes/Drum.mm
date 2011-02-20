@@ -402,7 +402,7 @@
 	if ([keybu.RzUnit length]<=0) return;
 	
 	// これ以降、localPool管理エリア
-	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
+	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];
 	@try {
 		[entryUnit setString:keybu.titleLabel.text]; // 単位表示
 		[entryUnit appendString:KeyUNIT_DELIMIT];	// ;
@@ -429,7 +429,7 @@
 	@catch (NSException * errEx) {
 		NSLog(@"entryUnitKey:Exception: %@: %@\n", [errEx name], [errEx reason]);
 	}
-	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
+	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通る!!!!!!!!!!!!!!!!!!!
 		[localPool release];
 	}
 }
@@ -607,6 +607,7 @@
 		else if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
 			iMmax = 3;
 		}
+		//NSLog(@"***** formulaOperators=%@\n", formulaOperators);
 
 		NSString *zUniM1 = nil;
 		int iM = 0;
@@ -985,7 +986,7 @@
 		assert(iRowStart <= iRowEnd);
 		
 		NSString *zOpe, *zNum, *zUni, *zUnitFormat;
-		NSRange rg;
+		//NSRange rg;
 		for (NSInteger idx = iRowStart; idx <= iRowEnd; idx++) 
 		{
 			zOpe = [formulaOperators objectAtIndex:idx];
