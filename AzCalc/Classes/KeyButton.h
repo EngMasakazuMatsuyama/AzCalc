@@ -55,7 +55,7 @@
 #define KeyTAG_UNIT_Start		1000 //-----------------SI基本単位換算
 #define KeyTAG_UNIT_kg			1000 // [kg]			1kg
 #define KeyTAG_UNIT_g			1001 // [g]				0.001kg = 1000mg
-#define KeyTAG_UNIT_mg			1002 // [mg]			0.00001kg = 0.001g
+#define KeyTAG_UNIT_mg			1002 // [mg]			0.000001kg = 0.001g
 #define KeyTAG_UNIT_t			1003 // [t]		トン		1000kg
 #define KeyTAG_UNIT_kt			1010 // [kt]	カラット	0.0002kg
 #define KeyTAG_UNIT_ozav		1011 // [oz] オンス常用	0.028349523125kg
@@ -81,6 +81,7 @@
 #define KeyTAG_UNIT_are			1202 // [a]		アール	100㎡
 #define KeyTAG_UNIT_ha			1203 // [ha]	㌶		10000㎡
 #define KeyTAG_UNIT_km2			1204 // [k㎡]			1000000㎡
+#define KeyTAG_UNIT_mm2			1205 // [m㎡]			0.000001㎡
 #define KeyTAG_UNIT_acre		1210 // [ac]	エーカー	4046.8564224㎡
 #define KeyTAG_UNIT_sqft		1211 // [sqft]	平方ft	0.09290304㎡
 #define KeyTAG_UNIT_sqin		1212 // [sqin]	平方in	0.00064516㎡

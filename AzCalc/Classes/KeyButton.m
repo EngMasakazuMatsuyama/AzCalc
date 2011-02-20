@@ -25,6 +25,7 @@
 {
     if ((self = [super initWithFrame:frame])) {
 		// OK
+		RzUnit = nil;
 		iPage = 0;
 		iCol = 0;
 		iRow = 0;

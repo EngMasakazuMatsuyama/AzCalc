@@ -19,6 +19,7 @@
 - (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
 - (void)vEnterOperator:(NSString *)zOperator;
 - (NSInteger)iNumLength:(NSString *)zNum;
+- (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum;
 @end
 
 @implementation Drum
@@ -246,7 +247,7 @@
 				
 				//---------------------------------------------[100]-[199] Operators
 			case KeyTAG_ANSWER: // [=]
-				if ([entryOperator length] <= 0) { // 演算子なし
+				if ([entryOperator length]<=0) { // 演算子なし
 					// 前行まで計算し回答する
 					[entryAnswer setString:@""];
 					[entryOperator setString:OP_ANS];
@@ -273,7 +274,7 @@
 					[entryUnit setString:[formulaUnits lastObject]];
 					// ↓ vCalcing
 				}
-				else if ([entryNumber isEqualToString:@""]) { 
+				else if ([entryNumber length]<=0) { 
 					// 数値未定
 					// 演算子が無い
 					// 回答する
@@ -342,8 +343,8 @@
 				[formulaUnits removeAllObjects];		[entryUnit setString:@""];
 				entryRow = 0;							[entryAnswer setString:@""];
 				// UNIT Reset
-//				AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-//				[app.viewController  GvKeyUnitGroupSI:nil]; // 全UNITリセット
+				AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+				[app.viewController  GvKeyUnitGroupSI:nil andSI:nil]; // 全単位ノーマル
 			}	break;
 				
 			case KeyTAG_BS: { // [BS]
@@ -387,6 +388,9 @@
 				break;
 		}
 	}
+	@catch (NSException * errEx) {
+		NSLog(@"entryKeyButton:Exception: %@: %@\n", [errEx name], [errEx reason]);
+	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
 		[localPool release];
 	}
@@ -398,7 +402,7 @@
 	if ([keybu.RzUnit length]<=0) return;
 	
 	// これ以降、localPool管理エリア
-	//NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
+	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
 	@try {
 		[entryUnit setString:keybu.titleLabel.text]; // 単位表示
 		[entryUnit appendString:KeyUNIT_DELIMIT];	// ;
@@ -407,12 +411,14 @@
 		
 		if ([entryOperator hasPrefix:OP_ANS]) {
 			// 再計算して単位表示する			    (-1)entryUnit
-			NSString *zUnitRevers = [self zUnit:(-1) withPara:3]; // (3)逆変換式
-			if (zUnitRevers) {
+			NSString *zRevers = [self zUnit:(-1) withPara:3]; // (3)逆変換式
+			if (zRevers) {
+				// UNIT逆変換式："#" ⇒ "%@" Format文字に変更する
+				zRevers = [zRevers stringByReplacingOccurrencesOfString:@"#" 
+															 withString:@"%@"];
 				// ドラムから計算式作成
 				NSString *zForm = [self zFormulaFromDrum];
-				// 逆変換式を加える
-				zForm = [NSString stringWithFormat:zUnitRevers, zForm]; // 逆変換式
+				zForm = [NSString stringWithFormat:zRevers, zForm]; // 逆変換式を加える
 				// 単位変換後に丸め処理される
 				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
 				NSLog(@"entryUnitKey: entryNumber=%@", entryNumber);
@@ -420,8 +426,11 @@
 			
 		}
 	}
+	@catch (NSException * errEx) {
+		NSLog(@"entryUnitKey:Exception: %@: %@\n", [errEx name], [errEx reason]);
+	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
-		//[localPool release];
+		[localPool release];
 	}
 }
 
@@ -441,12 +450,19 @@
 	return entryNumber;
 }
 
-- (NSString *)zUnit:(NSInteger)iRow	// 表示単位
+// iPara = (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+- (NSString *)zUnitPara:(NSString *)zUnit withPara:(NSInteger)iPara
 {
-	return [self zUnit:iRow withPara:0];
+	if (0<[zUnit length]) {
+		// [;]で区切られたコンポーネント(部分文字列)を切り出す
+		NSArray *arUnit = [zUnit componentsSeparatedByString:KeyUNIT_DELIMIT]; 
+		if (iPara < [arUnit count]) {
+			return [arUnit objectAtIndex:iPara];
+		}
+	}
+	return nil; // 未定義　(1)以降が未定義ならば「単位」でない。
 }
 
-// iPara = (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
 - (NSString *)zUnit:(NSInteger)iRow withPara:(NSInteger)iPara
 {
 	NSString *zUni;
@@ -456,11 +472,14 @@
 		zUni = entryUnit;
 	}
 	// [;]で区切られたコンポーネント(部分文字列)を切り出す
-	NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
-	if (iPara < [arUnit count]) {
-		return [arUnit objectAtIndex:iPara];
-	}
-	return nil;
+	NSString *zz = [self zUnitPara:zUni withPara:iPara];
+	if (zz) return zz;
+	return @"";
+}
+
+- (NSString *)zUnit:(NSInteger)iRow	// 表示単位
+{
+	return [self zUnit:iRow withPara:0];
 }
 
 - (NSString *)zAnswer
@@ -521,11 +540,14 @@
 	entryNumber = [NSMutableString new];
 	
 	// Unit: entryをarrayに追加し、entryを新規作成する
-	AzLOG(@"******************formulaUnits addObject:entryUnit=[%@]*****************", entryUnit);
 	assert( entryUnit != nil );
 	[formulaUnits addObject:entryUnit];
 	[entryUnit release];
-	entryUnit = [NSMutableString new];
+	if ([self zUnitPara:entryUnit withPara:1]) {	// 単位ならば繰り返す
+		entryUnit = [[NSMutableString alloc] initWithString:[formulaUnits lastObject]];
+	} else {
+		entryUnit = [NSMutableString new];
+	}
 	
 	// entryAnswer は、addObjectしないのでクリアするだけ。
 	[entryAnswer setString:@""];
@@ -547,7 +569,7 @@
 		// entryの演算子と数値が有効であるなら追加計算
 		// entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理する
 		[self vCalcing:zOperator];
-		return;
+		// ↓↓↓ UNIT系列 再構成する
 	}
 	else if ([entryOperator hasPrefix:OP_START]) {
 		// 開始行
@@ -569,6 +591,89 @@
 		[entryOperator setString:zOperator];
 		[entryNumber setString:@""]; // 数値クリア
 	}
+
+	// UNIT系列 再構成
+	NSString *zUnitSI = [self zUnitRebuild];// 直前までの単位系および次元を考慮して、選択不可キーをグレーアウトする
+	// zUnitSI は、現在までの最大「次元」の単位である。
+	if ([zOperator hasPrefix:OP_MULT] || [zOperator hasPrefix:OP_DIVI])
+	{ 
+		int iMmax = 0;
+		if ([zUnitSI hasPrefix:@"m"]) {
+			iMmax = 1;
+		}
+		else if ([zUnitSI hasPrefix:@"㎡"]) {	// 平方
+			iMmax = 2;
+		}
+		else if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
+			iMmax = 3;
+		}
+
+		NSString *zUniM1 = nil;
+		int iM = 0;
+		for (NSInteger idx = [formulaOperators count]-1; 0<=idx; idx--) // 末尾から
+		{
+			NSString *zOpe = [formulaOperators objectAtIndex:idx];
+			NSString *zUni = [formulaUnits objectAtIndex:idx];
+			if (zUni) {
+				// UNIT  SI基本単位変換
+				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
+				if (1 < [arUnit count]) {
+					zUni = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
+					if ([zUni hasPrefix:@"m"]) {
+						if ([zOpe hasPrefix:OP_DIVI]) {
+							iM -= 1;
+						} else {
+							iM += 1;
+						}
+						zUniM1 = zUni;
+					}
+					else if ([zUni hasPrefix:@"㎡"]) {	// 平方
+						if ([zOpe hasPrefix:OP_DIVI]) {
+							iM -= 2;
+						} else {
+							iM += 2;
+						}
+					}
+					else if ([zUni hasPrefix:@"㎥"]) {	// 立方
+						if ([zOpe hasPrefix:OP_DIVI]) {
+							iM -= 3;
+						} else {
+							iM += 3;
+						}
+					}
+				}
+			}
+			if (3 <= iM) break;
+			//
+			if ([zOpe hasPrefix:OP_START]) {
+				iMmax = 3; // 最初だから最大次元まで可能にする
+				break;
+			}
+			else if ([zOpe hasPrefix:OP_ADD] || [zOpe hasPrefix:OP_SUB]) break;
+		}
+
+		switch (iMmax - iM) {
+			case 1: // 残り1次元
+				if (zUniM1) {
+					[entryUnit setString:[NSString stringWithFormat:@"%@;%@;#;#", zUniM1, zUniM1]];	// 直前にあった1次元のSI基本単位
+				} else {
+					[entryUnit setString:@"m;m;#;#"];	// 無ければ1次元のSI基本単位
+				}
+				break;
+			case 2: // 残り2次元
+				[entryUnit setString:[formulaUnits lastObject]]; // 直前の単位を引用する
+				break;
+			default: // 次元オーバーにつき単位なしにする
+				[entryUnit setString:@""];
+				break;
+		}
+	}
+	else if (zUnitSI) {
+		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+		[app.viewController GvKeyUnitGroupSI:zUnitSI andSI:nil];
+		// UNIT利用中ならばSI基本単位を表示する
+		[entryUnit setString:[NSString stringWithFormat:@"%@;%@;#;#", zUnitSI, zUnitSI]];
+	}
 }
 
 
@@ -589,16 +694,31 @@
 	// 新しい行を追加する
 	if (![self vNewLine:zNextOperator]) return; // NO=行数オーバーで追加できなかった。
 	
-	// UNIT系列 再構成
-	[self zUnitRebuild];
-	
-	if ([zNextOperator isEqualToString:OP_ANS]) { 
+	if ([zNextOperator isEqualToString:OP_ANS]) {
 		// [=]が押されたならば、計算結果表示
-		[entryNumber setString:[self zAnswerDrum]]; 
-		
-		NSString *zUnitSI = [self zUnitRebuild];
+		[entryNumber setString:[self zAnswerDrum]];
+
+		// UNIT系列 再構成
+		NSString *zUnitSI = [self zUnitRebuild];// 直前までの単位系および次元を考慮して、選択不可キーをグレーアウトする
 		if (zUnitSI) {
-			[entryUnit setString:zUnitSI]; // UNIT利用中ならばSI基本単位を表示する
+			AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+			[app.viewController GvKeyUnitGroupSI:zUnitSI andSI:nil];
+			// 回答に最適な単位にする
+			NSString *zOpUnit = [self zOptimizeUnit:zUnitSI withNum:[entryNumber doubleValue]];
+			if (![zOpUnit isEqualToString:zUnitSI]) {
+				// 最適な単位が、SI単位と違うので変換する
+				NSString *zRevers = [self zUnitPara:zOpUnit withPara:3]; // (3)逆変換式
+				// UNIT逆変換式："#" ⇒ "%@" Format文字に変更する
+				zRevers = [zRevers stringByReplacingOccurrencesOfString:@"#" 
+															 withString:@"%@"];
+				// ドラムから計算式作成
+				NSString *zForm = [self zFormulaFromDrum];
+				zForm = [NSString stringWithFormat:zRevers, zForm]; // 逆変換式を加える
+				// 単位変換後に丸め処理される
+				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+
+			}
+			[entryUnit setString:zOpUnit];
 		}
 	}
 	else {
@@ -607,6 +727,67 @@
 	}
 }
 
+// zUnitSI系列でzNumに最適な単位を返す
+- (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum
+{
+	dNum = fabs(dNum);
+	
+	if ([zUnitSI hasPrefix:@"kg"]) {
+		if (1000.0 <= dNum) {
+			return @"t;kg;(#*1000);(#/1000)";
+		}
+		if (1.0 <= dNum) {
+			return @"kg;kg;#;#";
+		}
+		if (0.001 <= dNum) {
+			return @"g;kg;(#/1000);(#*1000)";
+		}
+		return @"mg;kg;(#/1000000);(#*1000000)";
+	}
+	if ([zUnitSI hasPrefix:@"m"]) {
+		if (1000.0 <= dNum) {
+			return @"km;m;(#*1000);(#/1000)";
+		}
+		if (1.0 <= dNum) {
+			return @"m;m;#;#";
+		}
+		if (0.01 <= dNum) {
+			return @"cm;m;(#/100);(#*100)";
+		}
+		return @"mm;m;(#/1000);(#*1000)";
+	}
+	if ([zUnitSI hasPrefix:@"㎡"]) {	// 平方
+		if (1000000.0 <= dNum) {
+			return @"k㎡;㎡;(#*1000000);(#/1000000)";
+		}
+		if (10000.0 <= dNum) {
+			return @"ha;㎡;(#*10000);(#/10000)";
+		}
+		if (1.0 <= dNum) {
+			return @"㎡;㎡;#;#";
+		}
+		if (0.0001 <= dNum) {
+			return @"c㎡;㎡;(#/10000);(#*10000)";
+		}
+		return @"m㎡;㎡;(#/1000000);(#*1000000)";
+	}
+	if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
+		if (1000000000.0 <= dNum) {
+			return @"k㎥;㎥;(#*1000000000);(#/1000000000)";
+		}
+		if (1.0 <= dNum) {
+			return @"㎥;㎥;#;#";
+		}
+		if (0.001 <= dNum) {
+			return @"L;㎥;(#/1000);(#*1000)";
+		}
+		if (0.0001 <= dNum) {
+			return @"dL;㎥;(#/10000);(#*10000)";
+		}
+		return @"mL;㎥;(#/100000);(#*100000)";
+	}
+	return zUnitSI;
+}
 
 - (NSString *)zFormulaCalculator	// ドラム ⇒ ibTvFormula用の数式文字列
 {
@@ -665,11 +846,11 @@
 		}
 		// UNIT を利用しているか調べる
 		NSString *zUnitSI = nil;
-		NSString *zUni;
-//		int iDimens = 0;
+		NSString *zUni, *zOpe;
 		int iM = 0;
 		int iMprev = 0;
 		int iMmax = 0;
+		BOOL bFirstSection = YES; // 最初の[+]または[-]まで
 		for (NSInteger idx = iRowStart; idx <= iRowEnd; idx++) 
 		{
 			zUni = [formulaUnits objectAtIndex:idx];
@@ -678,7 +859,8 @@
 				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
 				if (1 < [arUnit count]) {
 					zUnitSI = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
-					NSString *zOpe = [formulaOperators objectAtIndex:idx];
+					zOpe = [formulaOperators objectAtIndex:idx];
+					NSLog(@"***zUnitRebuild:--Ope[%@]--UnitSI[%@]--", zOpe, zUnitSI);
 					if ([zUnitSI hasPrefix:@"m"]) {
 						iM = 1;
 					}
@@ -690,27 +872,36 @@
 					}
 					else {
 						iM = 0;
-						if (iMmax != 0) {
-							[formulaUnits replaceObjectAtIndex:idx withObject:@"NG"];
+						if (0 < iMmax) {
+							[formulaUnits replaceObjectAtIndex:idx withObject:@""];
 						}
-						iMmax = (-1); // m系でない
 					}
 					//
 					if (0 < iM) {
 						if (iMmax < 0 || 3 <= iMprev) {
-							[formulaUnits replaceObjectAtIndex:idx withObject:@"NG"];
-						} else {
-							if ([zOpe hasPrefix:OP_MULT] || [zOpe hasPrefix:OP_DIVI]) {
-								iMprev += iM;
-								if (iMmax < iMprev) iMmax = iMprev;
-							} else {
-								iMprev = iM;
+							[formulaUnits replaceObjectAtIndex:idx withObject:@""];
+						}
+						else if ([zOpe hasPrefix:OP_MULT]) {
+							iMprev += iM;
+						} 
+						else if ([zOpe hasPrefix:OP_DIVI]) {
+							iMprev -= iM;
+						} 
+						else {
+							iMprev = iM;
+							if ([zOpe hasPrefix:OP_ADD] || [zOpe hasPrefix:OP_SUB]) {
+								bFirstSection = NO; // 次のセクションに入った
 							}
+						}
+						if (bFirstSection) {
+							iMmax = iMprev;
+						} else {
+							if (iMmax < iMprev) iMmax = iMprev;
 						}
 					}
 					//
 					if (3 < iMmax) {
-						[formulaUnits replaceObjectAtIndex:idx withObject:@"NG"];
+						[formulaUnits replaceObjectAtIndex:idx withObject:@""];
 						iMmax = 3;	// 立方
 					}
 				}
@@ -719,7 +910,7 @@
 		// キーボード　単位系列表示
 		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 		switch (iMmax) {
-			case -1:
+			case 0:
 				[app.viewController  GvKeyUnitGroupSI:zUnitSI andSI:nil];
 				return zUnitSI;
 				
@@ -732,11 +923,11 @@
 				return @"㎡";	// 平方
 				
 			case 3:
-				[app.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 無効
+				[app.viewController  GvKeyUnitGroupSI:@"" andSI:nil];	// 全単位無効
 				return @"㎥";	// 立方
 				
 			default:
-				[app.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 無効
+				[app.viewController  GvKeyUnitGroupSI:@"" andSI:nil];	// 全単位無効
 				return nil;
 		}
 		return nil;
@@ -818,7 +1009,7 @@
 			if (zUni==nil || [zUni length]<=0) {
 				zFormula = [zFormula stringByAppendingFormat:@"%@%@", zOpe, zNum];
 			}
-			else if ([zUni isEqualToString:UNI_PERC]) {
+			else if ([zUni hasPrefix:UNI_PERC]) {
 				if ([zOpe hasPrefix:OP_ADD]) {
 					// ＋％増　＜＜シャープ式： a[+]b[%] = aのb%増し「税込」と同じ＞＞ 100+5% = 100*(1+5/100) = 105
 					zFormula = [zFormula stringByAppendingFormat:@"×(1+(%@÷100))", zNum];
@@ -831,7 +1022,7 @@
 					zFormula = [zFormula stringByAppendingFormat:@"%@(%@÷100)", zOpe, zNum];	// 1/100
 				}
 			} 
-			else if ([zUni isEqualToString:UNI_PERML]) {
+			else if ([zUni hasPrefix:UNI_PERML]) {
 				if ([zOpe hasPrefix:OP_ADD]) {
 					// ＋‰増　＜＜シャープ式： a[+]b[‰] = aのb%増し＞＞
 					zFormula = [zFormula stringByAppendingFormat:@"×(1+(%@÷1000))", zNum];
@@ -844,10 +1035,10 @@
 					zFormula = [zFormula stringByAppendingFormat:@"%@(%@÷1000)", zOpe, zNum];	// 1/1000 
 				}
 			} 
-			else if ([zUni isEqualToString:UNI_AddTAX]) {
+			else if ([zUni hasPrefix:UNI_AddTAX]) {
 				zFormula = [zFormula stringByAppendingFormat:@"%@×%.3f", zNum, MfTaxRate];
 			} 
-			else if ([zUni isEqualToString:UNI_SubTAX]) {
+			else if ([zUni hasPrefix:UNI_SubTAX]) {
 				zFormula = [zFormula stringByAppendingFormat:@"%@÷%.3f", zNum, MfTaxRate]; 
 			} 
 			else {
@@ -855,6 +1046,9 @@
 				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
 				if (2 < [arUnit count]) {
 					zUnitFormat = [arUnit objectAtIndex:2]; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+					// UNIT変換式："#" ⇒ "%@" Format文字に変更する
+					zUnitFormat = [zUnitFormat stringByReplacingOccurrencesOfString:@"#" 
+																		 withString:@"%@"];
 					zFormula = [zFormula stringByAppendingString:zOpe];
 					zFormula = [zFormula stringByAppendingFormat:zUnitFormat, zNum];
 				}

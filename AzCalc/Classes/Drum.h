@@ -60,10 +60,11 @@
 // formulaOperators,formulaNumbers,formulaUnits を隠匿するためのメソッド
 - (NSString *)zOperator:(NSInteger)iRow;
 - (NSString *)zNumber:(NSInteger)iRow;
-- (NSString *)zUnit:(NSInteger)iRow;	// 表示単位
-- (NSString *)zUnit:(NSInteger)iRow withPara:(NSInteger)iPara; // (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
+- (NSString *)zUnitPara:(NSString *)zUnit withPara:(NSInteger)iPara;
+- (NSString *)zUnit:(NSInteger)iRow withPara:(NSInteger)iPara;
+- (NSString *)zUnit:(NSInteger)iRow;
 - (NSString *)zAnswer;
-- (void)vRemoveFromRow:(NSInteger)iRow; // iRow以降削除
+- (void)vRemoveFromRow:(NSInteger)iRow;
 
 
 

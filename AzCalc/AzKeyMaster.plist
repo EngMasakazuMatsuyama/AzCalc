@@ -403,7 +403,7 @@
 			<key>Text</key>
 			<string>kg</string>
 			<key>Unit</key>
-			<string>kg;@;@</string>
+			<string>kg;#;#</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -417,7 +417,21 @@
 			<key>Text</key>
 			<string>g</string>
 			<key>Unit</key>
-			<string>kg;(@/1000);(@*1000)</string>
+			<string>kg;(#/1000);(#*1000)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1002</integer>
+			<key>Text</key>
+			<string>mg</string>
+			<key>Unit</key>
+			<string>kg;(#/1000000);(#*1000000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -431,7 +445,7 @@
 			<key>Text</key>
 			<string>t</string>
 			<key>Unit</key>
-			<string>kg;(@*1000);(@/1000)</string>
+			<string>kg;(#*1000);(#/1000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -445,7 +459,7 @@
 			<key>Text</key>
 			<string>kt</string>
 			<key>Unit</key>
-			<string>kg;(@/20000);(@*20000)</string>
+			<string>kg;(#/5000);(#*5000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -459,7 +473,7 @@
 			<key>Text</key>
 			<string>oz</string>
 			<key>Unit</key>
-			<string>kg;(@/35.2739619558);(@*35.2739619558)</string>
+			<string>kg;(#*0.028349523125);(#/0.028349523125)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -473,7 +487,7 @@
 			<key>Text</key>
 			<string>lb</string>
 			<key>Unit</key>
-			<string>kg;(@/2.20462262184);(@*2.20462262184)</string>
+			<string>kg;(#*0.45359237);(#/0.45359237)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -487,7 +501,7 @@
 			<key>Text</key>
 			<string>貫</string>
 			<key>Unit</key>
-			<string>kg;(@*3.75);(@/3.75)</string>
+			<string>kg;(#*3.75);(#/3.75)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -501,7 +515,7 @@
 			<key>Text</key>
 			<string>匁</string>
 			<key>Unit</key>
-			<string>kg;(@*0.00375);(@/0.00375)</string>
+			<string>kg;(#*0.00375);(#/0.00375)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -515,7 +529,7 @@
 			<key>Text</key>
 			<string>m</string>
 			<key>Unit</key>
-			<string>m;@;@</string>
+			<string>m;#;#</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -529,7 +543,21 @@
 			<key>Text</key>
 			<string>cm</string>
 			<key>Unit</key>
-			<string>m;(@/100);(@*100)</string>
+			<string>m;(#/100);(#*100)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1102</integer>
+			<key>Text</key>
+			<string>mm</string>
+			<key>Unit</key>
+			<string>m;(#/1000);(#*1000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -543,7 +571,21 @@
 			<key>Text</key>
 			<string>km</string>
 			<key>Unit</key>
-			<string>m;(@*1000);(@/1000)</string>
+			<string>m;(#*1000);(#/1000)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1110</integer>
+			<key>Text</key>
+			<string>Adm</string>
+			<key>Unit</key>
+			<string>m;(#*1852);(#/1852)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -557,7 +599,7 @@
 			<key>Text</key>
 			<string>yd</string>
 			<key>Unit</key>
-			<string>m;(@*0.9144);(@/0.9144)</string>
+			<string>m;(#*0.9144);(#/0.9144)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -571,7 +613,7 @@
 			<key>Text</key>
 			<string>ft</string>
 			<key>Unit</key>
-			<string>m;(@*0.3048);(@/0.3048)</string>
+			<string>m;(#*0.3048);(#/0.3048)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -585,7 +627,7 @@
 			<key>Text</key>
 			<string>in</string>
 			<key>Unit</key>
-			<string>m;(@*0.254);(@/0.254)</string>
+			<string>m;(#*0.0254);(#/0.0254)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -599,7 +641,7 @@
 			<key>Text</key>
 			<string>mi</string>
 			<key>Unit</key>
-			<string>m;(@*1609.344);(@/1609.344)</string>
+			<string>m;(#*1609.344);(#/1609.344)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -613,7 +655,7 @@
 			<key>Text</key>
 			<string>尺</string>
 			<key>Unit</key>
-			<string>m;(@*0.303);(@/0.303)</string>
+			<string>m;(#*0.303);(#/0.303)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -627,7 +669,7 @@
 			<key>Text</key>
 			<string>寸</string>
 			<key>Unit</key>
-			<string>m;(@*0.0303);(@/0.0303)</string>
+			<string>m;(#*0.0303);(#/0.0303)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -641,7 +683,7 @@
 			<key>Text</key>
 			<string>里</string>
 			<key>Unit</key>
-			<string>m;(@*3927);(@/3927)</string>
+			<string>m;(#*3927);(#/3927)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -655,7 +697,7 @@
 			<key>Text</key>
 			<string>㎡</string>
 			<key>Unit</key>
-			<string>㎡;@;@</string>
+			<string>㎡;#;#</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -669,7 +711,7 @@
 			<key>Text</key>
 			<string>c㎡</string>
 			<key>Unit</key>
-			<string>㎡;(@/10000);(@*10000)</string>
+			<string>㎡;(#/10000);(#*10000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -683,7 +725,7 @@
 			<key>Text</key>
 			<string>a</string>
 			<key>Unit</key>
-			<string>㎡;(@*100);(@/100)</string>
+			<string>㎡;(#*100);(#/100)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -697,7 +739,7 @@
 			<key>Text</key>
 			<string>ha</string>
 			<key>Unit</key>
-			<string>㎡;(@*10000);(@/10000)</string>
+			<string>㎡;(#*10000);(#/10000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -711,7 +753,21 @@
 			<key>Text</key>
 			<string>k㎡</string>
 			<key>Unit</key>
-			<string>㎡;(@*1000000);(@/1000000)</string>
+			<string>㎡;(#*1000000);(#/1000000)</string>
+		</dict>
+		<dict>
+			<key>Alpha</key>
+			<real>0.8</real>
+			<key>Color</key>
+			<integer>4</integer>
+			<key>Size</key>
+			<integer>20</integer>
+			<key>Tag</key>
+			<integer>1205</integer>
+			<key>Text</key>
+			<string>m㎡</string>
+			<key>Unit</key>
+			<string>㎡;(#/1000000);(#*1000000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -725,7 +781,7 @@
 			<key>Text</key>
 			<string>ac</string>
 			<key>Unit</key>
-			<string>㎡;(@*4046.8564224);(@/4046.8564224)</string>
+			<string>㎡;(#*4046.8564224);(#/4046.8564224)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -739,7 +795,7 @@
 			<key>Text</key>
 			<string>sqft</string>
 			<key>Unit</key>
-			<string>㎡;(@*0.09290304);(@/0.09290304)</string>
+			<string>㎡;(#*0.09290304);(#/0.09290304)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -753,7 +809,7 @@
 			<key>Text</key>
 			<string>sqin</string>
 			<key>Unit</key>
-			<string>㎡;(@*0.00064516);(@/0.00064516)</string>
+			<string>㎡;(#*0.00064516);(#/0.00064516)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -767,7 +823,7 @@
 			<key>Text</key>
 			<string>坪</string>
 			<key>Unit</key>
-			<string>㎡;(@*3.305785);(@/3.305785)</string>
+			<string>㎡;(#*3.305785);(#/3.305785)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -781,7 +837,7 @@
 			<key>Text</key>
 			<string>畝</string>
 			<key>Unit</key>
-			<string>㎡;(@*99.17355);(@/99.17355)</string>
+			<string>㎡;(#*99.17355);(#/99.17355)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -795,7 +851,7 @@
 			<key>Text</key>
 			<string>反</string>
 			<key>Unit</key>
-			<string>㎡;(@*991.7355);(@/991.7355)</string>
+			<string>㎡;(#*991.7355);(#/991.7355)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -809,7 +865,7 @@
 			<key>Text</key>
 			<string>㎥</string>
 			<key>Unit</key>
-			<string>㎥;@;@</string>
+			<string>㎥;#;#</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -823,7 +879,7 @@
 			<key>Text</key>
 			<string>c㎥</string>
 			<key>Unit</key>
-			<string>㎥;(@/1000000);(@*1000000)</string>
+			<string>㎥;(#/1000000);(#*1000000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -837,7 +893,7 @@
 			<key>Text</key>
 			<string>L</string>
 			<key>Unit</key>
-			<string>㎥;(@/1000);(@*1000)</string>
+			<string>㎥;(#/1000);(#*1000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -851,7 +907,7 @@
 			<key>Text</key>
 			<string>dL</string>
 			<key>Unit</key>
-			<string>㎥;(@/10000);(@*10000)</string>
+			<string>㎥;(#/10000);(#*10000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -865,7 +921,7 @@
 			<key>Text</key>
 			<string>mL</string>
 			<key>Unit</key>
-			<string>㎥;(@/100000);(@*100000)</string>
+			<string>㎥;(#/1000000);(#*1000000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -879,7 +935,7 @@
 			<key>Text</key>
 			<string>cc</string>
 			<key>Unit</key>
-			<string>㎥;(@/100000);(@*100000)</string>
+			<string>㎥;(#/1000000);(#*1000000)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -893,7 +949,7 @@
 			<key>Text</key>
 			<string>cuin</string>
 			<key>Unit</key>
-			<string>㎥;(@*0.0016387064);(@/0.0016387064)</string>
+			<string>㎥;(#*0.0016387064);(#/0.0016387064)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -907,7 +963,7 @@
 			<key>Text</key>
 			<string>cuft</string>
 			<key>Unit</key>
-			<string>㎥;(@*0.028316846592);(@/0.028316846592)</string>
+			<string>㎥;(#*0.028316846592);(#/0.028316846592)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -921,7 +977,7 @@
 			<key>Text</key>
 			<string>galus</string>
 			<key>Unit</key>
-			<string>㎥;(@*0.003785411784);(@/0.003785411784)</string>
+			<string>㎥;(#*0.003785411784);(#/0.003785411784)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -935,7 +991,7 @@
 			<key>Text</key>
 			<string>bbl</string>
 			<key>Unit</key>
-			<string>㎥;(@*1.58987294928);(@/1.58987294928)</string>
+			<string>㎥;(#*1.58987294928);(#/1.58987294928)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -949,7 +1005,7 @@
 			<key>Text</key>
 			<string>合</string>
 			<key>Unit</key>
-			<string>㎥;(@*0.00018039);(@/0.00018039)</string>
+			<string>㎥;(#*0.00018039);(#/0.00018039)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -963,7 +1019,7 @@
 			<key>Text</key>
 			<string>升</string>
 			<key>Unit</key>
-			<string>㎥;(@*0.0018039);(@/0.0018039)</string>
+			<string>㎥;(#*0.0018039);(#/0.0018039)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -977,7 +1033,7 @@
 			<key>Text</key>
 			<string>斗</string>
 			<key>Unit</key>
-			<string>㎥;(@*0.018039);(@/0.018039)</string>
+			<string>㎥;(#*0.018039);(#/0.018039)</string>
 		</dict>
 	</array>
 	<array>

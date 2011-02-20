@@ -370,9 +370,8 @@
 						bu.alpha = KeyALPHA_DEFAULT_ON;
 					}
 					
-					// UNIT		"@" ⇒ "%@"
-					bu.RzUnit = [strUnit stringByReplacingOccurrencesOfString:@"@" 
-																   withString:@"%@"];
+					// UNIT
+					bu.RzUnit = strUnit;
 					
 				} else {
 					bu.tag = -1; // Function No.
@@ -450,6 +449,7 @@
 
 - (void)GvKeyUnitGroupSI:(NSString *)unitSI andSI:(NSString *)unitSi2 // =nil:ハイライト解除
 {
+	NSLog(@"***GvKeyUnitGroupSI=%@,%@", unitSI, unitSi2);
 	for (id obj in ibScrollLower.subviews)
 	{
 		if ([obj isMemberOfClass:[KeyButton class]]) {
@@ -937,7 +937,7 @@
 	//	[ibScrollLower scrollRectToVisible:rc animated:YES];
 		// UNIT系列 再構成
 		Drum *drum = [RaDrums objectAtIndex:entryComponent];
-		[drum zUnitRebuild];
+		[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
 	}
 	
 	// 以下の処理をしないと pickerView が再描画されない。
