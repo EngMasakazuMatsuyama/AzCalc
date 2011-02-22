@@ -447,9 +447,17 @@
 }
 */
 
-- (void)GvKeyUnitGroupSI:(NSString *)unitSI andSI:(NSString *)unitSi2 // =nil:ハイライト解除
+- (void)GvKeyUnitGroupSI:(NSString *)unitSI 
+				   andSI:(NSString *)unitSi2 // =nil:ハイライト解除
 {
-	NSLog(@"***GvKeyUnitGroupSI=%@,%@", unitSI, unitSi2);
+	[self GvKeyUnitGroupSI:unitSI andSi2:unitSi2 andSi3:nil];
+}
+
+- (void)GvKeyUnitGroupSI:(NSString *)unitSI
+				  andSi2:(NSString *)unitSi2
+				  andSi3:(NSString *)unitSi3 // =nil:ハイライト解除
+{
+	NSLog(@"***GvKeyUnitGroupSI=%@,%@,%@", unitSI, unitSi2, unitSi3);
 	for (id obj in ibScrollLower.subviews)
 	{
 		if ([obj isMemberOfClass:[KeyButton class]]) {
@@ -457,13 +465,13 @@
 			if (kb.RzUnit) {
 				if (unitSI || unitSi2) {		// 注意 ↓ nil ↓ 渡すとエラーになる
 					if ((unitSI && [kb.RzUnit hasPrefix:unitSI]) 
-					 || (unitSi2 && [kb.RzUnit hasPrefix:unitSi2])) {
+					 || (unitSi2 && [kb.RzUnit hasPrefix:unitSi2])
+					 || (unitSi3 && [kb.RzUnit hasPrefix:unitSi3])) {
 						// 同系列ハイライト
 						kb.enabled = YES;
 					} else {
 						// 異系列グレーアウト
 						kb.enabled = NO;
-						//NSLog(@"***kb.RzUnit=%@", kb.RzUnit);
 					}
 				} else {
 					// ノーマル

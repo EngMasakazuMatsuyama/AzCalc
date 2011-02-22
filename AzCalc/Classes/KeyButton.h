@@ -104,13 +104,13 @@
 #define KeyTAG_UNIT_TOU			1316 // [斗]				0.018039㎡
 
 #define KeyTAG_UNIT_rad			1400 // [rad]			1rad
-#define KeyTAG_UNIT_rDO			1401 // [°]		度		=PI/180rad
-#define KeyTAG_UNIT_rMI			1402 // [']		分		=度/60rad
-#define KeyTAG_UNIT_rSE			1403 // ["]		秒		=度/3600rad
+#define KeyTAG_UNIT_rDO			1401 // [°]		度		PI/180rad
+#define KeyTAG_UNIT_rMI			1402 // [']		分		PI/10800rad = PI/180/60rad
+#define KeyTAG_UNIT_rSE			1403 // ["]		秒		PI/648000rad = PI/180/60/60rad
 
 #define KeyTAG_UNIT_K			1500 // [K]		ケルビン	1K
-#define KeyTAG_UNIT_C			1501 // [°C]	摂氏		X+273.15K
-#define KeyTAG_UNIT_F			1502 // [°F]	華氏		(X+459.67)/1.8K
+#define KeyTAG_UNIT_C			1501 // [°C]	摂氏		(#+273.15)K
+#define KeyTAG_UNIT_F			1502 // [°F]	華氏		((#+459.67)/1.8)K
 
 #define KeyTAG_UNIT_s			1600 // [s]		秒		1s
 #define KeyTAG_UNIT_ms			1601 // [ms]	ミリ秒	0.001s
