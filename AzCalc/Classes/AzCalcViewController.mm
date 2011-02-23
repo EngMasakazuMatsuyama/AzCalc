@@ -305,9 +305,18 @@
 				bu.bDirty = NO;
 				NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", (int)bu.iPage, (int)bu.iCol, (int)bu.iRow];
 				NSDictionary *dicKey = [dicKeys objectForKey:zPCR];
+
 				if (dicKey) {
 					//NSDictionary *dicMaster = nil;
 					bu.tag = [[dicKey objectForKey:@"Tag"] integerValue]; // Function No.
+
+#ifndef GD_UNIT_ENABLED
+					if (KeyTAG_UNIT_Start <= bu.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End
+						dicKey = nil;
+					}
+				}
+				if (dicKey) {
+#endif
 					
 					NSString *strText = [dicKey objectForKey:@"Text"];
 					NSNumber *numSize = [dicKey objectForKey:@"Size"];
@@ -326,6 +335,7 @@
 								exit(-1);
 							}
 						}
+						
 						for (NSArray *aComponent in RaKeyMaster) {
 							for (NSDictionary *dic in aComponent) {
 								if ([[dic objectForKey:@"Tag"] integerValue] == bu.tag) {
@@ -951,7 +961,8 @@
 	//	[ibScrollLower scrollRectToVisible:rc animated:YES];
 		// UNIT系列 再構成
 		Drum *drum = [RaDrums objectAtIndex:entryComponent];
-		[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
+		//[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
+		[drum GvEntryUnitSet];
 	}
 	
 	// 以下の処理をしないと pickerView が再描画されない。
@@ -1106,7 +1117,14 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
 	if (RaKeyMaster) {
+#ifdef GD_UNIT_ENABLED
 		return [[RaKeyMaster objectAtIndex:component] count]; 
+#else
+		if (component==2) {
+			return 7; // (0)〜(6)[-Tax]まで　(7)[Kg]以降無効にする 
+		}
+		return [[RaKeyMaster objectAtIndex:component] count]; 
+#endif
 	}
 
 	Drum *dm = [RaDrums objectAtIndex:component];
@@ -1876,18 +1894,7 @@
 			// 遡った行の数値を「数値文字化」して copy autorelese object として保持する。
 			zCopyNumber = stringAzNum([drum zNumber:iRow]);
 			//
-			switch (button.tag) {
-				case KeyTAG_ANSWER:	// [=]
-				case KeyTAG_PLUS:	// [+]
-				case KeyTAG_MINUS:	// [-]
-				case KeyTAG_MULTI:	// [×]
-				case KeyTAG_DIVID:	// [÷]
-				case KeyTAG_SC:		// [SC]
-				case KeyTAG_BS:		// [BS]
-					// 上記の演算子ボタンがが押されたときだけ、遡った行以降の範囲削除
-					[drum vRemoveFromRow:iRow];	// iRow以降削除＆リセット
-					break;
-			}
+			[drum vRemoveFromRow:iRow];	// iRow以降削除＆リセット
 		}
 	}
 	
@@ -2275,7 +2282,8 @@
 			[CalcFunctions setCalcMethod:MiSegCalcMethod];	// ドラム側：設定方式に戻す
 			// 現ドラムの状態に従って、単位ボタンを有効にする
 			Drum *drum = [RaDrums objectAtIndex:entryComponent];
-			[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
+			//[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
+			[drum GvEntryUnitSet];
 		}
 	}
 	else {

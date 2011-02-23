@@ -20,7 +20,6 @@
 - (void)vEnterOperator:(NSString *)zOperator;
 - (NSInteger)iNumLength:(NSString *)zNum;
 - (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum;
-- (void)LvEntryUnitSet;
 @end
 
 @implementation Drum
@@ -277,7 +276,6 @@
 				}
 				else if ([entryNumber length]<=0) { 
 					// 数値未定
-					// 演算子が無い
 					// 回答する
 					[entryOperator setString:OP_ANS];
 					[entryNumber setString:[self zAnswerDrum]]; 
@@ -493,10 +491,15 @@
 	assert([formulaOperators count]==[formulaNumbers count]);
 	assert([formulaOperators count]==[formulaUnits count]);
 
-	if ([[self zOperator:iRow] hasPrefix:OP_START]) { // 削除する前に処理すること！
+	NSString *zOpe = [self zOperator:iRow];
+	if ([zOpe hasPrefix:OP_START]) { // 開始行を維持する。　削除する前に処理すること！
 		[entryOperator setString:OP_START];
-	} else {
+	}
+	else if ([zOpe hasPrefix:OP_ANS]) { // [=]
 		[entryOperator setString:@""];
+	}
+	else {
+		[entryOperator setString:zOpe];
 	}
 	
 	NSRange range = NSMakeRange(iRow, [formulaOperators count] - iRow);
@@ -507,7 +510,7 @@
 	[entryNumber setString:@""]; 
 	[entryAnswer setString:@""]; 
 	// これまでの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
-	[self LvEntryUnitSet];
+	[self GvEntryUnitSet];
 }
 
 
@@ -546,14 +549,9 @@
 	assert( entryUnit != nil );
 	[formulaUnits addObject:entryUnit];
 	[entryUnit release];
-/*	if ([self zUnitPara:entryUnit withPara:1]) {	// 単位ならば繰り返す
-		entryUnit = [[NSMutableString alloc] initWithString:[formulaUnits lastObject]];
-	} else {
-		entryUnit = [NSMutableString new];
-	}*/
 	entryUnit = [NSMutableString new];
 	
-	// entryAnswer は、addObjectしないのでクリアするだけ。
+	// Answer: addObjectしないのでクリアするだけ。
 	[entryAnswer setString:@""];
 	
 	// formula へ addObject しているのはここだけ。 要素数は、必ず一致すること。
@@ -564,8 +562,12 @@
 }
 
 // これまでの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
-- (void)LvEntryUnitSet
+// 演算子入力時やドラム切り替え時などに呼び出される。
+- (void)GvEntryUnitSet
 {
+#ifndef GD_UNIT_ENABLED
+	return;
+#endif
 	@try {
 		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 		
@@ -591,11 +593,17 @@
 		int iDim;
 		int iDimMax = 0; // 単位なし
 		BOOL bMMM = NO;	// YES=メートル系
-		for (NSInteger idx = idxTop; idx <= idxEnd; idx++) 
+		BOOL bFixed = NO; // 次元決定
+		for (NSInteger idx = idxTop; idx <= idxEnd+1; idx++) 
 		{
 			iDim = 0; // 単位なし
-			zOpe = [formulaOperators objectAtIndex:idx];
-			zUni = [formulaUnits objectAtIndex:idx];
+			if (idx <= idxEnd) {
+				zOpe = [formulaOperators objectAtIndex:idx];
+				zUni = [formulaUnits objectAtIndex:idx];
+			} else {
+				zOpe = entryOperator;
+				zUni = entryUnit;
+			}
 			if (0 < [zUni length]) {
 				// UNIT  SI基本単位変換
 				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
@@ -616,6 +624,7 @@
 					}
 					else {
 						iDim = 1;	// 長さ系でない1次元単位
+						[entryUnit setString:zUni];
 					}
 				}
 			}
@@ -630,83 +639,98 @@
 				iDimMax -= iDim;
 			}
 			else {
-				iDimMax = iDim; // 回答の次元が決定
+				bFixed = YES;	// [+][-][=]により単位次元が決定されたことを示す
 				break;
 			}
 		}
-		// iDimMax
-		if ([entryOperator hasPrefix:OP_ANS]) {
-			// [=]行ならば iDimMax 次元
+		//
+		if (bFixed || [entryOperator hasPrefix:OP_ANS]) {	// 次元決定
 			if (bMMM && 0<iDimMax) { // メートル系
 				switch (iDimMax) {
 					case 1:	// メートルのみ
-						[app.viewController GvKeyUnitGroupSI:@"m" andSi2:nil andSi3:nil];
+						[entryUnit setString:@"m;m;#;#"];
+						zUnitSI = @"m";
 						break;
 					case 2:	// 平方メートルのみ
-						[app.viewController GvKeyUnitGroupSI:@"㎡" andSi2:nil andSi3:nil];
+						[entryUnit setString:@"㎡;㎡;#;#"];
+						zUnitSI = @"㎡";
 						break;
 					case 3:	// 立方メートルのみ
-						[app.viewController GvKeyUnitGroupSI:@"㎥" andSi2:nil andSi3:nil];
+						[entryUnit setString:@"㎥;㎥;#;#"];
+						zUnitSI = @"㎥";
 						break;
 					default: // 単位なし　全単位無効
-						[app.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
+						[entryUnit setString:@""];
+						zUnitSI = @"";
 						break;
 				}
 			}
 			else if (iDimMax==1) { // メートル系でない1次元単位
-				[app.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
+				// zUnitSI そのまま
 			}
 			else { // 単位なし　全単位無効
-				[app.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
+				[entryUnit setString:@""];
+				zUnitSI = @"";
 			}
-			// ドラムから計算式作成
-			NSString *zForm = [self zFormulaFromDrum];
-			[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
-			if (1 <= iDimMax) {
-				// 回答に最適な単位にする
-				NSString *zOpUnit = [self zOptimizeUnit:zUnitSI withNum:[entryNumber doubleValue]];
-				if (![zOpUnit isEqualToString:zUnitSI]) {
-					// 最適な単位が、SI単位と違うので変換する
-					NSString *zRevers = [self zUnitPara:zOpUnit withPara:3]; // (3)逆変換式
-					// UNIT逆変換式："#" ⇒ "%@" Format文字に変更する
-					zRevers = [zRevers stringByReplacingOccurrencesOfString:@"#" 
-																 withString:@"%@"];
-					zForm = [NSString stringWithFormat:zRevers, zForm]; // 逆変換式を加える
-					// 単位変換後に丸め処理される
-					[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+			[app.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
+			// ↓↓↓ zUnitSI ↓↓↓ 必須
+			if ([entryOperator hasPrefix:OP_ANS]) {
+				// [=]行ならば iDimMax 次元
+				// ドラムから計算式作成
+				NSString *zForm = [self zFormulaFromDrum];
+				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+				if (1 <= iDimMax) {
+					// 回答に最適な単位にする
+					NSString *zOpUnit = [self zOptimizeUnit:zUnitSI withNum:[entryNumber doubleValue]];
+					if (![[self zUnitPara:zOpUnit withPara:1] isEqualToString:zUnitSI]) {
+						// 最適な単位が、SI単位と違うので変換する
+						NSString *zRevers = [self zUnitPara:zOpUnit withPara:3]; // (3)逆変換式
+						// UNIT逆変換式："#" ⇒ "%@" Format文字に変更する
+						zRevers = [zRevers stringByReplacingOccurrencesOfString:@"#" 
+																	 withString:@"%@"];
+						zForm = [NSString stringWithFormat:zRevers, zForm]; // 逆変換式を加える
+						// 単位変換後に丸め処理される
+						[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+					}
+					[entryUnit setString:zOpUnit];
 				}
-				[entryUnit setString:zOpUnit];
-			}
-		} 
-		else if (bMMM && 0<iDimMax) { // メートル系
-			switch (iDimMax) { // iDimMax 以下の選択が可能
+			} 
+		}
+		else if (bMMM && 0<=iDimMax) { // メートル系
+			switch (3 - iDimMax) { // (3-iDimMax)以下の選択が可能
 				case 1:
+					[entryUnit setString:@"m;m;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:nil andSi3:nil];
 					break;
 				case 2:
+					[entryUnit setString:@"m;m;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:nil];
 					break;
 				case 3:
+					[entryUnit setString:@"m;m;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:@"㎥"];
 					break;
-				default:
-					[entryUnit setString:@"NG"];
+				default:	// 単位なし　全単位無効
+					[entryUnit setString:@""];
+					[app.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
 					break;
 			}
 		}
 		else if (iDimMax==1) { // メートル系でない1次元単位
+			//NG//[entryUnit setString:zUnitSI];
 			[app.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
 		}
 		else {
 			// 単位なし　全単位無効
+			[entryUnit setString:@""];
 			[app.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
 		}
 	}
 	@catch (NSException * errEx) {
-		NSLog(@"*** LvEntryUnitSet:Exception: %@: %@\n", [errEx name], [errEx reason]);
+		NSLog(@"*** GvEntryUnitSet:Exception: %@: %@\n", [errEx name], [errEx reason]);
 	}
 	@catch (NSString *msg) {
-		NSLog(@"*** LvEntryUnitSet:@throw: %@\n", msg);
+		NSLog(@"*** GvEntryUnitSet:@throw: %@\n", msg);
 	}
 }
 
@@ -714,162 +738,65 @@
 //============================================================================================
 // zOperator により改行が発生するときの処理
 //============================================================================================
-- (void)vEnterOperator:(NSString *)zOperator // [+][-][×][÷]
+- (void)vEnterOperator:(NSString *)zOperator
 {
-	if (0<[entryOperator length] && 0<[entryNumber length] && ![entryOperator hasPrefix:OP_ANS]) {
-		// entryの演算子と数値が有効であるなら追加計算
-		// entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理する
-		[self vCalcing:zOperator];
-	}
-	else if ([entryOperator hasPrefix:OP_START]) {
-		// 開始行
-		if ([zOperator isEqualToString:OP_SUB]) { 
-			// [-] ならば値をマイナス値にする
-			if ([entryNumber hasPrefix:OP_SUB]) {
-				// 先頭が"-"ならば、先頭の"-"を削除する
-				[entryNumber deleteCharactersInRange:NSMakeRange(0,1)];
-			} else {
-				// 先頭に"-"を挿入する　＜＜数値未定の場合、符号だけ先に入ることになる＞＞
-				[entryNumber insertString:OP_SUB atIndex:0];
+	if (0<[entryOperator length])
+	{
+		if (0<[entryNumber length]) 
+		{
+			if ([entryOperator hasPrefix:OP_ANS]) 
+			{	 // [=]＆数値あり ⇒ 新しい演算子に置き換えて数値クリア
+				[entryAnswer setString:entryNumber]; // ここまでの回答を演算子の前に表示する
+				[entryOperator setString:zOperator];
+				[entryNumber setString:@""]; // 数値クリア
+				[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
+			}
+			else { // 演算子＆数値あり ⇒ 改行
+				// entryの演算子と数値が有効であるなら追加計算
+				// entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理する
+				//[self vCalcing:zOperator];
+				
+				if ([self vNewLine:zOperator]) // 改行（新しい行を追加）
+				{	// 改行成功
+					if ([zOperator isEqualToString:OP_ANS])
+					{	// [=]ならば、計算結果表示
+						[entryNumber setString:[self zAnswerDrum]];
+					} else {
+						// ここまでの回答を演算子の前に表示する
+						[entryAnswer setString:[self zAnswerDrum]]; 
+					}
+					[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
+				}
+				else { // 改行失敗（行数オーバーで追加できなかった）
+					[entryNumber setString:@"@Game Over"];
+				}
 			}
 		}
-		[entryAnswer setString:@""]; // 回答クリア
+		else { // 数値未定 ⇒ 演算子セットして単位あれば最適化
+			if ([entryOperator hasPrefix:OP_START]) 
+			{	// 数値未定＆開始行：演算子[>]の置換禁止
+				if ([zOperator isEqualToString:OP_SUB]) 
+				{	// 数値未定＆開始行＆[-] ⇒ マイナス符号ON/OFF  ＜＜数値あれば演算子扱いになる＞＞
+					if ([entryNumber hasPrefix:OP_SUB]) {
+						// 先頭が"-"ならば、先頭の"-"を削除する
+						[entryNumber deleteCharactersInRange:NSMakeRange(0,1)];
+					} else {
+						// 先頭に"-"を挿入する　＜＜数値未定の場合、符号だけ先に入ることになる＞＞
+						[entryNumber insertString:OP_SUB atIndex:0];
+					}
+				}
+				[entryAnswer setString:@""]; // 回答クリア
+			}
+			else { // 開始行でなければ演算子を置換
+				[entryOperator setString:zOperator];
+			}
+			[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
+		}
 	}
-	else {
-		[entryAnswer setString:[self zAnswerDrum]]; // ここまでの回答を演算子の前に表示する
+	else { // 演算子なし
 		[entryOperator setString:zOperator];
-		[entryNumber setString:@""]; // 数値クリア
+		[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
 	}
-	// これまでの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
-	[self LvEntryUnitSet];
-	return;
-
-/**************
-	// UNIT系列 再構成
-	NSString *zUnitSI = [self zUnitRebuild];// 直前までの単位系および次元を考慮して、選択不可キーをグレーアウトする
-	// zUnitSI は、現在までの最大「次元」の単位である。
-	if ([zUnitSI length]<=0) {
-		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-		if ([zOperator hasPrefix:OP_MULT] || [zOperator hasPrefix:OP_DIVI]) {
-			[app.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 全単位有効
-		} else {
-			[app.viewController  GvKeyUnitGroupSI:@"" andSI:nil];	// 全単位無効
-		}
-		return;
-	}
-	else if ([zOperator hasPrefix:OP_MULT] || [zOperator hasPrefix:OP_DIVI])
-	{ 
-		int iMmax = 0;
-		if ([zUnitSI hasPrefix:@"m"]) {
-			iMmax = 1;
-		}
-		else if ([zUnitSI hasPrefix:@"㎡"]) {	// 平方
-			iMmax = 2;
-		}
-		else if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
-			iMmax = 3;
-		}
-		//NSLog(@"***** formulaOperators=%@\n", formulaOperators);
-		
-		NSInteger idxTop = -1;
-		for (NSInteger idx = [formulaOperators count]-1; 0<=idx; idx--) // 末尾から
-		{
-			NSString *zOpe = [formulaOperators objectAtIndex:idx];
-			if (![zOpe hasPrefix:OP_MULT] && ![zOpe hasPrefix:OP_DIVI]) {
-				idxTop = idx; // 乗除区間の最初
-				break;
-			}
-		}
-		NSString *zUniM1 = nil;
-		NSString *zUniM2 = nil;
-		NSString *zUniM3 = nil;
-		int iM = 0;
-		NSLog(@"***formulaUnits=%@", formulaUnits);
-		for (NSInteger idx = idxTop; idx < [formulaOperators count]; idx++)
-		{
-			NSString *zOpe = [formulaOperators objectAtIndex:idx];
-			NSString *zUni = [formulaUnits objectAtIndex:idx];
-			if (zUni) {
-				// UNIT  SI基本単位変換
-				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
-				if (1 < [arUnit count]) {
-					zUni = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
-					if ([zUni hasPrefix:@"m"]) {
-						if ([zOpe hasPrefix:OP_DIVI]) {
-							iM -= 1;
-						} else {
-							iM += 1;
-						}
-						zUniM1 = [NSString stringWithString:zUni];
-					}
-					else if ([zUni hasPrefix:@"㎡"]) {	// 平方
-						if ([zOpe hasPrefix:OP_DIVI]) {
-							iM -= 2;
-						} else {
-							iM += 2;
-						}
-						zUniM2 = [NSString stringWithString:zUni];
-					}
-					else if ([zUni hasPrefix:@"㎥"]) {	// 立方
-						if ([zOpe hasPrefix:OP_DIVI]) {
-							iM -= 3;
-						} else {
-							iM += 3;
-						}
-						zUniM3 = [NSString stringWithString:zUni];
-					}
-				}
-			}
-		}
-		
-		if ([zOperator hasPrefix:OP_DIVI]) {
-			iMmax = iM;
-		} else {
-			iMmax = (3 - iM);
-		}
-		
-		if (iMmax<0) iMmax = 0;
-		else if (3<iMmax) iMmax = 3;
-		
-		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-		switch (iMmax) {
-			case 1: // 残り1次元
-				if (zUniM1) {
-					[entryUnit setString:[NSString stringWithFormat:@"%@;%@;#;#", zUniM1, zUniM1]];	// 直前にあった1次元のSI基本単位
-				} else {
-					[entryUnit setString:@"m;m;#;#"];	// 無ければ1次元のSI基本単位
-				}
-				[app.viewController GvKeyUnitGroupSI:@"m" andSI:nil];
-				break;
-			case 2: // 残り2次元
-				if (zUniM2) {
-					[entryUnit setString:[NSString stringWithFormat:@"%@;%@;#;#", zUniM2, zUniM2]];	// 直前にあった2次元のSI基本単位
-				} else {
-					[entryUnit setString:@"㎡;㎡;#;#"];	// 無ければ2次元のSI基本単位
-				}
-				[app.viewController GvKeyUnitGroupSI:@"m" andSI:@"㎡"];
-				break;
-			case 3: // 残り3次元
-				if (zUniM3) {
-					[entryUnit setString:[NSString stringWithFormat:@"%@;%@;#;#", zUniM3, zUniM3]];	// 直前にあった3次元のSI基本単位
-				} else {
-					[entryUnit setString:@"㎥;㎥;#;#"];	// 無ければ3次元のSI基本単位
-				}
-				[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:@"㎥"];
-				break;
-			default: // 次元オーバーにつき単位なしにする
-				[entryUnit setString:@""];
-				[app.viewController  GvKeyUnitGroupSI:@"" andSI:nil];	// 全単位無効
-				break;
-		}
-	}
-	else if (zUnitSI) {
-		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-		[app.viewController GvKeyUnitGroupSI:zUnitSI andSI:nil];
-		// UNIT利用中ならばSI基本単位を表示する
-		[entryUnit setString:[NSString stringWithFormat:@"%@;%@;#;#", zUnitSI, zUnitSI]];
-	}
- ****************/
 }
 
 
@@ -878,10 +805,15 @@
 //============================================================================================
 - (void)vCalcing:(NSString *)zNextOperator
 {
+	[self vEnterOperator:zNextOperator];
+	return;
+	
+/*******	
 	if ([entryNumber length]<=0) {
 		// 数値未定
 		if (! [entryOperator hasPrefix:OP_START]) { // 開始行でない！ならば、演算子だけ変更して計算しない
 			[entryOperator setString:zNextOperator];
+			[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
 		}
 		return;
 	}
@@ -889,41 +821,18 @@
 	//AzLOG(@"********************************entryUnit=1=[%@]", entryUnit);
 	// 新しい行を追加する
 	if (![self vNewLine:zNextOperator]) return; // NO=行数オーバーで追加できなかった。
-	return;
-	
-	/************************
+
 	if ([zNextOperator isEqualToString:OP_ANS]) {
 		// [=]が押されたならば、計算結果表示
 		[entryNumber setString:[self zAnswerDrum]];
-
-		// UNIT系列 再構成
-		NSString *zUnitSI = [self zUnitRebuild];// 直前までの単位系および次元を考慮して、選択不可キーをグレーアウトする
-		if (zUnitSI) {
-			AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-			[app.viewController GvKeyUnitGroupSI:zUnitSI andSI:nil];
-			// 回答に最適な単位にする
-			NSString *zOpUnit = [self zOptimizeUnit:zUnitSI withNum:[entryNumber doubleValue]];
-			if (![zOpUnit isEqualToString:zUnitSI]) {
-				// 最適な単位が、SI単位と違うので変換する
-				NSString *zRevers = [self zUnitPara:zOpUnit withPara:3]; // (3)逆変換式
-				// UNIT逆変換式："#" ⇒ "%@" Format文字に変更する
-				zRevers = [zRevers stringByReplacingOccurrencesOfString:@"#" 
-															 withString:@"%@"];
-				// ドラムから計算式作成
-				NSString *zForm = [self zFormulaFromDrum];
-				zForm = [NSString stringWithFormat:zRevers, zForm]; // 逆変換式を加える
-				// 単位変換後に丸め処理される
-				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
-
-			}
-			[entryUnit setString:zOpUnit];
-		}
 	}
 	else {
 		// ここまでの回答を演算子の前に表示する
 		[entryAnswer setString:[self zAnswerDrum]]; 
 	}
- ***************/
+	[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
+	return;
+ **********/
 }
 
 // zUnitSI系列でzNumに最適な単位を返す
@@ -1013,6 +922,7 @@
 	return @"";
 }
 
+/**********
 - (NSString *)zUnitRebuild		// UNITを使用している場合、その系列に従ってキーやドラム表示を変更する
 {
 	// Entry行だけの場合
@@ -1158,6 +1068,8 @@
 	}
 	return nil;
 }
+**********/
+
 
 /*
  ドラム ⇒ 数式

@@ -55,7 +55,8 @@
 
 // UNIT Convert
 //- (NSString *)zUnitSiFromDrum;	// 現在のドラムで使われているUNIT-SI基本単位
-- (NSString *)zUnitRebuild;		// UNITを使用している場合、その系列に従ってキーやドラム表示を変更する
+//- (NSString *)zUnitRebuild;		// UNITを使用している場合、その系列に従ってキーやドラム表示を変更する
+- (void)GvEntryUnitSet;
 
 // formulaOperators,formulaNumbers,formulaUnits を隠匿するためのメソッド
 - (NSString *)zOperator:(NSInteger)iRow;
