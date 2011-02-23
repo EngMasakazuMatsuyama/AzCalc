@@ -208,11 +208,11 @@
 					// 新セクション
 					[entryNumber setString:zNum]; // Az数値文字列をセット
 					[entryUnit setString:UNI_PERC];
-					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
+					[self vEnterOperator:OP_ANS]; // 演算子を加えて改行する。[=]ならば回答行になる
 				}
 				else {
 					[entryUnit setString:UNI_PERC];
-					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
+					[self vEnterOperator:OP_ANS]; // 演算子を加えて改行する。[=]ならば回答行になる
 				}
 				break;
 			case KeyTAG_PERM: // [‰]パーミル ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
@@ -225,7 +225,7 @@
 					[entryNumber setString:zNum]; // Az数値文字列をセット
 				}
 				[entryUnit setString:UNI_PERML];
-				[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
+				[self vEnterOperator:OP_ANS]; // 演算子を加えて改行する。[=]ならば回答行になる
 				break;
 			case KeyTAG_ROOT: // [√]ルート
 				if ([entryOperator hasPrefix:OP_ANS] && 0 < [entryNumber length]) {
@@ -235,7 +235,7 @@
 					// 新セクション
 					[entryOperator appendString:OP_ROOT]; // 演算子の末尾へ
 					[entryNumber setString:zNum]; // Az数値文字列をセット
-					[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
+					[self vEnterOperator:OP_ANS]; // 演算子を加えて改行する。[=]ならば回答行になる
 				}
 				else {
 					// 演算子後部に[√]を追加して計算式の一部にする
@@ -253,11 +253,6 @@
 					[entryOperator setString:OP_ANS];
 					[entryNumber setString:[self zAnswerDrum]]; 
 					[entryUnit setString:@""];
-					break;  // ＜＜return;ダメ！すると@finallyを通らない＞＞
-				}
-				else if ([entryOperator hasPrefix:OP_START]) { 
-					// 前行が[>]であるとき
-					// ↓ vCalcing
 				}
 				else if ([entryOperator hasPrefix:OP_ANS]) {
 					// 前行が[=]であるとき、[=]が繰り返されたことになる
@@ -272,17 +267,17 @@
 					}
 					[entryNumber setString:[formulaNumbers lastObject]];
 					[entryUnit setString:[formulaUnits lastObject]];
-					// ↓ vCalcing
+					[self vEnterOperator:OP_ANS]; // 演算子を加えて改行する。[=]ならば回答行になる
 				}
 				else if ([entryNumber length]<=0) { 
-					// 数値未定
-					// 回答する
+					// 数値未定 ⇒ 回答する
 					[entryOperator setString:OP_ANS];
 					[entryNumber setString:[self zAnswerDrum]]; 
-					break;
 				}
-				// entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
-				[self vCalcing:OP_ANS];
+				else {
+					// 改行
+					[self vEnterOperator:OP_ANS]; // 演算子を加えて改行する。[=]ならば回答行になる
+				}
 				break;
 				
 			case KeyTAG_PLUS: // [+]
@@ -383,7 +378,7 @@
 				} else {
 					[entryUnit setString:UNI_SubTAX];
 				}
-				[self vCalcing:OP_ANS]; // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
+				[self vEnterOperator:OP_ANS]; // 演算子を加えて改行する。[=]ならば回答行になる
 				break;
 		}
 	}
@@ -754,8 +749,6 @@
 			else { // 演算子＆数値あり ⇒ 改行
 				// entryの演算子と数値が有効であるなら追加計算
 				// entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理する
-				//[self vCalcing:zOperator];
-				
 				if ([self vNewLine:zOperator]) // 改行（新しい行を追加）
 				{	// 改行成功
 					if ([zOperator isEqualToString:OP_ANS])
@@ -800,6 +793,7 @@
 }
 
 
+/*******	
 //============================================================================================
 // entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理する
 //============================================================================================
@@ -808,7 +802,6 @@
 	[self vEnterOperator:zNextOperator];
 	return;
 	
-/*******	
 	if ([entryNumber length]<=0) {
 		// 数値未定
 		if (! [entryOperator hasPrefix:OP_START]) { // 開始行でない！ならば、演算子だけ変更して計算しない
@@ -832,8 +825,8 @@
 	}
 	[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
 	return;
- **********/
 }
+ **********/
 
 // zUnitSI系列でzNumに最適な単位を返す
 - (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum

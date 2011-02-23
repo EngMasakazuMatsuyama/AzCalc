@@ -89,5 +89,8 @@
 				  andSi2:(NSString *)unitSi2
 				  andSi3:(NSString *)unitSi3; // =nil:ハイライト解除
 
+- (void)MvAppleAdOn;
+- (void)MvAppleAdOff;
+
 @end
 

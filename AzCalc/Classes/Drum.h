@@ -47,7 +47,8 @@
 - (void)entryKeyButton:(KeyButton *)keyButton;  // キー入力処理
 - (void)entryUnitKey:(KeyButton *)keybu;  // 単位キー処理
 - (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
-- (void)vCalcing:(NSString *)zNextOperator;
+//- (void)vCalcing:(NSString *)zNextOperator;
+- (void)vEnterOperator:(NSString *)zOperator;
 
 - (NSString *)zFormulaFromDrum;	// ドラム ⇒ 数式
 - (NSString *)zAnswerDrum;

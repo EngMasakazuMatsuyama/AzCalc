@@ -78,12 +78,14 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application 
 {	//iOS4: アプリケーションがバックグラウンドになったら呼ばれる
+	[viewController MvAppleAdOff];
 	[self applicationWillTerminate:application]; //iOS3以前の終了処理
 }
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application 
 {	//iOS4: アプリケーションがバックグラウンドから復帰する直前に呼ばれる
+	[viewController MvAppleAdOn];
 }
 
 

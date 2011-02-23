@@ -229,7 +229,7 @@
 	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
 
 #ifdef AzMAKE_SPLASHFACE
-	ibPvDrum.alpha = 0.7;
+	ibPvDrum.alpha = 0.9;
 	ibBuMemory.hidden = YES;
 	ibLbEntry.hidden = YES;
 	if (ibAdBanner) {
@@ -239,7 +239,6 @@
 	ibBuInformation.hidden = YES;
 	NSDictionary *dicKeys = [NSDictionary new];
 #else
-
 	// standardUserDefaults からキー配置読み込む
 	NSDictionary *dicKeys = [userDef objectForKey:GUD_KeyboardSet];
 	if (dicKeys==nil) {
@@ -387,7 +386,11 @@
 					bu.tag = -1; // Function No.
 					//bu.titleLabel.text = @" "; // = nill ダメ  Space1
 					[bu setTitle:@" " forState:UIControlStateNormal]; // = nill ダメ  Space1
+#ifdef AzMAKE_SPLASHFACE
+					bu.alpha = 0.4;
+#else
 					bu.alpha = KeyALPHA_DEFAULT_OFF;
+#endif
 				}
 				
 				// 上と右のマージンが自動調整されるように。つまり、左下基点になる。
@@ -416,7 +419,7 @@
 	ibBuMemory.hidden = NO;
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
-
+	
 	if (ibAdBanner) {
 		[self.view bringSubviewToFront:ibAdBanner]; // iAdをRaDrumButtonsより上にする
 	}
@@ -467,6 +470,9 @@
 				  andSi2:(NSString *)unitSi2
 				  andSi3:(NSString *)unitSi3 // =nil:ハイライト解除
 {
+#ifndef GD_UNIT_ENABLED
+	return;
+#endif
 	NSLog(@"***GvKeyUnitGroupSI=%@,%@,%@", unitSI, unitSi2, unitSi3);
 	for (id obj in ibScrollLower.subviews)
 	{
@@ -759,6 +765,9 @@
 		//[self MvAppleAdOn];
 		//[self.view becomeFirstResponder];
 	}
+#ifdef AzMAKE_SPLASHFACE
+	ibBuMemory.hidden = YES;
+#endif
 	//[pool release];
 }
 
@@ -1127,8 +1136,12 @@
 #endif
 	}
 
+#ifdef AzMAKE_SPLASHFACE
+	return 0;
+#else
 	Drum *dm = [RaDrums objectAtIndex:component];
 	return ROWOFFSET + [dm count] + 1;  // (ROWOFFSET)タイトル行 + Drum(array行数) + 1(entry行)
+#endif
 }
 
 
@@ -1644,7 +1657,11 @@
 						if (bu.tag == ibBuMemory.tag) {
 							[bu setTitle:[NSString stringWithFormat:@"M%d", (int)(bu.tag - KeyTAG_MSTORE_Start)]
 								forState:UIControlStateNormal];
+#ifdef AzMAKE_SPLASHFACE
+							bu.alpha = 0.4; // Memory nothing
+#else
 							bu.alpha = KeyALPHA_MSTORE_OFF; // Memory nothing
+#endif
 							//break; 同じキーが複数割り当てられている可能性があるので最後までいく
 						}
 					}
@@ -1790,7 +1807,7 @@
 			else {
 				if (![drum.entryOperator isEqualToString:OP_ANS] && [drum.entryNumber doubleValue]!=0.0) {
 					// 演算中　entryを追加してから、直近の[=]の次行以降、今追加した行まで計算処理し、答えをentryNumberにセットする
-					[drum vCalcing:OP_ANS];
+					[drum vEnterOperator:OP_ANS];
 				} else {
 					// 計算処理する
 					[drum.entryOperator setString:OP_ANS];
@@ -2191,24 +2208,20 @@
 
 - (void)MvAppleAdOn
 {
+#ifdef GD_iAd_ENABLED
 	//AzLOG(@"=== MvAppleAdOn ===");
 	if (!NSClassFromString(@"ADBannerView") || !ibAdBanner || !bADbannerIsVisible) return; // iAd無効
 	
-	ibAdBanner.hidden = NO;
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:3.0];
 	
 	ibAdBanner.frame = ibPvDrum.frame;
-/*	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) { // ヨコ
-		//	ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
-		//	ibAdBanner.frame = CGRectMake(0, 320 - 32, 0,0);
-	} else {
-		ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-		ibAdBanner.frame = CGRectMake(0,0, 0,0);
-	}*/
+	ibAdBanner.hidden = NO;
+	[ibScrollUpper bringSubviewToFront:ibAdBanner]; // 上にする
 
 	[UIView commitAnimations];
+#endif
 }
 
 - (void)MvAppleAdOff
@@ -2218,15 +2231,12 @@
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:1.0];
+	[UIView setAnimationDuration:1.8];
 	
-	//CGRect theBannerFrame = self.view.frame;
-	//theBannerFrame.origin.y = -52;  // viewの外へ出す
-	//ibAdBanner.frame = theBannerFrame;	
 	ibAdBanner.frame = CGRectMake(0,-52, 0,0);
+	//ibAdBanner.hidden = YES;
 	
 	[UIView commitAnimations];
-	ibAdBanner.hidden = YES;
 }
 
 

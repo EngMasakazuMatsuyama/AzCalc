@@ -290,7 +290,7 @@
 								<reference key="IBUINormalTitleShadowColor" ref="444524143"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Setting-icon16.png</string>
+									<string key="NSResourceName">Icon16-Setting.png</string>
 								</object>
 							</object>
 							<object class="IBUILabel" id="584210161">
@@ -630,12 +630,12 @@
 							<reference ref="171654030"/>
 							<reference ref="445255124"/>
 							<reference ref="56282944"/>
-							<reference ref="934331105"/>
 							<reference ref="479167029"/>
 							<reference ref="302747404"/>
 							<reference ref="584210161"/>
 							<reference ref="175504206"/>
 							<reference ref="852859351"/>
+							<reference ref="934331105"/>
 						</object>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">ScrollUpper</string>
@@ -740,6 +740,7 @@
 					<string>8.IBPluginDependency</string>
 					<string>8.IBViewBoundsToFrameTransform</string>
 					<string>87.IBPluginDependency</string>
+					<string>87.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>87.IBViewBoundsToFrameTransform</string>
 					<string>89.IBPluginDependency</string>
 					<string>89.IBViewBoundsToFrameTransform</string>
@@ -806,6 +807,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw3AAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="0.0"/>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABAAAAAw1UAAA</bytes>
 					</object>
@@ -1022,7 +1024,7 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>Icon-Drum.png</string>
 				<string>Icon-DrumPush.png</string>
-				<string>Setting-icon16.png</string>
+				<string>Icon16-Setting.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>

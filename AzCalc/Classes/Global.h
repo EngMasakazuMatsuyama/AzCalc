@@ -6,9 +6,9 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
-//#define AzMAKE_SPLASHFACE  // 起動画面 Default.png を作るための作業オプション
 //#define AzDEBUG  プロジェクト設定にて"GCC_PREPROCESSOR_DEFINITIONS"定義した
 
+//#define AzMAKE_SPLASHFACE  // 起動画面 Default.png を作るための作業オプション
 #define GD_iAd_ENABLED
 #define GD_AdMob_ENABLED
 
