@@ -12,7 +12,7 @@
 #define GD_iAd_ENABLED
 #define GD_AdMob_ENABLED
 
-//#define GD_UNIT_ENABLED		// 単位機能
+#define GD_UNIT_ENABLED		// 単位機能
 
 #define OR  ||
 

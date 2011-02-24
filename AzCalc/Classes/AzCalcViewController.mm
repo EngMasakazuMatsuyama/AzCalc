@@ -487,7 +487,7 @@
 	{
 		if ([obj isMemberOfClass:[KeyButton class]]) {
 			KeyButton *kb = obj;
-			if (kb.RzUnit) {
+			if (3<[kb.RzUnit length]) {  // = "SI基本単位:変換式;逆変換式"
 				if (unitSI || unitSi2) {		// 注意 ↓ nil ↓ 渡すとエラーになる
 					if ((unitSI && [kb.RzUnit hasPrefix:unitSI]) 
 					 || (unitSi2 && [kb.RzUnit hasPrefix:unitSi2])
@@ -1119,7 +1119,7 @@
 	}
 #ifdef AzDEBUG
 	// レイアウト結果を.plistファイルへ書き出すことにより、初期レイアウトファイル"AzKeySet.plist"を作ることができる。
-	NSString *zPath = @"/Users/masa/AzukiSoft/AzCalc/AzKeySet_DEBUG.plist";
+	NSString *zPath = @"/Users/masa/AzukiSoft/AzCalc/AzCalc/AzKeySet_DEBUG.plist";
 	[mdKeySet writeToFile:zPath atomically:YES];
 #endif
 	
@@ -1454,6 +1454,11 @@
 		button.alpha = [[dic objectForKey:@"Alpha"] floatValue];
 		// Unit
 		button.RzUnit = [dic objectForKey:@"Unit"];
+	}
+	
+	//[0.3.1]毎回、ドラムをリセットすることにした。
+	for (int i=0; i<[RaKeyMaster count]; i++) {
+		[ibPvDrum selectRow:0 inComponent:i animated:YES];
 	}
 }
 

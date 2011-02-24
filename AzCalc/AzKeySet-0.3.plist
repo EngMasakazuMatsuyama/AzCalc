@@ -410,7 +410,7 @@
 	<key>P1C1R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -425,7 +425,7 @@
 	<key>P1C1R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -440,7 +440,7 @@
 	<key>P1C1R5</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -470,7 +470,7 @@
 	<key>P1C2R2</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -485,7 +485,7 @@
 	<key>P1C2R3</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -500,7 +500,7 @@
 	<key>P1C2R4</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -515,7 +515,7 @@
 	<key>P1C2R5</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -545,7 +545,7 @@
 	<key>P1C3R2</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -560,7 +560,7 @@
 	<key>P1C3R3</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -575,7 +575,7 @@
 	<key>P1C3R4</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -590,7 +590,7 @@
 	<key>P1C3R5</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -620,7 +620,7 @@
 	<key>P1C4R2</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -635,7 +635,7 @@
 	<key>P1C4R3</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -650,7 +650,7 @@
 	<key>P1C4R4</key>
 	<dict>
 		<key>Alpha</key>
-		<integer>1</integer>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -665,7 +665,7 @@
 	<key>P1C4R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.80000000000000004</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -680,7 +680,7 @@
 	<key>P1C5R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.80000000000000004</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -695,7 +695,7 @@
 	<key>P1C5R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.80000000000000004</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -710,7 +710,7 @@
 	<key>P1C5R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.80000000000000004</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -725,7 +725,7 @@
 	<key>P1C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.80000000000000004</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -740,7 +740,7 @@
 	<key>P1C5R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.80000000000000004</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -785,7 +785,7 @@
 	<key>P2C1R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -800,7 +800,7 @@
 	<key>P2C1R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.94999999999999996</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -815,7 +815,7 @@
 	<key>P2C1R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.80000000000000004</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -830,677 +830,677 @@
 	<key>P2C2R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1000</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>kg</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;#;#</string>
+		<string></string>
 	</dict>
 	<key>P2C2R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1003</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>t</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#*1000);(#/1000)</string>
+		<string></string>
 	</dict>
 	<key>P2C2R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1001</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>g</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#/1000);(#*1000)</string>
+		<string></string>
 	</dict>
 	<key>P2C2R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1002</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>mg</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#/1000000);(#*1000000)</string>
+		<string></string>
 	</dict>
 	<key>P2C2R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1014</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>匁</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#*0.00375);(#/0.00375)</string>
+		<string></string>
 	</dict>
 	<key>P2C3R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1100</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>m</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;#;#</string>
+		<string></string>
 	</dict>
 	<key>P2C3R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1103</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>km</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*1000);(#/1000)</string>
+		<string></string>
 	</dict>
 	<key>P2C3R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1101</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>cm</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#/100);(#*100)</string>
+		<string></string>
 	</dict>
 	<key>P2C3R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1102</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>mm</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#/1000);(#*1000)</string>
+		<string></string>
 	</dict>
 	<key>P2C3R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1115</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>尺</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*0.303);(#/0.303)</string>
+		<string></string>
 	</dict>
 	<key>P2C4R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1200</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>㎡</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;#;#</string>
+		<string></string>
 	</dict>
 	<key>P2C4R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1203</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>ha</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*10000);(#/10000)</string>
+		<string></string>
 	</dict>
 	<key>P2C4R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1201</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>c㎡</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#/10000);(#*10000)</string>
+		<string></string>
 	</dict>
 	<key>P2C4R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1205</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>m㎡</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#/1000000);(#*1000000)</string>
+		<string></string>
 	</dict>
 	<key>P2C4R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1213</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>坪</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*3.305785);(#/3.305785)</string>
+		<string></string>
 	</dict>
 	<key>P2C5R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1300</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>㎥</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;#;#</string>
+		<string></string>
 	</dict>
 	<key>P2C5R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1302</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>L</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#/1000);(#*1000)</string>
+		<string></string>
 	</dict>
 	<key>P2C5R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1303</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>dL</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#/10000);(#*10000)</string>
+		<string></string>
 	</dict>
 	<key>P2C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1304</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>mL</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#/1000000);(#*1000000)</string>
+		<string></string>
 	</dict>
 	<key>P2C5R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1314</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>合</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#*0.00018039);(#/0.00018039)</string>
+		<string></string>
 	</dict>
 	<key>P3C1R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1010</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>kt</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#/5000);(#*5000)</string>
+		<string></string>
 	</dict>
 	<key>P3C1R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1011</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>oz</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#*0.028349523125);(#/0.028349523125)</string>
+		<string></string>
 	</dict>
 	<key>P3C1R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1012</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>lb</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#*0.45359237);(#/0.45359237)</string>
+		<string></string>
 	</dict>
 	<key>P3C1R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1013</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>貫</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#*3.75);(#/3.75)</string>
+		<string></string>
 	</dict>
 	<key>P3C1R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1014</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>匁</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>kg;(#*0.00375);(#/0.00375)</string>
+		<string></string>
 	</dict>
 	<key>P3C2R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1110</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>Adm</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*1852);(#/1852)</string>
+		<string></string>
 	</dict>
 	<key>P3C2R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1111</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>yd</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*0.9144);(#/0.9144)</string>
+		<string></string>
 	</dict>
 	<key>P3C2R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1112</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>ft</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*0.3048);(#/0.3048)</string>
+		<string></string>
 	</dict>
 	<key>P3C2R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1113</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>in</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*0.0254);(#/0.0254)</string>
+		<string></string>
 	</dict>
 	<key>P3C2R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1114</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>mi</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*1609.344);(#/1609.344)</string>
+		<string></string>
 	</dict>
 	<key>P3C3R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1115</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>尺</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*0.303);(#/0.303)</string>
+		<string></string>
 	</dict>
 	<key>P3C3R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1116</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>寸</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*0.0303);(#/0.0303)</string>
+		<string></string>
 	</dict>
 	<key>P3C3R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1117</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>里</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>m;(#*3927);(#/3927)</string>
+		<string></string>
 	</dict>
 	<key>P3C3R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1204</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>k㎡</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*1000000);(#/1000000)</string>
+		<string></string>
 	</dict>
 	<key>P3C3R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1202</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>a</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*100);(#/100)</string>
+		<string></string>
 	</dict>
 	<key>P3C4R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1210</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>ac</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*4046.8564224);(#/4046.8564224)</string>
+		<string></string>
 	</dict>
 	<key>P3C4R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1211</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>sqft</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*0.09290304);(#/0.09290304)</string>
+		<string></string>
 	</dict>
 	<key>P3C4R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1212</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>sqin</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*0.00064516);(#/0.00064516)</string>
+		<string></string>
 	</dict>
 	<key>P3C4R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1214</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>畝</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*99.17355);(#/99.17355)</string>
+		<string></string>
 	</dict>
 	<key>P3C4R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1215</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>反</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎡;(#*991.7355);(#/991.7355)</string>
+		<string></string>
 	</dict>
 	<key>P3C5R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1313</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>bbl</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#*1.58987294928);(#/1.58987294928)</string>
+		<string></string>
 	</dict>
 	<key>P3C5R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1311</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>cuft</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#*0.028316846592);(#/0.028316846592)</string>
+		<string></string>
 	</dict>
 	<key>P3C5R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1312</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>galus</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#*0.003785411784);(#/0.003785411784)</string>
+		<string></string>
 	</dict>
 	<key>P3C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1310</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>cuin</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#*0.0016387064);(#/0.0016387064)</string>
+		<string></string>
 	</dict>
 	<key>P3C5R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>4</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>1315</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>升</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
-		<string>㎥;(#*0.0018039);(#/0.0018039)</string>
+		<string></string>
 	</dict>
 </dict>
 </plist>

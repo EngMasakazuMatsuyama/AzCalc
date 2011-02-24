@@ -49,7 +49,6 @@
 	BOOL				bDrumRefresh;		// =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
 	BOOL                bFormulaFilter;     // =YES:ペーストされたのでフィルタ処理する
     BOOL				bPad;				// =YES:iPad  =NO:iPhone
-	float				MfTaxRate;
 	
 	// Keyboard spec
 	int					iKeyPages;
@@ -61,6 +60,7 @@
 	float				fKeyHeiGap;		// キートップ上下の余白
 	float				fKeyWidth;		// キートップの幅
 	float				fKeyHeight;		// キートップの高さ
+	float				MfTaxRate;		// 消費税率(%)
 
 	// Change Keyboard
 	KeyButton			*buChangeKey;	// 選択中のキー

@@ -108,7 +108,11 @@
 			case 8:
 			case 9:
 				if ([entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
-					if (![self vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
+					if ([self vNewLine:OP_START]) { // entryをarrayに追加し、entryを新規作成する
+						[entryNumber appendFormat:@"%d", (int)keyButton.tag];
+						[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
+						break;
+					}
 				}
 				if (PRECISION-2 <= [entryNumber length]) { // [-][.]を考慮して(-2)
 					// 改めて[-][.]を除いた有効桁数を調べる
@@ -586,7 +590,7 @@
 		NSString *zUnitSI = nil;
 		NSString *zUni, *zOpe;
 		int iDim;
-		int iDimMax = 0; // 単位なし
+		int iDimAns = 0;	// 回答次元
 		BOOL bMMM = NO;	// YES=メートル系
 		BOOL bFixed = NO; // 次元決定
 		for (NSInteger idx = idxTop; idx <= idxEnd+1; idx++) 
@@ -597,7 +601,7 @@
 				zUni = [formulaUnits objectAtIndex:idx];
 			} else {
 				zOpe = entryOperator;
-				zUni = entryUnit;
+				zUni = @""; //entryUnit;
 			}
 			if (0 < [zUni length]) {
 				// UNIT  SI基本単位変換
@@ -625,13 +629,21 @@
 			}
 			
 			if ([zOpe hasPrefix:OP_START]) {
-				iDimMax = iDim;
+				iDimAns = iDim;
 			}
 			else if ([zOpe hasPrefix:OP_MULT]) {
-				iDimMax += iDim;
+				if (iDim==0) {
+					iDimAns = (3 - iDimAns);
+				} else {
+					iDimAns += iDim;
+				}
 			}
 			else if ([zOpe hasPrefix:OP_DIVI]) {
-				iDimMax -= iDim;
+				if (iDim==0) {
+					//iDimAns = iDimAns;
+				} else {
+					iDimAns -= iDim;
+				}
 			}
 			else {
 				bFixed = YES;	// [+][-][=]により単位次元が決定されたことを示す
@@ -640,8 +652,8 @@
 		}
 		//
 		if (bFixed || [entryOperator hasPrefix:OP_ANS]) {	// 次元決定
-			if (bMMM && 0<iDimMax) { // メートル系
-				switch (iDimMax) {
+			if (bMMM && 0<iDimAns) { // メートル系
+				switch (iDimAns) {
 					case 1:	// メートルのみ
 						[entryUnit setString:@"m;m;#;#"];
 						zUnitSI = @"m";
@@ -660,7 +672,7 @@
 						break;
 				}
 			}
-			else if (iDimMax==1) { // メートル系でない1次元単位
+			else if (iDimAns==1) { // メートル系でない1次元単位
 				// zUnitSI そのまま
 			}
 			else { // 単位なし　全単位無効
@@ -674,25 +686,28 @@
 				// ドラムから計算式作成
 				NSString *zForm = [self zFormulaFromDrum];
 				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
-				if (1 <= iDimMax) {
+				if (1 <= iDimAns) {
 					// 回答に最適な単位にする
 					NSString *zOpUnit = [self zOptimizeUnit:zUnitSI withNum:[entryNumber doubleValue]];
-					if (![[self zUnitPara:zOpUnit withPara:1] isEqualToString:zUnitSI]) {
+					if (3 < [zOpUnit length] 
+						&& ![[self zUnitPara:zOpUnit withPara:1] isEqualToString:zUnitSI]) {
 						// 最適な単位が、SI単位と違うので変換する
 						NSString *zRevers = [self zUnitPara:zOpUnit withPara:3]; // (3)逆変換式
-						// UNIT逆変換式："#" ⇒ "%@" Format文字に変更する
-						zRevers = [zRevers stringByReplacingOccurrencesOfString:@"#" 
-																	 withString:@"%@"];
-						zForm = [NSString stringWithFormat:zRevers, zForm]; // 逆変換式を加える
-						// 単位変換後に丸め処理される
-						[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+						if (zRevers) {
+							// UNIT逆変換式："#" ⇒ "%@" Format文字に変更する
+							zRevers = [zRevers stringByReplacingOccurrencesOfString:@"#" 
+																		 withString:@"%@"];
+							zForm = [NSString stringWithFormat:zRevers, zForm]; // 逆変換式を加える
+							// 単位変換後に丸め処理される
+							[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+						}
 					}
 					[entryUnit setString:zOpUnit];
 				}
 			} 
 		}
-		else if (bMMM && 0<=iDimMax) { // メートル系
-			switch (3 - iDimMax) { // (3-iDimMax)以下の選択が可能
+		else if (bMMM && 0<=iDimAns) { // メートル系
+			switch (iDimAns) { // (3-iDimMax)以下の選択が可能
 				case 1:
 					[entryUnit setString:@"m;m;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:nil andSi3:nil];
@@ -711,7 +726,7 @@
 					break;
 			}
 		}
-		else if (iDimMax==1) { // メートル系でない1次元単位
+		else if (iDimAns==1) { // メートル系でない1次元単位
 			//NG//[entryUnit setString:zUnitSI];
 			[app.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
 		}
@@ -832,6 +847,9 @@
 - (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum
 {
 	dNum = fabs(dNum);
+	if (dNum == 0.0) {
+		return @"";
+	}
 	
 	if ([zUnitSI hasPrefix:@"kg"]) {
 		if (1000.0 <= dNum) {
