@@ -87,6 +87,7 @@
     [super dealloc];
 }
 
+
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
@@ -241,7 +242,7 @@
 #else
 	// standardUserDefaults からキー配置読み込む
 	NSDictionary *dicKeys = [userDef objectForKey:GUD_KeyboardSet];
-	if (dicKeys==nil) {
+	if (dicKeys==nil) {  // インストール初回のみ通る
 		// AzKeySet.plistからキー配置読み込む
 		NSString *zKeySetFile;
 		if (bPad) { // iPad
@@ -324,7 +325,12 @@
 					// UNIT
 					NSString *strUnit = [dicKey objectForKey:@"Unit"];
 					
-					if (strText==nil OR numSize==nil OR numAlpha==nil OR numColor==nil) {
+					if (strText==nil 
+						OR numSize==nil 
+						OR numAlpha==nil 
+						OR numColor==nil 
+						OR strUnit==nil) 
+					{	// 通常は通らない。　将来、Master属性が増えたときに通る可能性あり。
 						// AzKeyMaster 引用
 						if (RaKeyMaster==nil) { // AzKeyMaster.plistからマスターキー一覧読み込む
 							NSString *zFile = [[NSBundle mainBundle] pathForResource:@"AzKeyMaster" ofType:@"plist"];
@@ -335,6 +341,7 @@
 							}
 						}
 						
+						strText = nil;
 						for (NSArray *aComponent in RaKeyMaster) {
 							for (NSDictionary *dic in aComponent) {
 								if ([[dic objectForKey:@"Tag"] integerValue] == bu.tag) {
@@ -342,10 +349,12 @@
 									numSize = [dic objectForKey:@"Size"];
 									numColor = [dic objectForKey:@"Color"];
 									numAlpha = [dic objectForKey:@"Alpha"];
-									// UNIT
 									strUnit = [dic objectForKey:@"Unit"];
+									// 将来、属性が増えれば、ここへ追加することになる。
+									break;
 								}
 							}
+							if (strText) break; // レス向上のため
 						}
 					}
 
@@ -623,12 +632,14 @@
 		 
 		// キー再表示：連結されたキーがあれば独立させる
 		NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
-		for (id obj in [aKeys reverseObjectEnumerator]) {  // 最後にaddSubViewしたのが先頭[0]になるから逆順で
+		for (id obj in aKeys) {
 			if ([obj isMemberOfClass:[KeyButton class]]) {
 				KeyButton *bu = (KeyButton *)obj;
-				// 連結されたボタンを全て最小独立表示する
+				// 連結されたボタンを全て最小独立表示する  [0.3]右および下のボタンを生かすようになったため修正
 				if (bu.frame.size.width != fKeyWidth OR bu.frame.size.height != fKeyHeight) {
 					CGRect rc = bu.frame;
+					rc.origin.x += (rc.size.width - fKeyWidth);		//[0.3]連結された右端のボタンになる
+					rc.origin.y += (rc.size.height - fKeyHeight);	//[0.3]連結された下端のボタンになる
 					rc.size.width = fKeyWidth;
 					rc.size.height = fKeyHeight;
 					bu.frame = rc;
@@ -703,9 +714,9 @@
 		[self MvMemoryShow];
 
 		// キー再表示
-		NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+		NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（上から下へかつ左から右）に収められている。
 		// タテ連結処理
-		for (id obj in [aKeys reverseObjectEnumerator]) {  // 最後にaddSubViewしたのが先頭[0]になるから逆順で
+		for (id obj in aKeys) {
 			if ([obj isMemberOfClass:[KeyButton class]]) {
 				KeyButton *bu = (KeyButton *)obj;
 				if (bu.tag!=-1 && bu.hidden == NO) { // 起動時やメモリ不足時にviewDidLoad後に通ることになる。その時、非表示となったボタンは無視する
@@ -713,19 +724,25 @@
 					for (id obj in aKeys) {
 						if ([obj isMemberOfClass:[KeyButton class]]) {
 							KeyButton *bu2 = (KeyButton *)obj;
-							if (bu.iPage == bu2.iPage) {
-								if (bu.iCol < bu2.iCol) break; // 次の列になれば終了
-								if (bu2.hidden == NO && bu != bu2
-									&& bu.iCol == bu2.iCol
-									&& bu.iRow < bu2.iRow)
-								{	// 同列 ＆ 下行 ならば タテ連結
-									if (bu.tag != bu2.tag) break; // 下行のTab違えば即終了
-									CGRect rc = bu.frame;
-									rc.size.height = CGRectGetMaxY(bu2.frame) - rc.origin.y;
-									bu.frame = rc;
-									// 非表示にする
-									bu2.hidden = YES;
-								}
+							if (bu != bu2 
+								&& bu.iPage == bu2.iPage // 同ページ内に限る
+								&& bu.hidden == NO
+								&& bu2.hidden == NO
+								&& bu.iCol == bu2.iCol
+								&& bu.iRow+1 == bu2.iRow) //[0.3]Fix 間に他のボタンが入っても連結されてしまう不具合修正
+							{	// 同列 ＆ 下行 ならば タテ連結
+								if (bu.tag != bu2.tag) break; // 下行のTab違えば即終了
+								if (bu.iCol != bu2.iCol) break;  // 列が違えば即終了
+								/*[0.3]Fix 間に他のボタンが入っても連結されてしまう不具合修正 ⇒ 右側を残して右隣(C+1)だけ比較するようにした。
+								 CGRect rc = bu.frame;
+								 rc.size.height = CGRectGetMaxY(bu2.frame) - rc.origin.y;
+								 bu.frame = rc;
+								 bu2.hidden = YES;
+								 */
+								CGRect rc = bu.frame; // タテ3連結以上に対応しているか確認すること。
+								rc.size.height = CGRectGetMaxY(bu2.frame) - rc.origin.y;
+								bu2.frame = rc;		// 下側ボタンを生かす。
+								bu.hidden = YES;   // 上側ボタンを非表示にする
 							}
 						}
 					}
@@ -734,28 +751,34 @@
 		}
 
 		// ヨコ連結処理　＜＜同じ高さならば連結する＞＞
-		for (id obj in [aKeys reverseObjectEnumerator]) {  // 最後にaddSubViewしたのが先頭[0]になるから逆順で
+		for (id obj in aKeys) {
 			if ([obj isMemberOfClass:[KeyButton class]]) {
 				KeyButton *bu = (KeyButton *)obj;
+				//NSLog(@"$$$$$ bu=[%@]", bu.titleLabel.text);
 				if (bu.tag!=-1 && bu.hidden == NO) { // 起動時やメモリ不足時にviewDidLoad後に通ることになる。その時、非表示となったボタンは無視する
 					// ヨコ連結処理　＜＜同じ高さならば連結する＞＞
 					for (id obj in aKeys) {
 						if ([obj isMemberOfClass:[KeyButton class]]) {
 							KeyButton *bu2 = (KeyButton *)obj;
-							if (bu.iPage == bu2.iPage) {
-								//if (bu.iRow < bu2.iRow) break; タテ方向に走査するため継続
-								if (bu2.hidden == NO && bu != bu2 
-									&& bu.iRow == bu2.iRow 
-									&& bu.iCol < bu2.iCol)
-								{	// 同行 ＆ 右列 ならば ヨコ結合
-									if (bu.tag != bu2.tag) break; // 右列のTab違えば即終了
-									if (bu.frame.size.height != bu2.frame.size.height) break; // 右列の高さが違えば即終了
-									CGRect rc = bu.frame;
-									rc.size.width = CGRectGetMaxX(bu2.frame) - rc.origin.x;
-									bu.frame = rc;
-									// 非表示にする
-									bu2.hidden = YES;
-								}
+							if (bu != bu2
+								&& bu.iPage == bu2.iPage // 同ページ内に限る
+								&& bu.hidden == NO
+								&& bu2.hidden == NO 
+								&& bu.iRow == bu2.iRow 
+								&& bu.iCol+1 == bu2.iCol) //[0.3]Fix 間に他のボタンが入っても連結されてしまう不具合修正
+							{	// 同行 ＆ 右隣 ならば ヨコ結合
+								if (bu.tag != bu2.tag) break; // 右列のTab違えば即終了
+								if (bu.frame.size.height != bu2.frame.size.height) break; // 右列の高さが違えば即終了
+								/*[0.3]Fix 間に他のボタンが入っても連結されてしまう不具合修正 ⇒ 右側を残して右隣(C+1)だけ比較するようにした。
+								 CGRect rc = bu.frame;
+								 rc.size.width = CGRectGetMaxX(bu2.frame) - rc.origin.x;
+								 bu.frame = rc;
+								 bu2.hidden = YES;
+								 */
+								CGRect rc = bu.frame; // ヨコ3連結以上に対応しているか確認すること。
+								rc.size.width = CGRectGetMaxX(bu2.frame) - rc.origin.x;
+								bu2.frame = rc;		// 右側ボタンを生かす。
+								bu.hidden = YES;   // 左側ボタンを非表示にする
 							}
 						}
 					}
@@ -1017,77 +1040,102 @@
 	[kb release];
 }
 
+// 全キー配置＆属性を記録する。起動時間短縮  　　
+// bMaster=YES: TagからMaster属性優先採用する（アップデート
+- (void)MvUserKeySave:(BOOL)bMaster	
+{
+	NSArray *arMaster = nil;
+	if (bMaster) {
+		// AzKeyMaster.plistからマスターキー一覧読み込む
+		NSString *zFile = [[NSBundle mainBundle] pathForResource:@"AzKeyMaster" ofType:@"plist"];
+		arMaster = [[NSArray alloc] initWithContentsOfFile:zFile];
+		if (arMaster==nil) {
+			AzLOG(@"MvUserKeySave:ERROR: AzKeyMaster.plist not Open");
+			return;
+		}
+	}
+	
+	NSMutableDictionary *mdKeySet = [NSMutableDictionary new];
+	
+	NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
+	for (id obj in aKeys) {
+		//AzLOG(@"aKeys:obj class=%@", [[obj class] description]); // "KeyButton" が得られる
+		assert([obj isMemberOfClass:[KeyButton class]]);
+		KeyButton *bu = (KeyButton *)obj;
+
+		NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", (int)bu.iPage, (int)bu.iCol, (int)bu.iRow];
+		if ([mdKeySet objectForKey:zPCR]) {
+			// キー重複！
+			AzLOG(@"MvUserKeySave: ERROR:キー重複:%@", zPCR);
+		} 
+		else {
+			// 新規生成して追加
+			NSString *strText  = bu.titleLabel.text;
+			NSNumber *numSize  = [NSNumber numberWithFloat:bu.fFontSize];
+			NSNumber *numColor = [NSNumber numberWithInteger:bu.iColorNo];
+			NSNumber *numAlpha = [NSNumber numberWithFloat:bu.alpha];
+			NSString *strUnit  = bu.RzUnit;
+
+			if (bMaster && arMaster) 
+			{	// Master属性を優先する
+				strText = nil;
+				for (NSArray *aKey in arMaster) {
+					for (NSDictionary *dKey in aKey) {
+						if ([[dKey objectForKey:@"Tag"] integerValue] == bu.tag) {
+							strText	 = [dKey objectForKey:@"Text"];
+							numSize  = [dKey objectForKey:@"Size"];
+							numColor = [dKey objectForKey:@"Color"];
+							numAlpha = [dKey objectForKey:@"Alpha"];
+							strUnit  = [dKey objectForKey:@"Unit"];
+							break;
+						}
+					}
+					if (strText) break;
+				}
+			}
+			
+			if (strText==nil) strText = @" "; // Space1
+			if (strUnit==nil) strUnit = @"";  // Dictionary では、nil 禁止のため
+			
+			NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+								 [NSNumber numberWithInteger:bu.tag], @"Tag",
+								 strText,	@"Text",
+								 numSize,	@"Size",
+								 numColor,	@"Color",
+								 numAlpha,	@"Alpha",
+								 strUnit,	@"Unit", nil];
+			[mdKeySet setObject:dic forKey:zPCR];
+			[dic release];
+		}
+		[zPCR release];
+	}		
+	[arMaster release];
+	
+	// standardUserDefaults へ保存する　＜＜アプリがアップデートされても保持される＞＞
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+	[userDef setObject:mdKeySet forKey:GUD_KeyboardSet];
+	if ([userDef synchronize] != YES) { // file write
+		AzLOG(@"MvUserKeySave synchronize: ERROR");
+	}
+#ifdef AzDEBUG
+	// レイアウト結果を.plistファイルへ書き出すことにより、初期レイアウトファイル"AzKeySet.plist"を作ることができる。
+	NSString *zPath = @"/Users/masa/AzukiSoft/AzCalc/AzKeySet_DEBUG.plist";
+	[mdKeySet writeToFile:zPath atomically:YES];
+#endif
+	
+	[mdKeySet release];	mdKeySet = nil;
+}
+
+
 - (IBAction)ibBuSetting:(UIButton *)button
 {
 	if (RaKeyMaster) {
-		//
-		// AzKeySet.plistからキー配置を読み込む
-		NSString *zKeySetFile;
-		if (bPad) { // iPad
-			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
-		} else {
-			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
-		}
-		NSMutableDictionary *mdKeySet = [[NSMutableDictionary alloc] initWithContentsOfFile:zKeySetFile];
-		if (mdKeySet==nil) {
-			AzLOG(@"ERROR: AzKeySet.plist not Open");
-			exit(-1);
-		}
-		BOOL bSave = NO;
-		// bu.bDirty == YES だけ更新する
-		NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
-		for (id obj in aKeys) {
-			//AzLOG(@"aKeys:obj class=%@", [[obj class] description]); // "KeyButton" が得られる
-			assert([obj isMemberOfClass:[KeyButton class]]);
-			KeyButton *bu = (KeyButton *)obj;
-			if (bu.bDirty) {
-				NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", (int)bu.iPage, (int)bu.iCol, (int)bu.iRow];
-				NSMutableDictionary *dic = [mdKeySet objectForKey:zPCR];
-				if (dic) {
-					[dic setValue:[NSNumber numberWithInteger:bu.tag]		forKey:@"Tag"];
-					[dic setValue:bu.titleLabel.text						forKey:@"Text"];
-					[dic setValue:[NSNumber numberWithFloat:bu.fFontSize]	forKey:@"Size"];
-					[dic setValue:[NSNumber numberWithFloat:bu.alpha]		forKey:@"Alpha"];
-					[dic setValue:[NSNumber numberWithInteger:bu.iColorNo]	forKey:@"Color"];
-				} else {
-					dic = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-						   [NSNumber numberWithInteger:bu.tag],		@"Tag",
-						   bu.titleLabel.text,						@"Text",
-						   [NSNumber numberWithFloat:bu.fFontSize],	@"Size",
-						   [NSNumber numberWithFloat:bu.alpha],		@"Alpha",
-						   [NSNumber numberWithInteger:bu.iColorNo],@"Color", nil];
-					[mdKeySet setObject:dic forKey:zPCR];
-					[dic release];
-				}
-				[zPCR release];
-				bSave = YES;
-			}
-		}		
-		if (bSave && mdKeySet) {
-			/*	// キーレイアウト変更モード：AzKeySet.plistへ保存する
-			 AzLOG(@"writeToFile:zKeySetFile=%@", zKeySetFile);
-			 //AzLOG(@"mdKeySet:%@", [mdKeySet description]);
-			 if ([mdKeySet writeToFile:zKeySetFile atomically:YES] != YES) {
-			 AzLOG(@"writeToFile = NO");
-			 }
-			 [mdKeySet release];*/
-
-			// standardUserDefaults へ保存する　＜＜アプリがアップデートされても保持される＞＞
-			NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-			[userDef setObject:mdKeySet forKey:GUD_KeyboardSet];
-			if ([userDef synchronize] != YES) { // file write
-				AzLOG(@"GUD_KeyboardSet synchronize: ERROR");
-			}
-			[mdKeySet release];	mdKeySet = nil;
-		}
+		// 全キー配置＆属性を記録する
+		[self MvUserKeySave:YES];
 	}
 
 	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.ibSettingVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;  // 水平回転
-												// UIModalTransitionStylePartialCurl; // めくれ上がる（計算式表示に使う）
-	//appDelegate.ibInformationVC.view.hidden = YES;
-	//appDelegate.ibSettingVC.view.hidden = NO;
-	//appDelegate.ibOptionVC.view.hidden = YES;
 	[self presentModalViewController:appDelegate.ibSettingVC animated:YES];
 }
 
