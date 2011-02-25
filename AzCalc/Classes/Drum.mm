@@ -256,7 +256,7 @@
 					[entryAnswer setString:@""];
 					[entryOperator setString:OP_ANS];
 					[entryNumber setString:[self zAnswerDrum]]; 
-					[entryUnit setString:@""];
+					[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
 				}
 				else if ([entryOperator hasPrefix:OP_ANS]) {
 					// 前行が[=]であるとき、[=]が繰り返されたことになる
@@ -277,6 +277,7 @@
 					// 数値未定 ⇒ 回答する
 					[entryOperator setString:OP_ANS];
 					[entryNumber setString:[self zAnswerDrum]]; 
+					[self GvEntryUnitSet]; // entryUnitと単位キーを最適化
 				}
 				else {
 					// 改行
@@ -590,9 +591,10 @@
 		NSString *zUnitSI = nil;
 		NSString *zUni, *zOpe;
 		int iDim;
-		int iDimAns = 0;	// 回答次元
+		int iDimAns = 0;		// 回答次元
+		int iDimAnsFix = -1;	// 回答次元　>=0:決定
 		BOOL bMMM = NO;	// YES=メートル系
-		BOOL bFixed = NO; // 次元決定
+		//BOOL bFixed = NO; // 次元決定
 		for (NSInteger idx = idxTop; idx <= idxEnd+1; idx++) 
 		{
 			iDim = 0; // 単位なし
@@ -601,7 +603,7 @@
 				zUni = [formulaUnits objectAtIndex:idx];
 			} else {
 				zOpe = entryOperator;
-				zUni = @""; //entryUnit;
+				zUni = @""; //entryUnit; ここは、この単位を求めるための処理である
 			}
 			if (0 < [zUni length]) {
 				// UNIT  SI基本単位変換
@@ -632,28 +634,43 @@
 				iDimAns = iDim;
 			}
 			else if ([zOpe hasPrefix:OP_MULT]) {
-				if (iDim==0) {
+				if (iDim==0 && idxEnd<idx) {
 					iDimAns = (3 - iDimAns);
-				} else {
+				} 
+				else {
 					iDimAns += iDim;
 				}
 			}
 			else if ([zOpe hasPrefix:OP_DIVI]) {
-				if (iDim==0) {
-					//iDimAns = iDimAns;
-				} else {
-					iDimAns -= iDim;
-				}
+				iDimAns -= iDim;
 			}
-			else {
-				bFixed = YES;	// [+][-][=]により単位次元が決定されたことを示す
-				break;
+			else if (iDimAnsFix < 0) {
+				iDimAnsFix = iDimAns; // [+][-][=]により単位次元が決定されたことを示す
+			}
+
+			if (([zOpe hasPrefix:OP_ADD] || [zOpe hasPrefix:OP_SUB])) {
+				iDimAns = iDim;
+			}
+			
+			if (iDimAns < 0 || 3 < iDimAns) {
+				if (idx <= idxEnd) {
+					[formulaUnits replaceObjectAtIndex:idx withObject:@""];
+				} else {
+					[entryUnit setString:@""];
+				}
 			}
 		}
 		//
-		if (bFixed || [entryOperator hasPrefix:OP_ANS]) {	// 次元決定
-			if (bMMM && 0<iDimAns) { // メートル系
-				switch (iDimAns) {
+		if (0<=iDimAnsFix && [entryOperator hasPrefix:OP_ANS]) {	// 次元決定
+			if (iDimAnsFix != iDimAns) {
+				NSString *zForm = [self zFormulaFromDrum];
+				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
+				// 単位＜矛盾＞
+				[entryUnit setString:@"?"];
+				return;
+			}
+			else if (bMMM) { // メートル系
+				switch (iDimAnsFix) {
 					case 1:	// メートルのみ
 						[entryUnit setString:@"m;m;#;#"];
 						zUnitSI = @"m";
@@ -672,7 +689,7 @@
 						break;
 				}
 			}
-			else if (iDimAns==1) { // メートル系でない1次元単位
+			else if (iDimAnsFix==1) { // メートル系でない1次元単位
 				// zUnitSI そのまま
 			}
 			else { // 単位なし　全単位無効
@@ -686,11 +703,10 @@
 				// ドラムから計算式作成
 				NSString *zForm = [self zFormulaFromDrum];
 				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
-				if (1 <= iDimAns) {
+				if (1 <= iDimAnsFix) {
 					// 回答に最適な単位にする
 					NSString *zOpUnit = [self zOptimizeUnit:zUnitSI withNum:[entryNumber doubleValue]];
-					if (3 < [zOpUnit length] 
-						&& ![[self zUnitPara:zOpUnit withPara:1] isEqualToString:zUnitSI]) {
+					if (3 < [zOpUnit length] && ![zOpUnit isEqualToString:zUnitSI]) {
 						// 最適な単位が、SI単位と違うので変換する
 						NSString *zRevers = [self zUnitPara:zOpUnit withPara:3]; // (3)逆変換式
 						if (zRevers) {
@@ -707,24 +723,25 @@
 			} 
 		}
 		else if (bMMM && 0<=iDimAns) { // メートル系
-			switch (iDimAns) { // (3-iDimMax)以下の選択が可能
+			switch (iDimAns) { // iDimAns以下の選択が可能
 				case 1:
-					[entryUnit setString:@"m;m;#;#"];
+					//[entryUnit setString:@"m;m;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:nil andSi3:nil];
 					break;
 				case 2:
-					[entryUnit setString:@"m;m;#;#"];
+					//[entryUnit setString:@"m;m;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:nil];
 					break;
 				case 3:
-					[entryUnit setString:@"m;m;#;#"];
+					//[entryUnit setString:@"m;m;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:@"㎥"];
 					break;
 				default:	// 単位なし　全単位無効
-					[entryUnit setString:@""];
+					//[entryUnit setString:@""];
 					[app.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
 					break;
 			}
+			[entryUnit setString:@""]; // 単位は都度入力する方が便利だと判断した。
 		}
 		else if (iDimAns==1) { // メートル系でない1次元単位
 			//NG//[entryUnit setString:zUnitSI];
