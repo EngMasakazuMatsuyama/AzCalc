@@ -561,7 +561,7 @@
 	return YES;
 }
 
-// これまでの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
+// 直前までの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
 // 演算子入力時やドラム切り替え時などに呼び出される。
 - (void)GvEntryUnitSet
 {
@@ -591,8 +591,8 @@
 		NSString *zUnitSI = nil;
 		NSString *zUni, *zOpe;
 		int iDim;
-		int iDimAns = 0;		// 回答次元
-		int iDimAnsFix = -1;	// 回答次元　>=0:決定
+		int iDimAns = 0;		// 直前までの次元
+		int iDimAnsFix = -1;	// [+][-]による次元決定、以後異なる次元になれば単位に"?"表示
 		BOOL bMMM = NO;	// YES=メートル系
 		//BOOL bFixed = NO; // 次元決定
 		for (NSInteger idx = idxTop; idx <= idxEnd+1; idx++) 
@@ -601,7 +601,7 @@
 			if (idx <= idxEnd) {
 				zOpe = [formulaOperators objectAtIndex:idx];
 				zUni = [formulaUnits objectAtIndex:idx];
-			} else {
+			} else { // idxEnd+1
 				zOpe = entryOperator;
 				zUni = @""; //entryUnit; ここは、この単位を求めるための処理である
 			}
@@ -630,26 +630,23 @@
 				}
 			}
 			
-			if ([zOpe hasPrefix:OP_START]) {
+			if ([zOpe hasPrefix:OP_START]) {		// [>]
 				iDimAns = iDim;
 			}
-			else if ([zOpe hasPrefix:OP_MULT]) {
-				if (iDim==0 && idxEnd<idx) {
-					iDimAns = (3 - iDimAns);
-				} 
-				else {
+			else if ([zOpe hasPrefix:OP_MULT]) {	// [×]
+				if (idx <= idxEnd) {
 					iDimAns += iDim;
+				} else {
+					iDimAns = (3 - iDimAns);
 				}
 			}
-			else if ([zOpe hasPrefix:OP_DIVI]) {
-				iDimAns -= iDim;
+			else if ([zOpe hasPrefix:OP_DIVI]) {	// [÷]
+				if (idx <= idxEnd) {
+					iDimAns -= iDim;
+				}
 			}
-			else if (iDimAnsFix < 0) {
-				iDimAnsFix = iDimAns; // [+][-][=]により単位次元が決定されたことを示す
-			}
-
-			if (([zOpe hasPrefix:OP_ADD] || [zOpe hasPrefix:OP_SUB])) {
-				iDimAns = iDim;
+			else if (iDimAnsFix < 0) {				// [+][-][=]
+				iDimAnsFix = iDimAns;	// 回答の次元が異なれば単位に"?"表示する
 			}
 			
 			if (iDimAns < 0 || 3 < iDimAns) {
@@ -660,9 +657,11 @@
 				}
 			}
 		}
+		
 		//
 		if (0<=iDimAnsFix && [entryOperator hasPrefix:OP_ANS]) {	// 次元決定
-			if (iDimAnsFix != iDimAns) {
+			if (iDimAnsFix != iDimAns) 
+			{	// 回答の次元が決定次元と異なるので単位に"?"表示する
 				NSString *zForm = [self zFormulaFromDrum];
 				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
 				// 単位＜矛盾＞
@@ -670,7 +669,7 @@
 				return;
 			}
 			else if (bMMM) { // メートル系
-				switch (iDimAnsFix) {
+				switch (iDimAns) {
 					case 1:	// メートルのみ
 						[entryUnit setString:@"m;m;#;#"];
 						zUnitSI = @"m";
@@ -689,7 +688,7 @@
 						break;
 				}
 			}
-			else if (iDimAnsFix==1) { // メートル系でない1次元単位
+			else if (iDimAns==1) { // メートル系でない1次元単位
 				// zUnitSI そのまま
 			}
 			else { // 単位なし　全単位無効
@@ -703,7 +702,7 @@
 				// ドラムから計算式作成
 				NSString *zForm = [self zFormulaFromDrum];
 				[entryNumber setString:[CalcFunctions zAnswerFromFormula:zForm]]; 
-				if (1 <= iDimAnsFix) {
+				if (1 <= iDimAns) {
 					// 回答に最適な単位にする
 					NSString *zOpUnit = [self zOptimizeUnit:zUnitSI withNum:[entryNumber doubleValue]];
 					if (3 < [zOpUnit length] && ![zOpUnit isEqualToString:zUnitSI]) {
@@ -729,11 +728,11 @@
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:nil andSi3:nil];
 					break;
 				case 2:
-					//[entryUnit setString:@"m;m;#;#"];
+					//[entryUnit setString:@"㎡;㎡;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:nil];
 					break;
 				case 3:
-					//[entryUnit setString:@"m;m;#;#"];
+					//[entryUnit setString:@"㎥;㎥;#;#"];
 					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:@"㎥"];
 					break;
 				default:	// 単位なし　全単位無効

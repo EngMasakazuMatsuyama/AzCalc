@@ -461,11 +461,11 @@
 		<key>Size</key>
 		<integer>20</integer>
 		<key>Tag</key>
-		<integer>1100</integer>
+		<integer>1300</integer>
 		<key>Text</key>
-		<string>m</string>
+		<string>㎥</string>
 		<key>Unit</key>
-		<string>m;#;#</string>
+		<string>㎥;#;#</string>
 	</dict>
 	<key>P1C2R2</key>
 	<dict>
@@ -611,11 +611,11 @@
 		<key>Size</key>
 		<integer>20</integer>
 		<key>Tag</key>
-		<integer>1300</integer>
+		<integer>1100</integer>
 		<key>Text</key>
-		<string>㎥</string>
+		<string>m</string>
 		<key>Unit</key>
-		<string>㎥;#;#</string>
+		<string>m;#;#</string>
 	</dict>
 	<key>P1C4R2</key>
 	<dict>
@@ -881,11 +881,11 @@
 		<key>Size</key>
 		<integer>20</integer>
 		<key>Tag</key>
-		<integer>1014</integer>
+		<integer>1002</integer>
 		<key>Text</key>
-		<string>匁</string>
+		<string>mg</string>
 		<key>Unit</key>
-		<string>kg;(#*0.00375);(#/0.00375)</string>
+		<string>kg;(#/1000000);(#*1000000)</string>
 	</dict>
 	<key>P2C2R5</key>
 	<dict>
@@ -956,11 +956,11 @@
 		<key>Size</key>
 		<integer>20</integer>
 		<key>Tag</key>
-		<integer>1115</integer>
+		<integer>1102</integer>
 		<key>Text</key>
-		<string>尺</string>
+		<string>mm</string>
 		<key>Unit</key>
-		<string>m;(#*0.303);(#/0.303)</string>
+		<string>m;(#/1000);(#*1000)</string>
 	</dict>
 	<key>P2C3R5</key>
 	<dict>
@@ -1031,11 +1031,11 @@
 		<key>Size</key>
 		<integer>20</integer>
 		<key>Tag</key>
-		<integer>1213</integer>
+		<integer>1205</integer>
 		<key>Text</key>
-		<string>坪</string>
+		<string>m㎡</string>
 		<key>Unit</key>
-		<string>㎡;(#*3.305785);(#/3.305785)</string>
+		<string>㎡;(#/1000000);(#*1000000)</string>
 	</dict>
 	<key>P2C4R5</key>
 	<dict>
@@ -1106,11 +1106,11 @@
 		<key>Size</key>
 		<integer>20</integer>
 		<key>Tag</key>
-		<integer>1314</integer>
+		<integer>1304</integer>
 		<key>Text</key>
-		<string>合</string>
+		<string>mL</string>
 		<key>Unit</key>
-		<string>㎥;(#*0.00018039);(#/0.00018039)</string>
+		<string>㎥;(#/1000000);(#*1000000)</string>
 	</dict>
 	<key>P2C5R5</key>
 	<dict>

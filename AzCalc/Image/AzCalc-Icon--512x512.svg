@@ -14,11 +14,11 @@
    height="512"
    id="svg2"
    version="1.1"
-   inkscape:version="0.47 r22583"
-   sodipodi:docname="AzCalc-icon.svg"
-   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Icon.png"
-   inkscape:export-xdpi="10.02"
-   inkscape:export-ydpi="10.02">
+   inkscape:version="0.48.0 r9654"
+   sodipodi:docname="AzCalc-Icon--512x512.svg"
+   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/Icon72.png"
+   inkscape:export-xdpi="12.65625"
+   inkscape:export-ydpi="12.65625">
   <defs
      id="defs4">
     <linearGradient
@@ -2941,10 +2941,10 @@
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
-     inkscape:window-width="1065"
-     inkscape:window-height="808"
-     inkscape:window-x="25"
-     inkscape:window-y="39"
+     inkscape:window-width="1320"
+     inkscape:window-height="946"
+     inkscape:window-x="304"
+     inkscape:window-y="0"
      inkscape:window-maximized="0"
      inkscape:snap-global="false" />
   <metadata
