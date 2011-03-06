@@ -20,7 +20,6 @@
 		44377D57131528EE0064EA93 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D56131528EE0064EA93 /* Default-Landscape~ipad.png */; };
 		44377D59131528FC0064EA93 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D58131528FC0064EA93 /* Default.png */; };
 		44377D5B131529060064EA93 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D5A131529060064EA93 /* Default@2x.png */; };
-		44418703120E8ECB00DE74B0 /* AzKeySet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44418702120E8ECB00DE74B0 /* AzKeySet.plist */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		445183D3130398D6002820EA /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183B8130398D6002820EA /* CDataScanner.m */; };
 		445183D4130398D6002820EA /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183BB130398D6002820EA /* CDataScanner_Extensions.m */; };
@@ -43,6 +42,7 @@
 		44A20A381212D96F000A315E /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A20A371212D96F000A315E /* KeyButton.m */; };
 		44A3D38211F31E4C0001BF89 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A3D38011F31E4C0001BF89 /* InformationVC.m */; };
 		44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
+		44A560D813237E48000E4628 /* AzKeySet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A560D713237E48000E4628 /* AzKeySet.plist */; };
 		44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */; };
 		44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
 		44A8B24711F3EC87007D6FA0 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B24511F3EC87007D6FA0 /* OptionVC.xib */; };
@@ -85,7 +85,6 @@
 		44377D56131528EE0064EA93 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		44377D58131528FC0064EA93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44377D5A131529060064EA93 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		44418702120E8ECB00DE74B0 /* AzKeySet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeySet.plist; sourceTree = "<group>"; };
 		444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeyMaster.plist; sourceTree = "<group>"; };
 		445183B7130398D6002820EA /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		445183B8130398D6002820EA /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
@@ -137,6 +136,7 @@
 		44A3D4BD11F354FB0001BF89 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = ../English.lproj/SettingVC.xib; sourceTree = "<group>"; };
 		44A3D4CB11F355400001BF89 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/InformationVC.xib; sourceTree = "<group>"; };
 		44A3D4CC11F355400001BF89 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/InformationVC.xib; sourceTree = "<group>"; };
+		44A560D713237E48000E4628 /* AzKeySet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeySet.plist; sourceTree = "<group>"; };
 		44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon32-PageFilp.png"; path = "Image/icon32-PageFilp.png"; sourceTree = "<group>"; };
 		44A8B24311F3EC87007D6FA0 /* OptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionVC.h; path = ../OptionVC.h; sourceTree = "<group>"; };
 		44A8B24411F3EC87007D6FA0 /* OptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionVC.m; path = ../OptionVC.m; sourceTree = "<group>"; };
@@ -241,7 +241,6 @@
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				44A2E47411EB29F5009FB007 /* Images */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
-				44EF5D9A12099A1F00BB87B6 /* Resources-iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -260,14 +259,18 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44A560D713237E48000E4628 /* AzKeySet.plist */,
 				444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */,
-				44418702120E8ECB00DE74B0 /* AzKeySet.plist */,
+				449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */,
 				8D1107310486CEB800E47090 /* AzCalc-Info.plist */,
 				441D242211F3056200A3B68A /* InfoPlist.strings */,
 				448D99301307D1DD004DFD62 /* Localizable.strings */,
 				44377D58131528FC0064EA93 /* Default.png */,
 				44377D5A131529060064EA93 /* Default@2x.png */,
+				44377D56131528EE0064EA93 /* Default-Landscape~ipad.png */,
+				44377D54131528CF0064EA93 /* Default-Portrait~ipad.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
+				44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -370,17 +373,6 @@
 			name = SBCD;
 			sourceTree = "<group>";
 		};
-		44EF5D9A12099A1F00BB87B6 /* Resources-iPad */ = {
-			isa = PBXGroup;
-			children = (
-				449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */,
-				44377D56131528EE0064EA93 /* Default-Landscape~ipad.png */,
-				44377D54131528CF0064EA93 /* Default-Portrait~ipad.png */,
-				44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */,
-			);
-			name = "Resources-iPad";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -454,7 +446,6 @@
 				44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */,
 				44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */,
 				44EF5DE112099FB200BB87B6 /* Information-iPad.xib in Resources */,
-				44418703120E8ECB00DE74B0 /* AzKeySet.plist in Resources */,
 				444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */,
 				449E6B98121FA34100338E7F /* AzKeySet-iPad.plist in Resources */,
 				445184411303B7A4002820EA /* Icon-DrumPush.png in Resources */,
@@ -470,6 +461,7 @@
 				44BD4A3F132329C300C96B5A /* Icon.png in Resources */,
 				44BD4A40132329C300C96B5A /* Icon@2x.png in Resources */,
 				44BD4A4613232A9300C96B5A /* Icon72.png in Resources */,
+				44A560D813237E48000E4628 /* AzKeySet.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

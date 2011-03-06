@@ -206,7 +206,7 @@
 	//========================================================== Lower ==============
 	
 	if (bPad) { // iPad
-		iKeyPages = 4;
+		iKeyPages = 4;	//[0.4]単位キー追加のため
 		iKeyCols = 7;	iKeyOffsetCol = 0; // AzdicKeys.plist C 開始位置
 		iKeyRows = 7;	iKeyOffsetRow = 0;
 		fKeyGap = 3.0;
@@ -214,7 +214,7 @@
 		//
 		[self MvPadKeysShow]; // iPad専用 メモリー20キー配置 および 回転処理
 	} else { // iPhone
-		iKeyPages = 4;
+		iKeyPages = 5;	//[0.4]単位キー追加のため
 		iKeyCols = 5;	iKeyOffsetCol = 1; // AzdicKeys.plist C 開始位置
 		iKeyRows = 5;	iKeyOffsetRow = 1;
 		fKeyGap = 1.5;
@@ -228,6 +228,8 @@
 	ibScrollLower.scrollsToTop = NO;
 	rect.origin.x = rect.size.width * MiSvLowerPage;
 	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
+
+	NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
 
 #ifdef AzMAKE_SPLASHFACE
 	ibPvDrum.alpha = 0.9;
@@ -244,19 +246,26 @@
 	NSDictionary *dicKeys = [userDef objectForKey:GUD_KeyboardSet];
 	if (dicKeys==nil) {  // インストール初回のみ通る
 		// AzKeySet.plistからキー配置読み込む
-		NSString *zKeySetFile;
+		NSString *zPath;
 		if (bPad) { // iPad
-			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
+			zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
 		} else {
-			zKeySetFile = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
+			zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
 		}
-		//AzLOG(@"OfFile:zKeySetFile=%@", zKeySetFile);
-		dicKeys = [[NSDictionary alloc] initWithContentsOfFile:zKeySetFile];	// 後で release している
+		dicKeys = [[NSDictionary alloc] initWithContentsOfFile:zPath];	// 後で release している
 		if (dicKeys==nil) {
 			AzLOG(@"ERROR: AzKeySet.plist not Open");
 			exit(-1);
 		}
-	}	
+	}
+	else {
+		NSString *zPCR = [NSString stringWithFormat:@"P%dC1R1", iKeyPages-1]; // 最終ページ
+		if ([dicKeys objectForKey:zPCR]==nil) {// 最終ページが無い ⇒ [0.4]アップデート初回起動である
+			//[0.4]iPhone: 3,4ページに単位キーを上書きするため
+			//[0.4]iPad: 3ページに単位キーを上書きするため
+			iPageUpdate = 3; // 3ページ以降、AzKeySetから読み込む
+		}
+	}
 #endif
 	
 	// ibPvDrumは、画面左下を基点にしている。
@@ -287,6 +296,23 @@
 	
 	for (int page=0; page<iKeyPages; page++ ) 
 	{
+		if (iPageUpdate <= page) {	// 以降、デフォルト"AzKeySet"から読み込む
+			iPageUpdate = 999;
+			NSString *zPath;
+			if (bPad) { // iPad
+				zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
+			} else {
+				zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
+			}
+			if (dicKeys) {
+				[dicKeys release];
+			}
+			dicKeys = [[NSDictionary alloc] initWithContentsOfFile:zPath];	// 後で release している
+			if (dicKeys==nil) {
+				AzLOG(@"ERROR: AzKeySet.plist not Open");
+				break;
+			}
+		}
 		float fx = ibScrollLower.frame.size.width * page + fKeyWidGap;
 		for (int col=0; col<iKeyCols && col<100; col++ ) 
 		{
@@ -647,6 +673,7 @@
 				if (bu.hidden) {
 					bu.hidden = NO;
 				}
+				bu.enabled = YES; // 単位キーで無効にされている場合、解除するため
 #ifdef xxxxxAzDEBUGxxxxxxxx		
 				// DEBUG: AzKeyMasterの修正を反映させる
 				for (NSArray *aComponent in RaKeyMaster) {
