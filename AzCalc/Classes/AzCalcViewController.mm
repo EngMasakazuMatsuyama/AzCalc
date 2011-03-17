@@ -69,8 +69,37 @@
 */
 
 
+- (void)releaseIBOutlets	// dealloc, viewDidUnload から呼び出される
+{
+	NSLog(@"--- releaseIBOutlets ---");
+	if (ibAdBanner) {
+		ibAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
+//		[ibAdBanner release], ibAdBanner = nil;
+	}
+	
+	ibScrollUpper.delegate = nil;
+	ibPvDrum.delegate = nil;
+	ibPvDrum.dataSource = nil;
+	ibTvFormula.delegate = nil;
+
+/*	[ibPvDrum release],		ibPvDrum = nil;
+	[ibLbEntry release],	ibLbEntry = nil;
+	[ibBuMemory release],	ibBuMemory = nil;
+	[ibBuSetting release],	ibBuSetting = nil;
+	[ibBuInformation release], ibBuInformation = nil;
+	[ibScrollLower release], ibScrollLower = nil;
+	[ibScrollUpper release], ibScrollUpper = nil;
+	[ibTvFormula release],	ibTvFormula = nil;
+	[ibLbFormAnswer release], ibLbFormAnswer = nil;
+	[ibBuFormLeft release], ibBuFormLeft = nil;
+	[ibBuFormRight release], ibBuFormRight = nil;
+	[ibBuGetDrum release],	ibBuGetDrum = nil;
+ */
+}
+
 - (void)dealloc 
 {
+	NSLog(@"--- dealloc ---");
 #ifdef GD_AdMob_ENABLED
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
@@ -78,7 +107,9 @@
 		//NG//RoAdMobView = nil; これすると cell更新あれば落ちる。cell側での破棄に任せる。
 	}
 #endif
-	//[maMemorys release];
+	// IBOutlet を解放する
+	[self releaseIBOutlets];
+
 	[RaPadKeyButtons release];
 	[RaKeyMaster release];
 	[RaDrumButtons release];
@@ -91,8 +122,9 @@
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
+	NSLog(@"--- viewDidLoad ---");
     [super viewDidLoad];
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
+    //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 	
@@ -134,8 +166,8 @@
 	RaDrumButtons = [[NSArray alloc] initWithArray:maButtons];	
 	[maButtons release];
 	
-	if (!RaDrums) {
-		// Drumオブジェクトは、SubViewではないので、最初に1度だけ生成し、viewDidUnloadでは破棄しない。
+	if (RaDrums==nil) {
+		// Drumオブジェクトは、最初に1度だけ生成し、viewDidUnloadでは破棄しない。
 		NSMutableArray *mRaDrums	= [NSMutableArray new];
 		// 初期ドラム生成：常にDRUMS_MAX個生成し、表示はその一部または全部
 		for (int i=0; i<DRUMS_MAX; i++) {
@@ -166,7 +198,6 @@
 		CGRect theBannerFrame = self.view.frame;
 		theBannerFrame.origin.y = -52;  // viewの外へ出す
 		ibAdBanner.frame = theBannerFrame;	
-		ibAdBanner.hidden = YES;
 		//[self MvAppleAdOff];
 		bADbannerIsVisible = NO;
 		bADbannerFirstTime = YES;
@@ -459,7 +490,7 @@
 		[self.view bringSubviewToFront:ibAdBanner]; // iAdをRaDrumButtonsより上にする
 	}
 	
-	[pool release]; // autorelease
+	//[pool release]; // autorelease
 
 #ifdef GD_AdMob_ENABLED
 	if (RoAdMobView==nil) {
@@ -537,15 +568,14 @@
 // 裏画面(非表示)状態のときにメモリ不足が発生するとコールされるので、viewDidLoadで生成したOBJを解放する
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-	// IB(xib)で生成されたOBJは自動的に解放＆再生成されるので触れないこと。
-	
-	[RaPadKeyButtons release];	RaPadKeyButtons = nil;
-	[RaDrumButtons release];		RaDrumButtons = nil;
-	
-	// RaDrums は、SubViewではないから破棄しない。
-	
-	// この後、viewDidLoadがコールされて、改めてOBJ生成される
+	NSLog(@"--- viewDidUnload ---");
+
+	[RaPadKeyButtons release],	RaPadKeyButtons = nil;
+	[RaDrumButtons release],	RaDrumButtons = nil;
+	// RaDrums は破棄しない。ドラム記録を消さないため
+
+	[self releaseIBOutlets];	// IBOutlet を解放する
+	[super viewDidUnload];		// この後、viewDidLoadがコールされて、改めてOBJ生成される
 }
 
 // viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　// viewDidAppear はView表示直後に呼ばれる
@@ -2289,15 +2319,15 @@
 - (void)MvAppleAdOn
 {
 #ifdef GD_iAd_ENABLED
-	//AzLOG(@"=== MvAppleAdOn ===");
 	if (!NSClassFromString(@"ADBannerView") || !ibAdBanner || !bADbannerIsVisible) return; // iAd無効
-	
+	if (0 <= ibAdBanner.frame.origin.y) return;	//[0.4.1]既にON
+
+	NSLog(@"=== MvAppleAdOn ===");
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:3.0];
 	
 	ibAdBanner.frame = ibPvDrum.frame;
-	ibAdBanner.hidden = NO;
 	[ibScrollUpper bringSubviewToFront:ibAdBanner]; // 上にする
 
 	[UIView commitAnimations];
@@ -2306,15 +2336,15 @@
 
 - (void)MvAppleAdOff
 {
-	AzLOG(@"=== MvAppleAdOff ===");
 	if (!NSClassFromString(@"ADBannerView") || !ibAdBanner) return; // iAd無効
-	
+	if (ibAdBanner.frame.origin.y < 0) return;	//[0.4.1]既にOFF
+
+	NSLog(@"=== MvAppleAdOff ===");
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.8];
 	
 	ibAdBanner.frame = CGRectMake(0,-52, 0,0);
-	//ibAdBanner.hidden = YES;
 	
 	[UIView commitAnimations];
 }
