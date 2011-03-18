@@ -69,37 +69,35 @@
 */
 
 
-- (void)releaseIBOutlets	// dealloc, viewDidUnload から呼び出される
+- (void)unloadRelease	// dealloc, viewDidUnload から呼び出される
 {
-	NSLog(@"--- releaseIBOutlets ---");
-	if (ibAdBanner) {
-		ibAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
-//		[ibAdBanner release], ibAdBanner = nil;
-	}
-	
+	NSLog(@"--- unloadRelease ---");
 	ibScrollUpper.delegate = nil;
 	ibPvDrum.delegate = nil;
 	ibPvDrum.dataSource = nil;
 	ibTvFormula.delegate = nil;
 
-/*	[ibPvDrum release],		ibPvDrum = nil;
-	[ibLbEntry release],	ibLbEntry = nil;
-	[ibBuMemory release],	ibBuMemory = nil;
-	[ibBuSetting release],	ibBuSetting = nil;
-	[ibBuInformation release], ibBuInformation = nil;
-	[ibScrollLower release], ibScrollLower = nil;
-	[ibScrollUpper release], ibScrollUpper = nil;
-	[ibTvFormula release],	ibTvFormula = nil;
-	[ibLbFormAnswer release], ibLbFormAnswer = nil;
-	[ibBuFormLeft release], ibBuFormLeft = nil;
-	[ibBuFormRight release], ibBuFormRight = nil;
-	[ibBuGetDrum release],	ibBuGetDrum = nil;
- */
+	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	if (ibAdBanner) {
+		ibAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
+		[ibAdBanner release], ibAdBanner = nil;
+		NSLog(@"-2- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	}
+
+	NSLog(@"--- retainCount: RaPadKeyButtons=%d", [RaPadKeyButtons retainCount]);
+	[RaPadKeyButtons release],	RaPadKeyButtons = nil;
+	NSLog(@"--- retainCount: RaKeyMaster=%d", [RaKeyMaster retainCount]);
+	[RaKeyMaster release],		RaKeyMaster = nil;
+	[RaDrumButtons release],	RaDrumButtons = nil;
+	// RaDrums は破棄しない（ドラム記録を消さないため）deallocではreleaseすること。
 }
 
 - (void)dealloc 
 {
 	NSLog(@"--- dealloc ---");
+	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
+
 #ifdef GD_AdMob_ENABLED
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
@@ -107,14 +105,9 @@
 		//NG//RoAdMobView = nil; これすると cell更新あれば落ちる。cell側での破棄に任せる。
 	}
 #endif
-	// IBOutlet を解放する
-	[self releaseIBOutlets];
-
-	[RaPadKeyButtons release];
-	[RaKeyMaster release];
-	[RaDrumButtons release];
+	
+	[self unloadRelease];
 	[RaDrums release];
-
     [super dealloc];
 }
 
@@ -123,6 +116,10 @@
 - (void)viewDidLoad 
 {
 	NSLog(@"--- viewDidLoad ---");
+	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
+	
+	
     [super viewDidLoad];
     //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
@@ -193,26 +190,35 @@
 	if (NSClassFromString(@"ADBannerView")) {
 		if (ibAdBanner==nil) { // iPad はここで生成する。　iPhoneはXIB生成済み。
 			ibAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
+			NSLog(@"-2- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
 		}
-		ibAdBanner.delegate = self;
-		CGRect theBannerFrame = self.view.frame;
-		theBannerFrame.origin.y = -52;  // viewの外へ出す
-		ibAdBanner.frame = theBannerFrame;	
-		//[self MvAppleAdOff];
-		bADbannerIsVisible = NO;
-		bADbannerFirstTime = YES;
-
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
 			ibAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
 														 ADBannerContentSizeIdentifier320x50,
 														 ADBannerContentSizeIdentifier480x32, nil];
+			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
+			} else {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+			}
 		} else {
 			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
 			ibAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
 														 ADBannerContentSizeIdentifierPortrait,
 														 ADBannerContentSizeIdentifierLandscape, nil];
+			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+			} else {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+			}
 		}
+		ibAdBanner.delegate = self;
+		CGRect theBannerFrame = self.view.frame;
+		theBannerFrame.origin.y = -66;  // viewの外へ出す (iPadの高さが66)
+		ibAdBanner.frame = theBannerFrame;	
+		bADbannerIsVisible = NO;
+		bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
 	}
 	
 	
@@ -488,6 +494,7 @@
 	
 	if (ibAdBanner) {
 		[self.view bringSubviewToFront:ibAdBanner]; // iAdをRaDrumButtonsより上にする
+		NSLog(@"-4- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
 	}
 	
 	//[pool release]; // autorelease
@@ -508,6 +515,7 @@
 	[ibScrollUpper addSubview:RoAdMobView];
 	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 #endif
+	NSLog(@"-5- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
 }
 
 /*
@@ -569,12 +577,10 @@
 - (void)viewDidUnload
 {
 	NSLog(@"--- viewDidUnload ---");
+	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 
-	[RaPadKeyButtons release],	RaPadKeyButtons = nil;
-	[RaDrumButtons release],	RaDrumButtons = nil;
-	// RaDrums は破棄しない。ドラム記録を消さないため
-
-	[self releaseIBOutlets];	// IBOutlet を解放する
+	[self unloadRelease];
 	[super viewDidUnload];		// この後、viewDidLoadがコールされて、改めてOBJ生成される
 }
 
@@ -893,9 +899,28 @@
 // 回転の開始前にコールされる。 ＜＜OS 3.0以降の推奨＞＞
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
-	if (!bPad) return; // iPhone
-	// このタイミングでなければ、配置がズレる
-	[ibTvFormula resignFirstResponder]; // キーボードを隠す
+	if (ibAdBanner) {	//[0.4.1]
+		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
+			// iOS4.2より前
+			if (UIInterfaceOrientationIsLandscape(orientation)) {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
+			} else {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+			}
+		} else {
+			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
+			if (UIInterfaceOrientationIsLandscape(orientation)) {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+			} else {
+				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+			}
+		}
+	}
+
+	if (bPad) {
+		// このタイミングでなければ、配置がズレる
+		[ibTvFormula resignFirstResponder]; // キーボードを隠す
+	}
 }
 
 // 回転アニメーションの開始直前に呼ばれる。 この直前の配置から、ここでの配置までの移動がアニメーション表示される。

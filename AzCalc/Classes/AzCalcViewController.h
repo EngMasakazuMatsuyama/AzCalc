@@ -15,27 +15,27 @@
 @interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate,
 														UIScrollViewDelegate, ADBannerViewDelegate, AdMobDelegate>
 {
-	IBOutlet ADBannerView	*ibAdBanner;
-	IBOutlet UIPickerView	*ibPvDrum;
-	IBOutlet UILabel		*ibLbEntry;
-	IBOutlet UIButton		*ibBuMemory;
-	IBOutlet UIButton		*ibBuSetting;
-	IBOutlet UIButton		*ibBuInformation;
-	IBOutlet UIScrollView	*ibScrollLower;
-	IBOutlet UIScrollView	*ibScrollUpper; //[0.3]
-	IBOutlet UITextView		*ibTvFormula;	//[0.3]
-	IBOutlet UILabel		*ibLbFormAnswer;
-	IBOutlet UIButton		*ibBuFormLeft;
-	IBOutlet UIButton		*ibBuFormRight;
-	IBOutlet UIButton		*ibBuGetDrum;
+	IBOutlet UIPickerView*	ibPvDrum;
+	IBOutlet UILabel*		ibLbEntry;
+	IBOutlet UIButton*		ibBuMemory;
+	IBOutlet UIButton*		ibBuSetting;
+	IBOutlet UIButton*		ibBuInformation;
+	IBOutlet UIScrollView*	ibScrollLower;
+	IBOutlet UIScrollView*	ibScrollUpper; //[0.3]
+	IBOutlet UITextView*	ibTvFormula;	//[0.3]
+	IBOutlet UILabel*		ibLbFormAnswer;
+	IBOutlet UIButton*		ibBuFormLeft;
+	IBOutlet UIButton*		ibBuFormRight;
+	IBOutlet UIButton*		ibBuGetDrum;
 	
 @private
 	//----------------------------------------------dealloc時にrelese
+	ADBannerView*		ibAdBanner;
+	AdMobView*			RoAdMobView;
 	NSArray				*RaDrums;
 	NSArray				*RaDrumButtons;
 	NSArray				*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
-	AdMobView			*RoAdMobView;
 
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 

@@ -16,15 +16,14 @@
 
 #define OR  ||
 
-#ifdef AzDEBUG 
+#ifdef AzDEBUG	//--------------------------------------------- DEBUG
 #define AzLOG(...) NSLog(__VA_ARGS__)
-#else
-#define AzLOG(...) 
-#endif
-
-#ifdef AzDEBUG
 #define AzRETAIN_CHECK(zName,pObj,iAns)  { if ([pObj retainCount] > iAns) NSLog(@"AzRETAIN_CHECK> %@ %d > %d", zName, [pObj retainCount], iAns); }
-#else
+
+#else	//----------------------------------------------------- RELEASE
+// その他のフラグ：-DNS_BLOCK_ASSERTIONS=1　（NSAssertが除去される）
+#define AzLOG(...) 
+#define NSLog(...) 
 #define AzRETAIN_CHECK(...) 
 #endif
 
