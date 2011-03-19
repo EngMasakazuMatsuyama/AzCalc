@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.0 r9654"
    sodipodi:docname="Icon-Drum.svg"
-   inkscape:export-filename="/Users/masa/AzukiSoft/AzCredit/Source/Design/Icon-DrumPush.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90"
+   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/Icon-DrumPush60x37.png"
+   inkscape:export-xdpi="42.189999"
+   inkscape:export-ydpi="42.189999"
    style="display:inline">
   <defs
      id="defs4">
@@ -3200,7 +3200,7 @@
      inkscape:cx="64"
      inkscape:cy="39.5"
      inkscape:document-units="px"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1319"
      inkscape:window-height="1097"
@@ -3252,7 +3252,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Drum"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <path
        style="fill:url(#linearGradient4260);fill-opacity:1;fill-rule:evenodd;stroke:#ffffff;stroke-width:0;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"

@@ -949,7 +949,7 @@
 			<key>Text</key>
 			<string>cuin</string>
 			<key>Unit</key>
-			<string>㎥;(#*0.0016387064);(#/0.0016387064)</string>
+			<string>㎥;(#*0.000016387064);(#/0.000016387064)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
@@ -991,7 +991,7 @@
 			<key>Text</key>
 			<string>bbl</string>
 			<key>Unit</key>
-			<string>㎥;(#*1.58987294928);(#/1.58987294928)</string>
+			<string>㎥;(#*0.158987294928);(#/0.158987294928)</string>
 		</dict>
 		<dict>
 			<key>Alpha</key>

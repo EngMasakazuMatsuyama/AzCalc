@@ -77,11 +77,11 @@
 	ibPvDrum.dataSource = nil;
 	ibTvFormula.delegate = nil;
 
-	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
-	if (ibAdBanner) {
-		ibAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
-		[ibAdBanner release], ibAdBanner = nil;
-		NSLog(@"-2- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	if (RiAdBanner) {
+		RiAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
+		[RiAdBanner release], RiAdBanner = nil;
+		NSLog(@"-2- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	}
 
 	NSLog(@"--- retainCount: RaPadKeyButtons=%d", [RaPadKeyButtons retainCount]);
@@ -90,12 +90,16 @@
 	[RaKeyMaster release],		RaKeyMaster = nil;
 	[RaDrumButtons release],	RaDrumButtons = nil;
 	// RaDrums は破棄しない（ドラム記録を消さないため）deallocではreleaseすること。
+	
+	//[0.4.1]//"Received memory warning. Level=2" 回避するため一元化
+	[RimgDrumButton release],	RimgDrumButton = nil;
+	[RimgDrumPush release],		RimgDrumPush = nil;
 }
 
 - (void)dealloc 
 {
 	NSLog(@"--- dealloc ---");
-	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 
 #ifdef GD_AdMob_ENABLED
@@ -116,7 +120,7 @@
 - (void)viewDidLoad 
 {
 	NSLog(@"--- viewDidLoad ---");
-	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 	
 	
@@ -188,35 +192,38 @@
 	
 	// iAd
 	if (NSClassFromString(@"ADBannerView")) {
-		if (ibAdBanner==nil) { // iPad はここで生成する。　iPhoneはXIB生成済み。
-			ibAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
-			NSLog(@"-2- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+		if (RiAdBanner==nil) { // iPad はここで生成する。　iPhoneはXIB生成済み。
+			NSLog(@"-1- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+			RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
+			NSLog(@"-2- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 		}
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
-			ibAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
+			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
 														 ADBannerContentSizeIdentifier320x50,
 														 ADBannerContentSizeIdentifier480x32, nil];
 			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
 			} else {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 			}
 		} else {
 			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-			ibAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
+			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
 														 ADBannerContentSizeIdentifierPortrait,
 														 ADBannerContentSizeIdentifierLandscape, nil];
 			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
 			} else {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
 			}
 		}
-		ibAdBanner.delegate = self;
+		RiAdBanner.delegate = self;
 		CGRect theBannerFrame = self.view.frame;
-		theBannerFrame.origin.y = -66;  // viewの外へ出す (iPadの高さが66)
-		ibAdBanner.frame = theBannerFrame;	
+		theBannerFrame.origin.y = -70;  // viewの外へ出す (iPadの高さが66)
+		RiAdBanner.frame = theBannerFrame;	
+		[ibScrollUpper addSubview:RiAdBanner];
+		//[RiAdBanner release]// unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
 		bADbannerIsVisible = NO;
 		bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
 	}
@@ -272,8 +279,8 @@
 	ibPvDrum.alpha = 0.9;
 	ibBuMemory.hidden = YES;
 	ibLbEntry.hidden = YES;
-	if (ibAdBanner) {
-		ibAdBanner.hidden = YES;
+	if (RiAdBanner) {
+		RiAdBanner.hidden = YES;
 	}
 	ibBuSetting.hidden = YES;
 	ibBuInformation.hidden = YES;
@@ -330,6 +337,16 @@
 	
 	// subViewsで取得できる配列には、以下のaddSubViewした順（縦書きで左から右）に収められている。
 	// UIButtonのみaddSubViewすること！ それを前提に後処理しているため。
+
+	
+	//[0.4.1]//"Received memory warning. Level=2" 回避するための最適化
+	if (bPad) {
+		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum128x79.png"] retain];
+		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush128x79.png"] retain];
+	} else {
+		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum60x37.png"] retain];
+		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush60x37.png"] retain];
+	}
 	
 	for (int page=0; page<iKeyPages; page++ ) 
 	{
@@ -360,8 +377,8 @@
 				KeyButton *bu = [[KeyButton alloc] initWithFrame:CGRectMake(fx,fy, fKeyWidth,fKeyHeight)];
 				//bu.contentMode = UIViewContentModeScaleToFill;
 				//bu.contentStretch = CGRectMake(0.5, 0.5, 0.0, 0.0);  変化なしだった。
-				[bu setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
-				[bu setBackgroundImage:[UIImage imageNamed:@"Icon-DrumPush.png"] forState:UIControlStateHighlighted];
+				[bu setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
+				[bu setBackgroundImage:RimgDrumPush forState:UIControlStateHighlighted];
 				bu.iPage = page;
 				bu.iCol = iKeyOffsetCol + col;
 				bu.iRow = iKeyOffsetRow + row;
@@ -452,9 +469,15 @@
 					}
 					
 					// UNIT
-					bu.RzUnit = strUnit;
-					
-				} else {
+					if (bu.tag==1313) {	//Patch//[0.4.1]//bbl=1.58987294928㎥⇒NG⇒0.158987294928㎥
+						bu.RzUnit = @"㎥;(#*0.158987294928);(#/0.158987294928)";
+					} else if (bu.tag==1310) {	//Patch//[0.4.1]//cuin=0.016387064㎥⇒NG⇒0.000016387064㎥
+						bu.RzUnit = @"㎥;(#*0.000016387064);(#/0.000016387064)";
+					} else {
+						bu.RzUnit = strUnit;
+					}
+				}
+				else {
 					bu.tag = -1; // Function No.
 					//bu.titleLabel.text = @" "; // = nill ダメ  Space1
 					[bu setTitle:@" " forState:UIControlStateNormal]; // = nill ダメ  Space1
@@ -492,9 +515,9 @@
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 	
-	if (ibAdBanner) {
-		[self.view bringSubviewToFront:ibAdBanner]; // iAdをRaDrumButtonsより上にする
-		NSLog(@"-4- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	if (RiAdBanner) {
+		[self.view bringSubviewToFront:RiAdBanner]; // iAdをRaDrumButtonsより上にする
+		NSLog(@"-4- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	}
 	
 	//[pool release]; // autorelease
@@ -515,7 +538,7 @@
 	[ibScrollUpper addSubview:RoAdMobView];
 	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 #endif
-	NSLog(@"-5- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"-5- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 }
 
 /*
@@ -577,7 +600,7 @@
 - (void)viewDidUnload
 {
 	NSLog(@"--- viewDidUnload ---");
-	NSLog(@"--- retainCount: ibAdBanner=%d", [ibAdBanner retainCount]);
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 
 	[self unloadRelease];
@@ -863,7 +886,7 @@
 	if (buChangeKey) {
 		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
 		// 復帰
-		[buChangeKey setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
+		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 		buChangeKey = nil;
 	}
 }
@@ -875,7 +898,7 @@
 	if (buChangeKey) {
 		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
 		// 復帰
-		[buChangeKey setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
+		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 		buChangeKey = nil;
 	}
 }
@@ -899,20 +922,20 @@
 // 回転の開始前にコールされる。 ＜＜OS 3.0以降の推奨＞＞
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
-	if (ibAdBanner) {	//[0.4.1]
+	if (RiAdBanner) {	//[0.4.1]
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
 			if (UIInterfaceOrientationIsLandscape(orientation)) {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
 			} else {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 			}
 		} else {
 			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
 			if (UIInterfaceOrientationIsLandscape(orientation)) {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
 			} else {
-				ibAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
 			}
 		}
 	}
@@ -2104,7 +2127,7 @@
 	[self MvMemoryShow];
 
 	// iAd
-	if (MiSvUpperPage==0 && ibAdBanner) {
+	if (MiSvUpperPage==0 && RiAdBanner) {
 		if (button.tag==KeyTAG_AC) { // [AC]
 			[self MvAppleAdOn];
 		} else {
@@ -2275,8 +2298,8 @@
 		{
 			//UIButton *bu = [UIButton buttonWithType:UIButtonTypeCustom];
 			KeyButton *bu = [[KeyButton alloc] initWithFrame:CGRectZero];
-			[bu setBackgroundImage:[UIImage imageNamed:@"Icon-Drum.png"] forState:UIControlStateNormal];
-			[bu setBackgroundImage:[UIImage imageNamed:@"Icon-DrumPush.png"] forState:UIControlStateHighlighted];
+			[bu setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
+			[bu setBackgroundImage:RimgDrumPush forState:UIControlStateHighlighted];
 			bu.iPage = 9;
 			bu.iCol = 0;
 			bu.iRow = 0;
@@ -2327,7 +2350,7 @@
 	//AzLOG(@"=== bannerViewDidLoadAd ===");
 	bADbannerIsVisible = YES; // iAd取得成功（広告内容あり）
 	
-	if (bADbannerFirstTime) {  // 起動時に1回だけ表示するため
+	if (RiAdBanner && bADbannerFirstTime) {  // 起動時に1回だけ表示するため
 		bADbannerFirstTime = NO;
 		[self MvAppleAdOn];
 	}
@@ -2338,22 +2361,24 @@
 {
 	AzLOG(@"=== didFailToReceiveAdWithError ===");
 	bADbannerIsVisible = NO; // iAd取得失敗（広告内容なし）
-	[self MvAppleAdOff];
+
+	if (RiAdBanner && 0<=RiAdBanner.frame.origin.y) 
+		[self MvAppleAdOff];
 }
 
 - (void)MvAppleAdOn
 {
 #ifdef GD_iAd_ENABLED
-	if (!NSClassFromString(@"ADBannerView") || !ibAdBanner || !bADbannerIsVisible) return; // iAd無効
-	if (0 <= ibAdBanner.frame.origin.y) return;	//[0.4.1]既にON
+	if (!NSClassFromString(@"ADBannerView") || !RiAdBanner || !bADbannerIsVisible) return; // iAd無効
+	if (0 <= RiAdBanner.frame.origin.y) return;	//[0.4.1]既にON
 
 	NSLog(@"=== MvAppleAdOn ===");
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:3.0];
 	
-	ibAdBanner.frame = ibPvDrum.frame;
-	[ibScrollUpper bringSubviewToFront:ibAdBanner]; // 上にする
+	RiAdBanner.frame = ibPvDrum.frame;
+	[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上にする
 
 	[UIView commitAnimations];
 #endif
@@ -2361,15 +2386,15 @@
 
 - (void)MvAppleAdOff
 {
-	if (!NSClassFromString(@"ADBannerView") || !ibAdBanner) return; // iAd無効
-	if (ibAdBanner.frame.origin.y < 0) return;	//[0.4.1]既にOFF
+	if (!NSClassFromString(@"ADBannerView") || !RiAdBanner) return; // iAd無効
+	if (RiAdBanner.frame.origin.y < 0) return;	//[0.4.1]既にOFF
 
 	NSLog(@"=== MvAppleAdOff ===");
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.8];
 	
-	ibAdBanner.frame = CGRectMake(0,-52, 0,0);
+	RiAdBanner.frame = CGRectMake(0,-70, 0,0);
 	
 	[UIView commitAnimations];
 }

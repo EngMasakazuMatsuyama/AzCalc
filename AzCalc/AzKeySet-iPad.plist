@@ -5,7 +5,7 @@
 	<key>P0C0R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -20,7 +20,7 @@
 	<key>P0C0R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -35,7 +35,7 @@
 	<key>P0C0R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -50,7 +50,7 @@
 	<key>P0C0R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -65,7 +65,7 @@
 	<key>P0C0R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -80,7 +80,7 @@
 	<key>P0C0R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -95,7 +95,7 @@
 	<key>P0C0R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -110,7 +110,7 @@
 	<key>P0C1R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -125,7 +125,7 @@
 	<key>P0C1R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -140,7 +140,7 @@
 	<key>P0C1R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -155,7 +155,7 @@
 	<key>P0C1R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -170,7 +170,7 @@
 	<key>P0C1R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -185,7 +185,7 @@
 	<key>P0C1R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -200,7 +200,7 @@
 	<key>P0C1R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -215,7 +215,7 @@
 	<key>P0C2R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -230,7 +230,7 @@
 	<key>P0C2R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -245,7 +245,7 @@
 	<key>P0C2R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -260,7 +260,7 @@
 	<key>P0C2R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -275,7 +275,7 @@
 	<key>P0C2R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -290,7 +290,7 @@
 	<key>P0C2R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -305,7 +305,7 @@
 	<key>P0C2R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -320,7 +320,7 @@
 	<key>P0C3R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -335,7 +335,7 @@
 	<key>P0C3R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -350,7 +350,7 @@
 	<key>P0C3R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -365,7 +365,7 @@
 	<key>P0C3R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -380,7 +380,7 @@
 	<key>P0C3R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -395,7 +395,7 @@
 	<key>P0C3R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -410,7 +410,7 @@
 	<key>P0C3R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -425,7 +425,7 @@
 	<key>P0C4R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -440,7 +440,7 @@
 	<key>P0C4R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -455,7 +455,7 @@
 	<key>P0C4R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -470,7 +470,7 @@
 	<key>P0C4R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -485,7 +485,7 @@
 	<key>P0C4R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -500,7 +500,7 @@
 	<key>P0C4R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -515,7 +515,7 @@
 	<key>P0C4R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -530,7 +530,7 @@
 	<key>P0C5R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -545,7 +545,7 @@
 	<key>P0C5R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -560,7 +560,7 @@
 	<key>P0C5R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -575,7 +575,7 @@
 	<key>P0C5R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -590,7 +590,7 @@
 	<key>P0C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -605,7 +605,7 @@
 	<key>P0C5R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -620,7 +620,7 @@
 	<key>P0C5R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -635,7 +635,7 @@
 	<key>P0C6R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -650,7 +650,7 @@
 	<key>P0C6R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -665,7 +665,7 @@
 	<key>P0C6R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -680,7 +680,7 @@
 	<key>P0C6R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.85</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -695,7 +695,7 @@
 	<key>P0C6R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.85</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -710,7 +710,7 @@
 	<key>P0C6R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -725,7 +725,7 @@
 	<key>P0C6R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -740,7 +740,7 @@
 	<key>P1C0R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>2</integer>
 		<key>Size</key>
@@ -755,7 +755,7 @@
 	<key>P1C0R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>2</integer>
 		<key>Size</key>
@@ -770,7 +770,7 @@
 	<key>P1C0R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -785,7 +785,7 @@
 	<key>P1C0R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.85</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -800,7 +800,7 @@
 	<key>P1C0R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.84999999999999998</real>
+		<real>0.85</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -815,7 +815,7 @@
 	<key>P1C0R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -830,7 +830,7 @@
 	<key>P1C0R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -845,7 +845,7 @@
 	<key>P1C1R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>2</integer>
 		<key>Size</key>
@@ -860,7 +860,7 @@
 	<key>P1C1R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>2</integer>
 		<key>Size</key>
@@ -875,7 +875,7 @@
 	<key>P1C1R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -935,7 +935,7 @@
 	<key>P1C1R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -950,7 +950,7 @@
 	<key>P1C2R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -965,7 +965,7 @@
 	<key>P1C2R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -1040,7 +1040,7 @@
 	<key>P1C2R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1055,7 +1055,7 @@
 	<key>P1C3R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -1070,7 +1070,7 @@
 	<key>P1C3R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -1145,7 +1145,7 @@
 	<key>P1C3R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1160,7 +1160,7 @@
 	<key>P1C4R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -1175,7 +1175,7 @@
 	<key>P1C4R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -1235,7 +1235,7 @@
 	<key>P1C4R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1250,7 +1250,7 @@
 	<key>P1C4R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1265,7 +1265,7 @@
 	<key>P1C5R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -1280,7 +1280,7 @@
 	<key>P1C5R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1295,7 +1295,7 @@
 	<key>P1C5R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1310,7 +1310,7 @@
 	<key>P1C5R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1325,7 +1325,7 @@
 	<key>P1C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1340,7 +1340,7 @@
 	<key>P1C5R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1355,7 +1355,7 @@
 	<key>P1C5R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1370,7 +1370,7 @@
 	<key>P1C6R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -1385,7 +1385,7 @@
 	<key>P1C6R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1400,7 +1400,7 @@
 	<key>P1C6R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1415,7 +1415,7 @@
 	<key>P1C6R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1430,7 +1430,7 @@
 	<key>P1C6R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1445,7 +1445,7 @@
 	<key>P1C6R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>1</integer>
 		<key>Size</key>
@@ -1460,7 +1460,7 @@
 	<key>P1C6R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1475,7 +1475,7 @@
 	<key>P2C0R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1490,7 +1490,7 @@
 	<key>P2C0R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1505,7 +1505,7 @@
 	<key>P2C0R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1520,7 +1520,7 @@
 	<key>P2C0R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1535,7 +1535,7 @@
 	<key>P2C0R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1550,7 +1550,7 @@
 	<key>P2C0R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1565,7 +1565,7 @@
 	<key>P2C0R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1580,7 +1580,7 @@
 	<key>P2C1R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1595,7 +1595,7 @@
 	<key>P2C1R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1610,7 +1610,7 @@
 	<key>P2C1R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1625,7 +1625,7 @@
 	<key>P2C1R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1640,7 +1640,7 @@
 	<key>P2C1R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1655,7 +1655,7 @@
 	<key>P2C1R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1670,7 +1670,7 @@
 	<key>P2C1R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1685,7 +1685,7 @@
 	<key>P2C2R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1700,7 +1700,7 @@
 	<key>P2C2R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1715,7 +1715,7 @@
 	<key>P2C2R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1730,7 +1730,7 @@
 	<key>P2C2R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1745,7 +1745,7 @@
 	<key>P2C2R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1760,7 +1760,7 @@
 	<key>P2C2R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1775,7 +1775,7 @@
 	<key>P2C2R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1790,7 +1790,7 @@
 	<key>P2C3R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1805,7 +1805,7 @@
 	<key>P2C3R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1820,7 +1820,7 @@
 	<key>P2C3R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1835,7 +1835,7 @@
 	<key>P2C3R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1850,7 +1850,7 @@
 	<key>P2C3R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1865,7 +1865,7 @@
 	<key>P2C3R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1880,7 +1880,7 @@
 	<key>P2C3R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1895,7 +1895,7 @@
 	<key>P2C4R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1910,7 +1910,7 @@
 	<key>P2C4R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1925,7 +1925,7 @@
 	<key>P2C4R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1940,7 +1940,7 @@
 	<key>P2C4R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1955,7 +1955,7 @@
 	<key>P2C4R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1970,7 +1970,7 @@
 	<key>P2C4R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -1985,7 +1985,7 @@
 	<key>P2C4R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2000,7 +2000,7 @@
 	<key>P2C5R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2015,7 +2015,7 @@
 	<key>P2C5R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2030,7 +2030,7 @@
 	<key>P2C5R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2045,7 +2045,7 @@
 	<key>P2C5R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2060,7 +2060,7 @@
 	<key>P2C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2075,7 +2075,7 @@
 	<key>P2C5R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2090,7 +2090,7 @@
 	<key>P2C5R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2105,7 +2105,7 @@
 	<key>P2C6R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2120,7 +2120,7 @@
 	<key>P2C6R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2135,7 +2135,7 @@
 	<key>P2C6R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2150,7 +2150,7 @@
 	<key>P2C6R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2165,7 +2165,7 @@
 	<key>P2C6R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2180,7 +2180,7 @@
 	<key>P2C6R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2195,7 +2195,7 @@
 	<key>P2C6R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.20000000000000001</real>
+		<real>0.2</real>
 		<key>Color</key>
 		<integer>0</integer>
 		<key>Size</key>
@@ -2210,7 +2210,7 @@
 	<key>P3C0R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2225,7 +2225,7 @@
 	<key>P3C0R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2240,7 +2240,7 @@
 	<key>P3C0R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2255,7 +2255,7 @@
 	<key>P3C0R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2270,7 +2270,7 @@
 	<key>P3C0R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2285,7 +2285,7 @@
 	<key>P3C0R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2300,7 +2300,7 @@
 	<key>P3C0R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2315,7 +2315,7 @@
 	<key>P3C1R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2330,7 +2330,7 @@
 	<key>P3C1R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2345,7 +2345,7 @@
 	<key>P3C1R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2360,7 +2360,7 @@
 	<key>P3C1R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2375,7 +2375,7 @@
 	<key>P3C1R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2390,7 +2390,7 @@
 	<key>P3C1R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2405,7 +2405,7 @@
 	<key>P3C1R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2420,7 +2420,7 @@
 	<key>P3C2R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2435,7 +2435,7 @@
 	<key>P3C2R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2450,7 +2450,7 @@
 	<key>P3C2R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2465,7 +2465,7 @@
 	<key>P3C2R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2480,7 +2480,7 @@
 	<key>P3C2R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2495,7 +2495,7 @@
 	<key>P3C2R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2510,7 +2510,7 @@
 	<key>P3C2R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2525,7 +2525,7 @@
 	<key>P3C3R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2540,7 +2540,7 @@
 	<key>P3C3R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2555,7 +2555,7 @@
 	<key>P3C3R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2570,7 +2570,7 @@
 	<key>P3C3R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2585,7 +2585,7 @@
 	<key>P3C3R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2600,7 +2600,7 @@
 	<key>P3C3R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2615,7 +2615,7 @@
 	<key>P3C3R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2630,7 +2630,7 @@
 	<key>P3C4R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2645,7 +2645,7 @@
 	<key>P3C4R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2660,7 +2660,7 @@
 	<key>P3C4R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2675,7 +2675,7 @@
 	<key>P3C4R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2690,7 +2690,7 @@
 	<key>P3C4R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2705,7 +2705,7 @@
 	<key>P3C4R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2720,7 +2720,7 @@
 	<key>P3C4R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2735,7 +2735,7 @@
 	<key>P3C5R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2750,7 +2750,7 @@
 	<key>P3C5R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2765,7 +2765,7 @@
 	<key>P3C5R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2780,7 +2780,7 @@
 	<key>P3C5R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2795,7 +2795,7 @@
 	<key>P3C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2810,7 +2810,7 @@
 	<key>P3C5R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2820,12 +2820,12 @@
 		<key>Text</key>
 		<string>bbl</string>
 		<key>Unit</key>
-		<string>㎥;(#*1.58987294928);(#/1.58987294928)</string>
+		<string>㎥;(#*0.158987294928);(#/0.158987294928)</string>
 	</dict>
 	<key>P3C5R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2840,7 +2840,7 @@
 	<key>P3C6R0</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.9</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2855,7 +2855,7 @@
 	<key>P3C6R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2870,7 +2870,7 @@
 	<key>P3C6R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2880,12 +2880,12 @@
 		<key>Text</key>
 		<string>cuin</string>
 		<key>Unit</key>
-		<string>㎥;(#*0.0016387064);(#/0.0016387064)</string>
+		<string>㎥;(#*0.000016387064);(#/0.000016387064)</string>
 	</dict>
 	<key>P3C6R3</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2900,7 +2900,7 @@
 	<key>P3C6R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2915,7 +2915,7 @@
 	<key>P3C6R5</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>
@@ -2930,7 +2930,7 @@
 	<key>P3C6R6</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.8</real>
 		<key>Color</key>
 		<integer>4</integer>
 		<key>Size</key>

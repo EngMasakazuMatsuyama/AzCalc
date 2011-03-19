@@ -30,13 +30,15 @@
 	
 @private
 	//----------------------------------------------dealloc時にrelese
-	ADBannerView*		ibAdBanner;
+	ADBannerView*		RiAdBanner;
 	AdMobView*			RoAdMobView;
 	NSArray				*RaDrums;
 	NSArray				*RaDrumButtons;
 	NSArray				*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
-
+	UIImage*			RimgDrumButton;	
+	UIImage*			RimgDrumPush;
+	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 
 	//----------------------------------------------assign
