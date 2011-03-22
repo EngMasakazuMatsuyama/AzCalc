@@ -84,6 +84,7 @@
 						<string key="NSFrame">{{0, 216}, {320, 244}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="881090632">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -108,7 +109,7 @@
 								<string key="NSFrameSize">{318, 216}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
+								<reference key="NSNextKeyView" ref="175504206"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="246203102">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
@@ -172,13 +173,13 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
-								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="91799716">
+								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage" id="998642052">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Icon-DrumPush.png</string>
+									<string key="NSResourceName">Icon-DrumPush60x37.png</string>
 								</object>
-								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="1023475701">
+								<object class="NSCustomResource" key="IBUINormalBackgroundImage" id="572532594">
 									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Icon-Drum.png</string>
+									<string key="NSResourceName">Icon-Drum60x37.png</string>
 								</object>
 							</object>
 							<object class="IBUIButton" id="302747404">
@@ -201,8 +202,8 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="444524143"/>
-								<reference key="IBUIHighlightedBackgroundImage" ref="91799716"/>
-								<reference key="IBUINormalBackgroundImage" ref="1023475701"/>
+								<reference key="IBUIHighlightedBackgroundImage" ref="998642052"/>
+								<reference key="IBUINormalBackgroundImage" ref="572532594"/>
 							</object>
 							<object class="IBUIButton" id="56282944">
 								<reference key="NSNextResponder" ref="157882084"/>
@@ -349,8 +350,14 @@
 							<bytes key="NSRGB">MC4wNDY5ODE0ODUwOCAwLjA4OTg1ODc1ODg5IDEAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="444524143"/>
-						<reference key="IBUIHighlightedBackgroundImage" ref="91799716"/>
-						<reference key="IBUINormalBackgroundImage" ref="1023475701"/>
+						<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">Icon-DrumPush128x79.png</string>
+						</object>
+						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
+							<string key="NSClassName">NSImage</string>
+							<string key="NSResourceName">Icon-Drum128x79.png</string>
+						</object>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 460}}</string>
@@ -665,14 +672,17 @@
 					<string>245.IBPluginDependency</string>
 					<string>245.IBViewBoundsToFrameTransform</string>
 					<string>258.IBPluginDependency</string>
+					<string>258.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>258.IBViewBoundsToFrameTransform</string>
 					<string>274.IBPluginDependency</string>
 					<string>274.IBViewBoundsToFrameTransform</string>
 					<string>276.IBPluginDependency</string>
 					<string>276.IBViewBoundsToFrameTransform</string>
 					<string>278.IBPluginDependency</string>
+					<string>278.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>278.IBViewBoundsToFrameTransform</string>
 					<string>279.IBPluginDependency</string>
+					<string>279.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>279.IBViewBoundsToFrameTransform</string>
 					<string>282.IBPluginDependency</string>
 					<string>282.IBViewBoundsToFrameTransform</string>
@@ -700,6 +710,7 @@
 						<bytes key="NSTransformStruct">P4AAAL+AAAAAAAAAw+UAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="0.0"/>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABCvgAAwngAAA</bytes>
 					</object>
@@ -712,10 +723,12 @@
 						<bytes key="NSTransformStruct">AQAAAABCQAAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="1"/>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">AT+AAABDNgAAA</bytes>
 					</object>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="0.0"/>
 					<object class="NSAffineTransform">
 						<bytes key="NSTransformStruct">P4AAAL+AAABDfgAAw1IAAA</bytes>
 					</object>
@@ -834,7 +847,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ibAdBanner</string>
 							<string>ibBuFormLeft</string>
 							<string>ibBuFormRight</string>
 							<string>ibBuGetDrum</string>
@@ -850,7 +862,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ADBannerView</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
@@ -869,7 +880,6 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>ibAdBanner</string>
 							<string>ibBuFormLeft</string>
 							<string>ibBuFormRight</string>
 							<string>ibBuGetDrum</string>
@@ -885,10 +895,6 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">ibAdBanner</string>
-								<string key="candidateClassName">ADBannerView</string>
-							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">ibBuFormLeft</string>
 								<string key="candidateClassName">UIButton</string>
@@ -962,14 +968,18 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>Icon-Drum.png</string>
-				<string>Icon-DrumPush.png</string>
+				<string>Icon-Drum128x79.png</string>
+				<string>Icon-Drum60x37.png</string>
+				<string>Icon-DrumPush128x79.png</string>
+				<string>Icon-DrumPush60x37.png</string>
 				<string>Icon16-Setting.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<string>{128, 79}</string>
+				<string>{60, 37}</string>
 				<string>{128, 79}</string>
+				<string>{60, 37}</string>
 				<string>{16, 16}</string>
 			</object>
 		</object>

@@ -248,6 +248,15 @@
 
 
 	//========================================================== Lower ==============
+	//[0.4.2]//[self MvPadKeysShow]より前に必要だった。
+	//[0.4.1]//"Received memory warning. Level=2" 回避するための最適化
+	if (bPad) {
+		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum128x79.png"] retain];
+		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush128x79.png"] retain];
+	} else {
+		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum60x37.png"] retain];
+		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush60x37.png"] retain];
+	}
 	
 	if (bPad) { // iPad
 		iKeyPages = 4;	//[0.4]単位キー追加のため
@@ -257,7 +266,8 @@
 		fKeyFontZoom = 1.5;
 		//
 		[self MvPadKeysShow]; // iPad専用 メモリー20キー配置 および 回転処理
-	} else { // iPhone
+	}
+	else { // iPhone
 		iKeyPages = 5;	//[0.4]単位キー追加のため
 		iKeyCols = 5;	iKeyOffsetCol = 1; // AzdicKeys.plist C 開始位置
 		iKeyRows = 5;	iKeyOffsetRow = 1;
@@ -338,15 +348,6 @@
 	// subViewsで取得できる配列には、以下のaddSubViewした順（縦書きで左から右）に収められている。
 	// UIButtonのみaddSubViewすること！ それを前提に後処理しているため。
 
-	
-	//[0.4.1]//"Received memory warning. Level=2" 回避するための最適化
-	if (bPad) {
-		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum128x79.png"] retain];
-		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush128x79.png"] retain];
-	} else {
-		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum60x37.png"] retain];
-		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush60x37.png"] retain];
-	}
 	
 	for (int page=0; page<iKeyPages; page++ ) 
 	{
