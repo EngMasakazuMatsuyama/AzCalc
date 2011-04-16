@@ -77,13 +77,15 @@
 	ibPvDrum.dataSource = nil;
 	ibTvFormula.delegate = nil;
 
+#ifdef GD_iAd_ENABLED
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RiAdBanner) {
 		RiAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
 		[RiAdBanner release], RiAdBanner = nil;
 		NSLog(@"-2- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	}
-
+#endif
+	
 	NSLog(@"--- retainCount: RaPadKeyButtons=%d", [RaPadKeyButtons retainCount]);
 	[RaPadKeyButtons release],	RaPadKeyButtons = nil;
 	NSLog(@"--- retainCount: RaKeyMaster=%d", [RaKeyMaster retainCount]);
@@ -99,10 +101,10 @@
 - (void)dealloc 
 {
 	NSLog(@"--- dealloc ---");
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 
 #ifdef GD_AdMob_ENABLED
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
 		[RoAdMobView release];
@@ -120,7 +122,6 @@
 - (void)viewDidLoad 
 {
 	NSLog(@"--- viewDidLoad ---");
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 	
 	
@@ -190,6 +191,7 @@
 	ibPvDrum.dataSource = self;
 	ibPvDrum.showsSelectionIndicator = NO;
 	
+#ifdef GD_iAd_ENABLED
 	// iAd
 	if (NSClassFromString(@"ADBannerView")) {
 		if (RiAdBanner==nil) { // iPad はここで生成する。　iPhoneはXIB生成済み。
@@ -227,7 +229,7 @@
 		bADbannerIsVisible = NO;
 		bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
 	}
-	
+#endif
 	
 	//-----------------------------------------------------(1)数式 ページ
 	// UITextView
@@ -240,7 +242,14 @@
 	ibBuGetDrum.titleLabel.font = [UIFont systemFontOfSize:14];
 	//
 	float dx = ibScrollUpper.frame.size.width;
+#ifdef AzSTABLE
+	rect = ibTvFormula.frame;
+	rect.size.height += (rect.origin.y - 3);  rect.origin.y = 3;  // AdMobのスペースを埋めるため
+	rect.origin.x += dx;	
+	ibTvFormula.frame = rect;
+#else
 	rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
+#endif
 	rect = ibLbFormAnswer.frame;	rect.origin.x += dx;	ibLbFormAnswer.frame = rect;
 	rect = ibBuFormLeft.frame;		rect.origin.x += dx;	ibBuFormLeft.frame = rect;
 	rect = ibBuFormRight.frame;		rect.origin.x += dx;	ibBuFormRight.frame = rect;
@@ -516,10 +525,12 @@
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 	
+#ifdef GD_iAd_ENABLED
 	if (RiAdBanner) {
 		[self.view bringSubviewToFront:RiAdBanner]; // iAdをRaDrumButtonsより上にする
 		NSLog(@"-4- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	}
+#endif
 	
 	//[pool release]; // autorelease
 
@@ -539,7 +550,6 @@
 	[ibScrollUpper addSubview:RoAdMobView];
 	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 #endif
-	NSLog(@"-5- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 }
 
 /*
@@ -601,7 +611,7 @@
 - (void)viewDidUnload
 {
 	NSLog(@"--- viewDidUnload ---");
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	//NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 
 	[self unloadRelease];
@@ -923,6 +933,7 @@
 // 回転の開始前にコールされる。 ＜＜OS 3.0以降の推奨＞＞
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
+#ifdef GD_iAd_ENABLED
 	if (RiAdBanner) {	//[0.4.1]
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
@@ -940,7 +951,8 @@
 			}
 		}
 	}
-
+#endif
+	
 	if (bPad) {
 		// このタイミングでなければ、配置がズレる
 		[ibTvFormula resignFirstResponder]; // キーボードを隠す
@@ -1397,7 +1409,11 @@
 				case -2:
 					lb.textAlignment = UITextAlignmentLeft;
 					lb.font = [UIFont systemFontOfSize:20];
+#ifdef AzFREE
+					lb.text =  [NSString stringWithFormat:@"%@ Free", NSLocalizedString(@"Product Title",nil)];
+#else
 					lb.text =  NSLocalizedString(@"Product Title",nil);
+#endif
 					break;
 				case -1:
 					lb.textAlignment = UITextAlignmentLeft;
@@ -2127,6 +2143,7 @@
 	// [M]ラベル表示
 	[self MvMemoryShow];
 
+#ifdef GD_iAd_ENABLED
 	// iAd
 	if (MiSvUpperPage==0 && RiAdBanner) {
 		if (button.tag==KeyTAG_AC) { // [AC]
@@ -2135,6 +2152,7 @@
 			[self MvAppleAdOff];
 		}
 	}
+#endif
 }
 
 - (IBAction)ibBuGetDrum:(UIButton *)button	// ドラム ⇒ 数式 転記
@@ -2345,6 +2363,8 @@
 }
 
 
+#ifdef GD_iAd_ENABLED
+
 // iAd取得できたときに呼ばれる　⇒　表示する
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
@@ -2369,7 +2389,6 @@
 
 - (void)MvAppleAdOn
 {
-#ifdef GD_iAd_ENABLED
 	if (!NSClassFromString(@"ADBannerView") || !RiAdBanner || !bADbannerIsVisible) return; // iAd無効
 	if (0 <= RiAdBanner.frame.origin.y) return;	//[0.4.1]既にON
 
@@ -2382,7 +2401,6 @@
 	[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上にする
 
 	[UIView commitAnimations];
-#endif
 }
 
 - (void)MvAppleAdOff
@@ -2399,6 +2417,8 @@
 	
 	[UIView commitAnimations];
 }
+
+#endif
 
 
 //=================================================================Touch delegate
@@ -2584,6 +2604,7 @@
 }
 
 
+#ifdef GD_AdMob_ENABLED
 //=================================================================AdMob delegate
 // 必要なFramework
 // AudioToolbox.framework
@@ -2606,7 +2627,7 @@
 - (void)didFailToReceiveAd:(AdMobView *)adView {
 	NSLog(@"AdMob: Did fail to receive ad");
 }
-
+#endif
 
 
 @end

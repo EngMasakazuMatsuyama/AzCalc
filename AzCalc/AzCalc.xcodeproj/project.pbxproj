@@ -58,9 +58,68 @@
 		44AF8AA6130578BF00D3594C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA5130578BF00D3594C /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA7130578BF00D3594C /* QuartzCore.framework */; };
 		44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; };
-		44BD4A3F132329C300C96B5A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BD4A3D132329C300C96B5A /* Icon.png */; };
-		44BD4A40132329C300C96B5A /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BD4A3E132329C300C96B5A /* Icon@2x.png */; };
-		44BD4A4613232A9300C96B5A /* Icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BD4A4513232A9300C96B5A /* Icon72.png */; };
+		44BC4C481359E9A1009B995C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		44BC4C491359E9A1009B995C /* AzCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */; };
+		44BC4C4A1359E9A1009B995C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448D99301307D1DD004DFD62 /* Localizable.strings */; };
+		44BC4C4B1359E9A1009B995C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
+		44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448D997C1307DC8D004DFD62 /* SettingVC.xib */; };
+		44BC4C4D1359E9A1009B995C /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
+		44BC4C4E1359E9A1009B995C /* icon32-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */; };
+		44BC4C4F1359E9A1009B995C /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B24511F3EC87007D6FA0 /* OptionVC.xib */; };
+		44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
+		44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
+		44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
+		44BC4C531359E9A1009B995C /* Information-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DE012099FB200BB87B6 /* Information-iPad.xib */; };
+		44BC4C541359E9A1009B995C /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
+		44BC4C551359E9A1009B995C /* AzKeySet-iPad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */; };
+		44BC4C561359E9A1009B995C /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
+		44BC4C571359E9A1009B995C /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
+		44BC4C581359E9A1009B995C /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D54131528CF0064EA93 /* Default-Portrait~ipad.png */; };
+		44BC4C591359E9A1009B995C /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D56131528EE0064EA93 /* Default-Landscape~ipad.png */; };
+		44BC4C5A1359E9A1009B995C /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D58131528FC0064EA93 /* Default.png */; };
+		44BC4C5B1359E9A1009B995C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D5A131529060064EA93 /* Default@2x.png */; };
+		44BC4C5F1359E9A1009B995C /* AzKeySet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A560D713237E48000E4628 /* AzKeySet.plist */; };
+		44BC4C601359E9A1009B995C /* Icon-Drum60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C3133450DF006859F4 /* Icon-Drum60x37.png */; };
+		44BC4C611359E9A1009B995C /* Icon-Drum60x37@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C4133450DF006859F4 /* Icon-Drum60x37@2x.png */; };
+		44BC4C621359E9A1009B995C /* Icon-DrumPush60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C5133450DF006859F4 /* Icon-DrumPush60x37.png */; };
+		44BC4C631359E9A1009B995C /* Icon-DrumPush60x37@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C6133450DF006859F4 /* Icon-DrumPush60x37@2x.png */; };
+		44BC4C641359E9A1009B995C /* Icon-Drum128x79.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08CB133454F1006859F4 /* Icon-Drum128x79.png */; };
+		44BC4C651359E9A1009B995C /* Icon-DrumPush128x79.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */; };
+		44BC4C671359E9A1009B995C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
+		44BC4C681359E9A1009B995C /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */; };
+		44BC4C691359E9A1009B995C /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */; };
+		44BC4C6A1359E9A1009B995C /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
+		44BC4C6B1359E9A1009B995C /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A3D38011F31E4C0001BF89 /* InformationVC.m */; };
+		44BC4C6C1359E9A1009B995C /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
+		44BC4C6D1359E9A1009B995C /* Drum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 449F71C711F546E600B778F1 /* Drum.mm */; };
+		44BC4C6E1359E9A1009B995C /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; };
+		44BC4C6F1359E9A1009B995C /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A20A371212D96F000A315E /* KeyButton.m */; };
+		44BC4C701359E9A1009B995C /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183B8130398D6002820EA /* CDataScanner.m */; };
+		44BC4C711359E9A1009B995C /* CDataScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183BB130398D6002820EA /* CDataScanner_Extensions.m */; };
+		44BC4C721359E9A1009B995C /* NSCharacterSet_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183BD130398D6002820EA /* NSCharacterSet_Extensions.m */; };
+		44BC4C731359E9A1009B995C /* NSDictionary_JSONExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183BF130398D6002820EA /* NSDictionary_JSONExtensions.m */; };
+		44BC4C741359E9A1009B995C /* NSScanner_Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C1130398D6002820EA /* NSScanner_Extensions.m */; };
+		44BC4C751359E9A1009B995C /* CJSONDataSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C4130398D6002820EA /* CJSONDataSerializer.m */; };
+		44BC4C761359E9A1009B995C /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C6130398D6002820EA /* CJSONDeserializer.m */; };
+		44BC4C771359E9A1009B995C /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183C8130398D6002820EA /* CJSONScanner.m */; };
+		44BC4C781359E9A1009B995C /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183CA130398D6002820EA /* CJSONSerializer.m */; };
+		44BC4C791359E9A1009B995C /* CSerializedJSONData.m in Sources */ = {isa = PBXBuildFile; fileRef = 445183CC130398D6002820EA /* CSerializedJSONData.m */; };
+		44BC4C7A1359E9A1009B995C /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44AF898213052F3D00D3594C /* CalcFunctions.mm */; };
+		44BC4C7C1359E9A1009B995C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		44BC4C7D1359E9A1009B995C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		44BC4C7E1359E9A1009B995C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
+		44BC4C7F1359E9A1009B995C /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		44BC4C801359E9A1009B995C /* libAdMob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 445183D2130398D6002820EA /* libAdMob.a */; };
+		44BC4C811359E9A1009B995C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA1130578BF00D3594C /* AudioToolbox.framework */; };
+		44BC4C821359E9A1009B995C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA3130578BF00D3594C /* MediaPlayer.framework */; };
+		44BC4C831359E9A1009B995C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA5130578BF00D3594C /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		44BC4C841359E9A1009B995C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA7130578BF00D3594C /* QuartzCore.framework */; };
+		44BC4C8E1359E9F1009B995C /* Icon57free.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C8B1359E9F1009B995C /* Icon57free.png */; };
+		44BC4C8F1359E9F1009B995C /* Icon57free@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C8C1359E9F1009B995C /* Icon57free@2x.png */; };
+		44BC4C901359E9F1009B995C /* Icon72free.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C8D1359E9F1009B995C /* Icon72free.png */; };
+		44BC4C941359EA01009B995C /* Icon57s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C911359EA01009B995C /* Icon57s1.png */; };
+		44BC4C951359EA01009B995C /* Icon57s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C921359EA01009B995C /* Icon57s1@2x.png */; };
+		44BC4C961359EA01009B995C /* Icon72s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C931359EA01009B995C /* Icon72s1.png */; };
 		44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
 		44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
 		44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
@@ -163,9 +222,14 @@
 		44B54B70130AA9030029CB85 /* Chinese (Simplified) */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "Chinese (Simplified)"; path = "../Chinese (Simplified).lproj/SettingVC.xib"; sourceTree = "<group>"; };
 		44B54B71130AA9090029CB85 /* Korean */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Korean; path = ../Korean.lproj/SettingVC.xib; sourceTree = "<group>"; };
 		44B54B72130AA9110029CB85 /* Turkish */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Turkish; path = ../Turkish.lproj/SettingVC.xib; sourceTree = "<group>"; };
-		44BD4A3D132329C300C96B5A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Image/Icon.png; sourceTree = "<group>"; };
-		44BD4A3E132329C300C96B5A /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Image/Icon@2x.png"; sourceTree = "<group>"; };
-		44BD4A4513232A9300C96B5A /* Icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72.png; sourceTree = "<group>"; };
+		44BC4C891359E9A1009B995C /* AzCalcS1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzCalcS1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		44BC4C8B1359E9F1009B995C /* Icon57free.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon57free.png; sourceTree = "<group>"; };
+		44BC4C8C1359E9F1009B995C /* Icon57free@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon57free@2x.png"; sourceTree = "<group>"; };
+		44BC4C8D1359E9F1009B995C /* Icon72free.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72free.png; sourceTree = "<group>"; };
+		44BC4C911359EA01009B995C /* Icon57s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon57s1.png; sourceTree = "<group>"; };
+		44BC4C921359EA01009B995C /* Icon57s1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon57s1@2x.png"; sourceTree = "<group>"; };
+		44BC4C931359EA01009B995C /* Icon72s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72s1.png; sourceTree = "<group>"; };
+		44BC4C971359EA7B009B995C /* AzCalc-InfoS1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-InfoS1.plist"; sourceTree = "<group>"; };
 		44CB363511F0AA9F0057E9F3 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		44CB363611F0AA9F0057E9F3 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
 		44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting@2x.png"; path = "Image/Icon16-Setting@2x.png"; sourceTree = "<group>"; };
@@ -190,6 +254,22 @@
 				44AF8AA4130578BF00D3594C /* MediaPlayer.framework in Frameworks */,
 				44AF8AA6130578BF00D3594C /* MessageUI.framework in Frameworks */,
 				44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44BC4C7B1359E9A1009B995C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44BC4C7C1359E9A1009B995C /* Foundation.framework in Frameworks */,
+				44BC4C7D1359E9A1009B995C /* UIKit.framework in Frameworks */,
+				44BC4C7E1359E9A1009B995C /* CoreGraphics.framework in Frameworks */,
+				44BC4C7F1359E9A1009B995C /* iAd.framework in Frameworks */,
+				44BC4C801359E9A1009B995C /* libAdMob.a in Frameworks */,
+				44BC4C811359E9A1009B995C /* AudioToolbox.framework in Frameworks */,
+				44BC4C821359E9A1009B995C /* MediaPlayer.framework in Frameworks */,
+				44BC4C831359E9A1009B995C /* MessageUI.framework in Frameworks */,
+				44BC4C841359E9A1009B995C /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* AzCalc.app */,
+				44BC4C891359E9A1009B995C /* AzCalcS1.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -267,6 +348,7 @@
 				444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */,
 				449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */,
 				8D1107310486CEB800E47090 /* AzCalc-Info.plist */,
+				44BC4C971359EA7B009B995C /* AzCalc-InfoS1.plist */,
 				441D242211F3056200A3B68A /* InfoPlist.strings */,
 				448D99301307D1DD004DFD62 /* Localizable.strings */,
 				44377D58131528FC0064EA93 /* Default.png */,
@@ -354,6 +436,12 @@
 		44A2E47411EB29F5009FB007 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				44BC4C911359EA01009B995C /* Icon57s1.png */,
+				44BC4C921359EA01009B995C /* Icon57s1@2x.png */,
+				44BC4C931359EA01009B995C /* Icon72s1.png */,
+				44BC4C8B1359E9F1009B995C /* Icon57free.png */,
+				44BC4C8C1359E9F1009B995C /* Icon57free@2x.png */,
+				44BC4C8D1359E9F1009B995C /* Icon72free.png */,
 				446E08CB133454F1006859F4 /* Icon-Drum128x79.png */,
 				446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */,
 				446E08C3133450DF006859F4 /* Icon-Drum60x37.png */,
@@ -363,9 +451,6 @@
 				445184431303B8BE002820EA /* Icon16-Setting.png */,
 				44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */,
 				44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */,
-				44BD4A4513232A9300C96B5A /* Icon72.png */,
-				44BD4A3D132329C300C96B5A /* Icon.png */,
-				44BD4A3E132329C300C96B5A /* Icon@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -397,6 +482,23 @@
 			name = AzCalc;
 			productName = AzCalc;
 			productReference = 1D6058910D05DD3D006BFB54 /* AzCalc.app */;
+			productType = "com.apple.product-type.application";
+		};
+		44BC4C461359E9A1009B995C /* AzCalcS1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 44BC4C851359E9A1009B995C /* Build configuration list for PBXNativeTarget "AzCalcS1" */;
+			buildPhases = (
+				44BC4C471359E9A1009B995C /* Resources */,
+				44BC4C661359E9A1009B995C /* Sources */,
+				44BC4C7B1359E9A1009B995C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AzCalcS1;
+			productName = AzCalc;
+			productReference = 44BC4C891359E9A1009B995C /* AzCalcS1.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -431,6 +533,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* AzCalc */,
+				44BC4C461359E9A1009B995C /* AzCalcS1 */,
 			);
 		};
 /* End PBXProject section */
@@ -460,9 +563,6 @@
 				44377D57131528EE0064EA93 /* Default-Landscape~ipad.png in Resources */,
 				44377D59131528FC0064EA93 /* Default.png in Resources */,
 				44377D5B131529060064EA93 /* Default@2x.png in Resources */,
-				44BD4A3F132329C300C96B5A /* Icon.png in Resources */,
-				44BD4A40132329C300C96B5A /* Icon@2x.png in Resources */,
-				44BD4A4613232A9300C96B5A /* Icon72.png in Resources */,
 				44A560D813237E48000E4628 /* AzKeySet.plist in Resources */,
 				446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */,
 				446E08C8133450DF006859F4 /* Icon-Drum60x37@2x.png in Resources */,
@@ -470,6 +570,46 @@
 				446E08CA133450DF006859F4 /* Icon-DrumPush60x37@2x.png in Resources */,
 				446E08CD133454F1006859F4 /* Icon-Drum128x79.png in Resources */,
 				446E08CE133454F1006859F4 /* Icon-DrumPush128x79.png in Resources */,
+				44BC4C8E1359E9F1009B995C /* Icon57free.png in Resources */,
+				44BC4C8F1359E9F1009B995C /* Icon57free@2x.png in Resources */,
+				44BC4C901359E9F1009B995C /* Icon72free.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44BC4C471359E9A1009B995C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44BC4C481359E9A1009B995C /* MainWindow.xib in Resources */,
+				44BC4C491359E9A1009B995C /* AzCalcViewController.xib in Resources */,
+				44BC4C4A1359E9A1009B995C /* Localizable.strings in Resources */,
+				44BC4C4B1359E9A1009B995C /* InfoPlist.strings in Resources */,
+				44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */,
+				44BC4C4D1359E9A1009B995C /* InformationVC.xib in Resources */,
+				44BC4C4E1359E9A1009B995C /* icon32-PageFilp.png in Resources */,
+				44BC4C4F1359E9A1009B995C /* OptionVC.xib in Resources */,
+				44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */,
+				44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */,
+				44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */,
+				44BC4C531359E9A1009B995C /* Information-iPad.xib in Resources */,
+				44BC4C541359E9A1009B995C /* AzKeyMaster.plist in Resources */,
+				44BC4C551359E9A1009B995C /* AzKeySet-iPad.plist in Resources */,
+				44BC4C561359E9A1009B995C /* Icon16-Setting.png in Resources */,
+				44BC4C571359E9A1009B995C /* Icon16-Setting@2x.png in Resources */,
+				44BC4C581359E9A1009B995C /* Default-Portrait~ipad.png in Resources */,
+				44BC4C591359E9A1009B995C /* Default-Landscape~ipad.png in Resources */,
+				44BC4C5A1359E9A1009B995C /* Default.png in Resources */,
+				44BC4C5B1359E9A1009B995C /* Default@2x.png in Resources */,
+				44BC4C5F1359E9A1009B995C /* AzKeySet.plist in Resources */,
+				44BC4C601359E9A1009B995C /* Icon-Drum60x37.png in Resources */,
+				44BC4C611359E9A1009B995C /* Icon-Drum60x37@2x.png in Resources */,
+				44BC4C621359E9A1009B995C /* Icon-DrumPush60x37.png in Resources */,
+				44BC4C631359E9A1009B995C /* Icon-DrumPush60x37@2x.png in Resources */,
+				44BC4C641359E9A1009B995C /* Icon-Drum128x79.png in Resources */,
+				44BC4C651359E9A1009B995C /* Icon-DrumPush128x79.png in Resources */,
+				44BC4C941359EA01009B995C /* Icon57s1.png in Resources */,
+				44BC4C951359EA01009B995C /* Icon57s1@2x.png in Resources */,
+				44BC4C961359EA01009B995C /* Icon72s1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +640,33 @@
 				445183DB130398D6002820EA /* CJSONSerializer.m in Sources */,
 				445183DC130398D6002820EA /* CSerializedJSONData.m in Sources */,
 				44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		44BC4C661359E9A1009B995C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				44BC4C671359E9A1009B995C /* main.m in Sources */,
+				44BC4C681359E9A1009B995C /* AzCalcAppDelegate.m in Sources */,
+				44BC4C691359E9A1009B995C /* AzCalcViewController.mm in Sources */,
+				44BC4C6A1359E9A1009B995C /* SettingVC.m in Sources */,
+				44BC4C6B1359E9A1009B995C /* InformationVC.m in Sources */,
+				44BC4C6C1359E9A1009B995C /* OptionVC.m in Sources */,
+				44BC4C6D1359E9A1009B995C /* Drum.mm in Sources */,
+				44BC4C6E1359E9A1009B995C /* SBCD.cpp in Sources */,
+				44BC4C6F1359E9A1009B995C /* KeyButton.m in Sources */,
+				44BC4C701359E9A1009B995C /* CDataScanner.m in Sources */,
+				44BC4C711359E9A1009B995C /* CDataScanner_Extensions.m in Sources */,
+				44BC4C721359E9A1009B995C /* NSCharacterSet_Extensions.m in Sources */,
+				44BC4C731359E9A1009B995C /* NSDictionary_JSONExtensions.m in Sources */,
+				44BC4C741359E9A1009B995C /* NSScanner_Extensions.m in Sources */,
+				44BC4C751359E9A1009B995C /* CJSONDataSerializer.m in Sources */,
+				44BC4C761359E9A1009B995C /* CJSONDeserializer.m in Sources */,
+				44BC4C771359E9A1009B995C /* CJSONScanner.m in Sources */,
+				44BC4C781359E9A1009B995C /* CJSONSerializer.m in Sources */,
+				44BC4C791359E9A1009B995C /* CSerializedJSONData.m in Sources */,
+				44BC4C7A1359E9A1009B995C /* CalcFunctions.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,12 +742,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = AzDEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = "AzDEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzFREE=1";
 				INFOPLIST_FILE = "AzCalc-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
@@ -589,6 +758,7 @@
 					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
 				);
 				PRODUCT_NAME = AzCalc;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "663117FB-C8A9-4BF9-A217-5FD37BD770A1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -603,6 +773,7 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzFREE=1";
 				INFOPLIST_FILE = "AzCalc-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
@@ -611,12 +782,87 @@
 					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
 				);
 				PRODUCT_NAME = AzCalc;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "29FF6695-4A91-4F7A-883C-1D9443E78DF6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "663117FB-C8A9-4BF9-A217-5FD37BD770A1";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
+		};
+		44BC4C861359E9A1009B995C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "AzDEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
+				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
+					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
+				);
+				PRODUCT_NAME = AzCalcS1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		44BC4C871359E9A1009B995C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
+				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
+					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
+				);
+				PRODUCT_NAME = AzCalcS1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "663117FB-C8A9-4BF9-A217-5FD37BD770A1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		44BC4C881359E9A1009B995C /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Masakazu Matsuyama";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
+				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
+					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
+				);
+				PRODUCT_NAME = AzCalcS1;
+				"PROVISIONING_PROFILE[sdk=*]" = "7AD6DF9D-D496-408C-B281-88EB1A6D7009";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
 		};
 		44D60ECC11F307DD00DD0317 /* Distribution */ = {
 			isa = XCBuildConfiguration;
@@ -630,7 +876,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "7AD6DF9D-D496-408C-B281-88EB1A6D7009";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FF34D7D5-B962-4103-9CD8-1A0F299594C0";
 				SDKROOT = iphoneos;
 			};
 			name = Distribution;
@@ -640,10 +886,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution: Masakazu Matsuyama";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzFREE=1";
 				INFOPLIST_FILE = "AzCalc-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
@@ -652,7 +898,6 @@
 					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
 				);
 				PRODUCT_NAME = AzCalc;
-				"PROVISIONING_PROFILE[sdk=*]" = "7AD6DF9D-D496-408C-B281-88EB1A6D7009";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -672,7 +917,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				MACOSX_DEPLOYMENT_TARGET = "";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "29FF6695-4A91-4F7A-883C-1D9443E78DF6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "663117FB-C8A9-4BF9-A217-5FD37BD770A1";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -689,7 +934,7 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "29FF6695-4A91-4F7A-883C-1D9443E78DF6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "663117FB-C8A9-4BF9-A217-5FD37BD770A1";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -703,6 +948,16 @@
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
 				44D60ECD11F307DD00DD0317 /* Distribution */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		44BC4C851359E9A1009B995C /* Build configuration list for PBXNativeTarget "AzCalcS1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				44BC4C861359E9A1009B995C /* Debug */,
+				44BC4C871359E9A1009B995C /* Release */,
+				44BC4C881359E9A1009B995C /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

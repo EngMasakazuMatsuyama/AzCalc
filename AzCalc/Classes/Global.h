@@ -9,8 +9,11 @@
 //#define AzDEBUG  プロジェクト設定にて"GCC_PREPROCESSOR_DEFINITIONS"定義した
 
 //#define AzMAKE_SPLASHFACE  // 起動画面 Default.png を作るための作業オプション
+
+#ifdef AZFREE
 #define GD_iAd_ENABLED
 #define GD_AdMob_ENABLED
+#endif
 
 #define GD_UNIT_ENABLED		// 単位機能
 
