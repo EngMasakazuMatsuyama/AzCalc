@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">300</string>
+			<string key="NS.object.0">301</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -115,7 +115,7 @@
 							<object class="IBUITextView" id="698131813">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 48}, {767, 111}}</string>
+								<string key="NSFrame">{{12, 48}, {744, 111}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="182193294"/>
@@ -142,7 +142,7 @@
 							<object class="IBUIButton" id="638055911">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{18, 5}, {100, 35}}</string>
+								<string key="NSFrame">{{12, 5}, {100, 35}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="573457145"/>
@@ -181,7 +181,7 @@
 							<object class="IBUIButton" id="573457145">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{648, 5}, {100, 35}}</string>
+								<string key="NSFrame">{{656, 5}, {100, 35}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="698131813"/>
@@ -263,7 +263,7 @@
 							<object class="IBUILabel" id="617674397">
 								<reference key="NSNextResponder" ref="675808578"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 159}, {767, 26}}</string>
+								<string key="NSFrame">{{12, 159}, {744, 26}}</string>
 								<reference key="NSSuperview" ref="675808578"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="934331105"/>
@@ -611,12 +611,12 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="934331105"/>
 							<reference ref="320010956"/>
-							<reference ref="638055911"/>
-							<reference ref="573457145"/>
 							<reference ref="171654030"/>
 							<reference ref="617674397"/>
 							<reference ref="182193294"/>
 							<reference ref="698131813"/>
+							<reference ref="638055911"/>
+							<reference ref="573457145"/>
 						</object>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">ScrollUpper</string>
@@ -992,6 +992,6 @@
 				<string>{16, 16}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">300</string>
+		<string key="IBCocoaTouchPluginVersion">301</string>
 	</data>
 </archive>

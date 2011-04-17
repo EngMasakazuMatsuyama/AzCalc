@@ -10,7 +10,7 @@
 
 //#define AzMAKE_SPLASHFACE  // 起動画面 Default.png を作るための作業オプション
 
-#ifdef AZFREE
+#ifdef AzFREE
 #define GD_iAd_ENABLED
 #define GD_AdMob_ENABLED
 #endif
@@ -74,6 +74,12 @@
 #define GUD_GroupingSeparator			@"GUD_GroupingSeparator"
 #define GUD_GroupingType				@"GUD_GroupingType"
 #define GUD_DecimalSeparator			@"GUD_DecimalSeparator"
+
+
+//
+// Global.m Functions
+//
+void alertBox( NSString *zTitle, NSString *zMsg, NSString *zButton );
 
 
 //END

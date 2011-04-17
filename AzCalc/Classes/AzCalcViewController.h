@@ -17,15 +17,14 @@
 
 @class KeyButton;
 
-@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate,
-														UIScrollViewDelegate>
+@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate
 #ifdef GD_iAd_ENABLED
-		<ADBannerViewDelegate>
+		,ADBannerViewDelegate
 #endif
 #ifdef GD_AdMob_ENABLED
-		<AdMobDelegate>
+		,AdMobDelegate
 #endif
-{
+> {
 	IBOutlet UIPickerView*	ibPvDrum;
 	IBOutlet UILabel*		ibLbEntry;
 	IBOutlet UIButton*		ibBuMemory;

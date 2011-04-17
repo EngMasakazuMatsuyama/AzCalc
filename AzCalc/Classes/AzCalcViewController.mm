@@ -46,8 +46,10 @@
 - (void)MvKeyboardPage1Alook0;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
 - (void)MvDrumButtonDragEnter:(UIButton *)button;
+#ifdef GD_iAd_ENABLED
 - (void)MvAppleAdOn;
 - (void)MvAppleAdOff;
+#endif
 @end
 
 @implementation AzCalcViewController
@@ -201,24 +203,31 @@
 		}
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
-			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
+/*			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
 														 ADBannerContentSizeIdentifier320x50,
 														 ADBannerContentSizeIdentifier480x32, nil];
 			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
 			} else {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-			}
-		} else {
+			}*/
+			//[0.5.0]ヨコのときもタテと同じバナーを使用する
+			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
+			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+		}
+		else {
 			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
+/*			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
 														 ADBannerContentSizeIdentifierPortrait,
 														 ADBannerContentSizeIdentifierLandscape, nil];
 			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
 			} else {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-			}
+			}*/
+			//[0.5.0]ヨコのときもタテと同じバナーを使用する
+			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
+			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
 		}
 		RiAdBanner.delegate = self;
 		CGRect theBannerFrame = self.view.frame;
@@ -227,8 +236,9 @@
 		[ibScrollUpper addSubview:RiAdBanner];
 		//[RiAdBanner release]// unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
 		bADbannerIsVisible = NO;
-		bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
 	}
+	//0.5.0//AdMob共用化
+	bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
 #endif
 	
 	//-----------------------------------------------------(1)数式 ページ
@@ -243,10 +253,14 @@
 	//
 	float dx = ibScrollUpper.frame.size.width;
 #ifdef AzSTABLE
-	rect = ibTvFormula.frame;
-	rect.size.height += (rect.origin.y - 3);  rect.origin.y = 3;  // AdMobのスペースを埋めるため
-	rect.origin.x += dx;	
-	ibTvFormula.frame = rect;
+	if (bPad) {
+		rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
+	} else {
+		rect = ibTvFormula.frame;
+		rect.size.height += (rect.origin.y - 3);  rect.origin.y = 3;  // AdMobのスペースを埋めるため
+		rect.origin.x += dx;	
+		ibTvFormula.frame = rect;
+	}
 #else
 	rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
 #endif
@@ -541,13 +555,16 @@
 		CGRect rc = RoAdMobView.frame;
         if (bPad) { // iPad
             rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
+            //rc.origin.x = ibScrollUpper.frame.size.width/2.0 - rc.size.width/2.0; // (0)ページ中央へ
         } else {
             rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
-        }
+			//rc.origin.x = 0; // (0)PAGE
+		}
 		rc.origin.y = 0;
 		RoAdMobView.frame = rc;
 	}
 	[ibScrollUpper addSubview:RoAdMobView];
+	[self.view bringSubviewToFront:RoAdMobView]; // 上にする
 	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 #endif
 }
@@ -779,7 +796,9 @@
 #endif
 			}
 		}
+#ifdef GD_iAd_ENABLED
 		[self MvAppleAdOff];
+#endif
 	} 
 	else {
 		// ドラタク通常モード
@@ -882,7 +901,6 @@
 				}
 			}
 		}
-		//[self MvAppleAdOn];
 		//[self.view becomeFirstResponder];
 	}
 #ifdef AzMAKE_SPLASHFACE
@@ -937,18 +955,22 @@
 	if (RiAdBanner) {	//[0.4.1]
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
-			if (UIInterfaceOrientationIsLandscape(orientation)) {
+/*			if (UIInterfaceOrientationIsLandscape(orientation)) {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
 			} else {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-			}
+			}*/
+			//[0.5.0]ヨコのときもタテと同じバナーを使用する
+			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 		} else {
 			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-			if (UIInterfaceOrientationIsLandscape(orientation)) {
+/*			if (UIInterfaceOrientationIsLandscape(orientation)) {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
 			} else {
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-			}
+			}*/
+			//[0.5.0]ヨコのときもタテと同じバナーを使用する
+			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
 		}
 	}
 #endif
@@ -1260,10 +1282,11 @@
 - (IBAction)ibBuInformation:(UIButton *)button
 {
 	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.ibInformationVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-	//appDelegate.ibInformationVC.view.hidden = NO;
-	//appDelegate.ibSettingVC.view.hidden = YES;
-	//appDelegate.ibOptionVC.view.hidden = YES;
+	if (bPad) {
+		appDelegate.ibInformationVC.modalPresentationStyle = UIModalPresentationFormSheet; // iPad画面1/4サイズ
+	} else {
+		appDelegate.ibInformationVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
 	[self presentModalViewController:appDelegate.ibInformationVC animated:YES];
 }
 
@@ -2144,13 +2167,10 @@
 	[self MvMemoryShow];
 
 #ifdef GD_iAd_ENABLED
-	// iAd
-	if (MiSvUpperPage==0 && RiAdBanner) {
-		if (button.tag==KeyTAG_AC) { // [AC]
-			[self MvAppleAdOn];
-		} else {
-			[self MvAppleAdOff];
-		}
+	if (button.tag==KeyTAG_AC) { // [AC]
+		[self MvAppleAdOn];
+	} else {
+		[self MvAppleAdOff];
 	}
 #endif
 }
@@ -2389,31 +2409,55 @@
 
 - (void)MvAppleAdOn
 {
-	if (!NSClassFromString(@"ADBannerView") || !RiAdBanner || !bADbannerIsVisible) return; // iAd無効
-	if (0 <= RiAdBanner.frame.origin.y) return;	//[0.4.1]既にON
-
 	NSLog(@"=== MvAppleAdOn ===");
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:3.0];
+	[UIView setAnimationDuration:1.2];
 	
-	RiAdBanner.frame = ibPvDrum.frame;
-	[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上にする
+#ifdef GD_AdMob_ENABLED
+	if (RoAdMobView && MiSvUpperPage==0) {
+		CGRect rc = RoAdMobView.frame;
+		rc.origin.x = ibScrollUpper.frame.size.width - rc.size.width; // (0)ページ右端へ
+		rc.origin.y = 0;
+		RoAdMobView.frame = rc;
+	}
+#endif
 
+	if (NSClassFromString(@"ADBannerView") && RiAdBanner && bADbannerIsVisible && RiAdBanner.frame.origin.y < 0) {
+		RiAdBanner.frame = ibPvDrum.frame;
+		[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上にする
+	}
+	
 	[UIView commitAnimations];
 }
 
 - (void)MvAppleAdOff
 {
-	if (!NSClassFromString(@"ADBannerView") || !RiAdBanner) return; // iAd無効
-	if (RiAdBanner.frame.origin.y < 0) return;	//[0.4.1]既にOFF
+	//if (!NSClassFromString(@"ADBannerView") || !RiAdBanner) return; // iAd無効
+	//if (RiAdBanner.frame.origin.y < 0) return;	//[0.4.1]既にOFF
 
 	NSLog(@"=== MvAppleAdOff ===");
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	[UIView setAnimationDuration:1.8];
+	//[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];		// slow at end
+	[UIView setAnimationDuration:1.2];
 	
-	RiAdBanner.frame = CGRectMake(0,-70, 0,0);
+	if (NSClassFromString(@"ADBannerView") && RiAdBanner && 0 <= RiAdBanner.frame.origin.y) {
+		RiAdBanner.frame = CGRectMake(0,-70, 0,0);
+	}
+
+#ifdef GD_AdMob_ENABLED
+	if (RoAdMobView) {
+		CGRect rc = RoAdMobView.frame;
+		if (bPad) { // iPad
+			rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
+		} else {
+			rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
+		}
+		rc.origin.y = 0;
+		RoAdMobView.frame = rc;
+	}
+#endif
 	
 	[UIView commitAnimations];
 }
@@ -2466,6 +2510,9 @@
 			[CalcFunctions setCalcMethod:1]; // 数式側：常に (1)Formula にする
 			// 全単位ボタンを無効にする
 			[self GvKeyUnitGroupSI:@"" andSI:@""];
+#ifdef GD_iAd_ENABLED
+			[self MvAppleAdOff];
+#endif
 		}
 		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
 			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -2475,6 +2522,9 @@
 			Drum *drum = [RaDrums objectAtIndex:entryComponent];
 			//[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
 			[drum GvEntryUnitSet];
+#ifdef GD_iAd_ENABLED
+			//これは出過ぎ// [self MvAppleAdOn];
+#endif
 		}
 	}
 	else {
@@ -2567,11 +2617,10 @@
 {
 	NSLog(@"--shouldChangeTextInRange-----[%@]", text);
 	
-	if ([text length]<=0) {
-		// [BS] "9+" が一緒に削除されてしまうので、オリジナルの[BS]処理する
-		[self MvButtonFormula:KeyTAG_BS];
-		return NO;
+	if ([text length]<=0) { // [BS]
+		return YES;
 	}
+	
 	if ([text hasPrefix:@"\n"]) { // [Done]
 		[textView resignFirstResponder]; // キーボードを隠す 
 		return NO;
@@ -2622,6 +2671,10 @@
 // AdMob
 - (void)didReceiveAd:(AdMobView *)adView {
 	NSLog(@"AdMob: Did receive ad");
+	if (bADbannerFirstTime) {  // 起動時に1回だけ表示するため
+		bADbannerFirstTime = NO;
+		[self MvAppleAdOn];
+	}
 }
 // AdMob
 - (void)didFailToReceiveAd:(AdMobView *)adView {

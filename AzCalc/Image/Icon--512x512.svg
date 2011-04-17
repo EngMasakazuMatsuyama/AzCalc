@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="Icon--512x512.svg"
-   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Icon72s1.png"
-   inkscape:export-xdpi="12.66"
-   inkscape:export-ydpi="12.66"
+   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Icon57s1@2x.png"
+   inkscape:export-xdpi="20.040001"
+   inkscape:export-ydpi="20.040001"
    style="display:inline">
   <defs
      id="defs4">
@@ -2969,15 +2969,15 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.3457031"
-     inkscape:cx="298.35704"
+     inkscape:cx="256"
      inkscape:cy="256"
      inkscape:document-units="px"
      inkscape:current-layer="layer4"
      showgrid="false"
      inkscape:window-width="1320"
      inkscape:window-height="946"
-     inkscape:window-x="418"
-     inkscape:window-y="150"
+     inkscape:window-x="42"
+     inkscape:window-y="113"
      inkscape:window-maximized="0"
      inkscape:snap-global="false" />
   <metadata
@@ -3029,7 +3029,7 @@
      sodipodi:insensitive="true">
     <g
        id="g5758"
-       transform="matrix(0.99659702,0,0,0.99659702,20.879609,20.945347)"
+       transform="matrix(0.8392396,0,0,0.99659702,58.00388,20.945347)"
        style="fill:#97504d;fill-opacity:1;stroke:none">
       <rect
          y="188.68333"
@@ -3054,7 +3054,7 @@
      style="display:none"
      sodipodi:insensitive="true">
     <flowRoot
-       transform="matrix(34.355637,0.03442238,-0.06325786,35.379182,-10654.273,-1624.6118)"
+       transform="matrix(32.606877,0.02931065,-0.06003793,30.125369,-10105.754,-1303.5312)"
        style="font-size:3.40804172px;font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:start;line-height:100%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#ffdab9;fill-opacity:1;stroke:none;display:inline;font-family:Hiragino Kaku Gothic Std;-inkscape-font-specification:Hiragino Kaku Gothic Std Bold Italic"
        id="flowRoot3958"
        xml:space="preserve"><flowRegion

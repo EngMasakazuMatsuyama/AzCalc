@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
-
-@interface InformationVC : UIViewController 
+@interface InformationVC : UIViewController  <MFMailComposeViewControllerDelegate>
 {
-	IBOutlet UILabel *ibLbProductName;
-	IBOutlet UILabel *ibLbVersion;
+	IBOutlet UILabel*	ibLbProductName;
+	IBOutlet UILabel*	ibLbVersion;
+	IBOutlet UIImageView*	ibImgIcon;
 }
 
+- (IBAction)ibBuContact:(UIButton *)button;
 - (IBAction)ibBuOK:(UIButton *)button;
 
 @end
