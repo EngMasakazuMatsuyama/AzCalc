@@ -49,6 +49,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{31, 20}, {100, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="440502072"/>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
 						<int key="IBUIContentMode">1</int>
@@ -62,15 +63,16 @@
 					<object class="IBUILabel" id="440502072">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{128, 20}, {412, 89}}</string>
+						<string key="NSFrame">{{128, 30}, {412, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="534004765"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">Drucalc</string>
+						<string key="IBUIText">CalcRoll</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Futura-CondensedExtraBold</string>
 							<double key="NSSize">65</double>
@@ -90,13 +92,14 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{128, 117}, {412, 62}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="152662311"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string type="base64-UTF8" key="IBUIText">VmVyc2lvbiAwLjAuMApBZCAtIEZyZWU</string>
+						<string type="base64-UTF8" key="IBUIText">VmVyc2lvbiAwLjAuMApGcmVlA</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">24</double>
@@ -112,16 +115,16 @@
 					<object class="IBUILabel" id="152662311">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{128, 188}, {412, 145}}</string>
+						<string key="NSFrame">{{128, 188}, {412, 124}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="43040229"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string type="base64-UTF8" key="IBUIText">QXp1a2lTb2Z0IFByb2plY3TigKhBekNhbGMKQm9ybiBvbiBKdWx5IDE44oCoKEMpMjAxMC0yMDExIEF6
-dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</string>
+						<string key="IBUIText">CalcRoll Born on July 18 (C)2010-2011 Azukid Creator Sum Positive All Rights Reserved.</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">16</double>
@@ -141,6 +144,7 @@ dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</string>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{41, 128}, {120, 110}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="165156831"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -166,6 +170,7 @@ dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</string>
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{31, 406}, {491, 171}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="300878591"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIAutoresizesSubviews">NO</bool>
@@ -173,11 +178,11 @@ dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</string>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string type="base64-UTF8" key="IBUIText">44CQQ29uc2Vuc3VzIG9uIHVzZeOAkeOAgEF6dWtpU29mdCBhdXRob3JzIGFuZCBvZmZpY2lhbHMgd2ls
-bCBub3QgYmVhciBhbnkgcmVzcG9uc2liaWxpdHkgZm9yIGRhbWFnZSBjYXVzZWQgYnkgdGhpcyBhcHBs
-aWNhdGlvbi4gSWYgeW91IGFncmVlIHdpdGggdGhpcywgcGxlYXNlIHVzZS7igKgKCuOAkFNlY3VyaXR5
-IEFsZXJ044CR44CAVGhpcyBhcHAgZG9lcyBub3QgZW5jcnlwdCB0aGUgaW5mb3JtYXRpb24u44CAUGxl
-YXNlIGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
+						<string type="base64-UTF8" key="IBUIText">44CQQ29uc2Vuc3VzIG9uIHVzZeOAkeOAgEF6dWtpZCBhdXRob3JzIGFuZCBvZmZpY2lhbHMgd2lsbCBu
+b3QgYmVhciBhbnkgcmVzcG9uc2liaWxpdHkgZm9yIGRhbWFnZSBjYXVzZWQgYnkgdGhpcyBhcHBsaWNh
+dGlvbi4gSWYgeW91IGFncmVlIHdpdGggdGhpcywgcGxlYXNlIHVzZS7igKgKCuOAkFNlY3VyaXR5IEFs
+ZXJ044CR44CAVGhpcyBhcHAgZG9lcyBub3QgZW5jcnlwdCB0aGUgaW5mb3JtYXRpb24u44CAUGxlYXNl
+IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">18</double>
@@ -199,6 +204,7 @@ YXNlIGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{193, 341}, {283, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="854747876"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -229,6 +235,7 @@ YXNlIGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 580}, {540, 40}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -251,6 +258,7 @@ YXNlIGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 				</object>
 				<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="896633924"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
@@ -331,7 +339,6 @@ YXNlIGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="440502072"/>
 							<reference ref="152662311"/>
 							<reference ref="854747876"/>
 							<reference ref="43040229"/>
@@ -339,6 +346,7 @@ YXNlIGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 							<reference ref="534004765"/>
 							<reference ref="300878591"/>
 							<reference ref="165156831"/>
+							<reference ref="440502072"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Information</string>
@@ -456,7 +464,90 @@ YXNlIGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 			<nil key="sourceID"/>
 			<int key="maxID">17</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBPartialClassDescription">
+					<string key="className">InformationVC</string>
+					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibBuContact:</string>
+							<string>ibBuOK:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
+							<string>UIButton</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibBuContact:</string>
+							<string>ibBuOK:</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">ibBuContact:</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">ibBuOK:</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="outlets">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibImgIcon</string>
+							<string>ibLbProductName</string>
+							<string>ibLbVersion</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIImageView</string>
+							<string>UILabel</string>
+							<string>UILabel</string>
+						</object>
+					</object>
+					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibImgIcon</string>
+							<string>ibLbProductName</string>
+							<string>ibLbVersion</string>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">ibImgIcon</string>
+								<string key="candidateClassName">UIImageView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">ibLbProductName</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">ibLbVersion</string>
+								<string key="candidateClassName">UILabel</string>
+							</object>
+						</object>
+					</object>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/InformationVC.h</string>
+					</object>
+				</object>
+			</object>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">

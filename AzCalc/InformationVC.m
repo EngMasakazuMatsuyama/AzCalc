@@ -43,7 +43,7 @@
     picker.mailComposeDelegate = self;
 	
 	// To: 宛先
-	NSArray *toRecipients = [NSArray arrayWithObject:@"AzCalc@azukid.com"];
+	NSArray *toRecipients = [NSArray arrayWithObject:@"CalcRoll@azukid.com"];
 	[picker setToRecipients:toRecipients];
     //[picker setCcRecipients:nil];
 	//[picker setBccRecipients:nil];
@@ -117,7 +117,7 @@
 	} else {
 		[ibImgIcon setImage:[UIImage imageNamed:@"Icon57free.png"]];
 	}
-	ibLbVersion.text = [NSString stringWithFormat:@"Version %@\nAd - Free", zVersion];
+	ibLbVersion.text = [NSString stringWithFormat:@"Version %@\nFree", zVersion];
 #endif
 }
 

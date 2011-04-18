@@ -46,10 +46,6 @@
 - (void)MvKeyboardPage1Alook0;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
 - (void)MvDrumButtonDragEnter:(UIButton *)button;
-#ifdef GD_iAd_ENABLED
-- (void)MvAppleAdOn;
-- (void)MvAppleAdOff;
-#endif
 @end
 
 @implementation AzCalcViewController
@@ -79,7 +75,7 @@
 	ibPvDrum.dataSource = nil;
 	ibTvFormula.delegate = nil;
 
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RiAdBanner) {
 		RiAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
@@ -105,7 +101,7 @@
 	NSLog(@"--- dealloc ---");
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 
-#ifdef GD_AdMob_ENABLED
+#ifdef GD_Ad_ENABLED
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
@@ -193,7 +189,7 @@
 	ibPvDrum.dataSource = self;
 	ibPvDrum.showsSelectionIndicator = NO;
 	
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 	// iAd
 	if (NSClassFromString(@"ADBannerView")) {
 		if (RiAdBanner==nil) { // iPad はここで生成する。　iPhoneはXIB生成済み。
@@ -238,7 +234,7 @@
 		bADbannerIsVisible = NO;
 	}
 	//0.5.0//AdMob共用化
-	bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
+	//bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
 #endif
 	
 	//-----------------------------------------------------(1)数式 ページ
@@ -539,16 +535,12 @@
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 	
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 	if (RiAdBanner) {
 		[self.view bringSubviewToFront:RiAdBanner]; // iAdをRaDrumButtonsより上にする
 		NSLog(@"-4- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	}
-#endif
-	
-	//[pool release]; // autorelease
 
-#ifdef GD_AdMob_ENABLED
 	if (RoAdMobView==nil) {
 		RoAdMobView = [AdMobView requestAdWithDelegate:self];
 		[RoAdMobView retain];
@@ -796,8 +788,8 @@
 #endif
 			}
 		}
-#ifdef GD_iAd_ENABLED
-		[self MvAppleAdOff];
+#ifdef GD_Ad_ENABLED
+		[self MvShowAdApple:NO AdMob:NO];
 #endif
 	} 
 	else {
@@ -951,7 +943,7 @@
 // 回転の開始前にコールされる。 ＜＜OS 3.0以降の推奨＞＞
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 	if (RiAdBanner) {	//[0.4.1]
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
@@ -1430,18 +1422,16 @@
 		if (component==0) {
 			switch (iRow) {
 				case -2:
-					lb.textAlignment = UITextAlignmentLeft;
-					lb.font = [UIFont systemFontOfSize:20];
-#ifdef AzFREE
-					lb.text =  [NSString stringWithFormat:@"%@ Free", NSLocalizedString(@"Product Title",nil)];
-#else
+					lb.textAlignment = UITextAlignmentCenter;
+					lb.font = [UIFont fontWithName:@"Futura-CondensedExtraBold" size:26];    //-Condensed-ExtraBold  boldSystemFontOfSize:20];
 					lb.text =  NSLocalizedString(@"Product Title",nil);
-#endif
 					break;
 				case -1:
-					lb.textAlignment = UITextAlignmentLeft;
+#ifdef AzFREE
+					lb.textAlignment = UITextAlignmentCenter;
 					lb.font = [UIFont systemFontOfSize:14];
-					lb.text =  NSLocalizedString(@" Azukid",nil);
+					lb.text =  @"Free";   //NSLocalizedString(@" Azukid",nil);
+#endif
 					break;
 				default:
 					lb.text =  @"";
@@ -2166,11 +2156,13 @@
 	// [M]ラベル表示
 	[self MvMemoryShow];
 
-#ifdef GD_iAd_ENABLED
-	if (button.tag==KeyTAG_AC) { // [AC]
-		[self MvAppleAdOn];
-	} else {
-		[self MvAppleAdOff];
+#ifdef GD_Ad_ENABLED
+	if (MiSvUpperPage==0) { // [AC]
+		if (button.tag==KeyTAG_AC) { // [AC]
+			[self MvShowAdApple:YES AdMob:YES];
+		} else {
+			[self MvShowAdApple:NO AdMob:NO];
+		}
 	}
 #endif
 }
@@ -2383,7 +2375,7 @@
 }
 
 
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 
 // iAd取得できたときに呼ばれる　⇒　表示する
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
@@ -2391,74 +2383,57 @@
 	//AzLOG(@"=== bannerViewDidLoadAd ===");
 	bADbannerIsVisible = YES; // iAd取得成功（広告内容あり）
 	
-	if (RiAdBanner && bADbannerFirstTime) {  // 起動時に1回だけ表示するため
-		bADbannerFirstTime = NO;
-		[self MvAppleAdOn];
-	}
+//	if (RiAdBanner && bADbannerFirstTime) {  // 起動時に1回だけ表示するため
+//		bADbannerFirstTime = NO;
+		[self MvShowAdApple:YES AdMob:YES];
+//	}
 }
 
 // iAd取得できなかったときに呼ばれる　⇒　非表示にする
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
 	AzLOG(@"=== didFailToReceiveAdWithError ===");
+	[self MvShowAdApple:NO AdMob:YES];		// iAdなし、AdMob表示
 	bADbannerIsVisible = NO; // iAd取得失敗（広告内容なし）
-
-	if (RiAdBanner && 0<=RiAdBanner.frame.origin.y) 
-		[self MvAppleAdOff];
 }
 
-- (void)MvAppleAdOn
+- (void)MvShowAdApple:(BOOL)bApple AdMob:(BOOL)bMob
 {
-	NSLog(@"=== MvAppleAdOn ===");
+	NSLog(@"=== MvShowAdApple[%d] AdMob[%d] ===", bApple, bMob);
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.2];
 	
-#ifdef GD_AdMob_ENABLED
-	if (RoAdMobView && MiSvUpperPage==0) {
-		CGRect rc = RoAdMobView.frame;
-		rc.origin.x = ibScrollUpper.frame.size.width - rc.size.width; // (0)ページ右端へ
-		rc.origin.y = 0;
-		RoAdMobView.frame = rc;
-	}
-#endif
-
-	if (NSClassFromString(@"ADBannerView") && RiAdBanner && bADbannerIsVisible && RiAdBanner.frame.origin.y < 0) {
-		RiAdBanner.frame = ibPvDrum.frame;
-		[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上にする
-	}
-	
-	[UIView commitAnimations];
-}
-
-- (void)MvAppleAdOff
-{
-	//if (!NSClassFromString(@"ADBannerView") || !RiAdBanner) return; // iAd無効
-	//if (RiAdBanner.frame.origin.y < 0) return;	//[0.4.1]既にOFF
-
-	NSLog(@"=== MvAppleAdOff ===");
-	[UIView beginAnimations:nil context:NULL];
-	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-	//[UIView setAnimationCurve:UIViewAnimationCurveEaseOut];		// slow at end
-	[UIView setAnimationDuration:1.2];
-	
-	if (NSClassFromString(@"ADBannerView") && RiAdBanner && 0 <= RiAdBanner.frame.origin.y) {
-		RiAdBanner.frame = CGRectMake(0,-70, 0,0);
+	if (NSClassFromString(@"ADBannerView") && RiAdBanner) {
+		if (bApple && bADbannerIsVisible) {
+			RiAdBanner.frame = ibPvDrum.frame;
+			[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上層にする
+			bMob = NO; // iAd表示優先
+		} else {
+			RiAdBanner.frame = CGRectMake(0,-70, 0,0);
+		}
 	}
 
-#ifdef GD_AdMob_ENABLED
 	if (RoAdMobView) {
 		CGRect rc = RoAdMobView.frame;
-		if (bPad) { // iPad
-			rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
-		} else {
-			rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
+		if (bMob && MiSvUpperPage==0) { // Upper(0)pageに表示する
+			if (bPad) {
+				//rc.origin.x = ibScrollUpper.frame.size.width - rc.size.width; // (0)ページ右端へ
+				rc.origin.x = ibScrollUpper.frame.size.width/2.0 - rc.size.width/2.0; // (0)ページ中央へ
+			} else {
+				rc.origin.x = 0;
+			}
+		} else { // Upper(1)pageに表示する　AdMobは非表示無し
+			if (bPad) { // iPad
+				rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
+			} else {
+				rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
+			}
 		}
 		rc.origin.y = 0;
 		RoAdMobView.frame = rc;
 	}
-#endif
-	
+
 	[UIView commitAnimations];
 }
 
@@ -2510,8 +2485,8 @@
 			[CalcFunctions setCalcMethod:1]; // 数式側：常に (1)Formula にする
 			// 全単位ボタンを無効にする
 			[self GvKeyUnitGroupSI:@"" andSI:@""];
-#ifdef GD_iAd_ENABLED
-			[self MvAppleAdOff];
+#ifdef GD_Ad_ENABLED
+			[self MvShowAdApple:NO AdMob:NO];	
 #endif
 		}
 		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
@@ -2522,7 +2497,7 @@
 			Drum *drum = [RaDrums objectAtIndex:entryComponent];
 			//[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
 			[drum GvEntryUnitSet];
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 			//これは出過ぎ// [self MvAppleAdOn];
 #endif
 		}
@@ -2653,7 +2628,7 @@
 }
 
 
-#ifdef GD_AdMob_ENABLED
+#ifdef GD_Ad_ENABLED
 //=================================================================AdMob delegate
 // 必要なFramework
 // AudioToolbox.framework
@@ -2671,10 +2646,7 @@
 // AdMob
 - (void)didReceiveAd:(AdMobView *)adView {
 	NSLog(@"AdMob: Did receive ad");
-	if (bADbannerFirstTime) {  // 起動時に1回だけ表示するため
-		bADbannerFirstTime = NO;
-		[self MvAppleAdOn];
-	}
+	[self MvShowAdApple:YES AdMob:YES];	
 }
 // AdMob
 - (void)didFailToReceiveAd:(AdMobView *)adView {

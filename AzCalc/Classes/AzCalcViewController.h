@@ -8,21 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 #import <iAd/iAd.h>
-#endif
-#ifdef GD_AdMob_ENABLED
 #import "AdMobDelegateProtocol.h"
 #endif
 
 @class KeyButton;
 
 @interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate
-#ifdef GD_iAd_ENABLED
-		,ADBannerViewDelegate
-#endif
-#ifdef GD_AdMob_ENABLED
-		,AdMobDelegate
+#ifdef GD_Ad_ENABLED
+		,ADBannerViewDelegate, AdMobDelegate
 #endif
 > {
 	IBOutlet UIPickerView*	ibPvDrum;
@@ -40,7 +35,7 @@
 	
 @private
 	//----------------------------------------------dealloc時にrelese
-#ifdef GD_iAd_ENABLED
+#ifdef GD_Ad_ENABLED
 	ADBannerView*		RiAdBanner;
 	AdMobView*			RoAdMobView;
 #endif
@@ -103,9 +98,8 @@
 				  andSi2:(NSString *)unitSi2
 				  andSi3:(NSString *)unitSi3; // =nil:ハイライト解除
 
-#ifdef GD_iAd_ENABLED
-- (void)MvAppleAdOn;
-- (void)MvAppleAdOff;
+#ifdef GD_Ad_ENABLED
+- (void)MvShowAdApple:(BOOL)bApple AdMob:(BOOL)bMob;
 #endif
 
 @end

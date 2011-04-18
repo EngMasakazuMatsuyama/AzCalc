@@ -61,7 +61,7 @@
 					<object class="IBUILabel" id="440502072">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{138, 30}, {402, 116}}</string>
+						<string key="NSFrame">{{138, 30}, {402, 100}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="165156831"/>
@@ -70,10 +70,10 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">ドラタク</string>
+						<string key="IBUIText">CalcRoll</string>
 						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">HiraKakuProN-W6</string>
-							<double key="NSSize">57</double>
+							<string key="NSName">Futura-CondensedExtraBold</string>
+							<double key="NSSize">65</double>
 							<int key="NSfFlags">16</int>
 						</object>
 						<object class="NSColor" key="IBUITextColor" id="999047234">
@@ -97,7 +97,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string type="base64-UTF8" key="IBUIText">VmVyc2lvbiAwLjAuMApBZCAtIEZyZWU</string>
+						<string type="base64-UTF8" key="IBUIText">VmVyc2lvbiAwLjAuMApGcmVlA</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">24</double>
@@ -113,7 +113,7 @@
 					<object class="IBUILabel" id="152662311">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{138, 196}, {402, 155}}</string>
+						<string key="NSFrame">{{138, 178}, {402, 155}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="43040229"/>
@@ -122,8 +122,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string type="base64-UTF8" key="IBUIText">QXp1a2lTb2Z0IFByb2plY3TigKhBekNhbGMKQm9ybiBvbiBKdWx5IDE44oCoKEMpMjAxMC0yMDExIEF6
-dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</string>
+						<string key="IBUIText">CalcRoll Born on July 18 (C)2010-2011 Azukid Creator Sum Positive All Rights Reserved.</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">18</double>
@@ -177,12 +176,12 @@ dWtpZOKAqENyZWF0b3IgU3VtIFBvc2l0aXZl4oCoQWxsIFJpZ2h0cyBSZXNlcnZlZC4KA</string>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string type="base64-UTF8" key="IBUIText">44CQ44GU5Yip55So5LiK44Gu5ZCI5oSP44CR5L2c6ICF44KEQXp1a2lTb2Z06Zai5L+C6ICF44Gv44CB
-44GT44Gu44Ki44OX44Oq44Gr44KI44KK55m655Sf44GX44Gf5pCN5a6z44Gr44Gk44GE44Gm44GE44GL
-44Gq44KL6LKs5Lu744KC6LKg44GE44G+44Gb44KT44CCIOOBk+OCjOOBq+WQiOaEj+OBl+OBpuOBlOWI
-qeeUqOOBj+OBoOOBleOBhOOAguKAqArjgJDjgrvjgq3jg6Xjg6rjg4bjgqPorablkYrjgJHjgZPjga7j
-gqLjg5fjg6rjga/jgIHmg4XloLHjgpLmmpflj7fljJbjgZfjgb7jgZvjgpPjgILmqZ/lr4bmg4XloLHj
-ga/oqJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
+						<string type="base64-UTF8" key="IBUIText">44CQ44GU5Yip55So5LiK44Gu5ZCI5oSP44CR5L2c6ICF44KEQXp1a2lk6Zai5L+C6ICF44Gv44CB44GT
+44Gu44Ki44OX44Oq44Gr44KI44KK55m655Sf44GX44Gf5pCN5a6z44Gr44Gk44GE44Gm44GE44GL44Gq
+44KL6LKs5Lu744KC6LKg44GE44G+44Gb44KT44CCIOOBk+OCjOOBq+WQiOaEj+OBl+OBpuOBlOWIqeeU
+qOOBj+OBoOOBleOBhOOAguKAqArjgJDjgrvjgq3jg6Xjg6rjg4bjgqPorablkYrjgJHjgZPjga7jgqLj
+g5fjg6rjga/jgIHmg4XloLHjgpLmmpflj7fljJbjgZfjgb7jgZvjgpPjgILmqZ/lr4bmg4XloLHjga/o
+qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 						<reference key="IBUIFont" ref="688405754"/>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">1</int>
@@ -338,11 +337,11 @@ ga/oqJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 							<reference ref="534004765"/>
 							<reference ref="440502072"/>
 							<reference ref="165156831"/>
-							<reference ref="152662311"/>
 							<reference ref="854747876"/>
 							<reference ref="300878591"/>
 							<reference ref="43040229"/>
 							<reference ref="896633924"/>
+							<reference ref="152662311"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Information</string>

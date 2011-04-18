@@ -50,7 +50,7 @@
 						<string key="NSFrame">{{20, 33}, {57, 57}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="440502072"/>
+						<reference key="NSNextKeyView" ref="534004765"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 					</object>
@@ -60,13 +60,13 @@
 						<string key="NSFrame">{{101, 20}, {199, 72}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="534004765"/>
+						<reference key="NSNextKeyView" ref="165156831"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Drucalc</string>
+						<string key="IBUIText">CalcRoll</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Futura-CondensedExtraBold</string>
 							<double key="NSSize">36</double>
@@ -93,7 +93,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string type="base64-UTF8" key="IBUIText">VmVyc2lvbiAwLjAuMApBZCAtIEZyZWU</string>
+						<string type="base64-UTF8" key="IBUIText">VmVyc2lvbiAwLjAuMApGcmVlA</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">14</double>
@@ -109,7 +109,7 @@
 					<object class="IBUILabel" id="152662311">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{101, 119}, {199, 115}}</string>
+						<string key="NSFrame">{{101, 119}, {199, 93}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="560613634"/>
@@ -118,8 +118,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string type="base64-UTF8" key="IBUIText">QXp1a2lTb2Z0IFByb2plY3TigKhBekNhbGPigKhCb3JuIG9uIEp1bHkgMTjigKgoQykyMDEwLTIwMTEg
-QXp1a2lk4oCoQ3JlYXRvciBTdW0gUG9zaXRpdmXigKhBbGwgUmlnaHRzIFJlc2VydmVkLgo</string>
+						<string key="IBUIText">CalcRoll Born on July 18 (C)2010-2011 Azukid Creator Sum Positive All Rights Reserved.</string>
 						<object class="NSFont" key="IBUIFont" id="721695638">
 							<string key="NSName">Monaco</string>
 							<double key="NSSize">12</double>
@@ -140,7 +139,7 @@ QXp1a2lk4oCoQ3JlYXRvciBTdW0gUG9zaXRpdmXigKhBbGwgUmlnaHRzIFJlc2VydmVkLgo</string>
 						<string key="NSFrame">{{20, 90}, {102, 97}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="165156831"/>
+						<reference key="NSNextKeyView" ref="440502072"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -159,7 +158,7 @@ QXp1a2lk4oCoQ3JlYXRvciBTdW0gUG9zaXRpdmXigKhBbGwgUmlnaHRzIFJlc2VydmVkLgo</string>
 					<object class="IBUILabel" id="950357638">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">266</int>
-						<string key="NSFrame">{{20, 290}, {280, 117}}</string>
+						<string key="NSFrame">{{20, 283}, {280, 124}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="300878591"/>
@@ -169,11 +168,11 @@ QXp1a2lk4oCoQ3JlYXRvciBTdW0gUG9zaXRpdmXigKhBbGwgUmlnaHRzIFJlc2VydmVkLgo</string>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string type="base64-UTF8" key="IBUIText">44CQQ29uc2Vuc3VzIG9uIHVzZeOAkeOAgEF6dWtpU29mdCBhdXRob3JzIGFuZCBvZmZpY2lhbHMgd2ls
-bCBub3QgYmVhciBhbnkgcmVzcG9uc2liaWxpdHkgZm9yIGRhbWFnZSBjYXVzZWQgYnkgdGhpcyBhcHBs
-aWNhdGlvbi4gSWYgeW91IGFncmVlIHdpdGggdGhpcywgcGxlYXNlIHVzZS7igKgK44CQU2VjdXJpdHkg
-QWxlcnTjgJHjgIBUaGlzIGFwcCBkb2VzIG5vdCBlbmNyeXB0IHRoZSBpbmZvcm1hdGlvbi7jgIBQbGVh
-c2UgZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
+						<string type="base64-UTF8" key="IBUIText">44CQQ29uc2Vuc3VzIG9uIHVzZeOAkeOAgEF6dWtpZCBhdXRob3JzIGFuZCBvZmZpY2lhbHMgd2lsbCBu
+b3QgYmVhciBhbnkgcmVzcG9uc2liaWxpdHkgZm9yIGRhbWFnZSBjYXVzZWQgYnkgdGhpcyBhcHBsaWNh
+dGlvbi4gSWYgeW91IGFncmVlIHdpdGggdGhpcywgcGxlYXNlIHVzZS7igKgK44CQU2VjdXJpdHkgQWxl
+cnTjgJHjgIBUaGlzIGFwcCBkb2VzIG5vdCBlbmNyeXB0IHRoZSBpbmZvcm1hdGlvbi7jgIBQbGVhc2Ug
+ZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Osaka</string>
 							<double key="NSSize">12</double>
@@ -224,7 +223,7 @@ c2UgZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 					<object class="IBUIButton" id="560613634">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{118, 242}, {164, 35}}</string>
+						<string key="NSFrame">{{118, 226}, {164, 35}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="950357638"/>

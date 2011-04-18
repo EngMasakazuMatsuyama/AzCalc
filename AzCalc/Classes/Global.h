@@ -11,8 +11,7 @@
 //#define AzMAKE_SPLASHFACE  // 起動画面 Default.png を作るための作業オプション
 
 #ifdef AzFREE
-#define GD_iAd_ENABLED
-#define GD_AdMob_ENABLED
+#define GD_Ad_ENABLED
 #endif
 
 #define GD_UNIT_ENABLED		// 単位機能
