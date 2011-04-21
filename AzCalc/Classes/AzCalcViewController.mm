@@ -266,7 +266,7 @@
 		[self MvPadKeysShow]; // iPad専用 メモリー20キー配置 および 回転処理
 	}
 	else { // iPhone
-		iKeyPages = 5;	//[0.4]単位キー追加のため
+		iKeyPages = 4;  //iPhone3Gだと、4以上にすると Received memory warning. 発生し、しばらくすると落ちる
 		iKeyCols = 5;	iKeyOffsetCol = 1; // AzdicKeys.plist C 開始位置
 		iKeyRows = 5;	iKeyOffsetRow = 1;
 		fKeyGap = 1.5;
