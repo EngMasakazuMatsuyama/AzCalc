@@ -80,10 +80,15 @@
 	if (RiAdBanner) {
 		RiAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
 		[RiAdBanner release], RiAdBanner = nil;
-		NSLog(@"-2- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	}
+
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	if (RoAdMobView) {
+		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
+		[RoAdMobView release], RoAdMobView = nil;
 	}
 #endif
-	
+
 	NSLog(@"--- retainCount: RaPadKeyButtons=%d", [RaPadKeyButtons retainCount]);
 	[RaPadKeyButtons release],	RaPadKeyButtons = nil;
 	NSLog(@"--- retainCount: RaKeyMaster=%d", [RaKeyMaster retainCount]);
@@ -99,17 +104,7 @@
 - (void)dealloc 
 {
 	NSLog(@"--- dealloc ---");
-	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
 
-#ifdef GD_Ad_ENABLED
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	if (RoAdMobView) {
-		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
-		[RoAdMobView release];
-		//NG//RoAdMobView = nil; これすると cell更新あれば落ちる。cell側での破棄に任せる。
-	}
-#endif
-	
 	[self unloadRelease];
 	[RaDrums release];
     [super dealloc];
@@ -199,28 +194,12 @@
 		}
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
-/*			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
-														 ADBannerContentSizeIdentifier320x50,
-														 ADBannerContentSizeIdentifier480x32, nil];
-			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
-			} else {
-				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-			}*/
 			//[0.5.0]ヨコのときもタテと同じバナーを使用する
 			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
 			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 		}
 		else {
 			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-/*			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:
-														 ADBannerContentSizeIdentifierPortrait,
-														 ADBannerContentSizeIdentifierLandscape, nil];
-			if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
-				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-			} else {
-				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-			}*/
 			//[0.5.0]ヨコのときもタテと同じバナーを使用する
 			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
 			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
@@ -233,8 +212,8 @@
 		//[RiAdBanner release]// unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
 		bADbannerIsVisible = NO;
 	}
-	//0.5.0//AdMob共用化
-	//bADbannerFirstTime = YES; // 起動直後に一度だけ強制的に表示させるため
+	//1.0.0//AdMob共用化
+	bADbannerTopShow = YES;
 #endif
 	
 	//-----------------------------------------------------(1)数式 ページ
@@ -2159,8 +2138,10 @@
 #ifdef GD_Ad_ENABLED
 	if (MiSvUpperPage==0) { // [AC]
 		if (button.tag==KeyTAG_AC) { // [AC]
+			bADbannerTopShow = YES;
 			[self MvShowAdApple:YES AdMob:YES];
 		} else {
+			bADbannerTopShow = NO; //[1.0.1]//入力が始まったので[AC]が押されるまで非表示にする
 			[self MvShowAdApple:NO AdMob:NO];
 		}
 	}
@@ -2382,11 +2363,7 @@
 {
 	//AzLOG(@"=== bannerViewDidLoadAd ===");
 	bADbannerIsVisible = YES; // iAd取得成功（広告内容あり）
-	
-//	if (RiAdBanner && bADbannerFirstTime) {  // 起動時に1回だけ表示するため
-//		bADbannerFirstTime = NO;
-		[self MvShowAdApple:YES AdMob:YES];
-//	}
+	[self MvShowAdApple:YES AdMob:YES];
 }
 
 // iAd取得できなかったときに呼ばれる　⇒　非表示にする
@@ -2400,6 +2377,12 @@
 - (void)MvShowAdApple:(BOOL)bApple AdMob:(BOOL)bMob
 {
 	NSLog(@"=== MvShowAdApple[%d] AdMob[%d] ===", bApple, bMob);
+	
+	if (bADbannerTopShow==NO) {
+		bApple = NO;
+		bMob = NO;
+	}
+	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.2];
@@ -2498,7 +2481,7 @@
 			//[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
 			[drum GvEntryUnitSet];
 #ifdef GD_Ad_ENABLED
-			//これは出過ぎ// [self MvAppleAdOn];
+			[self MvShowAdApple:YES AdMob:YES];	
 #endif
 		}
 	}

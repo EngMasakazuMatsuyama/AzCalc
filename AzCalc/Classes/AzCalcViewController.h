@@ -49,15 +49,18 @@
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 
 	//----------------------------------------------assign
-	NSInteger			entryComponent;
+	NSInteger		entryComponent;
 	BOOL				bDramRevers;		// これにより、ドラム逆転やりなおしモード時のキー連打不具合に対処している。
 	BOOL				bZoomEntryComponent; // YES= entryComponentの幅を最大にする
-	BOOL				bADbannerIsVisible; // iAd 広告内容があればYES
-	BOOL				bADbannerFirstTime; // iAd 広告内容があれば、起動時に表示するため
-	BOOL				bDrumButtonTap1;	// 最初のタップでYES
-	BOOL				bDrumRefresh;		// =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
-	BOOL                bFormulaFilter;     // =YES:ペーストされたのでフィルタ処理する
-    BOOL				bPad;				// =YES:iPad  =NO:iPhone
+	BOOL				bDrumButtonTap1;		// 最初のタップでYES
+	BOOL				bDrumRefresh;				// =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
+	BOOL               bFormulaFilter;				// =YES:ペーストされたのでフィルタ処理する
+    BOOL				bPad;								// =YES:iPad  =NO:iPhone
+#ifdef GD_Ad_ENABLED
+	BOOL				bADbannerIsVisible;		// iAd 広告内容があればYES
+	//BOOL				bADbannerFirstTime;		// iAd 広告内容があれば、起動時に表示するため
+	BOOL				bADbannerTopShow;		//[1.0.1]// =YES:トップの広告を表示する  =NO:入力が始まったので隠す
+#endif
 	
 	// Keyboard spec
 	int					iKeyPages;
