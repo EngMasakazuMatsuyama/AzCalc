@@ -233,7 +233,7 @@ ZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<reference key="IBUIFont" ref="250447834"/>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Contact by email</string>
+						<string key="IBUINormalTitle">Post Comment</string>
 						<reference key="IBUIHighlightedTitleColor" ref="569392430"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>

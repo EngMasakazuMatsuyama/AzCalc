@@ -197,7 +197,7 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 					<object class="IBUIButton" id="43040229">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{211, 364}, {257, 38}}</string>
+						<string key="NSFrame">{{248, 356}, {182, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="854747876"/>
@@ -211,7 +211,7 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">メールで問い合わせ</string>
+						<string key="IBUINormalTitle">コメント 投稿</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="817322542">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -339,9 +339,9 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 							<reference ref="165156831"/>
 							<reference ref="854747876"/>
 							<reference ref="300878591"/>
-							<reference ref="43040229"/>
 							<reference ref="896633924"/>
 							<reference ref="152662311"/>
+							<reference ref="43040229"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Information</string>

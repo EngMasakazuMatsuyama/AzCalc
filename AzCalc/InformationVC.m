@@ -38,6 +38,8 @@
 		alertBox( NSLocalizedString(@"Contact NoMail",nil), NSLocalizedString(@"Contact NoMail msg",nil), @"OK" );
         return;
     }
+
+	alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
     
 	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
     picker.mailComposeDelegate = self;
@@ -84,7 +86,7 @@
             break;
         case MFMailComposeResultSent:
             //送信した場合
-			alertBox( NSLocalizedString(@"Contact Sent",nil), nil, @"OK" );
+			alertBox( NSLocalizedString(@"Contact Sent",nil), NSLocalizedString(@"Contact Sent msg",nil), @"OK" );
             break;
         case MFMailComposeResultFailed:
             //[self setAlert:@"メール送信失敗！":@"メールの送信に失敗しました。ネットワークの設定などを確認して下さい"];
