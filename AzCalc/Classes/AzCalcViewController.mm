@@ -77,15 +77,16 @@
 
 #ifdef GD_Ad_ENABLED
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	if (RiAdBanner) {
-		RiAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
-		[RiAdBanner release], RiAdBanner = nil;
-	}
-
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
 		[RoAdMobView release], RoAdMobView = nil;
+	}
+
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	if (RiAdBanner) {
+		//[RiAdBanner cancelBannerViewAction];
+		RiAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
+		[RiAdBanner release], RiAdBanner = nil;
 	}
 #endif
 
@@ -183,38 +184,6 @@
 	ibPvDrum.delegate = self;
 	ibPvDrum.dataSource = self;
 	ibPvDrum.showsSelectionIndicator = NO;
-	
-#ifdef GD_Ad_ENABLED
-	// iAd
-	if (NSClassFromString(@"ADBannerView")) {
-		if (RiAdBanner==nil) { // iPad はここで生成する。　iPhoneはXIB生成済み。
-			NSLog(@"-1- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-			RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
-			NSLog(@"-2- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-		}
-		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
-			// iOS4.2より前
-			//[0.5.0]ヨコのときもタテと同じバナーを使用する
-			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
-			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-		}
-		else {
-			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-			//[0.5.0]ヨコのときもタテと同じバナーを使用する
-			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
-			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-		}
-		RiAdBanner.delegate = self;
-		CGRect theBannerFrame = self.view.frame;
-		theBannerFrame.origin.y = -70;  // viewの外へ出す (iPadの高さが66)
-		RiAdBanner.frame = theBannerFrame;	
-		[ibScrollUpper addSubview:RiAdBanner];
-		//[RiAdBanner release]// unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
-		bADbannerIsVisible = NO;
-	}
-	//1.0.0//AdMob共用化
-	bADbannerTopShow = YES;
-#endif
 	
 	//-----------------------------------------------------(1)数式 ページ
 	// UITextView
@@ -515,11 +484,11 @@
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 	
 #ifdef GD_Ad_ENABLED
-	if (RiAdBanner) {
-		[self.view bringSubviewToFront:RiAdBanner]; // iAdをRaDrumButtonsより上にする
-		NSLog(@"-4- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	}
-
+	//if (RiAdBanner) {
+	//	[self.view bringSubviewToFront:RiAdBanner]; // iAdをRaDrumButtonsより上にする
+	//	NSLog(@"-4- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	//}
+	//--------------------------------------------------------------------------------------------------------- AdMob
 	if (RoAdMobView==nil) {
 		RoAdMobView = [AdMobView requestAdWithDelegate:self];
 		[RoAdMobView retain];
@@ -537,6 +506,38 @@
 	[ibScrollUpper addSubview:RoAdMobView];
 	[self.view bringSubviewToFront:RoAdMobView]; // 上にする
 	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
+
+	//--------------------------------------------------------------------------------------------------------- iAd
+	//if (NSClassFromString(@"ADBannerView")) {
+	if (RiAdBanner==nil && [[[UIDevice currentDevice] systemVersion] compare:@"4.0"]!=NSOrderedAscending) { // !<  (>=) "4.0"
+		assert(NSClassFromString(@"ADBannerView"));
+		// iPad はここで生成する。　iPhoneはXIB生成済み。
+		NSLog(@"-1- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+		RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
+		NSLog(@"-2- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+
+		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
+			// iOS4.2より前
+			//[0.5.0]ヨコのときもタテと同じバナーを使用する
+			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
+			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+		}
+		else {
+			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
+			//[0.5.0]ヨコのときもタテと同じバナーを使用する
+			RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
+			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+		}
+		RiAdBanner.delegate = self;
+		CGRect theBannerFrame = self.view.frame;
+		theBannerFrame.origin.y = -70;  // viewの外へ出す (iPadの高さが66)
+		RiAdBanner.frame = theBannerFrame;	
+		[ibScrollUpper addSubview:RiAdBanner];
+		//[RiAdBanner release]// unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
+		bADbannerIsVisible = NO;
+	}
+	//1.0.0//AdMob共用化
+	bADbannerTopShow = YES;
 #endif
 }
 
@@ -2065,9 +2066,10 @@
 		[self MvKeyLayoute:button];
 		return;
 	}
-	
-	NSString *zCopyNumber = nil; // 遡って数値を[Copy]するのに備えて保持する
+
 	Drum *drum = [RaDrums objectAtIndex:entryComponent];
+
+	NSString *zCopyNumber = nil; // 遡って数値を[Copy]するのに備えて保持する
 
 	// ドラム逆回転時の処理
 	if (MiSvUpperPage==0 && MiSegReverseDrum==1 && bDramRevers) {
@@ -2086,7 +2088,17 @@
 	// [=]の後に数値キー入力すると改行(新セクション)になる。
 	
 	// キー入力処理   先に if (button.tag < 0) return; 処理済み
-	if (button.tag <= KeyTAG_STANDARD_End) { //[KeyTAG_STANDARD_Start-KeyTAG_STANDARD_End]---------Standard Keys
+	if (button.tag <= 9) { //[1.0.2]数値キーレスポンス向上のため
+		if (MiSvUpperPage==0) {
+			[drum entryKeyButton:button];
+			[ibPvDrum reloadComponent:entryComponent];	//ドラム再表示
+		} 
+		else if (MiSvUpperPage==1) {
+			[self MvButtonFormula:button.tag];
+		}
+		return;	// 以下の処理を通らない分だけレス向上
+	} 
+	else if (button.tag <= KeyTAG_STANDARD_End) { //[KeyTAG_STANDARD_Start-KeyTAG_STANDARD_End]---------Standard Keys
 		if (MiSvUpperPage==0) {
 			[drum entryKeyButton:button];
 		} 

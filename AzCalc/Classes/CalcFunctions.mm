@@ -109,7 +109,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 		return zFormula;
 	}
 	if (FORMULA_MAX_LENGTH < [zFormula length]) {
-		return  @"@Game Over =";  // 先頭を@にすると stringFormatter() で変換されずに@以降が返される。
+		return  @"@Game Over =";  // 先頭を@にすると stringFormatter() で変換されずに@以降が返されてドラムに表示される
 	}
 	
 	NSMutableArray *maStack = [[NSMutableArray alloc] init];	// - Stack Method
@@ -396,7 +396,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			}
 			if ([zNum hasPrefix:OP_SUB]) iIntLen--;
 			if (PRECISION < iIntLen) {
-				@throw @"@Overflow";
+				@throw @"@Overflow";  // 先頭を@にすると stringFormatter() で変換されずに@以降が返されてドラムに表示される
 			}
 			// 丸め処理
 			strcpy(cNum1, (char *)[zNum cStringUsingEncoding:NSASCIIStringEncoding]); 
@@ -415,7 +415,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 	}
 	@catch (NSString *msg) {
 		NSLog(@"Calc:@throw: %@\n", msg);
-		zAnswer = @"";  // nilにすると、戻り値を使った setString:で落ちる
+		zAnswer = msg; //@"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@finally {
 		//[autoPool release];
