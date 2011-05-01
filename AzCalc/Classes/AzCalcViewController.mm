@@ -152,7 +152,7 @@
 		//bu.hidden = YES;   MvDrumButtonShowで変更しているため効果なし
 #else
 		bu.alpha = 0.3; // 半透明 (0.0)透明にするとクリック検出されなくなる
-		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchDown];
 #endif
 		[maButtons addObject:bu];
 		//[self.view addSubview:bu];
@@ -458,7 +458,7 @@
 				
 				// 上と右のマージンが自動調整されるように。つまり、左下基点になる。
 				bu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin; 
-				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
+				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchDown];	// UIControlEventTouchUpInside
 
 				// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 
@@ -2333,7 +2333,7 @@
 			[bu setTitle:[NSString stringWithFormat:@"M%d", (int)1+i] forState:UIControlStateNormal];
 			bu.titleLabel.font = [UIFont boldSystemFontOfSize:DRUM_FONT_MSG];
 			[bu setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
+			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchDown];
 			[self.view addSubview:bu];
 			[maBus addObject:bu];
 		}
