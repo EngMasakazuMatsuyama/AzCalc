@@ -10,6 +10,9 @@
 #import "InformationVC.h"
 #import "UIDevice-Hardware.h"
 
+//#define ALERT_APP_FREE		19
+#define ALERT_APP_PAID		28
+#define ALERT_CONTACT		37
 
 @implementation InformationVC
 
@@ -30,6 +33,67 @@
 }
 */
 
+- (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex != 1) return; // Cancel
+	// OK
+	switch (alertView.tag) 
+	{
+		case ALERT_APP_PAID: { // Paid App Store																															432480691
+			NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=432480691&mt=8"];
+			[[UIApplication sharedApplication] openURL:url];
+		}	break;
+			
+		case ALERT_CONTACT: { // Post commens
+			MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
+			picker.mailComposeDelegate = self;
+			
+			// To: 宛先
+			NSArray *toRecipients = [NSArray arrayWithObject:@"CalcRoll@azukid.com"];
+			[picker setToRecipients:toRecipients];
+			//[picker setCcRecipients:nil];
+			//[picker setBccRecipients:nil];
+			
+			// Subject: 件名
+			NSString* zSubj = [NSString stringWithFormat:@"%@ %@ ", 
+							   NSLocalizedString(@"Product Title",nil), 
+							   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+#ifdef AzSTABLE
+			zSubj = [zSubj stringByAppendingString:@"Stable"];
+#else
+			zSubj = [zSubj stringByAppendingString:@"Free"];
+#endif
+			
+			UIDevice *device = [UIDevice currentDevice];
+			NSString* deviceID = [device platform];	
+			zSubj = [zSubj stringByAppendingFormat:@" [%@-%@]", 
+					 deviceID, 
+					 [[ UIDevice currentDevice ] systemVersion]]; // OSの現在のバージョン
+			
+			[picker setSubject:zSubj];  
+			
+			// Body: 本文
+			[picker setMessageBody:NSLocalizedString(@"Contact message",nil) isHTML:NO];
+			
+			[self presentModalViewController:picker animated:YES];
+			[picker release];
+		}	break;
+	}
+}
+
+- (IBAction)ibBuPaidApp:(UIButton *)button
+{
+	//alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AppStore Paid",nil)
+													message:NSLocalizedString(@"AppStore Paid msg",nil)
+												   delegate:self		// clickedButtonAtIndexが呼び出される
+										  cancelButtonTitle:@"Cancel"
+										  otherButtonTitles:@"OK", nil];
+	alert.tag = ALERT_APP_PAID;
+	[alert show];
+	[alert autorelease];
+}
+
 - (IBAction)ibBuContact:(UIButton *)button
 {
 	//メール送信可能かどうかのチェック　　＜＜＜MessageUI.framework が必要＞＞＞
@@ -39,43 +103,20 @@
         return;
     }
 
-	alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
-    
-	MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
-    picker.mailComposeDelegate = self;
-	
-	// To: 宛先
-	NSArray *toRecipients = [NSArray arrayWithObject:@"CalcRoll@azukid.com"];
-	[picker setToRecipients:toRecipients];
-    //[picker setCcRecipients:nil];
-	//[picker setBccRecipients:nil];
-	
-	// Subject: 件名
-	NSString* zSubj = [NSString stringWithFormat:@"%@ %@ ", 
-					   NSLocalizedString(@"Product Title",nil), 
-					   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
-#ifdef AzSTABLE
-	zSubj = [zSubj stringByAppendingString:@"Stable"];
-#else
-	zSubj = [zSubj stringByAppendingString:@"Free"];
-#endif
-	
-	UIDevice *device = [UIDevice currentDevice];
-	NSString* deviceID = [device platform];	
-	zSubj = [zSubj stringByAppendingFormat:@" [%@-%@]", 
-			 deviceID, 
-			 [[ UIDevice currentDevice ] systemVersion]]; // OSの現在のバージョン
-	
-	[picker setSubject:zSubj];  
-
-    // Body: 本文
-    [picker setMessageBody:NSLocalizedString(@"Contact message",nil) isHTML:NO];
-	
-    [self presentModalViewController:picker animated:YES];
-    [picker release];
+	//alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Contact mail",nil)
+													message:NSLocalizedString(@"Contact mail msg",nil)
+												   delegate:self		// clickedButtonAtIndexが呼び出される
+										  cancelButtonTitle:@"Cancel"
+										  otherButtonTitles:@"OK", nil];
+	alert.tag = ALERT_CONTACT;
+	[alert show];
+	[alert autorelease];
 }
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+		  didFinishWithResult:(MFMailComposeResult)result
+						error:(NSError*)error 
 {
     switch (result){
         case MFMailComposeResultCancelled:

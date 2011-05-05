@@ -17,6 +17,8 @@
 	IBOutlet UIImageView*	ibImgIcon;
 }
 
+//- (IBAction)ibBuIcon:(UIButton *)button;
+- (IBAction)ibBuPaidApp:(UIButton *)button;
 - (IBAction)ibBuContact:(UIButton *)button;
 - (IBAction)ibBuOK:(UIButton *)button;
 

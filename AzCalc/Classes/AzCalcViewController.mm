@@ -1407,10 +1407,12 @@
 					lb.text =  NSLocalizedString(@"Product Title",nil);
 					break;
 				case -1:
-#ifdef AzFREE
 					lb.textAlignment = UITextAlignmentCenter;
-					lb.font = [UIFont systemFontOfSize:14];
-					lb.text =  @"Free";   //NSLocalizedString(@" Azukid",nil);
+					lb.font = [UIFont systemFontOfSize:12];
+#ifdef AzFREE
+					lb.text = [NSString stringWithFormat:@"%@ Free", NSLocalizedString(@"Product Localize",nil)];  //@"Free";   //NSLocalizedString(@" Azukid",nil);
+#else
+					lb.text =  NSLocalizedString(@"Product Localize",nil);
 #endif
 					break;
 				default:

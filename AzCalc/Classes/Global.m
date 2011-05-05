@@ -18,4 +18,3 @@ void alertBox( NSString *zTitle, NSString *zMsg, NSString *zButton )
 	[alert release];
 }
 
-
