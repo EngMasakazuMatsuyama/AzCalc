@@ -115,10 +115,10 @@
 					<object class="IBUILabel" id="152662311">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{128, 188}, {412, 124}}</string>
+						<string key="NSFrame">{{128, 184}, {412, 124}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="43040229"/>
+						<reference key="NSNextKeyView" ref="1068388999"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -202,7 +202,7 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 					<object class="IBUIButton" id="43040229">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{193, 341}, {283, 44}}</string>
+						<string key="NSFrame">{{31, 365}, {476, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="854747876"/>
@@ -216,7 +216,7 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Post Comment</string>
+						<string key="IBUINormalTitle">Post defect report and comment</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor" id="817322542">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -247,11 +247,36 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 							<int key="NSfFlags">16</int>
 						</object>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">OK</string>
+						<string key="IBUINormalTitle">OK  (Opening)</string>
 						<reference key="IBUIHighlightedTitleColor" ref="817322542"/>
 						<object class="NSColor" key="IBUINormalTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4xOTYwNzg0MzE0IDAuMzA5ODAzOTIxNiAwLjUyMTU2ODYyNzUAA</bytes>
+						</object>
+						<reference key="IBUINormalTitleShadowColor" ref="313545402"/>
+					</object>
+					<object class="IBUIButton" id="1068388999">
+						<reference key="NSNextResponder" ref="191373211"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{235, 304}, {199, 28}}</string>
+						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="43040229"/>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<object class="NSFont" key="IBUIFont">
+							<string key="NSName">Osaka</string>
+							<double key="NSSize">12</double>
+							<int key="NSfFlags">16</int>
+						</object>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">Description of the paid version</string>
+						<reference key="IBUIHighlightedTitleColor" ref="817322542"/>
+						<object class="NSColor" key="IBUINormalTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="313545402"/>
 					</object>
@@ -324,6 +349,23 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 					</object>
 					<int key="connectionID">17</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">ibBuPaidApp</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="1068388999"/>
+					</object>
+					<int key="connectionID">19</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">ibBuPaidApp:</string>
+						<reference key="source" ref="1068388999"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">20</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -339,14 +381,15 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 						<reference key="object" ref="191373211"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="152662311"/>
 							<reference ref="854747876"/>
-							<reference ref="43040229"/>
 							<reference ref="896633924"/>
 							<reference ref="534004765"/>
 							<reference ref="300878591"/>
 							<reference ref="165156831"/>
 							<reference ref="440502072"/>
+							<reference ref="43040229"/>
+							<reference ref="152662311"/>
+							<reference ref="1068388999"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Information</string>
@@ -410,6 +453,12 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 						<reference key="parent" ref="191373211"/>
 						<string key="objectName">Bu Contact</string>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">18</int>
+						<reference key="object" ref="1068388999"/>
+						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Bu Contact</string>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -423,6 +472,9 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 					<string>1.IBPluginDependency</string>
 					<string>14.IBPluginDependency</string>
 					<string>15.IBPluginDependency</string>
+					<string>18.IBPluginDependency</string>
+					<string>18.IBUIButtonInspectorSelectedEdgeInsetMetadataKey</string>
+					<string>18.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>4.IBPluginDependency</string>
 					<string>5.IBPluginDependency</string>
 					<string>6.IBPluginDependency</string>
@@ -443,6 +495,9 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="0.0"/>
+					<real value="0.0"/>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -462,7 +517,7 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">17</int>
+			<int key="maxID">20</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -476,9 +531,11 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibBuContact:</string>
 							<string>ibBuOK:</string>
+							<string>ibBuPaidApp:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
 							<string>UIButton</string>
 							<string>UIButton</string>
 						</object>
@@ -489,6 +546,7 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibBuContact:</string>
 							<string>ibBuOK:</string>
+							<string>ibBuPaidApp:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -500,18 +558,24 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 								<string key="name">ibBuOK:</string>
 								<string key="candidateClassName">UIButton</string>
 							</object>
+							<object class="IBActionInfo">
+								<string key="name">ibBuPaidApp:</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibBuPaidApp</string>
 							<string>ibImgIcon</string>
 							<string>ibLbProductName</string>
 							<string>ibLbVersion</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIButton</string>
 							<string>UIImageView</string>
 							<string>UILabel</string>
 							<string>UILabel</string>
@@ -521,12 +585,17 @@ IGRvIG5vdCBlbnRlciBjb25maWRlbnRpYWwgaW5mb3JtYXRpb24uA</string>
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>ibBuPaidApp</string>
 							<string>ibImgIcon</string>
 							<string>ibLbProductName</string>
 							<string>ibLbVersion</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">ibBuPaidApp</string>
+								<string key="candidateClassName">UIButton</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">ibImgIcon</string>
 								<string key="candidateClassName">UIImageView</string>

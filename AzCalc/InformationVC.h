@@ -10,11 +10,12 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@interface InformationVC : UIViewController  <MFMailComposeViewControllerDelegate>
+@interface InformationVC : UIViewController  <MFMailComposeViewControllerDelegate, UIAlertViewDelegate>
 {
 	IBOutlet UILabel*	ibLbProductName;
 	IBOutlet UILabel*	ibLbVersion;
 	IBOutlet UIImageView*	ibImgIcon;
+	IBOutlet UIButton*	ibBuPaidApp;
 }
 
 //- (IBAction)ibBuIcon:(UIButton *)button;

@@ -154,6 +154,8 @@
 		[ibImgIcon setImage:[UIImage imageNamed:@"Icon57s1.png"]];
 	}
 	ibLbVersion.text = [NSString stringWithFormat:@"Version %@\nStable", zVersion];
+	//
+	ibBuPaidApp.hidden = YES;  // 有料版 AppStore 非表示
 #else
 	if (72 <= ibImgIcon.frame.size.width) {
 		[ibImgIcon setImage:[UIImage imageNamed:@"Icon72free.png"]];
