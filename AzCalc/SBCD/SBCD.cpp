@@ -8,19 +8,6 @@
 #include "SBCD.h"
 #import <Foundation/Foundation.h>
 
-/*
-// LOCAL
-void stringToSbcd( char *, SBCD * );
-void sbcdToString( SBCD *, char * );
-char charToValue( char );
-bool sbcdZero( SBCD *pSbcd );
-bool sbcAbsAdd( char *pValue1, char *pValue2, char *pAns);
-bool sbcAbsSub( char *pValue1, char *pValue2, char *pAns);
-void sbcAbsMulti( char *pValue1, char *pValue2, char *pAns);
-void sbcAbsDivid( char *pValue1, char *pValue2, char *pAns);
-*/
-
-
 //---------------------------------------------------------------------------
 // 文字1バイト ⇒ SBCD->Value[]=値 に変換して戻す
 //---------------------------------------------------------------------------
@@ -46,47 +33,20 @@ static void stringToSbcd( char *zNum, SBCD *pSBCD )
 	pSBCD->prove1 = PROVE1_VAL;
 	pSBCD->prove2 = PROVE2_VAL;
 #endif
-	//int bSize = sizeof(pSBCD->digit);
     int i;
     //構造体メンバのクリアを先にやっておく
-    //for(i=0;i<sizeof(pSBCD->digit);i++) pSBCD->digit[i] = 0;
-    //for( i=0; i<SBCD_PRECISION; i++ ) pSBCD->digit[i] = 0;
 	memset(pSBCD->digit, 0x00, SBCD_PRECISION); // 初期化
     //
     int se_cnt = 0;	//整数部カウンタ
     int sy_cnt = 0;	//小数部カウンタ
-    //数値文字列をローカルバッファにコピーして
-//    char Buff[SBCD_PRECISION+4];
-    //for(i=0;i<sizeof(Buff);i++) Buff[i] = 0;
-    //sprintf((char *)Buff,"%s",Buf);
-//	strcpy(Buff, Buf);
-    //整数部と小数部をカウントしておく
-	//for(i=0;i<sizeof(Buff);i++) if(Buff[i]=='.') break; else se_cnt++;
-    //i++;
-    //for(   ;i<sizeof(Buff);i++) if(Buff[i]=='\0') break; else sy_cnt++;
-/*	for( i=0; i<SBCD_PRECISION; i++ ) {
-		if(Buff[i]=='.') break; 
-		else se_cnt++;
-	}
-    for( i++; i<SBCD_PRECISION; i++ ) {
-		if(Buff[i]=='\0') break; 
-		else sy_cnt++;
-	}*/
 	
     //動的配列変数確保
-	//char *cInteger = new char [bSize];
-    //char *cDecimal = new char [bSize];
 	char cInteger[SBCD_PRECISION];
 	char cDecimal[SBCD_PRECISION];
 	memset(cInteger, 0x00, SBCD_PRECISION); // 初期化
 	memset(cDecimal, 0x00, SBCD_PRECISION); // 初期化
-    //配列アクセスで変数初期化
-//    for(int i=0;i<bSize;i++){
-//		cInteger[i] = 0;
-//        cDecimal[i] = 0;
-//    }
+
     //配列アクセスで整数部と小数部に分ける
-//    int bcnt=0;     //バッファカウンタ
 	char *pNum = &zNum[0];
     pSBCD->minus = false;
 	// 整数部
@@ -697,7 +657,7 @@ void formatterGroupingSeparator( NSString *zGroupSeparator )
 	} else {
 		__formatterGroupingSeparator = [NSString stringWithString:zGroupSeparator];
 	}
-		 }
+}
 		 
 //----------------------------------------------------------------------------------------
 // (0)   123 123  International

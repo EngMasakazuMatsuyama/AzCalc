@@ -34,11 +34,24 @@ typedef struct {
 #define	PROVE2_VAL	-33
 #endif
 
-#define	SBCD_GROUP_SEPARATOR		 ','	// [,]
+/*NG*[1.0.4]
+#define	SBCD_GROUP_SEPARATOR				','	// [,]
 #define	SBCD_GROUP_SEPARATOR_NS		@","	// NSString@定義
 
-#define	SBCD_DECIMAL_SEPARATOR		 '.'	// [.]
+#define	SBCD_DECIMAL_SEPARATOR			'.'	// [.]
 #define	SBCD_DECIMAL_SEPARATOR_NS	@"."	// NSString@定義
+*/
+/* Fix[1.0.4]
+	GROUP_SEPARATORを [.] にしたとき、両方ともDECIMAL_SEPARATORになる不具合発覚
+	(原因)DECIMAL_SEPARATORの内部記号に[.]を使っていたため
+	(対応) 内部記号を下記の通り、表示記号に無い記号にした。
+				stringFormatter()にて内部記号を表示記号に置換している。
+*/
+#define	SBCD_GROUP_SEPARATOR				';'	// [;]セミコロン	（表示に無い記号にすること）
+#define	SBCD_GROUP_SEPARATOR_NS		@";"	// NSString@定義
+
+#define	SBCD_DECIMAL_SEPARATOR			':'	// [:]コロン（表示に無い記号にすること）
+#define	SBCD_DECIMAL_SEPARATOR_NS	@":"	// NSString@定義
 
 
 //----------------------------------------------- *strAnswer[SBCD_PRECISION+1 以上] 確保して渡すこと。
