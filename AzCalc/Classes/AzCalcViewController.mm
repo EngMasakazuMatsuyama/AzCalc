@@ -15,7 +15,7 @@
 #import "OptionVC.h"
 #import "InformationVC.h"
 #import "KeyButton.h"
-#import "AdMobView.h"
+//#import "AdMobView.h"
 
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
@@ -77,16 +77,17 @@
 
 #ifdef GD_Ad_ENABLED
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	if (RoAdMobView) {
-		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
-		[RoAdMobView release], RoAdMobView = nil;
+	if (RiAdBanner) {
+		[RiAdBanner cancelBannerViewAction];	// 停止
+		RiAdBanner.delegate = nil;							// 解放メソッドを呼び出さないように　　　[0.4.1]メモリ不足時に落ちた原因
+		[RiAdBanner removeFromSuperview];		// UIView解放		retainCount -1
+		[RiAdBanner release], RiAdBanner = nil;	// alloc解放			retainCount -1
 	}
 
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	if (RiAdBanner) {
-		//[RiAdBanner cancelBannerViewAction];
-		RiAdBanner.delegate = nil;	//[0.4.1]メモリ不足時に落ちた原因除去
-		[RiAdBanner release], RiAdBanner = nil;
+	if (RoAdMobView) {
+		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
+		[RoAdMobView release], RoAdMobView = nil;
 	}
 #endif
 
@@ -197,15 +198,12 @@
 	//
 	float dx = ibScrollUpper.frame.size.width;
 #ifdef AzSTABLE
-	if (bPad) {
-		rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
-	} else {
-		rect = ibTvFormula.frame;
-		rect.size.height += (rect.origin.y - 3);  rect.origin.y = 3;  // AdMobのスペースを埋めるため
-		rect.origin.x += dx;	
-		ibTvFormula.frame = rect;
-	}
+	rect = ibTvFormula.frame;		
+	rect.origin.x += dx;	
+	rect.size.height += (rect.origin.y - 3);  rect.origin.y = 3;  // AdMobのスペースを埋めるため
+	ibTvFormula.frame = rect;
 #else
+	// Free : 上部に AdMob スペースあり
 	rect = ibTvFormula.frame;		rect.origin.x += dx;	ibTvFormula.frame = rect;
 #endif
 	rect = ibLbFormAnswer.frame;	rect.origin.x += dx;	ibLbFormAnswer.frame = rect;
@@ -484,28 +482,31 @@
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 	
 #ifdef GD_Ad_ENABLED
-	//if (RiAdBanner) {
-	//	[self.view bringSubviewToFront:RiAdBanner]; // iAdをRaDrumButtonsより上にする
-	//	NSLog(@"-4- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	//}
 	//--------------------------------------------------------------------------------------------------------- AdMob
 	if (RoAdMobView==nil) {
-		RoAdMobView = [AdMobView requestAdWithDelegate:self];
-		[RoAdMobView retain];
-		CGRect rc = RoAdMobView.frame;
-        if (bPad) { // iPad
-            rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
-            //rc.origin.x = ibScrollUpper.frame.size.width/2.0 - rc.size.width/2.0; // (0)ページ中央へ
-        } else {
-            rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
-			//rc.origin.x = 0; // (0)PAGE
+		RoAdMobView = [[GADBannerView alloc] init];
+		RoAdMobView.rootViewController = self;
+		
+        if (bPad) { // iPad    GAD_SIZE_728x90, GAD_SIZE_468x60
+            //rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
+			RoAdMobView.adUnitID = AdMobID_CalcRollPAD;
+			//[1.0.5]大型
+			RoAdMobView.frame = CGRectMake(ibScrollUpper.frame.size.width+20,  0,
+										   GAD_SIZE_468x60.width, GAD_SIZE_468x60.height);
+        }
+		else {
+			RoAdMobView.adUnitID = AdMobID_CalcRoll;
+			RoAdMobView.frame = CGRectMake(ibScrollUpper.frame.size.width,  0,
+										   GAD_SIZE_320x50.width, GAD_SIZE_320x50.height);
 		}
-		rc.origin.y = 0;
-		RoAdMobView.frame = rc;
+		GADRequest *request = [GADRequest request];
+		//[request setTesting:YES];
+		[RoAdMobView loadRequest:request];	
+
+		[ibScrollUpper addSubview:RoAdMobView];
+		[self.view bringSubviewToFront:RoAdMobView]; // 上にする
+		//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 	}
-	[ibScrollUpper addSubview:RoAdMobView];
-	[self.view bringSubviewToFront:RoAdMobView]; // 上にする
-	//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 
 	//--------------------------------------------------------------------------------------------------------- iAd
 	//if (NSClassFromString(@"ADBannerView")) {
@@ -533,7 +534,7 @@
 		theBannerFrame.origin.y = -70;  // viewの外へ出す (iPadの高さが66)
 		RiAdBanner.frame = theBannerFrame;	
 		[ibScrollUpper addSubview:RiAdBanner];
-		//[RiAdBanner release]// unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
+		//retainCount +2 --> unloadRelease:にて　-2 している　　　　　unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
 		bADbannerIsVisible = NO;
 	}
 	//1.0.0//AdMob共用化
@@ -769,6 +770,7 @@
 			}
 		}
 #ifdef GD_Ad_ENABLED
+		// キーレイアウト変更モードでは常時ＯＦＦ
 		[self MvShowAdApple:NO AdMob:NO];
 #endif
 	} 
@@ -890,6 +892,9 @@
 		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 		buChangeKey = nil;
 	}
+#ifdef GD_Ad_ENABLED
+	[self MvShowAdApple:YES AdMob:YES];
+#endif
 }
 
 - (void)viewWillDisappear:(BOOL)animated // 非表示になる直前にコールされる
@@ -2316,7 +2321,6 @@
 - (void)MvPadKeysShow // iPad専用 メモリー20キー配置 および 回転処理
 {
 	assert(bPad); // iPad
-	
 	if (RaPadKeyButtons==nil) {
 		// 生成
 		NSMutableArray *maBus = [NSMutableArray new];
@@ -2416,13 +2420,13 @@
 		if (bMob && MiSvUpperPage==0) { // Upper(0)pageに表示する
 			if (bPad) {
 				//rc.origin.x = ibScrollUpper.frame.size.width - rc.size.width; // (0)ページ右端へ
-				rc.origin.x = ibScrollUpper.frame.size.width/2.0 - rc.size.width/2.0; // (0)ページ中央へ
+				rc.origin.x = ibScrollUpper.frame.size.width - rc.size.width; // (0)ページ右端へ
 			} else {
 				rc.origin.x = 0;
 			}
 		} else { // Upper(1)pageに表示する　AdMobは非表示無し
 			if (bPad) { // iPad
-				rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
+				rc.origin.x = ibScrollUpper.frame.size.width+20; // * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
 			} else {
 				rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
 			}
@@ -2483,7 +2487,7 @@
 			// 全単位ボタンを無効にする
 			[self GvKeyUnitGroupSI:@"" andSI:@""];
 #ifdef GD_Ad_ENABLED
-			[self MvShowAdApple:NO AdMob:NO];	
+			[self MvShowAdApple:NO AdMob:YES];	
 #endif
 		}
 		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
@@ -2521,6 +2525,8 @@
 	if (bPad) { // iPad
 		int iMove = 260;
 		if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) iMove = 170; // ヨコ
+        rc = ibBuFormLeft.frame;    rc.origin.x -= 100;		ibBuFormLeft.frame = rc;	ibBuFormLeft.alpha = 0;
+        rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;	ibBuFormRight.alpha = 0;
         rc = ibScrollLower.frame;	rc.origin.y += (iMove+20);	ibScrollLower.frame = rc;
         rc = ibScrollUpper.frame;	rc.size.height += iMove;	ibScrollUpper.frame = rc;
 		rc = ibTvFormula.frame;		rc.size.height += iMove;	ibTvFormula.frame = rc;
@@ -2554,6 +2560,8 @@
 	if (bPad) { // iPad
 		int iMove = 260;
 		if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) iMove = 170; // ヨコ
+        rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;	ibBuFormLeft.alpha = 1;
+        rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;	ibBuFormRight.alpha = 1;
         rc = ibScrollLower.frame;	rc.origin.y -= (iMove+20);	ibScrollLower.frame = rc;
         rc = ibScrollUpper.frame;	rc.size.height -= iMove;    ibScrollUpper.frame = rc;
         rc = ibTvFormula.frame;		rc.size.height -= iMove;	ibTvFormula.frame = rc;
@@ -2624,7 +2632,7 @@
 	return YES;
 }
 
-
+/*
 #ifdef GD_Ad_ENABLED
 //=================================================================AdMob delegate
 // 必要なFramework
@@ -2650,7 +2658,7 @@
 	NSLog(@"AdMob: Did fail to receive ad");
 }
 #endif
-
+*/
 
 @end
 

@@ -10,14 +10,14 @@
 
 #ifdef GD_Ad_ENABLED
 #import <iAd/iAd.h>
-#import "AdMobDelegateProtocol.h"
+#import "GADBannerView.h"
 #endif
 
 @class KeyButton;
 
 @interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate
 #ifdef GD_Ad_ENABLED
-		,ADBannerViewDelegate, AdMobDelegate
+		,ADBannerViewDelegate
 #endif
 > {
 	IBOutlet UIPickerView*	ibPvDrum;
@@ -37,7 +37,7 @@
 	//----------------------------------------------dealloc時にrelese
 #ifdef GD_Ad_ENABLED
 	ADBannerView*		RiAdBanner;
-	AdMobView*			RoAdMobView;
+	GADBannerView*	RoAdMobView;
 #endif
 	NSArray				*RaDrums;
 	NSArray				*RaDrumButtons;

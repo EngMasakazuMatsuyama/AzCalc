@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1305</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">300</string>
+			<string key="NS.object.0">301</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -119,7 +119,7 @@
 							<object class="IBUITextView" id="175504206">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 48}, {320, 105}}</string>
+								<string key="NSFrame">{{10, 48}, {300, 105}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="852859351"/>
@@ -146,21 +146,49 @@
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
 							</object>
-							<object class="IBUIButton" id="479167029">
+							<object class="IBUILabel" id="584210161">
 								<reference key="NSNextResponder" ref="157882084"/>
-								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{1, 178}, {45, 30}}</string>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{10, 155}, {300, 30}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="302747404"/>
+								<object class="NSColor" key="IBUIBackgroundColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC41OTIxNTY4NjI3IDAuMzEzNzI1NDkwMiAwLjMwMTk2MDc4NDMAA</bytes>
+								</object>
+								<bool key="IBUIOpaque">NO</bool>
+								<bool key="IBUIClipsSubviews">YES</bool>
+								<int key="IBUIContentMode">7</int>
+								<bool key="IBUIUserInteractionEnabled">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<string key="IBUIText">999</string>
+								<object class="NSFont" key="IBUIFont">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">22</double>
+									<int key="NSfFlags">16</int>
+								</object>
+								<reference key="IBUITextColor" ref="863058367"/>
+								<reference key="IBUIHighlightedColor" ref="246203102"/>
+								<float key="IBUIMinimumFontSize">4</float>
+								<int key="IBUITextAlignment">1</int>
+								<int key="IBUILineBreakMode">5</int>
+							</object>
+							<object class="IBUIButton" id="479167029">
+								<reference key="NSNextResponder" ref="157882084"/>
+								<int key="NSvFlags">289</int>
+								<string key="NSFrame">{{6, 155}, {45, 30}}</string>
+								<reference key="NSSuperview" ref="157882084"/>
+								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="584210161"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">33</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<object class="NSFont" key="IBUIFont" id="821018839">
+								<object class="NSFont" key="IBUIFont" id="751430799">
 									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">20</double>
+									<double key="NSSize">18</double>
 									<int key="NSfFlags">16</int>
 								</object>
 								<string key="IBUINormalTitle">(</string>
@@ -185,7 +213,7 @@
 							<object class="IBUIButton" id="302747404">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">289</int>
-								<string key="NSFrame">{{275, 178}, {45, 30}}</string>
+								<string key="NSFrame">{{269, 155}, {45, 30}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="56282944"/>
@@ -194,7 +222,7 @@
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<reference key="IBUIFont" ref="821018839"/>
+								<reference key="IBUIFont" ref="751430799"/>
 								<string key="IBUINormalTitle">)</string>
 								<reference key="IBUIHighlightedTitleColor" ref="246203102"/>
 								<object class="NSColor" key="IBUINormalTitleColor">
@@ -263,37 +291,13 @@
 									<string key="NSResourceName">Icon16-Setting.png</string>
 								</object>
 							</object>
-							<object class="IBUILabel" id="584210161">
-								<reference key="NSNextResponder" ref="157882084"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{0, 153}, {320, 24}}</string>
-								<reference key="NSSuperview" ref="157882084"/>
-								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="934331105"/>
-								<object class="NSColor" key="IBUIBackgroundColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC41OTIxNTY4NjI3IDAuMzEzNzI1NDkwMiAwLjMwMTk2MDc4NDMAA</bytes>
-								</object>
-								<bool key="IBUIOpaque">NO</bool>
-								<bool key="IBUIClipsSubviews">YES</bool>
-								<int key="IBUIContentMode">7</int>
-								<bool key="IBUIUserInteractionEnabled">NO</bool>
-								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-								<string key="IBUIText">999</string>
-								<reference key="IBUIFont" ref="821018839"/>
-								<reference key="IBUITextColor" ref="863058367"/>
-								<reference key="IBUIHighlightedColor" ref="246203102"/>
-								<float key="IBUIMinimumFontSize">4</float>
-								<int key="IBUITextAlignment">1</int>
-								<int key="IBUILineBreakMode">5</int>
-							</object>
 							<object class="IBUIButton" id="852859351">
 								<reference key="NSNextResponder" ref="157882084"/>
 								<int key="NSvFlags">289</int>
 								<string key="NSFrame">{{98, 115}, {124, 32}}</string>
 								<reference key="NSSuperview" ref="157882084"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="584210161"/>
+								<reference key="NSNextKeyView" ref="934331105"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">33</int>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -336,11 +340,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">18</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<reference key="IBUIFont" ref="751430799"/>
 						<object class="NSColor" key="IBUIHighlightedTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4wNDY5ODE0ODUwOCAwLjA4OTg1ODc1ODg5IDEAA</bytes>
@@ -591,10 +591,10 @@
 							<reference ref="56282944"/>
 							<reference ref="479167029"/>
 							<reference ref="302747404"/>
-							<reference ref="584210161"/>
 							<reference ref="175504206"/>
 							<reference ref="852859351"/>
 							<reference ref="934331105"/>
+							<reference ref="584210161"/>
 						</object>
 						<reference key="parent" ref="774585933"/>
 						<string key="objectName">ScrollUpper</string>
@@ -983,6 +983,6 @@
 				<string>{16, 16}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">300</string>
+		<string key="IBCocoaTouchPluginVersion">301</string>
 	</data>
 </archive>

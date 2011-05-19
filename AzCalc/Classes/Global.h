@@ -12,6 +12,8 @@
 
 #ifdef AzFREE
 #define GD_Ad_ENABLED
+#define AdMobID_CalcRollPAD		@"a14dd47ad31c249"		// ドラタク　Pad Free パブリッシャー ID
+#define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
 #endif
 
 #define GD_UNIT_ENABLED		// 単位機能
