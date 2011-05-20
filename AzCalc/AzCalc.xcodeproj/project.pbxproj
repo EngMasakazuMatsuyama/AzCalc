@@ -287,7 +287,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				44C572921384B4B300490D58 /* SystemConfiguration.framework */,
 				44C572871384AE9E00490D58 /* GoogleAdMobAdsSDK */,
 				44CDB5CB135A807900037C8E /* OpenCode */,
 				44AF8CB111FC5E2200D4B206 /* SBCD */,
@@ -339,6 +338,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44C572921384B4B300490D58 /* SystemConfiguration.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,

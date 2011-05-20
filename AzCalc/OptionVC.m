@@ -62,11 +62,12 @@
 
 - (IBAction)ibSliderTaxChange:(UISlider *)slider
 {
-	float f = MfTaxRate + floor(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする
-	if (0<=f && f<=99.9) {
-		MfTaxRateModify = f;
-		ibLbTax.text = [NSString stringWithFormat:@"%.1f%%", MfTaxRateModify];
-	}
+	float f = MfTaxRate + ceilf(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする
+	if (f<0.1) f = 0.0;
+	else if (99.8<f) f = 99.9;
+
+	MfTaxRateModify = f;
+	ibLbTax.text = [NSString stringWithFormat:@"%.1f %%", MfTaxRateModify];
 }
 
 - (IBAction)ibSliderTaxTouchUp:(UISlider *)slider

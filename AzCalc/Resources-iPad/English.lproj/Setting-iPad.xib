@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1056</int>
-		<string key="IBDocument.SystemVersion">10J567</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1294</string>
+		<string key="IBDocument.SystemVersion">10J869</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1306</string>
 		<string key="IBDocument.AppKitVersion">1038.35</string>
-		<string key="IBDocument.HIToolboxVersion">462.00</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">294</string>
+			<string key="NS.object.0">301</string>
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -878,8 +878,8 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
-						<float key="IBUIMinValue">-10</float>
-						<float key="IBUIMaxValue">10</float>
+						<float key="IBUIMinValue">-5</float>
+						<float key="IBUIMaxValue">5</float>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
@@ -1093,7 +1093,16 @@
 						<reference key="destination" ref="372490531"/>
 						<int key="IBEventType">7</int>
 					</object>
-					<int key="connectionID">87</int>
+					<int key="connectionID">89</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">ibSliderTaxTouchUp:</string>
+						<reference key="source" ref="395582443"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">8</int>
+					</object>
+					<int key="connectionID">90</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1429,7 +1438,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">87</int>
+			<int key="maxID">90</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1653,6 +1662,6 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">294</string>
+		<string key="IBCocoaTouchPluginVersion">301</string>
 	</data>
 </archive>
