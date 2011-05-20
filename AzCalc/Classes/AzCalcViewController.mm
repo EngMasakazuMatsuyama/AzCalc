@@ -2536,8 +2536,8 @@
         rc = ibBuFormLeft.frame;    rc.origin.x -= 100;		ibBuFormLeft.frame = rc;
         rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;
         rc = ibScrollLower.frame;	rc.origin.y += 100;		ibScrollLower.frame = rc;
-        rc = ibTvFormula.frame;		rc.size.height += 30;	ibTvFormula.frame = rc;
-        rc = ibLbFormAnswer.frame;	rc.origin.y += 30;		ibLbFormAnswer.frame = rc;
+        rc = ibTvFormula.frame;		rc.size.height += 27;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y += 27;		ibLbFormAnswer.frame = rc;
         rc = ibBuMemory.frame;		rc.origin.y += 27;		ibBuMemory.frame = rc;
     }
 
@@ -2571,8 +2571,8 @@
         rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;
         rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;
         rc = ibScrollLower.frame;	rc.origin.y -= 100;		ibScrollLower.frame = rc;
-        rc = ibTvFormula.frame;		rc.size.height -= 30;	ibTvFormula.frame = rc;
-        rc = ibLbFormAnswer.frame;	rc.origin.y -= 30;		ibLbFormAnswer.frame = rc;
+        rc = ibTvFormula.frame;		rc.size.height -= 27;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y -= 27;		ibLbFormAnswer.frame = rc;
         rc = ibBuMemory.frame;		rc.origin.y -= 27;		ibBuMemory.frame = rc;
     }
 

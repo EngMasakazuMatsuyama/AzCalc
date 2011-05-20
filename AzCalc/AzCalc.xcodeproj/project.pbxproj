@@ -88,7 +88,6 @@
 		44BC4C951359EA01009B995C /* Icon57s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C921359EA01009B995C /* Icon57s1@2x.png */; };
 		44BC4C961359EA01009B995C /* Icon72s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C931359EA01009B995C /* Icon72s1.png */; };
 		44C572901384AE9E00490D58 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C5728E1384AE9E00490D58 /* libGoogleAdMobAds.a */; };
-		44C572911384AE9F00490D58 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44C5728F1384AE9E00490D58 /* README.txt */; };
 		44C572931384B4B300490D58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C572921384B4B300490D58 /* SystemConfiguration.framework */; };
 		44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
 		44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; };
@@ -479,23 +478,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				2899E5220DE3E06400AC0155 /* AzCalcViewController.xib in Resources */,
 				448D99311307D1DD004DFD62 /* Localizable.strings in Resources */,
 				441D242511F3056200A3B68A /* InfoPlist.strings in Resources */,
-				448D997D1307DC8D004DFD62 /* SettingVC.xib in Resources */,
-				44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */,
-				44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */,
-				44A8B24711F3EC87007D6FA0 /* OptionVC.xib in Resources */,
-				44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */,
-				44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */,
-				44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */,
-				44EF5DE112099FB200BB87B6 /* Information-iPad.xib in Resources */,
 				444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */,
+				44A560D813237E48000E4628 /* AzKeySet.plist in Resources */,
 				449E6B98121FA34100338E7F /* AzKeySet-iPad.plist in Resources */,
+				44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */,
+				44EF5DE112099FB200BB87B6 /* Information-iPad.xib in Resources */,
 				445184441303B8BE002820EA /* Icon16-Setting.png in Resources */,
 				44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */,
-				44A560D813237E48000E4628 /* AzKeySet.plist in Resources */,
 				446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */,
 				446E08C8133450DF006859F4 /* Icon-Drum60x37@2x.png in Resources */,
 				446E08C9133450DF006859F4 /* Icon-DrumPush60x37.png in Resources */,
@@ -509,8 +500,15 @@
 				44CDB60E135AA81100037C8E /* Default@2x.png in Resources */,
 				44CDB60F135AA82300037C8E /* Default-Portrait.png in Resources */,
 				44CDB610135AA82800037C8E /* Default-Landscape.png in Resources */,
+				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */,
+				2899E5220DE3E06400AC0155 /* AzCalcViewController.xib in Resources */,
+				44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */,
+				448D997D1307DC8D004DFD62 /* SettingVC.xib in Resources */,
+				44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */,
+				44A8B24711F3EC87007D6FA0 /* OptionVC.xib in Resources */,
+				44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */,
 				44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */,
-				44C572911384AE9F00490D58 /* README.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,23 +516,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44CDB634135AD9A600037C8E /* Default-Landscape.png in Resources */,
-				44CDB635135AD9A600037C8E /* Default-Portrait.png in Resources */,
-				44BC4C481359E9A1009B995C /* MainWindow.xib in Resources */,
-				44BC4C491359E9A1009B995C /* AzCalcViewController.xib in Resources */,
 				44BC4C4A1359E9A1009B995C /* Localizable.strings in Resources */,
 				44BC4C4B1359E9A1009B995C /* InfoPlist.strings in Resources */,
-				44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */,
-				44BC4C4E1359E9A1009B995C /* icon32-PageFilp.png in Resources */,
-				44BC4C4F1359E9A1009B995C /* OptionVC.xib in Resources */,
-				44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */,
-				44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */,
-				44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */,
 				44BC4C541359E9A1009B995C /* AzKeyMaster.plist in Resources */,
+				44BC4C5F1359E9A1009B995C /* AzKeySet.plist in Resources */,
 				44BC4C551359E9A1009B995C /* AzKeySet-iPad.plist in Resources */,
+				44BC4C4E1359E9A1009B995C /* icon32-PageFilp.png in Resources */,
 				44BC4C561359E9A1009B995C /* Icon16-Setting.png in Resources */,
 				44BC4C571359E9A1009B995C /* Icon16-Setting@2x.png in Resources */,
-				44BC4C5F1359E9A1009B995C /* AzKeySet.plist in Resources */,
 				44BC4C601359E9A1009B995C /* Icon-Drum60x37.png in Resources */,
 				44BC4C611359E9A1009B995C /* Icon-Drum60x37@2x.png in Resources */,
 				44BC4C621359E9A1009B995C /* Icon-DrumPush60x37.png in Resources */,
@@ -546,8 +535,17 @@
 				44BC4C961359EA01009B995C /* Icon72s1.png in Resources */,
 				44CDB611135AA84200037C8E /* Default.png in Resources */,
 				44CDB612135AA84700037C8E /* Default@2x.png in Resources */,
-				44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */,
+				44CDB635135AD9A600037C8E /* Default-Portrait.png in Resources */,
+				44CDB634135AD9A600037C8E /* Default-Landscape.png in Resources */,
+				44BC4C481359E9A1009B995C /* MainWindow.xib in Resources */,
+				44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */,
+				44BC4C491359E9A1009B995C /* AzCalcViewController.xib in Resources */,
+				44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */,
+				44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */,
+				44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */,
+				44BC4C4F1359E9A1009B995C /* OptionVC.xib in Resources */,
 				44FB6519137259150092532D /* InformationVC.xib in Resources */,
+				44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

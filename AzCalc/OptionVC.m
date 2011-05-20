@@ -60,20 +60,23 @@
 // viewDidAppear はView表示直後に呼ばれる
 
 
+// 同じ処理が、SettingVC.m (iPad用) にも存在する
 - (IBAction)ibSliderTaxChange:(UISlider *)slider
 {
-	float f = MfTaxRate + ceilf(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする
+	//float f = MfTaxRate + floorf(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする
+	float f = floorf((MfTaxRate + ibSliderTax.value) * 10.0) / 10.0; //[1.0.5] 小数1位までにする
 	if (f<0.1) f = 0.0;
 	else if (99.8<f) f = 99.9;
 
 	MfTaxRateModify = f;
-	ibLbTax.text = [NSString stringWithFormat:@"%.1f %%", MfTaxRateModify];
+	ibLbTax.text = [NSString stringWithFormat:@"%.2f%%", MfTaxRateModify];
 }
 
 - (IBAction)ibSliderTaxTouchUp:(UISlider *)slider
 {
 	MfTaxRate = MfTaxRateModify;
 	[[NSUserDefaults standardUserDefaults] setFloat:MfTaxRate forKey:GUD_TaxRate];
+	ibLbTax.text = [NSString stringWithFormat:@"%.2f%%", MfTaxRate];
 	ibSliderTax.value = 0; // Center
 }
 

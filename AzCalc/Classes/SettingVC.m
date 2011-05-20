@@ -78,20 +78,23 @@
 }
 
 
-// Options
+// 同じ処理が、OptionVC.m (iPhone用) にも存在する
 - (IBAction)ibSliderTaxChange:(UISlider *)slider
 {
-	float f = MfTaxRate + floor(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする
-	if (0<=f && f<=99.9) {
-		MfTaxRateModify = f;
-		ibLbTax.text = [NSString stringWithFormat:@"%.1f%%", MfTaxRateModify];
-	}
+	//float f = MfTaxRate + floorf(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする
+	float f = floorf((MfTaxRate + ibSliderTax.value) * 10.0) / 10.0; // 小数1位までにする
+	if (f<0.1) f = 0.00;
+	else if (99.8<f) f = 99.90;
+
+	MfTaxRateModify = f;
+	ibLbTax.text = [NSString stringWithFormat:@"%.2f%%", MfTaxRateModify];
 }
 
 - (IBAction)ibSliderTaxTouchUp:(UISlider *)slider
 {
 	MfTaxRate = MfTaxRateModify;
 	[[NSUserDefaults standardUserDefaults] setFloat:MfTaxRate forKey:GUD_TaxRate];
+	ibLbTax.text = [NSString stringWithFormat:@"%.2f%%", MfTaxRate];
 	ibSliderTax.value = 0; // Center
 }
 
