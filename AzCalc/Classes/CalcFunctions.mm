@@ -220,18 +220,18 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			[maRpn push:zz];
 		}
 		// 数値と演算子の数チェック
-		if (iCntNumber < iCntOperator + 1) {
-			@throw @"Too many operators"; // 演算子が多すぎる
+		if (iCntNumber < iCntOperator + 1) {	// 先頭の @ が無ければ、桁区切り処理されてしまう。
+			@throw NSLocalizedString(@"@Excess Operator",nil);		// @演算子過多
 		}
 		else if (iCntNumber > iCntOperator + 1) {
-			@throw @"Insufficient operator"; // 演算子が足らない
+			@throw NSLocalizedString(@"@Lack Operator",nil); // @演算子不足
 		}
 		// 括弧チェック
 		if (iCapLeft < iCapRight) {
-			@throw @"Closing parenthesis is excessive"; // 括弧が閉じ過ぎ
+			@throw NSLocalizedString(@"@Excess Closing",nil); // @閉じ過ぎ
 		}
 		else if (iCapLeft > iCapRight) {
-			@throw @"Unclosed parenthesis"; // 括弧が閉じていない
+			@throw NSLocalizedString(@"@Unclosed",nil);		// @閉じていない
 		}
 		
 		NSLog(@"***maRpn=%@\n", maRpn);
@@ -324,7 +324,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 					AzLOG(@"-[/]- zAns=%@", zAns);
 					if ([zAns hasPrefix:@"@"]) {
 						if ([zAns hasPrefix:@"@0"]) {
-							@throw @"Divide by zero";
+							@throw NSLocalizedString(@"@Divide by zero",nil);
 						}
 					}
 					[maStack push:zAns];	// スタックPUSH
@@ -396,7 +396,8 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			}
 			if ([zNum hasPrefix:OP_SUB]) iIntLen--;
 			if (PRECISION < iIntLen) {
-				@throw @"@Overflow";  // 先頭を@にすると stringFormatter() で変換されずに@以降が返されてドラムに表示される
+				//@throw @"@Overflow";  // 先頭を@にすると stringFormatter() で変換されずに@以降が返されてドラムに表示される
+				@throw NSLocalizedString(@"@Overflow",nil);
 			}
 			// 丸め処理
 			strcpy(cNum1, (char *)[zNum cStringUsingEncoding:NSASCIIStringEncoding]); 
@@ -406,7 +407,7 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			//[zAnswer retain]; // retainCount=1
 		}
 		else {
-			@throw @"[maStack count] != 1";
+			@throw @"@ERROR1";  //@"[maStack count] != 1";
 		}
 	}
 	@catch (NSException * errEx) {

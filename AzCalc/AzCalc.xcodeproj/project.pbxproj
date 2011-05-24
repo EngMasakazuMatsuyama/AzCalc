@@ -311,13 +311,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				448D99301307D1DD004DFD62 /* Localizable.strings */,
 				44A560D713237E48000E4628 /* AzKeySet.plist */,
 				444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */,
 				449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */,
 				8D1107310486CEB800E47090 /* AzCalc-Info.plist */,
 				44BC4C971359EA7B009B995C /* AzCalc-InfoS1.plist */,
 				441D242211F3056200A3B68A /* InfoPlist.strings */,
-				448D99301307D1DD004DFD62 /* Localizable.strings */,
 				44BC4C911359EA01009B995C /* Icon57s1.png */,
 				44BC4C921359EA01009B995C /* Icon57s1@2x.png */,
 				44BC4C931359EA01009B995C /* Icon72s1.png */,
