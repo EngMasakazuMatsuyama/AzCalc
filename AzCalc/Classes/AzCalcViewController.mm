@@ -51,7 +51,7 @@
 @implementation AzCalcViewController
 
 
-// MARK: 解放処理
+#pragma mark - View dealloc
 
 - (void)unloadRelease	// dealloc, viewDidUnload から呼び出される
 {
@@ -124,19 +124,38 @@
 }
 
 
-// MARK: 開始処理
+#pragma mark - View lifecicle
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad 
 {
 	NSLog(@"--- viewDidLoad ---");
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
-	
-	
     [super viewDidLoad];
     //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+
+	// インストールやアップデート後、1度だけ処理する
+	NSString *zNew = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+	NSString* zDef = [userDef valueForKey:@"DefVersion"];
+	if (![zDef isEqualToString:zNew]) {
+		if (zDef==nil || [zDef compare:@"1.0.6"]==NSOrderedAscending) { // ＜ "1.0.6"
+			//[1.0.6] "5/4" と "6/5" の位置を入れ替えたことに対応するため。
+			switch ((NSInteger)[userDef integerForKey:GUD_Round]) {
+				case 2:
+					[userDef setInteger:4 forKey:GUD_Round];
+					break;
+				case 4:
+					[userDef setInteger:2 forKey:GUD_Round];
+					break;
+			}
+		}
+		[userDef setValue:zNew forKey:@"DefVersion"];
+		MbInformationOpen = YES; // Informationを自動オープンする
+	} else {
+		MbInformationOpen = NO;
+	}
 	
 	bPad = (700 < self.view.frame.size.height);
 	
@@ -833,15 +852,22 @@
 - (void)viewDidAppear:(BOOL)animated // 画面表示された後にコールされる
 {
 	[super viewDidAppear:animated];
+	
 	if (buChangeKey) {
 		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
 		// 復帰
 		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 		buChangeKey = nil;
 	}
+
 #ifdef GD_Ad_ENABLED
 	[self MvShowAdApple:YES AdMob:YES];
 #endif
+
+	if (MbInformationOpen) {	//initWithStyleにて判定処理している
+		MbInformationOpen = NO;	// 以後、自動初期表示しない。
+		[self ibBuInformation:nil];
+	}
 }
 
 // Entryセル表示：entryComponentの位置にibLbEntryActiveを表示する
@@ -853,7 +879,8 @@
 	float fWiMin, fWiMax;
 	if (bZoomEntryComponent) {  // entryComponentを拡大する
 		fWiMin = PICKER_COMPONENT_WiMIN; // 1コンポーネントの表示最小幅
-		fWiMax = fWid - ((PICKER_COMPONENT_WiMIN + DRUM_GAP) * (MiSegDrums-1));
+		if (bPad) fWiMin *= 2.0;
+		fWiMax = fWid - ((fWiMin + DRUM_GAP) * (MiSegDrums-1));
 	} else {
 		fWiMin = (fWid / MiSegDrums) - DRUM_GAP;
 		fWiMax = fWiMin; // 均等
@@ -933,7 +960,8 @@
 }
 
 
-// MARK: 回転
+#pragma mark  View 回転
+
 // 回転サポート
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -996,7 +1024,7 @@
 
 
 
-// MARK: UNIT 単位
+#pragma mark - UNIT 単位
 
 - (void)GvKeyUnitGroupSI:(NSString *)unitSI 
 				   andSI:(NSString *)unitSi2 // =nil:ハイライト解除
@@ -1125,29 +1153,6 @@
 	[mdKeySet release];	mdKeySet = nil;
 }
 
-
-- (IBAction)ibBuSetting:(UIButton *)button
-{
-	if (RaKeyMaster) {
-		// 全キー配置＆属性を記録する
-		[self MvUserKeySave:YES];
-	}
-	
-	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-	appDelegate.ibSettingVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;  // 水平回転
-	[self presentModalViewController:appDelegate.ibSettingVC animated:YES];
-}
-
-- (IBAction)ibBuInformation:(UIButton *)button
-{
-	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-	if (bPad) {
-		appDelegate.ibInformationVC.modalPresentationStyle = UIModalPresentationFormSheet; // iPad画面1/4サイズ
-	} else {
-		appDelegate.ibInformationVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-	}
-	[self presentModalViewController:appDelegate.ibInformationVC animated:YES];
-}
 
 - (void)MvKeyLayoute:(KeyButton *)button   // キーレイアウト変更モード // ドラム選択中のキーを割り当てる
 {
@@ -1455,6 +1460,7 @@
 		return;
 	}
 
+#ifdef xxxOLDxxx
 	// ダブルタップ式
 	if (bDrumButtonTap1) {
 		bDrumButtonTap1 = NO;
@@ -1468,7 +1474,14 @@
 		bDrumButtonTap1 = YES;
 		[self performSelector:@selector(vDrumButtonTap1Clear) withObject:nil afterDelay:0.5f]; // 0.5秒後にクリアする
 	}
-
+#else
+	// シングルタップ式
+	if (entryComponent == button.tag) {
+		// ドラム幅を拡大する
+		bZoomEntryComponent = !bZoomEntryComponent;  // 拡大／均等トグル式
+	}
+#endif
+	
 	BOOL bTouchAction = NO;
 	if (entryComponent != button.tag) {
 		entryComponent = button.tag;	// ドラム切り替え
@@ -1516,16 +1529,6 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 */
-
-- (IBAction)ibBuMemory:(UIButton *)button
-{
-	// [Paste]
-	KeyButton *kb = [[KeyButton alloc] initWithFrame:CGRectZero];
-	kb.tag = KeyTAG_MPASTE; // [Paste]
-	[kb setTitle:@"Paste" forState:UIControlStateNormal];
-	[self ibButton:kb]; // Paste処理させる
-	[kb release];
-}
 
 - (void)MvButtonFormula:(NSInteger)iKeyTag  // 数式へのキー入力処理
 {
@@ -1988,6 +1991,9 @@
 	}
 }
 
+
+#pragma mark - IBAction
+
 - (IBAction)ibButton:(KeyButton *)button   // KeyButton TouchUpInside処理メソッド
 {
 	bDrumRefresh = YES;
@@ -2105,9 +2111,42 @@
 	}
 }
 
+- (IBAction)ibBuMemory:(UIButton *)button
+{
+	// [Paste]
+	KeyButton *kb = [[KeyButton alloc] initWithFrame:CGRectZero];
+	kb.tag = KeyTAG_MPASTE; // [Paste]
+	[kb setTitle:@"Paste" forState:UIControlStateNormal];
+	[self ibButton:kb]; // Paste処理させる
+	[kb release];
+}
 
 
-// MARK: delegate UIPickerView
+- (IBAction)ibBuSetting:(UIButton *)button
+{
+	if (RaKeyMaster) {
+		// 全キー配置＆属性を記録する
+		[self MvUserKeySave:YES];
+	}
+	
+	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+	appDelegate.ibSettingVC.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;  // 水平回転
+	[self presentModalViewController:appDelegate.ibSettingVC animated:YES];
+}
+
+- (IBAction)ibBuInformation:(UIButton *)button
+{
+	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+	if (bPad) {
+		appDelegate.ibInformationVC.modalPresentationStyle = UIModalPresentationFormSheet; // iPad画面1/4サイズ
+	} else {
+		appDelegate.ibInformationVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+	}
+	[self presentModalViewController:appDelegate.ibInformationVC animated:YES];
+}
+
+
+#pragma mark - delegate UIPickerView
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
 {
@@ -2152,10 +2191,12 @@
 	}
 
 	if (bZoomEntryComponent) {
+		float fWmin = PICKER_COMPONENT_WiMIN;
+		if (bPad) fWmin *= 2.0;
 		if (component == entryComponent) {  // entryComponentを拡大する
-			return fWid - ((PICKER_COMPONENT_WiMIN + DRUM_GAP) * (MiSegDrums-1));
+			return fWid - ((fWmin + DRUM_GAP) * (MiSegDrums-1));
 		} else {
-			return PICKER_COMPONENT_WiMIN; // 1コンポーネントの表示最小幅
+			return fWmin; // 1コンポーネントの表示最小幅
 		}
 	}
 	return (fWid / MiSegDrums) - DRUM_GAP; // 均等
@@ -2337,7 +2378,7 @@
 }
 
 
-// MARK: delegate UIScrollView
+#pragma mark - delegate UIScrollView
 //=================================================================ibScrollUpper delegate
 // スクロール開始したときに呼ばれる
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
@@ -2379,7 +2420,7 @@
 }
 
 
-// MARK: delegate UITextView
+#pragma mark - delegate UITextView
 //=================================================================ibTvFormula delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
@@ -2505,7 +2546,7 @@
 
 
 #ifdef GD_Ad_ENABLED
-// MARK: iAd, AdMob
+#pragma mark - iAd, AdMob
 
 // iAd取得できたときに呼ばれる　⇒　表示する
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner

@@ -25,7 +25,7 @@
 	NSMutableString		*entryOperator;		// NSArray にして MaOperator へ追加する
 	NSMutableString		*entryNumber;		// Az数値文字列：入力中は文字列扱いする ＜＜小数以下の0を表示するため ＆ [BS]処理が簡単
 	NSMutableString		*entryUnit;			// 単位 [%][‰] [mm][cm][m][km] [￥][＄]
-	NSInteger			entryRow;			// 現在選択行　>=0 And <= [aOperators count];
+	NSInteger				entryRow;			// 現在選択行　>=0 And <= [aOperators count];
 
 	// Setting
 	NSInteger	MiSegCalcMethod;
@@ -67,6 +67,7 @@
 - (NSString *)zUnit:(NSInteger)iRow;
 - (NSString *)zAnswer;
 - (void)vRemoveFromRow:(NSInteger)iRow;
+//- (void)vEditFromRow:(NSInteger)iRow;
 
 
 

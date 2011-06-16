@@ -15,16 +15,15 @@
 
 @implementation SettingVC
 
+
+#pragma mark - View dealloc
+
 - (void)dealloc {
     [super dealloc];
 }
 
-// 回転サポート
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-	if (700 < self.view.frame.size.height) return YES; // iPad
-	return NO;
-}
+
+#pragma mark - View lifecicle
 
 // viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　
 - (void)viewWillAppear:(BOOL)animated 
@@ -50,7 +49,18 @@
 }
 // viewDidAppear はView表示直後に呼ばれる
 
+#pragma mark  View 回転
 
+// 回転サポート
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) return YES; // タテは常にOK
+	else if (700 < self.view.frame.size.height) return YES; // iPad
+	return NO;
+}
+
+
+#pragma mark - IBAction
 
 - (IBAction)ibSegDrums:(UISegmentedControl *)segment
 {

@@ -65,7 +65,8 @@ void stringDivision( char *strAnswer, char *strNum1, char *strNum2 );
 
 // 丸め  iPrecision	= 有効桁数（整数部と小数部を合わせた最大桁数。符号や小数点は含まない）
 //		iDecimal	= 小数桁数（小数部の最大桁数）[ 0 〜 iPrecision ]
-//		iType		= 丸め方法 (0)RM (1)RZ:切捨 (2)5/4 (3)5/5 (4)6/5 (5)RI:切上 (6)RP
+//xx		iType		= 丸め方法 (0)RM (1)RZ:切捨 (2)5/4 (3)5/5 (4)6/5 (5)RI:切上 (6)RP		[1.0.5]以前
+//		iType		= 丸め方法 (0)RM (1)RZ:切捨 (2)6/5 (3)5/5 (4)5/4 (5)RI:切上 (6)RP		[1.0.6]以降
 void stringRounding( char *strAnswer, char *strNum, int iPrecision, int iDecimal, int iType );
 
 

@@ -95,7 +95,7 @@
 					<object class="IBUISegmentedControl" id="391816721">
 						<reference key="NSNextResponder" ref="854183509"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 276}, {300, 44}}</string>
+						<string key="NSFrame">{{10, 278}, {300, 44}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="531973576"/>
@@ -158,10 +158,9 @@
 					<object class="IBUISegmentedControl" id="309967325">
 						<reference key="NSNextResponder" ref="854183509"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{10, 350}, {300, 44}}</string>
+						<string key="NSFrame">{{10, 363}, {300, 44}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBNumberOfSegments">3</int>
@@ -200,7 +199,7 @@
 					<object class="IBUILabel" id="531973576">
 						<reference key="NSNextResponder" ref="854183509"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 327}, {280, 21}}</string>
+						<string key="NSFrame">{{20, 340}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="309967325"/>
@@ -218,7 +217,7 @@
 					<object class="IBUILabel" id="739418122">
 						<reference key="NSNextResponder" ref="854183509"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 250}, {280, 21}}</string>
+						<string key="NSFrame">{{20, 255}, {280, 21}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="391816721"/>
@@ -478,13 +477,13 @@
 							<reference ref="769992071"/>
 							<reference ref="309967325"/>
 							<reference ref="531973576"/>
-							<reference ref="739418122"/>
 							<reference ref="733847252"/>
-							<reference ref="391816721"/>
 							<reference ref="309546585"/>
 							<reference ref="135586101"/>
 							<reference ref="252775876"/>
 							<reference ref="113610899"/>
+							<reference ref="391816721"/>
+							<reference ref="739418122"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Option</string>

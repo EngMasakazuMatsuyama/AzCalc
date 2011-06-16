@@ -37,10 +37,14 @@
 }
 */
 
+#pragma mark - View dealloc
 
 - (void)dealloc {
     [super dealloc];
 }
+
+
+#pragma mark - View lifecicle
 
 // viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　
 - (void)viewWillAppear:(BOOL)animated 
@@ -59,6 +63,8 @@
 }
 // viewDidAppear はView表示直後に呼ばれる
 
+
+#pragma mark - IBAction
 
 // 同じ処理が、SettingVC.m (iPad用) にも存在する
 - (IBAction)ibSliderTaxChange:(UISlider *)slider

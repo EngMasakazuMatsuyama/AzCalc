@@ -56,6 +56,7 @@
 	BOOL				bDrumRefresh;				// =YES:ドラムを再表示する  =NO:[Copy]後などドラムを動かしたくないとき
 	BOOL               bFormulaFilter;				// =YES:ペーストされたのでフィルタ処理する
     BOOL				bPad;								// =YES:iPad  =NO:iPhone
+	BOOL				MbInformationOpen;
 #ifdef GD_Ad_ENABLED
 	BOOL				bADbannerIsVisible;		// iAd 広告内容があればYES
 	//BOOL				bADbannerFirstTime;		// iAd 広告内容があれば、起動時に表示するため

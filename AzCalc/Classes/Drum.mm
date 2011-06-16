@@ -16,10 +16,10 @@
 
 
 @interface Drum (PrivateMethods)
-- (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
-- (void)vEnterOperator:(NSString *)zOperator;
 - (NSInteger)iNumLength:(NSString *)zNum;
 - (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum;
+- (BOOL)vNewLine:(NSString *)zNextOperator;	// entryをarrayに追加し、entryを新規作成する
+- (void)vEnterOperator:(NSString *)zOperator;
 @end
 
 @implementation Drum
@@ -27,6 +27,8 @@
 //@synthesize formulaOperators, formulaNumbers, formulaUnits;
 @synthesize entryAnswer, entryOperator, entryNumber, entryUnit, entryRow;
 
+
+#pragma mark - NSObject lifecicle
 
 - (void)dealloc 
 {
@@ -65,6 +67,9 @@
 	
 }
 
+
+#pragma mark - Function
+
 - (void)reSetting				// Settingリセット
 {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -77,12 +82,21 @@
 	MfTaxRate = 1.0 + [defaults floatForKey:GUD_TaxRate] / 100.0; // 1 + 消費税率%/100
 }
 
-
 - (NSInteger)count
 {
 	return [formulaOperators count];
 }
 
+- (NSInteger)iNumLength:(NSString *)zNum
+{
+	// [-][.] を取り除く
+	NSString *z = [zNum stringByReplacingOccurrencesOfString:OP_SUB withString:@""];
+	z = [z stringByReplacingOccurrencesOfString:NUM_DECI withString:@""];
+	return [z length];
+}
+
+
+#pragma mark - Key function
 
 //- (void)entryKeyTag:(NSInteger)iKeyTag keyButton:(KeyButton *)keyButton  // キー入力処理
 - (void)entryKeyButton:(KeyButton *)keyButton  // キー入力処理
@@ -433,21 +447,8 @@
 	}
 }
 
-- (NSString *)zOperator:(NSInteger)iRow
-{
-	if (0 <= iRow && iRow < [formulaOperators count]) {
-		return [formulaOperators objectAtIndex:iRow];
-	}
-	return entryOperator;
-}
 
-- (NSString *)zNumber:(NSInteger)iRow
-{
-	if (0 <= iRow && iRow < [formulaNumbers count]) {
-		return [formulaNumbers objectAtIndex:iRow];
-	}
-	return entryNumber;
-}
+#pragma mark - Unit function
 
 // iPara = (0)表示単位 (1)SI基本単位　(2)変換式　(3)逆変換式
 - (NSString *)zUnitPara:(NSString *)zUnit withPara:(NSInteger)iPara
@@ -460,105 +461,6 @@
 		}
 	}
 	return nil; // 未定義　(1)以降が未定義ならば「単位」でない。
-}
-
-- (NSString *)zUnit:(NSInteger)iRow withPara:(NSInteger)iPara
-{
-	NSString *zUni;
-	if (0 <= iRow && iRow < [formulaUnits count]) {
-		zUni = [formulaUnits objectAtIndex:iRow];
-	} else {
-		zUni = entryUnit;
-	}
-	// [;]で区切られたコンポーネント(部分文字列)を切り出す
-	NSString *zz = [self zUnitPara:zUni withPara:iPara];
-	if (zz) return zz;
-	return @"";
-}
-
-- (NSString *)zUnit:(NSInteger)iRow	// 表示単位
-{
-	return [self zUnit:iRow withPara:0];
-}
-
-- (NSString *)zAnswer
-{
-	return entryAnswer;
-}
-
-- (void)vRemoveFromRow:(NSInteger)iRow // iRow以降削除（ドラム逆回転時に使用）
-{
-	assert([formulaOperators count]==[formulaNumbers count]);
-	assert([formulaOperators count]==[formulaUnits count]);
-
-	NSString *zOpe = [self zOperator:iRow];
-	if ([zOpe hasPrefix:OP_START]) { // 開始行を維持する。　削除する前に処理すること！
-		[entryOperator setString:OP_START];
-	}
-	else if ([zOpe hasPrefix:OP_ANS]) { // [=]
-		[entryOperator setString:@""];
-	}
-	else {
-		[entryOperator setString:zOpe];
-	}
-	
-	NSRange range = NSMakeRange(iRow, [formulaOperators count] - iRow);
-	[formulaOperators removeObjectsInRange:range];
-	[formulaNumbers removeObjectsInRange:range];		
-	[formulaUnits removeObjectsInRange:range];
-	// entry値クリア
-	[entryNumber setString:@""]; 
-	[entryAnswer setString:@""]; 
-	// これまでの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
-	[self GvEntryUnitSet];
-}
-
-
-- (BOOL)vNewLine:(NSString *)zNextOperator		// entryをarrayに追加し、entryを新規作成する
-{
-	if (DRUM_RECORDS-1 <= [formulaOperators count]) {  // 1ドラム最大行数制限
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Final answer", nil)
-														message:NSLocalizedString(@"Final answer msg", nil)
-													   delegate:nil
-											  cancelButtonTitle:nil
-											  otherButtonTitles:@"OK", nil];
-		[alert show];
-		[alert release];
-		if (DRUM_RECORDS <= [formulaOperators count]) { // 最終行オーバー：entry行に[=]回答を表示する
-			[entryOperator setString:OP_ANS];
-			[entryNumber setString:[self zAnswerDrum]]; 
-			return NO; // 最終行オーバーにつき拒否
-		}
-		// 最終行
-	}
-
-	// Operator: entryをarrayに追加し、entryを新規作成する
-	assert( entryOperator != nil );
-	[formulaOperators addObject:entryOperator];
-	[entryOperator release];
-	entryOperator = [[NSMutableString alloc] initWithString:zNextOperator];
-	entryRow = [formulaOperators count];
-	
-	// Number: entryをarrayに追加し、entryを新規作成する
-	assert( entryNumber != nil );
-	[formulaNumbers addObject:entryNumber];
-	[entryNumber release];
-	entryNumber = [NSMutableString new];
-	
-	// Unit: entryをarrayに追加し、entryを新規作成する
-	assert( entryUnit != nil );
-	[formulaUnits addObject:entryUnit];
-	[entryUnit release];
-	entryUnit = [NSMutableString new];
-	
-	// Answer: addObjectしないのでクリアするだけ。
-	[entryAnswer setString:@""];
-	
-	// formula へ addObject しているのはここだけ。 要素数は、必ず一致すること。
-	// もし、ここでエラー発生したときは、「ドラム逆回転時の処理」で削除が適切に行われているか確認すること。
-	assert( [formulaOperators count] == [formulaNumbers count] );
-	assert( [formulaOperators count] == [formulaUnits count] );
-	return YES;
 }
 
 // 直前までの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
@@ -760,9 +662,222 @@
 	}
 }
 
+// zUnitSI系列でzNumに最適な単位を返す
+- (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum
+{
+	dNum = fabs(dNum);
+	if (dNum == 0.0) {
+		return @"";
+	}
+	
+	if ([zUnitSI hasPrefix:@"kg"]) {
+		if (1000.0 <= dNum) {
+			return @"t;kg;(#*1000);(#/1000)";
+		}
+		if (1.0 <= dNum) {
+			return @"kg;kg;#;#";
+		}
+		if (0.001 <= dNum) {
+			return @"g;kg;(#/1000);(#*1000)";
+		}
+		return @"mg;kg;(#/1000000);(#*1000000)";
+	}
+	if ([zUnitSI hasPrefix:@"m"]) {
+		if (1000.0 <= dNum) {
+			return @"km;m;(#*1000);(#/1000)";
+		}
+		if (1.0 <= dNum) {
+			return @"m;m;#;#";
+		}
+		if (0.01 <= dNum) {
+			return @"cm;m;(#/100);(#*100)";
+		}
+		return @"mm;m;(#/1000);(#*1000)";
+	}
+	if ([zUnitSI hasPrefix:@"㎡"]) {	// 平方
+		if (1000000.0 <= dNum) {
+			return @"k㎡;㎡;(#*1000000);(#/1000000)";
+		}
+		if (10000.0 <= dNum) {
+			return @"ha;㎡;(#*10000);(#/10000)";
+		}
+		if (1.0 <= dNum) {
+			return @"㎡;㎡;#;#";
+		}
+		if (0.0001 <= dNum) {
+			return @"c㎡;㎡;(#/10000);(#*10000)";
+		}
+		return @"m㎡;㎡;(#/1000000);(#*1000000)";
+	}
+	if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
+		if (1000000000.0 <= dNum) {
+			return @"k㎥;㎥;(#*1000000000);(#/1000000000)";
+		}
+		if (1.0 <= dNum) {
+			return @"㎥;㎥;#;#";
+		}
+		if (0.001 <= dNum) {
+			return @"L;㎥;(#/1000);(#*1000)";
+		}
+		if (0.0001 <= dNum) {
+			return @"dL;㎥;(#/10000);(#*10000)";
+		}
+		return @"mL;㎥;(#/1000000);(#*1000000)";
+	}
+	return zUnitSI;
+}
+
+
+#pragma mark - iRow行の値を取得する
+
+- (NSString *)zOperator:(NSInteger)iRow
+{
+	if (0 <= iRow && iRow < [formulaOperators count]) {
+		return [formulaOperators objectAtIndex:iRow];
+	}
+	return entryOperator;
+}
+
+- (NSString *)zNumber:(NSInteger)iRow
+{
+	if (0 <= iRow && iRow < [formulaNumbers count]) {
+		return [formulaNumbers objectAtIndex:iRow];
+	}
+	return entryNumber;
+}
+
+
+- (NSString *)zUnit:(NSInteger)iRow withPara:(NSInteger)iPara
+{
+	NSString *zUni;
+	if (0 <= iRow && iRow < [formulaUnits count]) {
+		zUni = [formulaUnits objectAtIndex:iRow];
+	} else {
+		zUni = entryUnit;
+	}
+	// [;]で区切られたコンポーネント(部分文字列)を切り出す
+	NSString *zz = [self zUnitPara:zUni withPara:iPara];
+	if (zz) return zz;
+	return @"";
+}
+
+- (NSString *)zUnit:(NSInteger)iRow	// 表示単位
+{
+	return [self zUnit:iRow withPara:0];
+}
+
+
+#pragma mark - Drum function
+
+- (void)vRemoveFromRow:(NSInteger)iRow // iRow以降削除（ドラム逆回転時に使用）
+{
+	assert([formulaOperators count]==[formulaNumbers count]);
+	assert([formulaOperators count]==[formulaUnits count]);
+
+	NSString *zOpe = [self zOperator:iRow];
+	if ([zOpe hasPrefix:OP_START]) { // 開始行を維持する。　削除する前に処理すること！
+		[entryOperator setString:OP_START];
+	} 
+	else if ([zOpe hasPrefix:OP_ANS]) { // [=]
+		[entryOperator setString:@""];
+	} 
+	else {
+		[entryOperator setString:zOpe];
+	}
+	
+	NSRange range = NSMakeRange(iRow, [formulaOperators count] - iRow);
+	[formulaOperators removeObjectsInRange:range];
+	[formulaNumbers removeObjectsInRange:range];		
+	[formulaUnits removeObjectsInRange:range];
+	entryRow = [formulaOperators count];
+	// entry値クリア
+	[entryNumber setString:@""]; 
+	[entryAnswer setString:@""]; 
+	// これまでの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
+	[self GvEntryUnitSet];
+}
+
+/*没！ [1.1]仕様として根本的な解決を図ること！
+- (void)vEditFromRow:(NSInteger)iRow // iRow行クリア ＆ Entry行リセット （ドラム逆回転時に使用）
+{
+	assert([formulaOperators count]==[formulaNumbers count]);
+	assert([formulaOperators count]==[formulaUnits count]);
+	
+	NSString *zOpe = [self zOperator:iRow];
+	if ([zOpe hasPrefix:OP_START]) { // 開始行を維持する。　削除する前に処理すること！
+		[entryOperator setString:OP_START];
+	} 
+	else if ([zOpe hasPrefix:OP_ANS]) { // [=]
+		[entryOperator setString:@""];
+	} 
+	else {
+		[entryOperator setString:zOpe];
+	}
+
+	// entryEditRow クリア
+//	[formulaOperators replaceObjectAtIndex:iRow withObject:@""];
+//	[formulaNumbers replaceObjectAtIndex:iRow withObject:@""];
+//	[formulaUnits replaceObjectAtIndex:iRow withObject:@""];
+	//entryEditRow = iRow;  // entryを記録する行	　通常は、(-1)末尾
+	entryRow = iRow;	// vNewLineにて末尾追加でなく、置換処理される
+	// entry値クリア
+	[entryNumber setString:@""]; 
+	[entryAnswer setString:@""]; 
+	// これまでの式を評価して次に使用可能な単位キーを有効にし、entryUnit へ適切な単位をセットする。
+	//[self GvEntryUnitSet];
+}
+*/
+
+- (BOOL)vNewLine:(NSString *)zNextOperator		// entryをarrayに追加し、entryを新規作成する
+{
+	if (DRUM_RECORDS-1 <= [formulaOperators count]) {  // 1ドラム最大行数制限
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Final answer", nil)
+														message:NSLocalizedString(@"Final answer msg", nil)
+													   delegate:nil
+											  cancelButtonTitle:nil
+											  otherButtonTitles:@"OK", nil];
+		[alert show];
+		[alert release];
+		if (DRUM_RECORDS <= [formulaOperators count]) { // 最終行オーバー：entry行に[=]回答を表示する
+			[entryOperator setString:OP_ANS];
+			[entryNumber setString:[self zAnswerDrum]]; 
+			return NO; // 最終行オーバーにつき拒否
+		}
+		// 最終行
+	}
+
+	// Operator: entryをarrayに追加し、entryを新規作成する
+	assert( entryOperator != nil );
+	[formulaOperators addObject:entryOperator];
+	[entryOperator release];
+	entryOperator = [[NSMutableString alloc] initWithString:zNextOperator];
+	entryRow = [formulaOperators count];
+	
+	// Number: entryをarrayに追加し、entryを新規作成する
+	assert( entryNumber != nil );
+	[formulaNumbers addObject:entryNumber];
+	[entryNumber release];
+	entryNumber = [NSMutableString new];
+	
+	// Unit: entryをarrayに追加し、entryを新規作成する
+	assert( entryUnit != nil );
+	[formulaUnits addObject:entryUnit];
+	[entryUnit release];
+	entryUnit = [NSMutableString new];
+
+	// Answer: addObjectしないのでクリアするだけ。
+	[entryAnswer setString:@""];
+
+	// formula へ addObject しているのはここだけ。 要素数は、必ず一致すること。
+	// もし、ここでエラー発生したときは、「ドラム逆回転時の処理」で削除が適切に行われているか確認すること。
+	assert( [formulaOperators count] == [formulaNumbers count] );
+	assert( [formulaOperators count] == [formulaUnits count] );
+	return YES;
+}
+
 
 //============================================================================================
-// zOperator により改行が発生するときの処理
+// 演算子(zOperator) を加えて改行する。  [=]ならば回答行になる
 //============================================================================================
 - (void)vEnterOperator:(NSString *)zOperator
 {
@@ -859,70 +974,8 @@
 }
  **********/
 
-// zUnitSI系列でzNumに最適な単位を返す
-- (NSString *)zOptimizeUnit:(NSString *)zUnitSI withNum:(double)dNum
-{
-	dNum = fabs(dNum);
-	if (dNum == 0.0) {
-		return @"";
-	}
-	
-	if ([zUnitSI hasPrefix:@"kg"]) {
-		if (1000.0 <= dNum) {
-			return @"t;kg;(#*1000);(#/1000)";
-		}
-		if (1.0 <= dNum) {
-			return @"kg;kg;#;#";
-		}
-		if (0.001 <= dNum) {
-			return @"g;kg;(#/1000);(#*1000)";
-		}
-		return @"mg;kg;(#/1000000);(#*1000000)";
-	}
-	if ([zUnitSI hasPrefix:@"m"]) {
-		if (1000.0 <= dNum) {
-			return @"km;m;(#*1000);(#/1000)";
-		}
-		if (1.0 <= dNum) {
-			return @"m;m;#;#";
-		}
-		if (0.01 <= dNum) {
-			return @"cm;m;(#/100);(#*100)";
-		}
-		return @"mm;m;(#/1000);(#*1000)";
-	}
-	if ([zUnitSI hasPrefix:@"㎡"]) {	// 平方
-		if (1000000.0 <= dNum) {
-			return @"k㎡;㎡;(#*1000000);(#/1000000)";
-		}
-		if (10000.0 <= dNum) {
-			return @"ha;㎡;(#*10000);(#/10000)";
-		}
-		if (1.0 <= dNum) {
-			return @"㎡;㎡;#;#";
-		}
-		if (0.0001 <= dNum) {
-			return @"c㎡;㎡;(#/10000);(#*10000)";
-		}
-		return @"m㎡;㎡;(#/1000000);(#*1000000)";
-	}
-	if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
-		if (1000000000.0 <= dNum) {
-			return @"k㎥;㎥;(#*1000000000);(#/1000000000)";
-		}
-		if (1.0 <= dNum) {
-			return @"㎥;㎥;#;#";
-		}
-		if (0.001 <= dNum) {
-			return @"L;㎥;(#/1000);(#*1000)";
-		}
-		if (0.0001 <= dNum) {
-			return @"dL;㎥;(#/10000);(#*10000)";
-		}
-		return @"mL;㎥;(#/1000000);(#*1000000)";
-	}
-	return zUnitSI;
-}
+
+#pragma mark - Formula
 
 - (NSString *)zFormulaCalculator	// ドラム ⇒ ibTvFormula用の数式文字列
 {
@@ -1234,6 +1287,9 @@
 	return zFormula;
 }
 
+
+#pragma mark - Answer
+
 - (NSString *)zAnswerDrum	// ドラム ⇒ 数式 ⇒ 逆ポーランド記法(Reverse Polish Notation) ⇒ 答え
 {
 	NSString *zFormula = [self zFormulaFromDrum]; // autorelease
@@ -1243,12 +1299,9 @@
 	return nil;
 }
 
-- (NSInteger)iNumLength:(NSString *)zNum
+- (NSString *)zAnswer
 {
-	// [-][.] を取り除く
-	NSString *z = [zNum stringByReplacingOccurrencesOfString:OP_SUB withString:@""];
-	z = [z stringByReplacingOccurrencesOfString:NUM_DECI withString:@""];
-	return [z length];
+	return entryAnswer;
 }
 
 

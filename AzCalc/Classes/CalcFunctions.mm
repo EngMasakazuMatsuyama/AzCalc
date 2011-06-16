@@ -9,6 +9,8 @@
 #import "CalcFunctions.h"
 
 
+#pragma mark - Stack method
+
 //[0.3]-----------------------------------------------------NSMutableArray Stack Method
 @interface NSMutableArray (StackAdditions)
 - (void)push:(id)obj;
@@ -39,11 +41,13 @@
 //----------------------------------------------------------NSMutableArray Stack Method
 
 
+
 static NSInteger  MiSegCalcMethod;
 static NSInteger  MiSegDecimal;
 static NSInteger  MiSegRound;
 
 
+#pragma mark -
 @implementation CalcFunctions
 
 int levelOperator( NSString *zOpe )  // 演算子の優先順位

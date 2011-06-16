@@ -16,22 +16,117 @@
 
 @implementation InformationVC
 
+
+#pragma mark - View dealloc
+
 - (void)dealloc {
     [super dealloc];
 }
 
 
+#pragma mark - View lifecicle
+
 /*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-	if (self) {
-        // Custom initialization
-    }
-    return self;
+ - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil 
+ {
+ self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+ if (self) {
+ // Custom initialization
+ }
+ return self;
+ }
+ */
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+	
+	//ibLbProductName.text = NSLocalizedString(@"Product Title",nil);
+	
+	NSString *zVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]; // "Bundle version"
+#ifdef AzSTABLE
+	if (72 <= ibImgIcon.frame.size.width) {
+		[ibImgIcon setImage:[UIImage imageNamed:@"Icon72s1.png"]];
+	} else {
+		[ibImgIcon setImage:[UIImage imageNamed:@"Icon57s1.png"]];
+	}
+	ibLbVersion.text = [NSString stringWithFormat:@"Version %@\nStable", zVersion];
+	//
+	ibBuPaidApp.hidden = YES;  // 有料版 AppStore 非表示
+#else
+	if (72 <= ibImgIcon.frame.size.width) {
+		[ibImgIcon setImage:[UIImage imageNamed:@"Icon72free.png"]];
+	} else {
+		[ibImgIcon setImage:[UIImage imageNamed:@"Icon57free.png"]];
+	}
+	ibLbVersion.text = [NSString stringWithFormat:@"Version %@\nFree", zVersion];
+#endif
 }
-*/
+
+/*
+ // viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　
+ - (void)viewWillAppear:(BOOL)animated 
+ {
+ [super viewWillAppear:animated];
+ }
+ */
+
+
+#pragma mark  View 回転
+
+// Override to allow orientations other than the default portrait orientation.
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
+{
+	if (UIInterfaceOrientationIsPortrait(interfaceOrientation)) return YES; // タテは常にOK
+	else if (72 <= ibImgIcon.frame.size.width) return YES; // iPad
+	return NO;
+	//NG//if (700 < self.view.frame.size.height) return YES; // 小窓タイプなので、これでは判断できない
+}
+
+
+#pragma mark - IBAction
+
+- (IBAction)ibBuPaidApp:(UIButton *)button
+{
+	//alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AppStore Paid",nil)
+													message:NSLocalizedString(@"AppStore Paid msg",nil)
+												   delegate:self		// clickedButtonAtIndexが呼び出される
+										  cancelButtonTitle:@"Cancel"
+										  otherButtonTitles:@"OK", nil];
+	alert.tag = ALERT_APP_PAID;
+	[alert show];
+	[alert autorelease];
+}
+
+- (IBAction)ibBuContact:(UIButton *)button
+{
+	//メール送信可能かどうかのチェック　　＜＜＜MessageUI.framework が必要＞＞＞
+    if (![MFMailComposeViewController canSendMail]) {
+		//[self setAlert:@"メールが起動出来ません！":@"メールの設定をしてからこの機能は使用下さい。"];
+		alertBox( NSLocalizedString(@"Contact NoMail",nil), NSLocalizedString(@"Contact NoMail msg",nil), @"OK" );
+        return;
+    }
+
+	//alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Contact mail",nil)
+													message:NSLocalizedString(@"Contact mail msg",nil)
+												   delegate:self		// clickedButtonAtIndexが呼び出される
+										  cancelButtonTitle:@"Cancel"
+										  otherButtonTitles:@"OK", nil];
+	alert.tag = ALERT_CONTACT;
+	[alert show];
+	[alert autorelease];
+}
+
+- (IBAction)ibBuOK:(UIButton *)button
+{
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+
+#pragma mark - delegate
 
 - (void)alertView:(UIAlertView*)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -81,39 +176,6 @@
 	}
 }
 
-- (IBAction)ibBuPaidApp:(UIButton *)button
-{
-	//alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AppStore Paid",nil)
-													message:NSLocalizedString(@"AppStore Paid msg",nil)
-												   delegate:self		// clickedButtonAtIndexが呼び出される
-										  cancelButtonTitle:@"Cancel"
-										  otherButtonTitles:@"OK", nil];
-	alert.tag = ALERT_APP_PAID;
-	[alert show];
-	[alert autorelease];
-}
-
-- (IBAction)ibBuContact:(UIButton *)button
-{
-	//メール送信可能かどうかのチェック　　＜＜＜MessageUI.framework が必要＞＞＞
-    if (![MFMailComposeViewController canSendMail]) {
-		//[self setAlert:@"メールが起動出来ません！":@"メールの設定をしてからこの機能は使用下さい。"];
-		alertBox( NSLocalizedString(@"Contact NoMail",nil), NSLocalizedString(@"Contact NoMail msg",nil), @"OK" );
-        return;
-    }
-
-	//alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Contact mail",nil)
-													message:NSLocalizedString(@"Contact mail msg",nil)
-												   delegate:self		// clickedButtonAtIndexが呼び出される
-										  cancelButtonTitle:@"Cancel"
-										  otherButtonTitles:@"OK", nil];
-	alert.tag = ALERT_CONTACT;
-	[alert show];
-	[alert autorelease];
-}
-
 - (void)mailComposeController:(MFMailComposeViewController*)controller
 		  didFinishWithResult:(MFMailComposeResult)result
 						error:(NSError*)error 
@@ -136,58 +198,6 @@
         default:
             break;
     }
-	[self dismissModalViewControllerAnimated:YES];
-}
-
-
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad {
-    [super viewDidLoad];
-	
-	//ibLbProductName.text = NSLocalizedString(@"Product Title",nil);
-
-	NSString *zVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]; // "Bundle version"
-#ifdef AzSTABLE
-	if (72 <= ibImgIcon.frame.size.width) {
-		[ibImgIcon setImage:[UIImage imageNamed:@"Icon72s1.png"]];
-	} else {
-		[ibImgIcon setImage:[UIImage imageNamed:@"Icon57s1.png"]];
-	}
-	ibLbVersion.text = [NSString stringWithFormat:@"Version %@\nStable", zVersion];
-	//
-	ibBuPaidApp.hidden = YES;  // 有料版 AppStore 非表示
-#else
-	if (72 <= ibImgIcon.frame.size.width) {
-		[ibImgIcon setImage:[UIImage imageNamed:@"Icon72free.png"]];
-	} else {
-		[ibImgIcon setImage:[UIImage imageNamed:@"Icon57free.png"]];
-	}
-	ibLbVersion.text = [NSString stringWithFormat:@"Version %@\nFree", zVersion];
-#endif
-}
-
-
-
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
-{
-	//NG//if (700 < self.view.frame.size.height) return YES; // 小窓タイプなので、これでは判断できない
-	if (72 <= ibImgIcon.frame.size.width) return YES; // iPad
-	return NO;
-}
-
-
-/*
-// viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　
-- (void)viewWillAppear:(BOOL)animated 
-{
-	[super viewWillAppear:animated];
-}
-*/
-
-
-- (IBAction)ibBuOK:(UIButton *)button
-{
 	[self dismissModalViewControllerAnimated:YES];
 }
 

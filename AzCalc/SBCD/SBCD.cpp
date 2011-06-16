@@ -41,8 +41,8 @@ static void stringToSbcd( char *zNum, SBCD *pSBCD )
     int sy_cnt = 0;	//小数部カウンタ
 	
     //動的配列変数確保
-	char cInteger[SBCD_PRECISION];
-	char cDecimal[SBCD_PRECISION];
+	char cInteger[SBCD_PRECISION+1];
+	char cDecimal[SBCD_PRECISION+1];
 	memset(cInteger, 0x00, SBCD_PRECISION); // 初期化
 	memset(cDecimal, 0x00, SBCD_PRECISION); // 初期化
 
@@ -51,7 +51,7 @@ static void stringToSbcd( char *zNum, SBCD *pSBCD )
     pSBCD->minus = false;
 	// 整数部
 	se_cnt = 0;
-    while( *pNum != 0x00 ){
+    while( *pNum != 0x00 && se_cnt < SBCD_PRECISION ){
     	if(*pNum == '-'){
             pSBCD->minus = true; // マイナス値
         	pNum++;  // bcnt++;
@@ -67,14 +67,16 @@ static void stringToSbcd( char *zNum, SBCD *pSBCD )
         //if(dot_flg) break;
     }
 	cInteger[se_cnt] = 0x00;
+	assert(se_cnt <= SBCD_PRECISION);
 	// 小数部
 	sy_cnt = 0;
 	cDecimal[sy_cnt] = '0';  // 小数なし
     //s_cnt = 0;
-	while( *pNum != 0x00 ){
+	while( *pNum != 0x00 && sy_cnt < SBCD_PRECISION ){
 		cDecimal[sy_cnt++] = *pNum++;  //Buf[bcnt++];
 	}
 	cDecimal[sy_cnt] = 0x00;
+	assert(sy_cnt <= SBCD_PRECISION);
 
 #ifdef AzDEBUG
     printf("stringToSbcd: zNum=%s cInteger=%s cDecimal=%s minus=%d \n",zNum,cInteger,cDecimal,pSBCD->minus);
@@ -505,7 +507,8 @@ void stringDivision( char *strAnswer, char *strNum1, char *strNum2 )
 //----------------------------------------------------------------------------------------
 // 丸め  iPrecision	= 有効桁数（整数部と小数部を合わせた最大桁数。符号や小数点は含まない）
 //		iDecimal	= 小数桁数（小数部の最大桁数）[ 0 〜 iPrecision ]
-//		iType		= 丸め方法 (0)RM (1)RZ:切捨 (2)5/4 (3)5/5 (4)6/5 (5)RI:切上 (6)RP
+//xx		iType		= 丸め方法 (0)RM (1)RZ:切捨 (2)5/4 (3)5/5 (4)6/5 (5)RI:切上 (6)RP		[1.0.5]以前
+//		iType		= 丸め方法 (0)RM (1)RZ:切捨 (2)6/5 (3)5/5 (4)5/4 (5)RI:切上 (6)RP		[1.0.6]以降
 void stringRounding( char *strAnswer, char *strNum, int iPrecision, int iDecimal, int iType )
 {
     SBCD sbcd,		*pSbcd = &sbcd;
@@ -563,9 +566,9 @@ void stringRounding( char *strAnswer, char *strNum, int iPrecision, int iDecimal
 		case 1: // (1)RZ:切捨（絶対値）常に0に近づくことになるから「0への丸め」と言われる
 			// bRoundUp = false; Default
 			break;
-		case 2: // 5/4 四捨五入（絶対値型）[JIS Z 8401 規則Ｂ]
-			// [iRoundPos+1] >= 5 ならば、[iRoundPos]++ する
-			bRoundUp = (5 <= pSbcd->digit[iRoundPos+1]);	// ++
+		case 2: // 6/5 五捨六入（絶対値型）
+			// [iRoundPos+1] >= 6 ならば、[iRoundPos]++ する
+			bRoundUp = (6 <= pSbcd->digit[iRoundPos+1]);	// ++
 			break;
 		case 3: // 5/5 五捨五入「最近接偶数への丸め」[JIS Z 8401 規則Ａ] （偶数丸め、JIS丸め、ISO丸め、銀行家の丸め）
 			// [iRoundPos]が偶数で、[iRoundPos+1]以降が5より大きいならば [iRoundPos]++ する
@@ -591,9 +594,9 @@ void stringRounding( char *strAnswer, char *strNum, int iPrecision, int iDecimal
 				}
 			}
 			break;
-		case 4: // 6/5 五捨六入（絶対値型）
-			// [iRoundPos+1] >= 6 ならば、[iRoundPos]++ する
-			bRoundUp = (6 <= pSbcd->digit[iRoundPos+1]);	// ++
+		case 4: // 5/4 四捨五入（絶対値型）[JIS Z 8401 規則Ｂ]
+			// [iRoundPos+1] >= 5 ならば、[iRoundPos]++ する
+			bRoundUp = (5 <= pSbcd->digit[iRoundPos+1]);	// ++
 			break;
 		case 5: // (5)RI:切上（絶対値）常に無限遠点へ近づくことになるから「無限大への丸め」と言われる
 			// [iRoundPos+1]以降に0でない数値があれば、[iRoundPos]++ する

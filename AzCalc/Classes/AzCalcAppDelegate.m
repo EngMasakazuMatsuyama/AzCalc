@@ -24,14 +24,16 @@
 @synthesize bChangeKeyboard;
 
 
-#pragma mark -
-#pragma mark Application lifecycle
+#pragma mark - Application dealloc
 
 - (void)dealloc 
 {
     [window release];
     [super dealloc];
 }
+
+
+#pragma mark - Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
 {    

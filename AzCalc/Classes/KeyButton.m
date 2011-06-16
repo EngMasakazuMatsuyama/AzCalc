@@ -15,6 +15,8 @@
 @synthesize iPage, iCol, iRow, iColorNo, fFontSize, bDirty, RzUnit;
 
 
+#pragma mark - UIButton lifecicle
+
 - (void)dealloc 
 {
 	[RzUnit release];
