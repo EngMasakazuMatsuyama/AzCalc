@@ -15,7 +15,7 @@
 #import "OptionVC.h"
 #import "InformationVC.h"
 #import "KeyButton.h"
-//#import "AdMobView.h"
+//#import <AudioToolbox/AudioServices.h>	// AudioServicesPlaySystemSound
 
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
@@ -33,6 +33,9 @@
 
 #define MINUS_SIGN				@"−"	// Unicode[2212] 表示用文字　[002D]より大きくするため
 #define FORMULA_BLANK			@"〓 "	// Formula calc が空のとき表示するメッセージの先頭文字（判定に使用）
+
+// Tags
+//没//#define TAG_DrumButton_LABEL		109
 
 
 //================================================================================AzCalcViewController
@@ -180,6 +183,19 @@
 		// ドラム切り替えボタン(透明)をaddSubView
 		UIButton *bu = [UIButton buttonWithType:UIButtonTypeCustom];
 		bu.tag = i;
+/*	没：entryレス向上のためPicker再表示させずにラベルだけで処理しようと考えたが中止。
+		UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(5,0, bu.frame.size.width-10, bu.frame.size.height)];  //[1.0.6]entry中の表示レス向上策
+		lb.tag = TAG_DrumButton_LABEL;
+		lb.textAlignment = UITextAlignmentRight;
+		lb.backgroundColor = [UIColor clearColor];
+		lb.textColor = [UIColor blackColor];
+		lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
+		lb.adjustsFontSizeToFitWidth = YES;
+		lb.minimumFontSize = 6;
+		lb.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
+		lb.alpha = 0.0;
+		[bu addSubview:lb];
+		[lb release];*/
 #ifdef AzMAKE_SPLASHFACE
 		bu.alpha = 0.0;	// これで非表示状態になる
 		//bu.hidden = YES;   MvDrumButtonShowで変更しているため効果なし
@@ -190,7 +206,7 @@
 		[maButtons addObject:bu];
 		//[self.view addSubview:bu];
 		[ibScrollUpper addSubview:bu];
-		//[bu release];
+		//[bu release]; Auto
 	}
 	RaDrumButtons = [[NSArray alloc] initWithArray:maButtons];	
 	[maButtons release];
@@ -1997,6 +2013,8 @@
 - (IBAction)ibButton:(KeyButton *)button   // KeyButton TouchUpInside処理メソッド
 {
 	bDrumRefresh = YES;
+	
+	//AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);	//ショート・バイブレーション
 	
 	if (RaKeyMaster) {				// キーレイアウト変更モード // ドラム選択中のキーを割り当てる
 		[self MvKeyLayoute:button];
