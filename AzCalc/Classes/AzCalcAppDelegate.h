@@ -13,7 +13,7 @@
 @class InformationVC;
 @class OptionVC;
 
-@interface AzCalcAppDelegate : NSObject <UIApplicationDelegate> 
+@interface AzCalcAppDelegate : NSObject <UIApplicationDelegate>
 {
     UIWindow		*window;
     AzCalcViewController *viewController;

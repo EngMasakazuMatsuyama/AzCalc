@@ -9,12 +9,13 @@
 #import "Global.h"
 #import "CalcFunctions.h"
 #import "AzCalcAppDelegate.h"
-#import	"Drum.h"
+#import "Drum.h"
 #import "AzCalcViewController.h"
 #import "SettingVC.h"
 #import "OptionVC.h"
 #import "InformationVC.h"
 #import "KeyButton.h"
+
 //#import <AudioToolbox/AudioServices.h>	// AudioServicesPlaySystemSound
 
 
@@ -201,7 +202,7 @@
 		//bu.hidden = YES;   MvDrumButtonShowで変更しているため効果なし
 #else
 		bu.alpha = 0.3; // 半透明 (0.0)透明にするとクリック検出されなくなる
-		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchDown];
+		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
 #endif
 		[maButtons addObject:bu];
 		//[self.view addSubview:bu];
@@ -295,7 +296,9 @@
 	ibScrollLower.scrollsToTop = NO;
 	rect.origin.x = rect.size.width * MiSvLowerPage;
 	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
-
+	ibScrollLower.delegate = self;
+	//ibScrollLower.userInteractionEnabled = NO;
+	
 	NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
 
 #ifdef AzMAKE_SPLASHFACE
@@ -504,7 +507,9 @@
 				
 				// 上と右のマージンが自動調整されるように。つまり、左下基点になる。
 				bu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin; 
-				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchDown];	// UIControlEventTouchUpInside
+				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];	// UIControlEventTouchDown OR UIControlEventTouchUpInside
+				[bu addTarget:self action:@selector(ibButtonDragExit:) forControlEvents:UIControlEventTouchDragExit]; // ダブルスイープスクロールのため
+				//[bu addTarget:self action:@selector(ibButtonDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
 
 				// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 
@@ -1425,7 +1430,7 @@
 			[bu setTitle:[NSString stringWithFormat:@"M%d", (int)1+i] forState:UIControlStateNormal];
 			bu.titleLabel.font = [UIFont boldSystemFontOfSize:DRUM_FONT_MSG];
 			[bu setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchDown];
+			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
 			[self.view addSubview:bu];
 			[maBus addObject:bu];
 		}
@@ -2010,6 +2015,17 @@
 
 #pragma mark - IBAction
 
+
+- (IBAction)ibButtonDragExit:(KeyButton *)button // ダブルスイープスクロールのため
+{
+	NSLog(@"ibButtonDragExit: Col=%d", (int)button.iCol);
+	ibScrollLower.delaysContentTouches = YES;
+	
+	//ibScrollLower.canCancelContentTouches = YES;
+	//[self.view bringSubviewToFront:ibScrollLower];
+}
+
+
 - (IBAction)ibButton:(KeyButton *)button   // KeyButton TouchUpInside処理メソッド
 {
 	bDrumRefresh = YES;
@@ -2398,10 +2414,54 @@
 
 #pragma mark - delegate UIScrollView
 //=================================================================ibScrollUpper delegate
+/*
+ - (void)endTrackingWithTouch:(UITouch *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"endTrackingWithTouch: touches=%@", touches);
+	NSLog(@"endTrackingWithTouch: event=%@", event);
+
+	//[super endTrackingWithTouch:touches withEvent:event];
+}
+
+- (void) touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
+{
+	NSLog(@"touchesShouldBegin: touches=%@", touches);
+	NSLog(@"touchesShouldBegin: event=%@", event);
+}
+*/
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touchesBegan: touches=%@", touches);
+	//UITouch *touch = [touches anyObject];
+	//lineStartPos = [touch locationInView:self];
+	if ([touches count] == 1) {
+		//[self.superview setCanCancelContentTouches:NO];
+		[ibScrollLower setCanCancelContentTouches:NO];
+	} else {
+		//[self.superview setCanCancelContentTouches:YES];
+		[ibScrollLower setCanCancelContentTouches:YES];
+	}
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touchesMoved: touches=%@", touches);
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touchesEnded: touches=%@", touches);
+}
+
+
+
 // スクロール開始したときに呼ばれる
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-	[ibTvFormula resignFirstResponder]; // キーボードを隠す
+	if (scrollView==ibScrollUpper) {
+		[ibTvFormula resignFirstResponder]; // キーボードを隠す
+	}
 }
 
 // スクロールして画面が静止したときに呼ばれる
@@ -2434,6 +2494,9 @@
 	}
 	else {
 		MiSvLowerPage = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+		ibScrollLower.delaysContentTouches = NO;
+		ibScrollLower.canCancelContentTouches = NO;
+
 	}
 }
 

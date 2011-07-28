@@ -68,7 +68,7 @@
 	// Add the view controller's view to the window and display.
 	[window addSubview:viewController.view];    [viewController release];
     [window makeKeyAndVisible];
-
+	
     return YES;
 }
 
@@ -122,6 +122,23 @@
      Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
      */
 }
+
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touchesBegan: touches=%@", touches);
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touchesMoved: touches=%@", touches);
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+	NSLog(@"touchesEnded: touches=%@", touches);
+}
+
 
 
 @end

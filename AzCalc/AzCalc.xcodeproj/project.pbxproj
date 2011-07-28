@@ -677,8 +677,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
 					"\"$(SRCROOT)/GoogleAdMobAdsSDK\"",
 				);
 				PRODUCT_NAME = AzCalc;
@@ -702,8 +700,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
 					"\"$(SRCROOT)/GoogleAdMobAdsSDK\"",
 				);
 				PRODUCT_NAME = AzCalc;
@@ -728,11 +724,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
 				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = AzCalcS1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -751,11 +743,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
 				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = AzCalcS1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "32B6273E-80B8-4E87-8B63-1242DD8889DC";
 				SDKROOT = iphoneos;
@@ -775,11 +763,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
 				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = AzCalcS1;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -817,8 +801,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../admob_iphone_sdk/AdMob\"",
-					"\"$(SRCROOT)/../admob_iphone_sdk/extras\"",
 					"\"$(SRCROOT)/GoogleAdMobAdsSDK\"",
 				);
 				PRODUCT_NAME = AzCalc;
