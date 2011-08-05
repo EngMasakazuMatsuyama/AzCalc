@@ -67,7 +67,8 @@
 	bChangeKeyboard = NO;
 	
 	// Add the view controller's view to the window and display.
-	[window addSubview:viewController.view];    
+	//iOS6-NG//[window addSubview:viewController.view];
+	[window setRootViewController:viewController];  //iOS6対応
     [window makeKeyAndVisible];
 	
 /*** AZDropboxへ

@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-               BuildableName = "AzCalcS1.app"
-               BlueprintName = "AzCalcS1"
+               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+               BuildableName = "AzCalc.app"
+               BlueprintName = "AzCalcFree"
                ReferencedContainer = "container:AzCalc.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-            BuildableName = "AzCalcS1.app"
-            BlueprintName = "AzCalcS1"
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "AzCalc.app"
+            BlueprintName = "AzCalcFree"
             ReferencedContainer = "container:AzCalc.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -51,9 +51,9 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-            BuildableName = "AzCalcS1.app"
-            BlueprintName = "AzCalcS1"
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "AzCalc.app"
+            BlueprintName = "AzCalcFree"
             ReferencedContainer = "container:AzCalc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -64,14 +64,14 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-            BuildableName = "AzCalcS1.app"
-            BlueprintName = "AzCalcS1"
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "AzCalc.app"
+            BlueprintName = "AzCalcFree"
             ReferencedContainer = "container:AzCalc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

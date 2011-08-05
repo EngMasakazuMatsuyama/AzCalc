@@ -87,10 +87,6 @@
 		4438EB4215E0867D00252036 /* AZWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB3815E0867D00252036 /* AZWebView.m */; };
 		4438EB4615E086B600252036 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB4515E086B600252036 /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		4438EB4715E086B600252036 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB4515E086B600252036 /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		4438EB4B15E086D200252036 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB4A15E086D200252036 /* libGoogleAnalytics.a */; };
-		4438EB4C15E086D200252036 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB4A15E086D200252036 /* libGoogleAnalytics.a */; };
-		4438EB5815E086E500252036 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB5715E086E500252036 /* libGoogleAdMobAds.a */; };
-		4438EB5915E086E600252036 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB5715E086E500252036 /* libGoogleAdMobAds.a */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
 		446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C3133450DF006859F4 /* Icon-Drum60x37.png */; };
@@ -195,6 +191,12 @@
 		44E3DB6C1454695A00E0BA17 /* KeyOvalUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB551454695A00E0BA17 /* KeyOvalUp.png */; };
 		44E3DB6D1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */; };
 		44E3DB6E1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */; };
+		44F262451615DDF300400313 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F262431615DDF300400313 /* libGoogleAdMobAds.a */; };
+		44F262461615DDF300400313 /* README 6.1.4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44F262441615DDF300400313 /* README 6.1.4.txt */; };
+		44F2624B1615DE1E00400313 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F262491615DE1E00400313 /* libGoogleAnalytics.a */; };
+		44F2624C1615DE1E00400313 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F262491615DE1E00400313 /* libGoogleAnalytics.a */; };
+		44F2624D1615DE1E00400313 /* ReadMe 1.5.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44F2624A1615DE1E00400313 /* ReadMe 1.5.1.txt */; };
+		44F2624E1615DE1E00400313 /* ReadMe 1.5.1.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44F2624A1615DE1E00400313 /* ReadMe 1.5.1.txt */; };
 		44FBD2211451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
 		44FBD2221451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
 		44FBD2231451BF7800886093 /* Tx-LzBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */; };
@@ -287,18 +289,6 @@
 		4438EB3815E0867D00252036 /* AZWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZWebView.m; sourceTree = "<group>"; };
 		4438EB4415E086B600252036 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		4438EB4515E086B600252036 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
-		4438EB4915E086D200252036 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
-		4438EB4A15E086D200252036 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
-		4438EB4E15E086E500252036 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
-		4438EB4F15E086E500252036 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		4438EB5015E086E500252036 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
-		4438EB5115E086E500252036 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		4438EB5215E086E500252036 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		4438EB5315E086E500252036 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		4438EB5415E086E500252036 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		4438EB5515E086E500252036 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		4438EB5615E086E500252036 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		4438EB5715E086E500252036 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeyMaster.plist; sourceTree = "<group>"; };
 		445184431303B8BE002820EA /* Icon16-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting.png"; path = "Image/Icon16-Setting.png"; sourceTree = "<group>"; };
 		446E08C3133450DF006859F4 /* Icon-Drum60x37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum60x37.png"; path = "Image/Icon-Drum60x37.png"; sourceTree = "<group>"; };
@@ -358,6 +348,20 @@
 		44E3DB541454695A00E0BA17 /* KeyOvalDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalDw@2x.png"; path = "Image/KeyOvalDw@2x.png"; sourceTree = "<group>"; };
 		44E3DB551454695A00E0BA17 /* KeyOvalUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyOvalUp.png; path = Image/KeyOvalUp.png; sourceTree = "<group>"; };
 		44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalUp@2x.png"; path = "Image/KeyOvalUp@2x.png"; sourceTree = "<group>"; };
+		44F2623A1615DDF300400313 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		44F2623B1615DDF300400313 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		44F2623C1615DDF300400313 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		44F2623D1615DDF300400313 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		44F2623E1615DDF300400313 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		44F2623F1615DDF300400313 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		44F262401615DDF300400313 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		44F262411615DDF300400313 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		44F262421615DDF300400313 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		44F262431615DDF300400313 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		44F262441615DDF300400313 /* README 6.1.4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README 6.1.4.txt"; sourceTree = "<group>"; };
+		44F262481615DE1E00400313 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		44F262491615DE1E00400313 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		44F2624A1615DE1E00400313 /* ReadMe 1.5.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ReadMe 1.5.1.txt"; sourceTree = "<group>"; };
 		44FBD21F1451BF7800886093 /* Tx-LzBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack.png"; path = "Image/Tx-LzBack.png"; sourceTree = "<group>"; };
 		44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack@2x.png"; path = "Image/Tx-LzBack@2x.png"; sourceTree = "<group>"; };
 		44FBD2251451C19400886093 /* Tx-LzBrown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBrown.png"; path = "Image/Tx-LzBrown.png"; sourceTree = "<group>"; };
@@ -383,8 +387,8 @@
 				44968E34146268F800F25305 /* Security.framework in Frameworks */,
 				4404464A151E27C3008221B4 /* libsqlite3.0.dylib in Frameworks */,
 				4438EB1A15E0864200252036 /* DropboxSDK.framework in Frameworks */,
-				4438EB4B15E086D200252036 /* libGoogleAnalytics.a in Frameworks */,
-				4438EB5815E086E500252036 /* libGoogleAdMobAds.a in Frameworks */,
+				44F262451615DDF300400313 /* libGoogleAdMobAds.a in Frameworks */,
+				44F2624B1615DE1E00400313 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,8 +408,7 @@
 				44BC4C841359E9A1009B995C /* QuartzCore.framework in Frameworks */,
 				44968E321462684300F25305 /* Security.framework in Frameworks */,
 				4438EB1B15E0864200252036 /* DropboxSDK.framework in Frameworks */,
-				4438EB4C15E086D200252036 /* libGoogleAnalytics.a in Frameworks */,
-				4438EB5915E086E600252036 /* libGoogleAdMobAds.a in Frameworks */,
+				44F2624C1615DE1E00400313 /* libGoogleAnalytics.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -584,34 +587,6 @@
 			path = "../../OpenCode/UIDevice-Hardware/UIDevice-Hardware.release";
 			sourceTree = "<group>";
 		};
-		4438EB4815E086D200252036 /* GoogleAnalytics.release */ = {
-			isa = PBXGroup;
-			children = (
-				4438EB4915E086D200252036 /* GANTracker.h */,
-				4438EB4A15E086D200252036 /* libGoogleAnalytics.a */,
-			);
-			name = GoogleAnalytics.release;
-			path = ../../OpenCode/GoogleAnalytics/GoogleAnalytics.release;
-			sourceTree = "<group>";
-		};
-		4438EB4D15E086E500252036 /* AdMob.release */ = {
-			isa = PBXGroup;
-			children = (
-				4438EB4E15E086E500252036 /* GADAdMobExtras.h */,
-				4438EB4F15E086E500252036 /* GADAdNetworkExtras.h */,
-				4438EB5015E086E500252036 /* GADAdSize.h */,
-				4438EB5115E086E500252036 /* GADBannerView.h */,
-				4438EB5215E086E500252036 /* GADBannerViewDelegate.h */,
-				4438EB5315E086E500252036 /* GADInterstitial.h */,
-				4438EB5415E086E500252036 /* GADInterstitialDelegate.h */,
-				4438EB5515E086E500252036 /* GADRequest.h */,
-				4438EB5615E086E500252036 /* GADRequestError.h */,
-				4438EB5715E086E500252036 /* libGoogleAdMobAds.a */,
-			);
-			name = AdMob.release;
-			path = ../../OpenCode/AdMob/AdMob.release;
-			sourceTree = "<group>";
-		};
 		44487E571536949100AB6BBE /* AZClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -684,11 +659,41 @@
 		44CDB5CB135A807900037C8E /* OpenCode */ = {
 			isa = PBXGroup;
 			children = (
-				4438EB4D15E086E500252036 /* AdMob.release */,
-				4438EB4815E086D200252036 /* GoogleAnalytics.release */,
+				44F262471615DE1E00400313 /* GoogleAnalytics.release */,
+				44F262391615DDF300400313 /* AdMob.release */,
 				4438EB4315E086B600252036 /* UIDevice-Hardware.release */,
 			);
 			name = OpenCode;
+			sourceTree = "<group>";
+		};
+		44F262391615DDF300400313 /* AdMob.release */ = {
+			isa = PBXGroup;
+			children = (
+				44F2623A1615DDF300400313 /* GADAdMobExtras.h */,
+				44F2623B1615DDF300400313 /* GADAdNetworkExtras.h */,
+				44F2623C1615DDF300400313 /* GADAdSize.h */,
+				44F2623D1615DDF300400313 /* GADBannerView.h */,
+				44F2623E1615DDF300400313 /* GADBannerViewDelegate.h */,
+				44F2623F1615DDF300400313 /* GADInterstitial.h */,
+				44F262401615DDF300400313 /* GADInterstitialDelegate.h */,
+				44F262411615DDF300400313 /* GADRequest.h */,
+				44F262421615DDF300400313 /* GADRequestError.h */,
+				44F262431615DDF300400313 /* libGoogleAdMobAds.a */,
+				44F262441615DDF300400313 /* README 6.1.4.txt */,
+			);
+			name = AdMob.release;
+			path = ../../OpenCode/AdMob/AdMob.release;
+			sourceTree = "<group>";
+		};
+		44F262471615DE1E00400313 /* GoogleAnalytics.release */ = {
+			isa = PBXGroup;
+			children = (
+				44F262481615DE1E00400313 /* GANTracker.h */,
+				44F262491615DE1E00400313 /* libGoogleAnalytics.a */,
+				44F2624A1615DE1E00400313 /* ReadMe 1.5.1.txt */,
+			);
+			name = GoogleAnalytics.release;
+			path = ../../OpenCode/GoogleAnalytics/GoogleAnalytics.release;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -841,6 +846,8 @@
 				4438EB3B15E0867D00252036 /* AZWeb-Back-16@2x.png in Resources */,
 				4438EB3D15E0867D00252036 /* AZWeb-Forward-16.png in Resources */,
 				4438EB3F15E0867D00252036 /* AZWeb-Forward-16@2x.png in Resources */,
+				44F262461615DDF300400313 /* README 6.1.4.txt in Resources */,
+				44F2624D1615DE1E00400313 /* ReadMe 1.5.1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -917,6 +924,7 @@
 				4438EB3C15E0867D00252036 /* AZWeb-Back-16@2x.png in Resources */,
 				4438EB3E15E0867D00252036 /* AZWeb-Forward-16.png in Resources */,
 				4438EB4015E0867D00252036 /* AZWeb-Forward-16@2x.png in Resources */,
+				44F2624E1615DE1E00400313 /* ReadMe 1.5.1.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1053,10 +1061,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1073,16 +1078,22 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "AzCalc-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
 					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+					"-all_load",
+				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -1090,10 +1101,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -1107,17 +1115,23 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "AzCalc-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
 					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+					"-all_load",
 				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
@@ -1125,10 +1139,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1145,16 +1156,22 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
 					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+					"-all_load",
+				);
 				PRODUCT_NAME = AzCalcS1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
@@ -1162,10 +1179,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
@@ -1179,17 +1193,23 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
 					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+					"-all_load",
 				);
 				PRODUCT_NAME = AzCalcS1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};
@@ -1197,10 +1217,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
@@ -1214,27 +1231,30 @@
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
 				GCC_THUMB_SUPPORT = NO;
 				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
 					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+					"-all_load",
 				);
 				PRODUCT_NAME = AzCalcS1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Distribution;
 		};
 		44D60ECC11F307DD00DD0317 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masakazu Matsuyama";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1247,6 +1267,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "37736F5D-3C5E-4879-9E20-706AA10CC189";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Distribution;
 		};
@@ -1254,10 +1275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
@@ -1271,27 +1289,30 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "AzCalc-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
 					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lxml2",
+					"-all_load",
 				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = armv7;
 			};
 			name = Distribution;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1305,16 +1326,14 @@
 				MACOSX_DEPLOYMENT_TARGET = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "474544ED-B871-4D25-92DD-64FF551F0EE9";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Debug;
 		};
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -1327,6 +1346,7 @@
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "474544ED-B871-4D25-92DD-64FF551F0EE9";
 				SDKROOT = iphoneos;
+				VALID_ARCHS = armv7;
 			};
 			name = Release;
 		};

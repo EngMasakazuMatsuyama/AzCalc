@@ -1363,6 +1363,17 @@
 
 
 #pragma mark  View 回転
+- (NSUInteger)supportedInterfaceOrientations
+{	//iOS6以降
+	if (bPad) {
+		return UIInterfaceOrientationMaskAll;	//全方向
+	}
+	return UIInterfaceOrientationMaskPortrait;	//タテのみ
+}
+- (BOOL)shouldAutorotate
+{	//iOS6以降
+    return YES;	//=YES:デバイスが回転したら自動的に回転する
+}
 
 // 回転サポート
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -3356,6 +3367,7 @@
 #if (TARGET_IPHONE_SIMULATOR)
 	// シミュレータで動作している場合のコード
 	NSLog(@"AVAudioPlayer -　SIMULATOR");
+	return nil;
 #else
 	// 実機で動作している場合のコード
 	//viewDidLoad:にて AVAudioSessionカテゴリ指定すること。さもなくばiPod演奏が止まる
