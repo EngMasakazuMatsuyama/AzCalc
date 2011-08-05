@@ -47,6 +47,7 @@
 	UIImage*			RimgDrumPush;
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
+	UIView*			MviewKeyboard;
 
 	//----------------------------------------------assign
 	NSInteger		entryComponent;
