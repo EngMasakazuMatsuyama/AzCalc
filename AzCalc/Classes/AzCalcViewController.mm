@@ -16,8 +16,6 @@
 #import "InformationVC.h"
 #import "KeyButton.h"
 
-//#import <AudioToolbox/AudioServices.h>	// AudioServicesPlaySystemSound
-
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
 #define	PICKER_COMPONENT_WiMIN	40		// 1コンポーネントの表示最小幅
@@ -297,7 +295,7 @@
 	rect.origin.x = rect.size.width * MiSvLowerPage;
 	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
 	ibScrollLower.delegate = self;
-	//ibScrollLower.userInteractionEnabled = NO;
+	ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する
 	
 	NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
 
@@ -508,8 +506,11 @@
 				// 上と右のマージンが自動調整されるように。つまり、左下基点になる。
 				bu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin; 
 				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];	// UIControlEventTouchDown OR UIControlEventTouchUpInside
-				[bu addTarget:self action:@selector(ibButtonDragExit:) forControlEvents:UIControlEventTouchDragExit]; // ダブルスイープスクロールのため
-				//[bu addTarget:self action:@selector(ibButtonDragEnter:) forControlEvents:UIControlEventTouchDragEnter];
+
+				[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragExit]; //スクロールロック解除のため
+				//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragEnter]; NG/ほとんど無し
+				//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragInside]; NG/キー内の微妙な動きまで反応してしまう
+				//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragOutside];  NG/ほとんど無し
 
 				// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 
@@ -528,7 +529,7 @@
 		[RaKeyMaster release];
 		RaKeyMaster = nil;
 	}
-
+	
 	// Memory Display
 	ibBuMemory.hidden = NO;
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
@@ -2016,15 +2017,13 @@
 #pragma mark - IBAction
 
 
-- (IBAction)ibButtonDragExit:(KeyButton *)button // ダブルスイープスクロールのため
+//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragExit]; 
+- (IBAction)ibButtonDrag:(KeyButton *)button // ダブルスイープスクロールのため
 {
-	NSLog(@"ibButtonDragExit: Col=%d", (int)button.iCol);
-	ibScrollLower.delaysContentTouches = YES;
-	
-	//ibScrollLower.canCancelContentTouches = YES;
-	//[self.view bringSubviewToFront:ibScrollLower];
+	NSLog(@"ibButtonDrag: Col=%d", (int)button.iCol);
+	ibScrollLower.scrollEnabled = YES; //スクロール許可
+	ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する ⇒ これによりキーレスポンス低下する
 }
-
 
 - (IBAction)ibButton:(KeyButton *)button   // KeyButton TouchUpInside処理メソッド
 {
@@ -2035,6 +2034,11 @@
 	if (RaKeyMaster) {				// キーレイアウト変更モード // ドラム選択中のキーを割り当てる
 		[self MvKeyLayoute:button];
 		return;
+	}
+	else {	// 計算モードのとき、スクロールロックする
+		//キー入力が始まるとスクロール禁止にする
+		ibScrollLower.scrollEnabled = NO; //スクロール禁止
+		ibScrollLower.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	}
 	
 	Drum *drum = [RaDrums objectAtIndex:entryComponent];
@@ -2414,48 +2418,6 @@
 
 #pragma mark - delegate UIScrollView
 //=================================================================ibScrollUpper delegate
-/*
- - (void)endTrackingWithTouch:(UITouch *)touches withEvent:(UIEvent *)event
-{
-	NSLog(@"endTrackingWithTouch: touches=%@", touches);
-	NSLog(@"endTrackingWithTouch: event=%@", event);
-
-	//[super endTrackingWithTouch:touches withEvent:event];
-}
-
-- (void) touchesShouldBegin:(NSSet *)touches withEvent:(UIEvent *)event inContentView:(UIView *)view
-{
-	NSLog(@"touchesShouldBegin: touches=%@", touches);
-	NSLog(@"touchesShouldBegin: event=%@", event);
-}
-*/
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	NSLog(@"touchesBegan: touches=%@", touches);
-	//UITouch *touch = [touches anyObject];
-	//lineStartPos = [touch locationInView:self];
-	if ([touches count] == 1) {
-		//[self.superview setCanCancelContentTouches:NO];
-		[ibScrollLower setCanCancelContentTouches:NO];
-	} else {
-		//[self.superview setCanCancelContentTouches:YES];
-		[ibScrollLower setCanCancelContentTouches:YES];
-	}
-}
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	NSLog(@"touchesMoved: touches=%@", touches);
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-	NSLog(@"touchesEnded: touches=%@", touches);
-}
-
-
-
 // スクロール開始したときに呼ばれる
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
@@ -2494,9 +2456,6 @@
 	}
 	else {
 		MiSvLowerPage = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
-		ibScrollLower.delaysContentTouches = NO;
-		ibScrollLower.canCancelContentTouches = NO;
-
 	}
 }
 
