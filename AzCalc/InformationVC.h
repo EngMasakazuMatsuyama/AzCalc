@@ -15,10 +15,10 @@
 	IBOutlet UILabel*	ibLbProductName;
 	IBOutlet UILabel*	ibLbVersion;
 	IBOutlet UIImageView*	ibImgIcon;
-	IBOutlet UIButton*	ibBuPaidApp;
+	IBOutlet UIButton*		ibBuPaidApp;	// 非表示にするため
 }
 
-//- (IBAction)ibBuIcon:(UIButton *)button;
+- (IBAction)ibBuToSupport:(UIButton *)button;
 - (IBAction)ibBuPaidApp:(UIButton *)button;
 - (IBAction)ibBuContact:(UIButton *)button;
 - (IBAction)ibBuOK:(UIButton *)button;

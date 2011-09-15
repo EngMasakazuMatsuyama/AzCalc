@@ -10,9 +10,9 @@
 #import "InformationVC.h"
 #import "UIDevice-Hardware.h"
 
-//#define ALERT_APP_FREE		19
-#define ALERT_APP_PAID		28
-#define ALERT_CONTACT		37
+#define ALERT_ToSupportSite	19
+#define ALERT_APP_PAID			28
+#define ALERT_CONTACT			37
 
 @implementation InformationVC
 
@@ -44,7 +44,7 @@
 	
 	//ibLbProductName.text = NSLocalizedString(@"Product Title",nil);
 	
-	NSString *zVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]; // "Bundle version"
+	NSString *zVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 #ifdef AzSTABLE
 	if (72 <= ibImgIcon.frame.size.width) {
 		[ibImgIcon setImage:[UIImage imageNamed:@"Icon72s1.png"]];
@@ -87,14 +87,26 @@
 
 #pragma mark - IBAction
 
+- (IBAction)ibBuToSupport:(UIButton *)button
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ToSupportSite",nil)
+													message:NSLocalizedString(@"ToSupportSite msg",nil)
+												   delegate:self		// clickedButtonAtIndexが呼び出される
+										  cancelButtonTitle:@"＜Back"
+										  otherButtonTitles:@"Go safari＞", nil];
+	alert.tag = ALERT_ToSupportSite;
+	[alert show];
+	[alert autorelease];
+}
+
 - (IBAction)ibBuPaidApp:(UIButton *)button
 {
 	//alertBox( NSLocalizedString(@"Contact mail",nil), NSLocalizedString(@"Contact mail msg",nil), @"OK" );
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AppStore Paid",nil)
 													message:NSLocalizedString(@"AppStore Paid msg",nil)
 												   delegate:self		// clickedButtonAtIndexが呼び出される
-										  cancelButtonTitle:@"Cancel"
-										  otherButtonTitles:@"OK", nil];
+										  cancelButtonTitle:@"＜Back"
+										  otherButtonTitles:@"Go safari＞", nil];
 	alert.tag = ALERT_APP_PAID;
 	[alert show];
 	[alert autorelease];
@@ -134,6 +146,11 @@
 	// OK
 	switch (alertView.tag) 
 	{
+		case ALERT_ToSupportSite: {
+			NSURL *url = [NSURL URLWithString:@"http://calcroll.tumblr.com/"];
+			[[UIApplication sharedApplication] openURL:url];
+		}	break;
+
 		case ALERT_APP_PAID: { // Paid App Store																															432480691
 			NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewSoftware?id=432480691&mt=8"];
 			[[UIApplication sharedApplication] openURL:url];
@@ -150,25 +167,31 @@
 			//[picker setBccRecipients:nil];
 			
 			// Subject: 件名
-			NSString* zSubj = [NSString stringWithFormat:@"%@ %@ ", 
-							   NSLocalizedString(@"Product Title",nil), 
-							   [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]];
+			NSString* zSubj = NSLocalizedString(@"Product Title",nil);
 #ifdef AzSTABLE
-			zSubj = [zSubj stringByAppendingString:@"Stable"];
+			//zSubj = [zSubj stringByAppendingString:@" Stable"];
 #else
-			zSubj = [zSubj stringByAppendingString:@"Free"];
+			zSubj = [zSubj stringByAppendingString:@" Free"];
 #endif
-			
-			UIDevice *device = [UIDevice currentDevice];
-			NSString* deviceID = [device platformString];	
-			zSubj = [zSubj stringByAppendingFormat:@" [%@-%@]", 
-					 deviceID, 
-					 [[ UIDevice currentDevice ] systemVersion]]; // OSの現在のバージョン
-			
 			[picker setSubject:zSubj];  
 			
 			// Body: 本文
-			[picker setMessageBody:NSLocalizedString(@"Contact message",nil) isHTML:NO];
+			NSString *zVersion = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]; //（リリース バージョン）は、ユーザーに公開した時のレベルを表現したバージョン表記
+			NSString *zBuild = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"]; //（ビルド回数 バージョン）は、ユーザーに非公開のレベルも含めたバージョン表記
+			NSString* zBody = [NSString stringWithFormat:@"Product: %@\n",  zSubj];
+#ifdef AzSTABLE
+			zBody = [zBody stringByAppendingFormat:@"Version: %@ (%@) Stable\n",  zVersion, zBuild];
+#else
+			zBody = [zBody stringByAppendingFormat:@"Version: %@ (%@)\n",  zVersion, zBuild];
+#endif
+			UIDevice *device = [UIDevice currentDevice];
+			NSString* deviceID = [device platformString];	
+			zBody = [zBody stringByAppendingFormat:@"Device: %@   iOS: %@\n\n", 
+					 deviceID,
+					 [[UIDevice currentDevice] systemVersion]]; // OSの現在のバージョン
+			
+			zBody = [zBody stringByAppendingString:NSLocalizedString(@"Contact message",nil)];
+			[picker setMessageBody:zBody isHTML:NO];
 			
 			[self presentModalViewController:picker animated:YES];
 			[picker release];
