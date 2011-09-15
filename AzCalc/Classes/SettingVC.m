@@ -25,6 +25,12 @@
 
 #pragma mark - View lifecicle
 
+- (void)loadView
+{
+	[super loadView];
+	appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
 // viewWillAppear はView表示直前に呼ばれる。よって、Viewの変化要素はここに記述する。　 　
 - (void)viewWillAppear:(BOOL)animated 
 {
@@ -129,8 +135,6 @@
 {
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	[userDefaults synchronize]; // plistへ書き出す
-
-	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.bChangeKeyboard = NO;
 
 	[self dismissModalViewControllerAnimated:YES];
@@ -140,8 +144,6 @@
 {
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	[userDefaults synchronize]; // plistへ書き出す
-	
-	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.bChangeKeyboard = YES;
 	
 	[self dismissModalViewControllerAnimated:YES];
@@ -149,7 +151,6 @@
 
 - (IBAction)ibBuPageFlip:(UIButton *)button
 {
-	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	appDelegate.ibOptionVC.modalTransitionStyle = UIModalTransitionStylePartialCurl; // めくれ上がる
 	//appDelegate.ibInformationVC.view.hidden = YES;
 	//appDelegate.ibSettingVC.view.hidden = NO;

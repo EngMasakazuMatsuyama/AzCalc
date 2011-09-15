@@ -27,6 +27,8 @@
 	NSMutableString		*entryUnit;			// 単位 [%][‰] [mm][cm][m][km] [￥][＄]
 	NSInteger				entryRow;			// 現在選択行　>=0 And <= [aOperators count];
 
+	AzCalcAppDelegate *appDelegate;  // initにて = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+
 	// Setting
 	NSInteger	MiSegCalcMethod;
 	NSInteger	MiSegDecimal;

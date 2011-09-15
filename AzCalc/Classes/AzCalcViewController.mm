@@ -33,6 +33,7 @@
 #define MINUS_SIGN				@"−"	// Unicode[2212] 表示用文字　[002D]より大きくするため
 #define FORMULA_BLANK			@"〓 "	// Formula calc が空のとき表示するメッセージの先頭文字（判定に使用）
 
+
 // Tags
 //没//#define TAG_DrumButton_LABEL		109
 
@@ -106,12 +107,13 @@
 {
 	[super viewWillDisappear:animated];
 	
-	if (buChangeKey) {
+	/*
+	 if (buChangeKey) {
 		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
 		// 復帰
 		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 		buChangeKey = nil;
-	}
+	}*/
 }
 
 // 裏画面(非表示)状態のときにメモリ不足が発生するとコールされるので、viewDidLoadで生成したOBJを解放する
@@ -239,6 +241,8 @@
 	ibTvFormula.delegate = self;
 	ibTvFormula.text = [NSString stringWithFormat:@"%@%@", FORMULA_BLANK, NSLocalizedString(@"Formula mode", nil)];
 	//ibTvFormula.font = [UIFont systemFontOfSize:14];
+	ibTvFormula.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+	
 	[ibBuGetDrum setTitle:NSLocalizedString(@"Formula Quote", nil) forState:UIControlStateNormal];
 	ibBuGetDrum.titleLabel.textAlignment = UITextAlignmentCenter;
 	ibBuGetDrum.titleLabel.font = [UIFont systemFontOfSize:14];
@@ -688,7 +692,7 @@
 				AzLOG(@"ERROR: AzKeyMaster.plist not Open");
 				exit(-1);
 			}
-			buChangeKey = nil;
+			//buChangeKey = nil;
 		}
 		
 		for (UIButton *bu in RaDrumButtons) {
@@ -875,12 +879,13 @@
 {
 	[super viewDidAppear:animated];
 	
+	/*
 	if (buChangeKey) {
 		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
 		// 復帰
 		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 		buChangeKey = nil;
-	}
+	}*/
 
 #ifdef GD_Ad_ENABLED
 	[self MvShowAdApple:YES AdMob:YES];
@@ -2461,11 +2466,26 @@
 
 
 #pragma mark - delegate UITextView
+
+// 数式(TextView)をタッチして拡張するときの高さ拡張量を返す
+- (float)fPadKeyOffset 
+{	// 日本語キーになるとファンクション行があらわれてMemoryとAnswer行の一部が隠れるが、通常Asciiキーなので問題にしない。
+	if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) {
+		return 170; // ヨコ
+	} else {
+		return 260; // タテ
+	}
+}
+
 //=================================================================ibTvFormula delegate
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
 	AzLOG(@"--textViewDidBeginEditing:");
 	ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
+
+	//ibTvFormula.keyboardType = UIKeyboardTypeNumbersAndPunctuation;  どちらも効かず、上部ファンクションを消せない
+	//[ibTvFormula setKeyboardType:UIKeyboardTypeNumbersAndPunctuation]; どちらも効かず、上部ファンクションを消せない
+	// 今の所、手操作で UIKeyboardTypeNumbersAndPunctuation モードに変えてもらうしか無い。
 
 	CGRect rc;
 	// アニメ開始時の位置をセット
@@ -2475,15 +2495,14 @@
 	[UIView setAnimationDuration:0.9];
 	// アニメ終了時の位置をセット
 	if (bPad) { // iPad
-		int iMove = 260;
-		if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) iMove = 170; // ヨコ
+		float fOfs = [self fPadKeyOffset];
         rc = ibBuFormLeft.frame;    rc.origin.x -= 100;		ibBuFormLeft.frame = rc;	ibBuFormLeft.alpha = 0;
         rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;	ibBuFormRight.alpha = 0;
-        rc = ibScrollLower.frame;	rc.origin.y += (iMove+20);	ibScrollLower.frame = rc;
-        rc = ibScrollUpper.frame;	rc.size.height += iMove;	ibScrollUpper.frame = rc;
-		rc = ibTvFormula.frame;		rc.size.height += iMove;	ibTvFormula.frame = rc;
-        rc = ibLbFormAnswer.frame;	rc.origin.y += iMove;		ibLbFormAnswer.frame = rc;
-        rc = ibBuMemory.frame;		rc.origin.y += iMove;		ibBuMemory.frame = rc;
+        rc = ibScrollLower.frame;	rc.origin.y += (fOfs+20);	ibScrollLower.frame = rc;
+        rc = ibScrollUpper.frame;	rc.size.height += fOfs;	ibScrollUpper.frame = rc;
+		rc = ibTvFormula.frame;		rc.size.height += fOfs;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y += fOfs;		ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y += fOfs;		ibBuMemory.frame = rc;
     } else {
         rc = ibBuFormLeft.frame;    rc.origin.x -= 100;		ibBuFormLeft.frame = rc;
         rc = ibBuFormRight.frame;	rc.origin.x += 100;		ibBuFormRight.frame = rc;
@@ -2510,15 +2529,14 @@
 	[UIView setAnimationDuration:0.5];	// 戻りは早く
 	// アニメ終了時の位置をセット
 	if (bPad) { // iPad
-		int iMove = 260;
-		if (UIInterfaceOrientationIsLandscape(self.interfaceOrientation)) iMove = 170; // ヨコ
+		float fOfs = [self fPadKeyOffset];
         rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;	ibBuFormLeft.alpha = 1;
         rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;	ibBuFormRight.alpha = 1;
-        rc = ibScrollLower.frame;	rc.origin.y -= (iMove+20);	ibScrollLower.frame = rc;
-        rc = ibScrollUpper.frame;	rc.size.height -= iMove;    ibScrollUpper.frame = rc;
-        rc = ibTvFormula.frame;		rc.size.height -= iMove;	ibTvFormula.frame = rc;
-        rc = ibLbFormAnswer.frame;	rc.origin.y -= iMove;		ibLbFormAnswer.frame = rc;
-        rc = ibBuMemory.frame;		rc.origin.y -= iMove;		ibBuMemory.frame = rc;
+        rc = ibScrollLower.frame;	rc.origin.y -= (fOfs+20);	ibScrollLower.frame = rc;
+        rc = ibScrollUpper.frame;	rc.size.height -= fOfs;    ibScrollUpper.frame = rc;
+        rc = ibTvFormula.frame;		rc.size.height -= fOfs;	ibTvFormula.frame = rc;
+        rc = ibLbFormAnswer.frame;	rc.origin.y -= fOfs;		ibLbFormAnswer.frame = rc;
+        rc = ibBuMemory.frame;		rc.origin.y -= fOfs;		ibBuMemory.frame = rc;
     } else {
         rc = ibBuFormLeft.frame;	rc.origin.x += 100;		ibBuFormLeft.frame = rc;
         rc = ibBuFormRight.frame;	rc.origin.x -= 100;		ibBuFormRight.frame = rc;

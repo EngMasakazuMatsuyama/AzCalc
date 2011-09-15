@@ -77,7 +77,7 @@
 	float				MfTaxRate;		// 消費税率(%)
 
 	// Change Keyboard
-	KeyButton			*buChangeKey;	// 選択中のキー
+	//KeyButton			*buChangeKey;	// 選択中のキー
 	
 	// Setting
 	NSInteger  MiSegDrums;		// ドラム数 ＜＜セグメント値に +1 している＞＞

@@ -49,6 +49,8 @@
 	self = [super init];
 	if (self != nil)
 	{
+		appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+
 		formulaOperators = [NSMutableArray new];
 		formulaNumbers = [NSMutableArray new];
 		formulaUnits = [NSMutableArray new];
@@ -106,7 +108,6 @@
 	// これ以降、localPool管理エリア
 	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
 	// 以後、return;使用禁止！すると@finallyを通らず、localPoolが解放されない。
-	//AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	@try {
 		switch (keyButton.tag) { // .Tag は、AzKeyMaster.plist の定義が元になる。
@@ -356,8 +357,7 @@
 				[formulaUnits removeAllObjects];		[entryUnit setString:@""];
 				entryRow = 0;							[entryAnswer setString:@""];
 				// UNIT Reset
-				AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-				[app.viewController  GvKeyUnitGroupSI:nil andSI:nil]; // 全単位ノーマル
+				[appDelegate.viewController  GvKeyUnitGroupSI:nil andSI:nil]; // 全単位ノーマル
 			}	break;
 				
 			case KeyTAG_BS: { // [BS]
@@ -471,10 +471,8 @@
 	return;
 #endif
 	@try {
-		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-		
 		if ([entryOperator hasPrefix:OP_START]) {
-			[app.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 全単位有効
+			[appDelegate.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 全単位有効
 			return;
 		}
 		
@@ -597,7 +595,7 @@
 				[entryUnit setString:@""];
 				zUnitSI = @"";
 			}
-			[app.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
+			[appDelegate.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
 			// ↓↓↓ zUnitSI ↓↓↓ 必須
 			if ([entryOperator hasPrefix:OP_ANS]) {
 				// [=]行ならば iDimMax 次元
@@ -627,31 +625,31 @@
 			switch (iDimAns) { // iDimAns以下の選択が可能
 				case 1:
 					//[entryUnit setString:@"m;m;#;#"];
-					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:nil andSi3:nil];
+					[appDelegate.viewController GvKeyUnitGroupSI:@"m" andSi2:nil andSi3:nil];
 					break;
 				case 2:
 					//[entryUnit setString:@"㎡;㎡;#;#"];
-					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:nil];
+					[appDelegate.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:nil];
 					break;
 				case 3:
 					//[entryUnit setString:@"㎥;㎥;#;#"];
-					[app.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:@"㎥"];
+					[appDelegate.viewController GvKeyUnitGroupSI:@"m" andSi2:@"㎡" andSi3:@"㎥"];
 					break;
 				default:	// 単位なし　全単位無効
 					//[entryUnit setString:@""];
-					[app.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
+					[appDelegate.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
 					break;
 			}
 			[entryUnit setString:@""]; // 単位は都度入力する方が便利だと判断した。
 		}
 		else if (iDimAns==1) { // メートル系でない1次元単位
 			//NG//[entryUnit setString:zUnitSI];
-			[app.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
+			[appDelegate.viewController GvKeyUnitGroupSI:zUnitSI andSi2:nil andSi3:nil];
 		}
 		else {
 			// 単位なし　全単位無効
 			[entryUnit setString:@""];
-			[app.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
+			[appDelegate.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
 		}
 	}
 	@catch (NSException * errEx) {
@@ -1001,154 +999,6 @@
 	}
 	return @"";
 }
-
-/**********
-- (NSString *)zUnitRebuild		// UNITを使用している場合、その系列に従ってキーやドラム表示を変更する
-{
-	// Entry行だけの場合
-	if (entryRow <= 0 OR [formulaOperators count] < entryRow) return nil;
-
-	@try {
-		NSInteger iRowStart = 0; // 最初から
-		if (2 <= entryRow) {
-			if ([formulaOperators count] <= entryRow) {
-				iRowStart = [formulaOperators count] - 1;
-			} else {
-				iRowStart = entryRow;
-			}
-			for ( ; 0 < iRowStart; iRowStart--) {
-				if ([[formulaOperators objectAtIndex:iRowStart] hasPrefix:OP_ANS]	// 直前の[=]の次にする
-					OR [[formulaOperators objectAtIndex:iRowStart] hasPrefix:OP_GT]) {	// 直前の[>GT]の次にする
-					iRowStart++;
-					break;
-				}
-			}
-		}
-		// 計算対象範囲は、iRowStart 〜 iRowEnd まで
-		NSInteger iRowEnd = entryRow;
-		if ([formulaOperators count] <= iRowEnd) {
-			iRowEnd = [formulaOperators count] - 1;
-		}
-		if (iRowEnd < iRowStart) {
-			@throw @"iRowEnd < iRowStart";
-		}
-		// UNIT を利用しているか調べる
-		NSString *zUnitSI = nil;
-		NSString *zUni, *zOpe;
-		int iM = 0;
-		int iMprev = 0;
-		int iMmax = 0;
-		BOOL bFirstSection = YES; // 最初の[+]または[-]まで
-		for (NSInteger idx = iRowStart; idx <= iRowEnd; idx++) 
-		{
-			zUni = [formulaUnits objectAtIndex:idx];
-			if (zUni) {
-				// UNIT  SI基本単位変換
-				NSArray *arUnit = [zUni componentsSeparatedByString:KeyUNIT_DELIMIT]; 
-				if (1 < [arUnit count]) {
-					zUnitSI = [arUnit objectAtIndex:1]; // (0)表示単位　(1)SI基本単位　(2)変換式　(3)逆変換式
-					zOpe = [formulaOperators objectAtIndex:idx];
-					NSLog(@"***zUnitRebuild:--Ope[%@]--UnitSI[%@]--", zOpe, zUnitSI);
-					if ([zUnitSI hasPrefix:@"m"]) {
-						iM = 1;
-					}
-					else if ([zUnitSI hasPrefix:@"㎡"]) {	// 平方
-						iM = 2;
-					}
-					else if ([zUnitSI hasPrefix:@"㎥"]) {	// 立方
-						iM = 3;
-					}
-					else {
-						iM = 0;	// 長さ系でない1次元単位
-						// 次の演算子が[
-
-						if (0 < iMmax) {
-#ifdef AzDEBUG
-							[formulaUnits replaceObjectAtIndex:idx withObject:@"NG1"];
-#else
-							[formulaUnits replaceObjectAtIndex:idx withObject:@""];
-#endif
-						}
-					}
-					//
-					if (iMmax < 0) {
-#ifdef AzDEBUG
-						[formulaUnits replaceObjectAtIndex:idx withObject:@"NG2"];
-#else
-						[formulaUnits replaceObjectAtIndex:idx withObject:@""];
-#endif
-					}
-					else if ([zOpe hasPrefix:OP_MULT]) {
-						iMprev += iM;
-					} 
-					else if ([zOpe hasPrefix:OP_DIVI]) {
-						iMprev -= iM;
-					} 
-					else if (iM==0) {
-						iMmax = -1;
-						break;
-					}
-					else {
-						iMprev = iM;
-						if ([zOpe hasPrefix:OP_ADD] || [zOpe hasPrefix:OP_SUB]) {
-							if (bFirstSection) {
-								iMmax = iMprev;	// 最初のセクション（乗除区間）で次元が決まる
-							}
-							bFirstSection = NO; // 次のセクションに入った
-						}
-					}
-					//
-					if (3 < iMmax) {
-#ifdef AzDEBUG
-						[formulaUnits replaceObjectAtIndex:idx withObject:@"NG3"];
-#else
-						[formulaUnits replaceObjectAtIndex:idx withObject:@""];
-#endif
-						iMmax = 3;	// 立方
-					}
-				}
-			}
-		}
-		
-		if (bFirstSection && 0<iMmax){
-			// 最初のセクションで乗除が続いており、かつ、長さ系の場合、最高次元にする
-			iMmax = 3; 
-		}
-
-		// キーボード　単位系列表示
-		AzCalcAppDelegate *app = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-		switch (iMmax) {
-			case -1:
-				[app.viewController  GvKeyUnitGroupSI:zUnitSI andSI:nil];
-				return zUnitSI;
-				
-			case 1:
-				[app.viewController  GvKeyUnitGroupSI:@"m" andSI:@"㎡"];	// メートル
-				return @"m";	// メートル
-				
-			case 2:
-				[app.viewController  GvKeyUnitGroupSI:@"m" andSI:nil];	// 平方
-				return @"㎡";	// 平方
-				
-			case 3:
-				[app.viewController  GvKeyUnitGroupSI:@"" andSI:nil];	// 全単位無効
-				return @"㎥";	// 立方
-				
-			default:
-				[app.viewController  GvKeyUnitGroupSI:@"" andSI:nil];	// 全単位無効
-				return nil;
-		}
-		return nil;
-	}
-	@catch (NSException * errEx) {
-		NSLog(@"vUnitRebuild:Exception: %@: %@\n", [errEx name], [errEx reason]);
-	}
-	@catch (NSString *msg) {
-		NSLog(@"vUnitRebuild:@throw: %@\n", msg);
-	}
-	return nil;
-}
-**********/
 
 
 /*

@@ -24,6 +24,7 @@
 	IBOutlet UISegmentedControl	*ibSegGroupingType;
 	IBOutlet UISegmentedControl	*ibSegDecimalSeparator;
 @private
+	AzCalcAppDelegate *appDelegate;  // initにて = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	// Option-iPad
 	float		MfTaxRate;
 	float		MfTaxRateModify;
