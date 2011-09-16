@@ -292,14 +292,33 @@
 	}
 
 	// ScrollLower 	(0)Memorys (1〜)Buttons
-	MiSvLowerPage = 1; // DEFAULT PAGE
+	MiSvLowerPage = 2; // DEFAULT PAGE
 	rect = ibScrollLower.frame;
-	ibScrollLower.contentSize = CGSizeMake(rect.size.width * iKeyPages, rect.size.height); 
+	//ibScrollLower.contentSize = CGSizeMake(rect.size.width * iKeyPages, rect.size.height); 
+	ibScrollLower.contentSize = CGSizeMake(rect.size.width * (iKeyPages + 2), rect.size.height); // (0)先頭 と (iKeyPages+1)末尾 にブランクページ
 	ibScrollLower.scrollsToTop = NO;
 	rect.origin.x = rect.size.width * MiSvLowerPage;
 	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
 	ibScrollLower.delegate = self;
-	ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する
+	//ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する
+	
+	//[1.0.8]　UITapGestureRecognizer対応 ＜＜iOS3.2以降
+	ibScrollLower.scrollEnabled = NO; //スクロール禁止
+	ibScrollLower.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
+	// セレクタを指定して、ジェスチャーリコジナイザーを生成する ＜＜iOS3.2以降対応
+	// handleSwipeLeft:ハンドラ登録　　2本指で左へスワイプされた
+	UISwipeGestureRecognizer *swipeLeftGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeLeft:)];
+	swipeLeftGesture.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+	swipeLeftGesture.direction = UISwipeGestureRecognizerDirectionLeft; //左
+	[ibScrollLower addGestureRecognizer:swipeLeftGesture];// スクロールビューに登録
+	[swipeLeftGesture release];
+	// handleSwipeRight:ハンドラ登録　　2本指で右へスワイプされた
+	UISwipeGestureRecognizer *swipeRightGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeRight:)];
+	swipeRightGesture.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+	swipeRightGesture.direction = UISwipeGestureRecognizerDirectionRight; //右
+	[ibScrollLower addGestureRecognizer:swipeRightGesture];// スクロールビューに登録
+	[swipeRightGesture release];
+
 	
 	NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
 
@@ -386,7 +405,8 @@
 				break;
 			}
 		}
-		float fx = ibScrollLower.frame.size.width * page + fKeyWidGap;
+		//float fx = ibScrollLower.frame.size.width * page + fKeyWidGap;
+		float fx = ibScrollLower.frame.size.width * (1 + page) + fKeyWidGap;  // 先頭ブランクページを飛ばすため
 		for (int col=0; col<iKeyCols && col<100; col++ ) 
 		{
 			float fy = fKeyHeiGap;
@@ -1050,6 +1070,48 @@
 }
 
 
+#pragma mark - GestureRecognizer Handler
+
+- (void)handleSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
+{	// 2本指で左へスワイプされた
+	NSLog(@"-- Swipe Left 2 finger -- MiSvLowerPage=%d", (int)MiSvLowerPage);
+	// 次（右）ページへ
+	if (iKeyPages <= MiSvLowerPage) {
+		CGRect rect = ibScrollLower.frame;
+		rect.origin.x = rect.size.width * (iKeyPages + 1); // 末尾ブランクページ
+		[ibScrollLower scrollRectToVisible:rect animated:YES];
+		rect.origin.x = 0; // 先頭のブランクページ へ
+		[ibScrollLower scrollRectToVisible:rect animated:NO];
+		MiSvLowerPage = 1; // 最初のページ へ
+	} else {
+		MiSvLowerPage++; // Right
+	}
+	NSLog(@"-- MiSvLowerPage=%d", (int)MiSvLowerPage);
+	CGRect rect = ibScrollLower.frame;
+	rect.origin.x = rect.size.width * MiSvLowerPage;
+	[ibScrollLower scrollRectToVisible:rect animated:YES];
+}
+
+- (void)handleSwipeRight: (UISwipeGestureRecognizer*) recognizer 
+{	// 2本指で右へスワイプされた
+	NSLog(@"-- Swipe Right 2 finger -- MiSvLowerPage=%d", (int)MiSvLowerPage);
+	// 前（左）ページへ
+	if (MiSvLowerPage <= 1) {
+		CGRect rect = ibScrollLower.frame;
+		rect.origin.x = 0; // 先頭のブランクページ へ
+		[ibScrollLower scrollRectToVisible:rect animated:YES];
+		rect.origin.x = rect.size.width * (iKeyPages + 1); // 末尾ブランクページ
+		[ibScrollLower scrollRectToVisible:rect animated:NO];
+		MiSvLowerPage = iKeyPages; // 最終ページ へ
+	} else {
+		MiSvLowerPage--; // Left
+	}
+	NSLog(@"-- MiSvLowerPage=%d", (int)MiSvLowerPage);
+	CGRect rect = ibScrollLower.frame;
+	rect.origin.x = rect.size.width * MiSvLowerPage;
+	[ibScrollLower scrollRectToVisible:rect animated:YES];
+}
+
 
 #pragma mark - UNIT 単位
 
@@ -1391,7 +1453,7 @@
 			rc.origin.x = rc.size.width * MiSvLowerPage;
 			[ibScrollLower scrollRectToVisible:rc animated:NO];
 		} else {
-			MiSvLowerPage = 1; // DEFAULT PAGE
+			MiSvLowerPage = 2; // DEFAULT PAGE
 		}
 	}
 }
@@ -2026,8 +2088,8 @@
 - (IBAction)ibButtonDrag:(KeyButton *)button // ダブルスイープスクロールのため
 {
 	NSLog(@"ibButtonDrag: Col=%d", (int)button.iCol);
-	ibScrollLower.scrollEnabled = YES; //スクロール許可
-	ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する ⇒ これによりキーレスポンス低下する
+	//ibScrollLower.scrollEnabled = YES; //スクロール許可
+	//ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する ⇒ これによりキーレスポンス低下する
 }
 
 - (IBAction)ibButton:(KeyButton *)button   // KeyButton TouchUpInside処理メソッド
@@ -2042,8 +2104,8 @@
 	}
 	else {	// 計算モードのとき、スクロールロックする
 		//キー入力が始まるとスクロール禁止にする
-		ibScrollLower.scrollEnabled = NO; //スクロール禁止
-		ibScrollLower.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
+		//ibScrollLower.scrollEnabled = NO; //スクロール禁止
+		//ibScrollLower.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	}
 	
 	Drum *drum = [RaDrums objectAtIndex:entryComponent];
@@ -2460,7 +2522,10 @@
 		}
 	}
 	else {
-		MiSvLowerPage = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+		//MiSvLowerPage = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
+		//　UITapGestureRecognizer対応
+		//ibScrollLower.scrollEnabled = NO; //スクロール禁止
+		ibScrollLower.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	}
 }
 
