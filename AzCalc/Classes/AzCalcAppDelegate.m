@@ -55,7 +55,7 @@
 							  NSLocalizedString(@"GUD_GroupingType",nil),		GUD_GroupingType,
 							  NSLocalizedString(@"GUD_DecimalSeparator",nil),	GUD_DecimalSeparator,
 							  NSLocalizedString(@"GUD_TaxRate",nil),			GUD_TaxRate,
-							  @"1",		GUD_AudioVolume,	// 0〜10
+							  @"3",		GUD_AudioVolume,	// 0〜10
 							  nil];
 
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

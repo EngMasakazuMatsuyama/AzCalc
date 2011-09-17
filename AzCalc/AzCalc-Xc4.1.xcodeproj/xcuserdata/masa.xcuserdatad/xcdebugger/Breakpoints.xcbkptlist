@@ -46,30 +46,16 @@
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "337956654.679659"
+         timestampString = "337963650.060593"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "640"
-         endingLineNumber = "640"
-         landmarkName = "-viewWillAppear:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "337956654.679659"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2698"
-         endingLineNumber = "2698"
+         startingLineNumber = "2699"
+         endingLineNumber = "2699"
          landmarkName = "-audioPlayer:"
          landmarkType = "5">
       </FileBreakpoint>

@@ -34,7 +34,6 @@
 		44A560D813237E48000E4628 /* AzKeySet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A560D713237E48000E4628 /* AzKeySet.plist */; };
 		44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */; };
 		44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
-		44A8B24711F3EC87007D6FA0 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B24511F3EC87007D6FA0 /* OptionVC.xib */; };
 		44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
 		44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44AF898213052F3D00D3594C /* CalcFunctions.mm */; };
@@ -49,7 +48,6 @@
 		44BC4C4B1359E9A1009B995C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
 		44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448D997C1307DC8D004DFD62 /* SettingVC.xib */; };
 		44BC4C4E1359E9A1009B995C /* icon32-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */; };
-		44BC4C4F1359E9A1009B995C /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B24511F3EC87007D6FA0 /* OptionVC.xib */; };
 		44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
 		44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
 		44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
@@ -104,12 +102,13 @@
 		44CDB635135AD9A600037C8E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D54131528CF0064EA93 /* Default-Portrait.png */; };
 		44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
 		44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
-		44D32BD41424A7950041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD31424A7950041523E /* AVFoundation.framework */; };
+		44D0F2411424F1F3000BEFA9 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
+		44D0F2421424F1F4000BEFA9 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
 		44D32BD71424A79F0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
+		44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
 		44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
 		44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
-		44EF5DE112099FB200BB87B6 /* Information-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DE012099FB200BB87B6 /* Information-iPad.xib */; };
 		44FB6519137259150092532D /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
 /* End PBXBuildFile section */
 
@@ -162,7 +161,6 @@
 		44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon32-PageFilp.png"; path = "Image/icon32-PageFilp.png"; sourceTree = "<group>"; };
 		44A8B24311F3EC87007D6FA0 /* OptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionVC.h; path = ../OptionVC.h; sourceTree = "<group>"; };
 		44A8B24411F3EC87007D6FA0 /* OptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionVC.m; path = ../OptionVC.m; sourceTree = "<group>"; };
-		44A8B24511F3EC87007D6FA0 /* OptionVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = OptionVC.xib; path = ../OptionVC.xib; sourceTree = "<group>"; };
 		44AB054012258878005E11A7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
 		44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		44AF898213052F3D00D3594C /* CalcFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CalcFunctions.mm; sourceTree = "<group>"; };
@@ -199,13 +197,13 @@
 		44CDB5D0135A813600037C8E /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
 		44CDB616135AD2A400037C8E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		44CDB619135AD2D300037C8E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
-		44D32BD31424A7950041523E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		44D32BD61424A79F0041523E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		44D32BDA1424D41D0041523E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OptionVC.xib; sourceTree = "<group>"; };
+		44D32BDC1424D4350041523E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/OptionVC.xib; sourceTree = "<group>"; };
 		44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting@2x.png"; path = "Image/Icon16-Setting@2x.png"; sourceTree = "<group>"; };
 		44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "AzCalcViewController-iPad.xib"; path = "../Resources-iPad/AzCalcViewController-iPad.xib"; sourceTree = "<group>"; };
 		44EF5DDD12099F6000BB87B6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
-		44EF5DE012099FB200BB87B6 /* Information-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = "Information-iPad.xib"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/Resources-iPad/Information-iPad.xib"; sourceTree = "<absolute>"; };
 		44FB653A1372B9140092532D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hans.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
 		44FB653F1372B96A0092532D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hant.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* AzCalc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
@@ -216,7 +214,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44D32BD41424A7950041523E /* AVFoundation.framework in Frameworks */,
 				44C572931384B4B300490D58 /* SystemConfiguration.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -227,6 +224,7 @@
 				44AF8AA6130578BF00D3594C /* MessageUI.framework in Frameworks */,
 				44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */,
 				44C572901384AE9E00490D58 /* libGoogleAdMobAds.a in Frameworks */,
+				44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,7 +269,7 @@
 				44AB053E1225886E005E11A7 /* Setting-iPad.xib */,
 				44A8B24311F3EC87007D6FA0 /* OptionVC.h */,
 				44A8B24411F3EC87007D6FA0 /* OptionVC.m */,
-				44A8B24511F3EC87007D6FA0 /* OptionVC.xib */,
+				44D32BD91424D41D0041523E /* OptionVC.xib */,
 				44A3D37F11F31E4C0001BF89 /* InformationVC.h */,
 				44A3D38011F31E4C0001BF89 /* InformationVC.m */,
 				44A3D4CA11F355400001BF89 /* InformationVC.xib */,
@@ -292,8 +290,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				44D32BD61424A79F0041523E /* AVFoundation.framework */,
-				44D32BD31424A7950041523E /* AVFoundation.framework */,
 				44C572871384AE9E00490D58 /* GoogleAdMobAdsSDK */,
 				44CDB5CB135A807900037C8E /* OpenCode */,
 				44AF8CB111FC5E2200D4B206 /* SBCD */,
@@ -345,6 +341,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44D32BD61424A79F0041523E /* AVFoundation.framework */,
 				44C572921384B4B300490D58 /* SystemConfiguration.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -493,7 +490,6 @@
 				44A560D813237E48000E4628 /* AzKeySet.plist in Resources */,
 				449E6B98121FA34100338E7F /* AzKeySet-iPad.plist in Resources */,
 				44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */,
-				44EF5DE112099FB200BB87B6 /* Information-iPad.xib in Resources */,
 				445184441303B8BE002820EA /* Icon16-Setting.png in Resources */,
 				44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */,
 				446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */,
@@ -515,9 +511,9 @@
 				44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */,
 				448D997D1307DC8D004DFD62 /* SettingVC.xib in Resources */,
 				44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */,
-				44A8B24711F3EC87007D6FA0 /* OptionVC.xib in Resources */,
 				44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */,
 				44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */,
+				44D0F2411424F1F3000BEFA9 /* OptionVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,9 +548,9 @@
 				44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */,
 				44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */,
 				44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */,
-				44BC4C4F1359E9A1009B995C /* OptionVC.xib in Resources */,
 				44FB6519137259150092532D /* InformationVC.xib in Resources */,
 				44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */,
+				44D0F2421424F1F4000BEFA9 /* OptionVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +660,16 @@
 				44CDB619135AD2D300037C8E /* English */,
 			);
 			name = "InformationVC-iPad.xib";
+			sourceTree = "<group>";
+		};
+		44D32BD91424D41D0041523E /* OptionVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44D32BDA1424D41D0041523E /* English */,
+				44D32BDC1424D4350041523E /* Japanese */,
+			);
+			name = OptionVC.xib;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

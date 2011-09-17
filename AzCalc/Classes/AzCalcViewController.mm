@@ -2691,20 +2691,29 @@
 #pragma mark - AVAudioPlayer
 - (void)audioPlayer:(NSString*)filename
 {
+	if (MfAudioVolume <= 0.0 || 1.0 < MfAudioVolume) return;
 	NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/%@", filename]];
-	AVAudioPlayer *audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-	audio.delegate = self;		// audioPlayerDidFinishPlaying:にて release するため。
-	audio.volume = MfAudioVolume;  // 0.0〜1.0
-	[audio play];
+	AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+	player.volume = MfAudioVolume;  // 0.0〜1.0
+	player.delegate = self;		// audioPlayerDidFinishPlaying:にて release するため。
+	[player play];
 }
 
 #pragma mark  <AVAudioPlayerDelegate>
-- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer*) player successfully:(BOOL) flag 
-{	// 再生が終了したとき、破棄する
+
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
+{	// 再生が終了したとき、破棄する	＜＜ シミュレータでは呼び出されない
+	NSLog(@"- audioPlayerDidFinishPlaying -");
+	player.delegate = nil;
+    [player release];
+}
+
+- (void)audioPlayerDecodeErrorDidOccur: (AVAudioPlayer*)player error:(NSError*)error
+{	// エラー発生
+	NSLog(@"- audioPlayerDecodeErrorDidOccur -");
 	player.delegate = nil;
 	[player release];
 }
-
 
 #ifdef GD_Ad_ENABLED
 #pragma mark - iAd, AdMob
