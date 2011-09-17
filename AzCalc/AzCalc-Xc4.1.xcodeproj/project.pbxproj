@@ -18,6 +18,8 @@
 		441D242511F3056200A3B68A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
+		44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
+		44542EA41424F5BE00ADE01F /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
 		446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C3133450DF006859F4 /* Icon-Drum60x37.png */; };
 		446E08C8133450DF006859F4 /* Icon-Drum60x37@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C4133450DF006859F4 /* Icon-Drum60x37@2x.png */; };
 		446E08C9133450DF006859F4 /* Icon-DrumPush60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C5133450DF006859F4 /* Icon-DrumPush60x37.png */; };
@@ -102,8 +104,6 @@
 		44CDB635135AD9A600037C8E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D54131528CF0064EA93 /* Default-Portrait.png */; };
 		44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
 		44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
-		44D0F2411424F1F3000BEFA9 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
-		44D0F2421424F1F4000BEFA9 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
 		44D32BD71424A79F0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
@@ -513,7 +513,7 @@
 				44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */,
 				44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */,
 				44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */,
-				44D0F2411424F1F3000BEFA9 /* OptionVC.xib in Resources */,
+				44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,7 +550,7 @@
 				44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */,
 				44FB6519137259150092532D /* InformationVC.xib in Resources */,
 				44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */,
-				44D0F2421424F1F4000BEFA9 /* OptionVC.xib in Resources */,
+				44542EA41424F5BE00ADE01F /* OptionVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

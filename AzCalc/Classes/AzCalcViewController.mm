@@ -46,7 +46,7 @@
 - (void)MvPadKeysShow;
 - (void)MvKeyUnitGroup:(KeyButton *)keyUnit;
 - (void)MvKeyboardPage:(NSInteger)iPage;
-- (void)MvKeyboardPage1Alook0;
+//- (void)MvKeyboardPage1Alook0;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
 - (void)MvDrumButtonDragEnter:(UIButton *)button;
 - (void)audioPlayer:(NSString*)filename;
@@ -1092,6 +1092,7 @@
 		MiSvLowerPage++; // Right
 	}
 	NSLog(@"-- MiSvLowerPage=%d", (int)MiSvLowerPage);
+	[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
 	CGRect rect = ibScrollLower.frame;
 	rect.origin.x = rect.size.width * MiSvLowerPage;
 	[ibScrollLower scrollRectToVisible:rect animated:YES];
@@ -1112,6 +1113,7 @@
 		MiSvLowerPage--; // Left
 	}
 	NSLog(@"-- MiSvLowerPage=%d", (int)MiSvLowerPage);
+	[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
 	CGRect rect = ibScrollLower.frame;
 	rect.origin.x = rect.size.width * MiSvLowerPage;
 	[ibScrollLower scrollRectToVisible:rect animated:YES];
@@ -1471,6 +1473,7 @@
 	[ibScrollLower scrollRectToVisible:rc animated:YES];
 }
 
+/*[1.0.8]廃止：2指スワイプ対応により相性が悪くなったため
 - (void)MvKeyboardPage1Alook0 // 1ページから0ページを「ちょっと見せる」アニメーション
 {
 	//AzLOG(@"ibScrollLower: x=%f w=%f", ibScrollLower.frame.origin.x, ibScrollLower.frame.size.width);
@@ -1480,7 +1483,7 @@
 	[ibScrollLower scrollRectToVisible:rc animated:NO];
 	rc.origin.x = rc.size.width * 1; // 1Pageに復帰
 	[ibScrollLower scrollRectToVisible:rc animated:YES];
-}
+}*/
 
 - (void)MvPadKeysShow // iPad専用 メモリー20キー配置 および 回転処理
 {
@@ -1864,7 +1867,7 @@
 						}
 					}
 				} else {
-					[self MvKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
+					//[self MvKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
 				}
 				ibBuMemory.tag = 0; // MClear
 			}
@@ -1960,7 +1963,7 @@
 						}
 					}
 				} else {
-					[self MvKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
+					//[self MvKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
 				}
 			}
 			break;
