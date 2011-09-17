@@ -49,6 +49,7 @@
 - (void)MvKeyboardPage1Alook0;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
 - (void)MvDrumButtonDragEnter:(UIButton *)button;
+- (void)audioPlayer:(NSString*)filename;
 @end
 
 @implementation AzCalcViewController
@@ -234,6 +235,7 @@
 	ibPvDrum.delegate = self;
 	ibPvDrum.dataSource = self;
 	ibPvDrum.showsSelectionIndicator = NO;
+	//[ibPvDrum setSoundsEnabled:NO];  ピッカーの音を止める。しかし、Apple拒否API
 	
 	//-----------------------------------------------------(1)数式 ページ
 	// UITextView
@@ -531,7 +533,8 @@
 				bu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin; 
 				[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];	// UIControlEventTouchDown OR UIControlEventTouchUpInside
 
-				[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragExit]; //スクロールロック解除のため
+				//[1.0.8]　UITapGestureRecognizer対応により以下没。
+				//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragExit]; //スクロールロック解除のため
 				//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragEnter]; NG/ほとんど無し
 				//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragInside]; NG/キー内の微妙な動きまで反応してしまう
 				//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragOutside];  NG/ほとんど無し
@@ -627,6 +630,8 @@
     //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
+	MfAudioVolume = (float)[defaults integerForKey:GUD_AudioVolume] / 10.0;
 	
 	// Setting
 #ifdef AzMAKE_SPLASHFACE
@@ -1566,6 +1571,7 @@
 #else
 	// シングルタップ式
 	if (entryComponent == button.tag) {
+		[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
 		// ドラム幅を拡大する
 		bZoomEntryComponent = !bZoomEntryComponent;  // 拡大／均等トグル式
 	}
@@ -1573,6 +1579,8 @@
 	
 	BOOL bTouchAction = NO;
 	if (entryComponent != button.tag) {
+		[self audioPlayer:@"SentMessage.caf"];  // SMSの送信音
+
 		entryComponent = button.tag;	// ドラム切り替え
 		bZoomEntryComponent = NO;  // 均等サイズに戻す
 		bTouchAction = YES;
@@ -2084,19 +2092,20 @@
 #pragma mark - IBAction
 
 
+/*　[1.0.8]　UITapGestureRecognizer対応により以下没。
 //[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragExit]; 
 - (IBAction)ibButtonDrag:(KeyButton *)button // ダブルスイープスクロールのため
 {
 	NSLog(@"ibButtonDrag: Col=%d", (int)button.iCol);
 	//ibScrollLower.scrollEnabled = YES; //スクロール許可
 	//ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する ⇒ これによりキーレスポンス低下する
-}
+}*/
 
 - (IBAction)ibButton:(KeyButton *)button   // KeyButton TouchUpInside処理メソッド
 {
 	bDrumRefresh = YES;
 	
-	//AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);	//ショート・バイブレーション
+	[self audioPlayer:@"Tock.caf"];  // キークリック音
 	
 	if (RaKeyMaster) {				// キーレイアウト変更モード // ドラム選択中のキーを割り当てる
 		[self MvKeyLayoute:button];
@@ -2490,6 +2499,8 @@
 {
 	if (scrollView==ibScrollUpper) {
 		[ibTvFormula resignFirstResponder]; // キーボードを隠す
+
+		[self audioPlayer:@"mail-sent.caf"];  // Mail.appの送信音
 	}
 }
 
@@ -2548,6 +2559,8 @@
 	AzLOG(@"--textViewDidBeginEditing:");
 	ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
 
+	[self audioPlayer:@"unlock.caf"];  // SMSの送信音
+
 	//ibTvFormula.keyboardType = UIKeyboardTypeNumbersAndPunctuation;  どちらも効かず、上部ファンクションを消せない
 	//[ibTvFormula setKeyboardType:UIKeyboardTypeNumbersAndPunctuation]; どちらも効かず、上部ファンクションを消せない
 	// 今の所、手操作で UIKeyboardTypeNumbersAndPunctuation モードに変えてもらうしか無い。
@@ -2582,6 +2595,11 @@
 	[UIView commitAnimations];
 }
 
+- (void)textViewAnimeDidStop
+{	// アニメ終了後、
+	[self audioPlayer:@"lock.caf"];  // SMSの送信音
+}
+
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
 	ibScrollUpper.scrollEnabled = YES; // スクロール許可
@@ -2592,6 +2610,8 @@
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:0.5];	// 戻りは早く
+	[UIView setAnimationDelegate:self];
+	[UIView setAnimationDidStopSelector:@selector(textViewAnimeDidStop)]; //アニメーション終了時にメッセージを受信するセレクタを指定
 	// アニメ終了時の位置をセット
 	if (bPad) { // iPad
 		float fOfs = [self fPadKeyOffset];
@@ -2612,6 +2632,7 @@
     }
 
 	[self MvFormulaBlankMessage:YES];
+
 	// アニメ開始
 	[UIView commitAnimations];
 }
@@ -2665,6 +2686,23 @@
 	AzLOG(@"--textViewShouldEndEditing");
 	[ibTvFormula resignFirstResponder]; // キーボードを隠す
 	return YES;
+}
+
+#pragma mark - AVAudioPlayer
+- (void)audioPlayer:(NSString*)filename
+{
+	NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/%@", filename]];
+	AVAudioPlayer *audio = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
+	audio.delegate = self;		// audioPlayerDidFinishPlaying:にて release するため。
+	audio.volume = MfAudioVolume;  // 0.0〜1.0
+	[audio play];
+}
+
+#pragma mark  <AVAudioPlayerDelegate>
+- (void) audioPlayerDidFinishPlaying:(AVAudioPlayer*) player successfully:(BOOL) flag 
+{	// 再生が終了したとき、破棄する
+	player.delegate = nil;
+	[player release];
 }
 
 

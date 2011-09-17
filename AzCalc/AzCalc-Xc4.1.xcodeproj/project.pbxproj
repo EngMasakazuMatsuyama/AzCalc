@@ -104,6 +104,8 @@
 		44CDB635135AD9A600037C8E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D54131528CF0064EA93 /* Default-Portrait.png */; };
 		44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
 		44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
+		44D32BD41424A7950041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD31424A7950041523E /* AVFoundation.framework */; };
+		44D32BD71424A79F0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
 		44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
 		44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
@@ -197,6 +199,8 @@
 		44CDB5D0135A813600037C8E /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
 		44CDB616135AD2A400037C8E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		44CDB619135AD2D300037C8E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44D32BD31424A7950041523E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		44D32BD61424A79F0041523E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting@2x.png"; path = "Image/Icon16-Setting@2x.png"; sourceTree = "<group>"; };
 		44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "AzCalcViewController-iPad.xib"; path = "../Resources-iPad/AzCalcViewController-iPad.xib"; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44D32BD41424A7950041523E /* AVFoundation.framework in Frameworks */,
 				44C572931384B4B300490D58 /* SystemConfiguration.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
@@ -229,6 +234,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44D32BD71424A79F0041523E /* AVFoundation.framework in Frameworks */,
 				44BC4C7C1359E9A1009B995C /* Foundation.framework in Frameworks */,
 				44BC4C7D1359E9A1009B995C /* UIKit.framework in Frameworks */,
 				44BC4C7E1359E9A1009B995C /* CoreGraphics.framework in Frameworks */,
@@ -286,6 +292,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				44D32BD61424A79F0041523E /* AVFoundation.framework */,
+				44D32BD31424A7950041523E /* AVFoundation.framework */,
 				44C572871384AE9E00490D58 /* GoogleAdMobAdsSDK */,
 				44CDB5CB135A807900037C8E /* OpenCode */,
 				44AF8CB111FC5E2200D4B206 /* SBCD */,

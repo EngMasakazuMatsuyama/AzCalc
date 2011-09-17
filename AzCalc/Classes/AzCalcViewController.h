@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#include <AVFoundation/AVFoundation.h>
 
 #ifdef GD_Ad_ENABLED
 #import <iAd/iAd.h>
@@ -15,7 +16,7 @@
 
 @class KeyButton;
 
-@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate
+@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate
 #ifdef GD_Ad_ENABLED
 		,ADBannerViewDelegate
 #endif
@@ -47,7 +48,7 @@
 	UIImage*			RimgDrumPush;
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
-	UIView*			MviewKeyboard;
+	//UIView*			MviewKeyboard;
 
 	//----------------------------------------------assign
 	NSInteger		entryComponent;
@@ -70,12 +71,13 @@
 	int					iKeyRows, iKeyOffsetRow;
 	float				fKeyGap;
 	float				fKeyFontZoom;
-	float				fKeyWidGap;		// キートップ左右の余白
-	float				fKeyHeiGap;		// キートップ上下の余白
-	float				fKeyWidth;		// キートップの幅
-	float				fKeyHeight;		// キートップの高さ
-	float				MfTaxRate;		// 消費税率(%)
-
+	float				fKeyWidGap;			// キートップ左右の余白
+	float				fKeyHeiGap;			// キートップ上下の余白
+	float				fKeyWidth;				// キートップの幅
+	float				fKeyHeight;				// キートップの高さ
+	float				MfTaxRate;				// 消費税率(%)
+	float				MfAudioVolume;		// 0.0〜1.0
+	
 	// Change Keyboard
 	//KeyButton			*buChangeKey;	// 選択中のキー
 	

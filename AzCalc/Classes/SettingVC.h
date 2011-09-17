@@ -18,6 +18,8 @@
 	IBOutlet UISegmentedControl	*ibSegReverseDrum;
 
 	// Option-iPad
+	IBOutlet UILabel			*ibLbVolume;
+	IBOutlet UISlider			*ibSliderVolume;
 	IBOutlet UILabel			*ibLbTax;
 	IBOutlet UISlider			*ibSliderTax;
 	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
@@ -40,6 +42,8 @@
 - (IBAction)ibBuPageFlip:(UIButton *)button;
 
 // Option-iPad
+- (IBAction)ibSliderVolumeChange:(UISlider *)slider;
+- (IBAction)ibSliderVolumeTouchUp:(UISlider *)slider;
 - (IBAction)ibSliderTaxChange:(UISlider *)slider;
 - (IBAction)ibSliderTaxTouchUp:(UISlider *)slider;
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment;

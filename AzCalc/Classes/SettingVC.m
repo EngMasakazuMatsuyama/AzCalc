@@ -45,6 +45,9 @@
 	ibSegReverseDrum.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_ReverseDrum];
 
 	// Options
+	NSInteger iVol = [defaults integerForKey:GUD_AudioVolume];
+	ibLbVolume.text = [NSString stringWithFormat:@"%d", iVol];
+
 	MfTaxRate = [defaults floatForKey:GUD_TaxRate];
 	MfTaxRateModify = MfTaxRate;
 	ibLbTax.text = [NSString stringWithFormat:@"%.1f%%", MfTaxRate];
@@ -95,6 +98,21 @@
 
 
 // 同じ処理が、OptionVC.m (iPhone用) にも存在する
+- (IBAction)ibSliderVolumeChange:(UISlider *)slider
+{
+	NSInteger iVol  = (NSInteger)ibSliderVolume.value;
+	if (iVol < 0) iVol = 0;
+	else if (10 < iVol) iVol = 10;
+	ibSliderVolume.value = iVol;
+	ibLbVolume.text = [NSString stringWithFormat:@"%d", iVol];
+}
+
+- (IBAction)ibSliderVolumeTouchUp:(UISlider *)slider
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:(NSInteger)ibSliderVolume.value forKey:GUD_AudioVolume];
+}
+
+
 - (IBAction)ibSliderTaxChange:(UISlider *)slider
 {
 	//float f = MfTaxRate + floorf(ibSliderTax.value * 10.0) / 10.0; // 小数1位までにする

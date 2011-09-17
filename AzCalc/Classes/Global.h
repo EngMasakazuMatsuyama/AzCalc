@@ -63,16 +63,17 @@
 
 // SettingVC
 #define DECIMAL_Float	6		// Setting:GUD_Decimal 値がこれ以上ならば浮動小数点処理する　 ＜SettingVC設定に関連＞
-#define GUD_Drums						@"GUD_Drums"
+#define GUD_Drums							@"GUD_Drums"
 #define GUD_CalcMethod					@"GUD_CalcMethod"
-#define GUD_Decimal						@"GUD_Decimal"
-#define GUD_Round						@"GUD_Round"
-#define GUD_ReverseDrum					@"GUD_ReverseDrum"
+#define GUD_Decimal							@"GUD_Decimal"
+#define GUD_Round							@"GUD_Round"
+#define GUD_ReverseDrum				@"GUD_ReverseDrum"
+#define GUD_AudioVolume				@"GUD_AudioVolume"
 
 // OptionVC
 #define GUD_TaxRate						@"GUD_TaxRate"
 #define GUD_RoundOption					@"GUD_RoundOption"
-#define GUD_GroupingSeparator			@"GUD_GroupingSeparator"
+#define GUD_GroupingSeparator		@"GUD_GroupingSeparator"
 #define GUD_GroupingType				@"GUD_GroupingType"
 #define GUD_DecimalSeparator			@"GUD_DecimalSeparator"
 

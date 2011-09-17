@@ -11,7 +11,9 @@
 
 @interface OptionVC : UIViewController 
 {
+	IBOutlet UILabel			*ibLbVolume;
 	IBOutlet UILabel			*ibLbTax;
+	IBOutlet UISlider			*ibSliderVolume;
 	IBOutlet UISlider			*ibSliderTax;
 	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
 	IBOutlet UISegmentedControl	*ibSegGroupingType;
@@ -21,6 +23,8 @@
 	float		MfTaxRateModify;
 }
 
+- (IBAction)ibSliderVolumeChange:(UISlider *)slider;
+- (IBAction)ibSliderVolumeTouchUp:(UISlider *)slider;
 - (IBAction)ibSliderTaxChange:(UISlider *)slider;
 - (IBAction)ibSliderTaxTouchUp:(UISlider *)slider;
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment;
