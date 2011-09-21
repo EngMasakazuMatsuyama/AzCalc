@@ -139,13 +139,13 @@
 		446E08C6133450DF006859F4 /* Icon-DrumPush60x37@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-DrumPush60x37@2x.png"; path = "Image/Icon-DrumPush60x37@2x.png"; sourceTree = "<group>"; };
 		446E08CB133454F1006859F4 /* Icon-Drum128x79.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum128x79.png"; path = "Image/Icon-Drum128x79.png"; sourceTree = "<group>"; };
 		446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-DrumPush128x79.png"; path = "Image/Icon-DrumPush128x79.png"; sourceTree = "<group>"; };
-		448D99321307D1EB004DFD62 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99331307D1F8004DFD62 /* French */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99341307D1FE004DFD62 /* German */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99351307D209004DFD62 /* Italian */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99361307D210004DFD62 /* Spanish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99381307D226004DFD62 /* Korean */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99391307D249004DFD62 /* Turkish */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Turkish; path = Turkish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		448D99321307D1EB004DFD62 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		448D99331307D1F8004DFD62 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
+		448D99341307D1FE004DFD62 /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
+		448D99351307D209004DFD62 /* Italian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
+		448D99361307D210004DFD62 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		448D99381307D226004DFD62 /* Korean */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
+		448D99391307D249004DFD62 /* Turkish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Turkish; path = Turkish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		448D997E1307DC96004DFD62 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = ../Japanese.lproj/SettingVC.xib; sourceTree = "<group>"; };
 		449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzKeySet-iPad.plist"; sourceTree = "<group>"; };
 		449EBC6911E57EA900E2AABD /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
@@ -204,8 +204,8 @@
 		44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "AzCalcViewController-iPad.xib"; path = "../Resources-iPad/AzCalcViewController-iPad.xib"; sourceTree = "<group>"; };
 		44EF5DDD12099F6000BB87B6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
-		44FB653A1372B9140092532D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hans.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
-		44FB653F1372B96A0092532D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hant.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
+		44FB653A1372B9140092532D /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hans.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
+		44FB653F1372B96A0092532D /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hant.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* AzCalc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 

@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "338012085.157129"
+         timestampString = "338317082.872464"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "313"
-         endingLineNumber = "313"
+         startingLineNumber = "337"
+         endingLineNumber = "337"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "338012085.157129"
+         timestampString = "338317238.010132"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2542"
-         endingLineNumber = "2542"
+         startingLineNumber = "2605"
+         endingLineNumber = "2605"
          landmarkName = "-scrollViewDidEndDecelerating:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -37,12 +37,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "338012085.157129"
+         timestampString = "338317082.872464"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1083"
-         endingLineNumber = "1083"
-         landmarkName = "-handleSwipeLeft:"
+         startingLineNumber = "180"
+         endingLineNumber = "180"
+         landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Classes/AzCalcViewController.mm"
+         timestampString = "338317238.010132"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1151"
+         endingLineNumber = "1151"
+         landmarkName = "-handleLowerSwipeLeft:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
