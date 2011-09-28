@@ -38,11 +38,11 @@
 // Tags
 //没//#define TAG_DrumButton_LABEL		109
 
-
+/* Apple審査拒絶「仕様禁止メソッド」
 @interface UIPickerView (Mute)
 -(void) setSoundsEnabled:(BOOL)enabled;
 @end
-
+*/
 
 //================================================================================AzCalcViewController
 @interface AzCalcViewController (PrivateMethods)
@@ -260,7 +260,8 @@
 	ibPvDrum.delegate = self;
 	ibPvDrum.dataSource = self;
 	ibPvDrum.showsSelectionIndicator = NO;
-	[ibPvDrum setSoundsEnabled:NO];  // ピッカーの音を止める。しかし、Apple非推奨API
+	//NG//[ibPvDrum setSoundsEnabled:NO];  // ピッカーの音を止める。   Apple審査拒絶されました「仕様禁止メソッド」
+
 	
 	//-----------------------------------------------------(1)数式 ページ
 	// UITextView
