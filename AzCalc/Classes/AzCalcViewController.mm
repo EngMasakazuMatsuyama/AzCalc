@@ -178,9 +178,11 @@
 	MiSvUpperPage = 0;
 	rect.origin.x = rect.size.width * MiSvUpperPage;
 	[ibScrollUpper scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
-	//ibScrollUpper.bounces = NO; // 両端の跳ね返り
 	
-/*[1.0.8.2]Uppreの2指スワイプを試みたが操作性が良くないので没にした。
+	ibScrollUpper.scrollEnabled = YES; //スクロール許可
+	ibScrollUpper.bounces = NO; // 両端の跳ね返り
+
+	/**
 	//[1.0.8.2]　UITapGestureRecognizer対応 ＜＜iOS3.2以降
 	ibScrollUpper.scrollEnabled = NO; //スクロール禁止
 	ibScrollUpper.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
@@ -197,7 +199,19 @@
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release];
-*/
+	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
+	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
+	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
+	swipe.direction = UISwipeGestureRecognizerDirectionRight;
+	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
+	[swipe release], swipe = nil;
+	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
+	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
+	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
+	swipe.direction = UISwipeGestureRecognizerDirectionLeft;
+	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
+	[swipe release], swipe = nil;
+	*/
 	
 	//-----------------------------------------------------(0)ドラム ページ
 	if (RaDrumButtons) {
@@ -295,11 +309,11 @@
 	//[0.4.2]//[self MvPadKeysShow]より前に必要だった。
 	//[0.4.1]//"Received memory warning. Level=2" 回避するための最適化
 	if (bPad) {
-		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum128x79.png"] retain];
-		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush128x79.png"] retain];
+		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum128x79"] retain];
+		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush128x79"] retain];
 	} else {
-		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum60x37.png"] retain];
-		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush60x37.png"] retain];
+		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum60x37"] retain];
+		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush60x37"] retain];
 	}
 	
 	if (bPad) { // iPad
@@ -320,7 +334,7 @@
 	}
 
 	// ScrollLower 	(0)Memorys (1〜)Buttons
-	MiSvLowerPage = 2; // DEFAULT PAGE
+	MiSvLowerPage = 2; // DEFAULT PAGE　　＜＜(0)先頭 と (iKeyPages+1)末尾 にブランクページ が入るようになったから
 	rect = ibScrollLower.frame;
 	//ibScrollLower.contentSize = CGSizeMake(rect.size.width * iKeyPages, rect.size.height); 
 	ibScrollLower.contentSize = CGSizeMake(rect.size.width * (iKeyPages + 2), rect.size.height); // (0)先頭 と (iKeyPages+1)末尾 にブランクページ
@@ -346,14 +360,14 @@
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
-	// handleLowerSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
-	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipe1finger:)];
+	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
+	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
 	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionRight;
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
-	// handleLowerSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
-	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipe1finger:)];
+	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
+	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
 	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionLeft;
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
@@ -746,7 +760,7 @@
 	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (appDelegate.bChangeKeyboard) {
 		// キーレイアウト変更モード
-		ibScrollUpper.scrollEnabled = NO; // レイアウト中は固定する
+		//ibScrollUpper.scrollEnabled = NO; // レイアウト中は固定する
 		if (RaKeyMaster==nil) {
 			// AzKeyMaster.plistからマスターキー一覧読み込む
 			NSString *zFile = [[NSBundle mainBundle] pathForResource:@"AzKeyMaster" ofType:@"plist"];
@@ -831,7 +845,7 @@
 	} 
 	else {
 		// ドラタク通常モード
-		ibScrollUpper.scrollEnabled = YES;
+		//ibScrollUpper.scrollEnabled = YES;
 		if (RaKeyMaster) {
 			[RaKeyMaster release];
 			RaKeyMaster = nil;
@@ -1115,7 +1129,6 @@
 
 #pragma mark - GestureRecognizer Handler
 
-/*[1.0.8.2]Uppreの2指スワイプを試みたが操作性が良くないので没にした。
 - (void)handleUpperSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
 {	// 2本指で左へスワイプされた
 	NSLog(@"handleUpperSwipeLeft -- Swipe Left 2 finger -- MiSvUpperPage=%d", (int)MiSvUpperPage);
@@ -1145,7 +1158,6 @@
 		[ibScrollLower scrollRectToVisible:rect animated:YES];
 	}
 }
-*/
 
 - (void)handleLowerSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
 {	// 2本指で左へスワイプされた
@@ -1189,21 +1201,28 @@
 	[ibScrollLower scrollRectToVisible:rect animated:YES];
 }
 
-- (void)reset_MiLowerSwipe1fingerCount {
-	MiLowerSwipe1fingerCount = 0;
+- (void)reset_MiSwipe1fingerCount {
+	MiSwipe1fingerCount = 0;
 }
 
-- (void)handleLowerSwipe1finger: (UISwipeGestureRecognizer*) recognizer
+- (void)handleSwipe1finger: (UISwipeGestureRecognizer*) recognizer
 {	// 1本指で右または左へスワイプされた
-	NSLog(@"handleLowerSwipe1finger");
-	MiLowerSwipe1fingerCount++;
-	if (MiLowerSwipe1fingerCount == 1) {
-		[self performSelector:@selector(reset_MiLowerSwipe1fingerCount) withObject:nil afterDelay:2.0f]; // 2秒後にクリアする
+	NSLog(@"handleSwipe1finger");
+	MiSwipe1fingerCount++;
+	if (MiSwipe1fingerCount == 1) {
+		[self performSelector:@selector(reset_MiSwipe1fingerCount) withObject:nil afterDelay:2.0f]; // 2秒後にクリアする
 	}
-	else if (2 <= MiLowerSwipe1fingerCount) {	// 2回以上スワイプされたらヘルプメッセージを出す
-		MiLowerSwipe1fingerCount = 0;
+	else if (2 <= MiSwipe1fingerCount) {	// 2回以上スワイプされたらヘルプメッセージを出す
+		MiSwipe1fingerCount = 0;
 		//NG//alertBox( NSLocalizedString(@"Help LowerSwipe title", nil), nil, @"OK" );  LINK ERROR になる
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Help LowerSwipe title", nil)
+		
+		NSString *zTitle;
+		if (ibBuFormLeft.frame.origin.x < 0) {  // Fomula editting [(]左括弧ボタンが画面外に出ている ⇒ 編集ロック中
+			zTitle = NSLocalizedString(@"Help Fomula locking", nil);
+		} else {
+			zTitle = NSLocalizedString(@"Help Swipe 2 fingers", nil);
+		}
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:zTitle
 														message:nil
 													   delegate:nil
 											  cancelButtonTitle:nil
@@ -1473,8 +1492,11 @@
 		[mdMk setObject:[NSNumber numberWithInteger:ibBuMemory.tag]  forKey:@"PB_TAG"];
 		[mdMk setObject:[UIPasteboard generalPasteboard].string  forKey:@"PB_TEXT"];
 	}
+	
+	/*[1.0.9]常に DEFAULT PAGE に戻すようにした。
 	// Keyboard ページ保存
 	[mdMk setObject:[NSNumber numberWithInteger:MiSvLowerPage]  forKey:@"KB_PAGE"];
+	 */
 	
 	// SAVE
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -1547,6 +1569,7 @@
 	[self MvMemoryShow];
 	// Keyboard ページ復帰
 	{
+		/*[1.0.9]常に DEFAULT PAGE に戻すようにした。
 		NSNumber *num = [dicMkeys objectForKey:@"KB_PAGE"];
 		if (num && 0<=[num integerValue]) {
 			MiSvLowerPage = [num integerValue];
@@ -1555,7 +1578,8 @@
 			[ibScrollLower scrollRectToVisible:rc animated:NO];
 		} else {
 			MiSvLowerPage = 2; // DEFAULT PAGE
-		}
+		}*/
+		MiSvLowerPage = 2; // DEFAULT PAGE
 	}
 }
 
@@ -2655,7 +2679,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
 	AzLOG(@"--textViewDidBeginEditing:");
-	ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
+	//ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
 
 	[self audioPlayer:@"unlock.caf"];  // ロック解除音
 
@@ -2700,7 +2724,7 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-	ibScrollUpper.scrollEnabled = YES; // スクロール許可
+	//ibScrollUpper.scrollEnabled = YES; // スクロール許可
 
 	CGRect rc;
 	// アニメ開始時の位置をセット

@@ -33,6 +33,8 @@
 	IBOutlet UIButton*		ibBuFormLeft;
 	IBOutlet UIButton*		ibBuFormRight;
 	IBOutlet UIButton*		ibBuGetDrum;
+	//IBOutlet UIPanGestureRecognizer	*ibPanUpper;
+	//IBOutlet UIPanGestureRecognizer	*ibPanLower;
 	
 @private
 	//----------------------------------------------dealloc時にrelese
@@ -90,7 +92,7 @@
 
 	NSInteger  MiSvLowerPage;	// ibScrollLower の現在表示ページを常に保持
 	NSInteger  MiSvUpperPage;	// ibScrollUpper の現在表示ページを常に保持
-	NSInteger  MiLowerSwipe1fingerCount;		// 1指で3回スワイプされたらヘルプメッセージを出すため
+	NSInteger  MiSwipe1fingerCount;		// 1指で3回スワイプされたらヘルプメッセージを出すため
 }
 
 - (IBAction)ibBuMemory:(UIButton *)button;
