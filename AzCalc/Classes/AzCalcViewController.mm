@@ -760,7 +760,7 @@
 	AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (appDelegate.bChangeKeyboard) {
 		// キーレイアウト変更モード
-		//ibScrollUpper.scrollEnabled = NO; // レイアウト中は固定する
+		ibScrollUpper.scrollEnabled = NO; // レイアウト中は固定する
 		if (RaKeyMaster==nil) {
 			// AzKeyMaster.plistからマスターキー一覧読み込む
 			NSString *zFile = [[NSBundle mainBundle] pathForResource:@"AzKeyMaster" ofType:@"plist"];
@@ -845,7 +845,7 @@
 	} 
 	else {
 		// ドラタク通常モード
-		//ibScrollUpper.scrollEnabled = YES;
+		ibScrollUpper.scrollEnabled = YES;
 		if (RaKeyMaster) {
 			[RaKeyMaster release];
 			RaKeyMaster = nil;
@@ -1210,7 +1210,7 @@
 	NSLog(@"handleSwipe1finger");
 	MiSwipe1fingerCount++;
 	if (MiSwipe1fingerCount == 1) {
-		[self performSelector:@selector(reset_MiSwipe1fingerCount) withObject:nil afterDelay:2.0f]; // 2秒後にクリアする
+		[self performSelector:@selector(reset_MiSwipe1fingerCount) withObject:nil afterDelay:1.0f]; // 秒後にクリアする
 	}
 	else if (2 <= MiSwipe1fingerCount) {	// 2回以上スワイプされたらヘルプメッセージを出す
 		MiSwipe1fingerCount = 0;
@@ -1698,13 +1698,13 @@
 	}
 #endif
 	
-	BOOL bTouchAction = NO;
+	//BOOL bTouchAction = NO;
 	if (entryComponent != button.tag) {
 		[self audioPlayer:@"SentMessage.caf"];  // SMSの送信音
 
 		entryComponent = button.tag;	// ドラム切り替え
 		bZoomEntryComponent = NO;  // 均等サイズに戻す
-		bTouchAction = YES;
+		//bTouchAction = YES;
 		// ドラム切り替え時に、キーボードをページ(1)にする
 	//	CGRect rc = ibScrollLower.frame;
 	//	rc.origin.x = rc.size.width * 1;
@@ -2679,7 +2679,7 @@
 - (void)textViewDidBeginEditing:(UITextView *)textView
 {
 	AzLOG(@"--textViewDidBeginEditing:");
-	//ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
+	ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
 
 	[self audioPlayer:@"unlock.caf"];  // ロック解除音
 
@@ -2724,7 +2724,7 @@
 
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
-	//ibScrollUpper.scrollEnabled = YES; // スクロール許可
+	ibScrollUpper.scrollEnabled = YES; // スクロール許可
 
 	CGRect rc;
 	// アニメ開始時の位置をセット

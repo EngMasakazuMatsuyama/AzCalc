@@ -13,10 +13,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-               BuildableName = "AzCalc.app"
-               BlueprintName = "AzCalc"
-               ReferencedContainer = "container:AzCalc-Xc4.1.xcodeproj">
+               BlueprintIdentifier = "44BC4C461359E9A1009B995C"
+               BuildableName = "AzCalcS1.app"
+               BlueprintName = "AzCalcS1"
+               ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,10 +31,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "AzCalc.app"
-            BlueprintName = "AzCalc"
-            ReferencedContainer = "container:AzCalc-Xc4.1.xcodeproj">
+            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
+            BuildableName = "AzCalcS1.app"
+            BlueprintName = "AzCalcS1"
+            ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -49,10 +49,10 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "AzCalc.app"
-            BlueprintName = "AzCalc"
-            ReferencedContainer = "container:AzCalc-Xc4.1.xcodeproj">
+            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
+            BuildableName = "AzCalcS1.app"
+            BlueprintName = "AzCalcS1"
+            ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -60,17 +60,17 @@
    </LaunchAction>
    <ProfileAction
       shouldUseLaunchSchemeArgsEnv = "YES"
-      savedToolIdentifier = "/Developer/Applications/Instruments.app/Contents/Resources/templates/Leaks.tracetemplate"
+      savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
-            BuildableName = "AzCalc.app"
-            BlueprintName = "AzCalc"
-            ReferencedContainer = "container:AzCalc-Xc4.1.xcodeproj">
+            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
+            BuildableName = "AzCalcS1.app"
+            BlueprintName = "AzCalcS1"
+            ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
