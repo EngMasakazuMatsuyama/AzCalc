@@ -114,6 +114,14 @@
 		44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
 		44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
 		44FB6519137259150092532D /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
+		44FBD2211451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
+		44FBD2221451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
+		44FBD2231451BF7800886093 /* Tx-LzBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */; };
+		44FBD2241451BF7800886093 /* Tx-LzBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */; };
+		44FBD2271451C19400886093 /* Tx-LzBrown.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2251451C19400886093 /* Tx-LzBrown.png */; };
+		44FBD2281451C19400886093 /* Tx-LzBrown.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2251451C19400886093 /* Tx-LzBrown.png */; };
+		44FBD2291451C19400886093 /* Tx-LzBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2261451C19400886093 /* Tx-LzBrown@2x.png */; };
+		44FBD22A1451C19400886093 /* Tx-LzBrown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2261451C19400886093 /* Tx-LzBrown@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -212,6 +220,10 @@
 		44EF5DDD12099F6000BB87B6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
 		44FB653A1372B9140092532D /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hans.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
 		44FB653F1372B96A0092532D /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hant.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
+		44FBD21F1451BF7800886093 /* Tx-LzBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack.png"; path = "Image/Tx-LzBack.png"; sourceTree = "<group>"; };
+		44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack@2x.png"; path = "Image/Tx-LzBack@2x.png"; sourceTree = "<group>"; };
+		44FBD2251451C19400886093 /* Tx-LzBrown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBrown.png"; path = "Image/Tx-LzBrown.png"; sourceTree = "<group>"; };
+		44FBD2261451C19400886093 /* Tx-LzBrown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBrown@2x.png"; path = "Image/Tx-LzBrown@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* AzCalc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -364,6 +376,10 @@
 		44A2E47411EB29F5009FB007 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				44FBD2251451C19400886093 /* Tx-LzBrown.png */,
+				44FBD2261451C19400886093 /* Tx-LzBrown@2x.png */,
+				44FBD21F1451BF7800886093 /* Tx-LzBack.png */,
+				44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */,
 				446E08CB133454F1006859F4 /* Icon-Drum128x79.png */,
 				446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */,
 				446E08C3133450DF006859F4 /* Icon-Drum60x37.png */,
@@ -524,6 +540,10 @@
 				44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */,
 				440C19941446B50E008E9CB0 /* icon44-PageFilp@2x.png in Resources */,
 				440C19961446B50E008E9CB0 /* icon44-PageFilp.png in Resources */,
+				44FBD2211451BF7800886093 /* Tx-LzBack.png in Resources */,
+				44FBD2231451BF7800886093 /* Tx-LzBack@2x.png in Resources */,
+				44FBD2271451C19400886093 /* Tx-LzBrown.png in Resources */,
+				44FBD2291451C19400886093 /* Tx-LzBrown@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -563,6 +583,10 @@
 				44542EA41424F5BE00ADE01F /* OptionVC.xib in Resources */,
 				440C19951446B50E008E9CB0 /* icon44-PageFilp@2x.png in Resources */,
 				440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */,
+				44FBD2221451BF7800886093 /* Tx-LzBack.png in Resources */,
+				44FBD2241451BF7800886093 /* Tx-LzBack@2x.png in Resources */,
+				44FBD2281451C19400886093 /* Tx-LzBrown.png in Resources */,
+				44FBD22A1451C19400886093 /* Tx-LzBrown@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

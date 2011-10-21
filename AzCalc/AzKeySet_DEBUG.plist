@@ -1130,30 +1130,30 @@
 	<key>P3C1R1</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>105</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>GT</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<key>P3C1R2</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.90000000000000002</real>
+		<real>0.20000000000000001</real>
 		<key>Color</key>
-		<integer>1</integer>
+		<integer>0</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>10</integer>
 		<key>Tag</key>
-		<integer>105</integer>
+		<integer>-1</integer>
 		<key>Text</key>
-		<string>GT</string>
+		<string>(Blank)</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>

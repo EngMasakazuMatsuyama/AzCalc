@@ -169,6 +169,9 @@
 	
 	bPad = (700 < self.view.frame.size.height);
 	
+	// 背景テクスチャ・タイルペイント
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Tx-LzBack"]];
+
 	//========================================================== Upper ==============
 	// ScrollUpper  (0)Pickerドラム  (1)TextView数式
 	ibScrollUpper.delegate = self;
