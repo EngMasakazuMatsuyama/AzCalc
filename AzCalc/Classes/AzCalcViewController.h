@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #include <AVFoundation/AVFoundation.h>
+#import "AzCalcAppDelegate.h"
 
 #ifdef GD_Ad_ENABLED
 #import <iAd/iAd.h>
@@ -46,13 +47,17 @@
 	NSArray				*RaDrumButtons;
 	NSArray				*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
-	UIImage*			RimgDrumButton;	
-	UIImage*			RimgDrumPush;
+	NSDictionary		*dicKeys;
+	UIImage				*RimgDrumButton;	
+	UIImage				*RimgDrumPush;
+	UIView					*mKeyView;
+	UIView					*mKeyViewPrev;  // スクロール後に破棄する
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 	//UIView*			MviewKeyboard;
 
 	//----------------------------------------------assign
+	AzCalcAppDelegate	*mAppDelegate;
 	NSInteger		entryComponent;
 	BOOL				bDramRevers;		// これにより、ドラム逆転やりなおしモード時のキー連打不具合に対処している。
 	BOOL				bZoomEntryComponent; // YES= entryComponentの幅を最大にする

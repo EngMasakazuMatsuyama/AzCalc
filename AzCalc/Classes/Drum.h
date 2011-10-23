@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "AzCalcAppDelegate.h"
 
 #define DRUM_RECORDS	200	// 1ドラムの最大行数制限
 

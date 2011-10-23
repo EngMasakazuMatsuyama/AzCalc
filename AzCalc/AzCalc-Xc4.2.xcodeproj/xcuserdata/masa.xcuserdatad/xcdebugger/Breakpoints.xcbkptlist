@@ -9,40 +9,26 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "341028737.05629"
+         timestampString = "341077590.739084"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "347"
-         endingLineNumber = "347"
+         startingLineNumber = "667"
+         endingLineNumber = "667"
          landmarkName = "-viewDidLoad"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "341037179.69548"
+         timestampString = "341080311.859183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2631"
-         endingLineNumber = "2631"
-         landmarkName = "@implementation AzCalcViewController"
-         landmarkType = "3">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "340902408.285966"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "183"
-         endingLineNumber = "183"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "2726"
+         endingLineNumber = "2726"
+         landmarkName = "-scrollViewDidEndDecelerating:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -51,27 +37,13 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "341037179.69548"
+         timestampString = "341080311.859183"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1161"
-         endingLineNumber = "1161"
-         landmarkName = "-handleUpperSwipeRight:"
+         startingLineNumber = "2698"
+         endingLineNumber = "2698"
+         landmarkName = "-scrollViewDidEndDecelerating:"
          landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "Classes/AzCalcViewController.mm"
-         timestampString = "341037179.69548"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2619"
-         endingLineNumber = "2619"
-         landmarkName = "@implementation AzCalcViewController"
-         landmarkType = "3">
       </FileBreakpoint>
    </FileBreakpoints>
 </Bucket>
