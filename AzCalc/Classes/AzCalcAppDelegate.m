@@ -56,6 +56,7 @@
 							  NSLocalizedString(@"GUD_DecimalSeparator",nil),	GUD_DecimalSeparator,
 							  NSLocalizedString(@"GUD_TaxRate",nil),			GUD_TaxRate,
 							  @"0",		GUD_AudioVolume,	// 0〜10
+							  @"1",		GUD_ButtonDesign,	//[1.0.10] 0=Drum, 1=RoundRect, 2=Rect
 							  nil];
 
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

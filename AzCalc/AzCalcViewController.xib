@@ -87,6 +87,7 @@
 						<string key="NSFrame">{{0, 216}, {320, 244}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="881090632">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -98,9 +99,13 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<bool key="IBUIDirectionalLockEnabled">YES</bool>
+						<bool key="IBUIBounces">NO</bool>
 						<bool key="IBUIPagingEnabled">YES</bool>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
+						<bool key="IBUIDelaysContentTouches">NO</bool>
+						<bool key="IBUICanCancelContentTouches">NO</bool>
+						<bool key="IBUIBouncesZoom">NO</bool>
 					</object>
 					<object class="IBUIScrollView" id="157882084">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -359,12 +364,17 @@
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="171654030"/>
 						<reference key="IBUIBackgroundColor" ref="881090632"/>
+						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
-						<bool key="IBUIMultipleTouchEnabled">YES</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIDirectionalLockEnabled">YES</bool>
+						<bool key="IBUIBounces">NO</bool>
 						<bool key="IBUIPagingEnabled">YES</bool>
 						<bool key="IBUIShowsHorizontalScrollIndicator">NO</bool>
 						<bool key="IBUIShowsVerticalScrollIndicator">NO</bool>
+						<bool key="IBUIDelaysContentTouches">NO</bool>
+						<bool key="IBUICanCancelContentTouches">NO</bool>
+						<bool key="IBUIBouncesZoom">NO</bool>
 					</object>
 					<object class="IBUIButton" id="946835803">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -377,6 +387,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
+						<string key="IBUINormalTitle">MEMORY</string>
 						<object class="NSColor" key="IBUIHighlightedTitleColor">
 							<int key="NSColorSpace">1</int>
 							<bytes key="NSRGB">MC4wNDY5ODE0ODUwOCAwLjA4OTg1ODc1ODg5IDEAA</bytes>
@@ -386,14 +397,6 @@
 							<bytes key="NSRGB">MC4wNDY5ODE0ODUwOCAwLjA4OTg1ODc1ODg5IDEAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="444524143"/>
-						<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Icon-DrumPush128x79.png</string>
-						</object>
-						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">Icon-Drum128x79.png</string>
-						</object>
 						<reference key="IBUIFontDescription" ref="502550913"/>
 						<reference key="IBUIFont" ref="751430799"/>
 					</object>
@@ -967,17 +970,13 @@
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>Icon-Drum128x79.png</string>
 				<string>Icon-Drum60x37.png</string>
-				<string>Icon-DrumPush128x79.png</string>
 				<string>Icon-DrumPush60x37.png</string>
 				<string>Icon16-Setting.png</string>
 			</object>
 			<object class="NSMutableArray" key="dict.values">
 				<bool key="EncodedWithXMLCoder">YES</bool>
-				<string>{128, 79}</string>
 				<string>{60, 37}</string>
-				<string>{128, 79}</string>
 				<string>{60, 37}</string>
 				<string>{16, 16}</string>
 			</object>

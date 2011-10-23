@@ -182,40 +182,31 @@
 	rect.origin.x = rect.size.width * MiSvUpperPage;
 	[ibScrollUpper scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
 	
-	ibScrollUpper.scrollEnabled = YES; //スクロール許可
+	//ibScrollUpper.scrollEnabled = YES; //スクロール許可
 	ibScrollUpper.bounces = NO; // 両端の跳ね返り
 
-	/**
 	//[1.0.8.2]　UITapGestureRecognizer対応 ＜＜iOS3.2以降
 	ibScrollUpper.scrollEnabled = NO; //スクロール禁止
 	ibScrollUpper.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	// セレクタを指定して、ジェスチャーリコジナイザーを生成する ＜＜iOS3.2以降対応
 	// handleSwipeLeft:ハンドラ登録　　2本指で左へスワイプされた
 	UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpperSwipeLeft:)];
-	swipe.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionLeft; //左
 	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release];
 	// handleSwipeRight:ハンドラ登録　　2本指で右へスワイプされた
 	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpperSwipeRight:)];
-	swipe.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release];
-	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
-	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
-	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
-	swipe.direction = UISwipeGestureRecognizerDirectionRight;
-	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
-	[swipe release], swipe = nil;
-	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
-	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
-	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
-	swipe.direction = UISwipeGestureRecognizerDirectionLeft;
-	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
-	[swipe release], swipe = nil;
-	*/
+	// 長押し
+	UILongPressGestureRecognizer *press = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpperLongPress:)];
+	[ibPvDrum addGestureRecognizer:press];
+	[press release];
 	
+
 	//-----------------------------------------------------(0)ドラム ページ
 	if (RaDrumButtons) {
 		[RaDrumButtons release];	// viewDidUnloadされた後、ここを通る
@@ -227,19 +218,6 @@
 		// ドラム切り替えボタン(透明)をaddSubView
 		UIButton *bu = [UIButton buttonWithType:UIButtonTypeCustom];
 		bu.tag = i;
-/*	没：entryレス向上のためPicker再表示させずにラベルだけで処理しようと考えたが中止。
-		UILabel *lb = [[UILabel alloc] initWithFrame:CGRectMake(5,0, bu.frame.size.width-10, bu.frame.size.height)];  //[1.0.6]entry中の表示レス向上策
-		lb.tag = TAG_DrumButton_LABEL;
-		lb.textAlignment = UITextAlignmentRight;
-		lb.backgroundColor = [UIColor clearColor];
-		lb.textColor = [UIColor blackColor];
-		lb.font = [UIFont systemFontOfSize:DRUM_FONT_MAX];
-		lb.adjustsFontSizeToFitWidth = YES;
-		lb.minimumFontSize = 6;
-		lb.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
-		lb.alpha = 0.0;
-		[bu addSubview:lb];
-		[lb release];*/
 #ifdef AzMAKE_SPLASHFACE
 		bu.alpha = 0.0;	// これで非表示状態になる
 		//bu.hidden = YES;   MvDrumButtonShowで変更しているため効果なし
@@ -311,13 +289,32 @@
 	//========================================================== Lower ==============
 	//[0.4.2]//[self MvPadKeysShow]より前に必要だった。
 	//[0.4.1]//"Received memory warning. Level=2" 回避するための最適化
-	if (bPad) {
-		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum128x79"] retain];
-		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush128x79"] retain];
-	} else {
-		RimgDrumButton = [[UIImage imageNamed:@"Icon-Drum60x37"] retain];
-		RimgDrumPush = [[UIImage imageNamed:@"Icon-DrumPush60x37"] retain];
+	
+	switch ([userDef integerForKey:GUD_ButtonDesign]) {
+		case 1: // Round　rect
+			//[1.0.10]stretchableImageWithLeftCapWidth:により四隅を固定して伸縮する
+			RimgDrumButton = [[[UIImage imageNamed:@"ButtonWhite"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
+			RimgDrumPush = [[[UIImage imageNamed:@"ButtonWhitePush"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
+			break;
+
+		case 2: // Rect
+			//[1.0.10]stretchableImageWithLeftCapWidth:により四隅を固定して伸縮する
+			RimgDrumButton = [[[UIImage imageNamed:@"ButtonWhite"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
+			RimgDrumPush = [[[UIImage imageNamed:@"ButtonWhitePush"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
+			break;
+			
+		default: // 0=Drum
+			if (bPad) {
+				//[1.0.10]stretchableImageWithLeftCapWidth:によりボタンイメージ向上
+				RimgDrumButton = [[[UIImage imageNamed:@"Icon-Drum128x79"] stretchableImageWithLeftCapWidth:40 topCapHeight:0] retain];
+				RimgDrumPush = [[[UIImage imageNamed:@"Icon-DrumPush128x79"] stretchableImageWithLeftCapWidth:40 topCapHeight:0] retain];
+			} else {
+				RimgDrumButton = [[[UIImage imageNamed:@"Icon-Drum60x37"] stretchableImageWithLeftCapWidth:20 topCapHeight:0] retain];
+				RimgDrumPush = [[[UIImage imageNamed:@"Icon-DrumPush60x37"] stretchableImageWithLeftCapWidth:20 topCapHeight:0] retain];
+			}
+			break;
 	}
+
 	
 	if (bPad) { // iPad
 		iKeyPages = 4;	//[0.4]単位キー追加のため
@@ -352,18 +349,19 @@
 	ibScrollLower.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	// セレクタを指定して、ジェスチャーリコジナイザーを生成する ＜＜iOS3.2以降対応
 	// handleSwipeLeft:ハンドラ登録　　2本指で左へスワイプされた
-	UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeLeft:)];
-	swipe.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+	//UISwipeGestureRecognizer *
+	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeLeft:)];
+	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionLeft; //左
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
 	// handleSwipeRight:ハンドラ登録　　2本指で右へスワイプされた
 	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeRight:)];
-	swipe.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
-	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
+/*	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
 	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
 	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionRight;
@@ -375,7 +373,7 @@
 	swipe.direction = UISwipeGestureRecognizerDirectionLeft;
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
-	
+*/
 	
 	NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
 
@@ -442,7 +440,6 @@
 	// subViewsで取得できる配列には、以下のaddSubViewした順（縦書きで左から右）に収められている。
 	// UIButtonのみaddSubViewすること！ それを前提に後処理しているため。
 
-	
 	for (int page=0; page<iKeyPages; page++ ) 
 	{
 		if (iPageUpdate <= page) {	// 以降、デフォルト"AzKeySet"から読み込む
@@ -471,8 +468,6 @@
 			for (int row=0; row<iKeyRows && row<100; row++ ) 
 			{
 				KeyButton *bu = [[KeyButton alloc] initWithFrame:CGRectMake(fx,fy, fKeyWidth,fKeyHeight)];
-				//bu.contentMode = UIViewContentModeScaleToFill;
-				//bu.contentStretch = CGRectMake(0.5, 0.5, 0.0, 0.0);  変化なしだった。
 				[bu setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 				[bu setBackgroundImage:RimgDrumPush forState:UIControlStateHighlighted];
 				bu.iPage = page;
@@ -612,7 +607,9 @@
 		RaKeyMaster = nil;
 	}
 	
-	// Memory Display
+	// MEMORY BUTTON
+	[ibBuMemory setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
+	[ibBuMemory setBackgroundImage:RimgDrumPush forState:UIControlStateHighlighted];
 	ibBuMemory.hidden = NO;
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
@@ -1002,12 +999,14 @@
 			//bu.frame = CGRectMake(fX,fY+155, fWiMax-6,28); // 選択中
 			bu.frame = CGRectMake(fX,fY+153, fWiMax-6,32); // 選択中
 			bu.backgroundColor = [UIColor greenColor];	// 追加
+			bu.userInteractionEnabled = NO; //[1.0.10]ピッカーロール優先のため無効にした。　ダブルタップ式に変更
 			// Next
 			fX += (fWiMax + DRUM_GAP);
 		} else {
 			bu.frame = CGRectMake(fX,fY, fWiMin-6,fY+ibPvDrum.frame.size.height);  // 非選択時
 			//bu.backgroundColor = [UIColor yellowColor];  //DEBUG
 			bu.backgroundColor = [UIColor clearColor];
+			bu.userInteractionEnabled = YES;
 			// Next
 			fX += (fWiMin + DRUM_GAP);
 		}
@@ -1204,6 +1203,7 @@
 	[ibScrollLower scrollRectToVisible:rect animated:YES];
 }
 
+/*
 - (void)reset_MiSwipe1fingerCount {
 	MiSwipe1fingerCount = 0;
 }
@@ -1234,7 +1234,7 @@
 		[alert release];
 	}
 }
-
+*/
 
 #pragma mark - UNIT 単位
 

@@ -18,6 +18,8 @@
 	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
 	IBOutlet UISegmentedControl	*ibSegGroupingType;
 	IBOutlet UISegmentedControl	*ibSegDecimalSeparator;
+	IBOutlet UISegmentedControl	*ibSegButtonDesign;
+
 @private
 	float		MfTaxRate;
 	float		MfTaxRateModify;
@@ -30,6 +32,7 @@
 - (IBAction)ibSegGroupingSeparator:(UISegmentedControl *)segment;
 - (IBAction)ibSegGroupingType:(UISegmentedControl *)segment;
 - (IBAction)ibSegDecimalSeparator:(UISegmentedControl *)segment;
+- (IBAction)ibSegButtonDesign:(UISegmentedControl *)segment;
 - (IBAction)ibBuOK:(UIButton *)button;
 
 @end

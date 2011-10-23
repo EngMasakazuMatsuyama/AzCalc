@@ -76,6 +76,7 @@
 #define GUD_GroupingSeparator		@"GUD_GroupingSeparator"
 #define GUD_GroupingType				@"GUD_GroupingType"
 #define GUD_DecimalSeparator			@"GUD_DecimalSeparator"
+#define GUD_ButtonDesign				@"GUD_ButtonDesign"
 
 
 //

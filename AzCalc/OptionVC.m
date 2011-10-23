@@ -63,6 +63,7 @@
 	ibSegGroupingSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingSeparator];
 	ibSegGroupingType.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_GroupingType];
 	ibSegDecimalSeparator.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_DecimalSeparator];
+	ibSegButtonDesign.selectedSegmentIndex = (NSInteger)[defaults integerForKey:GUD_ButtonDesign];
 }
 // viewDidAppear はView表示直後に呼ばれる
 
@@ -126,6 +127,14 @@
 	// (0) 0.0
 	// (1) 0·0
 	// (2) 0,0
+}
+
+- (IBAction)ibSegButtonDesign:(UISegmentedControl *)segment
+{
+	[[NSUserDefaults standardUserDefaults] setInteger:segment.selectedSegmentIndex forKey:GUD_ButtonDesign];
+	// (0) Roll
+	// (1) Round rect
+	// (2) Rect
 }
 
 - (IBAction)ibBuOK:(UIButton *)button

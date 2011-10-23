@@ -86,9 +86,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>401</integer>
+		<integer>406</integer>
 		<key>Text</key>
-		<string>M1</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -101,9 +101,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>402</integer>
+		<integer>406</integer>
 		<key>Text</key>
-		<string>M2</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -116,9 +116,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>403</integer>
+		<integer>406</integer>
 		<key>Text</key>
-		<string>M3</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -176,9 +176,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>407</integer>
+		<integer>406</integer>
 		<key>Text</key>
-		<string>M7</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -191,9 +191,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>408</integer>
+		<integer>406</integer>
 		<key>Text</key>
-		<string>M8</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -206,9 +206,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>409</integer>
+		<integer>404</integer>
 		<key>Text</key>
-		<string>M9</string>
+		<string>M4</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -251,9 +251,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>407</integer>
+		<integer>406</integer>
 		<key>Text</key>
-		<string>M7</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -266,9 +266,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>408</integer>
+		<integer>406</integer>
 		<key>Text</key>
-		<string>M8</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -281,9 +281,9 @@
 		<key>Size</key>
 		<integer>18</integer>
 		<key>Tag</key>
-		<integer>409</integer>
+		<integer>404</integer>
 		<key>Text</key>
-		<string>M9</string>
+		<string>M4</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
@@ -350,15 +350,15 @@
 	<key>P0C5R4</key>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000000000000004</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
-		<integer>20</integer>
+		<integer>18</integer>
 		<key>Tag</key>
-		<integer>312</integer>
+		<integer>404</integer>
 		<key>Text</key>
-		<string>M-</string>
+		<string>M4</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>

@@ -25,6 +25,8 @@
 	IBOutlet UISegmentedControl	*ibSegGroupingSeparator;
 	IBOutlet UISegmentedControl	*ibSegGroupingType;
 	IBOutlet UISegmentedControl	*ibSegDecimalSeparator;
+	IBOutlet UISegmentedControl	*ibSegButtonDesign;
+
 @private
 	AzCalcAppDelegate *appDelegate;  // initにて = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	// Option-iPad
@@ -37,6 +39,7 @@
 - (IBAction)ibSegDecimal:(UISegmentedControl *)segment;
 - (IBAction)ibSegRound:(UISegmentedControl *)segment;
 - (IBAction)ibSegReverseDrum:(UISegmentedControl *)segment;
+- (IBAction)ibSegButtonDesign:(UISegmentedControl *)segment;
 - (IBAction)ibBuOK:(UIButton *)button;
 - (IBAction)ibBuKeyboardEdit:(UIButton *)button;
 - (IBAction)ibBuPageFlip:(UIButton *)button;

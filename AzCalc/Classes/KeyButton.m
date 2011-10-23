@@ -34,6 +34,10 @@
 		iColorNo = 0;
 		fFontSize = 10;
 		bDirty = NO;
+		//bu.contentMode = UIViewContentModeScaleToFill;
+		//bu.contentStretch = CGRectMake(0.5, 0.5, 0.0, 0.0);  変化なしだった。
+		//self.imageView.contentMode = UIViewContentModeScaleToFill;
+		//self.imageView.contentStretch = CGRectMake(0.5, 0.5, 0.0, 0.0);
     }
     return self;
 }
