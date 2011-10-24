@@ -38,7 +38,6 @@
 		44A3D38211F31E4C0001BF89 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A3D38011F31E4C0001BF89 /* InformationVC.m */; };
 		44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
 		44A560D813237E48000E4628 /* AzKeySet.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44A560D713237E48000E4628 /* AzKeySet.plist */; };
-		44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */; };
 		44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
 		44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
 		44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -53,7 +52,6 @@
 		44BC4C4A1359E9A1009B995C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448D99301307D1DD004DFD62 /* Localizable.strings */; };
 		44BC4C4B1359E9A1009B995C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
 		44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448D997C1307DC8D004DFD62 /* SettingVC.xib */; };
-		44BC4C4E1359E9A1009B995C /* icon32-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */; };
 		44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
 		44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
 		44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
@@ -111,14 +109,14 @@
 		44D32BD71424A79F0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
-		44E3DB571454695A00E0BA17 /* KeyRectDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4B1454695A00E0BA17 /* KeyRectDw.png */; };
-		44E3DB581454695A00E0BA17 /* KeyRectDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4B1454695A00E0BA17 /* KeyRectDw.png */; };
-		44E3DB591454695A00E0BA17 /* KeyRectDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4C1454695A00E0BA17 /* KeyRectDw@2x.png */; };
-		44E3DB5A1454695A00E0BA17 /* KeyRectDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4C1454695A00E0BA17 /* KeyRectDw@2x.png */; };
-		44E3DB5B1454695A00E0BA17 /* KeyRectUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4D1454695A00E0BA17 /* KeyRectUp.png */; };
-		44E3DB5C1454695A00E0BA17 /* KeyRectUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4D1454695A00E0BA17 /* KeyRectUp.png */; };
-		44E3DB5D1454695A00E0BA17 /* KeyRectUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4E1454695A00E0BA17 /* KeyRectUp@2x.png */; };
-		44E3DB5E1454695A00E0BA17 /* KeyRectUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4E1454695A00E0BA17 /* KeyRectUp@2x.png */; };
+		44E3DB571454695A00E0BA17 /* KeySquareDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */; };
+		44E3DB581454695A00E0BA17 /* KeySquareDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */; };
+		44E3DB591454695A00E0BA17 /* KeySquareDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4C1454695A00E0BA17 /* KeySquareDw@2x.png */; };
+		44E3DB5A1454695A00E0BA17 /* KeySquareDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4C1454695A00E0BA17 /* KeySquareDw@2x.png */; };
+		44E3DB5B1454695A00E0BA17 /* KeySquareUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4D1454695A00E0BA17 /* KeySquareUp.png */; };
+		44E3DB5C1454695A00E0BA17 /* KeySquareUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4D1454695A00E0BA17 /* KeySquareUp.png */; };
+		44E3DB5D1454695A00E0BA17 /* KeySquareUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4E1454695A00E0BA17 /* KeySquareUp@2x.png */; };
+		44E3DB5E1454695A00E0BA17 /* KeySquareUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4E1454695A00E0BA17 /* KeySquareUp@2x.png */; };
 		44E3DB5F1454695A00E0BA17 /* KeyRollDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4F1454695A00E0BA17 /* KeyRollDw.png */; };
 		44E3DB601454695A00E0BA17 /* KeyRollDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4F1454695A00E0BA17 /* KeyRollDw.png */; };
 		44E3DB611454695A00E0BA17 /* KeyRollDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB501454695A00E0BA17 /* KeyRollDw@2x.png */; };
@@ -127,14 +125,14 @@
 		44E3DB641454695A00E0BA17 /* KeyRollUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB511454695A00E0BA17 /* KeyRollUp.png */; };
 		44E3DB651454695A00E0BA17 /* KeyRollUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB521454695A00E0BA17 /* KeyRollUp@2x.png */; };
 		44E3DB661454695A00E0BA17 /* KeyRollUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB521454695A00E0BA17 /* KeyRollUp@2x.png */; };
-		44E3DB671454695A00E0BA17 /* KeyRoundDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB531454695A00E0BA17 /* KeyRoundDw.png */; };
-		44E3DB681454695A00E0BA17 /* KeyRoundDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB531454695A00E0BA17 /* KeyRoundDw.png */; };
-		44E3DB691454695A00E0BA17 /* KeyRoundDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB541454695A00E0BA17 /* KeyRoundDw@2x.png */; };
-		44E3DB6A1454695A00E0BA17 /* KeyRoundDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB541454695A00E0BA17 /* KeyRoundDw@2x.png */; };
-		44E3DB6B1454695A00E0BA17 /* KeyRoundUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB551454695A00E0BA17 /* KeyRoundUp.png */; };
-		44E3DB6C1454695A00E0BA17 /* KeyRoundUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB551454695A00E0BA17 /* KeyRoundUp.png */; };
-		44E3DB6D1454695A00E0BA17 /* KeyRoundUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyRoundUp@2x.png */; };
-		44E3DB6E1454695A00E0BA17 /* KeyRoundUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyRoundUp@2x.png */; };
+		44E3DB671454695A00E0BA17 /* KeyOvalDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB531454695A00E0BA17 /* KeyOvalDw.png */; };
+		44E3DB681454695A00E0BA17 /* KeyOvalDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB531454695A00E0BA17 /* KeyOvalDw.png */; };
+		44E3DB691454695A00E0BA17 /* KeyOvalDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB541454695A00E0BA17 /* KeyOvalDw@2x.png */; };
+		44E3DB6A1454695A00E0BA17 /* KeyOvalDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB541454695A00E0BA17 /* KeyOvalDw@2x.png */; };
+		44E3DB6B1454695A00E0BA17 /* KeyOvalUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB551454695A00E0BA17 /* KeyOvalUp.png */; };
+		44E3DB6C1454695A00E0BA17 /* KeyOvalUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB551454695A00E0BA17 /* KeyOvalUp.png */; };
+		44E3DB6D1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */; };
+		44E3DB6E1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */; };
 		44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
 		44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
 		44FB6519137259150092532D /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
@@ -196,7 +194,6 @@
 		44A3D4BD11F354FB0001BF89 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = ../English.lproj/SettingVC.xib; sourceTree = "<group>"; };
 		44A3D4CB11F355400001BF89 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/InformationVC.xib; sourceTree = "<group>"; };
 		44A560D713237E48000E4628 /* AzKeySet.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeySet.plist; sourceTree = "<group>"; };
-		44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon32-PageFilp.png"; path = "Image/icon32-PageFilp.png"; sourceTree = "<group>"; };
 		44A8B24311F3EC87007D6FA0 /* OptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionVC.h; path = ../OptionVC.h; sourceTree = "<group>"; };
 		44A8B24411F3EC87007D6FA0 /* OptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionVC.m; path = ../OptionVC.m; sourceTree = "<group>"; };
 		44AB054012258878005E11A7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
@@ -239,18 +236,18 @@
 		44D32BDA1424D41D0041523E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OptionVC.xib; sourceTree = "<group>"; };
 		44D32BDC1424D4350041523E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/OptionVC.xib; sourceTree = "<group>"; };
 		44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting@2x.png"; path = "Image/Icon16-Setting@2x.png"; sourceTree = "<group>"; };
-		44E3DB4B1454695A00E0BA17 /* KeyRectDw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyRectDw.png; path = Image/KeyRectDw.png; sourceTree = "<group>"; };
-		44E3DB4C1454695A00E0BA17 /* KeyRectDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyRectDw@2x.png"; path = "Image/KeyRectDw@2x.png"; sourceTree = "<group>"; };
-		44E3DB4D1454695A00E0BA17 /* KeyRectUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyRectUp.png; path = Image/KeyRectUp.png; sourceTree = "<group>"; };
-		44E3DB4E1454695A00E0BA17 /* KeyRectUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyRectUp@2x.png"; path = "Image/KeyRectUp@2x.png"; sourceTree = "<group>"; };
+		44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeySquareDw.png; path = Image/KeySquareDw.png; sourceTree = "<group>"; };
+		44E3DB4C1454695A00E0BA17 /* KeySquareDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeySquareDw@2x.png"; path = "Image/KeySquareDw@2x.png"; sourceTree = "<group>"; };
+		44E3DB4D1454695A00E0BA17 /* KeySquareUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeySquareUp.png; path = Image/KeySquareUp.png; sourceTree = "<group>"; };
+		44E3DB4E1454695A00E0BA17 /* KeySquareUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeySquareUp@2x.png"; path = "Image/KeySquareUp@2x.png"; sourceTree = "<group>"; };
 		44E3DB4F1454695A00E0BA17 /* KeyRollDw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyRollDw.png; path = Image/KeyRollDw.png; sourceTree = "<group>"; };
 		44E3DB501454695A00E0BA17 /* KeyRollDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyRollDw@2x.png"; path = "Image/KeyRollDw@2x.png"; sourceTree = "<group>"; };
 		44E3DB511454695A00E0BA17 /* KeyRollUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyRollUp.png; path = Image/KeyRollUp.png; sourceTree = "<group>"; };
 		44E3DB521454695A00E0BA17 /* KeyRollUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyRollUp@2x.png"; path = "Image/KeyRollUp@2x.png"; sourceTree = "<group>"; };
-		44E3DB531454695A00E0BA17 /* KeyRoundDw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyRoundDw.png; path = Image/KeyRoundDw.png; sourceTree = "<group>"; };
-		44E3DB541454695A00E0BA17 /* KeyRoundDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyRoundDw@2x.png"; path = "Image/KeyRoundDw@2x.png"; sourceTree = "<group>"; };
-		44E3DB551454695A00E0BA17 /* KeyRoundUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyRoundUp.png; path = Image/KeyRoundUp.png; sourceTree = "<group>"; };
-		44E3DB561454695A00E0BA17 /* KeyRoundUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyRoundUp@2x.png"; path = "Image/KeyRoundUp@2x.png"; sourceTree = "<group>"; };
+		44E3DB531454695A00E0BA17 /* KeyOvalDw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyOvalDw.png; path = Image/KeyOvalDw.png; sourceTree = "<group>"; };
+		44E3DB541454695A00E0BA17 /* KeyOvalDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalDw@2x.png"; path = "Image/KeyOvalDw@2x.png"; sourceTree = "<group>"; };
+		44E3DB551454695A00E0BA17 /* KeyOvalUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyOvalUp.png; path = Image/KeyOvalUp.png; sourceTree = "<group>"; };
+		44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalUp@2x.png"; path = "Image/KeyOvalUp@2x.png"; sourceTree = "<group>"; };
 		44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "AzCalcViewController-iPad.xib"; path = "../Resources-iPad/AzCalcViewController-iPad.xib"; sourceTree = "<group>"; };
 		44EF5DDD12099F6000BB87B6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
@@ -412,18 +409,18 @@
 		44A2E47411EB29F5009FB007 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				44E3DB4B1454695A00E0BA17 /* KeyRectDw.png */,
-				44E3DB4C1454695A00E0BA17 /* KeyRectDw@2x.png */,
-				44E3DB4D1454695A00E0BA17 /* KeyRectUp.png */,
-				44E3DB4E1454695A00E0BA17 /* KeyRectUp@2x.png */,
+				44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */,
+				44E3DB4C1454695A00E0BA17 /* KeySquareDw@2x.png */,
+				44E3DB4D1454695A00E0BA17 /* KeySquareUp.png */,
+				44E3DB4E1454695A00E0BA17 /* KeySquareUp@2x.png */,
 				44E3DB4F1454695A00E0BA17 /* KeyRollDw.png */,
 				44E3DB501454695A00E0BA17 /* KeyRollDw@2x.png */,
 				44E3DB511454695A00E0BA17 /* KeyRollUp.png */,
 				44E3DB521454695A00E0BA17 /* KeyRollUp@2x.png */,
-				44E3DB531454695A00E0BA17 /* KeyRoundDw.png */,
-				44E3DB541454695A00E0BA17 /* KeyRoundDw@2x.png */,
-				44E3DB551454695A00E0BA17 /* KeyRoundUp.png */,
-				44E3DB561454695A00E0BA17 /* KeyRoundUp@2x.png */,
+				44E3DB531454695A00E0BA17 /* KeyOvalDw.png */,
+				44E3DB541454695A00E0BA17 /* KeyOvalDw@2x.png */,
+				44E3DB551454695A00E0BA17 /* KeyOvalUp.png */,
+				44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */,
 				44FBD2251451C19400886093 /* Tx-LzBrown.png */,
 				44FBD2261451C19400886093 /* Tx-LzBrown@2x.png */,
 				44FBD21F1451BF7800886093 /* Tx-LzBack.png */,
@@ -436,7 +433,6 @@
 				446E08C6133450DF006859F4 /* Icon-DrumPush60x37@2x.png */,
 				445184431303B8BE002820EA /* Icon16-Setting.png */,
 				44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */,
-				44A8B23511F3E5F6007D6FA0 /* icon32-PageFilp.png */,
 				440C19931446B50E008E9CB0 /* icon44-PageFilp.png */,
 				440C19921446B50E008E9CB0 /* icon44-PageFilp@2x.png */,
 			);
@@ -561,7 +557,6 @@
 				444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */,
 				44A560D813237E48000E4628 /* AzKeySet.plist in Resources */,
 				449E6B98121FA34100338E7F /* AzKeySet-iPad.plist in Resources */,
-				44A8B23611F3E5F6007D6FA0 /* icon32-PageFilp.png in Resources */,
 				445184441303B8BE002820EA /* Icon16-Setting.png in Resources */,
 				44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */,
 				446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */,
@@ -592,18 +587,18 @@
 				44FBD2231451BF7800886093 /* Tx-LzBack@2x.png in Resources */,
 				44FBD2271451C19400886093 /* Tx-LzBrown.png in Resources */,
 				44FBD2291451C19400886093 /* Tx-LzBrown@2x.png in Resources */,
-				44E3DB571454695A00E0BA17 /* KeyRectDw.png in Resources */,
-				44E3DB591454695A00E0BA17 /* KeyRectDw@2x.png in Resources */,
-				44E3DB5B1454695A00E0BA17 /* KeyRectUp.png in Resources */,
-				44E3DB5D1454695A00E0BA17 /* KeyRectUp@2x.png in Resources */,
+				44E3DB571454695A00E0BA17 /* KeySquareDw.png in Resources */,
+				44E3DB591454695A00E0BA17 /* KeySquareDw@2x.png in Resources */,
+				44E3DB5B1454695A00E0BA17 /* KeySquareUp.png in Resources */,
+				44E3DB5D1454695A00E0BA17 /* KeySquareUp@2x.png in Resources */,
 				44E3DB5F1454695A00E0BA17 /* KeyRollDw.png in Resources */,
 				44E3DB611454695A00E0BA17 /* KeyRollDw@2x.png in Resources */,
 				44E3DB631454695A00E0BA17 /* KeyRollUp.png in Resources */,
 				44E3DB651454695A00E0BA17 /* KeyRollUp@2x.png in Resources */,
-				44E3DB671454695A00E0BA17 /* KeyRoundDw.png in Resources */,
-				44E3DB691454695A00E0BA17 /* KeyRoundDw@2x.png in Resources */,
-				44E3DB6B1454695A00E0BA17 /* KeyRoundUp.png in Resources */,
-				44E3DB6D1454695A00E0BA17 /* KeyRoundUp@2x.png in Resources */,
+				44E3DB671454695A00E0BA17 /* KeyOvalDw.png in Resources */,
+				44E3DB691454695A00E0BA17 /* KeyOvalDw@2x.png in Resources */,
+				44E3DB6B1454695A00E0BA17 /* KeyOvalUp.png in Resources */,
+				44E3DB6D1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -616,7 +611,6 @@
 				44BC4C541359E9A1009B995C /* AzKeyMaster.plist in Resources */,
 				44BC4C5F1359E9A1009B995C /* AzKeySet.plist in Resources */,
 				44BC4C551359E9A1009B995C /* AzKeySet-iPad.plist in Resources */,
-				44BC4C4E1359E9A1009B995C /* icon32-PageFilp.png in Resources */,
 				44BC4C561359E9A1009B995C /* Icon16-Setting.png in Resources */,
 				44BC4C571359E9A1009B995C /* Icon16-Setting@2x.png in Resources */,
 				44BC4C601359E9A1009B995C /* Icon-Drum60x37.png in Resources */,
@@ -647,18 +641,18 @@
 				44FBD2241451BF7800886093 /* Tx-LzBack@2x.png in Resources */,
 				44FBD2281451C19400886093 /* Tx-LzBrown.png in Resources */,
 				44FBD22A1451C19400886093 /* Tx-LzBrown@2x.png in Resources */,
-				44E3DB581454695A00E0BA17 /* KeyRectDw.png in Resources */,
-				44E3DB5A1454695A00E0BA17 /* KeyRectDw@2x.png in Resources */,
-				44E3DB5C1454695A00E0BA17 /* KeyRectUp.png in Resources */,
-				44E3DB5E1454695A00E0BA17 /* KeyRectUp@2x.png in Resources */,
+				44E3DB581454695A00E0BA17 /* KeySquareDw.png in Resources */,
+				44E3DB5A1454695A00E0BA17 /* KeySquareDw@2x.png in Resources */,
+				44E3DB5C1454695A00E0BA17 /* KeySquareUp.png in Resources */,
+				44E3DB5E1454695A00E0BA17 /* KeySquareUp@2x.png in Resources */,
 				44E3DB601454695A00E0BA17 /* KeyRollDw.png in Resources */,
 				44E3DB621454695A00E0BA17 /* KeyRollDw@2x.png in Resources */,
 				44E3DB641454695A00E0BA17 /* KeyRollUp.png in Resources */,
 				44E3DB661454695A00E0BA17 /* KeyRollUp@2x.png in Resources */,
-				44E3DB681454695A00E0BA17 /* KeyRoundDw.png in Resources */,
-				44E3DB6A1454695A00E0BA17 /* KeyRoundDw@2x.png in Resources */,
-				44E3DB6C1454695A00E0BA17 /* KeyRoundUp.png in Resources */,
-				44E3DB6E1454695A00E0BA17 /* KeyRoundUp@2x.png in Resources */,
+				44E3DB681454695A00E0BA17 /* KeyOvalDw.png in Resources */,
+				44E3DB6A1454695A00E0BA17 /* KeyOvalDw@2x.png in Resources */,
+				44E3DB6C1454695A00E0BA17 /* KeyOvalUp.png in Resources */,
+				44E3DB6E1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

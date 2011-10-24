@@ -321,7 +321,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">When you rotate the drum</string>
+						<string key="IBUIText">When you rotate the roll</string>
 						<reference key="IBUITextColor" ref="170086321"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -569,7 +569,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Number of drums</string>
+						<string key="IBUIText">Number of rolls</string>
 						<reference key="IBUITextColor" ref="170086321"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -1116,6 +1116,7 @@
 							<string>ibBuKeyboardEdit:</string>
 							<string>ibBuOK:</string>
 							<string>ibBuPageFlip:</string>
+							<string>ibSegButtonDesign:</string>
 							<string>ibSegCalcMethod:</string>
 							<string>ibSegDecimal:</string>
 							<string>ibSegDecimalSeparator:</string>
@@ -1142,6 +1143,7 @@
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
+							<string>UISegmentedControl</string>
 							<string>UISlider</string>
 							<string>UISlider</string>
 							<string>UISlider</string>
@@ -1155,6 +1157,7 @@
 							<string>ibBuKeyboardEdit:</string>
 							<string>ibBuOK:</string>
 							<string>ibBuPageFlip:</string>
+							<string>ibSegButtonDesign:</string>
 							<string>ibSegCalcMethod:</string>
 							<string>ibSegDecimal:</string>
 							<string>ibSegDecimalSeparator:</string>
@@ -1181,6 +1184,10 @@
 							<object class="IBActionInfo">
 								<string key="name">ibBuPageFlip:</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">ibSegButtonDesign:</string>
+								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">ibSegCalcMethod:</string>
@@ -1238,6 +1245,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibLbTax</string>
 							<string>ibLbVolume</string>
+							<string>ibSegButtonDesign</string>
 							<string>ibSegCalcMethod</string>
 							<string>ibSegDecimal</string>
 							<string>ibSegDecimalSeparator</string>
@@ -1261,6 +1269,7 @@
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
+							<string>UISegmentedControl</string>
 							<string>UISlider</string>
 							<string>UISlider</string>
 						</object>
@@ -1271,6 +1280,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibLbTax</string>
 							<string>ibLbVolume</string>
+							<string>ibSegButtonDesign</string>
 							<string>ibSegCalcMethod</string>
 							<string>ibSegDecimal</string>
 							<string>ibSegDecimalSeparator</string>
@@ -1291,6 +1301,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">ibLbVolume</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">ibSegButtonDesign</string>
+								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">ibSegCalcMethod</string>

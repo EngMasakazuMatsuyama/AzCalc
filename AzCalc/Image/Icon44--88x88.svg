@@ -16,9 +16,10 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="Icon44--88x88.svg"
-   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/icon44-PageFilp.png"
-   inkscape:export-xdpi="45"
-   inkscape:export-ydpi="45">
+   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/icon44-PageFilp@2x.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   style="display:inline">
   <defs
      id="defs4153">
     <linearGradient
@@ -110,9 +111,9 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4.1240058"
-     inkscape:cx="75.617128"
+     inkscape:cx="44.21562"
      inkscape:cy="18.773006"
-     inkscape:current-layer="layer3"
+     inkscape:current-layer="layer2"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
@@ -137,16 +138,16 @@
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Back"
-     style="display:none"
+     style="display:inline"
      transform="translate(0,56)"
      sodipodi:insensitive="true">
     <rect
-       style="fill:#999999;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:#c0c0c0;fill-rule:evenodd;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
        id="rect5278"
-       width="88"
-       height="88"
-       x="0"
-       y="-56" />
+       width="69.813797"
+       height="66.176552"
+       x="32.977642"
+       y="-17.687737" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -172,25 +173,5 @@
        id="path3852"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
-  </g>
-  <g
-     id="layer1"
-     inkscape:label="Page Flip xxxxx"
-     inkscape:groupmode="layer"
-     transform="translate(0,56)"
-     sodipodi:insensitive="true"
-     style="display:none">
-    <path
-       style="fill:#cccccc;stroke:#ffffff;stroke-width:0.09999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       d="m 0.20537696,31.701641 c 0,0 21.13140904,-4.211727 32.41987004,-15.024244 10.828585,-12.4092959 5.173638,-39.26952 5.173638,-39.26952 0,0 26.77063,9.083948 34.792532,4.243664 13.547211,-10.004918 15.254853,-37.445936 15.254853,-37.445936 0.586903,35.705015 -0.727683,65.979498 0,87.617415 z"
-       id="path4758"
-       sodipodi:nodetypes="ccccccc"
-       inkscape:connector-curvature="0" />
-    <path
-       sodipodi:nodetypes="cccccc"
-       id="path5316"
-       d="m 20.713524,31.759954 c 0,0 17.710727,-7.91835 27.652235,-13.386298 C 59.420635,12.712895 64.241786,11.534226 71.87831,-0.55624422 81.042783,-16.789495 88.041613,-34.678978 88.041613,-34.678978 88.490719,-7.3571003 88.53497,14.01604 88.162992,32.245471 z"
-       style="fill:#ffffff;stroke:#ffffff;stroke-width:0.09999999;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
-       inkscape:connector-curvature="0" />
   </g>
 </svg>

@@ -545,12 +545,17 @@
 	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
-	[swipe release];
-	// 長押し
+	[swipe release], swipe = nil;
+	// 1指2タップ
+	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpper2Taps:)];
+	tap.numberOfTouchesRequired =1; // 指数
+	tap.numberOfTapsRequired = 2; // タップ数
+	[ibPvDrum addGestureRecognizer:tap];
+	[tap release], tap = nil;
+	/*// 長押し
 	UILongPressGestureRecognizer *press = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpperLongPress:)];
 	[ibPvDrum addGestureRecognizer:press];
-	[press release];
-	
+	[press release], press = nil;*/
 
 	//-----------------------------------------------------(0)ドラム ページ
 	if (RaDrumButtons) {
@@ -568,7 +573,7 @@
 		//bu.hidden = YES;   MvDrumButtonShowで変更しているため効果なし
 #else
 		bu.alpha = 0.3; // 半透明 (0.0)透明にするとクリック検出されなくなる
-		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];
+		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchDown];  //TouchUpInside];
 #endif
 		[maButtons addObject:bu];
 		//[self.view addSubview:bu];
@@ -911,19 +916,19 @@
 		[RimgDrumPush release], RimgDrumPush = nil;
 	}
 	switch ([defaults integerForKey:GUD_ButtonDesign]) {
-		case 1: // Round　rect
+		case 1: // Oval
 			//[1.0.10]stretchableImageWithLeftCapWidth:により四隅を固定して伸縮する
-			RimgDrumButton = [[[UIImage imageNamed:@"KeyRoundUp"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
-			RimgDrumPush = [[[UIImage imageNamed:@"KeyRoundDw"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
+			RimgDrumButton = [[[UIImage imageNamed:@"KeyOvalUp"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
+			RimgDrumPush = [[[UIImage imageNamed:@"KeyOvalDw"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
 			break;
 			
-		case 2: // Rect
+		case 2: // Square
 			//[1.0.10]stretchableImageWithLeftCapWidth:により四隅を固定して伸縮する
-			RimgDrumButton = [[[UIImage imageNamed:@"KeyRectUp"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] retain];
-			RimgDrumPush = [[[UIImage imageNamed:@"KeyRectDw"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] retain];
+			RimgDrumButton = [[[UIImage imageNamed:@"KeySquareUp"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] retain];
+			RimgDrumPush = [[[UIImage imageNamed:@"KeySquareDw"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] retain];
 			break;
 			
-		default: // 0=Drum
+		default: // 0=Roll
 			//[1.0.10]stretchableImageWithLeftCapWidth:によりボタンイメージ向上
 			RimgDrumButton = [[[UIImage imageNamed:@"KeyRollUp"] stretchableImageWithLeftCapWidth:20 topCapHeight:0] retain];
 			RimgDrumPush = [[[UIImage imageNamed:@"KeyRollDw"] stretchableImageWithLeftCapWidth:20 topCapHeight:0] retain];
@@ -935,6 +940,9 @@
 		[mKeyView removeFromSuperview];
 		mKeyView = nil;
 	}
+#ifdef AzMAKE_SPLASHFACE
+	ibBuMemory.hidden = YES;
+#else
 	CGRect rcBounds = ibScrollLower.bounds;	// .y = 0
 	rcBounds.origin.x = rcBounds.size.width * PAGES/2; // 常に中央位置
 	mKeyView = [[UIView alloc] initWithFrame:rcBounds]; // .y=どこでも大丈夫
@@ -948,7 +956,6 @@
 	ibBuMemory.hidden = NO;
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
-#ifdef AzMAKE_SPLASHFACE
 	ibBuMemory.hidden = YES;
 #endif
 	
@@ -1065,14 +1072,14 @@
 		}
 		[ibBuMemory setTitle:zTitle forState:UIControlStateNormal];
 		// ボタンを出現させる
-		CGRect rc = ibBuMemory.frame;
-		rc.origin.y = ibScrollLower.frame.origin.y; // 定位置：ibScrollLowerの裏に隠れている
+		CGRect rc = ibBuMemory.frame; // Y位置はnib定義通り固定
 		// 文字数からボタンの幅を調整する
 		CGSize sz = [zTitle sizeWithFont:ibBuMemory.titleLabel.font];
 		AzLOG(@"sizeWithFont = W%f, H%f", sz.width, sz.height);
 		rc.size.width = sz.width + 20;
 		if (260 < rc.size.width) rc.size.width = 260; // Over
 		rc.origin.x = (ibPvDrum.frame.size.width - rc.size.width) / 2.0;
+		ibBuMemory.frame = rc;
 		// アニメ準備
 		[UIView beginAnimations:nil context:NULL];
 		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
@@ -1159,6 +1166,31 @@
 
 
 #pragma mark - GestureRecognizer Handler
+
+- (void)handleUpper2Taps: (UILongPressGestureRecognizer *) recognizer 
+{	// 上部で1指2タップ　＜＜指が離れたときにも呼び出される（2回）ことに注意
+	if (MiSvUpperPage==0) { // 選択中のロールを拡幅/縮小する
+		[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+		// ドラム幅を拡大する
+		bZoomEntryComponent = !bZoomEntryComponent;  // 拡大／均等トグル式
+		
+		// 以下の処理をしないと pickerView が再描画されない。
+		NSInteger iDrums = MiSegDrums;
+		MiSegDrums = 0;
+		[ibPvDrum reloadAllComponents];
+		MiSegDrums = iDrums;
+		// ibPvDrum は、以下のアニメーションに対応しない。
+		// アニメ準備
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+		[UIView setAnimationDuration:0.3];
+		// アニメ終了時の位置をセット
+		// Entryセル表示　＜＜この中でpickerView再描画
+		[self MvDrumButtonShow];
+		// アニメ開始
+		[UIView commitAnimations];
+	}
+}
 
 - (void)handleUpperSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
 {	// 2本指で左へスワイプされた

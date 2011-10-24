@@ -333,7 +333,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">ドラム数</string>
+						<string key="IBUIText">ロール数</string>
 						<reference key="IBUITextColor" ref="170086321"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -393,7 +393,7 @@
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">ドラム逆回転時</string>
+						<string key="IBUIText">ロール逆回転時</string>
 						<reference key="IBUITextColor" ref="170086321"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
@@ -698,6 +698,7 @@
 						<string key="NSFrame">{{277, 417}, {44, 44}}</string>
 						<reference key="NSSuperview" ref="854183509"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -1150,6 +1151,7 @@
 							<string>ibBuKeyboardEdit:</string>
 							<string>ibBuOK:</string>
 							<string>ibBuPageFlip:</string>
+							<string>ibSegButtonDesign:</string>
 							<string>ibSegCalcMethod:</string>
 							<string>ibSegDecimal:</string>
 							<string>ibSegDecimalSeparator:</string>
@@ -1176,6 +1178,7 @@
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
+							<string>UISegmentedControl</string>
 							<string>UISlider</string>
 							<string>UISlider</string>
 							<string>UISlider</string>
@@ -1189,6 +1192,7 @@
 							<string>ibBuKeyboardEdit:</string>
 							<string>ibBuOK:</string>
 							<string>ibBuPageFlip:</string>
+							<string>ibSegButtonDesign:</string>
 							<string>ibSegCalcMethod:</string>
 							<string>ibSegDecimal:</string>
 							<string>ibSegDecimalSeparator:</string>
@@ -1215,6 +1219,10 @@
 							<object class="IBActionInfo">
 								<string key="name">ibBuPageFlip:</string>
 								<string key="candidateClassName">UIButton</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">ibSegButtonDesign:</string>
+								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">ibSegCalcMethod:</string>
@@ -1272,6 +1280,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibLbTax</string>
 							<string>ibLbVolume</string>
+							<string>ibSegButtonDesign</string>
 							<string>ibSegCalcMethod</string>
 							<string>ibSegDecimal</string>
 							<string>ibSegDecimalSeparator</string>
@@ -1295,6 +1304,7 @@
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
 							<string>UISegmentedControl</string>
+							<string>UISegmentedControl</string>
 							<string>UISlider</string>
 							<string>UISlider</string>
 						</object>
@@ -1305,6 +1315,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>ibLbTax</string>
 							<string>ibLbVolume</string>
+							<string>ibSegButtonDesign</string>
 							<string>ibSegCalcMethod</string>
 							<string>ibSegDecimal</string>
 							<string>ibSegDecimalSeparator</string>
@@ -1325,6 +1336,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">ibLbVolume</string>
 								<string key="candidateClassName">UILabel</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">ibSegButtonDesign</string>
+								<string key="candidateClassName">UISegmentedControl</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">ibSegCalcMethod</string>
