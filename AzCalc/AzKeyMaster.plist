@@ -1055,7 +1055,7 @@
 			<key>Color</key>
 			<integer>2</integer>
 			<key>Size</key>
-			<integer>14</integer>
+			<integer>12</integer>
 			<key>Tag</key>
 			<integer>300</integer>
 			<key>Text</key>
@@ -1067,7 +1067,7 @@
 			<key>Color</key>
 			<integer>3</integer>
 			<key>Size</key>
-			<integer>14</integer>
+			<integer>12</integer>
 			<key>Tag</key>
 			<integer>301</integer>
 			<key>Text</key>

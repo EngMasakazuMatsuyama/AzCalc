@@ -566,7 +566,7 @@
 	ibPvDrum.dataSource = self;
 	ibPvDrum.showsSelectionIndicator = NO;
 	//NG//[ibPvDrum setSoundsEnabled:NO];  // ピッカーの音を止める。   Apple審査拒絶されました「仕様禁止メソッド」
-
+	
 	
 	//-----------------------------------------------------(1)数式 ページ
 	// UITextView
@@ -646,19 +646,6 @@
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
-/*	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
-	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
-	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
-	swipe.direction = UISwipeGestureRecognizerDirectionRight;
-	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
-	[swipe release], swipe = nil;
-	// handleSwipe1finger:ハンドラ登録　　1本指で右へスワイプされた
-	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe1finger:)];
-	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
-	swipe.direction = UISwipeGestureRecognizerDirectionLeft;
-	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
-	[swipe release], swipe = nil;
-*/
 	
 	//NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
 
@@ -666,9 +653,6 @@
 	ibPvDrum.alpha = 0.9;
 	ibBuMemory.hidden = YES;
 	ibLbEntry.hidden = YES;
-	if (RiAdBanner) {
-		RiAdBanner.hidden = YES;
-	}
 	ibBuSetting.hidden = YES;
 	ibBuInformation.hidden = YES;
 	NSDictionary *dicKeys = [NSDictionary new];
@@ -1108,6 +1092,9 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
 										 duration:(NSTimeInterval)duration
 {
+#ifdef AzMAKE_SPLASHFACE
+	return;
+#endif
 	if (!bPad) return; // iPhone
 	
 	// iPad専用 メモリー20キー配置 および 回転処理
@@ -1119,7 +1106,6 @@
 	// ibBuMemory：透明にして隠す。その後、改めて MvMemoryShow する
 	ibBuMemory.alpha = 0;
 	[self MvMemoryShow]; // 改めて表示
-	
 }
 
 

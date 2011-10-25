@@ -10,7 +10,8 @@
 
 //#define AzMAKE_SPLASHFACE  // 起動画面 Default.png を作るための作業オプション
 
-#ifdef AzFREE
+
+#if defined (AzFREE) && !defined(AzMAKE_SPLASHFACE)
 #define GD_Ad_ENABLED
 #define AdMobID_CalcRollPAD		@"a14dd47ad31c249"		// ドラタク　Pad Free パブリッシャー ID
 #define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
