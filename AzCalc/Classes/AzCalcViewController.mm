@@ -51,6 +51,7 @@
 - (void)MvMemoryShow;
 - (void)MvFormulaBlankMessage:(BOOL)bBlank;
 - (void)MvPadKeysShow;
+- (void)MvKeyUnitGroupSI;
 - (void)MvKeyUnitGroup:(KeyButton *)keyUnit;
 - (void)MvKeyboardPage:(NSInteger)iPage;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
@@ -103,8 +104,12 @@
 - (void)dealloc 
 {
 	NSLog(@"--- dealloc ---");
-
 	[self unloadRelease];
+	
+	[mGvKeyUnitSI release];
+	[mGvKeyUnitSi2 release];
+	[mGvKeyUnitSi3 release];
+
 	[RaDrums release];
     [super dealloc];
 }
@@ -163,15 +168,7 @@
 			if (dicKey) {
 				//NSDictionary *dicMaster = nil;
 				bu.tag = [[dicKey objectForKey:@"Tag"] integerValue]; // Function No.
-				
-#ifndef GD_UNIT_ENABLED
-				if (KeyTAG_UNIT_Start <= bu.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End
-					dicKey = nil;
-				}
-			}
-			if (dicKey) {
-#endif
-				
+
 				NSString *strText = [dicKey objectForKey:@"Text"];
 				NSNumber *numSize = [dicKey objectForKey:@"Size"];
 				NSNumber *numColor = [dicKey objectForKey:@"Color"];
@@ -264,13 +261,8 @@
 			
 			// 上と右のマージンが自動調整されるように。つまり、左下基点になる。
 			bu.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin; 
-			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];	// UIControlEventTouchDown OR UIControlEventTouchUpInside
-			
-			//[1.0.8]　UITapGestureRecognizer対応により以下没。
-			//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragExit]; //スクロールロック解除のため
-			//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragEnter]; NG/ほとんど無し
-			//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragInside]; NG/キー内の微妙な動きまで反応してしまう
-			//[bu addTarget:self action:@selector(ibButtonDrag:) forControlEvents:UIControlEventTouchDragOutside];  NG/ほとんど無し
+			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];	
+			// UIControlEventTouchDown OR UIControlEventTouchUpInside
 			
 			// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 			
@@ -333,39 +325,6 @@
 					bu.hidden = NO;
 				}
 				bu.enabled = YES; // 単位キーで無効にされている場合、解除するため
-#ifdef xxxxxAzDEBUGxxxxxxxx		
-				// DEBUG: AzKeyMasterの修正を反映させる
-				for (NSArray *aComponent in RaKeyMaster) {
-					for (NSDictionary *dic in aComponent) {
-						if ([[dic objectForKey:@"Tag"] integerValue] == bu.tag) {
-							// Dirty
-							bu.bDirty = YES; // 変更あり ⇒ 要保存
-							// Tag
-							bu.tag = [[dic objectForKey:@"Tag"] integerValue];
-							if (bu.tag != -1) { // Nothing Space
-								// Text
-								[bu setTitle:[dic objectForKey:@"Text"] forState:UIControlStateNormal];
-								// Color
-								bu.iColorNo = [[dic objectForKey:@"Color"] integerValue];
-								switch (bu.iColorNo) {
-									case 1:	[bu setTitleColor:[UIColor blackColor]	forState:UIControlStateNormal];	break;
-									case 2:	[bu setTitleColor:[UIColor redColor]	forState:UIControlStateNormal];	break;
-									case 3:	[bu setTitleColor:[UIColor blueColor]	forState:UIControlStateNormal];	break;
-									default:[bu setTitleColor:[UIColor clearColor]	forState:UIControlStateNormal];	break;
-								}
-								// Size
-								float fSize = [[dic objectForKey:@"Size"] floatValue]; 
-								bu.fFontSize = fSize; 
-								if (bPad) fSize *= 1.5; // iPadやや拡大
-								bu.titleLabel.font = [UIFont boldSystemFontOfSize:fSize];
-								// Alpha
-								bu.alpha = [[dic objectForKey:@"Alpha"] floatValue];
-							}
-							break;
-						}
-					}
-				}
-#endif
 			}
 		}
 #ifdef GD_Ad_ENABLED
@@ -475,7 +434,8 @@
 				}
 			}
 		}
-		//[self.view becomeFirstResponder];
+		//[1.0.10]キーボードスクロール時、単位キーの有効／無効を「直前と同様に」セットする
+		[self MvKeyUnitGroupSI];
 	}
 }
 
@@ -573,7 +533,7 @@
 		//bu.hidden = YES;   MvDrumButtonShowで変更しているため効果なし
 #else
 		bu.alpha = 0.3; // 半透明 (0.0)透明にするとクリック検出されなくなる
-		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchDown];  //TouchUpInside];
+		[bu addTarget:self action:@selector(MvDrumButtonTouchUp:) forControlEvents:UIControlEventTouchUpInside];  //TouchUpInside];
 #endif
 		[maButtons addObject:bu];
 		//[self.view addSubview:bu];
@@ -851,7 +811,6 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
 	[super viewWillAppear:animated];
-    //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	MfAudioVolume = (float)[defaults integerForKey:GUD_AudioVolume] / 10.0;
@@ -937,6 +896,7 @@
 	
 	// キーボード生成
 	if (mKeyView) {
+		mKeyView.hidden = YES;  // 実機では、removeだけでは消えない場合があった。
 		[mKeyView removeFromSuperview];
 		mKeyView = nil;
 	}
@@ -957,8 +917,7 @@
 	ibBuMemory.alpha = 0.0; // 透明にして隠す
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 	ibBuMemory.hidden = YES;
-#endif
-	
+
 	if (bPad) {
 		[self MvPadKeysShow]; // iPad専用 メモリー20キー配置 および 回転処理
 	}
@@ -984,8 +943,7 @@
 		}
 		formatterDecimalSeparator( bu.titleLabel.text ); // 参照はOK
 	}
-	
-	//[pool release];
+#endif
 }
 
 - (void)viewDidAppear:(BOOL)animated // 画面表示された後にコールされる
@@ -1327,29 +1285,17 @@
 
 #pragma mark - UNIT 単位
 
-- (void)GvKeyUnitGroupSI:(NSString *)unitSI 
-				   andSI:(NSString *)unitSi2 // =nil:ハイライト解除
-{
-	[self GvKeyUnitGroupSI:unitSI andSi2:unitSi2 andSi3:nil];
-}
-
-- (void)GvKeyUnitGroupSI:(NSString *)unitSI
-				  andSi2:(NSString *)unitSi2
-				  andSi3:(NSString *)unitSi3 // =nil:ハイライト解除
-{
-#ifndef GD_UNIT_ENABLED
-	return;
-#endif
-	NSLog(@"***GvKeyUnitGroupSI=%@,%@,%@", unitSI, unitSi2, unitSi3);
-	for (id obj in ibScrollLower.subviews)
+- (void)MvKeyUnitGroupSI
+{	//[1.0.10]キーボードスクロール時、単位キーの有無効を直前と同様にする
+	for (id obj in mKeyView.subviews)
 	{
 		if ([obj isMemberOfClass:[KeyButton class]]) {
 			KeyButton *kb = obj;
 			if (3<[kb.RzUnit length]) {  // = "SI基本単位:変換式;逆変換式"
-				if (unitSI || unitSi2) {		// 注意 ↓ nil ↓ 渡すとエラーになる
-					if ((unitSI && [kb.RzUnit hasPrefix:unitSI]) 
-					 || (unitSi2 && [kb.RzUnit hasPrefix:unitSi2])
-					 || (unitSi3 && [kb.RzUnit hasPrefix:unitSi3])) {
+				if (mGvKeyUnitSI || mGvKeyUnitSi2) {		// 注意 ↓ nil ↓ 渡すとエラーになる
+					if ((mGvKeyUnitSI && [kb.RzUnit hasPrefix:mGvKeyUnitSI]) 
+						|| (mGvKeyUnitSi2 && [kb.RzUnit hasPrefix:mGvKeyUnitSi2])
+						|| (mGvKeyUnitSi3 && [kb.RzUnit hasPrefix:mGvKeyUnitSi3])) {
 						// 同系列ハイライト
 						kb.enabled = YES;
 					} else {
@@ -1363,6 +1309,24 @@
 			}
 		}
 	}
+}
+
+- (void)GvKeyUnitGroupSI:(NSString *)unitSI 
+				   andSI:(NSString *)unitSi2 // =nil:ハイライト解除
+{
+	[self GvKeyUnitGroupSI:unitSI andSi2:unitSi2 andSi3:nil];
+}
+
+- (void)GvKeyUnitGroupSI:(NSString *)unitSI
+				  andSi2:(NSString *)unitSi2
+				  andSi3:(NSString *)unitSi3 // =nil:ハイライト解除
+{
+	NSLog(@"***GvKeyUnitGroupSI=%@,%@,%@", unitSI, unitSi2, unitSi3);
+	[mGvKeyUnitSI release];		if (unitSI) mGvKeyUnitSI = [unitSI copy];			else	mGvKeyUnitSI = nil;
+	[mGvKeyUnitSi2 release];	if (unitSi2) mGvKeyUnitSi2 = [unitSi2 copy];	else	mGvKeyUnitSi2 = nil;
+	[mGvKeyUnitSi3 release];	if (unitSi3) mGvKeyUnitSi3 = [unitSi3 copy];	else	mGvKeyUnitSi3 = nil;
+	NSLog(@"***mGvKeyUnitSI=%@,%@,%@", mGvKeyUnitSI, mGvKeyUnitSi2, mGvKeyUnitSi3);
+	[self MvKeyUnitGroupSI];
 }
 
 
@@ -1701,7 +1665,15 @@
 - (void)MvPadKeysShow // iPad専用 メモリー20キー配置 および 回転処理
 {
 	assert(bPad); // iPad
-	if (RaPadKeyButtons==nil) {
+	if (RaPadKeyButtons) {
+		//破棄しない//[RaPadKeyButtons release], RaPadKeyButtons = nil;
+		// .titleに値を保持しているため、破棄せずに表示だけ変更する
+		for (KeyButton *bu in RaPadKeyButtons) {
+			[bu setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
+			[bu setBackgroundImage:RimgDrumPush forState:UIControlStateHighlighted];
+		}
+	}
+	else {
 		// 生成
 		NSMutableArray *maBus = [NSMutableArray new];
 		for (int i=0; i<15; i++) 
@@ -2494,14 +2466,7 @@
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
 {
 	if (RaKeyMaster) {
-#ifdef GD_UNIT_ENABLED
 		return [[RaKeyMaster objectAtIndex:component] count]; 
-#else
-		if (component==2) {
-			return 7; // (0)〜(6)[-Tax]まで　(7)[Kg]以降無効にする 
-		}
-		return [[RaKeyMaster objectAtIndex:component] count]; 
-#endif
 	}
 
 #ifdef AzMAKE_SPLASHFACE

@@ -467,9 +467,6 @@
 // 演算子入力時やドラム切り替え時などに呼び出される。
 - (void)GvEntryUnitSet
 {
-#ifndef GD_UNIT_ENABLED
-	return;
-#endif
 	@try {
 		if ([entryOperator hasPrefix:OP_START]) {
 			[appDelegate.viewController  GvKeyUnitGroupSI:nil andSI:nil];	// 全単位有効
@@ -588,8 +585,9 @@
 						break;
 				}
 			}
-			else if (iDimAns==1) { // メートル系でない1次元単位
+			else if (iDimAns==1) { // メートル系でない1次元単位 "Kg" など
 				// zUnitSI そのまま
+				//[[zUnitSI retain] autorelease];	//[1.0.10]保持する
 			}
 			else { // 単位なし　全単位無効
 				[entryUnit setString:@""];

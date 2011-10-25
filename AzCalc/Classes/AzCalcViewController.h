@@ -52,6 +52,9 @@
 	UIImage				*RimgDrumPush;
 	UIView					*mKeyView;
 	UIView					*mKeyViewPrev;  // スクロール後に破棄する
+	NSString				*mGvKeyUnitSI;
+	NSString				*mGvKeyUnitSi2;
+	NSString				*mGvKeyUnitSi3;
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 	//UIView*			MviewKeyboard;
@@ -73,9 +76,9 @@
 #endif
 	
 	// Keyboard spec
-	int					iKeyPages;
-	int					iKeyCols, iKeyOffsetCol;
-	int					iKeyRows, iKeyOffsetRow;
+	int				iKeyPages;
+	int				iKeyCols, iKeyOffsetCol;
+	int				iKeyRows, iKeyOffsetRow;
 	float				fKeyGap;
 	float				fKeyFontZoom;
 	float				fKeyWidGap;			// キートップ左右の余白
@@ -84,9 +87,6 @@
 	float				fKeyHeight;				// キートップの高さ
 	float				MfTaxRate;				// 消費税率(%)
 	float				MfAudioVolume;		// 0.0〜1.0
-	
-	// Change Keyboard
-	//KeyButton			*buChangeKey;	// 選択中のキー
 	
 	// Setting
 	NSInteger  MiSegDrums;		// ドラム数 ＜＜セグメント値に +1 している＞＞

@@ -16,8 +16,6 @@
 #define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
 #endif
 
-#define GD_UNIT_ENABLED		// 単位機能
-
 #define OR  ||
 
 #ifdef AzDEBUG	//--------------------------------------------- DEBUG
