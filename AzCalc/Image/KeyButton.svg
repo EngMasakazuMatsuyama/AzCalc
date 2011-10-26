@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="KeyButton.svg"
-   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/KeySquareUp@2x.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90"
+   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/KeyOvalUp.png"
+   inkscape:export-xdpi="45"
+   inkscape:export-ydpi="45"
    style="display:inline">
   <defs
      id="defs4">
@@ -4960,15 +4960,6 @@
        y1="44"
        x2="25"
        y2="3" />
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter3956-2"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3958-3"
-         stdDeviation="0.66150001"
-         inkscape:collect="always" />
-    </filter>
     <clipPath
        id="clipPath3960-1"
        clipPathUnits="userSpaceOnUse">
@@ -5002,15 +4993,6 @@
        id="linearGradient6722-5"
        xlink:href="#linearGradient3856-2"
        inkscape:collect="always" />
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter3914-7"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3916-11"
-         stdDeviation="0.735"
-         inkscape:collect="always" />
-    </filter>
     <clipPath
        id="clipPath3918-5"
        clipPathUnits="userSpaceOnUse">
@@ -12765,15 +12747,6 @@
        x2="25"
        y2="3"
        gradientTransform="matrix(3.75,0,0,1,-33.743622,32.611094)" />
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter3956-2-8"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3958-3-6"
-         stdDeviation="0.66150001"
-         inkscape:collect="always" />
-    </filter>
     <clipPath
        id="clipPath3960-1-7"
        clipPathUnits="userSpaceOnUse">
@@ -12807,15 +12780,6 @@
        id="linearGradient6722-5-9"
        xlink:href="#linearGradient3856-2-5"
        inkscape:collect="always" />
-    <filter
-       color-interpolation-filters="sRGB"
-       id="filter3914-7-4"
-       inkscape:collect="always">
-      <feGaussianBlur
-         id="feGaussianBlur3916-11-8"
-         stdDeviation="0.735"
-         inkscape:collect="always" />
-    </filter>
     <clipPath
        id="clipPath3918-5-3"
        clipPathUnits="userSpaceOnUse">
@@ -27317,6 +27281,225 @@
        x2="129.98511"
        y2="40.4268"
        gradientUnits="userSpaceOnUse" />
+    <filter
+       id="filter4023-4"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur4025-9"
+         result="result6"
+         stdDeviation="1.5" />
+      <feComposite
+         id="feComposite4027-5"
+         in2="result6"
+         operator="atop"
+         in="SourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite4029-9"
+         in2="SourceAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter4023-9"
+       inkscape:label="Dark and Glow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darkens the edge with an inner blur and adds a flexible glow"
+       color-interpolation-filters="sRGB"
+       y="-0.25"
+       height="1.5">
+      <feGaussianBlur
+         id="feGaussianBlur4025-8"
+         result="result6"
+         stdDeviation="1.5" />
+      <feComposite
+         id="feComposite4027-6"
+         in2="result6"
+         operator="atop"
+         in="SourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite4029-5"
+         in2="SourceAlpha"
+         in="result8"
+         operator="atop"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix7850" />
+      <feGaussianBlur
+         id="feGaussianBlur7852"
+         stdDeviation="5"
+         result="result6"
+         in="fbSourceGraphic" />
+      <feComposite
+         id="feComposite7854"
+         in2="result6"
+         result="result8"
+         in="fbSourceGraphic"
+         operator="atop" />
+      <feComposite
+         id="feComposite7856"
+         in2="fbSourceGraphicAlpha"
+         result="result9"
+         operator="over"
+         in="result8" />
+      <feColorMatrix
+         id="feColorMatrix7858"
+         values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 1 0 "
+         result="result10" />
+      <feBlend
+         id="feBlend7860"
+         in2="result6"
+         in="result10"
+         mode="normal" />
+    </filter>
+    <filter
+       id="filter7862"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur7864"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset7866"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         id="feComposite7868"
+         in2="result11"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood7870"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         id="feBlend7872"
+         in2="result10"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         id="feComposite7874"
+         in2="SourceGraphic"
+         result="result2"
+         operator="in" />
+    </filter>
+    <filter
+       id="filter7876"
+       inkscape:label="Darken edges"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Darken the edges with an inner blur"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur7878"
+         result="result6"
+         stdDeviation="1.5" />
+      <feComposite
+         id="feComposite7880"
+         in2="result6"
+         operator="atop"
+         in="SourceGraphic"
+         result="result8" />
+      <feComposite
+         id="feComposite7882"
+         in2="SourceAlpha"
+         in="result8"
+         operator="atop"
+         result="result9" />
+    </filter>
+    <filter
+       id="filter7884"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur7886"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset7888"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         id="feComposite7890"
+         in2="result11"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood7892"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         id="feBlend7894"
+         in2="result10"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         id="feComposite7896"
+         in2="SourceGraphic"
+         result="result2"
+         operator="in" />
+    </filter>
+    <filter
+       id="filter7898"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur7900"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset7902"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         id="feComposite7904"
+         in2="result11"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood7906"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         id="feBlend7908"
+         in2="result10"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         id="feComposite7910"
+         in2="SourceGraphic"
+         result="result2"
+         operator="in" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -27325,11 +27508,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="8.06"
-     inkscape:cx="64"
+     inkscape:zoom="6.11"
+     inkscape:cx="48.142157"
      inkscape:cy="40"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3480"
      showgrid="false"
      inkscape:window-width="1660"
      inkscape:window-height="1080"
@@ -27380,7 +27563,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="KeyRollDw"
+     inkscape:label="KeyRollDw w64,128"
      style="display:none"
      sodipodi:insensitive="true">
     <path
@@ -27391,8 +27574,8 @@
   </g>
   <g
      transform="translate(0,1)"
-     style="display:none"
-     inkscape:label="KeyOvalUp"
+     style="display:inline"
+     inkscape:label="KeyOvalUp w64,128,110"
      id="g3480"
      inkscape:groupmode="layer"
      sodipodi:insensitive="true">
@@ -27404,7 +27587,8 @@
        height="80"
        width="128"
        id="rect3482"
-       style="fill:#ffffff;fill-rule:evenodd;stroke:none;filter:url(#filter3947)" />
+       style="fill:#ffffff;fill-rule:evenodd;stroke:none;filter:url(#filter7884)"
+       transform="matrix(-1,0,0,-1,128,78)" />
     <rect
        rx="37.785999"
        style="fill:#aeaead;fill-opacity:0;fill-rule:evenodd;stroke:none;display:inline"
@@ -27423,68 +27607,33 @@
      style="display:none"
      sodipodi:insensitive="true">
     <rect
-       transform="matrix(0.99755838,0,0,1.0074203,0.243055,-0.73287942)"
-       rx="39.5"
-       ry="39.5"
-       y="3.5527137e-15"
-       x="0"
-       height="79"
-       width="128"
-       id="rect3482-0"
-       style="fill:#f5f5f5;fill-rule:evenodd;stroke:none;display:inline;filter:url(#filter3781)" />
-    <rect
-       transform="matrix(0.9497414,0,0,0.93303306,3.2916097,2.2030967)"
-       rx="39.785564"
-       style="fill:#c0c0c0;fill-rule:evenodd;stroke:none;filter:url(#filter3789)"
+       transform="matrix(0.99922973,0,0,1.0115997,0.11423175,-0.96374755)"
+       rx="37.815125"
+       style="fill:#f5f5f5;fill-rule:evenodd;stroke:none;filter:url(#filter3789)"
        id="rect3487"
        width="127.99992"
        height="78.999954"
        x="-2.4353196e-05"
        y="6.1275743e-05"
-       ry="39.865368" />
+       ry="36.769196" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer1"
-     inkscape:label="KeySquareUp"
-     style="display:inline"
-     transform="translate(0,1)">
+     inkscape:label="KeySquareUp w64,128"
+     style="display:none"
+     transform="translate(0,1)"
+     sodipodi:insensitive="true">
     <rect
-       style="fill:#ffffff;fill-rule:evenodd;stroke:none"
-       id="rect3486"
-       width="126.63524"
-       height="78.263031"
-       x="0"
+       style="fill:#ffffff;fill-rule:evenodd;stroke:none;display:inline;filter:url(#filter7898)"
+       id="rect3486-7-7"
+       width="128"
+       height="80"
+       x="0.14215755"
        y="-1"
-       ry="10"
-       rx="10.000001" />
-    <rect
+       ry="10.000001"
        rx="10.000001"
-       ry="10"
-       y="2.2258065"
-       x="0.62034738"
-       height="76.774193"
-       width="127.37965"
-       id="rect19343"
-       style="fill:#f5f5f5;fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    <rect
-       style="fill:url(#linearGradient19397);fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect19389"
-       width="8.0248089"
-       height="70.942924"
-       x="119.97519"
-       y="5.203474"
-       ry="10"
-       rx="10.000001" />
-    <rect
-       style="fill:url(#linearGradient19375);fill-opacity:1;fill-rule:evenodd;stroke:none"
-       id="rect19367"
-       width="127.25558"
-       height="19.950375"
-       x="0.49627787"
-       y="59.049625"
-       ry="8.4243183"
-       rx="9.8014917" />
+       transform="matrix(-1,0,0,-1,128.28432,78)" />
   </g>
   <g
      style="display:none"
@@ -27494,7 +27643,7 @@
      transform="translate(0,1)"
      sodipodi:insensitive="true">
     <rect
-       style="fill:#ffffff;fill-rule:evenodd;stroke:none;display:inline;filter:url(#filter4023)"
+       style="fill:#f5f5f5;fill-rule:evenodd;stroke:none;display:inline;filter:url(#filter7862)"
        id="rect3486-7"
        width="128"
        height="80"
@@ -27502,16 +27651,6 @@
        y="-1.0000064"
        ry="10.000001"
        rx="10.000001" />
-    <rect
-       ry="8.5670376"
-       y="6.1275743e-05"
-       x="-2.4353196e-05"
-       height="78.999954"
-       width="127.99992"
-       id="rect4474"
-       style="fill:#d3d3d3;fill-rule:evenodd;stroke:none;filter:url(#filter4000)"
-       rx="8.5670376"
-       transform="matrix(0.95660814,0,0,0.94166392,2.9521178,1.942607)" />
   </g>
   <g
      inkscape:groupmode="layer"

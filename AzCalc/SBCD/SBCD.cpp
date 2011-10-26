@@ -29,7 +29,7 @@ static char charToValue( char c )
 // pSBCD : Write
 static void stringToSbcd( char *zNum, SBCD *pSBCD )
 {
-#ifdef AzDEBUG
+#ifdef DEBUG
 	pSBCD->prove1 = PROVE1_VAL;
 	pSBCD->prove2 = PROVE2_VAL;
 #endif
@@ -78,7 +78,7 @@ static void stringToSbcd( char *zNum, SBCD *pSBCD )
 	cDecimal[sy_cnt] = 0x00;
 	assert(sy_cnt <= SBCD_PRECISION);
 
-#ifdef AzDEBUG
+#ifdef DEBUG
     printf("stringToSbcd: zNum=%s cInteger=%s cDecimal=%s minus=%d \n",zNum,cInteger,cDecimal,pSBCD->minus);
 #endif
 
@@ -101,7 +101,7 @@ static void stringToSbcd( char *zNum, SBCD *pSBCD )
             sy_cnt--; cnt++;
     	}else break;
     }
-#ifdef AzDEBUG
+#ifdef DEBUG
 	assert(pSBCD->prove1 == PROVE1_VAL);
 	assert(pSBCD->prove2 == PROVE2_VAL);
 #endif
@@ -351,7 +351,7 @@ void stringAddition( char *strAnswer, char *strNum1, char *strNum2 )
     SBCD sbcd1,		*pSbcd1 = &sbcd1;
     SBCD sbcd2,		*pSbcd2 = &sbcd2;
     SBCD sbcdAns,	*pSbcdAns = &sbcdAns;
-#ifdef AzDEBUG
+#ifdef DEBUG
 	pSbcdAns->prove1 = PROVE1_VAL;
 	pSbcdAns->prove2 = PROVE2_VAL;
 #endif
@@ -402,7 +402,7 @@ void stringAddition( char *strAnswer, char *strNum1, char *strNum2 )
 		// 回答
 		sbcdToString(pSbcdAns, strAnswer);
 	}
-#ifdef AzDEBUG
+#ifdef DEBUG
 	assert(pSbcdAns->prove1 == PROVE1_VAL);
 	assert(pSbcdAns->prove2 == PROVE2_VAL);
 #endif
@@ -440,7 +440,7 @@ void stringMultiply( char *strAnswer, char *strNum1, char *strNum2 )
     SBCD sbcd1,		*pSbcd1 = &sbcd1;
     SBCD sbcd2,		*pSbcd2 = &sbcd2;
     SBCD sbcdAns,	*pSbcdAns = &sbcdAns;
-#ifdef AzDEBUG
+#ifdef DEBUG
 	pSbcdAns->prove1 = PROVE1_VAL;
 	pSbcdAns->prove2 = PROVE2_VAL;
 #endif
@@ -461,7 +461,7 @@ void stringMultiply( char *strAnswer, char *strNum1, char *strNum2 )
 	// 回答
     sbcdToString( pSbcdAns, strAnswer );
 	
-#ifdef AzDEBUG
+#ifdef DEBUG
 	assert(pSbcdAns->prove1 == PROVE1_VAL);
 	assert(pSbcdAns->prove2 == PROVE2_VAL);
 #endif
@@ -476,7 +476,7 @@ void stringDivision( char *strAnswer, char *strNum1, char *strNum2 )
     SBCD sbcd1,		*pSbcd1 = &sbcd1;
     SBCD sbcd2,		*pSbcd2 = &sbcd2;
     SBCD sbcdAns,	*pSbcdAns = &sbcdAns;
-#ifdef AzDEBUG
+#ifdef DEBUG
 	pSbcdAns->prove1 = PROVE1_VAL;
 	pSbcdAns->prove2 = PROVE2_VAL;
 #endif
@@ -498,7 +498,7 @@ void stringDivision( char *strAnswer, char *strNum1, char *strNum2 )
 	// 回答
     sbcdToString( pSbcdAns, strAnswer );
 	
-#ifdef AzDEBUG
+#ifdef DEBUG
 	assert(pSbcdAns->prove1 == PROVE1_VAL);
 	assert(pSbcdAns->prove2 == PROVE2_VAL);
 #endif
@@ -658,7 +658,8 @@ void formatterGroupingSeparator( NSString *zGroupSeparator )
 	if ([zGroupSeparator isEqualToString:[NSString stringWithCString:(char *)cDef encoding:NSASCIIStringEncoding]]) {
 		__formatterGroupingSeparator = nil;
 	} else {
-		__formatterGroupingSeparator = [NSString stringWithString:zGroupSeparator];
+		[__formatterGroupingSeparator release];
+		__formatterGroupingSeparator = [[NSString alloc] initWithString:zGroupSeparator];  //NG//[NSString stringWithString:zGroupSeparator];
 	}
 }
 		 
@@ -682,7 +683,8 @@ void formatterDecimalSeparator( NSString *zDecimalSeparator )
 	if ([zDecimalSeparator isEqualToString:[NSString stringWithCString:(char *)cDef encoding:NSASCIIStringEncoding]]) {
 		__formatterDecimalSeparator = nil;
 	} else {
-		__formatterDecimalSeparator = [NSString stringWithString:zDecimalSeparator];
+		[__formatterDecimalSeparator release];
+		__formatterDecimalSeparator = [[NSString alloc] initWithString:zDecimalSeparator];  //NG//[[NSString stringWithString:zDecimalSeparator] retain];
 	}
 }
 
@@ -708,7 +710,13 @@ NSString *stringAzNum( NSString *zNum )
 	
 	NSString *str; // = [NSString stringWithString:zNum];
 	NSString *zDeci = getFormatterDecimalSeparator();
-	if ([zDeci isEqualToString:@"·"]) { // ミドル・ドット（英米式小数点）⇒ 標準小数点[.]ピリオドにする
+#ifdef xxxDEBUG
+    printf("*** zNum=%s  zDeci=%s\n", zNum, zDeci);
+#endif
+	if (zDeci==nil || [zDeci length]<=0) {
+        str = [NSString stringWithString:zNum];
+	}
+	else if ([zDeci isEqualToString:@"·"]) { // ミドル・ドット（英米式小数点）⇒ 標準小数点[.]ピリオドにする
 		// ミドル・ドットだけはUnicodeにつきNSASCIIStringEncodingできないので事前に変換が必要
 		str = [zNum stringByReplacingOccurrencesOfString:@"·" withString:@"."]; // ミドル・ドット ⇒ 小数点
 	}
@@ -766,7 +774,7 @@ NSString *stringFormatter( NSString *strAzNum, BOOL bZeroCut )
 
 	char cNum[SBCD_PRECISION+1+1];
 	char cAns[SBCD_PRECISION+1+1];
-#ifdef AzDEBUG
+#ifdef DEBUG
 	cNum[SBCD_PRECISION+1] = PROVE1_VAL;
 	cAns[SBCD_PRECISION+1] = PROVE2_VAL;
 #endif
@@ -864,7 +872,7 @@ NSString *stringFormatter( NSString *strAzNum, BOOL bZeroCut )
 	}
 	
 	cAns[iAnsPos] = 0x00; // 文字列終端
-#ifdef AzDEBUG
+#ifdef DEBUG
 	assert( iAnsPos <= SBCD_PRECISION );
 	assert( cNum[SBCD_PRECISION+1] == PROVE1_VAL );
 	assert( cAns[SBCD_PRECISION+1] == PROVE2_VAL );

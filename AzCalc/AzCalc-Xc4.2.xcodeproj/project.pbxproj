@@ -41,6 +41,10 @@
 		44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
 		44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
 		44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		44ABE22914582424005D6189 /* KeyOvalDw@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22714582424005D6189 /* KeyOvalDw@Pad.png */; };
+		44ABE22A14582424005D6189 /* KeyOvalDw@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22714582424005D6189 /* KeyOvalDw@Pad.png */; };
+		44ABE22B14582424005D6189 /* KeyOvalUp@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22814582424005D6189 /* KeyOvalUp@Pad.png */; };
+		44ABE22C14582424005D6189 /* KeyOvalUp@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22814582424005D6189 /* KeyOvalUp@Pad.png */; };
 		44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44AF898213052F3D00D3594C /* CalcFunctions.mm */; };
 		44AF8AA2130578BF00D3594C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA1130578BF00D3594C /* AudioToolbox.framework */; };
 		44AF8AA4130578BF00D3594C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA3130578BF00D3594C /* MediaPlayer.framework */; };
@@ -198,6 +202,8 @@
 		44A8B24411F3EC87007D6FA0 /* OptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionVC.m; path = ../OptionVC.m; sourceTree = "<group>"; };
 		44AB054012258878005E11A7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
 		44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		44ABE22714582424005D6189 /* KeyOvalDw@Pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalDw@Pad.png"; path = "Image/KeyOvalDw@Pad.png"; sourceTree = "<group>"; };
+		44ABE22814582424005D6189 /* KeyOvalUp@Pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalUp@Pad.png"; path = "Image/KeyOvalUp@Pad.png"; sourceTree = "<group>"; };
 		44AF898213052F3D00D3594C /* CalcFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CalcFunctions.mm; sourceTree = "<group>"; };
 		44AF898313052F3D00D3594C /* CalcFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcFunctions.h; sourceTree = "<group>"; };
 		44AF8AA1130578BF00D3594C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -409,6 +415,8 @@
 		44A2E47411EB29F5009FB007 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				44ABE22714582424005D6189 /* KeyOvalDw@Pad.png */,
+				44ABE22814582424005D6189 /* KeyOvalUp@Pad.png */,
 				44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */,
 				44E3DB4C1454695A00E0BA17 /* KeySquareDw@2x.png */,
 				44E3DB4D1454695A00E0BA17 /* KeySquareUp.png */,
@@ -599,6 +607,8 @@
 				44E3DB691454695A00E0BA17 /* KeyOvalDw@2x.png in Resources */,
 				44E3DB6B1454695A00E0BA17 /* KeyOvalUp.png in Resources */,
 				44E3DB6D1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */,
+				44ABE22914582424005D6189 /* KeyOvalDw@Pad.png in Resources */,
+				44ABE22B14582424005D6189 /* KeyOvalUp@Pad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +663,8 @@
 				44E3DB6A1454695A00E0BA17 /* KeyOvalDw@2x.png in Resources */,
 				44E3DB6C1454695A00E0BA17 /* KeyOvalUp.png in Resources */,
 				44E3DB6E1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */,
+				44ABE22A14582424005D6189 /* KeyOvalDw@Pad.png in Resources */,
+				44ABE22C14582424005D6189 /* KeyOvalUp@Pad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -791,7 +803,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "AzDEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzFREE=1";
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "AzCalc-Info.plist";
@@ -848,7 +860,7 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
-				GCC_PREPROCESSOR_DEFINITIONS = "AzDEBUG=1";
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
 				INFOPLIST_FILE = "AzCalc-InfoS1.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
@@ -962,7 +974,7 @@
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_PREPROCESSOR_DEFINITIONS = AzDEBUG;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_FUNCTION = NO;

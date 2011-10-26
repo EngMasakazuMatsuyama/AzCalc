@@ -124,9 +124,9 @@
 
 //----------------------------------------------------Alpha
 #define KeyALPHA_DEFAULT_ON		0.8	// 標準ボタン
-#define KeyALPHA_DEFAULT_OFF	0.2	// 無機能ボタン
-#define KeyALPHA_MSTORE_ON		0.8	// メモリ値あり
-#define KeyALPHA_MSTORE_OFF		0.5	// メモリ値なし
+#define KeyALPHA_DEFAULT_OFF		0.2	// 無機能ボタン
+#define KeyALPHA_MSTORE_ON			0.8	// メモリ値あり
+#define KeyALPHA_MSTORE_OFF			0.5	// メモリ値なし
 
 
 @interface KeyButton : UIButton

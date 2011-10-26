@@ -19,7 +19,8 @@
 
 #define OR  ||
 
-#ifdef AzDEBUG	//--------------------------------------------- DEBUG
+#ifdef DEBUG	//--------------------------------------------- DEBUG
+#define AzDEBUG
 #define AzLOG(...) NSLog(__VA_ARGS__)
 #define AzRETAIN_CHECK(zName,pObj,iAns)  { if ([pObj retainCount] > iAns) NSLog(@"AzRETAIN_CHECK> %@ %d > %d", zName, [pObj retainCount], iAns); }
 

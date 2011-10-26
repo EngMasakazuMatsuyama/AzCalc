@@ -20,16 +20,16 @@
 
 typedef struct {
 	bool minus;			// false=(+) true=(-)
-#ifdef AzDEBUG
+#ifdef DEBUG
 	int	prove1;			// デバッグ用プローブ PROVE1_VAL をセットして適時チェックしメモリ破壊されていないか確認する
 #endif
 	char digit[SBCD_PRECISION+1];	// BCD保持値 (0x00)〜(0x09)
-#ifdef AzDEBUG
+#ifdef DEBUG
 	int	prove2;			// デバッグ用プローブ PROVE1_VAL をセットして適時チェックしメモリ破壊されていないか確認する
 #endif
 } SBCD;
 
-#ifdef AzDEBUG
+#ifdef DEBUG
 #define	PROVE1_VAL	-11
 #define	PROVE2_VAL	-33
 #endif

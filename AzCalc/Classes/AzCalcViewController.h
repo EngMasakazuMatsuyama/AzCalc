@@ -47,7 +47,7 @@
 	NSArray				*RaDrumButtons;
 	NSArray				*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
-	NSDictionary		*dicKeys;
+	NSDictionary		*RdicAllKeys;	//*dicKeys;
 	UIImage				*RimgDrumButton;	
 	UIImage				*RimgDrumPush;
 	UIView					*mKeyView;
@@ -97,7 +97,7 @@
 
 	NSInteger  MiSvLowerPage;	// ibScrollLower の現在表示ページを常に保持
 	NSInteger  MiSvUpperPage;	// ibScrollUpper の現在表示ページを常に保持
-	NSInteger  MiSwipe1fingerCount;		// 1指で3回スワイプされたらヘルプメッセージを出すため
+	//NSInteger  MiSwipe1fingerCount;		// 1指で3回スワイプされたらヘルプメッセージを出すため
 }
 
 - (IBAction)ibBuMemory:(UIButton *)button;
