@@ -27512,7 +27512,7 @@
      inkscape:cx="48.142157"
      inkscape:cy="40"
      inkscape:document-units="px"
-     inkscape:current-layer="g3480"
+     inkscape:current-layer="g3509"
      showgrid="false"
      inkscape:window-width="1660"
      inkscape:window-height="1080"
@@ -27549,7 +27549,7 @@
        y="-6.0517197" />
   </g>
   <g
-     style="display:none"
+     style="display:inline"
      inkscape:label="KeyRollUp Black Edge"
      id="g3509"
      inkscape:groupmode="layer"
@@ -27574,7 +27574,7 @@
   </g>
   <g
      transform="translate(0,1)"
-     style="display:inline"
+     style="display:none"
      inkscape:label="KeyOvalUp w64,128,110"
      id="g3480"
      inkscape:groupmode="layer"

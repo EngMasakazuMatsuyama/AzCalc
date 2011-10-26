@@ -15,6 +15,7 @@
 #import "OptionVC.h"
 #import "InformationVC.h"
 #import "KeyButton.h"
+#import <TargetConditionals.h>	// TARGET_IPHONE_SIMULATOR
 
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
@@ -639,16 +640,41 @@
 	// handleSwipeLeft:ハンドラ登録　　2本指で左へスワイプされた
 	//UISwipeGestureRecognizer *
 	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeLeft:)];
-	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
+#if (TARGET_IPHONE_SIMULATOR)
+	// シミュレータで動作している場合のコード
+	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
+#else
+	swipe.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+#endif
 	swipe.direction = UISwipeGestureRecognizerDirectionLeft; //左
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
 	// handleSwipeRight:ハンドラ登録　　2本指で右へスワイプされた
 	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeRight:)];
-	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
+#if (TARGET_IPHONE_SIMULATOR)
+	// シミュレータで動作している場合のコード
+	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
+#else
+	swipe.numberOfTouchesRequired = 2; //タッチの数、つまり指の本数
+#endif
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
+#if (TARGET_IPHONE_SIMULATOR)
+	// シミュレータで動作している場合のコード
+#else
+	// handleSwipe1Finger:ハンドラ登録　　1本指でスワイプされた
+	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipe1Finger:)];
+	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
+	swipe.direction = UISwipeGestureRecognizerDirectionLeft; //左
+	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
+	[swipe release], swipe = nil;
+	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipe1Finger:)];
+	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
+	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
+	[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
+	[swipe release], swipe = nil;
+#endif
 	
 	//NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
 
@@ -1252,29 +1278,19 @@
 	}
 }
 
-/*
 - (void)reset_MiSwipe1fingerCount {
 	MiSwipe1fingerCount = 0;
 }
-
-- (void)handleSwipe1finger: (UISwipeGestureRecognizer*) recognizer
-{	// 1本指で右または左へスワイプされた
-	NSLog(@"handleSwipe1finger");
+- (void)handleLowerSwipe1Finger: (UISwipeGestureRecognizer*) recognizer
+{	// 1本指でスワイプされた
+	NSLog(@"handleLowerSwipe1Finger");
 	MiSwipe1fingerCount++;
 	if (MiSwipe1fingerCount == 1) {
-		[self performSelector:@selector(reset_MiSwipe1fingerCount) withObject:nil afterDelay:1.0f]; // 秒後にクリアする
+		[self performSelector:@selector(reset_MiSwipe1fingerCount) withObject:nil afterDelay:0.5f]; // 秒後にクリアする
 	}
 	else if (2 <= MiSwipe1fingerCount) {	// 2回以上スワイプされたらヘルプメッセージを出す
 		MiSwipe1fingerCount = 0;
-		//NG//alertBox( NSLocalizedString(@"Help LowerSwipe title", nil), nil, @"OK" );  LINK ERROR になる
-		
-		NSString *zTitle;
-		if (ibBuFormLeft.frame.origin.x < 0) {  // Fomula editting [(]左括弧ボタンが画面外に出ている ⇒ 編集ロック中
-			zTitle = NSLocalizedString(@"Help Fomula locking", nil);
-		} else {
-			zTitle = NSLocalizedString(@"Help Swipe 2 fingers", nil);
-		}
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:zTitle
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Help Swipe 2 fingers", nil)
 														message:nil
 													   delegate:nil
 											  cancelButtonTitle:nil
@@ -1283,7 +1299,7 @@
 		[alert release];
 	}
 }
-*/
+
 
 #pragma mark - UNIT 単位
 

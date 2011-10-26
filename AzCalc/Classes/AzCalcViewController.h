@@ -97,7 +97,7 @@
 
 	NSInteger  MiSvLowerPage;	// ibScrollLower の現在表示ページを常に保持
 	NSInteger  MiSvUpperPage;	// ibScrollUpper の現在表示ページを常に保持
-	//NSInteger  MiSwipe1fingerCount;		// 1指で3回スワイプされたらヘルプメッセージを出すため
+	NSInteger  MiSwipe1fingerCount;		// 1指で3回スワイプされたらヘルプメッセージを出すため
 }
 
 - (IBAction)ibBuMemory:(UIButton *)button;
