@@ -26,7 +26,7 @@
  iPhone3,1 ->	iPhone 4/AT&T
  iPhone3,2 ->	iPhone 4/Other Carrier?
  iPhone3,3 ->	iPhone 4/Other Carrier?
- iPhone4,1 ->	??iPhone 5
+ iPhone4,1 ->	??iPhone 5  <<<<<<<<< 4S
 
  iPod1,1   -> iPod touch 1G 
  iPod2,1   -> iPod touch 2G 
