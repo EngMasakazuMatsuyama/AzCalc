@@ -117,7 +117,14 @@
 	//メール送信可能かどうかのチェック　　＜＜＜MessageUI.framework が必要＞＞＞
     if (![MFMailComposeViewController canSendMail]) {
 		//[self setAlert:@"メールが起動出来ません！":@"メールの設定をしてからこの機能は使用下さい。"];
-		alertBox( NSLocalizedString(@"Contact NoMail",nil), NSLocalizedString(@"Contact NoMail msg",nil), @"OK" );
+		//alertBox( NSLocalizedString(@"Contact NoMail",nil), NSLocalizedString(@"Contact NoMail msg",nil), @"OK" );
+		UIAlertView *alert = [[UIAlertView alloc] initWithTitle: NSLocalizedString(@"Contact NoMail",nil)
+														message:NSLocalizedString(@"Contact NoMail msg",nil)
+													   delegate:nil
+											  cancelButtonTitle:nil
+											  otherButtonTitles:@"OK", nil];
+		[alert show];
+		[alert release];
         return;
     }
 
@@ -210,14 +217,28 @@
         case MFMailComposeResultSaved:
             //保存した場合
             break;
-        case MFMailComposeResultSent:
+        case MFMailComposeResultSent: {
             //送信した場合
-			alertBox( NSLocalizedString(@"Contact Sent",nil), NSLocalizedString(@"Contact Sent msg",nil), @"OK" );
-            break;
-        case MFMailComposeResultFailed:
+			//alertBox( NSLocalizedString(@"Contact Sent",nil), NSLocalizedString(@"Contact Sent msg",nil), @"OK" );
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Contact Sent",nil)
+															message:NSLocalizedString(@"Contact Sent msg",nil)
+														   delegate:nil
+												  cancelButtonTitle:nil
+												  otherButtonTitles:@"OK", nil];
+			[alert show];
+			[alert release];
+		} break;
+        case MFMailComposeResultFailed: {
             //[self setAlert:@"メール送信失敗！":@"メールの送信に失敗しました。ネットワークの設定などを確認して下さい"];
-			alertBox( NSLocalizedString(@"Contact Failed",nil), NSLocalizedString(@"Contact Failed msg",nil), @"OK" );
-            break;
+			//alertBox( NSLocalizedString(@"Contact Failed",nil), NSLocalizedString(@"Contact Failed msg",nil), @"OK" );
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Contact Failed",nil)
+															message:NSLocalizedString(@"Contact Failed msg",nil)
+														   delegate:nil
+												  cancelButtonTitle:nil
+												  otherButtonTitles:@"OK", nil];
+			[alert show];
+			[alert release];
+        } break;
         default:
             break;
     }

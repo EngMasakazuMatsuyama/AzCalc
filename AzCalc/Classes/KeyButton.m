@@ -15,6 +15,35 @@
 @synthesize iPage, iCol, iRow, iColorNo, fFontSize, bDirty, RzUnit;
 
 
+#pragma mark - <NSCoding>
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+	self = [super init];
+	if (self) {
+		iPage = [[decoder decodeObjectForKey:@"iPage"] integerValue];
+		iCol = [[decoder decodeObjectForKey:@"iCol"] integerValue];
+		iRow = [[decoder decodeObjectForKey:@"iRow"] integerValue];
+		iColorNo = [[decoder decodeObjectForKey:@"iColorNo"] integerValue];
+		fFontSize = [[decoder decodeObjectForKey:@"fFontSize"] floatValue];
+		bDirty = [[decoder decodeObjectForKey:@"bDirty"] boolValue];
+		RzUnit = [[decoder decodeObjectForKey:@"RzUnit"] retain];
+	}
+	return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+	[encoder encodeObject:[NSNumber numberWithInteger:iPage]  forKey:@"iPage"];
+	[encoder encodeObject:[NSNumber numberWithInteger:iCol]  forKey:@"iCol"];
+	[encoder encodeObject:[NSNumber numberWithInteger:iRow]  forKey:@"iRow"];
+	[encoder encodeObject:[NSNumber numberWithInteger:iColorNo]  forKey:@"iColorNo"];
+	[encoder encodeObject:[NSNumber numberWithFloat:fFontSize]  forKey:@"fFontSize"];
+	[encoder encodeObject:[NSNumber numberWithBool:bDirty]  forKey:@"bDirty"];
+	[encoder encodeObject:RzUnit forKey:@"RzUnit"];
+}
+
+
 #pragma mark - UIButton lifecicle
 
 - (void)dealloc 

@@ -15,6 +15,9 @@
 #import "GADBannerView.h"
 #endif
 
+#define KeyMemorys_MAX		20	// M1〜M20
+
+
 @class KeyButton;
 
 @interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate
@@ -47,7 +50,9 @@
 	NSArray				*RaDrumButtons;
 	NSArray				*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
-	NSDictionary		*RdicAllKeys;	//*dicKeys;
+	NSMutableDictionary	*RdicKeyboardSet;  //*RdicAllKeys;	//*dicKeys;
+	//NSMutableDictionary	*RdicKeyMemorys;	// M1〜M20 の値を記録
+	//NSMutableArray	*RaMemorys;	// M1〜M20 の値を記録
 	UIImage				*RimgDrumButton;	
 	UIImage				*RimgDrumPush;
 	UIView					*mKeyView;

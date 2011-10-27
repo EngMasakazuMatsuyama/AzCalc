@@ -49,7 +49,27 @@
 #define KeyTAG_M_DIVID			314	// [M÷]
 #define KeyTAG_MEMORY_End		399
 
-#define KeyTAG_MSTORE_Start		400
+#define KeyTAG_MSTORE_Start	400
+#define KeyTAG_MSTORE_M1		401	// [M1]
+#define KeyTAG_MSTORE_M2		402
+#define KeyTAG_MSTORE_M3		403
+#define KeyTAG_MSTORE_M4		404
+#define KeyTAG_MSTORE_M5		405
+#define KeyTAG_MSTORE_M6		406
+#define KeyTAG_MSTORE_M7		407
+#define KeyTAG_MSTORE_M8		408
+#define KeyTAG_MSTORE_M9		409
+#define KeyTAG_MSTORE_M10		410
+#define KeyTAG_MSTORE_M11		411
+#define KeyTAG_MSTORE_M12		412
+#define KeyTAG_MSTORE_M13		413
+#define KeyTAG_MSTORE_M14		414
+#define KeyTAG_MSTORE_M15		415
+#define KeyTAG_MSTORE_M16		416
+#define KeyTAG_MSTORE_M17		417
+#define KeyTAG_MSTORE_M18		418
+#define KeyTAG_MSTORE_M19		419
+#define KeyTAG_MSTORE_M20		420
 #define KeyTAG_MSTROE_End		499
 
 #define KeyTAG_UNIT_Start		1000 //-----------------SI基本単位換算
@@ -129,7 +149,7 @@
 #define KeyALPHA_MSTORE_OFF			0.5	// メモリ値なし
 
 
-@interface KeyButton : UIButton
+@interface KeyButton : UIButton <NSCoding>
 {
 	NSString	*RzUnit;
 
@@ -142,7 +162,6 @@
 }
 
 @property (nonatomic, retain) NSString		*RzUnit;
-
 @property (nonatomic, assign) NSInteger		iPage;
 @property (nonatomic, assign) NSInteger		iCol;
 @property (nonatomic, assign) NSInteger		iRow;

@@ -98,8 +98,6 @@
 		44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
 		44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; };
 		44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; };
-		44CDB5D1135A813600037C8E /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5D0135A813600037C8E /* Global.m */; };
-		44CDB5D2135A813600037C8E /* Global.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5D0135A813600037C8E /* Global.m */; };
 		44CDB60D135AA80B00037C8E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D58131528FC0064EA93 /* Default.png */; };
 		44CDB60E135AA81100037C8E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D5A131529060064EA93 /* Default@2x.png */; };
 		44CDB60F135AA82300037C8E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D54131528CF0064EA93 /* Default-Portrait.png */; };
@@ -235,7 +233,6 @@
 		44CDB5C9135A77D600037C8E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/InformationVC.xib; sourceTree = "<group>"; };
 		44CDB5CC135A80BE00037C8E /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
-		44CDB5D0135A813600037C8E /* Global.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Global.m; sourceTree = "<group>"; };
 		44CDB616135AD2A400037C8E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		44CDB619135AD2D300037C8E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		44D32BD61424A79F0041523E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -307,7 +304,6 @@
 			isa = PBXGroup;
 			children = (
 				449EBC6911E57EA900E2AABD /* Global.h */,
-				44CDB5D0135A813600037C8E /* Global.m */,
 				1D3623240D0F684500981E51 /* AzCalcAppDelegate.h */,
 				1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */,
 				44AF898313052F3D00D3594C /* CalcFunctions.h */,
@@ -686,7 +682,6 @@
 				44A20A381212D96F000A315E /* KeyButton.m in Sources */,
 				44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */,
 				44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
-				44CDB5D1135A813600037C8E /* Global.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,7 +700,6 @@
 				44BC4C6F1359E9A1009B995C /* KeyButton.m in Sources */,
 				44BC4C7A1359E9A1009B995C /* CalcFunctions.mm in Sources */,
 				44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
-				44CDB5D2135A813600037C8E /* Global.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

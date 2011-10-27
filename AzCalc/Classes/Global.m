@@ -7,14 +7,3 @@
 
 #import "Global.h"
 
-void alertBox( NSString *zTitle, NSString *zMsg, NSString *zButton )
-{
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:zTitle
-													message:zMsg
-												   delegate:nil
-										  cancelButtonTitle:nil
-										  otherButtonTitles:zButton, nil];
-	[alert show];
-	[alert release];
-}
-
