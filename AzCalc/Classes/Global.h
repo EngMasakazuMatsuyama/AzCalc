@@ -58,10 +58,14 @@
 
  -----------------------------------------------------------------------*/
 
-#define GUD_KeyboardSet					@"GUD_KeyboardSet"  // NSMutableDictionary
-#define GUD_KeyMemorys					@"GUD_KeyMemorys"	//[1.0.10]　GUD_KeyboardSet へ統合する。後日削除
-#define GUD_KeyView						@"GUD_KeyView_"		//"_%d" ページ番号が入る
-#define GUD_KeyViewPad					@"GUD_KeyViewPad_"  //"_%d" ページ番号が入る
+#define GUD_KeyboardSet					@"GUD_KeyboardSet"	//[1.0.9]までの保存形式
+#define GUD_KeyMapPad					@"GUD_KeyMapPad"		//[1.0.10]からの保存形式 Pad専用
+#define GUD_KeyMapPhone				@"GUD_KeyMapPhone"	//[1.0.10]からの保存形式 Phone専用
+
+//#define GUD_KeyMemorys					@"GUD_KeyMemorys"	//[1.0.10]　GUD_KeyboardSet へ統合する。後日削除
+//#define GUD_KeyView						@"GUD_KeyView_"		//"_%d" ページ番号が入る
+//#define GUD_KeyViewPad					@"GUD_KeyViewPad_"  //"_%d" ページ番号が入る
+
 
 // SettingVC
 #define DECIMAL_Float	6		// Setting:GUD_Decimal 値がこれ以上ならば浮動小数点処理する　 ＜SettingVC設定に関連＞

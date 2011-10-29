@@ -54,7 +54,7 @@
 - (void)MvPadKeysShow;
 - (void)MvKeyUnitGroupSI;
 - (void)MvKeyUnitGroup:(KeyButton *)keyUnit;
-- (void)MvKeyboardPage:(NSInteger)iPage;
+//- (void)MvKeyboardPage:(NSInteger)iPage;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
 - (void)MvDrumButtonDragEnter:(UIButton *)button;
 - (void)MvSaveKeyView:(UIView*)keyView;
@@ -62,6 +62,122 @@
 @end
 
 @implementation AzCalcViewController
+
+
+#pragma mark - Keymap
+
+- (void)keymapSaveAndSync:(BOOL)bSync
+{
+	if (mKmPages) 
+	{	// 初期キーボード配置を　standardUserDefaults へ保存する
+		NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+		if (bPad) {
+			[userDef setObject:mKmPages forKey:GUD_KeyMapPad];
+		} else {
+			[userDef setObject:mKmPages forKey:GUD_KeyMapPhone];
+		}
+		
+		if (bSync) {
+			if ([userDef synchronize] != YES) {
+				NSLog(@"keymapSave: synchronize: ERROR");
+			}
+		}
+	}
+}
+
+- (void)keymapLoad
+{
+	//[mKmUnits release], mKmUnits = nil;
+	[mKmMemorys release], mKmMemorys = nil;
+	[mKmPages release], mKmPages = nil;
+
+#ifdef AzMAKE_SPLASHFACE
+	return; // キー定義なし
+#endif
+	
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+	// standardUserDefaults:GUD_KeyMap からキー配置を読み込む
+	if (bPad) {
+		mKmPages = [userDef objectForKey:GUD_KeyMapPad];
+	} else {
+		mKmPages = [userDef objectForKey:GUD_KeyMapPhone];
+	}
+	//
+	if (mKmPages==nil) {	// 未定義ならば
+		// standardUserDefaults:GUD_KeyboardSet から[1.0.9]以前のキー配置を読み込む
+		NSDictionary *keyboardSet = [userDef objectForKey:GUD_KeyboardSet];
+		if (keyboardSet==nil) {  // インストール初回のみ通る
+			//[1.0.10]以降、AzKeyMap.plistからキー配置読み込む
+			NSString *zPath = [[NSBundle mainBundle] pathForResource:@"AzKeyMap" ofType:@"plist"];
+			NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:zPath];
+			if (dic) {
+				if (bPad) {
+					mKmPages = [dic objectForKey:GUD_KeyMapPad];
+				} else {
+					mKmPages = [dic objectForKey:GUD_KeyMapPhone];
+				}
+				[dic release];
+			}
+			else {
+				//[1.0.9]以前、AzKeySet.plistからキー配置読み込む
+				NSString *zPath;
+				if (bPad) { // iPad
+					zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
+				} else {
+					zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
+				}
+				NSMutableDictionary *dicPCR = [[NSMutableDictionary alloc] initWithContentsOfFile:zPath];	// 後で release している
+				if (dicPCR==nil) {
+					AzLOG(@"ERROR: AzKeySet.plist not Open");
+					return;
+				}
+				// KeyMap へ変換する
+				mKmPages = [NSMutableArray new];
+				for (int iPage=0; iPage<9; iPage++) {
+					NSMutableArray *maKeys = [NSMutableArray new];
+					for (int iCol=0; iCol<9; iCol++) {
+						for (int iRow=0; iRow<9; iRow++) {
+							NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", iPage, iCol, iRow];
+							NSMutableDictionary *dicKey = [dicPCR objectForKey:zPCR];
+							[zPCR release];
+							if (dicKey) {
+								[maKeys addObject:dicKey];
+							}
+						}
+					}
+					if (0 < [maKeys count]) {
+						[mKmPages addObject:maKeys];
+					}
+					[maKeys release];
+				}
+				// KeyMap 変換完了
+			}
+			// 初期キーボード配置を　standardUserDefaults へ保存する
+			[self keymapSaveAndSync:YES];
+		}
+	}
+	// 
+	if (mKmPages) 
+	{	// Index生成： mKmPages から mKmMemorys, mKmUnits を生成する
+		//NSMutableArray *maMemorys = [NSMutableArray new];
+		//NSMutableArray *maUnits = [NSMutableArray new];
+		for (NSArray *aPage in mKmPages)
+		{	// 1ページ分
+			for (NSDictionary *dicKey in aPage)
+			{	// 1ページ内のキー
+				NSInteger iTag = [[dicKey objectForKey:@"Tag"] integerValue];
+				if (KeyTAG_MSTORE_Start <= iTag && iTag <= KeyTAG_MSTROE_End) { // メモリキー
+					// Memorys index
+					[mKmMemorys addObject:dicKey];
+				}
+			/*	if (KeyTAG_UNIT_Start <= iTag && iTag <= KeyTAG_UNIT_End) { // 単位キー
+					// Units index
+					[maUnits addObject:dicKey];
+				}*/
+			}
+		}
+	}
+}
 
 
 #pragma mark - View dealloc
@@ -101,10 +217,10 @@
 	//不要//[mKeyView release], mKeyView = nil;  ＜＜ ibScrollLowerがオーナーだから。
 	//不要//[mKeyViewPrev release], mKeyViewPrev = nil;
 
-	// RdicKeyboardSet Save & Release
+/*	// RdicKeyboardSet Save & Release
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 	[userDef setObject:RdicKeyboardSet forKey:GUD_KeyboardSet];
-	[RdicKeyboardSet release],	RdicKeyboardSet = nil;
+	[RdicKeyboardSet release],	RdicKeyboardSet = nil;*/
 }
 
 - (void)dealloc 
@@ -115,6 +231,10 @@
 	[mGvKeyUnitSI release];
 	[mGvKeyUnitSi2 release];
 	[mGvKeyUnitSi3 release];
+
+	//[mKmUnits release], mKmUnits = nil;
+	[mKmMemorys release], mKmMemorys = nil;
+	[mKmPages release], mKmPages = nil;
 
 	[RaDrums release];
     [super dealloc];
@@ -149,43 +269,27 @@
 
 #pragma mark - View lifecicle
 
-//- (void)drawKeyboard:(UIView*)keyView page:(NSInteger)page
 - (UIView *)keyViewAllocPage:(NSInteger)page
 {
-	UIView *keyView = nil;
-	//[1.0.10]keyViewコンテンツを丸ごと保存するようになった
-	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-	NSString *zKey;
-	if (bPad) {
-		zKey = [NSString stringWithFormat:GUD_KeyViewPad @"%d", (int)page];
-	} else {
-		zKey = [NSString stringWithFormat:GUD_KeyView @"%d", (int)page];
-	}
 	CGRect rcBounds = ibScrollLower.bounds;	// .y = 0
 	rcBounds.origin.x = rcBounds.size.width * PAGES/2; // 常に中央位置
-	
-	NSData *da = [userDef objectForKey:zKey];
-	if (da) {
-		keyView = (UIView*)[NSKeyedUnarchiver unarchiveObjectWithData:da];
-		if (keyView) {
-			assert(	keyView.tag == page);
-			keyView.frame = rcBounds;
-			return [keyView retain];
-		}
-	}
 
 	// RdicKeyboardSet から生成する
-	keyView = [[UIView alloc] initWithFrame:rcBounds]; // .y=どこでも大丈夫
+	UIView *keyView = [[UIView alloc] initWithFrame:rcBounds]; // .y=どこでも大丈夫
 	assert(keyView);
 	keyView.tag = page;
+
+	NSArray *aPage = [mKmPages objectAtIndex:page];
+	NSInteger idx = 0;
 	
 	float fx = fKeyWidGap;
-	for (int col=0; col<iKeyCols && col<100; col++ ) 
+	for (int col=0; col<iKeyCols && col<10; col++ ) 
 	{
 		float fy = fKeyHeiGap;
-		//KeyButton *buPrev = nil;	// タテ結合処理：直上ボタン
-		for (int row=0; row<iKeyRows && row<100; row++ ) 
+		for (int row=0; row<iKeyRows && row<10; row++ ) 
 		{
+			if ([aPage count] <= idx) break;
+			
 			KeyButton *bu = [[KeyButton alloc] initWithFrame:CGRectMake(fx,fy, fKeyWidth,fKeyHeight)];
 			[bu setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 			[bu setBackgroundImage:RimgDrumPush forState:UIControlStateHighlighted];
@@ -193,8 +297,8 @@
 			bu.iCol = iKeyOffsetCol + col;
 			bu.iRow = iKeyOffsetRow + row;
 			bu.bDirty = NO;
-			NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", (int)bu.iPage, (int)bu.iCol, (int)bu.iRow];
-			NSDictionary *dicKey = [RdicKeyboardSet objectForKey:zPCR];
+			//
+			NSDictionary *dicKey = [aPage objectAtIndex:idx++];
 			if (dicKey) {
 				bu.tag = [[dicKey objectForKey:@"Tag"] integerValue]; // Function No.
 
@@ -238,14 +342,6 @@
 					}
 				}
 				
-				if (KeyTAG_MSTORE_Start < bu.tag && bu.tag < KeyTAG_MSTROE_End) 
-				{ // [M*]
-					NSString *zKey = [NSString stringWithFormat:@"M%d", bu.tag - KeyTAG_MSTORE_Start];
-					NSDictionary *dic = [RdicKeyboardSet objectForKey:zKey];
-					if (dic) {
-						strText = [dic objectForKey:@"Text"];
-					}
-				}
 				if (strText==nil) strText = @" "; // Space1
 				[bu setTitle:strText forState:UIControlStateNormal];
 				
@@ -306,10 +402,8 @@
 			
 			// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 			
-			//[ibScrollLower addSubview:bu];
 			[keyView addSubview:bu];
 			[bu release]; // init だから
-			[zPCR release];
 			
 			fy += (fKeyHeight + fKeyHeiGap*2);
 		}
@@ -346,7 +440,6 @@
 		}
 		
 		// キー再表示：連結されたキーがあれば独立させる
-		//NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 		NSArray *aKeys = [keyView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
 		for (id obj in aKeys) {
 			if ([obj isMemberOfClass:[KeyButton class]]) {
@@ -401,7 +494,6 @@
 		[self MvMemoryShow];
 		
 		// キー再表示
-		//NSArray *aKeys = [ibScrollLower subviews]; // addSubViewした順（上から下へかつ左から右）に収められている。
 		NSArray *aKeys = [keyView subviews]; // addSubViewした順（上から下へかつ左から右）に収められている。
 		// タテ連結処理
 		for (id obj in aKeys) {
@@ -442,7 +534,6 @@
 		for (id obj in aKeys) {
 			if ([obj isMemberOfClass:[KeyButton class]]) {
 				KeyButton *bu = (KeyButton *)obj;
-				//NSLog(@"$$$$$ bu=[%@]", bu.titleLabel.text);
 				if (bu.tag!=-1 && bu.hidden == NO) { // 起動時やメモリ不足時にviewDidLoad後に通ることになる。その時、非表示となったボタンは無視する
 					// ヨコ連結処理　＜＜同じ高さならば連結する＞＞
 					for (id obj in aKeys) {
@@ -486,13 +577,10 @@
 	NSLog(@"--- viewDidLoad ---");
 	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
     [super viewDidLoad];
-    //NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; // 途中 return で抜けないこと！！！
 
 	mAppDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-	// RdicKeyMemorys  Load
-	//RdicKeyMemorys = [userDef objectForKey:GUD_KeyMemorys];
 
 	// インストールやアップデート後、1度だけ処理する
 	NSString *zNew = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
@@ -715,66 +803,9 @@
 	[swipe release], swipe = nil;
 #endif
 	
-	//NSInteger iPageUpdate = 999; //[0.4]ユーザのキー配置変更を守りつつ単位キーを追加するため
+	//----------------------------- KeyMap 読み込み
+	[self keymapLoad];	// mKmPages を生成する
 
-#ifdef AzMAKE_SPLASHFACE
-	ibPvDrum.alpha = 0.9;
-	ibBuMemory.hidden = YES;
-	ibLbEntry.hidden = YES;
-	ibBuSetting.hidden = YES;
-	ibBuInformation.hidden = YES;
-	RdicKeyboardSet = [NSDictionary new];
-#else
-	// standardUserDefaults からキー配置読み込む
-	if (RdicKeyboardSet) {
-		[RdicKeyboardSet release], RdicKeyboardSet = nil;
-	}
-	RdicKeyboardSet = [[userDef objectForKey:GUD_KeyboardSet] retain];
-	if (RdicKeyboardSet==nil) {  // インストール初回のみ通る
-		// AzKeySet.plistからキー配置読み込む
-		NSString *zPath;
-		if (bPad) { // iPad
-			zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
-		} else {
-			zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
-		}
-		RdicKeyboardSet = [[NSMutableDictionary alloc] initWithContentsOfFile:zPath];	// 後で release している
-		if (RdicKeyboardSet==nil) {
-			AzLOG(@"ERROR: AzKeySet.plist not Open");
-			exit(-1);
-		}
-		// 初期キーボード配置dicを　standardUserDefaults へ保存する　＜＜アプリがアップデートされても保持される＞＞
-		[userDef setObject:RdicKeyboardSet forKey:GUD_KeyboardSet];
-		if ([userDef synchronize] != YES) {
-			NSLog(@"RdicKeyboardSet synchronize: ERROR");
-		}
-	}
-	
-	//[1.0.10] Memory[M*]を RdicKeyboardSet に統合　＞＞移行完了したら廃止
-	NSDictionary *dicOld = [userDef objectForKey:GUD_KeyMemorys]; //[1.0.9]以前の[M*]メモリ値を取り出すため。 この最後に削除している
-	if (dicOld) {
-		NSDictionary *dKeySet = [NSDictionary dictionaryWithDictionary:RdicKeyboardSet]; //Loop中に RdicKeyboardSet を更新するため。
-		for (NSDictionary *dic in dKeySet) { // 配置済みの[M*]キーについて
-			NSInteger iTag = [[dic objectForKey:@"Tag"] integerValue];
-			if (KeyTAG_MSTORE_Start < iTag && iTag < KeyTAG_MSTROE_End) { // [M*]
-				NSString *zKey = [NSString stringWithFormat:@"%d", iTag]; // GUD_KeyMemorys では Tag がキーになっている
-				NSString *zCap = [dicOld objectForKey:zKey];
-				if (zCap && [zCap hasPrefix:@"M"]) {
-					// 値なしにつきなにもしない
-				} else {
-					// zCap をキー属性 @"Text" にセットする
-					NSArray *arPCRs = [RdicKeyboardSet allKeysForObject:dic]; // dicのkey("PxCxRx")or("Mx")を求める
-					if (arPCRs) {
-						NSMutableDictionary *mdic = [[NSMutableDictionary alloc] initWithDictionary:dic];
-						[mdic setObject:zCap forKey:@"Text"]; // UPDATE
-						[RdicKeyboardSet setObject:mdic forKey:[arPCRs objectAtIndex:0]];
-					}
-				}
-			}
-		}
-	}
-#endif
-	
 	// ibPvDrumは、画面左下を基点にしている。
 	// ボタンの縦横比を「黄金率」にして余白をGapにする
 	fKeyWidGap = 0;
@@ -798,26 +829,8 @@
 	fKeyWidth -= (fKeyWidGap * 2);
 	fKeyHeight -= (fKeyHeiGap * 2);
 	
-	// subViewsで取得できる配列には、以下のaddSubViewした順（縦書きで左から右）に収められている。
-	// UIButtonのみaddSubViewすること！ それを前提に後処理しているため。
-
-	/*[1.0.10] viewWillAppear:にて生成＆描画するようにした。
-	CGRect rc = ibScrollLower.bounds;
-	for (int page=0; page<iKeyPages; page++ ) 
-	{
-		rc.origin.x = rc.size.width * page;
-		UIView *vv = [[UIView alloc] initWithFrame:rc];
-		[self drawKeyboard:vv page:page];
-		[ibScrollLower addSubview:vv];
-		[vv release];
-	}
-	[dicKeys release];
-
-	if (RaKeyMaster) {
-		[RaKeyMaster release];
-		RaKeyMaster = nil;
-	}
-	*/
+	// この後、上のパラメータを使って、viewWillAppear:にて mKeyView 生成＆描画する
+	// [mKeyView　subViews] で取得できる配列には、addSubViewした順（縦書きで左から右）に収められている。
 	
 #ifdef GD_Ad_ENABLED
 	//--------------------------------------------------------------------------------------------------------- AdMob
@@ -986,9 +999,6 @@
 	CGRect rcBounds = ibScrollLower.bounds;	// .y = 0
 	rcBounds.origin.x = rcBounds.size.width * PAGES/2; // 常に中央位置
 
-/*	mKeyView = [[UIView alloc] initWithFrame:rcBounds]; // .y=どこでも大丈夫
-	[self drawKeyboard:mKeyView page:MiSvLowerPage];
- */
 	if (mKeyView) {
 		mKeyView.hidden = YES;  // 実機では、removeだけでは消えない場合があった。
 		[mKeyView removeFromSuperview];
@@ -1039,14 +1049,6 @@
 {
 	[super viewDidAppear:animated];
 	
-	/*
-	if (buChangeKey) {
-		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
-		// 復帰
-		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
-		buChangeKey = nil;
-	}*/
-
 #ifdef GD_Ad_ENABLED
 	[self MvShowAdApple:YES AdMob:YES];
 #endif
@@ -1430,79 +1432,19 @@
 {	//[1.0.10] keyView のキー配置を記録する　＜＜キー配置変更時、ページ切替の都度、呼び出されて記録する。
 	if (!keyView) return;
 
-#ifdef xxxxxxxxxxxxxOLDxxxxxxxxxxxx
-	NSArray *aKeys = [keyView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
-	for (id obj in aKeys) 
-	{
-		assert([obj isMemberOfClass:[KeyButton class]]);
-		KeyButton *bu = (KeyButton *)obj;
-
-		//[1.0.10] [M*]メモリも統合
-		NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", (int)bu.iPage, (int)bu.iCol, (int)bu.iRow];
-		// 新規生成して追加
-		NSString *strText  = bu.titleLabel.text;		// [M*]キーの場合、メモリ数値が入る
-		NSString *strUnit  = bu.RzUnit;
-		
-		if (strText==nil) strText = @" "; // Space1つ ＜＜注意
-		if (strUnit==nil) strUnit = @"";  // Dictionary では、nil 禁止のため
-		
-		NSDictionary *dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-							 [NSNumber numberWithInteger:bu.tag],			@"Tag",
-							 strText,																@"Text",
-							 [NSNumber numberWithFloat:bu.fFontSize],	@"Size",
-							 [NSNumber numberWithInteger:bu.iColorNo],	@"Color",
-							 [NSNumber numberWithFloat:bu.alpha],			@"Alpha",
-							 strUnit,																@"Unit", 
-							 nil];
-		[RdicKeyboardSet setObject:dic forKey:zPCR];	// ADD, UPDATE
-		[dic release];
-		[zPCR release];
-	}
-	// RdicKeyboardSet は、適時 userDef へ書き出している
-#ifdef xxxxxDEBUG
-	// レイアウト結果を.plistファイルへ書き出すことにより、初期レイアウトファイル"AzKeySet.plist"を作ることができる。
-	NSString *zPath = @"/Users/masa/AzukiSoft/AzCalc/AzCalc/AzKeySet_DEBUG.plist";
-	[RdicKeyboardSet writeToFile:zPath atomically:YES];
-#endif
-
-#else
-	//[1.0.10]keyViewコンテンツを丸ごと保存する
-	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-	NSString *zKey;
-	if (bPad) {
-		zKey = [NSString stringWithFormat:GUD_KeyViewPad @"%d", (int)keyView.tag];
-	} else {
-		zKey = [NSString stringWithFormat:GUD_KeyView @"%d", (int)keyView.tag];
-	}
-	//NG//[userDef setObject:keyView forKey:zKey];
-	
-/*	for (id obj in [keyView subviews])
-	{
-		if (obj && [obj isMemberOfClass:[KeyButton class]]) {
-			KeyButton *bu = (KeyButton *)obj;
-			NSData *da = [NSKeyedArchiver archivedDataWithRootObject:bu];
-			
+	NSMutableArray *maKeys = [NSMutableArray new];
+	for (id keybu in [keyView subviews]) {	// addSubViewした順（縦書きで左から右）に収められている。
+		if ([keybu isMemberOfClass:[KeyButton class]]) {
+			[maKeys addObject:keybu];
 		}
 	}
+	[mKmPages replaceObjectAtIndex:keyView.tag withObject:maKeys];
+	[maKeys release];
 	
-	id obj = [mKeyView viewWithTag:KeyTAG_DECIMAL]; // (KeyTAG_DECIMAL)[.]小数点
-	if (obj && [obj isMemberOfClass:[KeyButton class]]) {
-		KeyButton *bu = (KeyButton *)obj;
-	}*/
-	
-	NSData *da = [NSKeyedArchiver archivedDataWithRootObject:keyView];
-	[userDef setObject:da forKey:zKey];
-	
-	
-#ifdef xxDEBUG
-	// レイアウト結果を.plistファイルへ書き出すことにより、初期レイアウトファイル"AzKeySet.plist"を作ることができる。
-	NSString *zPath = [NSString stringWithFormat:@"/Users/masa/AzukiSoft/AzCalc/AzCalc/%@.plist", zKey];
-	[keyView writeToFile:zPath atomically:YES];
-#endif
-	// 遅延書き込みする予定
-	if (![userDef synchronize]) {
-		NSLog(@"RdicKeyboardSet synchronize: ERROR");
-	}
+#ifdef xxxxxDEBUG
+	// mKmPages を.plistファイルへ書き出すことにより、初期レイアウトファイル"AzKeyMap.plist"を作ることができる。
+	NSString *zPath = @"/Users/masa/AzukiSoft/AzCalc/AzCalc/AzKeyMap_DEBUG.plist";
+	[mKmPages writeToFile:zPath atomically:YES];
 #endif
 }
 
@@ -1617,10 +1559,13 @@
 		}
 	}***/
 	
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 	// [PB]ペーストボード（画面中央に出入りする）ボタンを保存
 	if (KeyTAG_MSTORE_Start < ibBuMemory.tag) {
-		[RdicKeyboardSet setObject:[NSNumber numberWithInteger:ibBuMemory.tag]  forKey:@"PB_TAG"];
-		[RdicKeyboardSet setObject:[UIPasteboard generalPasteboard].string  forKey:@"PB_TEXT"];
+		//[RdicKeyboardSet setObject:[NSNumber numberWithInteger:ibBuMemory.tag]  forKey:@"PB_TAG"];
+		//[RdicKeyboardSet setObject:[UIPasteboard generalPasteboard].string  forKey:@"PB_TEXT"];
+		[userDef setObject:[NSNumber numberWithInteger:ibBuMemory.tag]  forKey:@"PB_TAG"];
+		[userDef setObject:[UIPasteboard generalPasteboard].string  forKey:@"PB_TEXT"];
 	}
 	
 	/*[1.0.9]常に DEFAULT PAGE に戻すようにした。
@@ -1631,7 +1576,8 @@
 
 - (void)GvMemoryLoad
 {	// [M]メモリボタンや[PB]ボタン を RdicKeyboardSet から復帰させる
-	NSString *str = [RdicKeyboardSet objectForKey:@"PB_TEXT"];
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+	NSString *str = [userDef objectForKey:@"PB_TEXT"];
 	if (str==nil OR ![str isEqualToString:[UIPasteboard generalPasteboard].string]) {
 		// generalPasteboardの値を表示
 		ibBuMemory.tag = 0;
@@ -1639,7 +1585,7 @@
 									  stringFormatter(stringAzNum([UIPasteboard generalPasteboard].string), YES)];
 	}
 	else {
-		NSNumber *num = [RdicKeyboardSet objectForKey:@"PB_TAG"];
+		NSNumber *num = [userDef objectForKey:@"PB_TAG"];
 		if (num) {
 			ibBuMemory.tag = [num integerValue];
 			// [UIPasteboard generalPasteboard].string そのまま表示
@@ -1686,13 +1632,14 @@
 	MiSvLowerPage = 1; // DEFAULT PAGE
 }
 
+/*
 - (void)MvKeyboardPage:(NSInteger)iPage
 {
 	//if (ibScrollLower.frame.origin.x / ibScrollLower.frame.size.width == iPage) return; // 既にiPageである。
 	CGRect rc = ibScrollLower.frame;
 	rc.origin.x = rc.size.width * iPage;
 	[ibScrollLower scrollRectToVisible:rc animated:YES];
-}
+}*/
 
 /*[1.0.8]廃止：2指スワイプ対応により相性が悪くなったため
 - (void)MvKeyboardPage1Alook0 // 1ページから0ページを「ちょっと見せる」アニメーション
@@ -1720,7 +1667,7 @@
 	else {
 		// 生成
 		NSMutableArray *maBus = [NSMutableArray new];
-		for (int i=0 ; i<15 && i<KeyMemorys_MAX ; i++) 
+		for (int idx=0 ; idx<15 && idx<KeyMemorys_MAX ; idx++) 
 		{
 			KeyButton *bu = [[KeyButton alloc] initWithFrame:CGRectZero];
 			[bu setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
@@ -1730,18 +1677,22 @@
 			bu.iRow = 0;
 			bu.bDirty = NO;
 			bu.alpha = KeyALPHA_MSTORE_OFF;
-			bu.tag = KeyTAG_MSTORE_Start + 1 + i;
-			
-			NSString *zKey = [NSString stringWithFormat:@"M%d", 1+i];
-			NSDictionary *dic = [RdicKeyboardSet objectForKey:zKey];
-			if (dic) {
-				[bu setTitle:[dic objectForKey:@"Text"] forState:UIControlStateNormal];
-			} else {
-				[bu setTitle:[NSString stringWithFormat:@"M%d", (int)1+i] forState:UIControlStateNormal];
-			}
+			bu.tag = KeyTAG_MSTORE_Start + 1 + idx;
 			bu.titleLabel.font = [UIFont boldSystemFontOfSize:DRUM_FONT_MSG];
 			[bu setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 			[bu addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
+			
+			BOOL bReset = YES;
+			for (NSMutableDictionary *kbu in mKmMemorys) {
+				if ([[kbu objectForKey:@"Tag"] integerValue]  == bu.tag) {
+					[bu setTitle:[kbu objectForKey:@"Text"] forState:UIControlStateNormal];	// メモリ記録値を再現
+					bReset = NO;
+					break;
+				}
+			}
+			if (bReset) {
+				[bu setTitle: [NSString stringWithFormat:@"M%d", 1+idx] forState:UIControlStateNormal];
+			}
 			[self.view addSubview:bu];
 			[maBus addObject:bu];
 		}
@@ -2074,12 +2025,13 @@
 			}
 			//
 			if (KeyTAG_MSTORE_Start < ibBuMemory.tag && ibBuMemory.tag <= KeyTAG_MSTROE_End) 
-			{	// RdicKeyboardSet をクリアする
-				NSString *zKey = [NSString stringWithFormat:@"M%d", ibBuMemory.tag - KeyTAG_MSTORE_Start];
-				NSMutableDictionary *md = [RdicKeyboardSet objectForKey:zKey];
-				if (md) {
-					[md setObject:zKey forKey:@"Text"]; // CLEAR UPDATE
-					[RdicKeyboardSet setObject:md forKey:zKey]; // UPDATE
+			{	// mKmPages をクリアする
+				NSString *zTitleClear = [NSString stringWithFormat:@"M%d", ibBuMemory.tag - KeyTAG_MSTORE_Start];
+				for (NSMutableDictionary *kbu in mKmMemorys) {
+					if ([[kbu objectForKey:@"Tag"] integerValue]  ==ibBuMemory.tag) {
+						[kbu setObject:zTitleClear forKey:@"Text"];
+						// 同じキーが2個以上配置されている可能性もあるので最後まで処理する
+					}
 				}
 				// 現ページにあれば消す
 				NSArray *aKeys = [mKeyView subviews]; // addSubViewした順（縦書きで左から右）に収められている。
@@ -2087,8 +2039,7 @@
 					if ([obj isMemberOfClass:[KeyButton class]]) {
 						KeyButton *bu = (KeyButton *)obj;
 						if (bu.tag == ibBuMemory.tag) {
-							[bu setTitle:[NSString stringWithFormat:@"M%d", (int)(bu.tag - KeyTAG_MSTORE_Start)]
-								forState:UIControlStateNormal];
+							[bu setTitle:[NSString stringWithFormat:@"M%d", (int)(bu.tag - KeyTAG_MSTORE_Start)] forState:UIControlStateNormal];
 							bu.alpha = KeyALPHA_MSTORE_OFF; // Memory nothing
 							//2個以上連結している場合があるため最後まで調べて全て更新する
 						}
@@ -2107,8 +2058,6 @@
 							//break; 同じキーが複数割り当てられている可能性があるので最後までいく
 						}
 					}
-				} else {
-					//[self MvKeyboardPage1Alook0]; // iPhoneのときだけ「しゃくる」
 				}
 				ibBuMemory.tag = 0; // MClear
 			}
@@ -2133,22 +2082,19 @@
 				// [UIPasteboard generalPasteboard].string を 未使用メモリーKey へ登録する
 				ibBuMemory.tag = 0; // MClear
 				NSInteger iSavedTag = (-1);
-				// RdicKeyboardSet から未使用[M*]を探す
-				for (int ii=1; ii<=KeyMemorys_MAX; ii++) {
-					NSString *zKey = [NSString stringWithFormat:@"M%d", ii];
-					NSMutableDictionary *md = [RdicKeyboardSet objectForKey:zKey];
-					if (md) {
-						NSString *zText = [md objectForKey:@"Text"];
-						if (zText && [zText hasPrefix:@"M"]) {
-							iSavedTag = KeyTAG_MSTORE_Start + ii;
-							[md setObject:[UIPasteboard generalPasteboard].string forKey:@"Text"]; // UPDATE
-							[RdicKeyboardSet setObject:md forKey:zKey]; // UPDATE
-							break;
+				// mKmPages から未使用で最小順位のメモリを探す
+				NSInteger iTagMin = KeyTAG_MSTROE_End;
+				for (NSMutableDictionary *kbu in mKmMemorys) {
+					NSInteger iTag = [[kbu objectForKey:@"Tag"] integerValue];
+					NSString *zText = [kbu objectForKey:@"Text"];
+					if (zText && [zText hasPrefix:@"M"]) {
+						if (iTag < iTagMin) {
+							iTagMin = iTag;
+							// 同じキーが2個以上配置されている可能性もあるので最後まで処理する
 						}
 					}
 				}
-				if (iSavedTag <= KeyTAG_MSTORE_Start) {
-					//AzLOG(@"Memory Key Fill.");
+				if (iTagMin <= KeyTAG_MSTORE_Start OR KeyTAG_MSTROE_End <= iTagMin) {
 					UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Memory Over",nil)
 																	message:NSLocalizedString(@"[M1]-[M20]",nil)
 																   delegate:nil
@@ -2157,6 +2103,15 @@
 					[alert show];
 					[alert release];
 					break;
+				}
+				// 未使用メモリ（iTagMin）へ記録する
+				iSavedTag = iTagMin;
+				for (NSMutableDictionary *kbu in mKmMemorys) {
+					NSInteger iTag = [[kbu objectForKey:@"Tag"] integerValue];
+					if (iTag == iSavedTag) {
+						[kbu setObject:[UIPasteboard generalPasteboard].string forKey:@"Text"]; // UPDATE
+						// 同じキーが2個以上配置されている可能性もあるので最後まで処理する
+					}
 				}
 				// iPad専用メモリー表示
 				if (RaPadKeyButtons && KeyTAG_MSTORE_Start < iSavedTag) { 
@@ -2291,12 +2246,13 @@
 					// ペーストボードへ
 					[UIPasteboard generalPasteboard].string = stringFormatter(zAns, YES);
 					if (KeyTAG_MSTORE_Start < ibBuMemory.tag && ibBuMemory.tag < KeyTAG_MSTROE_End) {
-						// RdicKeyboardSet を更新する
-						NSString *zKey = [NSString stringWithFormat:@"M%d", ibBuMemory.tag - KeyTAG_MSTORE_Start];
-						NSMutableDictionary *md = [RdicKeyboardSet objectForKey:zKey];
-						if (md) {
-							[md setObject:[UIPasteboard generalPasteboard].string forKey:@"Text"]; // UPDATE
-							[RdicKeyboardSet setObject:md forKey:zKey]; // UPDATE
+						// メモリへ記録する
+						for (NSMutableDictionary *kbu in mKmMemorys) {
+							NSInteger iTag = [[kbu objectForKey:@"Tag"] integerValue];
+							if (iTag == ibBuMemory.tag) {
+								[kbu setObject:[UIPasteboard generalPasteboard].string forKey:@"Text"]; // UPDATE
+								// 同じキーが2個以上配置されている可能性もあるので最後まで処理する
+							}
 						}
 						// iPad専用メモリー表示
 						if (RaPadKeyButtons) {
@@ -2480,12 +2436,8 @@
 	if (RaKeyMaster) {// !=nil キーレイアウト変更モード
 		[self MvSaveKeyView:mKeyView];
 
-		// RdicKeyboardSet　を　standardUserDefaults へ保存する　＜＜アプリがアップデートされても保持される＞＞
-		NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-		[userDef setObject:RdicKeyboardSet forKey:GUD_KeyboardSet];
-		if ([userDef synchronize] != YES) {
-			NSLog(@"RdicKeyboardSet synchronize: ERROR");
-		}
+		// mKmPages　を　standardUserDefaults へ保存する　＜＜アプリがアップデートされても保持される＞＞
+		[self keymapSaveAndSync:YES];
 	}
 	
 	//AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];

@@ -50,7 +50,7 @@
 	NSArray				*RaDrumButtons;
 	NSArray				*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
-	NSMutableDictionary	*RdicKeyboardSet;  //*RdicAllKeys;	//*dicKeys;
+	//NSMutableDictionary	*RdicKeyboardSet;  //*RdicAllKeys;	//*dicKeys;
 	//NSMutableDictionary	*RdicKeyMemorys;	// M1〜M20 の値を記録
 	//NSMutableArray	*RaMemorys;	// M1〜M20 の値を記録
 	UIImage				*RimgDrumButton;	
@@ -60,6 +60,11 @@
 	NSString				*mGvKeyUnitSI;
 	NSString				*mGvKeyUnitSi2;
 	NSString				*mGvKeyUnitSi3;
+	
+	//[1.0.10] mKm : Keymap
+	NSMutableArray		*mKmPages;			// <--(All Page) <--(All KeyButton)
+	NSMutableArray		*mKmMemorys;		// <--(Memory KeyButton)
+	//NSArray				*mKmUnits;				// <--(Unit KeyButton)
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 	//UIView*			MviewKeyboard;

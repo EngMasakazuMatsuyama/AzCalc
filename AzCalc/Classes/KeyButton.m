@@ -15,11 +15,11 @@
 @synthesize iPage, iCol, iRow, iColorNo, fFontSize, bDirty, RzUnit;
 
 
-#pragma mark - <NSCoding>
+#pragma mark - <NSCoding> シリアライズ
 
 - (id)initWithCoder:(NSCoder *)decoder
 {
-	self = [super init];
+	self = [super initWithCoder:decoder];
 	if (self) {
 		iPage = [[decoder decodeObjectForKey:@"iPage"] integerValue];
 		iCol = [[decoder decodeObjectForKey:@"iCol"] integerValue];
@@ -34,6 +34,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
+	[super encodeWithCoder:encoder];
 	[encoder encodeObject:[NSNumber numberWithInteger:iPage]  forKey:@"iPage"];
 	[encoder encodeObject:[NSNumber numberWithInteger:iCol]  forKey:@"iCol"];
 	[encoder encodeObject:[NSNumber numberWithInteger:iRow]  forKey:@"iRow"];

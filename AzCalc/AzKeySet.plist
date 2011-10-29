@@ -302,6 +302,19 @@
 		<key>Unit</key>
 		<string></string>
 	</dict>
+	<key>Pad</key>
+	<array>
+		<array>
+			<dict>
+				<key>Alpha</key>
+				<real>0.5</real>
+				<key>Color</key>
+				<integer>3</integer>
+				<key>Size</key>
+				<integer>18</integer>
+			</dict>
+		</array>
+	</array>
 	<key>P0C1R1</key>
 	<dict>
 		<key>Alpha</key>
