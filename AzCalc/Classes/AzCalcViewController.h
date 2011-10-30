@@ -25,20 +25,18 @@
 		,ADBannerViewDelegate
 #endif
 > {
-	IBOutlet UIPickerView*	ibPvDrum;
-	IBOutlet UILabel*		ibLbEntry;
-	IBOutlet UIButton*		ibBuMemory;
-	IBOutlet UIButton*		ibBuSetting;
-	IBOutlet UIButton*		ibBuInformation;
-	IBOutlet UIScrollView*	ibScrollLower;
-	IBOutlet UIScrollView*	ibScrollUpper; //[0.3]
-	IBOutlet UITextView*	ibTvFormula;	//[0.3]
-	IBOutlet UILabel*		ibLbFormAnswer;
-	IBOutlet UIButton*		ibBuFormLeft;
-	IBOutlet UIButton*		ibBuFormRight;
-	IBOutlet UIButton*		ibBuGetDrum;
-	//IBOutlet UIPanGestureRecognizer	*ibPanUpper;
-	//IBOutlet UIPanGestureRecognizer	*ibPanLower;
+	IBOutlet UIPickerView	*ibPvDrum;
+	IBOutlet UILabel			*ibLbEntry;
+	IBOutlet UIButton		*ibBuMemory;
+	IBOutlet UIButton		*ibBuSetting;
+	IBOutlet UIButton		*ibBuInformation;
+	IBOutlet UIScrollView	*ibScrollLower;
+	IBOutlet UIScrollView	*ibScrollUpper; //[0.3]
+	IBOutlet UITextView	*ibTvFormula;	//[0.3]
+	IBOutlet UILabel			*ibLbFormAnswer;
+	IBOutlet UIButton		*ibBuFormLeft;
+	IBOutlet UIButton		*ibBuFormRight;
+	IBOutlet UIButton		*ibBuGetDrum;
 	
 @private
 	//----------------------------------------------dealloc時にrelese
@@ -48,11 +46,8 @@
 #endif
 	NSArray				*RaDrums;
 	NSArray				*RaDrumButtons;
-	NSArray				*RaPadKeyButtons;
+	NSArray				*mPadKeyButtons;  //*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
-	//NSMutableDictionary	*RdicKeyboardSet;  //*RdicAllKeys;	//*dicKeys;
-	//NSMutableDictionary	*RdicKeyMemorys;	// M1〜M20 の値を記録
-	//NSMutableArray	*RaMemorys;	// M1〜M20 の値を記録
 	UIImage				*RimgDrumButton;	
 	UIImage				*RimgDrumPush;
 	UIView					*mKeyView;
@@ -64,7 +59,6 @@
 	//[1.0.10] mKm : Keymap
 	NSMutableArray		*mKmPages;			// <--(All Page) <--(All KeyButton)
 	NSMutableArray		*mKmMemorys;		// <--(Memory KeyButton)
-	//NSArray				*mKmUnits;				// <--(Unit KeyButton)
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 	//UIView*			MviewKeyboard;
@@ -87,8 +81,8 @@
 	
 	// Keyboard spec
 	int				iKeyPages;
-	int				iKeyCols, iKeyOffsetCol;
-	int				iKeyRows, iKeyOffsetRow;
+	int				iKeyCols; //, iKeyOffsetCol;
+	int				iKeyRows; //, iKeyOffsetRow;
 	float				fKeyGap;
 	float				fKeyFontZoom;
 	float				fKeyWidGap;			// キートップ左右の余白

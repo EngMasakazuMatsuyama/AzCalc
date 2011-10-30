@@ -58,13 +58,16 @@
 
  -----------------------------------------------------------------------*/
 
-#define GUD_KeyboardSet					@"GUD_KeyboardSet"	//[1.0.9]までの保存形式
-#define GUD_KeyMapPad					@"GUD_KeyMapPad"		//[1.0.10]からの保存形式 Pad専用
-#define GUD_KeyMapPhone				@"GUD_KeyMapPhone"	//[1.0.10]からの保存形式 Phone専用
+#define PLIST_KEYMAP_PAD				@"AzKeyMapPad"		// .plistファイル名
+#define PLIST_KEYMAP_PHONE		@"AzKeyMapPhone"	// .plistファイル名
 
-//#define GUD_KeyMemorys					@"GUD_KeyMemorys"	//[1.0.10]　GUD_KeyboardSet へ統合する。後日削除
-//#define GUD_KeyView						@"GUD_KeyView_"		//"_%d" ページ番号が入る
-//#define GUD_KeyViewPad					@"GUD_KeyViewPad_"  //"_%d" ページ番号が入る
+
+#define GUD_KeyboardSet					@"GUD_KeyboardSet"		//[1.0.9]までのuserDef保存Key
+
+#define GUD_KeyMapPhone				@"GUD_KeyMapPhone"		//[1.0.10]からのuserDef保存Key Phone
+#define GUD_KeyMapPad					@"GUD_KeyMapPad"			//[1.0.10]からのuserDef保存Key Pad
+#define GUD_KeyMapPadMem			@"GUD_KeyMapPadMem"	//[1.0.10]からのuserDef保存Key Pad拡張メモリ
+
 
 
 // SettingVC
