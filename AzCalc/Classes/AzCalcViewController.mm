@@ -52,7 +52,7 @@
 - (void)MvMemoryShow;
 - (void)MvFormulaBlankMessage:(BOOL)bBlank;
 - (void)MvPadKeysShow;
-- (void)MvKeyUnitGroupSI;
+- (void)MvKeyUnitGroupSI:(UIView*)keyView;
 - (void)MvKeyUnitGroup:(KeyButton *)keyUnit;
 //- (void)MvKeyboardPage:(NSInteger)iPage;
 - (void)MvDrumButtonTouchUp:(UIButton *)button;
@@ -177,6 +177,7 @@
 			}
 		}
 	}
+	//NSLog(@"KeyMap: mKmPages=%@", mKmPages);
 }
 
 
@@ -215,7 +216,7 @@
 	[RimgDrumButton release],	RimgDrumButton = nil;
 	[RimgDrumPush release],		RimgDrumPush = nil;
 	//不要//[mKeyView release], mKeyView = nil;  ＜＜ ibScrollLowerがオーナーだから。
-	//不要//[mKeyViewPrev release], mKeyViewPrev = nil;
+	//不要//[mKeyViewPrev release], mKeyViewPrev = nil;  ＜＜ ibScrollLowerがオーナーだから。
 
 /*	// RdicKeyboardSet Save & Release
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -269,18 +270,17 @@
 
 #pragma mark - View lifecicle
 
-- (UIView *)keyViewAllocPage:(NSInteger)page
+- (UIView *)keyViewAlloc:(CGRect)frame  page:(NSInteger)page
 {
-	CGRect rcBounds = ibScrollLower.bounds;	// .y = 0
-	rcBounds.origin.x = rcBounds.size.width * PAGES/2; // 常に中央位置
-
-	// RdicKeyboardSet から生成する
-	UIView *keyView = [[UIView alloc] initWithFrame:rcBounds]; // .y=どこでも大丈夫
+	UIView *keyView = [[UIView alloc] initWithFrame:frame]; // .y=どこでも大丈夫
 	assert(keyView);
 	keyView.tag = page;
 
+	if (page<0 OR [mKmPages count] <= page) return keyView; // No Keybutton
+
 	NSArray *aPage = [mKmPages objectAtIndex:page];
 	NSInteger idx = 0;
+	//NSLog(@"KeyMap: aPage=%@", aPage);
 	
 	float fx = fKeyWidGap;
 	for (int col=0; col<iKeyCols && col<10; col++ ) 
@@ -308,6 +308,8 @@
 				NSNumber *numAlpha = [dicKey objectForKey:@"Alpha"];
 				// UNIT
 				NSString *strUnit = [dicKey objectForKey:@"Unit"];
+				
+				//NSLog(@"KeyMap: page=%d idx=%d  Tag=%d Text=%@", (int)page, (int)idx, (int)bu.tag, strText);
 				
 				if (strText==nil 
 					OR numSize==nil 
@@ -565,9 +567,9 @@
 			}
 		}
 		//[1.0.10]キーボードスクロール時、単位キーの有効／無効を「直前と同様に」セットする
-		[self MvKeyUnitGroupSI];
+		[self MvKeyUnitGroupSI:keyView];
 	}
-	//
+	//NSLog(@"KeyMap: keyView=%@", keyView);
 	return keyView;
 }
 
@@ -1001,10 +1003,10 @@
 
 	if (mKeyView) {
 		mKeyView.hidden = YES;  // 実機では、removeだけでは消えない場合があった。
-		[mKeyView removeFromSuperview];
+		[mKeyView removeFromSuperview]; // オーナー(Superview)から削除されると同時にreleaseされる。
 		mKeyView = nil;
 	}
-	mKeyView = [self keyViewAllocPage:MiSvLowerPage];
+	mKeyView = [self keyViewAlloc:rcBounds page:MiSvLowerPage];
 	assert(mKeyView);
 	[ibScrollLower addSubview:mKeyView], [mKeyView release];
 	[ibScrollLower scrollRectToVisible:rcBounds animated:NO]; // 中央 ＜＜ .y=0でも大丈夫
@@ -1292,20 +1294,21 @@
 	//assert(mKeyViewPrev==nil);
 	if (mKeyViewPrev) {  // スクロールが完全停止しないうちにスワイプしたときのため
 		[mKeyViewPrev removeFromSuperview];
+		mKeyViewPrev = nil;
 	}
-	mKeyViewPrev = mKeyView; // 直前ページを保持
+	
 	CGRect rect = mKeyView.frame; // .y=0 であることに注意
 	if (ibScrollLower.contentSize.width - rect.size.width <= rect.origin.x) { // スクロール限界オーバー
 		rect.origin.x = rect.size.width * PAGES/2; // 強制的に中央へ戻す
 		[ibScrollLower scrollRectToVisible:rect animated:NO]; // 瞬間移動！
-		mKeyViewPrev.frame = rect;		// 瞬間移動！ ＜＜結構、うまく錯覚させることができているようだ。
+		mKeyView.frame = rect;		// 瞬間移動！ ＜＜結構、うまく錯覚させることができているようだ。
 	}
 	rect.origin.x += rect.size.width;	// (+)右へ
+
+	mKeyViewPrev = mKeyView; // 直前ページを保持
+	//NG//[mKeyView removeFromSuperview]; これすると mKeyViewPrev が破棄されることになる。
 	// 新しいページを生成し、スクロール表示
-	//mKeyView = [[UIView alloc] initWithFrame:rect];
-	//[self drawKeyboard:mKeyView page:MiSvLowerPage]; // キー生成
-	[mKeyView removeFromSuperview];
-	mKeyView = [self keyViewAllocPage:MiSvLowerPage];
+	mKeyView = [self keyViewAlloc:rect page:MiSvLowerPage];
 	[ibScrollLower addSubview:mKeyView], [mKeyView release];
 	[ibScrollLower scrollRectToVisible:rect animated:YES]; // rect.origin.y=0になっているが垂直移動しないので無視される
 	// キーレイアウト変更モードならば、直前ページを保存する
@@ -1328,21 +1331,23 @@
 
 	//assert(mKeyViewPrev==nil);
 	if (mKeyViewPrev) {  // スクロールが完全停止しないうちにスワイプしたときのため
+		NSLog(@"mKeyViewPrev=%@", mKeyViewPrev);
 		[mKeyViewPrev removeFromSuperview];
+		mKeyViewPrev = nil;
 	}
-	mKeyViewPrev = mKeyView; // 直前ページを保持
+	
 	CGRect rect = mKeyView.frame; // .y=0 であることに注意
 	if (rect.origin.x <= 0) { // スクロール限界オーバー
 		rect.origin.x = rect.size.width * PAGES/2; // 強制的に中央へ戻す
 		[ibScrollLower scrollRectToVisible:rect animated:NO]; // 瞬間移動！
-		mKeyViewPrev.frame = rect;		// 瞬間移動！ ＜＜結構、うまく錯覚させることができているようだ。
+		mKeyView.frame = rect;		// 瞬間移動！ ＜＜結構、うまく錯覚させることができているようだ。
 	}
 	rect.origin.x -= rect.size.width; // (-)左へ
+	//
+	mKeyViewPrev = mKeyView; // 直前ページを保持
+	//NG//[mKeyView removeFromSuperview]; これすると mKeyViewPrev が破棄されることになる。
 	// 新しいページを生成し、スクロール表示
-	//mKeyView = [[UIView alloc] initWithFrame:rect];
-	//[self drawKeyboard:mKeyView page:MiSvLowerPage]; // キー生成
-	[mKeyView removeFromSuperview];
-	mKeyView = [self keyViewAllocPage:MiSvLowerPage];
+	mKeyView = [self keyViewAlloc:rect page:MiSvLowerPage];
 	[ibScrollLower addSubview:mKeyView], [mKeyView release];
 	[ibScrollLower scrollRectToVisible:rect animated:YES]; // rect.origin.y=0になっているが垂直移動しないので無視される
 	// キーレイアウト変更モードならば、直前ページを保存する
@@ -1376,9 +1381,12 @@
 
 #pragma mark - UNIT 単位
 
-- (void)MvKeyUnitGroupSI
+- (void)MvKeyUnitGroupSI:(UIView*)keyView
 {	//[1.0.10]キーボードスクロール時、単位キーの有無効を直前と同様にする
-	for (id obj in mKeyView.subviews)
+	NSLog(@"MvKeyUnitGroupSI: keyView=%@  page=%d  count=%d", keyView, (int)keyView.tag, (int)[[keyView subviews] count]);
+	NSLog(@"MvKeyUnitGroupSI: mGvKeyUnitSI=%@, %@, %@", mGvKeyUnitSI, mGvKeyUnitSi2, mGvKeyUnitSi3);
+	assert(keyView);
+	for (id obj in [keyView subviews])
 	{
 		if ([obj isMemberOfClass:[KeyButton class]]) {
 			KeyButton *kb = obj;
@@ -1421,7 +1429,7 @@
 	[mGvKeyUnitSi2 release];	if (unitSi2) mGvKeyUnitSi2 = [unitSi2 copy];	else	mGvKeyUnitSi2 = nil;
 	[mGvKeyUnitSi3 release];	if (unitSi3) mGvKeyUnitSi3 = [unitSi3 copy];	else	mGvKeyUnitSi3 = nil;
 	NSLog(@"***mGvKeyUnitSI=%@,%@,%@", mGvKeyUnitSI, mGvKeyUnitSi2, mGvKeyUnitSi3);
-	[self MvKeyUnitGroupSI];
+	[self MvKeyUnitGroupSI:mKeyView];
 }
 
 
@@ -2723,13 +2731,13 @@
 #endif
 		}
 	}
-	else { // ibScrollLower
+	/*else { // ibScrollLower
 		// 直前ページを破棄
 		if (mKeyViewPrev) {
 			[mKeyViewPrev removeFromSuperview];
 			mKeyViewPrev = nil;
 		}
-	}
+	}*/
 }
 
 
