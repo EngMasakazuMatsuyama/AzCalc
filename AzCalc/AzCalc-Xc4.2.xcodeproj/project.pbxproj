@@ -20,6 +20,7 @@
 		440C19961446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
 		440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
 		441D242511F3056200A3B68A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
+		4430E8CF14604D6300E891F7 /* README 5.0.4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4430E8CE14604D6300E891F7 /* README 5.0.4.txt */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
 		44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
@@ -169,6 +170,7 @@
 		440C19931446B50E008E9CB0 /* icon44-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon44-PageFilp.png"; path = "Image/icon44-PageFilp.png"; sourceTree = "<group>"; };
 		441D242311F3056200A3B68A /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		441D242411F3056200A3B68A /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		4430E8CE14604D6300E891F7 /* README 5.0.4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README 5.0.4.txt"; sourceTree = "<group>"; };
 		44377D54131528CF0064EA93 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		44377D56131528EE0064EA93 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		44377D58131528FC0064EA93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -232,7 +234,6 @@
 		44C5728C1384AE9E00490D58 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
 		44C5728D1384AE9E00490D58 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		44C5728E1384AE9E00490D58 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		44C5728F1384AE9E00490D58 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		44C572921384B4B300490D58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		44CB363511F0AA9F0057E9F3 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
 		44CB363611F0AA9F0057E9F3 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
@@ -463,6 +464,7 @@
 		44C572871384AE9E00490D58 /* GoogleAdMobAdsSDK */ = {
 			isa = PBXGroup;
 			children = (
+				4430E8CE14604D6300E891F7 /* README 5.0.4.txt */,
 				44C572881384AE9E00490D58 /* GADBannerView.h */,
 				44C572891384AE9E00490D58 /* GADBannerViewDelegate.h */,
 				44C5728A1384AE9E00490D58 /* GADInterstitial.h */,
@@ -470,7 +472,6 @@
 				44C5728C1384AE9E00490D58 /* GADRequest.h */,
 				44C5728D1384AE9E00490D58 /* GADRequestError.h */,
 				44C5728E1384AE9E00490D58 /* libGoogleAdMobAds.a */,
-				44C5728F1384AE9E00490D58 /* README.txt */,
 			);
 			path = GoogleAdMobAdsSDK;
 			sourceTree = "<group>";
@@ -615,6 +616,7 @@
 				44ABE22B14582424005D6189 /* KeyOvalUp@Pad.png in Resources */,
 				44B1A7BB145DA5C600DD8E2E /* AzKeyMapPad.plist in Resources */,
 				44B1A7BD145DA5C600DD8E2E /* AzKeyMapPhone.plist in Resources */,
+				4430E8CF14604D6300E891F7 /* README 5.0.4.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
