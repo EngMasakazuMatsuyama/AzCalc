@@ -46,7 +46,6 @@
 #endif
 	NSArray				*RaDrums;
 	NSArray				*RaDrumButtons;
-	NSArray				*mPadKeyButtons;  //*RaPadKeyButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
 	UIImage				*RimgDrumButton;	
 	UIImage				*RimgDrumPush;
@@ -55,10 +54,12 @@
 	NSString				*mGvKeyUnitSI;
 	NSString				*mGvKeyUnitSi2;
 	NSString				*mGvKeyUnitSi3;
+	NSArray				*mPadMemoryKeyButtons; // <--(KeyButton *)[M]
 	
 	//[1.0.10] mKm : Keymap
-	NSMutableArray		*mKmPages;			// <--(All Page) <--(All KeyButton)
-	NSMutableArray		*mKmMemorys;		// <--(Memory KeyButton)
+	NSMutableArray		*mKmPages;			// <--(All Page) <--(NSMutableDictionary *)[Key]
+	NSMutableArray		*mKmMemorys;		// <--(NSMutableDictionary *)[M]
+	NSArray					*mPadMemorys;		//Pad// <--(NSMutableDictionary *)[M]
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 	//UIView*			MviewKeyboard;

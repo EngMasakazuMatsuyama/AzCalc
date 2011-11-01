@@ -67,7 +67,7 @@
 #define GUD_KeyMapPhone				@"GUD_KeyMapPhone"		//[1.0.10]からのuserDef保存Key Phone
 #define GUD_KeyMapPad					@"GUD_KeyMapPad"			//[1.0.10]からのuserDef保存Key Pad
 #define GUD_KeyMapPadMem			@"GUD_KeyMapPadMem"	//[1.0.10]からのuserDef保存Key Pad拡張メモリ
-
+#define GUD_PadMemorys					@"GUD_PadMemorys"		
 
 
 // SettingVC
