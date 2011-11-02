@@ -16,7 +16,7 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="KeyButton.svg"
-   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/KeyOvalUp.png"
+   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Image/KeyOvalDw.png"
    inkscape:export-xdpi="45"
    inkscape:export-ydpi="45"
    style="display:inline">
@@ -27509,10 +27509,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="6.11"
-     inkscape:cx="48.142157"
+     inkscape:cx="82.266984"
      inkscape:cy="40"
      inkscape:document-units="px"
-     inkscape:current-layer="g3509"
+     inkscape:current-layer="g3484"
      showgrid="false"
      inkscape:window-width="1660"
      inkscape:window-height="1080"
@@ -27549,7 +27549,7 @@
        y="-6.0517197" />
   </g>
   <g
-     style="display:inline"
+     style="display:none"
      inkscape:label="KeyRollUp Black Edge"
      id="g3509"
      inkscape:groupmode="layer"
@@ -27580,8 +27580,8 @@
      inkscape:groupmode="layer"
      sodipodi:insensitive="true">
     <rect
-       rx="40"
-       ry="40"
+       rx="35"
+       ry="35"
        y="-1"
        x="0"
        height="80"
@@ -27604,18 +27604,18 @@
      inkscape:groupmode="layer"
      id="g3484"
      inkscape:label="KeyOvalDw"
-     style="display:none"
+     style="display:inline"
      sodipodi:insensitive="true">
     <rect
        transform="matrix(0.99922973,0,0,1.0115997,0.11423175,-0.96374755)"
-       rx="37.815125"
+       rx="35.026981"
        style="fill:#f5f5f5;fill-rule:evenodd;stroke:none;filter:url(#filter3789)"
        id="rect3487"
        width="127.99992"
        height="78.999954"
        x="-2.4353196e-05"
        y="6.1275743e-05"
-       ry="36.769196" />
+       ry="34.598667" />
   </g>
   <g
      inkscape:groupmode="layer"
