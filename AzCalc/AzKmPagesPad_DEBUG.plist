@@ -735,57 +735,57 @@
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.5</real>
+			<real>0.84999999999999998</real>
 			<key>Color</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>Size</key>
-			<real>18</real>
+			<integer>20</integer>
 			<key>Tag</key>
-			<integer>401</integer>
+			<integer>20</integer>
 			<key>Text</key>
-			<string>7</string>
+			<string>+/-</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.5</real>
+			<real>0.84999999999999998</real>
 			<key>Color</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>Size</key>
-			<real>18</real>
+			<integer>20</integer>
 			<key>Tag</key>
-			<integer>402</integer>
+			<integer>30</integer>
 			<key>Text</key>
-			<string>78</string>
+			<string>%</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.5</real>
+			<real>0.90000000000000002</real>
 			<key>Color</key>
-			<integer>3</integer>
+			<integer>1</integer>
 			<key>Size</key>
-			<real>18</real>
+			<integer>20</integer>
 			<key>Tag</key>
-			<integer>403</integer>
+			<integer>105</integer>
 			<key>Text</key>
-			<string>789</string>
+			<string>GT</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.20000000000000001</real>
+			<real>0.80000001192092896</real>
 			<key>Color</key>
-			<integer>0</integer>
+			<integer>2</integer>
 			<key>Size</key>
-			<integer>10</integer>
+			<real>20</real>
 			<key>Tag</key>
-			<integer>-1</integer>
+			<integer>200</integer>
 			<key>Text</key>
-			<string>(Blank)</string>
+			<string>AC</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>

@@ -5,7 +5,7 @@
 	<array>
 		<dict>
 			<key>Alpha</key>
-			<real>0.5</real>
+			<real>0.80000001192092896</real>
 			<key>Color</key>
 			<integer>3</integer>
 			<key>Size</key>
@@ -13,13 +13,13 @@
 			<key>Tag</key>
 			<integer>401</integer>
 			<key>Text</key>
-			<string>M1</string>
+			<string>1</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.5</real>
+			<real>0.80000001192092896</real>
 			<key>Color</key>
 			<integer>3</integer>
 			<key>Size</key>
@@ -27,7 +27,7 @@
 			<key>Tag</key>
 			<integer>402</integer>
 			<key>Text</key>
-			<string>M2</string>
+			<string>2</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
@@ -75,7 +75,7 @@
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.5</real>
+			<real>0.80000001192092896</real>
 			<key>Color</key>
 			<integer>3</integer>
 			<key>Size</key>
@@ -83,13 +83,13 @@
 			<key>Tag</key>
 			<integer>401</integer>
 			<key>Text</key>
-			<string>M1</string>
+			<string>1</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.5</real>
+			<real>0.80000001192092896</real>
 			<key>Color</key>
 			<integer>3</integer>
 			<key>Size</key>
@@ -97,7 +97,7 @@
 			<key>Tag</key>
 			<integer>402</integer>
 			<key>Text</key>
-			<string>M2</string>
+			<string>2</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
