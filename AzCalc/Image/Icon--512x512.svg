@@ -16,9 +16,9 @@
    version="1.1"
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="Icon--512x512.svg"
-   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Icon512s1.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90"
+   inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Icon57s1.png"
+   inkscape:export-xdpi="10.02"
+   inkscape:export-ydpi="10.02"
    style="display:inline">
   <defs
      id="defs4">
@@ -2999,6 +2999,45 @@
          result="result2"
          operator="in" />
     </filter>
+    <filter
+       id="filter3478"
+       inkscape:label="Inner Shadow"
+       inkscape:menu="Shadows and Glows"
+       inkscape:menu-tooltip="Adds a colorizable drop shadow inside"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur3480"
+         stdDeviation="4"
+         result="result8" />
+      <feOffset
+         id="feOffset3482"
+         dx="4"
+         dy="4"
+         result="result11" />
+      <feComposite
+         id="feComposite3484"
+         in2="result11"
+         result="result6"
+         in="SourceGraphic"
+         operator="in" />
+      <feFlood
+         id="feFlood3486"
+         result="result10"
+         in="result6"
+         flood-opacity="1"
+         flood-color="rgb(0,0,0)" />
+      <feBlend
+         id="feBlend3488"
+         in2="result10"
+         mode="normal"
+         in="result6"
+         result="result12" />
+      <feComposite
+         id="feComposite3490"
+         in2="SourceGraphic"
+         result="result2"
+         operator="in" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -3007,11 +3046,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.83972969"
-     inkscape:cx="265.95654"
-     inkscape:cy="359.42336"
+     inkscape:zoom="0.70910507"
+     inkscape:cx="187.60393"
+     inkscape:cy="256"
      inkscape:document-units="px"
-     inkscape:current-layer="layer2"
+     inkscape:current-layer="g3447"
      showgrid="false"
      inkscape:window-width="1360"
      inkscape:window-height="1042"
@@ -3034,7 +3073,7 @@
   <g
      inkscape:groupmode="layer"
      id="layer6"
-     inkscape:label="Backgraund"
+     inkscape:label="Back 57, 114, 72, 512"
      style="display:inline"
      sodipodi:insensitive="true">
     <rect
@@ -3063,8 +3102,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer3"
-     inkscape:label="="
-     style="display:inline"
+     inkscape:label="= long"
+     style="display:none"
      sodipodi:insensitive="true">
     <g
        id="g5758"
@@ -3084,6 +3123,32 @@
          height="38.379623"
          x="140.59885"
          y="249.57294" />
+    </g>
+  </g>
+  <g
+     style="display:inline"
+     inkscape:label="= short"
+     id="g3447"
+     inkscape:groupmode="layer"
+     sodipodi:insensitive="true">
+    <g
+       style="fill:#97504d;fill-opacity:1;stroke:none;filter:url(#filter9592)"
+       transform="matrix(0.83072947,0,0,1.362257,60.007285,-68.765391)"
+       id="g3449">
+      <rect
+         style="fill:#97504d;fill-opacity:1;fill-rule:evenodd;stroke:none"
+         id="rect3451"
+         width="190.64877"
+         height="38.379623"
+         x="140.59885"
+         y="188.68333" />
+      <rect
+         y="249.57294"
+         x="140.59885"
+         height="38.379623"
+         width="190.64877"
+         id="rect3453"
+         style="fill:#97504d;fill-opacity:1;fill-rule:evenodd;stroke:none" />
     </g>
   </g>
   <g

@@ -9,8 +9,8 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon57free.png</string>
-		<string>Icon57free@2x.png</string>
 		<string>Icon72free.png</string>
+		<string>Icon57free@2x.png</string>
 	</array>
 	<key>CFBundleIcons</key>
 	<dict>
@@ -19,8 +19,8 @@
 			<key>CFBundleIconFiles</key>
 			<array>
 				<string>Icon57free.png</string>
-				<string>Icon57free@2x.png</string>
 				<string>Icon72free.png</string>
+				<string>Icon57free@2x.png</string>
 			</array>
 			<key>UIPrerenderedIcon</key>
 			<false/>
