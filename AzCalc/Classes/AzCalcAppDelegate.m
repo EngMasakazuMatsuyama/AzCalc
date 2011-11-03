@@ -12,6 +12,7 @@
 #import "SettingVC.h"
 #import "InformationVC.h"
 #import "OptionVC.h"
+#import "DropboxTVC.h"
 
 @implementation AzCalcAppDelegate
 
@@ -89,6 +90,7 @@
 		{	// Dropbox 認証成功
             NSLog(@"App linked successfully!");
             // At this point you can start making API calls
+			// DropboxTVC を空ける
         }
         return YES;
     }

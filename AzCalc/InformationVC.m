@@ -19,7 +19,8 @@
 
 #pragma mark - View dealloc
 
-- (void)dealloc {
+- (void)dealloc 
+{
     [super dealloc];
 }
 

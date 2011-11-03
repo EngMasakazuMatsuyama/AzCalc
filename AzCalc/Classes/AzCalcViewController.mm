@@ -16,7 +16,7 @@
 #import "InformationVC.h"
 #import "KeyButton.h"
 #import <TargetConditionals.h>	// TARGET_IPHONE_SIMULATOR
-
+#import "DropboxTVC.h"
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
 #define	PICKER_COMPONENT_WiMIN	40		// 1コンポーネントの表示最小幅
@@ -1686,7 +1686,7 @@
 	[self MvMemoryShow];
 
 	//[1.0.9]常に DEFAULT PAGE に戻すようにした。
-	MiSvLowerPage = 1; // DEFAULT PAGE
+	//NG//MiSvLowerPage = 1; // DEFAULT PAGE
 }
 
 /*
@@ -2313,7 +2313,17 @@
 	switch (iKeyTag) {
 		case KeyTAG_FUNC_Dropbox: 
 		{	// Dropbox authentication process
-			if (![[DBSession sharedSession] isLinked]) {
+			if ([[DBSession sharedSession] isLinked]) {
+				if (bPad) {
+					DropboxTVC *tvc = [[DropboxTVC alloc] initWithNibName:@"DropboxTVC-iPad" bundle:nil];
+					tvc.modalPresentationStyle = UIModalPresentationFormSheet;
+					[self presentModalViewController:tvc animated:YES];
+				} else {
+					DropboxTVC *tvc = [[DropboxTVC alloc] initWithNibName:@"DropboxTVC" bundle:nil];
+					tvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+					[self presentModalViewController:tvc animated:YES];
+				}
+			} else {
 				[[DBSession sharedSession] link];
 			}
   		}	break;
