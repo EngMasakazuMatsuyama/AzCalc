@@ -607,15 +607,15 @@
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.20000000000000001</real>
+			<real>0.80000000000000004</real>
 			<key>Color</key>
-			<integer>0</integer>
+			<integer>3</integer>
 			<key>Size</key>
 			<integer>10</integer>
 			<key>Tag</key>
-			<integer>-1</integer>
+			<integer>502</integer>
 			<key>Text</key>
-			<string>(Blank)</string>
+			<string>Dropbox</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>
@@ -777,15 +777,15 @@
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.80000001192092896</real>
+			<real>0.20000000000000001</real>
 			<key>Color</key>
-			<integer>2</integer>
+			<integer>0</integer>
 			<key>Size</key>
-			<real>20</real>
+			<integer>10</integer>
 			<key>Tag</key>
-			<integer>200</integer>
+			<integer>-1</integer>
 			<key>Text</key>
-			<string>AC</string>
+			<string>(Blank)</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>

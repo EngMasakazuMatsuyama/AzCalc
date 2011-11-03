@@ -2307,6 +2307,20 @@
 	}
 }
 
+// Function関係キー入力処理
+- (void)buttonFunction:(Drum *)drum withTag:(NSInteger)iKeyTag
+{
+	switch (iKeyTag) {
+		case KeyTAG_FUNC_Dropbox: 
+		{	// Dropbox authentication process
+			if (![[DBSession sharedSession] isLinked]) {
+				[[DBSession sharedSession] link];
+			}
+  		}	break;
+	}
+}
+
+
 
 #pragma mark - IBAction
 
@@ -2402,6 +2416,9 @@
 			}
 			// アニメーション：他のボタン同様にentryに際してはアニメなし
 		}
+	}
+	else if (button.tag <= KeyTAG_FUNC_End) { //----------Function Keys
+		[self buttonFunction:drum  withTag:button.tag];
 	}
 	else if (KeyTAG_UNIT_Start <= button.tag) { //[KeyTAG_UNIT_Start-KeyTAG_UNIT_End
 		if (MiSvUpperPage==0) {

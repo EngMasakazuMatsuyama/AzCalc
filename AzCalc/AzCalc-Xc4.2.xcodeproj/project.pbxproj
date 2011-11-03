@@ -21,6 +21,12 @@
 		440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
 		441D242511F3056200A3B68A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
 		4430E8CF14604D6300E891F7 /* README 5.0.4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4430E8CE14604D6300E891F7 /* README 5.0.4.txt */; };
+		443E4CAE14629DBB003B1E18 /* CloudTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* CloudTVC.m */; };
+		443E4CAF14629DBB003B1E18 /* CloudTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* CloudTVC.m */; };
+		443E4CB61462A1D5003B1E18 /* CloudTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB51462A1D5003B1E18 /* CloudTVC.xib */; };
+		443E4CB71462A1D5003B1E18 /* CloudTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB51462A1D5003B1E18 /* CloudTVC.xib */; };
+		443E4CB91462A1F1003B1E18 /* Cloud-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB81462A1F1003B1E18 /* Cloud-iPad.xib */; };
+		443E4CBA1462A1F1003B1E18 /* Cloud-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB81462A1F1003B1E18 /* Cloud-iPad.xib */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
 		44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
@@ -33,6 +39,10 @@
 		446E08CE133454F1006859F4 /* Icon-DrumPush128x79.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */; };
 		448D99311307D1DD004DFD62 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448D99301307D1DD004DFD62 /* Localizable.strings */; };
 		448D997D1307DC8D004DFD62 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448D997C1307DC8D004DFD62 /* SettingVC.xib */; };
+		44968E2F146267DD00F25305 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E2E146267DD00F25305 /* DropboxSDK.framework */; };
+		44968E321462684300F25305 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E311462684300F25305 /* Security.framework */; };
+		44968E33146268BC00F25305 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E2E146267DD00F25305 /* DropboxSDK.framework */; };
+		44968E34146268F800F25305 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E311462684300F25305 /* Security.framework */; };
 		449E6B98121FA34100338E7F /* AzKeySet-iPad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */; };
 		449F71C811F546E600B778F1 /* Drum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 449F71C711F546E600B778F1 /* Drum.mm */; };
 		44A20A381212D96F000A315E /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A20A371212D96F000A315E /* KeyButton.m */; };
@@ -177,6 +187,10 @@
 		44377D56131528EE0064EA93 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		44377D58131528FC0064EA93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44377D5A131529060064EA93 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		443E4CAB14629DBB003B1E18 /* CloudTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CloudTVC.h; sourceTree = "<group>"; };
+		443E4CAC14629DBB003B1E18 /* CloudTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CloudTVC.m; sourceTree = "<group>"; };
+		443E4CB51462A1D5003B1E18 /* CloudTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CloudTVC.xib; sourceTree = "<group>"; };
+		443E4CB81462A1F1003B1E18 /* Cloud-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Cloud-iPad.xib"; sourceTree = "<group>"; };
 		444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeyMaster.plist; sourceTree = "<group>"; };
 		445184431303B8BE002820EA /* Icon16-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting.png"; path = "Image/Icon16-Setting.png"; sourceTree = "<group>"; };
 		446E08C3133450DF006859F4 /* Icon-Drum60x37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum60x37.png"; path = "Image/Icon-Drum60x37.png"; sourceTree = "<group>"; };
@@ -193,6 +207,8 @@
 		448D99381307D226004DFD62 /* Korean */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
 		448D99391307D249004DFD62 /* Turkish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Turkish; path = Turkish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		448D997E1307DC96004DFD62 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = ../Japanese.lproj/SettingVC.xib; sourceTree = "<group>"; };
+		44968E2E146267DD00F25305 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "dropbox-ios-sdk-1.0/DropboxSDK.framework"; sourceTree = "<group>"; };
+		44968E311462684300F25305 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		449E6B97121FA34100338E7F /* AzKeySet-iPad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzKeySet-iPad.plist"; sourceTree = "<group>"; };
 		449EBC6911E57EA900E2AABD /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
 		449F71C611F546E600B778F1 /* Drum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drum.h; sourceTree = "<group>"; };
@@ -289,6 +305,8 @@
 				44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */,
 				44C572901384AE9E00490D58 /* libGoogleAdMobAds.a in Frameworks */,
 				44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */,
+				44968E33146268BC00F25305 /* DropboxSDK.framework in Frameworks */,
+				44968E34146268F800F25305 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +322,8 @@
 				44BC4C821359E9A1009B995C /* MediaPlayer.framework in Frameworks */,
 				44BC4C831359E9A1009B995C /* MessageUI.framework in Frameworks */,
 				44BC4C841359E9A1009B995C /* QuartzCore.framework in Frameworks */,
+				44968E2F146267DD00F25305 /* DropboxSDK.framework in Frameworks */,
+				44968E321462684300F25305 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +357,10 @@
 				44A3D38011F31E4C0001BF89 /* InformationVC.m */,
 				44A3D4CA11F355400001BF89 /* InformationVC.xib */,
 				44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */,
+				443E4CAB14629DBB003B1E18 /* CloudTVC.h */,
+				443E4CAC14629DBB003B1E18 /* CloudTVC.m */,
+				443E4CB51462A1D5003B1E18 /* CloudTVC.xib */,
+				443E4CB81462A1F1003B1E18 /* Cloud-iPad.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -407,6 +431,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				44968E311462684300F25305 /* Security.framework */,
+				44968E2E146267DD00F25305 /* DropboxSDK.framework */,
 				44D32BD61424A79F0041523E /* AVFoundation.framework */,
 				44C572921384B4B300490D58 /* SystemConfiguration.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -622,6 +648,8 @@
 				44B762F5146194850078AE1D /* AzKmPagesPad.plist in Resources */,
 				44B762F7146194850078AE1D /* AzKmPagesPhone.plist in Resources */,
 				44B56F21146244C200855BBF /* Icon57free@2x.png in Resources */,
+				443E4CB61462A1D5003B1E18 /* CloudTVC.xib in Resources */,
+				443E4CB91462A1F1003B1E18 /* Cloud-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +709,8 @@
 				44B762F6146194850078AE1D /* AzKmPagesPad.plist in Resources */,
 				44B762F8146194850078AE1D /* AzKmPagesPhone.plist in Resources */,
 				44D9A04D1461BC4200689F2D /* Icon57s1.png in Resources */,
+				443E4CB71462A1D5003B1E18 /* CloudTVC.xib in Resources */,
+				443E4CBA1462A1F1003B1E18 /* Cloud-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +732,7 @@
 				44A20A381212D96F000A315E /* KeyButton.m in Sources */,
 				44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */,
 				44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
+				443E4CAE14629DBB003B1E18 /* CloudTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,6 +751,7 @@
 				44BC4C6F1359E9A1009B995C /* KeyButton.m in Sources */,
 				44BC4C7A1359E9A1009B995C /* CalcFunctions.mm in Sources */,
 				44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
+				443E4CAF14629DBB003B1E18 /* CloudTVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,6 +845,10 @@
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/dropbox-ios-sdk-1.0\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -843,6 +879,10 @@
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/dropbox-ios-sdk-1.0\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzFREE=1";
@@ -870,6 +910,10 @@
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/dropbox-ios-sdk-1.0\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -895,6 +939,10 @@
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/dropbox-ios-sdk-1.0\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
@@ -918,6 +966,10 @@
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/dropbox-ios-sdk-1.0\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzSTABLE=1";
@@ -961,6 +1013,10 @@
 				);
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masakazu Matsuyama";
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/dropbox-ios-sdk-1.0\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS_NOT_USED_IN_PRECOMPS = "AzFREE=1";

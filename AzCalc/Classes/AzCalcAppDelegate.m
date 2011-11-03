@@ -71,7 +71,29 @@
 	[window addSubview:viewController.view];    [viewController release];
     [window makeKeyAndVisible];
 	
-    return YES;
+	//[1.1.0]Dropbox
+	DBSession* dbSession = [[[DBSession alloc]
+							 initWithAppKey:@"62f2rrofi788410"
+							 appSecret:@"s07scm6ifi1o035"
+							 root:kDBRootAppFolder] // either kDBRootAppFolder or kDBRootDropbox
+     autorelease];
+	[DBSession setSharedSession:dbSession];
+    
+	return YES;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+{
+    if ([[DBSession sharedSession] handleOpenURL:url]) {
+        if ([[DBSession sharedSession] isLinked]) 
+		{	// Dropbox 認証成功
+            NSLog(@"App linked successfully!");
+            // At this point you can start making API calls
+        }
+        return YES;
+    }
+    // Add whatever other url handling code your app requires here
+    return NO;
 }
 
 

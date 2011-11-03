@@ -4,7 +4,7 @@
 <array>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -12,13 +12,13 @@
 		<key>Tag</key>
 		<integer>401</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M1</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -26,13 +26,13 @@
 		<key>Tag</key>
 		<integer>402</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M2</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -40,13 +40,13 @@
 		<key>Tag</key>
 		<integer>403</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M3</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -54,13 +54,13 @@
 		<key>Tag</key>
 		<integer>404</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M4</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -68,13 +68,13 @@
 		<key>Tag</key>
 		<integer>405</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M5</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -82,13 +82,13 @@
 		<key>Tag</key>
 		<integer>406</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M6</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -96,13 +96,13 @@
 		<key>Tag</key>
 		<integer>407</integer>
 		<key>Text</key>
-		<string>88</string>
+		<string>M7</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -110,13 +110,13 @@
 		<key>Tag</key>
 		<integer>408</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M8</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -124,13 +124,13 @@
 		<key>Tag</key>
 		<integer>409</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M9</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -138,13 +138,13 @@
 		<key>Tag</key>
 		<integer>410</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M10</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -152,13 +152,13 @@
 		<key>Tag</key>
 		<integer>411</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M11</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -166,13 +166,13 @@
 		<key>Tag</key>
 		<integer>412</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M12</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -180,13 +180,13 @@
 		<key>Tag</key>
 		<integer>413</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M13</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -194,13 +194,13 @@
 		<key>Tag</key>
 		<integer>414</integer>
 		<key>Text</key>
-		<string>777</string>
+		<string>M14</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>
 	<dict>
 		<key>Alpha</key>
-		<real>0.80000001192092896</real>
+		<real>0.5</real>
 		<key>Color</key>
 		<integer>3</integer>
 		<key>Size</key>
@@ -208,7 +208,7 @@
 		<key>Tag</key>
 		<integer>415</integer>
 		<key>Text</key>
-		<string>88</string>
+		<string>M15</string>
 		<key>Unit</key>
 		<string></string>
 	</dict>

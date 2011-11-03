@@ -1061,15 +1061,15 @@
 	<array>
 		<dict>
 			<key>Alpha</key>
-			<real>0.20000000000000001</real>
+			<real>0.80000001192092896</real>
 			<key>Color</key>
-			<integer>0</integer>
+			<integer>3</integer>
 			<key>Size</key>
-			<integer>10</integer>
+			<real>12</real>
 			<key>Tag</key>
-			<integer>-1</integer>
+			<integer>502</integer>
 			<key>Text</key>
-			<string>(Blank)</string>
+			<string>Dropbox</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>

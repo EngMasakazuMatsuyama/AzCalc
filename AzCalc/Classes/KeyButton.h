@@ -72,6 +72,12 @@
 #define KeyTAG_MSTORE_M20		420
 #define KeyTAG_MSTROE_End		499
 
+#define KeyTAG_FUNC_Start			500
+#define KeyTAG_FUNC_iCloud			501
+#define KeyTAG_FUNC_Dropbox		502
+#define KeyTAG_FUNC_Evernote		503
+#define KeyTAG_FUNC_End				599
+
 #define KeyTAG_UNIT_Start		1000 //-----------------SI基本単位換算
 #define KeyTAG_UNIT_kg			1000 // [kg]			1kg
 #define KeyTAG_UNIT_g			1001 // [g]				0.001kg = 1000mg
