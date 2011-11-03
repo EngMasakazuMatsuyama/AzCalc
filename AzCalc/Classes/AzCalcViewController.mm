@@ -1686,7 +1686,7 @@
 	[self MvMemoryShow];
 
 	//[1.0.9]常に DEFAULT PAGE に戻すようにした。
-	MiSvLowerPage = 1; // DEFAULT PAGE
+	//NG//MiSvLowerPage = 1; // DEFAULT PAGE
 }
 
 /*
