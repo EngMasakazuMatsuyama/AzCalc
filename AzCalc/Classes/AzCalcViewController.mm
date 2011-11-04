@@ -16,7 +16,7 @@
 #import "InformationVC.h"
 #import "KeyButton.h"
 #import <TargetConditionals.h>	// TARGET_IPHONE_SIMULATOR
-#import "DropboxTVC.h"
+#import "DropboxVC.h"
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
 #define	PICKER_COMPONENT_WiMIN	40		// 1コンポーネントの表示最小幅
@@ -130,8 +130,7 @@
 			}
 		}
 	}
-
-	NSLog(@"keymapLoad: mKmMemorys=%@", mKmMemorys);
+	//NSLog(@"keymapLoad: mKmMemorys=%@", mKmMemorys);
 }
 
 - (void)mKmPagesFromKeyboardSet:(NSDictionary*)keybordSet
@@ -2315,13 +2314,13 @@
 		{	// Dropbox authentication process
 			if ([[DBSession sharedSession] isLinked]) {
 				if (bPad) {
-					DropboxTVC *tvc = [[DropboxTVC alloc] initWithNibName:@"DropboxTVC-iPad" bundle:nil];
-					tvc.modalPresentationStyle = UIModalPresentationFormSheet;
-					[self presentModalViewController:tvc animated:YES];
+					DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC-iPad" bundle:nil];
+					vc.modalPresentationStyle = UIModalPresentationFormSheet;
+					[self presentModalViewController:vc animated:YES];
 				} else {
-					DropboxTVC *tvc = [[DropboxTVC alloc] initWithNibName:@"DropboxTVC" bundle:nil];
-					tvc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-					[self presentModalViewController:tvc animated:YES];
+					DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC" bundle:nil];
+					vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+					[self presentModalViewController:vc animated:YES];
 				}
 			} else {
 				[[DBSession sharedSession] link];

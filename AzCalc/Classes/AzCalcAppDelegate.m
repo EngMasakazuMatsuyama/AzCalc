@@ -12,7 +12,7 @@
 #import "SettingVC.h"
 #import "InformationVC.h"
 #import "OptionVC.h"
-#import "DropboxTVC.h"
+#import "DropboxVC.h"
 
 @implementation AzCalcAppDelegate
 

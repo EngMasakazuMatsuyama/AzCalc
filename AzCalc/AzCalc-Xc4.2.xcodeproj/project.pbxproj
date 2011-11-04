@@ -21,12 +21,12 @@
 		440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
 		441D242511F3056200A3B68A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
 		4430E8CF14604D6300E891F7 /* README 5.0.4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4430E8CE14604D6300E891F7 /* README 5.0.4.txt */; };
-		443E4CAE14629DBB003B1E18 /* DropboxTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* DropboxTVC.m */; };
-		443E4CAF14629DBB003B1E18 /* DropboxTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* DropboxTVC.m */; };
-		443E4CB61462A1D5003B1E18 /* DropboxTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB51462A1D5003B1E18 /* DropboxTVC.xib */; };
-		443E4CB71462A1D5003B1E18 /* DropboxTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB51462A1D5003B1E18 /* DropboxTVC.xib */; };
-		443E4CB91462A1F1003B1E18 /* DropboxTVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB81462A1F1003B1E18 /* DropboxTVC-iPad.xib */; };
-		443E4CBA1462A1F1003B1E18 /* DropboxTVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB81462A1F1003B1E18 /* DropboxTVC-iPad.xib */; };
+		443E4CAE14629DBB003B1E18 /* DropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* DropboxVC.m */; };
+		443E4CAF14629DBB003B1E18 /* DropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* DropboxVC.m */; };
+		443E4CB61462A1D5003B1E18 /* DropboxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB51462A1D5003B1E18 /* DropboxVC.xib */; };
+		443E4CB71462A1D5003B1E18 /* DropboxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB51462A1D5003B1E18 /* DropboxVC.xib */; };
+		443E4CB91462A1F1003B1E18 /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB81462A1F1003B1E18 /* DropboxVC-iPad.xib */; };
+		443E4CBA1462A1F1003B1E18 /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 443E4CB81462A1F1003B1E18 /* DropboxVC-iPad.xib */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
 		44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
@@ -189,10 +189,10 @@
 		44377D56131528EE0064EA93 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		44377D58131528FC0064EA93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44377D5A131529060064EA93 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		443E4CAB14629DBB003B1E18 /* DropboxTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxTVC.h; sourceTree = "<group>"; };
-		443E4CAC14629DBB003B1E18 /* DropboxTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxTVC.m; sourceTree = "<group>"; };
-		443E4CB51462A1D5003B1E18 /* DropboxTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropboxTVC.xib; sourceTree = "<group>"; };
-		443E4CB81462A1F1003B1E18 /* DropboxTVC-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DropboxTVC-iPad.xib"; sourceTree = "<group>"; };
+		443E4CAB14629DBB003B1E18 /* DropboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DropboxVC.h; sourceTree = "<group>"; };
+		443E4CAC14629DBB003B1E18 /* DropboxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxVC.m; sourceTree = "<group>"; };
+		443E4CB51462A1D5003B1E18 /* DropboxVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropboxVC.xib; sourceTree = "<group>"; };
+		443E4CB81462A1F1003B1E18 /* DropboxVC-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DropboxVC-iPad.xib"; sourceTree = "<group>"; };
 		444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeyMaster.plist; sourceTree = "<group>"; };
 		445184431303B8BE002820EA /* Icon16-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting.png"; path = "Image/Icon16-Setting.png"; sourceTree = "<group>"; };
 		446E08C3133450DF006859F4 /* Icon-Drum60x37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum60x37.png"; path = "Image/Icon-Drum60x37.png"; sourceTree = "<group>"; };
@@ -359,10 +359,10 @@
 				44A3D38011F31E4C0001BF89 /* InformationVC.m */,
 				44A3D4CA11F355400001BF89 /* InformationVC.xib */,
 				44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */,
-				443E4CAB14629DBB003B1E18 /* DropboxTVC.h */,
-				443E4CAC14629DBB003B1E18 /* DropboxTVC.m */,
-				443E4CB51462A1D5003B1E18 /* DropboxTVC.xib */,
-				443E4CB81462A1F1003B1E18 /* DropboxTVC-iPad.xib */,
+				443E4CAB14629DBB003B1E18 /* DropboxVC.h */,
+				443E4CAC14629DBB003B1E18 /* DropboxVC.m */,
+				443E4CB51462A1D5003B1E18 /* DropboxVC.xib */,
+				443E4CB81462A1F1003B1E18 /* DropboxVC-iPad.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -404,6 +404,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				448D99301307D1DD004DFD62 /* Localizable.strings */,
 				44B762F0146194850078AE1D /* AzKmPadKeys.plist */,
 				44B762F1146194850078AE1D /* AzKmPagesPad.plist */,
 				44B762F2146194850078AE1D /* AzKmPagesPhone.plist */,
@@ -420,7 +421,6 @@
 				44377D5A131529060064EA93 /* Default@2x.png */,
 				44377D56131528EE0064EA93 /* Default-Landscape.png */,
 				44377D54131528CF0064EA93 /* Default-Portrait.png */,
-				448D99301307D1DD004DFD62 /* Localizable.strings */,
 				44CF046B1462CFA100E80EFF /* AzCalc-InfoS1.plist */,
 				44CF04691462CF9300E80EFF /* AzCalc-Info.plist */,
 				441D242211F3056200A3B68A /* InfoPlist.strings */,
@@ -650,8 +650,8 @@
 				44B762F5146194850078AE1D /* AzKmPagesPad.plist in Resources */,
 				44B762F7146194850078AE1D /* AzKmPagesPhone.plist in Resources */,
 				44B56F21146244C200855BBF /* Icon57free@2x.png in Resources */,
-				443E4CB61462A1D5003B1E18 /* DropboxTVC.xib in Resources */,
-				443E4CB91462A1F1003B1E18 /* DropboxTVC-iPad.xib in Resources */,
+				443E4CB61462A1D5003B1E18 /* DropboxVC.xib in Resources */,
+				443E4CB91462A1F1003B1E18 /* DropboxVC-iPad.xib in Resources */,
 				44CF046A1462CF9300E80EFF /* AzCalc-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,8 +712,8 @@
 				44B762F6146194850078AE1D /* AzKmPagesPad.plist in Resources */,
 				44B762F8146194850078AE1D /* AzKmPagesPhone.plist in Resources */,
 				44D9A04D1461BC4200689F2D /* Icon57s1.png in Resources */,
-				443E4CB71462A1D5003B1E18 /* DropboxTVC.xib in Resources */,
-				443E4CBA1462A1F1003B1E18 /* DropboxTVC-iPad.xib in Resources */,
+				443E4CB71462A1D5003B1E18 /* DropboxVC.xib in Resources */,
+				443E4CBA1462A1F1003B1E18 /* DropboxVC-iPad.xib in Resources */,
 				44CF046C1462CFA100E80EFF /* AzCalc-InfoS1.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,7 +736,7 @@
 				44A20A381212D96F000A315E /* KeyButton.m in Sources */,
 				44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */,
 				44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
-				443E4CAE14629DBB003B1E18 /* DropboxTVC.m in Sources */,
+				443E4CAE14629DBB003B1E18 /* DropboxVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,7 +755,7 @@
 				44BC4C6F1359E9A1009B995C /* KeyButton.m in Sources */,
 				44BC4C7A1359E9A1009B995C /* CalcFunctions.mm in Sources */,
 				44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
-				443E4CAF14629DBB003B1E18 /* DropboxTVC.m in Sources */,
+				443E4CAF14629DBB003B1E18 /* DropboxVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

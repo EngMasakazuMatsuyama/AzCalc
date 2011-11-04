@@ -213,7 +213,7 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 					<object class="IBUIButton" id="54895298">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{30, 331}, {187, 35}}</string>
+						<string key="NSFrame">{{40, 374}, {200, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="109198038"/>
@@ -248,7 +248,7 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 					<object class="IBUIButton" id="109198038">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{333, 331}, {187, 35}}</string>
+						<string key="NSFrame">{{170, 316}, {200, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="43040229"/>
@@ -270,7 +270,7 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 					<object class="IBUIButton" id="43040229">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{30, 389}, {490, 38}}</string>
+						<string key="NSFrame">{{295, 374}, {200, 38}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="854747876"/>
@@ -299,7 +299,7 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 					<object class="IBUIButton" id="300878591">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{0, 580}, {540, 40}}</string>
+						<string key="NSFrame">{{170, 591}, {200, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
@@ -319,7 +319,7 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 						<reference key="IBUIFont" ref="825590479"/>
 					</object>
 				</object>
-				<string key="NSFrame">{{0, 20}, {768, 1004}}</string>
+				<string key="NSFrameSize">{540, 620}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="896633924"/>
@@ -328,8 +328,23 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 					<bytes key="NSRGB">MC41OTIxNTY4NjI3IDAuMzEzNzI1NDkwMiAwLjMwMTk2MDc4NDMgMC43NQA</bytes>
 				</object>
 				<bool key="IBUIAutoresizesSubviews">NO</bool>
-				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
-					<int key="IBUIStatusBarStyle">2</int>
+				<object class="IBUISimulatedSizeMetrics" key="IBUISimulatedDestinationMetrics">
+					<string key="IBUISimulatedSizeMetricsClass">IBUIModalFormSheetSimulatedSizeMetrics</string>
+					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<object class="NSArray" key="dict.sortedKeys">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<integer value="1"/>
+							<integer value="3"/>
+						</object>
+						<object class="NSMutableArray" key="dict.values">
+							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>{540, 620}</string>
+							<string>{540, 620}</string>
+						</object>
+					</object>
+					<string key="IBUITargetRuntime">IBIPadFramework</string>
+					<string key="IBUIDisplayName">Form Sheet</string>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -435,11 +450,11 @@ qJjlhaXjgZfjgarjgYTjgafjgY/jgaDjgZXjgYTjgII</string>
 							<reference ref="165156831"/>
 							<reference ref="854747876"/>
 							<reference ref="896633924"/>
-							<reference ref="43040229"/>
 							<reference ref="300878591"/>
 							<reference ref="152662311"/>
-							<reference ref="54895298"/>
 							<reference ref="109198038"/>
+							<reference ref="54895298"/>
+							<reference ref="43040229"/>
 						</object>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Information</string>
