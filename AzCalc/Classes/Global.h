@@ -58,15 +58,12 @@
 
  -----------------------------------------------------------------------*/
 
-#define PLIST_KmPagesPad					@"AzKmPagesPad"			// .plistファイル名
-#define PLIST_KmPagesPhone				@"AzKmPagesPhone"		// .plistファイル名
-#define PLIST_KmPadKeys					@"AzKmPadKeys"				// .plistファイル名
+#define PLIST_CalcRoll							@"AzCalcRoll"						// .plistファイル名
+#define PLIST_CalcRollPad						@"AzCalcRollPad"				// .plistファイル名
 
-#define GUD_KeyboardSet						@"GUD_KeyboardSet"		//[1.0.9]までのuserDef保存Key
-
-#define GUD_KmPagesPhone				@"GUD_KmPagesPhone"	//[1.0.10]からのuserDef保存Key Phone専用ページ
-#define GUD_KmPagesPad					@"GUD_KmPagesPad"		//[1.0.10]からのuserDef保存Key Pad専用ページ
-#define GUD_KmPadKeys						@"GUD_KmPadKeys"			//[1.0.10]からのuserDef保存Key Pad拡張キー
+#define GUD_KmPages							@"GUD_KmPagesPhone"				//GUD_KmPages//[1.0.10]からのuserDef保存Key Phone専用ページ
+#define GUD_KmPadPages					@"GUD_KmPagesPad"		//GUD_KmPadPages//[1.0.10]からのuserDef保存Key Pad専用ページ
+#define GUD_KmPadFunc						@"GUD_KmPadKeys"			//GUD_KmPadFunc//[1.0.10]からのuserDef保存Key Pad拡張キー
 
 // SettingVC
 #define DECIMAL_Float	6		// Setting:GUD_Decimal 値がこれ以上ならば浮動小数点処理する　 ＜SettingVC設定に関連＞

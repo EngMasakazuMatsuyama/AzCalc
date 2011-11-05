@@ -56,10 +56,10 @@
 	NSString				*mGvKeyUnitSi3;
 	NSArray				*mPadMemoryKeyButtons; // <--(KeyButton *)[M]
 	
-	//[1.0.10] mKm : KeyMap
-	NSMutableArray		*mKmPages;			// <--(All Page) <--(NSMutableDictionary *) キー配列
-	NSMutableArray		*mKmPadKeys;		// <--(NSMutableDictionary *) iPad拡張メモリキー配列
-	NSMutableArray		*mKmMemorys;		// <--(NSMutableDictionary *) mKmPagesとmKmPadKeysの[M]キーをリンクしている
+	//[1.0.10] mKm : KeyMap   ＜＜＜注意！ 配下も全てMutableにすること。
+	NSMutableArray		*mKmPages;			// <--(NSMutableArray *)All Page <--(NSMutableDictionary *) キー配列
+	NSMutableArray		*mKmPadFunc;		// <--(NSMutableDictionary *) iPad拡張メモリキー配列
+	NSMutableArray		*mKmMemorys;		// <--(NSMutableDictionary *) mKmPagesとmKmPadFuncの[M]キーをリンクしている
 	
 	//----------------------------------------------Owner移管につきdealloc時のrelese不要
 	//UIView*			MviewKeyboard;

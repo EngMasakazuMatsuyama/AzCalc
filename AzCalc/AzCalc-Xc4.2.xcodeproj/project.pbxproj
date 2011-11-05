@@ -130,6 +130,10 @@
 		44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
 		44D9A04D1461BC4200689F2D /* Icon57s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C911359EA01009B995C /* Icon57s1.png */; };
+		44D9A78A146578610031F268 /* AzCalcRoll.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44D9A789146578610031F268 /* AzCalcRoll.plist */; };
+		44D9A78B146578610031F268 /* AzCalcRoll.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44D9A789146578610031F268 /* AzCalcRoll.plist */; };
+		44D9A78D146578E40031F268 /* AzCalcRollPad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44D9A78C146578E40031F268 /* AzCalcRollPad.plist */; };
+		44D9A78E146578E40031F268 /* AzCalcRollPad.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44D9A78C146578E40031F268 /* AzCalcRollPad.plist */; };
 		44E3DB571454695A00E0BA17 /* KeySquareDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */; };
 		44E3DB581454695A00E0BA17 /* KeySquareDw.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */; };
 		44E3DB591454695A00E0BA17 /* KeySquareDw@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB4C1454695A00E0BA17 /* KeySquareDw@2x.png */; };
@@ -189,7 +193,7 @@
 		44377D56131528EE0064EA93 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		44377D58131528FC0064EA93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44377D5A131529060064EA93 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		443E4CAB14629DBB003B1E18 /* DropboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; path = DropboxVC.h; sourceTree = "<group>"; };
+		443E4CAB14629DBB003B1E18 /* DropboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxVC.h; sourceTree = "<group>"; };
 		443E4CAC14629DBB003B1E18 /* DropboxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxVC.m; sourceTree = "<group>"; };
 		443E4CB51462A1D5003B1E18 /* DropboxVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropboxVC.xib; sourceTree = "<group>"; };
 		443E4CB81462A1F1003B1E18 /* DropboxVC-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "DropboxVC-iPad.xib"; sourceTree = "<group>"; };
@@ -268,6 +272,8 @@
 		44D32BDA1424D41D0041523E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OptionVC.xib; sourceTree = "<group>"; };
 		44D32BDC1424D4350041523E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/OptionVC.xib; sourceTree = "<group>"; };
 		44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting@2x.png"; path = "Image/Icon16-Setting@2x.png"; sourceTree = "<group>"; };
+		44D9A789146578610031F268 /* AzCalcRoll.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzCalcRoll.plist; sourceTree = "<group>"; };
+		44D9A78C146578E40031F268 /* AzCalcRollPad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzCalcRollPad.plist; sourceTree = "<group>"; };
 		44E3DB4B1454695A00E0BA17 /* KeySquareDw.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeySquareDw.png; path = Image/KeySquareDw.png; sourceTree = "<group>"; };
 		44E3DB4C1454695A00E0BA17 /* KeySquareDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeySquareDw@2x.png"; path = "Image/KeySquareDw@2x.png"; sourceTree = "<group>"; };
 		44E3DB4D1454695A00E0BA17 /* KeySquareUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeySquareUp.png; path = Image/KeySquareUp.png; sourceTree = "<group>"; };
@@ -404,6 +410,8 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44D9A78C146578E40031F268 /* AzCalcRollPad.plist */,
+				44D9A789146578610031F268 /* AzCalcRoll.plist */,
 				448D99301307D1DD004DFD62 /* Localizable.strings */,
 				44B762F0146194850078AE1D /* AzKmPadKeys.plist */,
 				44B762F1146194850078AE1D /* AzKmPagesPad.plist */,
@@ -653,6 +661,8 @@
 				443E4CB61462A1D5003B1E18 /* DropboxVC.xib in Resources */,
 				443E4CB91462A1F1003B1E18 /* DropboxVC-iPad.xib in Resources */,
 				44CF046A1462CF9300E80EFF /* AzCalc-Info.plist in Resources */,
+				44D9A78A146578610031F268 /* AzCalcRoll.plist in Resources */,
+				44D9A78D146578E40031F268 /* AzCalcRollPad.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -715,6 +725,8 @@
 				443E4CB71462A1D5003B1E18 /* DropboxVC.xib in Resources */,
 				443E4CBA1462A1F1003B1E18 /* DropboxVC-iPad.xib in Resources */,
 				44CF046C1462CFA100E80EFF /* AzCalc-InfoS1.plist in Resources */,
+				44D9A78B146578610031F268 /* AzCalcRoll.plist in Resources */,
+				44D9A78E146578E40031F268 /* AzCalcRollPad.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,7 +16,7 @@
 #import "InformationVC.h"
 #import "KeyButton.h"
 #import <TargetConditionals.h>	// TARGET_IPHONE_SIMULATOR
-#import "DropboxVC.h"
+#import "DropboxVC.h"		// SBjsonが含まれている
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
 #define	PICKER_COMPONENT_WiMIN	40		// 1コンポーネントの表示最小幅
@@ -51,7 +51,7 @@
 - (void)MvDrumButtonShow;
 - (void)MvMemoryShow;
 - (void)MvFormulaBlankMessage:(BOOL)bBlank;
-- (void)MvPadKeysShow;
+- (void)MvPadFuncShow;
 - (void)MvKeyUnitGroupSI:(UIView*)keyView;
 - (void)MvKeyUnitGroup:(KeyButton *)keyUnit;
 //- (void)MvKeyboardPage:(NSInteger)iPage;
@@ -68,50 +68,72 @@
 
 - (void)keymapSaveAndSync:(BOOL)bSync
 {
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+
 	if (mKmPages) 
 	{	// 初期キーボード配置を　standardUserDefaults へ保存する
-		NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 		if (bPad) {
-			[userDef setObject:mKmPages forKey:GUD_KmPagesPad];
+			[userDef setObject:mKmPages forKey:GUD_KmPadPages];
 		} else {
-			[userDef setObject:mKmPages forKey:GUD_KmPagesPhone];
-		}
-		
-		if (mKmPadKeys) 
-		{	// mKmPadKeys を保存する
-			NSLog(@"SAVE: mKmPadKeys=%@", mKmPadKeys);
-			[userDef setObject:mKmPadKeys forKey:GUD_KmPadKeys];
-		}
-		
-		if (bSync) {
-			if ([userDef synchronize] != YES) {
-				NSLog(@"keymapSave: synchronize: ERROR");
-			}
-#ifdef DEBUG
-			// mKmPages を.plistファイルへ書き出すことにより、初期レイアウトファイルを作ることができる。
-			NSString *zPath = @"/Users/masa/AzukiSoft/AzCalc/AzCalc/";
-			if (bPad) {
-				[mKmPages writeToFile:[zPath stringByAppendingString:PLIST_KmPagesPad @"_DEBUG.plist"] atomically:YES];
-			} else {
-				[mKmPages writeToFile:[zPath stringByAppendingString:PLIST_KmPagesPhone @"_DEBUG.plist"] atomically:YES];
-			}
-			// mKmPadKeys を.plistファイルへ書き出すことにより、初期レイアウトファイルを作る
-			[mKmPadKeys writeToFile:[zPath stringByAppendingString:PLIST_KmPadKeys @"_DEBUG.plist"] atomically:YES];
-#endif
+			[userDef setObject:mKmPages forKey:GUD_KmPages];
 		}
 	}
+		
+	if (mKmPadFunc) 
+	{	// mKmPadFunc を保存する
+		NSLog(@"SAVE: mKmPadFunc=%@", mKmPadFunc);
+		[userDef setObject:mKmPadFunc forKey:GUD_KmPadFunc];
+	}
+	
+	if (bSync) {
+		if ([userDef synchronize] != YES) {
+			NSLog(@"keymapSaveAndSync: synchronize: ERROR");
+		}
+	}
+	
+#ifdef DEBUG
+	NSString *zPath = @"/Users/masa/AzukiSoft/AzCalc/AzCalc/";
+	NSDictionary *dic = nil;
+	if (bPad) {
+		dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+			   mKmPages,		@"PadPages", 
+			   mKmPadFunc,	@"PadFunc",
+			   nil];
+		[dic writeToFile:[zPath stringByAppendingString:PLIST_CalcRollPad @"_DEBUG.plist"] atomically:YES];
+	} else {
+		dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+			   mKmPages,		@"Pages", 
+			   nil];
+		[dic writeToFile:[zPath stringByAppendingString:PLIST_CalcRoll @"_DEBUG.plist"] atomically:YES];
+	}
+	[dic release];
+
+	/*	// JSON   （DropboxSDK.frameworkに含まれる）
+		//NSArray		*mKmPages;			// <--(All Page) <--(NSDictionary *) キー配列
+		//NSArray		*mKmPadFunc;		// <--(NSDictionary *) iPad拡張メモリキー配列
+		NSArray *aJson = [[NSArray alloc] initWithObjects:mKmPages, mKmPadFunc, nil];
+		NSString *zJson = [[NSString alloc] initWithString:(NSString*)[aJson JSONRepresentation]];
+		[aJson release], aJson = nil;
+		NSLog(@"zJson-------------------------------------\n%@\nzJson-------------------------------------", zJson);
+		[zJson release], zJson = nil;
+	 */
+#endif
 }
 
 - (void)mKmMemoryReset
 {	// keymapLoad から呼び出される。
-	[mKmMemorys release], mKmMemorys = [NSMutableArray new];
-
+	[mKmMemorys release], mKmMemorys = [NSMutableArray new]; // RootだけMutable
+	
 	if (mKmPages) 
 	{	// mKmPages にある[M]メモリキーを mKmMemorys から参照できるようにする
-		for (NSArray *aPage in mKmPages)
+		//NSLog(@"[mKmPages count]=%d", [mKmPages count]);
+		for (NSMutableArray *aPage in mKmPages)
 		{	// 1ページ分
+			//NSLog(@"[aPage count]=%d", [aPage count]);
+			//NSLog(@"mKmPages: aPage=%@", aPage);
 			for (NSMutableDictionary *dic in aPage)
 			{	// 1ページ内のキー
+				//NSLog(@"mKmPages: dic=%@", dic);
 				NSInteger iTag = [[dic objectForKey:@"Tag"] integerValue];
 				if (KeyTAG_MSTORE_Start <= iTag && iTag <= KeyTAG_MSTROE_End) { // メモリキー
 					[mKmMemorys addObject:dic];
@@ -120,9 +142,9 @@
 		}
 	}
 	
-	if (mKmPadKeys) 
-	{	// mKmPadKeys にある[M]メモリキーを mKmMemorys から参照できるようにする
-		for (NSMutableDictionary *dic in mKmPadKeys)
+	if (mKmPadFunc) 
+	{	// mKmPadFunc にある[M]メモリキーを mKmMemorys から参照できるようにする
+		for (NSMutableDictionary *dic in mKmPadFunc)
 		{
 			NSInteger iTag = [[dic objectForKey:@"Tag"] integerValue];
 			if (KeyTAG_MSTORE_Start <= iTag && iTag <= KeyTAG_MSTROE_End) { // メモリキー
@@ -136,8 +158,8 @@
 - (void)mKmPagesFromKeyboardSet:(NSDictionary*)keybordSet
 {	// [1.0.9]以前の KeyboardSet を、mKmPages に変換する
 	// KeyMap へ変換する
-	[mKmPages release], mKmPages = [NSMutableArray new];
-	
+	[mKmPages release], mKmPages = [NSMutableArray new];	// RootだけMutable
+
 	NSInteger	iColOfs, iRowOfs; // AzKeySet仕様に合わせるため＜＜ iPad(0,0) iPhone(1,1) を原点にしていたため。
 	if (bPad) { // iPad
 		iColOfs = 0;
@@ -151,7 +173,7 @@
 		for (int iCol=iColOfs ; iCol<iColOfs+iKeyCols ; iCol++) {
 			for (int iRow=iRowOfs ; iRow<iRowOfs+iKeyRows ; iRow++) {
 				NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", iPage, iCol, iRow];
-				NSMutableDictionary *dicKey = [keybordSet objectForKey:zPCR];
+				NSDictionary *dicKey = [keybordSet objectForKey:zPCR];
 				[zPCR release];
 				if (dicKey) {
 					[maKeys addObject:dicKey];
@@ -181,22 +203,60 @@
 - (void)keymapLoad
 {
 	[mKmPages release], mKmPages = nil;
+	[mKmPadFunc release], mKmPadFunc = nil;
 
 #ifdef AzMAKE_SPLASHFACE
 	return; // キー定義なし
 #endif
 	
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+	NSArray *array;
 	// standardUserDefaults:GUD_KeyMap からキー配置を読み込む
 	if (bPad) {
-		mKmPages = [userDef objectForKey:GUD_KmPagesPad];
+		array = [userDef arrayForKey:GUD_KmPadPages];
+		if (array) {
+			mKmPages = [NSMutableArray new];	// 全てMutableにする
+			for (NSArray *aPage in array) {
+				NSMutableArray *muKeys = [NSMutableArray new];
+				for (NSDictionary *aKey in aPage) {
+					NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+					[muKeys addObject:dKey];
+					[dKey release];
+				}
+				[mKmPages addObject:muKeys];
+				[muKeys release];
+			}
+		}
+		array = [userDef arrayForKey:GUD_KmPadFunc];
+		if (array) {
+			mKmPadFunc = [NSMutableArray new];	// 全てMutableにする
+			for (NSDictionary *aKey in array) {
+				NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+				[mKmPadFunc addObject:dKey];
+				[dKey release];
+			}
+		}
 	} else {
-		mKmPages = [userDef objectForKey:GUD_KmPagesPhone];
+		array = [userDef arrayForKey:GUD_KmPages];
+		if (array) {
+			mKmPages = [NSMutableArray new];	// 全てMutableにする
+			for (NSArray *aPage in array) {
+				NSMutableArray *muKeys = [NSMutableArray new];
+				for (NSDictionary *aKey in aPage) {
+					NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+					[muKeys addObject:dKey];
+					[dKey release];
+				}
+				[mKmPages addObject:muKeys];
+				[muKeys release];
+			}
+		}
+		mKmPadFunc = nil;
 	}
 	//
 	if (mKmPages==nil) {	// 未定義（インストール直後）ならば、
 		// standardUserDefaults:GUD_KeyboardSet から[1.0.9]以前のキー配置を読み込む
-		NSDictionary *keyboardSet = [userDef objectForKey:GUD_KeyboardSet];
+		NSDictionary *keyboardSet = [userDef dictionaryForKey:@"GUD_KeyboardSet"];		//[1.0.9]までのuserDef保存Key
 		if (keyboardSet) {
 			//[1.0.9]以前のユーザ配置を読み込んで、mKmPages に変換する
 			// mKmPages へ変換する
@@ -204,56 +264,95 @@
 			// mKmPages 変換完了
 		} 
 		else {
-			//[1.0.10]以降、.plistからキー配置読み込む
+			//[1.0.10]以降、AzCalcRoll.plistからキー配置読み込む
 			NSString *zPath;
 			if (bPad) {
-				zPath = [[NSBundle mainBundle] pathForResource:PLIST_KmPagesPad ofType:@"plist"];
+				zPath = [[NSBundle mainBundle] pathForResource:PLIST_CalcRollPad ofType:@"plist"];
 			} else {
-				zPath = [[NSBundle mainBundle] pathForResource:PLIST_KmPagesPhone ofType:@"plist"];
+				zPath = [[NSBundle mainBundle] pathForResource:PLIST_CalcRoll ofType:@"plist"];
 			}
-			mKmPages = [[NSMutableArray alloc] initWithContentsOfFile:zPath];
-			//
-#ifdef DEBUG
-			//[1.0.9]以前の仕様、AzKeySet.plistからキー配置読み込む
-			if (mKmPages==nil) {
-				NSString *zPath;
-				if (bPad) { // iPad
-					zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet-iPad" ofType:@"plist"];
-				} else {
-					zPath = [[NSBundle mainBundle] pathForResource:@"AzKeySet" ofType:@"plist"];
-				}
-				NSDictionary *dicPCR = [[NSDictionary alloc] initWithContentsOfFile:zPath];	// 後で release している
-				if (dicPCR==nil) {
-					AzLOG(@"ERROR: AzKeySet.plist not Open");
-					return;
-				}
-				// mKmPages へ変換する
-				[self mKmPagesFromKeyboardSet:dicPCR];
-				// mKmPages 変換完了
-			}
-#else
-			if (mKmPages==nil) {
-				NSLog(@"ERROR: AzKeyMap Read error: zPath=%@", zPath);
+			NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:zPath];
+			if (dic==nil) {
+				NSLog(@"ERROR: AzCalcRoll.plist Read error: zPath=%@", zPath);
 				return;
 			}
-#endif
-			// 初期キーボード配置を　standardUserDefaults へ保存する
-			//[self keymapSaveAndSync:YES];
+			if (bPad) {
+				array = [dic objectForKey:@"PadPages"];
+				if (array) {
+					//mKmPages = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
+					mKmPages = [NSMutableArray new];	// 全てMutableにする
+					for (NSArray *aPage in array) {
+						NSMutableArray *muKeys = [NSMutableArray new];
+						for (NSDictionary *aKey in aPage) {
+							NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+							[muKeys addObject:dKey];
+							[dKey release];
+						}
+						[mKmPages addObject:muKeys];
+						[muKeys release];
+					}
+				}
+				array = [dic objectForKey:@"PadFunc"];
+				if (array) {
+					//mKmPadFunc = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
+					mKmPadFunc = [NSMutableArray new];	// 全てMutableにする
+					for (NSDictionary *aKey in array) {
+						NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+						[mKmPadFunc addObject:dKey];
+						[dKey release];
+					}
+				}
+			} else {
+				array = [dic objectForKey:@"Pages"];
+				if (array) {
+					//mKmPages = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
+					mKmPages = [NSMutableArray new];	// 全てMutableにする
+					for (NSArray *aPage in array) {
+						NSMutableArray *muKeys = [NSMutableArray new];
+						for (NSDictionary *aKey in aPage) {
+							NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+							[muKeys addObject:dKey];
+							[dKey release];
+						}
+						[mKmPages addObject:muKeys];
+						[muKeys release];
+					}
+				}
+				mKmPadFunc = nil;
+			}
+			[dic release];
+			
+	/*		NSString *zPath;
+			if (bPad) { // iPad
+				zPath = [[NSBundle mainBundle] pathForResource:@"AzKmPagesPad" ofType:@"plist"];
+				mKmPages = [[NSMutableArray alloc] initWithContentsOfFile:zPath];
+			} else {
+				zPath = [[NSBundle mainBundle] pathForResource:@"AzKmPagesPhone" ofType:@"plist"];
+				mKmPages = [[NSMutableArray alloc] initWithContentsOfFile:zPath];
+				zPath = [[NSBundle mainBundle] pathForResource:@"AzKmPadKeys" ofType:@"plist"];
+				mKmPadFunc = [[NSMutableArray alloc] initWithContentsOfFile:zPath];
+			}*/
+			//
+
+			if (mKmPages==nil) {
+				NSLog(@"ERROR: AzCalcRoll.plist Read error: zPath=%@", zPath);
+				return;
+			}
 		}
 	}
 
-	if (bPad) {
-		// mKmPadKeys を読み込む
-		mKmPadKeys = [userDef objectForKey:GUD_KmPadKeys];
-		if (mKmPadKeys==nil) { // 未定義（インストール直後）ならば、
+/*	if (bPad) {
+		// mKmPadFunc を読み込む
+		mKmPadFunc = [userDef objectForKey:GUD_KmPadFunc];
+		if (mKmPadFunc==nil) { // 未定義（インストール直後）ならば、
 			//　.plistから iPad拡張キー 配置読み込む
-			mKmPadKeys = [[NSMutableArray alloc] initWithContentsOfFile:
-						  [[NSBundle mainBundle] pathForResource:PLIST_KmPadKeys ofType:@"plist"]];
+			mKmPadFunc = [[NSMutableArray alloc] initWithContentsOfFile:
+						  [[NSBundle mainBundle] pathForResource:PLIST_KmPadFunc ofType:@"plist"]];
 		}
-		NSLog(@"LOAD: mKmPadKeys=%@", mKmPadKeys);
-	}
+		NSLog(@"LOAD: mKmPadFunc=%@", mKmPadFunc);
+	}*/
 	
-	// mKmPages と mKmPadKeys から mKmMemory を生成する
+	// mKmPages と mKmPadFunc から mKmMemory を生成する
 	[self mKmMemoryReset]; 
 }
 
@@ -306,7 +405,7 @@
 	[mGvKeyUnitSi3 release];
 
 	[mKmMemorys release], mKmMemorys = nil;
-	[mKmPadKeys release],	mKmPadKeys = nil;
+	[mKmPadFunc release],	mKmPadFunc = nil;
 	[mKmPages release], mKmPages = nil;
 	
 	[RaDrums release];
@@ -807,7 +906,7 @@
 
 
 	//========================================================== Lower ==============
-	//[0.4.2]//[self MvPadKeysShow]より前に必要だった。
+	//[0.4.2]//[self MvPadFuncShow]より前に必要だった。
 	//[0.4.1]//"Received memory warning. Level=2" 回避するための最適化
 	
 	if (bPad) { // iPad
@@ -1041,10 +1140,11 @@
 	if ( ![zDec isEqualToString:getFormatterDecimalSeparator()] ) { // 小数点表記が変更された
 		formatterDecimalSeparator( zDec );
 		// mKmPages 更新
-		for (NSArray *aPage in mKmPages) {	// 1ページ分
+		for (NSMutableArray *aPage in mKmPages) {	// 1ページ分  ＜＜全てMutable
 			for (NSMutableDictionary *dicKey in aPage) {	// 1ページ内のキー
 				if ([[dicKey objectForKey:@"Tag"] integerValue]==KeyTAG_DECIMAL) {
-					[dicKey setObject:zDec forKey:@"Text"];
+					[dicKey setObject:zDec forKey:@"Text"];		// Mutableでないと落ちる
+					// 同じキーが複数ある可能性があるので最後まで続ける
 				}
 			}
 		}
@@ -1117,7 +1217,7 @@
 	[self.view bringSubviewToFront:ibBuMemory]; // 上にする
 
 	if (bPad) {
-		[self MvPadKeysShow]; // iPad専用 メモリー(KeyMemorys_MAX=20)キー配置 および 回転処理
+		[self MvPadFuncShow]; // iPad専用 メモリー(KeyMemorys_MAX=20)キー配置 および 回転処理
 	}
 #endif
 }
@@ -1282,7 +1382,7 @@
 	if (!bPad) return; // iPhone
 	
 	// iPad専用 メモリー(KeyMemorys_MAX=20)キー配置 および 回転処理
-	[self MvPadKeysShow]; 
+	[self MvPadFuncShow]; 
 	
 	// RaDrumButtons
 	[self MvDrumButtonShow];
@@ -1709,7 +1809,7 @@
 	[ibScrollLower scrollRectToVisible:rc animated:YES];
 }*/
 
-- (void)MvPadKeysShow // iPad拡張 メモリー(KeyMemorys_MAX=20)キー配置 および 回転処理
+- (void)MvPadFuncShow // iPad拡張 メモリー(KeyMemorys_MAX=20)キー配置 および 回転処理
 {
 	assert(bPad); // iPad
 	if (mPadMemoryKeyButtons) {
@@ -1736,8 +1836,8 @@
 			[kb setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
 			[kb addTarget:self action:@selector(ibButton:) forControlEvents:UIControlEventTouchUpInside];
 			
-			if (mKmPadKeys && idx < [mKmPadKeys count]) {
-				NSMutableDictionary *dic = [mKmPadKeys objectAtIndex:idx];
+			if (mKmPadFunc && idx < [mKmPadFunc count]) {
+				NSMutableDictionary *dic = [mKmPadFunc objectAtIndex:idx];
 				kb.tag = [[dic objectForKey:@"Tag"] integerValue];
 				kb.iColorNo = [[dic objectForKey:@"Color"] integerValue];
 				kb.fFontSize = [[dic objectForKey:@"Size"] floatValue];
@@ -2086,7 +2186,7 @@
 		fAlpha = KeyALPHA_MSTORE_OFF;
 	}
 	
-	// mKmMemorys から mKmPages と mKmPadKeys の[M]メモリキーを更新する
+	// mKmMemorys から mKmPages と mKmPadFunc の[M]メモリキーを更新する
 	for (NSMutableDictionary *dic in mKmMemorys) {
 		if ([[dic objectForKey:@"Tag"] integerValue]  == iTag) {
 			[dic setObject:zMemory forKey:@"Text"];
@@ -2135,7 +2235,7 @@
 	// 最小順位の未使用メモリを探す
 	NSInteger iTagMin = KeyTAG_MSTROE_End;
 
-	// mKmMemorys から mKmPages と mKmPadKeys の[M]メモリキーを探す
+	// mKmMemorys から mKmPages と mKmPadFunc の[M]メモリキーを探す
 	for (NSMutableDictionary *dic in mKmMemorys) {
 		NSInteger iTag = [[dic objectForKey:@"Tag"] integerValue];
 		NSString *zText = [dic objectForKey:@"Text"];
