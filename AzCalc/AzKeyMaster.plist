@@ -1043,33 +1043,9 @@
 			<key>Size</key>
 			<integer>12</integer>
 			<key>Tag</key>
-			<integer>501</integer>
-			<key>Text</key>
-			<string>iCloud</string>
-		</dict>
-		<dict>
-			<key>Alpha</key>
-			<real>0.8</real>
-			<key>Color</key>
-			<integer>3</integer>
-			<key>Size</key>
-			<integer>12</integer>
-			<key>Tag</key>
 			<integer>502</integer>
 			<key>Text</key>
 			<string>Dropbox</string>
-		</dict>
-		<dict>
-			<key>Alpha</key>
-			<real>0.8</real>
-			<key>Color</key>
-			<integer>3</integer>
-			<key>Size</key>
-			<integer>12</integer>
-			<key>Tag</key>
-			<integer>503</integer>
-			<key>Text</key>
-			<string>Evernote</string>
 		</dict>
 	</array>
 	<array>

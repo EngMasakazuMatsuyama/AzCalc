@@ -7,8 +7,11 @@
 //
 
 #import "DropboxVC.h"
+#import "AzCalcViewController.h"
 
 @implementation DropboxVC
+@synthesize delegate;
+@synthesize mLocalPath;
 
 /*
 - (id)initWithStyle:(UITableViewStyle)style
@@ -43,12 +46,29 @@
 
 - (IBAction)ibBuSave:(UIButton *)button
 {
+	[ibTfName resignFirstResponder]; // キーボードを隠す
+	
+	NSString *filename = [ibTfName.text stringByDeletingPathExtension]; // 拡張子を除く
+	if ([filename length] < 3) {
+		return;
+	}
+	filename = [filename stringByAppendingFormat:@".%@", [mLocalPath pathExtension]]; // 拡張子を付ける
+	
+	NSString *destDir = @"/";
 
+	NSLog(@"mLocalPath=%@, filename=%@, destDir=%@", mLocalPath, filename, destDir);
+	[[self restClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:mLocalPath];
+	//
+	[mAlert setTitle:NSLocalizedString(@"Saveing", nil)];
+	[mAlert setMessage:filename];
+	[mAlert show];
+	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-55, 50, 50)];
+	[mActivityIndicator startAnimating];
 }
 
 - (IBAction)ibSegSort:(UISegmentedControl *)segment
 {
-	
+	[[self restClient] loadMetadata:@"/"];
 }
 
 
@@ -61,18 +81,42 @@
 	//ibTfName.delegate = self;   IBにて定義済み
 	//ibTableView.delegate = self;
 	
-	[[self restClient] loadMetadata:@"/"];
-
+	ibTfName.keyboardType = UIKeyboardTypeDefault;
+	ibTfName.returnKeyType = UIReturnKeyDone;
+	
+	[mAlert release];
+	mAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+	[self.view addSubview:mAlert];
+	
+	[mActivityIndicator release];
+	mActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	mActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
+	[mAlert addSubview:mActivityIndicator];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+	
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+	ibTfName.text = [userDef objectForKey:@"DropboxFileName"];
+	if ([ibTfName.text length] < 3) {
+		ibTfName.text = @"MyKeybord";
+	}
+	//
+	[mAlert setTitle:NSLocalizedString(@"Loading", nil)];
+	[mAlert setMessage:@""];
+	[mAlert show];
+	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-55, 50, 50)];
+	[mActivityIndicator startAnimating];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+	
+	// Dropbox/App/CalcRoll 一覧表示
+	[[self restClient] loadMetadata:@"/"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -111,6 +155,8 @@
 
 - (void)dealloc 
 {
+	[mActivityIndicator release];
+	[mAlert release];
 	[mMetadatas release], mMetadatas = nil;
     [super dealloc];
 }
@@ -119,7 +165,7 @@
 #pragma mark - Dropbox <DBRestClientDelegate>
 
 - (void)restClient:(DBRestClient *)client loadedMetadata:(DBMetadata *)metadata 
-{
+{	// メタデータ読み込み成功
     if (metadata.isDirectory) {
 #ifdef DEBUG
         NSLog(@"Folder '%@' contains:", metadata.path);
@@ -128,18 +174,79 @@
 		}
 #endif
 		[mMetadatas release];
-		mMetadatas = [[NSArray alloc] initWithArray:metadata.contents];
+		mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
+		// Sorting
+		if (ibSegSort.selectedSegmentIndex==0) { // Name Asc
+			NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"filename" ascending:YES];
+			NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
+			[sort1 release];
+			[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
+			[sorting release];
+		} else { // Date Desc
+			NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"lastModifiedDate" ascending:NO];
+			NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
+			[sort1 release];
+			[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
+			[sorting release];
+		}
 		[ibTableView reloadData];
 	}
+	//
+	[mActivityIndicator stopAnimating];
+	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
 }
 
 - (void)restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error 
-{
+{	// メタデータ読み込み失敗
     NSLog(@"Error loading metadata: %@", error);
 	[mMetadatas release];
 	mMetadatas = nil;
 	[ibTableView reloadData];
+	//
+	[mActivityIndicator stopAnimating];
+	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
 }
+
+
+- (void)restClient:(DBRestClient*)client loadedFile:(NSString*)localPath 
+{	// ファイル読み込み成功
+    NSLog(@"File loaded into path: %@", localPath);
+	// mKmPages リセット
+	[delegate GvCalcRollLoad:localPath]; // .CalcRoll - Plist file
+	//
+	[mActivityIndicator stopAnimating];
+	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	// 閉じる
+	[self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error 
+{	// ファイル読み込み失敗
+    NSLog(@"There was an error loading the file - %@", error);
+	//
+	[mActivityIndicator stopAnimating];
+	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+}
+
+- (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
+			  from:(NSString*)srcPath metadata:(DBMetadata*)metadata
+{	// ファイル書き込み成功
+    NSLog(@"File uploaded successfully to path: %@", metadata.path);
+	// Dropbox/App/CalcRoll 一覧表示
+	[[self restClient] loadMetadata:@"/"];
+	//
+	[mActivityIndicator stopAnimating];
+	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+}
+
+- (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error 
+{	// ファイル書き込み失敗
+    NSLog(@"File upload failed with error - %@", error);
+	//
+	[mActivityIndicator stopAnimating];
+	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+}
+
 
 
 #pragma mark - <UITableViewDataSource>
@@ -192,7 +299,7 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
 									   reuseIdentifier:CellIdentifier] autorelease];
     }
 	
@@ -200,9 +307,9 @@
 		case 0: {
 			if (0 < [mMetadatas count]) {
 				DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
-				cell.detailTextLabel.text = dbm.filename;
+				cell.textLabel.text = dbm.filename;
 			} else {
-				cell.detailTextLabel.text = NSLocalizedString(@"Loading", nil);
+				cell.textLabel.text = NSLocalizedString(@"LoadingWait", nil);
 			}
 		} break;
 	}
@@ -254,22 +361,44 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	[ibTableView deselectRowAtIndexPath:indexPath animated:YES]; // 選択解除
-	switch (indexPath.section) {
-		case 0: { // CLOSE
-			[self dismissModalViewControllerAnimated:YES];
-		} break;
-			
-		case 1: { // SAVE
-			switch (indexPath.row) {
-				case 0:
-					break;
-				case 1:
-					break;
-			}
-		} break;
-			
-		case 2: {	// LOAD
-		} break;
+
+	if (0<=indexPath.row && indexPath.row<[mMetadatas count]) 
+	{
+		DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
+		//
+		[mAlert setTitle:@"Loading"];
+		[mAlert setMessage:dbm.filename];
+		[mAlert show];
+		[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-55, 50, 50)];
+		[mActivityIndicator startAnimating];
+		//
+		NSLog(@"dbm.path=%@ --> mLocalPath=%@", dbm.path, mLocalPath);
+		[[self restClient] loadFile:dbm.path intoPath:mLocalPath]; //---> loadedFile:
+		//[self dismissModalViewControllerAnimated:YES];
+	}
+}
+
+
+#pragma mark - <UITextFieldDelegate>
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+	[textField resignFirstResponder]; // キーボードを隠す
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range 
+replacementString:(NSString *)string 
+{
+	// senderは、MtfName だけ
+    NSMutableString *text = [[textField.text mutableCopy] autorelease];
+    [text replaceCharactersInRange:range withString:string];
+	// 置き換えた後の長さをチェックする
+	if ([text length] <= 40) {
+		//appDelegate.AppUpdateSave = YES; // 変更あり
+		//self.navigationItem.rightBarButtonItem.enabled = YES; // 変更あり [Save]有効
+		return YES;
+	} else {
+		return NO;
 	}
 }
 

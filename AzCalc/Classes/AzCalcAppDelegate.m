@@ -89,8 +89,8 @@
         if ([[DBSession sharedSession] isLinked]) 
 		{	// Dropbox 認証成功
             NSLog(@"App linked successfully!");
-            // At this point you can start making API calls
 			// DropboxTVC を空ける
+			[viewController GvDropbox];
         }
         return YES;
     }

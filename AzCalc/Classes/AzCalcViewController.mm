@@ -200,6 +200,64 @@
 	// KeyMap 変換完了
 }
 
+- (void)GvCalcRollLoad:(NSString*)zCalcRollPath
+{	// 
+	NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:zCalcRollPath];
+	if (dic==nil) {
+		NSLog(@"GvKmPageLoadPath: ERROR: zCalcRollPath=%@", zCalcRollPath);
+		return;
+	}
+	NSArray *array;
+	if (bPad) {
+		array = [dic objectForKey:@"PadPages"];
+	} else {
+		array = [dic objectForKey:@"Pages"];
+	}
+	if (array==nil OR [array count]<4) {  //iPad最小ページ数4
+		NSLog(@"ERROR: GvCalcRollLoad: zCalcRollPath=%@", zCalcRollPath);
+		UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Canceled", nil)
+													  message:NSLocalizedString(@"CanceledMsg", nil)
+													 delegate:nil
+											cancelButtonTitle:nil
+											otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
+		[alv	show];
+		[alv release];
+		return;
+	}
+	//
+	if (mKmPages) {
+		[mKmPages release], mKmPages = nil;
+		[mKmPadFunc release], mKmPadFunc = nil;
+	}
+	mKmPages = [NSMutableArray new];	// 全てMutableにする
+	for (NSArray *aPage in array) {
+		NSMutableArray *muKeys = [NSMutableArray new];
+		for (NSDictionary *aKey in aPage) {
+			NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+			[muKeys addObject:dKey];
+			[dKey release];
+		}
+		[mKmPages addObject:muKeys];
+		[muKeys release];
+	}
+	
+	if (bPad) {
+		array = [dic objectForKey:@"PadFunc"];
+		if (array) {
+			//mKmPadFunc = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
+			mKmPadFunc = [NSMutableArray new];	// 全てMutableにする
+			for (NSDictionary *aKey in array) {
+				NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
+				[mKmPadFunc addObject:dKey];
+				[dKey release];
+			}
+		}
+	} 
+	[dic release];
+	//
+	[self viewWillAppear:YES];
+}
+
 - (void)keymapLoad
 {
 	[mKmPages release], mKmPages = nil;
@@ -271,68 +329,7 @@
 			} else {
 				zPath = [[NSBundle mainBundle] pathForResource:PLIST_CalcRoll ofType:@"plist"];
 			}
-			NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:zPath];
-			if (dic==nil) {
-				NSLog(@"ERROR: AzCalcRoll.plist Read error: zPath=%@", zPath);
-				return;
-			}
-			if (bPad) {
-				array = [dic objectForKey:@"PadPages"];
-				if (array) {
-					//mKmPages = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
-					mKmPages = [NSMutableArray new];	// 全てMutableにする
-					for (NSArray *aPage in array) {
-						NSMutableArray *muKeys = [NSMutableArray new];
-						for (NSDictionary *aKey in aPage) {
-							NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
-							[muKeys addObject:dKey];
-							[dKey release];
-						}
-						[mKmPages addObject:muKeys];
-						[muKeys release];
-					}
-				}
-				array = [dic objectForKey:@"PadFunc"];
-				if (array) {
-					//mKmPadFunc = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
-					mKmPadFunc = [NSMutableArray new];	// 全てMutableにする
-					for (NSDictionary *aKey in array) {
-						NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
-						[mKmPadFunc addObject:dKey];
-						[dKey release];
-					}
-				}
-			} else {
-				array = [dic objectForKey:@"Pages"];
-				if (array) {
-					//mKmPages = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
-					mKmPages = [NSMutableArray new];	// 全てMutableにする
-					for (NSArray *aPage in array) {
-						NSMutableArray *muKeys = [NSMutableArray new];
-						for (NSDictionary *aKey in aPage) {
-							NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
-							[muKeys addObject:dKey];
-							[dKey release];
-						}
-						[mKmPages addObject:muKeys];
-						[muKeys release];
-					}
-				}
-				mKmPadFunc = nil;
-			}
-			[dic release];
-			
-	/*		NSString *zPath;
-			if (bPad) { // iPad
-				zPath = [[NSBundle mainBundle] pathForResource:@"AzKmPagesPad" ofType:@"plist"];
-				mKmPages = [[NSMutableArray alloc] initWithContentsOfFile:zPath];
-			} else {
-				zPath = [[NSBundle mainBundle] pathForResource:@"AzKmPagesPhone" ofType:@"plist"];
-				mKmPages = [[NSMutableArray alloc] initWithContentsOfFile:zPath];
-				zPath = [[NSBundle mainBundle] pathForResource:@"AzKmPadKeys" ofType:@"plist"];
-				mKmPadFunc = [[NSMutableArray alloc] initWithContentsOfFile:zPath];
-			}*/
-			//
+			[self GvCalcRollLoad:zPath];
 
 			if (mKmPages==nil) {
 				NSLog(@"ERROR: AzCalcRoll.plist Read error: zPath=%@", zPath);
@@ -2406,26 +2403,56 @@
 	}
 }
 
+- (void)GvDropbox
+{	// 未認証の場合、認証処理後、AzCalcAppDelegate:handleOpenURL:から呼び出される
+	if ([[DBSession sharedSession] isLinked]) 
+	{	// Dropbox 認証済み
+		NSString *zHome = NSHomeDirectory();
+		NSString *zTmp = [zHome stringByAppendingPathComponent:@"tmp"]; // "Documents"
+		NSString *zPath = [zTmp stringByAppendingPathComponent:@"MyKeyboard.CalcRoll"];
+		// 先に.plist保存する
+		NSLog(@"zPath=%@", zPath);
+		NSDictionary *dic = nil;
+		if (bPad) {
+			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+				   mKmPages,		@"PadPages", 
+				   mKmPadFunc,	@"PadFunc",
+				   nil];
+			zPath = [zPath stringByAppendingString:@"Pad"];
+		} else {
+			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+				   mKmPages,		@"Pages", 
+				   nil];
+		}
+		[dic writeToFile:zPath atomically:YES];
+		[dic release];
+		
+		if (bPad) {
+			DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC-iPad" bundle:nil];
+			vc.modalPresentationStyle = UIModalPresentationFormSheet;
+			vc.mLocalPath = zPath;
+			vc.delegate = self;
+			[self presentModalViewController:vc animated:YES];
+		} else {
+			DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC" bundle:nil];
+			vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+			vc.mLocalPath = zPath;
+			vc.delegate = self;
+			[self presentModalViewController:vc animated:YES];
+		}
+	} else {
+		// Dropbox 未認証
+		[[DBSession sharedSession] link];
+	}
+}
+
 // Function関係キー入力処理
 - (void)buttonFunction:(Drum *)drum withTag:(NSInteger)iKeyTag
 {
 	switch (iKeyTag) {
-		case KeyTAG_FUNC_Dropbox: 
-		{	// Dropbox authentication process
-			if ([[DBSession sharedSession] isLinked]) {
-				if (bPad) {
-					DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC-iPad" bundle:nil];
-					vc.modalPresentationStyle = UIModalPresentationFormSheet;
-					[self presentModalViewController:vc animated:YES];
-				} else {
-					DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC" bundle:nil];
-					vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-					[self presentModalViewController:vc animated:YES];
-				}
-			} else {
-				[[DBSession sharedSession] link];
-			}
-  		}	break;
+		case KeyTAG_FUNC_Dropbox: // Dropbox authentication process
+			[self GvDropbox];
+			break;
 	}
 }
 

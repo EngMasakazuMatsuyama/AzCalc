@@ -122,5 +122,9 @@
 - (void)MvShowAdApple:(BOOL)bApple AdMob:(BOOL)bMob;
 #endif
 
+// delegate
+- (void)GvCalcRollLoad:(NSString*)zCalcRollPath;
+- (void)GvDropbox;
+
 @end
 
