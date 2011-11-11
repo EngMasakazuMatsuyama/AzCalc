@@ -81,7 +81,7 @@
 		
 	if (mKmPadFunc) 
 	{	// mKmPadFunc を保存する
-		NSLog(@"SAVE: mKmPadFunc=%@", mKmPadFunc);
+		//NSLog(@"SAVE: mKmPadFunc=%@", mKmPadFunc);
 		[userDef setObject:mKmPadFunc forKey:GUD_KmPadFunc];
 	}
 	
@@ -215,13 +215,12 @@
 	}
 	if (array==nil OR [array count]<4) {  //iPad最小ページ数4
 		NSLog(@"ERROR: GvCalcRollLoad: zCalcRollPath=%@", zCalcRollPath);
-		UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Canceled", nil)
+		UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Canceled", nil)
 													  message:NSLocalizedString(@"CanceledMsg", nil)
 													 delegate:nil
 											cancelButtonTitle:nil
-											otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
+											 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
 		[alv	show];
-		[alv release];
 		return;
 	}
 	//

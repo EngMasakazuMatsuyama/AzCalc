@@ -11,7 +11,8 @@
 
 #define EXTENSION	"calcroll"
 
-@interface DropboxVC : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, DBRestClientDelegate>
+@interface DropboxVC : UIViewController <UITableViewDelegate, UITableViewDataSource, 
+UITextFieldDelegate, DBRestClientDelegate, UIActionSheetDelegate>
 {
 	IBOutlet UIButton		*ibBuClose;
 	IBOutlet UIButton		*ibBuSave;
@@ -26,6 +27,7 @@
 	NSMutableArray		*mMetadatas;
 	UIActivityIndicatorView	*mActivityIndicator;
 	UIAlertView						*mAlert;
+	NSIndexPath					*mDidSelectRowAtIndexPath;
 }
 
 @property (nonatomic, strong) id					delegate;

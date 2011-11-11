@@ -9,6 +9,9 @@
 #import "DropboxVC.h"
 #import "AzCalcViewController.h"
 
+#define TAG_ACTION_Save			109
+#define TAG_ACTION_Retrieve		118
+
 @implementation DropboxVC
 @synthesize delegate;
 @synthesize mLocalPath;
@@ -23,6 +26,23 @@
     return self;
 }
 */
+
+
+#pragma mark - Alert
+
+- (void)alertIndicatorOn:(NSString*)zTitle
+{
+	[mAlert setTitle:zTitle];
+	[mAlert show];
+	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-80, 50, 50)];
+	[mActivityIndicator startAnimating];
+}
+
+- (void)alertIndicatorOff
+{
+	[mActivityIndicator stopAnimating];
+	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+}
 
 
 #pragma mark - Dropbox DBRestClient
@@ -47,23 +67,23 @@
 - (IBAction)ibBuSave:(UIButton *)button
 {
 	[ibTfName resignFirstResponder]; // キーボードを隠す
-	
 	NSString *filename = [ibTfName.text stringByDeletingPathExtension]; // 拡張子を除く
 	if ([filename length] < 3) {
+		UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NameLeast", nil) 
+													  message:NSLocalizedString(@"NameLeastMsg", nil)  
+													  delegate:nil cancelButtonTitle:nil 
+											 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+		[alv show];
 		return;
 	}
-	filename = [filename stringByAppendingFormat:@".%@", [mLocalPath pathExtension]]; // 拡張子を付ける
 	
-	NSString *destDir = @"/";
-
-	NSLog(@"mLocalPath=%@, filename=%@, destDir=%@", mLocalPath, filename, destDir);
-	[[self restClient] uploadFile:filename toPath:destDir withParentRev:nil fromPath:mLocalPath];
-	//
-	[mAlert setTitle:NSLocalizedString(@"Saveing", nil)];
-	[mAlert setMessage:filename];
-	[mAlert show];
-	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-55, 50, 50)];
-	[mActivityIndicator startAnimating];
+	UIActionSheet *as = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
+													delegate:self 
+										   cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+									  destructiveButtonTitle:nil 
+											otherButtonTitles:NSLocalizedString(@"SaveKeyboard", nil), nil] autorelease];
+	as.tag = TAG_ACTION_Save;
+	[as showInView:self.view];
 }
 
 - (IBAction)ibSegSort:(UISegmentedControl *)segment
@@ -85,9 +105,8 @@
 	ibTfName.returnKeyType = UIReturnKeyDone;
 	
 	[mAlert release];
-	mAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-	[self.view addSubview:mAlert];
-	
+	mAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:nil]; // deallocにて解放
+	//[self.view addSubview:mAlert];
 	[mActivityIndicator release];
 	mActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	mActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
@@ -104,11 +123,7 @@
 		ibTfName.text = @"MyKeybord";
 	}
 	//
-	[mAlert setTitle:NSLocalizedString(@"Loading", nil)];
-	[mAlert setMessage:@""];
-	[mAlert show];
-	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-55, 50, 50)];
-	[mActivityIndicator startAnimating];
+	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -155,6 +170,7 @@
 
 - (void)dealloc 
 {
+	[mDidSelectRowAtIndexPath release], mDidSelectRowAtIndexPath = nil;
 	[mActivityIndicator release];
 	[mAlert release];
 	[mMetadatas release], mMetadatas = nil;
@@ -192,8 +208,7 @@
 		[ibTableView reloadData];
 	}
 	//
-	[mActivityIndicator stopAnimating];
-	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	[self alertIndicatorOff];
 }
 
 - (void)restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error 
@@ -203,8 +218,7 @@
 	mMetadatas = nil;
 	[ibTableView reloadData];
 	//
-	[mActivityIndicator stopAnimating];
-	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	[self alertIndicatorOff];
 }
 
 
@@ -214,8 +228,7 @@
 	// mKmPages リセット
 	[delegate GvCalcRollLoad:localPath]; // .CalcRoll - Plist file
 	//
-	[mActivityIndicator stopAnimating];
-	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	[self alertIndicatorOff];
 	// 閉じる
 	[self dismissModalViewControllerAnimated:YES];
 }
@@ -224,8 +237,7 @@
 {	// ファイル読み込み失敗
     NSLog(@"There was an error loading the file - %@", error);
 	//
-	[mActivityIndicator stopAnimating];
-	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	[self alertIndicatorOff];
 }
 
 - (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
@@ -235,16 +247,14 @@
 	// Dropbox/App/CalcRoll 一覧表示
 	[[self restClient] loadMetadata:@"/"];
 	//
-	[mActivityIndicator stopAnimating];
-	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	[self alertIndicatorOff];
 }
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error 
 {	// ファイル書き込み失敗
     NSLog(@"File upload failed with error - %@", error);
 	//
-	[mActivityIndicator stopAnimating];
-	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	[self alertIndicatorOff];
 }
 
 
@@ -309,7 +319,7 @@
 				DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
 				cell.textLabel.text = dbm.filename;
 			} else {
-				cell.textLabel.text = NSLocalizedString(@"LoadingWait", nil);
+				cell.textLabel.text = NSLocalizedString(@"Communicating", nil);
 			}
 		} break;
 	}
@@ -360,21 +370,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	[ibTableView deselectRowAtIndexPath:indexPath animated:YES]; // 選択解除
-
 	if (0<=indexPath.row && indexPath.row<[mMetadatas count]) 
 	{
-		DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
+		[mDidSelectRowAtIndexPath release], mDidSelectRowAtIndexPath = [indexPath copy];
 		//
-		[mAlert setTitle:@"Loading"];
-		[mAlert setMessage:dbm.filename];
-		[mAlert show];
-		[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-55, 50, 50)];
-		[mActivityIndicator startAnimating];
-		//
-		NSLog(@"dbm.path=%@ --> mLocalPath=%@", dbm.path, mLocalPath);
-		[[self restClient] loadFile:dbm.path intoPath:mLocalPath]; //---> loadedFile:
-		//[self dismissModalViewControllerAnimated:YES];
+		UIActionSheet *as = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
+														delegate:self 
+											   cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+										  destructiveButtonTitle:NSLocalizedString(@"ChangeKeyboard", nil) 
+												otherButtonTitles:nil] autorelease];
+		as.tag = TAG_ACTION_Retrieve;
+		[as showInView:self.view];
+	}
+	else {
+		[ibTableView deselectRowAtIndexPath:indexPath animated:YES]; // 選択解除
 	}
 }
 
@@ -384,6 +393,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder]; // キーボードを隠す
+	return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range 
@@ -401,5 +411,48 @@ replacementString:(NSString *)string
 		return NO;
 	}
 }
+
+
+#pragma mark - <UIActionSheetDelegate>
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+	if (mDidSelectRowAtIndexPath) {
+		@try {
+			[ibTableView deselectRowAtIndexPath:mDidSelectRowAtIndexPath animated:YES]; // 選択解除
+		}
+		@catch (NSException *exception) {
+			NSLog(@"ERROR");
+		}
+	}
+
+	if (buttonIndex==actionSheet.cancelButtonIndex) return; // CANCEL
+	
+	switch (actionSheet.tag) {
+		case TAG_ACTION_Save:	// 保存
+			if (mLocalPath) {
+				NSString *filename = [ibTfName.text stringByDeletingPathExtension]; // 拡張子を除く
+				filename = [filename stringByAppendingFormat:@".%@", [mLocalPath pathExtension]]; // 拡張子を付ける
+				NSLog(@"mLocalPath=%@, filename=%@", mLocalPath, filename);
+				[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
+				[[self restClient] uploadFile:filename toPath:@"/" withParentRev:nil fromPath:mLocalPath];
+			}
+			break;
+		case TAG_ACTION_Retrieve:		// このキーボードを採用する。
+			if (mDidSelectRowAtIndexPath && mDidSelectRowAtIndexPath.row < [mMetadatas count]) {
+				DBMetadata *dbm = [mMetadatas objectAtIndex:mDidSelectRowAtIndexPath.row];
+				if (dbm) {
+					NSLog(@"dbm.path=%@ --> mLocalPath=%@", dbm.path, mLocalPath);
+					[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
+					[[self restClient] loadFile:dbm.path intoPath:mLocalPath]; // DownLoad開始 ---> delagate loadedFile:
+				}
+			}
+			break;
+
+	/*	case TAG_ACTION_Delete:		// このファイルを削除する。
+			break;　*/
+	}
+}
+
 
 @end

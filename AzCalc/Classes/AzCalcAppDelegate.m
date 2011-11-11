@@ -84,7 +84,7 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
-{
+{	// CalcRoll free と Stable が共存している場合、free から戻ったとき Stableが呼ばれる。
     if ([[DBSession sharedSession] handleOpenURL:url]) {
         if ([[DBSession sharedSession] isLinked]) 
 		{	// Dropbox 認証成功
