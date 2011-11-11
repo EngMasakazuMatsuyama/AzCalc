@@ -88,6 +88,7 @@
 
 - (IBAction)ibSegSort:(UISegmentedControl *)segment
 {
+	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 	[[self restClient] loadMetadata:@"/"];
 }
 
