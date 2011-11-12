@@ -243,7 +243,6 @@
 	if (bPad) {
 		array = [dic objectForKey:@"PadFunc"];
 		if (array) {
-			//mKmPadFunc = [[NSMutableArray alloc] initWithArray:array];	// RootだけMutable
 			mKmPadFunc = [NSMutableArray new];	// 全てMutableにする
 			for (NSDictionary *aKey in array) {
 				NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
@@ -253,6 +252,8 @@
 		}
 	} 
 	[dic release];
+	// mKmPages と mKmPadFunc から mKmMemory を生成する
+	[self mKmMemoryReset]; 
 	//
 	[self viewWillAppear:YES];
 }
@@ -336,18 +337,6 @@
 			}
 		}
 	}
-
-/*	if (bPad) {
-		// mKmPadFunc を読み込む
-		mKmPadFunc = [userDef objectForKey:GUD_KmPadFunc];
-		if (mKmPadFunc==nil) { // 未定義（インストール直後）ならば、
-			//　.plistから iPad拡張キー 配置読み込む
-			mKmPadFunc = [[NSMutableArray alloc] initWithContentsOfFile:
-						  [[NSBundle mainBundle] pathForResource:PLIST_KmPadFunc ofType:@"plist"]];
-		}
-		NSLog(@"LOAD: mKmPadFunc=%@", mKmPadFunc);
-	}*/
-	
 	// mKmPages と mKmPadFunc から mKmMemory を生成する
 	[self mKmMemoryReset]; 
 }
@@ -473,11 +462,9 @@
 				NSNumber *numSize = [dicKey objectForKey:@"Size"];
 				NSNumber *numColor = [dicKey objectForKey:@"Color"];
 				NSNumber *numAlpha = [dicKey objectForKey:@"Alpha"];
-				// UNIT
 				NSString *strUnit = [dicKey objectForKey:@"Unit"];
 				
 				//NSLog(@"KeyMap: page=%d idx=%d  Tag=%d Text=%@", (int)page, (int)idx, (int)bu.tag, strText);
-				
 				if (strText==nil 
 					OR numSize==nil 
 					OR numAlpha==nil 
@@ -493,7 +480,6 @@
 							exit(-1);
 						}
 					}
-					
 					strText = nil;
 					for (NSArray *aComponent in RaKeyMaster) {
 						for (NSDictionary *dic in aComponent) {
@@ -509,6 +495,12 @@
 						}
 						if (strText) break; // レス向上のため
 					}
+				}
+				
+				switch (bu.tag) {	// 特殊処理
+					case KeyTAG_DECIMAL: // 小数点
+						strText = getFormatterDecimalSeparator();
+						break;
 				}
 				
 				if (strText==nil) strText = @" "; // Space1
@@ -1126,13 +1118,18 @@
 	//formatterGroupingSize( (int)[defaults integerForKey:GUD_GroupingSize] );				// Default[3]
 	formatterGroupingType( (int)[defaults integerForKey:GUD_GroupingType] );				// Default[3]
 	
+	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+
 	// 小数点の表記(@"Text")を変更する
 	NSString *zDec = @".";				// ドット
-	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 	switch ((NSInteger)[userDef integerForKey:GUD_DecimalSeparator]) {
 		case 1: zDec = @"·"; break;	// ミドル・ドット（middle dot）
 		case 2: zDec = @","; break;	// ピリオド
 	}
+	formatterDecimalSeparator( zDec );
+	// この後、keyViewAlloc:にて「小数点」表示している。
+
+	/*	
 	if ( ![zDec isEqualToString:getFormatterDecimalSeparator()] ) { // 小数点表記が変更された
 		formatterDecimalSeparator( zDec );
 		// mKmPages 更新
@@ -1144,7 +1141,7 @@
 				}
 			}
 		}
-	}
+	}*/
 
 	//-------------------------------------------------------------------------キーボード生成
 	// キーボタン イメージ

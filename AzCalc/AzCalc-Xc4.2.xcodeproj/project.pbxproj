@@ -352,21 +352,6 @@
 				44159C0D146EC10900906673 /* AzCalcViewController.mm */,
 				44159C42146EC54300906673 /* AzCalcViewController.xib */,
 				44159C43146EC54300906673 /* AzCalcViewController-iPad.xib */,
-				44159C13146EC10900906673 /* SettingVC.m */,
-				44159C14146EC10900906673 /* SettingVC.h */,
-				44B270B7146EB84C00450472 /* SettingVC.xib */,
-				44B270CA146EBA4700450472 /* SettingVC-iPad.xib */,
-				44159C38146EC41B00906673 /* OptionVC.h */,
-				44159C37146EC41B00906673 /* OptionVC.m */,
-				44B270BC146EB89E00450472 /* OptionVC.xib */,
-				44159C39146EC41B00906673 /* InformationVC.h */,
-				44159C36146EC41B00906673 /* InformationVC.m */,
-				44B270C1146EB8D100450472 /* InformationVC.xib */,
-				44B270C8146EBA4700450472 /* InformationVC-iPad.xib */,
-				44159C0E146EC10900906673 /* DropboxVC.h */,
-				44159C0C146EC10900906673 /* DropboxVC.m */,
-				44B270D2146EBA7900450472 /* DropboxVC.xib */,
-				44B270D4146EBA7900450472 /* DropboxVC-iPad.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -387,22 +372,15 @@
 				44CDB5CB135A807900037C8E /* OpenCode */,
 				44AF8CB111FC5E2200D4B206 /* SBCD */,
 				080E96DDFE201D6D7F000001 /* Classes */,
-				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				444A497D146ED7D700AAD85B /* SettingVC */,
+				444A497C146ED7C700AAD85B /* InformationVC */,
+				444A497B146ED79200AAD85B /* DropboxVC */,
 				44A2E47411EB29F5009FB007 /* Images */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
 			name = CustomTemplate;
-			sourceTree = "<group>";
-		};
-		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
-			isa = PBXGroup;
-			children = (
-				32CA4F630368D1EE00C91783 /* AzCalc_Prefix.pch */,
-				29B97316FDCFA39411CA2CEA /* main.m */,
-			);
-			name = "Other Sources";
 			sourceTree = "<group>";
 		};
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
@@ -428,6 +406,8 @@
 				44377D54131528CF0064EA93 /* Default-Portrait.png */,
 				44CF046B1462CFA100E80EFF /* AzCalc-InfoS1.plist */,
 				44CF04691462CF9300E80EFF /* AzCalc-Info.plist */,
+				32CA4F630368D1EE00C91783 /* AzCalc_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				44159C3F146EC52C00906673 /* MainWindow-iPad.xib */,
 			);
@@ -451,6 +431,42 @@
 				44AF8AA7130578BF00D3594C /* QuartzCore.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		444A497B146ED79200AAD85B /* DropboxVC */ = {
+			isa = PBXGroup;
+			children = (
+				44159C0E146EC10900906673 /* DropboxVC.h */,
+				44159C0C146EC10900906673 /* DropboxVC.m */,
+				44B270D2146EBA7900450472 /* DropboxVC.xib */,
+				44B270D4146EBA7900450472 /* DropboxVC-iPad.xib */,
+			);
+			name = DropboxVC;
+			sourceTree = "<group>";
+		};
+		444A497C146ED7C700AAD85B /* InformationVC */ = {
+			isa = PBXGroup;
+			children = (
+				44159C39146EC41B00906673 /* InformationVC.h */,
+				44159C36146EC41B00906673 /* InformationVC.m */,
+				44B270C1146EB8D100450472 /* InformationVC.xib */,
+				44B270C8146EBA4700450472 /* InformationVC-iPad.xib */,
+			);
+			name = InformationVC;
+			sourceTree = "<group>";
+		};
+		444A497D146ED7D700AAD85B /* SettingVC */ = {
+			isa = PBXGroup;
+			children = (
+				44159C13146EC10900906673 /* SettingVC.m */,
+				44159C14146EC10900906673 /* SettingVC.h */,
+				44B270B7146EB84C00450472 /* SettingVC.xib */,
+				44B270CA146EBA4700450472 /* SettingVC-iPad.xib */,
+				44159C38146EC41B00906673 /* OptionVC.h */,
+				44159C37146EC41B00906673 /* OptionVC.m */,
+				44B270BC146EB89E00450472 /* OptionVC.xib */,
+			);
+			name = SettingVC;
 			sourceTree = "<group>";
 		};
 		44A2E47411EB29F5009FB007 /* Images */ = {
@@ -775,6 +791,7 @@
 				44159C77146ECD5800906673 /* it */,
 			);
 			name = SettingVC.xib;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		44B270BC146EB89E00450472 /* OptionVC.xib */ = {
@@ -784,6 +801,7 @@
 				44B270BE146EB89E00450472 /* en */,
 			);
 			name = OptionVC.xib;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		44B270C1146EB8D100450472 /* InformationVC.xib */ = {
@@ -793,6 +811,7 @@
 				44B270C3146EB8D200450472 /* en */,
 			);
 			name = InformationVC.xib;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		44B270C8146EBA4700450472 /* InformationVC-iPad.xib */ = {
@@ -802,6 +821,7 @@
 				44B270CD146EBA4700450472 /* en */,
 			);
 			name = "InformationVC-iPad.xib";
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		44B270CA146EBA4700450472 /* SettingVC-iPad.xib */ = {
@@ -814,6 +834,7 @@
 				44159C79146ECD5800906673 /* it */,
 			);
 			name = "SettingVC-iPad.xib";
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		44B270D2146EBA7900450472 /* DropboxVC.xib */ = {
@@ -823,6 +844,7 @@
 				44B270D6146EBA7900450472 /* en */,
 			);
 			name = DropboxVC.xib;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		44B270D4146EBA7900450472 /* DropboxVC-iPad.xib */ = {
@@ -832,6 +854,7 @@
 				44B270D7146EBA7900450472 /* en */,
 			);
 			name = "DropboxVC-iPad.xib";
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		44B270E2146EBAED00450472 /* InfoPlist.strings */ = {
