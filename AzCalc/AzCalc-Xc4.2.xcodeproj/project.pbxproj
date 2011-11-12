@@ -7,59 +7,80 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D3623260D0F684500981E51 /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
-		2899E5220DE3E06400AC0155 /* AzCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		28D7ACF80DDB3853001CB0EB /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */; };
 		440C19941446B50E008E9CB0 /* icon44-PageFilp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19921446B50E008E9CB0 /* icon44-PageFilp@2x.png */; };
 		440C19951446B50E008E9CB0 /* icon44-PageFilp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19921446B50E008E9CB0 /* icon44-PageFilp@2x.png */; };
 		440C19961446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
 		440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
-		441D242511F3056200A3B68A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
+		44159C1A146EC10900906673 /* DropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0C146EC10900906673 /* DropboxVC.m */; };
+		44159C1B146EC10900906673 /* DropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0C146EC10900906673 /* DropboxVC.m */; };
+		44159C1C146EC10900906673 /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0D146EC10900906673 /* AzCalcViewController.mm */; };
+		44159C1D146EC10900906673 /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0D146EC10900906673 /* AzCalcViewController.mm */; };
+		44159C1E146EC10900906673 /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0F146EC10900906673 /* AzCalcAppDelegate.m */; };
+		44159C1F146EC10900906673 /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0F146EC10900906673 /* AzCalcAppDelegate.m */; };
+		44159C20146EC10900906673 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C13146EC10900906673 /* SettingVC.m */; };
+		44159C21146EC10900906673 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C13146EC10900906673 /* SettingVC.m */; };
+		44159C22146EC10900906673 /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C15146EC10900906673 /* KeyButton.m */; };
+		44159C23146EC10900906673 /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C15146EC10900906673 /* KeyButton.m */; };
+		44159C24146EC10900906673 /* Drum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C16146EC10900906673 /* Drum.mm */; };
+		44159C25146EC10900906673 /* Drum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C16146EC10900906673 /* Drum.mm */; };
+		44159C26146EC10900906673 /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C18146EC10900906673 /* CalcFunctions.mm */; };
+		44159C27146EC10900906673 /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C18146EC10900906673 /* CalcFunctions.mm */; };
+		44159C3A146EC41B00906673 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C36146EC41B00906673 /* InformationVC.m */; };
+		44159C3B146EC41B00906673 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C36146EC41B00906673 /* InformationVC.m */; };
+		44159C3C146EC41B00906673 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C37146EC41B00906673 /* OptionVC.m */; };
+		44159C3D146EC41B00906673 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C37146EC41B00906673 /* OptionVC.m */; };
+		44159C40146EC52C00906673 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C3F146EC52C00906673 /* MainWindow-iPad.xib */; };
+		44159C41146EC52C00906673 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C3F146EC52C00906673 /* MainWindow-iPad.xib */; };
+		44159C44146EC54300906673 /* AzCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C42146EC54300906673 /* AzCalcViewController.xib */; };
+		44159C45146EC54300906673 /* AzCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C42146EC54300906673 /* AzCalcViewController.xib */; };
+		44159C46146EC54300906673 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C43146EC54300906673 /* AzCalcViewController-iPad.xib */; };
+		44159C47146EC54300906673 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C43146EC54300906673 /* AzCalcViewController-iPad.xib */; };
 		4430E8CF14604D6300E891F7 /* README 5.0.4.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4430E8CE14604D6300E891F7 /* README 5.0.4.txt */; };
-		443E4CAE14629DBB003B1E18 /* DropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* DropboxVC.m */; };
-		443E4CAF14629DBB003B1E18 /* DropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 443E4CAC14629DBB003B1E18 /* DropboxVC.m */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
-		4452E25D146D78D20099AAFE /* DropboxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4452E257146D78D20099AAFE /* DropboxVC.xib */; };
-		4452E25E146D78D20099AAFE /* DropboxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4452E257146D78D20099AAFE /* DropboxVC.xib */; };
-		4452E25F146D78D20099AAFE /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4452E259146D78D20099AAFE /* DropboxVC-iPad.xib */; };
-		4452E260146D78D20099AAFE /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4452E259146D78D20099AAFE /* DropboxVC-iPad.xib */; };
-		44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
-		44542EA41424F5BE00ADE01F /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44D32BD91424D41D0041523E /* OptionVC.xib */; };
 		446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C3133450DF006859F4 /* Icon-Drum60x37.png */; };
 		446E08C8133450DF006859F4 /* Icon-Drum60x37@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C4133450DF006859F4 /* Icon-Drum60x37@2x.png */; };
 		446E08C9133450DF006859F4 /* Icon-DrumPush60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C5133450DF006859F4 /* Icon-DrumPush60x37.png */; };
 		446E08CA133450DF006859F4 /* Icon-DrumPush60x37@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C6133450DF006859F4 /* Icon-DrumPush60x37@2x.png */; };
 		446E08CD133454F1006859F4 /* Icon-Drum128x79.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08CB133454F1006859F4 /* Icon-Drum128x79.png */; };
 		446E08CE133454F1006859F4 /* Icon-DrumPush128x79.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */; };
-		448D99311307D1DD004DFD62 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448D99301307D1DD004DFD62 /* Localizable.strings */; };
-		448D997D1307DC8D004DFD62 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448D997C1307DC8D004DFD62 /* SettingVC.xib */; };
 		44968E2F146267DD00F25305 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E2E146267DD00F25305 /* DropboxSDK.framework */; };
 		44968E321462684300F25305 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E311462684300F25305 /* Security.framework */; };
 		44968E33146268BC00F25305 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E2E146267DD00F25305 /* DropboxSDK.framework */; };
 		44968E34146268F800F25305 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44968E311462684300F25305 /* Security.framework */; };
-		449F71C811F546E600B778F1 /* Drum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 449F71C711F546E600B778F1 /* Drum.mm */; };
-		44A20A381212D96F000A315E /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A20A371212D96F000A315E /* KeyButton.m */; };
-		44A3D38211F31E4C0001BF89 /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A3D38011F31E4C0001BF89 /* InformationVC.m */; };
-		44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
-		44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
-		44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
 		44AB8B3011F1E3E200D7C4F9 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		44ABE22914582424005D6189 /* KeyOvalDw@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22714582424005D6189 /* KeyOvalDw@Pad.png */; };
 		44ABE22A14582424005D6189 /* KeyOvalDw@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22714582424005D6189 /* KeyOvalDw@Pad.png */; };
 		44ABE22B14582424005D6189 /* KeyOvalUp@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22814582424005D6189 /* KeyOvalUp@Pad.png */; };
 		44ABE22C14582424005D6189 /* KeyOvalUp@Pad.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ABE22814582424005D6189 /* KeyOvalUp@Pad.png */; };
-		44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44AF898213052F3D00D3594C /* CalcFunctions.mm */; };
 		44AF8AA2130578BF00D3594C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA1130578BF00D3594C /* AudioToolbox.framework */; };
 		44AF8AA4130578BF00D3594C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA3130578BF00D3594C /* MediaPlayer.framework */; };
 		44AF8AA6130578BF00D3594C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA5130578BF00D3594C /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA7130578BF00D3594C /* QuartzCore.framework */; };
 		44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; };
+		44B270BA146EB84C00450472 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270B7146EB84C00450472 /* SettingVC.xib */; };
+		44B270BB146EB84C00450472 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270B7146EB84C00450472 /* SettingVC.xib */; };
+		44B270BF146EB89E00450472 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270BC146EB89E00450472 /* OptionVC.xib */; };
+		44B270C0146EB89E00450472 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270BC146EB89E00450472 /* OptionVC.xib */; };
+		44B270C4146EB8D200450472 /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270C1146EB8D100450472 /* InformationVC.xib */; };
+		44B270C5146EB8D200450472 /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270C1146EB8D100450472 /* InformationVC.xib */; };
+		44B270CE146EBA4700450472 /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270C8146EBA4700450472 /* InformationVC-iPad.xib */; };
+		44B270CF146EBA4700450472 /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270C8146EBA4700450472 /* InformationVC-iPad.xib */; };
+		44B270D0146EBA4700450472 /* SettingVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270CA146EBA4700450472 /* SettingVC-iPad.xib */; };
+		44B270D1146EBA4700450472 /* SettingVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270CA146EBA4700450472 /* SettingVC-iPad.xib */; };
+		44B270D8146EBA7900450472 /* DropboxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270D2146EBA7900450472 /* DropboxVC.xib */; };
+		44B270D9146EBA7900450472 /* DropboxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270D2146EBA7900450472 /* DropboxVC.xib */; };
+		44B270DA146EBA7900450472 /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270D4146EBA7900450472 /* DropboxVC-iPad.xib */; };
+		44B270DB146EBA7900450472 /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270D4146EBA7900450472 /* DropboxVC-iPad.xib */; };
+		44B270E5146EBAED00450472 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44B270E2146EBAED00450472 /* InfoPlist.strings */; };
+		44B270E6146EBAED00450472 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44B270E2146EBAED00450472 /* InfoPlist.strings */; };
+		44B270EC146EBB2900450472 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44B270E9146EBB2900450472 /* Localizable.strings */; };
+		44B270ED146EBB2900450472 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44B270E9146EBB2900450472 /* Localizable.strings */; };
 		44B56F21146244C200855BBF /* Icon57free@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C8C1359E9F1009B995C /* Icon57free@2x.png */; };
 		44B762F3146194850078AE1D /* AzKmPadKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44B762F0146194850078AE1D /* AzKmPadKeys.plist */; };
 		44B762F4146194850078AE1D /* AzKmPadKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44B762F0146194850078AE1D /* AzKmPadKeys.plist */; };
@@ -68,13 +89,6 @@
 		44B762F7146194850078AE1D /* AzKmPagesPhone.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44B762F2146194850078AE1D /* AzKmPagesPhone.plist */; };
 		44B762F8146194850078AE1D /* AzKmPagesPhone.plist in Resources */ = {isa = PBXBuildFile; fileRef = 44B762F2146194850078AE1D /* AzKmPagesPhone.plist */; };
 		44BC4C481359E9A1009B995C /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		44BC4C491359E9A1009B995C /* AzCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */; };
-		44BC4C4A1359E9A1009B995C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 448D99301307D1DD004DFD62 /* Localizable.strings */; };
-		44BC4C4B1359E9A1009B995C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 441D242211F3056200A3B68A /* InfoPlist.strings */; };
-		44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 448D997C1307DC8D004DFD62 /* SettingVC.xib */; };
-		44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
-		44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
-		44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44AB053E1225886E005E11A7 /* Setting-iPad.xib */; };
 		44BC4C541359E9A1009B995C /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
 		44BC4C561359E9A1009B995C /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
 		44BC4C571359E9A1009B995C /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
@@ -85,15 +99,7 @@
 		44BC4C641359E9A1009B995C /* Icon-Drum128x79.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08CB133454F1006859F4 /* Icon-Drum128x79.png */; };
 		44BC4C651359E9A1009B995C /* Icon-DrumPush128x79.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */; };
 		44BC4C671359E9A1009B995C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		44BC4C681359E9A1009B995C /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */; };
-		44BC4C691359E9A1009B995C /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */; };
-		44BC4C6A1359E9A1009B995C /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
-		44BC4C6B1359E9A1009B995C /* InformationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A3D38011F31E4C0001BF89 /* InformationVC.m */; };
-		44BC4C6C1359E9A1009B995C /* OptionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A8B24411F3EC87007D6FA0 /* OptionVC.m */; };
-		44BC4C6D1359E9A1009B995C /* Drum.mm in Sources */ = {isa = PBXBuildFile; fileRef = 449F71C711F546E600B778F1 /* Drum.mm */; };
 		44BC4C6E1359E9A1009B995C /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; };
-		44BC4C6F1359E9A1009B995C /* KeyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 44A20A371212D96F000A315E /* KeyButton.m */; };
-		44BC4C7A1359E9A1009B995C /* CalcFunctions.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44AF898213052F3D00D3594C /* CalcFunctions.mm */; };
 		44BC4C7C1359E9A1009B995C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		44BC4C7D1359E9A1009B995C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		44BC4C7E1359E9A1009B995C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
@@ -107,7 +113,6 @@
 		44BC4C961359EA01009B995C /* Icon72s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C931359EA01009B995C /* Icon72s1.png */; };
 		44C572901384AE9E00490D58 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C5728E1384AE9E00490D58 /* libGoogleAdMobAds.a */; };
 		44C572931384B4B300490D58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C572921384B4B300490D58 /* SystemConfiguration.framework */; };
-		44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CB363611F0AA9F0057E9F3 /* SettingVC.m */; };
 		44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; };
 		44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; };
 		44CDB60D135AA80B00037C8E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D58131528FC0064EA93 /* Default.png */; };
@@ -118,8 +123,6 @@
 		44CDB612135AA84700037C8E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D5A131529060064EA93 /* Default@2x.png */; };
 		44CDB634135AD9A600037C8E /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D56131528EE0064EA93 /* Default-Landscape.png */; };
 		44CDB635135AD9A600037C8E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D54131528CF0064EA93 /* Default-Portrait.png */; };
-		44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
-		44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */; };
 		44D32BD71424A79F0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44D32BD61424A79F0041523E /* AVFoundation.framework */; };
 		44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */; };
@@ -152,9 +155,6 @@
 		44E3DB6C1454695A00E0BA17 /* KeyOvalUp.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB551454695A00E0BA17 /* KeyOvalUp.png */; };
 		44E3DB6D1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */; };
 		44E3DB6E1454695A00E0BA17 /* KeyOvalUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */; };
-		44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */; };
-		44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */; };
-		44FB6519137259150092532D /* InformationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44A3D4CA11F355400001BF89 /* InformationVC.xib */; };
 		44FBD2211451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
 		44FBD2221451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
 		44FBD2231451BF7800886093 /* Tx-LzBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */; };
@@ -167,74 +167,90 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		1D3623240D0F684500981E51 /* AzCalcAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalcAppDelegate.h; sourceTree = "<group>"; };
-		1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AzCalcAppDelegate.m; sourceTree = "<group>"; };
 		1D6058910D05DD3D006BFB54 /* AzCalc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzCalc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		288765A40DF7441C002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = AzCalcViewController.xib; path = ../AzCalcViewController.xib; sourceTree = "<group>"; };
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
-		28D7ACF60DDB3853001CB0EB /* AzCalcViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalcViewController.h; sourceTree = "<group>"; };
-		28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AzCalcViewController.mm; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* AzCalc_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalc_Prefix.pch; sourceTree = "<group>"; };
 		440C19921446B50E008E9CB0 /* icon44-PageFilp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon44-PageFilp@2x.png"; path = "Image/icon44-PageFilp@2x.png"; sourceTree = "<group>"; };
 		440C19931446B50E008E9CB0 /* icon44-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon44-PageFilp.png"; path = "Image/icon44-PageFilp.png"; sourceTree = "<group>"; };
-		441D242311F3056200A3B68A /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		441D242411F3056200A3B68A /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		44159C0B146EC0A900906673 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = SOURCE_ROOT; };
+		44159C0C146EC10900906673 /* DropboxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxVC.m; sourceTree = SOURCE_ROOT; };
+		44159C0D146EC10900906673 /* AzCalcViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AzCalcViewController.mm; sourceTree = SOURCE_ROOT; };
+		44159C0E146EC10900906673 /* DropboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxVC.h; sourceTree = SOURCE_ROOT; };
+		44159C0F146EC10900906673 /* AzCalcAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AzCalcAppDelegate.m; sourceTree = SOURCE_ROOT; };
+		44159C10146EC10900906673 /* AzCalcViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalcViewController.h; sourceTree = SOURCE_ROOT; };
+		44159C11146EC10900906673 /* KeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyButton.h; sourceTree = SOURCE_ROOT; };
+		44159C12146EC10900906673 /* AzCalcAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalcAppDelegate.h; sourceTree = SOURCE_ROOT; };
+		44159C13146EC10900906673 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = SOURCE_ROOT; };
+		44159C14146EC10900906673 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = SOURCE_ROOT; };
+		44159C15146EC10900906673 /* KeyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyButton.m; sourceTree = SOURCE_ROOT; };
+		44159C16146EC10900906673 /* Drum.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Drum.mm; sourceTree = SOURCE_ROOT; };
+		44159C17146EC10900906673 /* Drum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drum.h; sourceTree = SOURCE_ROOT; };
+		44159C18146EC10900906673 /* CalcFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CalcFunctions.mm; sourceTree = SOURCE_ROOT; };
+		44159C19146EC10900906673 /* CalcFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcFunctions.h; sourceTree = SOURCE_ROOT; };
+		44159C36146EC41B00906673 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InformationVC.m; sourceTree = SOURCE_ROOT; };
+		44159C37146EC41B00906673 /* OptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionVC.m; sourceTree = SOURCE_ROOT; };
+		44159C38146EC41B00906673 /* OptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionVC.h; sourceTree = SOURCE_ROOT; };
+		44159C39146EC41B00906673 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InformationVC.h; sourceTree = SOURCE_ROOT; };
+		44159C3F146EC52C00906673 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		44159C42146EC54300906673 /* AzCalcViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AzCalcViewController.xib; sourceTree = SOURCE_ROOT; };
+		44159C43146EC54300906673 /* AzCalcViewController-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "AzCalcViewController-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44159C5B146ECCF900906673 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = /Users/masa/AzukiSoft/AzCalc/AzCalc/fr.lproj/Localizable.strings; sourceTree = "<absolute>"; };
+		44159C5C146ECCF900906673 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = /Users/masa/AzukiSoft/AzCalc/AzCalc/fr.lproj/SettingVC.xib; sourceTree = "<absolute>"; };
+		44159C5E146ECCF900906673 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/fr.lproj/SettingVC-iPad.xib"; sourceTree = "<absolute>"; };
+		44159C64146ECD3300906673 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = /Users/masa/AzukiSoft/AzCalc/AzCalc/de.lproj/Localizable.strings; sourceTree = "<absolute>"; };
+		44159C65146ECD3300906673 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = /Users/masa/AzukiSoft/AzCalc/AzCalc/de.lproj/SettingVC.xib; sourceTree = "<absolute>"; };
+		44159C67146ECD3300906673 /* de */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = de; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/de.lproj/SettingVC-iPad.xib"; sourceTree = "<absolute>"; };
+		44159C6D146ECD5400906673 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = /Users/masa/AzukiSoft/AzCalc/AzCalc/es.lproj/Localizable.strings; sourceTree = "<absolute>"; };
+		44159C76146ECD5800906673 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = /Users/masa/AzukiSoft/AzCalc/AzCalc/it.lproj/Localizable.strings; sourceTree = "<absolute>"; };
+		44159C77146ECD5800906673 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = /Users/masa/AzukiSoft/AzCalc/AzCalc/it.lproj/SettingVC.xib; sourceTree = "<absolute>"; };
+		44159C79146ECD5800906673 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/it.lproj/SettingVC-iPad.xib"; sourceTree = "<absolute>"; };
+		44159C7F146ECDFB00906673 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hans.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
+		44159C88146ECE2000906673 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hant.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
 		4430E8CE14604D6300E891F7 /* README 5.0.4.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README 5.0.4.txt"; sourceTree = "<group>"; };
 		44377D54131528CF0064EA93 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		44377D56131528EE0064EA93 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		44377D58131528FC0064EA93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44377D5A131529060064EA93 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		443E4CAB14629DBB003B1E18 /* DropboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropboxVC.h; sourceTree = "<group>"; };
-		443E4CAC14629DBB003B1E18 /* DropboxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropboxVC.m; sourceTree = "<group>"; };
 		444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeyMaster.plist; sourceTree = "<group>"; };
 		445184431303B8BE002820EA /* Icon16-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting.png"; path = "Image/Icon16-Setting.png"; sourceTree = "<group>"; };
-		4452E258146D78D20099AAFE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/DropboxVC.xib; sourceTree = SOURCE_ROOT; };
-		4452E25A146D78D20099AAFE /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "English.lproj/DropboxVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
-		4452E25B146D78D20099AAFE /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/DropboxVC.xib; sourceTree = SOURCE_ROOT; };
-		4452E25C146D78D20099AAFE /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Japanese.lproj/DropboxVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		446E08C3133450DF006859F4 /* Icon-Drum60x37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum60x37.png"; path = "Image/Icon-Drum60x37.png"; sourceTree = "<group>"; };
 		446E08C4133450DF006859F4 /* Icon-Drum60x37@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum60x37@2x.png"; path = "Image/Icon-Drum60x37@2x.png"; sourceTree = "<group>"; };
 		446E08C5133450DF006859F4 /* Icon-DrumPush60x37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-DrumPush60x37.png"; path = "Image/Icon-DrumPush60x37.png"; sourceTree = "<group>"; };
 		446E08C6133450DF006859F4 /* Icon-DrumPush60x37@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-DrumPush60x37@2x.png"; path = "Image/Icon-DrumPush60x37@2x.png"; sourceTree = "<group>"; };
 		446E08CB133454F1006859F4 /* Icon-Drum128x79.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum128x79.png"; path = "Image/Icon-Drum128x79.png"; sourceTree = "<group>"; };
 		446E08CC133454F1006859F4 /* Icon-DrumPush128x79.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-DrumPush128x79.png"; path = "Image/Icon-DrumPush128x79.png"; sourceTree = "<group>"; };
-		448D99321307D1EB004DFD62 /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; lineEnding = 0; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99331307D1F8004DFD62 /* French */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = French; path = French.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99341307D1FE004DFD62 /* German */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = German; path = German.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99351307D209004DFD62 /* Italian */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Italian; path = Italian.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99361307D210004DFD62 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99381307D226004DFD62 /* Korean */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D99391307D249004DFD62 /* Turkish */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Turkish; path = Turkish.lproj/Localizable.strings; sourceTree = "<group>"; };
-		448D997E1307DC96004DFD62 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = ../Japanese.lproj/SettingVC.xib; sourceTree = "<group>"; };
 		44968E2E146267DD00F25305 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "dropbox-ios-sdk-1.0/DropboxSDK.framework"; sourceTree = "<group>"; };
 		44968E311462684300F25305 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		449EBC6911E57EA900E2AABD /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
-		449F71C611F546E600B778F1 /* Drum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Drum.h; sourceTree = "<group>"; };
-		449F71C711F546E600B778F1 /* Drum.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Drum.mm; sourceTree = "<group>"; };
-		44A20A361212D96F000A315E /* KeyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyButton.h; sourceTree = "<group>"; };
-		44A20A371212D96F000A315E /* KeyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyButton.m; sourceTree = "<group>"; };
-		44A3D37F11F31E4C0001BF89 /* InformationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InformationVC.h; path = ../InformationVC.h; sourceTree = "<group>"; };
-		44A3D38011F31E4C0001BF89 /* InformationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InformationVC.m; path = ../InformationVC.m; sourceTree = "<group>"; };
-		44A3D4BD11F354FB0001BF89 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = ../English.lproj/SettingVC.xib; sourceTree = "<group>"; };
-		44A3D4CB11F355400001BF89 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/InformationVC.xib; sourceTree = "<group>"; };
-		44A8B24311F3EC87007D6FA0 /* OptionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionVC.h; path = ../OptionVC.h; sourceTree = "<group>"; };
-		44A8B24411F3EC87007D6FA0 /* OptionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionVC.m; path = ../OptionVC.m; sourceTree = "<group>"; };
-		44AB054012258878005E11A7 /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
 		44AB8B2F11F1E3E200D7C4F9 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		44ABE22714582424005D6189 /* KeyOvalDw@Pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalDw@Pad.png"; path = "Image/KeyOvalDw@Pad.png"; sourceTree = "<group>"; };
 		44ABE22814582424005D6189 /* KeyOvalUp@Pad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalUp@Pad.png"; path = "Image/KeyOvalUp@Pad.png"; sourceTree = "<group>"; };
-		44AF898213052F3D00D3594C /* CalcFunctions.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = CalcFunctions.mm; sourceTree = "<group>"; };
-		44AF898313052F3D00D3594C /* CalcFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalcFunctions.h; sourceTree = "<group>"; };
 		44AF8AA1130578BF00D3594C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		44AF8AA3130578BF00D3594C /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		44AF8AA5130578BF00D3594C /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		44AF8AA7130578BF00D3594C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		44AF8CB811FC5FED00D4B206 /* SBCD.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.h; fileEncoding = 4; name = SBCD.h; path = SBCD/SBCD.h; sourceTree = "<group>"; };
 		44AF8D5911FC8F0700D4B206 /* SBCD.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.objcpp; fileEncoding = 4; name = SBCD.cpp; path = SBCD/SBCD.cpp; sourceTree = "<group>"; };
-		44AFE96411F2DEDF00F6C8C2 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44B270B8146EB84C00450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/SettingVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270B9146EB84C00450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SettingVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270BD146EB89E00450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/OptionVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270BE146EB89E00450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/OptionVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270C2146EB8D200450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/InformationVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270C3146EB8D200450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/InformationVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270C9146EBA4700450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = "ja.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44B270CB146EBA4700450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = "ja.lproj/SettingVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44B270CC146EBA4700450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/SettingVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44B270CD146EBA4700450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44B270D3146EBA7900450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = ja.lproj/DropboxVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270D5146EBA7900450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = "ja.lproj/DropboxVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44B270D6146EBA7900450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DropboxVC.xib; sourceTree = SOURCE_ROOT; };
+		44B270D7146EBA7900450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "en.lproj/DropboxVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
+		44B270E3146EBAED00450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		44B270E4146EBAED00450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		44B270EA146EBB2900450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		44B270EB146EBB2900450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44B762F0146194850078AE1D /* AzKmPadKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKmPadKeys.plist; sourceTree = "<group>"; };
 		44B762F1146194850078AE1D /* AzKmPagesPad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKmPagesPad.plist; sourceTree = "<group>"; };
 		44B762F2146194850078AE1D /* AzKmPagesPhone.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKmPagesPhone.plist; sourceTree = "<group>"; };
@@ -253,18 +269,11 @@
 		44C5728D1384AE9E00490D58 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
 		44C5728E1384AE9E00490D58 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		44C572921384B4B300490D58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		44CB363511F0AA9F0057E9F3 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
-		44CB363611F0AA9F0057E9F3 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
-		44CDB5C9135A77D600037C8E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/InformationVC.xib; sourceTree = "<group>"; };
 		44CDB5CC135A80BE00037C8E /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
 		44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
-		44CDB616135AD2A400037C8E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = "Resources-iPad/Japanese.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
-		44CDB619135AD2D300037C8E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/InformationVC-iPad.xib"; sourceTree = SOURCE_ROOT; };
 		44CF04691462CF9300E80EFF /* AzCalc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-Info.plist"; sourceTree = "<group>"; };
 		44CF046B1462CFA100E80EFF /* AzCalc-InfoS1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-InfoS1.plist"; sourceTree = "<group>"; };
 		44D32BD61424A79F0041523E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		44D32BDA1424D41D0041523E /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/OptionVC.xib; sourceTree = "<group>"; };
-		44D32BDC1424D4350041523E /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Japanese; path = Japanese.lproj/OptionVC.xib; sourceTree = "<group>"; };
 		44D4B74213150BC100D89E34 /* Icon16-Setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting@2x.png"; path = "Image/Icon16-Setting@2x.png"; sourceTree = "<group>"; };
 		44D9A789146578610031F268 /* AzCalcRoll.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzCalcRoll.plist; sourceTree = "<group>"; };
 		44D9A78C146578E40031F268 /* AzCalcRollPad.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzCalcRollPad.plist; sourceTree = "<group>"; };
@@ -280,11 +289,6 @@
 		44E3DB541454695A00E0BA17 /* KeyOvalDw@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalDw@2x.png"; path = "Image/KeyOvalDw@2x.png"; sourceTree = "<group>"; };
 		44E3DB551454695A00E0BA17 /* KeyOvalUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = KeyOvalUp.png; path = Image/KeyOvalUp.png; sourceTree = "<group>"; };
 		44E3DB561454695A00E0BA17 /* KeyOvalUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "KeyOvalUp@2x.png"; path = "Image/KeyOvalUp@2x.png"; sourceTree = "<group>"; };
-		44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
-		44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "AzCalcViewController-iPad.xib"; path = "../Resources-iPad/AzCalcViewController-iPad.xib"; sourceTree = "<group>"; };
-		44EF5DDD12099F6000BB87B6 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = "Resources-iPad/English.lproj/Setting-iPad.xib"; sourceTree = "<group>"; };
-		44FB653A1372B9140092532D /* zh-Hans */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hans.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
-		44FB653F1372B96A0092532D /* zh-Hant */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hant.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
 		44FBD21F1451BF7800886093 /* Tx-LzBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack.png"; path = "Image/Tx-LzBack.png"; sourceTree = "<group>"; };
 		44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack@2x.png"; path = "Image/Tx-LzBack@2x.png"; sourceTree = "<group>"; };
 		44FBD2251451C19400886093 /* Tx-LzBrown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBrown.png"; path = "Image/Tx-LzBrown.png"; sourceTree = "<group>"; };
@@ -335,34 +339,34 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				449EBC6911E57EA900E2AABD /* Global.h */,
-				1D3623240D0F684500981E51 /* AzCalcAppDelegate.h */,
-				1D3623250D0F684500981E51 /* AzCalcAppDelegate.m */,
-				44AF898313052F3D00D3594C /* CalcFunctions.h */,
-				44AF898213052F3D00D3594C /* CalcFunctions.mm */,
-				449F71C611F546E600B778F1 /* Drum.h */,
-				449F71C711F546E600B778F1 /* Drum.mm */,
-				44A20A361212D96F000A315E /* KeyButton.h */,
-				44A20A371212D96F000A315E /* KeyButton.m */,
-				28D7ACF60DDB3853001CB0EB /* AzCalcViewController.h */,
-				28D7ACF70DDB3853001CB0EB /* AzCalcViewController.mm */,
-				2899E5210DE3E06400AC0155 /* AzCalcViewController.xib */,
-				44EF5DD712099EB400BB87B6 /* AzCalcViewController-iPad.xib */,
-				44CB363511F0AA9F0057E9F3 /* SettingVC.h */,
-				44CB363611F0AA9F0057E9F3 /* SettingVC.m */,
-				448D997C1307DC8D004DFD62 /* SettingVC.xib */,
-				44AB053E1225886E005E11A7 /* Setting-iPad.xib */,
-				44A8B24311F3EC87007D6FA0 /* OptionVC.h */,
-				44A8B24411F3EC87007D6FA0 /* OptionVC.m */,
-				44D32BD91424D41D0041523E /* OptionVC.xib */,
-				44A3D37F11F31E4C0001BF89 /* InformationVC.h */,
-				44A3D38011F31E4C0001BF89 /* InformationVC.m */,
-				44A3D4CA11F355400001BF89 /* InformationVC.xib */,
-				44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */,
-				443E4CAB14629DBB003B1E18 /* DropboxVC.h */,
-				443E4CAC14629DBB003B1E18 /* DropboxVC.m */,
-				4452E257146D78D20099AAFE /* DropboxVC.xib */,
-				4452E259146D78D20099AAFE /* DropboxVC-iPad.xib */,
+				44159C0B146EC0A900906673 /* Global.h */,
+				44159C12146EC10900906673 /* AzCalcAppDelegate.h */,
+				44159C0F146EC10900906673 /* AzCalcAppDelegate.m */,
+				44159C11146EC10900906673 /* KeyButton.h */,
+				44159C15146EC10900906673 /* KeyButton.m */,
+				44159C17146EC10900906673 /* Drum.h */,
+				44159C16146EC10900906673 /* Drum.mm */,
+				44159C18146EC10900906673 /* CalcFunctions.mm */,
+				44159C19146EC10900906673 /* CalcFunctions.h */,
+				44159C10146EC10900906673 /* AzCalcViewController.h */,
+				44159C0D146EC10900906673 /* AzCalcViewController.mm */,
+				44159C42146EC54300906673 /* AzCalcViewController.xib */,
+				44159C43146EC54300906673 /* AzCalcViewController-iPad.xib */,
+				44159C13146EC10900906673 /* SettingVC.m */,
+				44159C14146EC10900906673 /* SettingVC.h */,
+				44B270B7146EB84C00450472 /* SettingVC.xib */,
+				44B270CA146EBA4700450472 /* SettingVC-iPad.xib */,
+				44159C38146EC41B00906673 /* OptionVC.h */,
+				44159C37146EC41B00906673 /* OptionVC.m */,
+				44B270BC146EB89E00450472 /* OptionVC.xib */,
+				44159C39146EC41B00906673 /* InformationVC.h */,
+				44159C36146EC41B00906673 /* InformationVC.m */,
+				44B270C1146EB8D100450472 /* InformationVC.xib */,
+				44B270C8146EBA4700450472 /* InformationVC-iPad.xib */,
+				44159C0E146EC10900906673 /* DropboxVC.h */,
+				44159C0C146EC10900906673 /* DropboxVC.m */,
+				44B270D2146EBA7900450472 /* DropboxVC.xib */,
+				44B270D4146EBA7900450472 /* DropboxVC-iPad.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -404,9 +408,10 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				44B270E9146EBB2900450472 /* Localizable.strings */,
 				44D9A78C146578E40031F268 /* AzCalcRollPad.plist */,
 				44D9A789146578610031F268 /* AzCalcRoll.plist */,
-				448D99301307D1DD004DFD62 /* Localizable.strings */,
+				44B270E2146EBAED00450472 /* InfoPlist.strings */,
 				44B762F0146194850078AE1D /* AzKmPadKeys.plist */,
 				44B762F1146194850078AE1D /* AzKmPagesPad.plist */,
 				44B762F2146194850078AE1D /* AzKmPagesPhone.plist */,
@@ -423,9 +428,8 @@
 				44377D54131528CF0064EA93 /* Default-Portrait.png */,
 				44CF046B1462CFA100E80EFF /* AzCalc-InfoS1.plist */,
 				44CF04691462CF9300E80EFF /* AzCalc-Info.plist */,
-				441D242211F3056200A3B68A /* InfoPlist.strings */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
-				44EF5DA912099BBF00BB87B6 /* MainWindow-iPad.xib */,
+				44159C3F146EC52C00906673 /* MainWindow-iPad.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -581,6 +585,7 @@
 				Korean,
 				Turkish,
 				ja,
+				en,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -597,8 +602,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				448D99311307D1DD004DFD62 /* Localizable.strings in Resources */,
-				441D242511F3056200A3B68A /* InfoPlist.strings in Resources */,
 				444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */,
 				445184441303B8BE002820EA /* Icon16-Setting.png in Resources */,
 				44D4B74313150BC100D89E34 /* Icon16-Setting@2x.png in Resources */,
@@ -615,14 +618,6 @@
 				44CDB60F135AA82300037C8E /* Default-Portrait.png in Resources */,
 				44CDB610135AA82800037C8E /* Default-Landscape.png in Resources */,
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
-				44EF5DAB12099BBF00BB87B6 /* MainWindow-iPad.xib in Resources */,
-				2899E5220DE3E06400AC0155 /* AzCalcViewController.xib in Resources */,
-				44EF5DD812099EB400BB87B6 /* AzCalcViewController-iPad.xib in Resources */,
-				448D997D1307DC8D004DFD62 /* SettingVC.xib in Resources */,
-				44AB053F1225886E005E11A7 /* Setting-iPad.xib in Resources */,
-				44A3D4CD11F355400001BF89 /* InformationVC.xib in Resources */,
-				44CDB636135AE1B200037C8E /* InformationVC-iPad.xib in Resources */,
-				44542EA21424F5BD00ADE01F /* OptionVC.xib in Resources */,
 				440C19941446B50E008E9CB0 /* icon44-PageFilp@2x.png in Resources */,
 				440C19961446B50E008E9CB0 /* icon44-PageFilp.png in Resources */,
 				44FBD2211451BF7800886093 /* Tx-LzBack.png in Resources */,
@@ -650,8 +645,18 @@
 				44B56F21146244C200855BBF /* Icon57free@2x.png in Resources */,
 				44D9A78A146578610031F268 /* AzCalcRoll.plist in Resources */,
 				44D9A78D146578E40031F268 /* AzCalcRollPad.plist in Resources */,
-				4452E25D146D78D20099AAFE /* DropboxVC.xib in Resources */,
-				4452E25F146D78D20099AAFE /* DropboxVC-iPad.xib in Resources */,
+				44B270BA146EB84C00450472 /* SettingVC.xib in Resources */,
+				44B270BF146EB89E00450472 /* OptionVC.xib in Resources */,
+				44B270C4146EB8D200450472 /* InformationVC.xib in Resources */,
+				44B270CE146EBA4700450472 /* InformationVC-iPad.xib in Resources */,
+				44B270D0146EBA4700450472 /* SettingVC-iPad.xib in Resources */,
+				44B270D8146EBA7900450472 /* DropboxVC.xib in Resources */,
+				44B270DA146EBA7900450472 /* DropboxVC-iPad.xib in Resources */,
+				44B270E5146EBAED00450472 /* InfoPlist.strings in Resources */,
+				44B270EC146EBB2900450472 /* Localizable.strings in Resources */,
+				44159C40146EC52C00906673 /* MainWindow-iPad.xib in Resources */,
+				44159C44146EC54300906673 /* AzCalcViewController.xib in Resources */,
+				44159C46146EC54300906673 /* AzCalcViewController-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -659,8 +664,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44BC4C4A1359E9A1009B995C /* Localizable.strings in Resources */,
-				44BC4C4B1359E9A1009B995C /* InfoPlist.strings in Resources */,
 				44BC4C541359E9A1009B995C /* AzKeyMaster.plist in Resources */,
 				44BC4C561359E9A1009B995C /* Icon16-Setting.png in Resources */,
 				44BC4C571359E9A1009B995C /* Icon16-Setting@2x.png in Resources */,
@@ -677,14 +680,6 @@
 				44CDB635135AD9A600037C8E /* Default-Portrait.png in Resources */,
 				44CDB634135AD9A600037C8E /* Default-Landscape.png in Resources */,
 				44BC4C481359E9A1009B995C /* MainWindow.xib in Resources */,
-				44BC4C501359E9A1009B995C /* MainWindow-iPad.xib in Resources */,
-				44BC4C491359E9A1009B995C /* AzCalcViewController.xib in Resources */,
-				44BC4C511359E9A1009B995C /* AzCalcViewController-iPad.xib in Resources */,
-				44BC4C4C1359E9A1009B995C /* SettingVC.xib in Resources */,
-				44BC4C521359E9A1009B995C /* Setting-iPad.xib in Resources */,
-				44FB6519137259150092532D /* InformationVC.xib in Resources */,
-				44CDB637135AE1B300037C8E /* InformationVC-iPad.xib in Resources */,
-				44542EA41424F5BE00ADE01F /* OptionVC.xib in Resources */,
 				440C19951446B50E008E9CB0 /* icon44-PageFilp@2x.png in Resources */,
 				440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */,
 				44FBD2221451BF7800886093 /* Tx-LzBack.png in Resources */,
@@ -711,8 +706,18 @@
 				44D9A04D1461BC4200689F2D /* Icon57s1.png in Resources */,
 				44D9A78B146578610031F268 /* AzCalcRoll.plist in Resources */,
 				44D9A78E146578E40031F268 /* AzCalcRollPad.plist in Resources */,
-				4452E25E146D78D20099AAFE /* DropboxVC.xib in Resources */,
-				4452E260146D78D20099AAFE /* DropboxVC-iPad.xib in Resources */,
+				44B270BB146EB84C00450472 /* SettingVC.xib in Resources */,
+				44B270C0146EB89E00450472 /* OptionVC.xib in Resources */,
+				44B270C5146EB8D200450472 /* InformationVC.xib in Resources */,
+				44B270CF146EBA4700450472 /* InformationVC-iPad.xib in Resources */,
+				44B270D1146EBA4700450472 /* SettingVC-iPad.xib in Resources */,
+				44B270D9146EBA7900450472 /* DropboxVC.xib in Resources */,
+				44B270DB146EBA7900450472 /* DropboxVC-iPad.xib in Resources */,
+				44B270E6146EBAED00450472 /* InfoPlist.strings in Resources */,
+				44B270ED146EBB2900450472 /* Localizable.strings in Resources */,
+				44159C41146EC52C00906673 /* MainWindow-iPad.xib in Resources */,
+				44159C45146EC54300906673 /* AzCalcViewController.xib in Resources */,
+				44159C47146EC54300906673 /* AzCalcViewController-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,17 +729,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
-				1D3623260D0F684500981E51 /* AzCalcAppDelegate.m in Sources */,
-				28D7ACF80DDB3853001CB0EB /* AzCalcViewController.mm in Sources */,
-				44CB363711F0AA9F0057E9F3 /* SettingVC.m in Sources */,
-				44A3D38211F31E4C0001BF89 /* InformationVC.m in Sources */,
-				44A8B24611F3EC87007D6FA0 /* OptionVC.m in Sources */,
-				449F71C811F546E600B778F1 /* Drum.mm in Sources */,
 				44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */,
-				44A20A381212D96F000A315E /* KeyButton.m in Sources */,
-				44AF898413052F3D00D3594C /* CalcFunctions.mm in Sources */,
 				44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
-				443E4CAE14629DBB003B1E18 /* DropboxVC.m in Sources */,
+				44159C1A146EC10900906673 /* DropboxVC.m in Sources */,
+				44159C1C146EC10900906673 /* AzCalcViewController.mm in Sources */,
+				44159C1E146EC10900906673 /* AzCalcAppDelegate.m in Sources */,
+				44159C20146EC10900906673 /* SettingVC.m in Sources */,
+				44159C22146EC10900906673 /* KeyButton.m in Sources */,
+				44159C24146EC10900906673 /* Drum.mm in Sources */,
+				44159C26146EC10900906673 /* CalcFunctions.mm in Sources */,
+				44159C3A146EC41B00906673 /* InformationVC.m in Sources */,
+				44159C3C146EC41B00906673 /* OptionVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,113 +748,114 @@
 			buildActionMask = 2147483647;
 			files = (
 				44BC4C671359E9A1009B995C /* main.m in Sources */,
-				44BC4C681359E9A1009B995C /* AzCalcAppDelegate.m in Sources */,
-				44BC4C691359E9A1009B995C /* AzCalcViewController.mm in Sources */,
-				44BC4C6A1359E9A1009B995C /* SettingVC.m in Sources */,
-				44BC4C6B1359E9A1009B995C /* InformationVC.m in Sources */,
-				44BC4C6C1359E9A1009B995C /* OptionVC.m in Sources */,
-				44BC4C6D1359E9A1009B995C /* Drum.mm in Sources */,
 				44BC4C6E1359E9A1009B995C /* SBCD.cpp in Sources */,
-				44BC4C6F1359E9A1009B995C /* KeyButton.m in Sources */,
-				44BC4C7A1359E9A1009B995C /* CalcFunctions.mm in Sources */,
 				44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
-				443E4CAF14629DBB003B1E18 /* DropboxVC.m in Sources */,
+				44159C1B146EC10900906673 /* DropboxVC.m in Sources */,
+				44159C1D146EC10900906673 /* AzCalcViewController.mm in Sources */,
+				44159C1F146EC10900906673 /* AzCalcAppDelegate.m in Sources */,
+				44159C21146EC10900906673 /* SettingVC.m in Sources */,
+				44159C23146EC10900906673 /* KeyButton.m in Sources */,
+				44159C25146EC10900906673 /* Drum.mm in Sources */,
+				44159C27146EC10900906673 /* CalcFunctions.mm in Sources */,
+				44159C3B146EC41B00906673 /* InformationVC.m in Sources */,
+				44159C3D146EC41B00906673 /* OptionVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		441D242211F3056200A3B68A /* InfoPlist.strings */ = {
+		44B270B7146EB84C00450472 /* SettingVC.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				441D242311F3056200A3B68A /* English */,
-				441D242411F3056200A3B68A /* Japanese */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		4452E257146D78D20099AAFE /* DropboxVC.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4452E258146D78D20099AAFE /* English */,
-				4452E25B146D78D20099AAFE /* Japanese */,
-			);
-			name = DropboxVC.xib;
-			sourceTree = "<group>";
-		};
-		4452E259146D78D20099AAFE /* DropboxVC-iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4452E25A146D78D20099AAFE /* English */,
-				4452E25C146D78D20099AAFE /* Japanese */,
-			);
-			name = "DropboxVC-iPad.xib";
-			sourceTree = "<group>";
-		};
-		448D99301307D1DD004DFD62 /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				44AFE96411F2DEDF00F6C8C2 /* English */,
-				448D99321307D1EB004DFD62 /* Japanese */,
-				448D99331307D1F8004DFD62 /* French */,
-				448D99341307D1FE004DFD62 /* German */,
-				448D99351307D209004DFD62 /* Italian */,
-				448D99361307D210004DFD62 /* Spanish */,
-				448D99381307D226004DFD62 /* Korean */,
-				448D99391307D249004DFD62 /* Turkish */,
-				44FB653A1372B9140092532D /* zh-Hans */,
-				44FB653F1372B96A0092532D /* zh-Hant */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		448D997C1307DC8D004DFD62 /* SettingVC.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				44A3D4BD11F354FB0001BF89 /* English */,
-				448D997E1307DC96004DFD62 /* Japanese */,
+				44B270B8146EB84C00450472 /* ja */,
+				44B270B9146EB84C00450472 /* en */,
+				44159C5C146ECCF900906673 /* fr */,
+				44159C65146ECD3300906673 /* de */,
+				44159C77146ECD5800906673 /* it */,
 			);
 			name = SettingVC.xib;
 			sourceTree = "<group>";
 		};
-		44A3D4CA11F355400001BF89 /* InformationVC.xib */ = {
+		44B270BC146EB89E00450472 /* OptionVC.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				44A3D4CB11F355400001BF89 /* Japanese */,
-				44CDB5C9135A77D600037C8E /* English */,
+				44B270BD146EB89E00450472 /* ja */,
+				44B270BE146EB89E00450472 /* en */,
+			);
+			name = OptionVC.xib;
+			sourceTree = "<group>";
+		};
+		44B270C1146EB8D100450472 /* InformationVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44B270C2146EB8D200450472 /* ja */,
+				44B270C3146EB8D200450472 /* en */,
 			);
 			name = InformationVC.xib;
-			path = ..;
 			sourceTree = "<group>";
 		};
-		44AB053E1225886E005E11A7 /* Setting-iPad.xib */ = {
+		44B270C8146EBA4700450472 /* InformationVC-iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				44AB054012258878005E11A7 /* Japanese */,
-				44EF5DDD12099F6000BB87B6 /* English */,
-			);
-			name = "Setting-iPad.xib";
-			path = ..;
-			sourceTree = "<group>";
-		};
-		44CDB615135AD2A400037C8E /* InformationVC-iPad.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				44CDB616135AD2A400037C8E /* Japanese */,
-				44CDB619135AD2D300037C8E /* English */,
+				44B270C9146EBA4700450472 /* ja */,
+				44B270CD146EBA4700450472 /* en */,
 			);
 			name = "InformationVC-iPad.xib";
 			sourceTree = "<group>";
 		};
-		44D32BD91424D41D0041523E /* OptionVC.xib */ = {
+		44B270CA146EBA4700450472 /* SettingVC-iPad.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				44D32BDA1424D41D0041523E /* English */,
-				44D32BDC1424D4350041523E /* Japanese */,
+				44B270CB146EBA4700450472 /* ja */,
+				44B270CC146EBA4700450472 /* en */,
+				44159C5E146ECCF900906673 /* fr */,
+				44159C67146ECD3300906673 /* de */,
+				44159C79146ECD5800906673 /* it */,
 			);
-			name = OptionVC.xib;
-			path = ..;
+			name = "SettingVC-iPad.xib";
+			sourceTree = "<group>";
+		};
+		44B270D2146EBA7900450472 /* DropboxVC.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44B270D3146EBA7900450472 /* ja */,
+				44B270D6146EBA7900450472 /* en */,
+			);
+			name = DropboxVC.xib;
+			sourceTree = "<group>";
+		};
+		44B270D4146EBA7900450472 /* DropboxVC-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44B270D5146EBA7900450472 /* ja */,
+				44B270D7146EBA7900450472 /* en */,
+			);
+			name = "DropboxVC-iPad.xib";
+			sourceTree = "<group>";
+		};
+		44B270E2146EBAED00450472 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44B270E3146EBAED00450472 /* ja */,
+				44B270E4146EBAED00450472 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		44B270E9146EBB2900450472 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				44B270EA146EBB2900450472 /* ja */,
+				44B270EB146EBB2900450472 /* en */,
+				44159C5B146ECCF900906673 /* fr */,
+				44159C64146ECD3300906673 /* de */,
+				44159C6D146ECD5400906673 /* es */,
+				44159C76146ECD5800906673 /* it */,
+				44159C7F146ECDFB00906673 /* zh-Hans */,
+				44159C88146ECE2000906673 /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
