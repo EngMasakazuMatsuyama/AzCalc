@@ -221,6 +221,7 @@
 											cancelButtonTitle:nil
 											 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
 		[alv	show];
+		[dic release]; //---注意---＜＜Analize指摘
 		return;
 	}
 	//
@@ -582,6 +583,7 @@
 			if (RaKeyMaster==nil) {
 				AzLOG(@"ERROR: AzKeyMaster.plist not Open");
 				//exit(-1);
+				[keyView release]; //--注意---＜＜Analize指摘
 				return nil;
 			}
 			//buChangeKey = nil;
@@ -734,7 +736,7 @@
 		[self MvKeyUnitGroupSI:keyView];
 	}
 	//NSLog(@"KeyMap: keyView=%@", keyView);
-	return keyView;
+	return keyView;	// 受け取った側で release すること。
 }
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
@@ -1192,8 +1194,8 @@
 
 	if (mKeyView) {
 		mKeyView.hidden = YES;  // 実機では、removeだけでは消えない場合があった。
-		[mKeyView removeFromSuperview]; // オーナー(Superview)から削除されると同時にreleaseされる。
-		mKeyView = nil;
+		[mKeyView removeFromSuperview];
+		mKeyView = nil; // addSubview:直後にreleaseしているため、上でremoveしたならrelease不要。
 	}
 	mKeyView = [self keyViewAlloc:rcBounds page:MiSvLowerPage];
 	assert(mKeyView);
@@ -1462,7 +1464,7 @@
 	//assert(mKeyViewPrev==nil);
 	if (mKeyViewPrev) {  // スクロールが完全停止しないうちにスワイプしたときのため
 		[mKeyViewPrev removeFromSuperview];
-		mKeyViewPrev = nil;
+		mKeyViewPrev = nil; // addSubview:直後にreleaseしているため、上でremoveしたならrelease不要。
 	}
 	
 	CGRect rect = mKeyView.frame; // .y=0 であることに注意
@@ -1501,7 +1503,7 @@
 	if (mKeyViewPrev) {  // スクロールが完全停止しないうちにスワイプしたときのため
 		NSLog(@"mKeyViewPrev=%@", mKeyViewPrev);
 		[mKeyViewPrev removeFromSuperview];
-		mKeyViewPrev = nil;
+		mKeyViewPrev = nil; // addSubview:直後にreleaseしているため、上でremoveしたならrelease不要。
 	}
 	
 	CGRect rect = mKeyView.frame; // .y=0 であることに注意
