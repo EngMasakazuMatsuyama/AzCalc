@@ -28,6 +28,8 @@ UITextFieldDelegate, DBRestClientDelegate, UIActionSheetDelegate>
 	UIActivityIndicatorView	*mActivityIndicator;
 	UIAlertView						*mAlert;
 	NSIndexPath					*mDidSelectRowAtIndexPath;
+	BOOL						bPad;
+	NSString					*mRootPath;
 }
 
 @property (nonatomic, strong) id					delegate;

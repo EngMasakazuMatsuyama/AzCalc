@@ -6,6 +6,31 @@
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>CalcRoll</string>
+			</array>
+			<key>CFBundleTypeIconFiles</key>
+			<array>
+				<string>Icon57s1</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>CalcRoll Document</string>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>LSHandlerRank</key>
+			<string>Owner</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>com.azukid.AzukiSoft.${PRODUCT_NAME:identifier}</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<false/>
+		</dict>
+	</array>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFiles</key>
@@ -33,7 +58,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>CalcRoll free</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -75,6 +100,26 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.data</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>CalcRoll Document</string>
+			<key>UTTypeIdentifier</key>
+			<string>com.azukid.AzukiSoft.${PRODUCT_NAME:identifier}</string>
+			<key>UTTypeTagSpecification</key>
+			<dict>
+				<key>public.filename-extension</key>
+				<string>CalcRoll</string>
+				<key>public.mime-type</key>
+				<string>application/vnd.calcroll</string>
+			</dict>
+		</dict>
 	</array>
 </dict>
 </plist>

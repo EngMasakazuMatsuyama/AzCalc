@@ -2416,7 +2416,6 @@
 				   mKmPages,		@"PadPages", 
 				   mKmPadFunc,	@"PadFunc",
 				   nil];
-			zPath = [zPath stringByAppendingString:@"Pad"];
 		} else {
 			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
 				   mKmPages,		@"Pages", 

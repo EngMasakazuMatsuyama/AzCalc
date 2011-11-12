@@ -16,17 +16,6 @@
 @synthesize delegate;
 @synthesize mLocalPath;
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-*/
-
 
 #pragma mark - Alert
 
@@ -89,7 +78,7 @@
 - (IBAction)ibSegSort:(UISegmentedControl *)segment
 {
 	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-	[[self restClient] loadMetadata:@"/"];
+	[[self restClient] loadMetadata:mRootPath];
 }
 
 
@@ -98,7 +87,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
+	bPad = (320 < self.view.frame.size.width);
+	if (bPad) {
+		mRootPath = @"/iPad/";
+	} else {
+		mRootPath = @"/iPhone/";
+	}
+
 	//ibTfName.delegate = self;   IBにて定義済み
 	//ibTableView.delegate = self;
 	
@@ -132,7 +127,7 @@
     [super viewDidAppear:animated];
 	
 	// Dropbox/App/CalcRoll 一覧表示
-	[[self restClient] loadMetadata:@"/"];
+	[[self restClient] loadMetadata:mRootPath];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -246,7 +241,7 @@
 {	// ファイル書き込み成功
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 	// Dropbox/App/CalcRoll 一覧表示
-	[[self restClient] loadMetadata:@"/"];
+	[[self restClient] loadMetadata:mRootPath];
 	//
 	[self alertIndicatorOff];
 }
@@ -320,7 +315,7 @@
 				DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
 				cell.textLabel.text = dbm.filename;
 			} else {
-				cell.textLabel.text = NSLocalizedString(@"Communicating", nil);
+				cell.textLabel.text = NSLocalizedString(@"NoFile", nil);
 			}
 		} break;
 	}
@@ -436,7 +431,7 @@ replacementString:(NSString *)string
 				filename = [filename stringByAppendingFormat:@".%@", [mLocalPath pathExtension]]; // 拡張子を付ける
 				NSLog(@"mLocalPath=%@, filename=%@", mLocalPath, filename);
 				[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-				[[self restClient] uploadFile:filename toPath:@"/" withParentRev:nil fromPath:mLocalPath];
+				[[self restClient] uploadFile:filename toPath:mRootPath withParentRev:nil fromPath:mLocalPath];
 			}
 			break;
 		case TAG_ACTION_Retrieve:		// このキーボードを採用する。
