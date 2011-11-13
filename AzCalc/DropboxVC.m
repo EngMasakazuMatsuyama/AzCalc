@@ -12,6 +12,8 @@
 #define TAG_ACTION_Save			109
 #define TAG_ACTION_Retrieve		118
 
+#define USER_KEYBOARD_FILENAME		@"DropboxFileName"
+
 @implementation DropboxVC
 @synthesize delegate;
 @synthesize mLocalPath;
@@ -23,7 +25,7 @@
 {
 	[mAlert setTitle:zTitle];
 	[mAlert show];
-	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-80, 50, 50)];
+	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-75, 50, 50)];
 	[mActivityIndicator startAnimating];
 }
 
@@ -33,6 +35,14 @@
 	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
 }
 
+- (void)alertCommError
+{
+	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CommError", nil) 
+												   message:NSLocalizedString(@"CommErrorMsg", nil) 
+												  delegate:nil cancelButtonTitle:nil 
+										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+	[alv show];
+}
 
 #pragma mark - Dropbox DBRestClient
 
@@ -55,7 +65,6 @@
 
 - (IBAction)ibBuSave:(UIButton *)button
 {
-	[ibTfName resignFirstResponder]; // キーボードを隠す
 	NSString *filename = [ibTfName.text stringByDeletingPathExtension]; // 拡張子を除く
 	if ([filename length] < 3) {
 		UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NameLeast", nil) 
@@ -73,6 +82,7 @@
 											otherButtonTitles:NSLocalizedString(@"SaveKeyboard", nil), nil] autorelease];
 	as.tag = TAG_ACTION_Save;
 	[as showInView:self.view];
+	[ibTfName resignFirstResponder]; // キーボードを隠す
 }
 
 - (IBAction)ibSegSort:(UISegmentedControl *)segment
@@ -114,18 +124,17 @@
     [super viewWillAppear:animated];
 	
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
-	ibTfName.text = [userDef objectForKey:@"DropboxFileName"];
+	ibTfName.text = [userDef objectForKey:USER_KEYBOARD_FILENAME];
 	if ([ibTfName.text length] < 3) {
 		ibTfName.text = @"MyKeybord";
 	}
-	//
-	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
 	
+	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 	// Dropbox/App/CalcRoll 一覧表示
 	[[self restClient] loadMetadata:mRootPath];
 }
@@ -215,6 +224,7 @@
 	[ibTableView reloadData];
 	//
 	[self alertIndicatorOff];
+	[self alertCommError];
 }
 
 
@@ -227,13 +237,20 @@
 	[self alertIndicatorOff];
 	// 閉じる
 	[self dismissModalViewControllerAnimated:YES];
+	// Done
+	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"QuoteDone", nil)
+												   message:nil
+												  delegate:nil
+										 cancelButtonTitle:nil
+										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+	[alv	show];
 }
 
 - (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error 
 {	// ファイル読み込み失敗
     NSLog(@"There was an error loading the file - %@", error);
-	//
 	[self alertIndicatorOff];
+	[self alertCommError];
 }
 
 - (void)restClient:(DBRestClient*)client uploadedFile:(NSString*)destPath
@@ -242,15 +259,18 @@
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 	// Dropbox/App/CalcRoll 一覧表示
 	[[self restClient] loadMetadata:mRootPath];
-	//
 	[self alertIndicatorOff];
+	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SaveDone", nil) 
+												   message:nil  delegate:nil cancelButtonTitle:nil 
+										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+	[alv show];
 }
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error 
 {	// ファイル書き込み失敗
     NSLog(@"File upload failed with error - %@", error);
-	//
 	[self alertIndicatorOff];
+	[self alertCommError];
 }
 
 
@@ -368,15 +388,27 @@
 {
 	if (0<=indexPath.row && indexPath.row<[mMetadatas count]) 
 	{
-		[mDidSelectRowAtIndexPath release], mDidSelectRowAtIndexPath = [indexPath copy];
-		//
-		UIActionSheet *as = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
-														delegate:self 
-											   cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
-										  destructiveButtonTitle:NSLocalizedString(@"ChangeKeyboard", nil) 
-												otherButtonTitles:nil] autorelease];
-		as.tag = TAG_ACTION_Retrieve;
-		[as showInView:self.view];
+		[mDidSelectRowAtIndexPath release], mDidSelectRowAtIndexPath = nil;
+		DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
+		if (dbm) {
+			mDidSelectRowAtIndexPath = [indexPath copy];
+			NSLog(@"dbm.filename=%@", dbm.filename);
+			ibTfName.text = [dbm.filename stringByDeletingPathExtension];
+			NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+			[userDef setObject:ibTfName.text  forKey:USER_KEYBOARD_FILENAME];
+			[userDef synchronize];
+			//
+			UIActionSheet *as = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
+															 delegate:self 
+													cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
+											   destructiveButtonTitle:NSLocalizedString(@"ChangeKeyboard", nil) 
+													otherButtonTitles:nil] autorelease];
+			as.tag = TAG_ACTION_Retrieve;
+			[as showInView:self.view];
+		}
+		else {
+			[ibTableView deselectRowAtIndexPath:indexPath animated:YES]; // 選択解除
+		}
 	}
 	else {
 		[ibTableView deselectRowAtIndexPath:indexPath animated:YES]; // 選択解除

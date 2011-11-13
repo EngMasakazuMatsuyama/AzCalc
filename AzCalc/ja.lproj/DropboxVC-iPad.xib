@@ -47,6 +47,7 @@
 							<string key="NSFrame">{{170, 593}, {200, 30}}</string>
 							<reference key="NSSuperview" ref="740521811"/>
 							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<bool key="IBUIOpaque">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							<int key="IBUIContentHorizontalAlignment">0</int>
@@ -222,7 +223,7 @@
 							<int key="IBUIContentMode">7</int>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<string key="IBUIText">Dropbox から取り出す</string>
+							<string key="IBUIText">Dropbox から引用する</string>
 							<reference key="IBUITextColor" ref="145624089"/>
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>

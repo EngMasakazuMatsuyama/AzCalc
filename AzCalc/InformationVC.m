@@ -155,6 +155,7 @@
 	switch (alertView.tag) 
 	{
 		case ALERT_ToSupportSite: {
+			//NSURL *url = [NSURL URLWithString:@"http://azukisoft.seesaa.net/"];
 			NSURL *url = [NSURL URLWithString:@"http://calcroll.tumblr.com/"];
 			[[UIApplication sharedApplication] openURL:url];
 		}	break;

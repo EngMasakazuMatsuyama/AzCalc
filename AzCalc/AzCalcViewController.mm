@@ -786,25 +786,25 @@
 	rect.origin.x = rect.size.width * MiSvUpperPage;
 	[ibScrollUpper scrollRectToVisible:rect animated:NO]; // 初期ページ(1)にする
 	
-	//ibScrollUpper.scrollEnabled = YES; //スクロール許可
+	ibScrollUpper.scrollEnabled = YES; //スクロール許可 ---> 数式編集中だけ NO で固定する。
 	ibScrollUpper.bounces = NO; // 両端の跳ね返り
-
+	ibScrollUpper.delaysContentTouches = YES; //NOにするとiPhone3Gにてスクロール困難になる。
+	
 	//[1.0.8.2]　UITapGestureRecognizer対応 ＜＜iOS3.2以降
-	ibScrollUpper.scrollEnabled = NO; //スクロール禁止
-	ibScrollUpper.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	// セレクタを指定して、ジェスチャーリコジナイザーを生成する ＜＜iOS3.2以降対応
-	// handleSwipeLeft:ハンドラ登録　　2本指で左へスワイプされた
+/*	// handleSwipeLeft:ハンドラ登録　　1本指で左へスワイプされた
 	UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpperSwipeLeft:)];
 	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionLeft; //左
 	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release];
-	// handleSwipeRight:ハンドラ登録　　2本指で右へスワイプされた
+	// handleSwipeRight:ハンドラ登録　　1本指で右へスワイプされた
 	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpperSwipeRight:)];
 	swipe.numberOfTouchesRequired = 1; //2; //タッチの数、つまり指の本数
 	swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 	[ibScrollUpper addGestureRecognizer:swipe];// スクロールビューに登録
 	[swipe release], swipe = nil;
+ */
 	// 1指2タップ
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleUpper2Taps:)];
 	tap.numberOfTouchesRequired =1; // 指数
@@ -925,16 +925,14 @@
 	//rect.origin.x = rect.size.width * MiSvLowerPage;
 	rect.origin.x = rect.size.width * PAGES/2;
 	[ibScrollLower scrollRectToVisible:rect animated:NO]; // 初期ページ位置
-	ibScrollLower.delegate = self;
-	//ibScrollLower.delaysContentTouches = YES; //スクロール操作検出のため0.5s先取する
+	ibScrollLower.delegate = nil;  //self;
+	ibScrollLower.scrollEnabled = NO; //スクロール禁止
+	ibScrollLower.delaysContentTouches = NO; //NO:スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	
 	//[1.0.8]　UITapGestureRecognizer対応 ＜＜iOS3.2以降
-	ibScrollLower.scrollEnabled = NO; //スクロール禁止
-	ibScrollLower.delaysContentTouches = NO; //スクロール操作検出のため0.5s先取中止 ⇒ これによりキーレスポンス向上する
 	// セレクタを指定して、ジェスチャーリコジナイザーを生成する ＜＜iOS3.2以降対応
 	// handleSwipeLeft:ハンドラ登録　　2本指で左へスワイプされた
-	//UISwipeGestureRecognizer *
-	swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeLeft:)];
+	UISwipeGestureRecognizer *swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeLeft:)];
 #if (TARGET_IPHONE_SIMULATOR)
 	// シミュレータで動作している場合のコード
 	swipe.numberOfTouchesRequired = 1; //タッチの数、つまり指の本数
@@ -1414,11 +1412,11 @@
 		[UIView commitAnimations];
 	}
 }
-
+/*
 - (void)handleUpperSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
-{	// 2本指で左へスワイプされた
-	NSLog(@"handleUpperSwipeLeft -- Swipe Left 2 finger -- MiSvUpperPage=%d", (int)MiSvUpperPage);
-	if (ibScrollUpper.scrollEnabled) {
+{	// 1本指で左へスワイプされた
+	NSLog(@"handleUpperSwipeLeft -- Swipe Left 1 finger -- MiSvUpperPage=%d", (int)MiSvUpperPage);
+	if (ibScrollUpper.scrollEnabled) { // 数式編集中だけ NO で固定するため
 		// 次（右）ページ(1)へ
 		if (1 <= MiSvUpperPage) { // End
 			[self audioPlayer:@"short_double_low.caf"];  // 
@@ -1433,12 +1431,12 @@
 }
 
 - (void)handleUpperSwipeRight: (UISwipeGestureRecognizer*) recognizer 
-{	// 2本指で右へスワイプされた
-	NSLog(@"handleUpperSwipeRight -- Swipe Right 2 finger -- MiSvUpperPage=%d", (int)MiSvUpperPage);
-	if (ibScrollUpper.scrollEnabled) {
+{	// 1本指で右へスワイプされた
+	NSLog(@"handleUpperSwipeRight -- Swipe Right 1 finger -- MiSvUpperPage=%d", (int)MiSvUpperPage);
+	if (ibScrollUpper.scrollEnabled) { // 数式編集中だけ NO で固定するため
 		// 前（左）ページ(0)へ
 		if (MiSvUpperPage <= 0) {
-			[self audioPlayer:@"sq_lock.caf"];  // 
+			[self audioPlayer:@"short_double_low.caf"];  // 
 		} else {
 			MiSvUpperPage = 0;
 			[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
@@ -1448,7 +1446,7 @@
 		}
 	}
 }
-
+*/
 - (void)handleLowerSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
 {	// 2本指で左へスワイプされた
 	NSLog(@"handleLowerSwipeLeft -- Swipe Left 2 finger -- MiSvLowerPage=%d", (int)MiSvLowerPage);
@@ -2864,7 +2862,7 @@
 		[ibTvFormula resignFirstResponder]; // キーボードを隠す
 
 		//[self audioPlayer:@"mail-sent.caf"];  // Mail.appの送信音
-		[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+		//[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
 	}
 }
 
@@ -2896,13 +2894,6 @@
 #endif
 		}
 	}
-	/*else { // ibScrollLower
-		// 直前ページを破棄
-		if (mKeyViewPrev) {
-			[mKeyViewPrev removeFromSuperview];
-			mKeyViewPrev = nil;
-		}
-	}*/
 }
 
 
