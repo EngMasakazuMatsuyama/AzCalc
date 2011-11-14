@@ -1016,6 +1016,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masakazu Matsuyama";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1028,6 +1029,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = AzCalcS1;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8C2AF85B-3CB4-48B7-9769-5D63D923F576";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1079,7 +1081,7 @@
 					"\"$(SRCROOT)/GoogleAdMobAdsSDK\"",
 				);
 				PRODUCT_NAME = AzCalc;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "37736F5D-3C5E-4879-9E20-706AA10CC189";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "8FE2BD1F-A875-41C2-B69F-FAF211EE357C";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
