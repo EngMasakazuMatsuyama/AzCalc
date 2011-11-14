@@ -110,9 +110,10 @@
 	ibTfName.keyboardType = UIKeyboardTypeDefault;
 	ibTfName.returnKeyType = UIReturnKeyDone;
 	
+	// alertIndicatorOn: alertIndicatorOff: のための準備
 	[mAlert release];
 	mAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:nil]; // deallocにて解放
-	//[self.view addSubview:mAlert];
+	//[self.view addSubview:mAlert];　　alertIndicatorOn:にてaddSubviewしている。
 	[mActivityIndicator release];
 	mActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	mActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
@@ -194,8 +195,16 @@
 			NSLog(@"\t%@", file.filename);
 		}
 #endif
-		[mMetadatas release];
-		mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
+		[mMetadatas release], mMetadatas = nil;
+		if ([metadata.contents count]<=0) return;
+		
+		//mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
+		mMetadatas = [NSMutableArray new];
+		for (DBMetadata *dbm in metadata.contents) {
+			if ([[dbm.filename pathExtension] caseInsensitiveCompare:@"CalcRoll"]==NSOrderedSame) { // 大小文字区別なく比較する
+				[mMetadatas addObject:dbm];
+			}
+		}
 		// Sorting
 		if (ibSegSort.selectedSegmentIndex==0) { // Name Asc
 			NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"filename" ascending:YES];
@@ -333,7 +342,7 @@
 		case 0: {
 			if (0 < [mMetadatas count]) {
 				DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
-				cell.textLabel.text = dbm.filename;
+				cell.textLabel.text = [dbm.filename stringByDeletingPathExtension]; // 拡張子を除く
 			} else {
 				cell.textLabel.text = NSLocalizedString(@"NoFile", nil);
 			}
