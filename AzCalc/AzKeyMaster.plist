@@ -1035,18 +1035,6 @@
 			<key>Text</key>
 			<string>-Tax</string>
 		</dict>
-		<dict>
-			<key>Alpha</key>
-			<real>0.8</real>
-			<key>Color</key>
-			<integer>3</integer>
-			<key>Size</key>
-			<integer>12</integer>
-			<key>Tag</key>
-			<integer>502</integer>
-			<key>Text</key>
-			<string>Dropbox</string>
-		</dict>
 	</array>
 	<array>
 		<dict>

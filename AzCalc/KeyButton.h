@@ -73,9 +73,9 @@
 #define KeyTAG_MSTROE_End		499
 
 #define KeyTAG_FUNC_Start			500
-#define KeyTAG_FUNC_iCloud			501
-#define KeyTAG_FUNC_Dropbox		502
-#define KeyTAG_FUNC_Evernote		503
+//#define KeyTAG_FUNC_iCloud			501
+//#define KeyTAG_FUNC_Dropbox		502	＜＜＜ SettingVCにボタン設置することにした。
+//#define KeyTAG_FUNC_Evernote		503
 #define KeyTAG_FUNC_End				599
 
 #define KeyTAG_UNIT_Start		1000 //-----------------SI基本単位換算

@@ -43,6 +43,7 @@
 - (IBAction)ibBuOK:(UIButton *)button;
 - (IBAction)ibBuKeyboardEdit:(UIButton *)button;
 - (IBAction)ibBuPageFlip:(UIButton *)button;
+- (IBAction)ibBuDropbox:(UIButton *)button;
 
 // Option-iPad
 - (IBAction)ibSliderVolumeChange:(UISlider *)slider;

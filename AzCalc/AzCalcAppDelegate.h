@@ -37,5 +37,6 @@
 //@property (nonatomic, assign) double	dMemory;
 @property (nonatomic, assign) BOOL		bChangeKeyboard;
 
+
 @end
 

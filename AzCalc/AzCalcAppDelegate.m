@@ -89,7 +89,7 @@
         if ([[DBSession sharedSession] isLinked]) 
 		{	// Dropbox 認証成功
             NSLog(@"App linked successfully!");
-			// DropboxTVC を空ける
+			// DropboxTVC を開ける
 			[viewController GvDropbox];
         }
         return YES;

@@ -458,8 +458,8 @@
 		444A497D146ED7D700AAD85B /* SettingVC */ = {
 			isa = PBXGroup;
 			children = (
-				44159C13146EC10900906673 /* SettingVC.m */,
 				44159C14146EC10900906673 /* SettingVC.h */,
+				44159C13146EC10900906673 /* SettingVC.m */,
 				44B270B7146EB84C00450472 /* SettingVC.xib */,
 				44B270CA146EBA4700450472 /* SettingVC-iPad.xib */,
 				44159C38146EC41B00906673 /* OptionVC.h */,

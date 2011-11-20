@@ -11,6 +11,7 @@
 #import "SettingVC.h"
 #import "OptionVC.h"
 #import "InformationVC.h"
+#import "AzCalcViewController.h"
 
 
 @implementation SettingVC
@@ -185,5 +186,11 @@
 	[self presentModalViewController:appDelegate.ibOptionVC animated:YES];
 }
 
+- (IBAction)ibBuDropbox:(UIButton *)button
+{
+	appDelegate.bChangeKeyboard = NO;
+	[self dismissModalViewControllerAnimated:NO];
+	[appDelegate.viewController GvDropbox];
+}
 
 @end
