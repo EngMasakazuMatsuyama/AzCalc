@@ -16,6 +16,7 @@
 			<key>CFBundleTypeIconFiles</key>
 			<array>
 				<string>Icon57s1</string>
+				<string>Icon57free</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>CalcRoll Document</string>

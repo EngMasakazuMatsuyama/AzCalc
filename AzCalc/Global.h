@@ -31,6 +31,8 @@
 #define AzRETAIN_CHECK(...) 
 #endif
 
+#define YES_iPad   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+
 
 #define GD_PRODUCTNAME	@"AzCalc"  // IMPORTANT PRODUCT NAME  和名「ドラタク」
 /*----- GD_PRODUCTNAME を変更するときに必要となる作業の覚書 -------------------------------

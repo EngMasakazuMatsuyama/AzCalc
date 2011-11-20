@@ -287,7 +287,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>2</integer>
 				<key>Size</key>
@@ -301,7 +301,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>3</integer>
 				<key>Size</key>
@@ -315,7 +315,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>3</integer>
 				<key>Size</key>
@@ -329,7 +329,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>3</integer>
 				<key>Size</key>
@@ -343,7 +343,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>3</integer>
 				<key>Size</key>
@@ -359,7 +359,7 @@
 		<array>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>2</integer>
 				<key>Size</key>
@@ -373,7 +373,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>2</integer>
 				<key>Size</key>
@@ -387,7 +387,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.84999999999999998</real>
+				<real>0.85</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -401,7 +401,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.84999999999999998</real>
+				<real>0.85</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -429,7 +429,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>2</integer>
 				<key>Size</key>
@@ -499,7 +499,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>3</integer>
 				<key>Size</key>
@@ -569,7 +569,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>3</integer>
 				<key>Size</key>
@@ -625,7 +625,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -639,7 +639,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -653,7 +653,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -667,7 +667,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -681,7 +681,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -695,7 +695,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -711,7 +711,7 @@
 		<array>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -725,7 +725,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -739,7 +739,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -753,7 +753,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -767,7 +767,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -781,7 +781,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -851,7 +851,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -921,7 +921,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -977,7 +977,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -991,7 +991,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1005,7 +1005,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -1019,7 +1019,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -1033,7 +1033,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -1047,7 +1047,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -1063,21 +1063,7 @@
 		<array>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000001192092896</real>
-				<key>Color</key>
-				<integer>3</integer>
-				<key>Size</key>
-				<real>12</real>
-				<key>Tag</key>
-				<integer>502</integer>
-				<key>Text</key>
-				<string>Dropbox</string>
-				<key>Unit</key>
-				<string></string>
-			</dict>
-			<dict>
-				<key>Alpha</key>
-				<real>0.20000000000000001</real>
+				<real>0.2</real>
 				<key>Color</key>
 				<integer>0</integer>
 				<key>Size</key>
@@ -1091,7 +1077,21 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.2</real>
+				<key>Color</key>
+				<integer>0</integer>
+				<key>Size</key>
+				<integer>10</integer>
+				<key>Tag</key>
+				<integer>-1</integer>
+				<key>Text</key>
+				<string>(Blank)</string>
+				<key>Unit</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>Alpha</key>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -1105,7 +1105,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.84999999999999998</real>
+				<real>0.85</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -1119,7 +1119,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.84999999999999998</real>
+				<real>0.85</real>
 				<key>Color</key>
 				<integer>1</integer>
 				<key>Size</key>
@@ -1133,7 +1133,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1147,7 +1147,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1161,7 +1161,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1175,7 +1175,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1189,7 +1189,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1203,7 +1203,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1217,7 +1217,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1231,7 +1231,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1245,7 +1245,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1259,7 +1259,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1273,7 +1273,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1287,7 +1287,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1301,7 +1301,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1315,7 +1315,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1329,7 +1329,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1343,7 +1343,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.90000000000000002</real>
+				<real>0.9</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1357,7 +1357,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1371,7 +1371,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1385,7 +1385,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1399,7 +1399,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1415,7 +1415,7 @@
 		<array>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1429,7 +1429,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1443,7 +1443,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1457,7 +1457,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1471,7 +1471,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1485,7 +1485,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1499,7 +1499,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1513,7 +1513,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1527,7 +1527,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1541,7 +1541,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1555,7 +1555,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1569,7 +1569,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1583,7 +1583,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1597,7 +1597,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1611,7 +1611,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1625,7 +1625,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1639,7 +1639,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1653,7 +1653,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1667,7 +1667,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1681,7 +1681,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1695,7 +1695,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1709,7 +1709,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1723,7 +1723,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1737,7 +1737,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>
@@ -1751,7 +1751,7 @@
 			</dict>
 			<dict>
 				<key>Alpha</key>
-				<real>0.80000000000000004</real>
+				<real>0.8</real>
 				<key>Color</key>
 				<integer>4</integer>
 				<key>Size</key>

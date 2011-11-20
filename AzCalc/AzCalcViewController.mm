@@ -201,7 +201,7 @@
 }
 
 - (void)GvCalcRollLoad:(NSString*)zCalcRollPath
-{	// 
+{	// zCalcRollPath.plist から mKmPages や mKmPadFunc を読み込む
 	NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:zCalcRollPath];
 	if (dic==nil) {
 		NSLog(@"GvKmPageLoadPath: ERROR: zCalcRollPath=%@", zCalcRollPath);
@@ -340,88 +340,6 @@
 	}
 	// mKmPages と mKmPadFunc から mKmMemory を生成する
 	[self mKmMemoryReset]; 
-}
-
-
-#pragma mark - View dealloc
-
-- (void)unloadRelease	// dealloc, viewDidUnload から呼び出される
-{
-	NSLog(@"--- unloadRelease ---");
-	ibScrollUpper.delegate = nil;
-	ibPvDrum.delegate = nil;
-	ibPvDrum.dataSource = nil;
-	ibTvFormula.delegate = nil;
-	
-#ifdef GD_Ad_ENABLED
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	if (RiAdBanner) {
-		[RiAdBanner cancelBannerViewAction];	// 停止
-		RiAdBanner.delegate = nil;							// 解放メソッドを呼び出さないように　　　[0.4.1]メモリ不足時に落ちた原因
-		[RiAdBanner removeFromSuperview];		// UIView解放		retainCount -1
-		[RiAdBanner release], RiAdBanner = nil;	// alloc解放			retainCount -1
-	}
-
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	if (RoAdMobView) {
-		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
-		[RoAdMobView release], RoAdMobView = nil;
-	}
-#endif
-
-	[RaKeyMaster release],			RaKeyMaster = nil;
-	[RaDrumButtons release],		RaDrumButtons = nil;
-	// RaDrums は破棄しない（ドラム記録を消さないため）deallocではreleaseすること。
-	[mPadMemoryKeyButtons release], mPadMemoryKeyButtons = nil;
-	
-	//[0.4.1]//"Received memory warning. Level=2" 回避するため一元化
-	[RimgDrumButton release],	RimgDrumButton = nil;
-	[RimgDrumPush release],		RimgDrumPush = nil;
-	//不要//[mKeyView release], mKeyView = nil;  ＜＜ ibScrollLowerがオーナーだから。
-	//不要//[mKeyViewPrev release], mKeyViewPrev = nil;  ＜＜ ibScrollLowerがオーナーだから。
-}
-
-- (void)dealloc 
-{
-	NSLog(@"--- dealloc ---");
-	[self unloadRelease];
-	
-	[mGvKeyUnitSI release];
-	[mGvKeyUnitSi2 release];
-	[mGvKeyUnitSi3 release];
-
-	[mKmMemorys release], mKmMemorys = nil;
-	[mKmPadFunc release],	mKmPadFunc = nil;
-	[mKmPages release], mKmPages = nil;
-	
-	[RaDrums release];
-    [super dealloc];
-}
-
-// MARK: 終了処理
-
-- (void)viewWillDisappear:(BOOL)animated // 非表示になる直前にコールされる
-{
-	[super viewWillDisappear:animated];
-	
-	/*
-	 if (buChangeKey) {
-		//buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
-		// 復帰
-		[buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
-		buChangeKey = nil;
-	}*/
-}
-
-// 裏画面(非表示)状態のときにメモリ不足が発生するとコールされるので、viewDidLoadで生成したOBJを解放する
-- (void)viewDidUnload
-{
-	NSLog(@"--- viewDidUnload ---");
-	//NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
-	
-	[self unloadRelease];
-	[super viewDidUnload];		// この後、viewDidLoadがコールされて、改めてOBJ生成される
 }
 
 
@@ -1384,6 +1302,87 @@
 	ibBuMemory.alpha = 0;
 	[self MvMemoryShow]; // 改めて表示
 }
+
+
+#pragma mark  View End
+
+- (void)viewWillDisappear:(BOOL)animated // 非表示になる直前にコールされる
+{
+	[super viewWillDisappear:animated];
+	
+	/*
+	 if (buChangeKey) {
+	 //buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
+	 // 復帰
+	 [buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
+	 buChangeKey = nil;
+	 }*/
+}
+
+- (void)unloadRelease	// dealloc, viewDidUnload から呼び出される
+{
+	NSLog(@"--- unloadRelease ---");
+	ibScrollUpper.delegate = nil;
+	ibPvDrum.delegate = nil;
+	ibPvDrum.dataSource = nil;
+	ibTvFormula.delegate = nil;
+	
+#ifdef GD_Ad_ENABLED
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	if (RiAdBanner) {
+		[RiAdBanner cancelBannerViewAction];	// 停止
+		RiAdBanner.delegate = nil;							// 解放メソッドを呼び出さないように　　　[0.4.1]メモリ不足時に落ちた原因
+		[RiAdBanner removeFromSuperview];		// UIView解放		retainCount -1
+		[RiAdBanner release], RiAdBanner = nil;	// alloc解放			retainCount -1
+	}
+	
+	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	if (RoAdMobView) {
+		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
+		[RoAdMobView release], RoAdMobView = nil;
+	}
+#endif
+	
+	[RaKeyMaster release],			RaKeyMaster = nil;
+	[RaDrumButtons release],		RaDrumButtons = nil;
+	// RaDrums は破棄しない（ドラム記録を消さないため）deallocではreleaseすること。
+	[mPadMemoryKeyButtons release], mPadMemoryKeyButtons = nil;
+	
+	//[0.4.1]//"Received memory warning. Level=2" 回避するため一元化
+	[RimgDrumButton release],	RimgDrumButton = nil;
+	[RimgDrumPush release],		RimgDrumPush = nil;
+	//不要//[mKeyView release], mKeyView = nil;  ＜＜ ibScrollLowerがオーナーだから。
+	//不要//[mKeyViewPrev release], mKeyViewPrev = nil;  ＜＜ ibScrollLowerがオーナーだから。
+}
+
+// 裏画面(非表示)状態のときにメモリ不足が発生するとコールされるので、viewDidLoadで生成したOBJを解放する
+- (void)viewDidUnload
+{
+	NSLog(@"--- viewDidUnload ---");
+	//NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+	NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
+	
+	[self unloadRelease];
+	[super viewDidUnload];		// この後、viewDidLoadがコールされて、改めてOBJ生成される
+}
+
+- (void)dealloc 
+{
+	NSLog(@"--- dealloc ---");
+	[self unloadRelease];
+	
+	[mGvKeyUnitSI release];
+	[mGvKeyUnitSi2 release];
+	[mGvKeyUnitSi3 release];
+	
+	[mKmMemorys release], mKmMemorys = nil;
+	[mKmPadFunc release],	mKmPadFunc = nil;
+	[mKmPages release], mKmPages = nil;
+	
+	[RaDrums release];
+    [super dealloc];
+}
+
 
 
 #pragma mark - GestureRecognizer Handler
@@ -2400,7 +2399,8 @@
 }
 
 - (void)GvDropbox
-{	// 未認証の場合、認証処理後、AzCalcAppDelegate:handleOpenURL:から呼び出される
+{	// SettingVC:から呼び出される
+	// 未認証の場合、認証処理後、AzCalcAppDelegate:handleOpenURL:から呼び出される
 	if ([[DBSession sharedSession] isLinked]) 
 	{	// Dropbox 認証済み
 		NSString *zHome = NSHomeDirectory();
@@ -2409,7 +2409,7 @@
 		// 先に.plist保存する
 		NSLog(@"zPath=%@", zPath);
 		NSDictionary *dic = nil;
-		if (bPad) {
+		if (YES_iPad) {
 			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
 				   mKmPages,		@"PadPages", 
 				   mKmPadFunc,	@"PadFunc",
@@ -2422,7 +2422,7 @@
 		[dic writeToFile:zPath atomically:YES];
 		[dic release];
 		
-		if (bPad) {
+		if (YES_iPad) {
 			DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC-iPad" bundle:nil];
 			vc.modalPresentationStyle = UIModalPresentationFormSheet;
 			vc.mLocalPath = zPath;
@@ -2444,11 +2444,11 @@
 // Function関係キー入力処理
 - (void)buttonFunction:(Drum *)drum withTag:(NSInteger)iKeyTag
 {
-	switch (iKeyTag) {
+/*	switch (iKeyTag) {
 		case KeyTAG_FUNC_Dropbox: // Dropbox authentication process
 			[self GvDropbox];
 			break;
-	}
+	}*/
 }
 
 
