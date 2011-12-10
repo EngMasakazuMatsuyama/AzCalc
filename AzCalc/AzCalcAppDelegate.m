@@ -149,7 +149,7 @@
      */
 }
 
-
+/*
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	NSLog(@"touchesBegan: touches=%@", touches);
@@ -164,7 +164,7 @@
 {
 	NSLog(@"touchesEnded: touches=%@", touches);
 }
-
+*/
 
 
 @end

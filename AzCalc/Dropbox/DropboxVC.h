@@ -9,10 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <DropboxSDK/DropboxSDK.h>
 
-#define EXTENSION	"calcroll"
+#define EXTENSION	"calcroll"		//リリース済みにつき変更禁止 （変更するならば旧名にも対応すること）
 
-@interface DropboxVC : UIViewController <UITableViewDelegate, UITableViewDataSource, 
-UITextFieldDelegate, DBRestClientDelegate, UIActionSheetDelegate>
+@interface DropboxVC : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, DBRestClientDelegate, UIActionSheetDelegate>
 {
 	IBOutlet UIButton		*ibBuClose;
 	IBOutlet UIButton		*ibBuSave;

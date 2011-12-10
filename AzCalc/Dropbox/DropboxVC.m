@@ -178,7 +178,7 @@
 {
 	[mDidSelectRowAtIndexPath release], mDidSelectRowAtIndexPath = nil;
 	[mActivityIndicator release];
-	[mAlert release];
+	[mAlert release], mAlert = nil;
 	[mMetadatas release], mMetadatas = nil;
     [super dealloc];
 }
@@ -196,32 +196,32 @@
 		}
 #endif
 		[mMetadatas release], mMetadatas = nil;
-		if ([metadata.contents count]<=0) return;
-		
-		//mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
-		mMetadatas = [NSMutableArray new];
-		for (DBMetadata *dbm in metadata.contents) {
-			if ([[dbm.filename pathExtension] caseInsensitiveCompare:@"CalcRoll"]==NSOrderedSame) { // 大小文字区別なく比較する
-				[mMetadatas addObject:dbm];
+		if (0 < [metadata.contents count]) {
+			//mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
+			mMetadatas = [NSMutableArray new];
+			for (DBMetadata *dbm in metadata.contents) {
+				if ([[dbm.filename pathExtension] caseInsensitiveCompare:@"CalcRoll"]==NSOrderedSame) { // 大小文字区別なく比較する
+					[mMetadatas addObject:dbm];
+				}
 			}
+			// Sorting
+			if (ibSegSort.selectedSegmentIndex==0) { // Name Asc
+				NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"filename" ascending:YES];
+				NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
+				[sort1 release];
+				[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
+				[sorting release];
+			} else { // Date Desc
+				NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"lastModifiedDate" ascending:NO];
+				NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
+				[sort1 release];
+				[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
+				[sorting release];
+			}
+			[ibTableView reloadData];
 		}
-		// Sorting
-		if (ibSegSort.selectedSegmentIndex==0) { // Name Asc
-			NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"filename" ascending:YES];
-			NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
-			[sort1 release];
-			[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
-			[sorting release];
-		} else { // Date Desc
-			NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"lastModifiedDate" ascending:NO];
-			NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
-			[sort1 release];
-			[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
-			[sorting release];
-		}
-		[ibTableView reloadData];
 	}
-	//
+	// 必ず通すこと
 	[self alertIndicatorOff];
 }
 
