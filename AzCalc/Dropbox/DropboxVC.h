@@ -20,13 +20,14 @@
 	IBOutlet UISegmentedControl	*ibSegSort;
 	IBOutlet UITableView	*ibTableView;
 
-	id		delegate;
-	NSString			*mLocalPath;		//= "(HOME)/tmp/MyKeyboard.CalcRoll" or ".CalcRollPad"
-	DBRestClient	*restClient;
-	NSMutableArray		*mMetadatas;
-	UIActivityIndicatorView	*mActivityIndicator;
-	UIAlertView						*mAlert;
-	NSIndexPath					*mDidSelectRowAtIndexPath;
+@private
+	//id		delegate;
+	//NSString			*mLocalPath;		//= "(HOME)/tmp/MyKeyboard.CalcRoll" or ".CalcRollPad"
+	DBRestClient	*restClient_;
+	NSMutableArray		*metadatas_;
+	UIActivityIndicatorView	*activityIndicator_;
+	UIAlertView						*alert_;
+	NSIndexPath					*didSelectRowAtIndexPath_;
 	BOOL						bPad;
 	NSString					*mRootPath;
 }

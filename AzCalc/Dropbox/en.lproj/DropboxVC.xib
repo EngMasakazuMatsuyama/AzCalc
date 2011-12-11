@@ -223,7 +223,7 @@
 							<int key="IBUIContentMode">7</int>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<string key="IBUIText">Quote from Dropbox.</string>
+							<string key="IBUIText">Restore from Dropbox.</string>
 							<reference key="IBUITextColor" ref="193881541"/>
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>
@@ -243,7 +243,7 @@
 							<int key="IBUIContentMode">7</int>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<string key="IBUIText">Touch the keyboard name you want to quote.</string>
+							<string key="IBUIText">Touch the keyboard name you want to restore.</string>
 							<reference key="IBUITextColor" ref="430337958"/>
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>

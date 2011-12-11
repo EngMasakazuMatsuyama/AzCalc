@@ -223,7 +223,7 @@
 							<int key="IBUIContentMode">7</int>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<string key="IBUIText">Dropbox から引用する</string>
+							<string key="IBUIText">Dropbox から復元する</string>
 							<reference key="IBUITextColor" ref="145624089"/>
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>
@@ -243,7 +243,7 @@
 							<int key="IBUIContentMode">7</int>
 							<bool key="IBUIUserInteractionEnabled">NO</bool>
 							<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-							<string key="IBUIText">採用したいキーボード名をタッチ。</string>
+							<string key="IBUIText">復元したいキーボード名をタッチ。</string>
 							<reference key="IBUITextColor" ref="874847118"/>
 							<nil key="IBUIHighlightedColor"/>
 							<int key="IBUIBaselineAdjustment">1</int>

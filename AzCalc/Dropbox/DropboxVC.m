@@ -7,7 +7,7 @@
 //
 
 #import "DropboxVC.h"
-#import "AzCalcViewController.h"
+#import "AzCalcViewController.h"		// delegate GvCalcRollLoad
 
 #define TAG_ACTION_Save			109
 #define TAG_ACTION_Retrieve		118
@@ -23,16 +23,16 @@
 
 - (void)alertIndicatorOn:(NSString*)zTitle
 {
-	[mAlert setTitle:zTitle];
-	[mAlert show];
-	[mActivityIndicator setFrame:CGRectMake((mAlert.bounds.size.width-50)/2, mAlert.frame.size.height-75, 50, 50)];
-	[mActivityIndicator startAnimating];
+	[alert_ setTitle:zTitle];
+	[alert_ show];
+	[activityIndicator_ setFrame:CGRectMake((alert_.bounds.size.width-50)/2, alert_.frame.size.height-75, 50, 50)];
+	[activityIndicator_ startAnimating];
 }
 
 - (void)alertIndicatorOff
 {
-	[mActivityIndicator stopAnimating];
-	[mAlert dismissWithClickedButtonIndex:mAlert.cancelButtonIndex animated:YES];
+	[activityIndicator_ stopAnimating];
+	[alert_ dismissWithClickedButtonIndex:alert_.cancelButtonIndex animated:YES];
 }
 
 - (void)alertCommError
@@ -46,13 +46,13 @@
 
 #pragma mark - Dropbox DBRestClient
 
-- (DBRestClient *)restClient 
+- (DBRestClient *)restClient_ 
 {
-	if (!restClient) {
-		restClient = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
-		restClient.delegate = self;
+	if (!restClient_) {
+		restClient_ = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
+		restClient_.delegate = self;
 	}
-	return restClient;
+	return restClient_;
 }
 
 
@@ -88,7 +88,7 @@
 - (IBAction)ibSegSort:(UISegmentedControl *)segment
 {
 	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-	[[self restClient] loadMetadata:mRootPath];
+	[[self restClient_] loadMetadata:mRootPath];
 }
 
 
@@ -111,13 +111,13 @@
 	ibTfName.returnKeyType = UIReturnKeyDone;
 	
 	// alertIndicatorOn: alertIndicatorOff: のための準備
-	[mAlert release];
-	mAlert = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:nil]; // deallocにて解放
+	[alert_ release];
+	alert_ = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:nil]; // deallocにて解放
 	//[self.view addSubview:mAlert];　　alertIndicatorOn:にてaddSubviewしている。
-	[mActivityIndicator release];
-	mActivityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-	mActivityIndicator.frame = CGRectMake(0, 0, 50, 50);
-	[mAlert addSubview:mActivityIndicator];
+	[activityIndicator_ release];
+	activityIndicator_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+	activityIndicator_.frame = CGRectMake(0, 0, 50, 50);
+	[alert_ addSubview:activityIndicator_];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -137,7 +137,7 @@
 	
 	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 	// Dropbox/App/CalcRoll 一覧表示
-	[[self restClient] loadMetadata:mRootPath];
+	[[self restClient_] loadMetadata:mRootPath];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -176,10 +176,10 @@
 
 - (void)dealloc 
 {
-	[mDidSelectRowAtIndexPath release], mDidSelectRowAtIndexPath = nil;
-	[mActivityIndicator release];
-	[mAlert release], mAlert = nil;
-	[mMetadatas release], mMetadatas = nil;
+	[didSelectRowAtIndexPath_ release], didSelectRowAtIndexPath_ = nil;
+	[activityIndicator_ release];
+	[alert_ release], alert_ = nil;
+	[metadatas_ release], metadatas_ = nil;
     [super dealloc];
 }
 
@@ -195,13 +195,13 @@
 			NSLog(@"\t%@", file.filename);
 		}
 #endif
-		[mMetadatas release], mMetadatas = nil;
+		[metadatas_ release], metadatas_ = nil;
 		if (0 < [metadata.contents count]) {
 			//mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
-			mMetadatas = [NSMutableArray new];
+			metadatas_ = [NSMutableArray new];
 			for (DBMetadata *dbm in metadata.contents) {
 				if ([[dbm.filename pathExtension] caseInsensitiveCompare:@"CalcRoll"]==NSOrderedSame) { // 大小文字区別なく比較する
-					[mMetadatas addObject:dbm];
+					[metadatas_ addObject:dbm];
 				}
 			}
 			// Sorting
@@ -209,13 +209,13 @@
 				NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"filename" ascending:YES];
 				NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
 				[sort1 release];
-				[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
+				[metadatas_ sortUsingDescriptors:sorting]; // 降順から昇順にソートする
 				[sorting release];
 			} else { // Date Desc
 				NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"lastModifiedDate" ascending:NO];
 				NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
 				[sort1 release];
-				[mMetadatas sortUsingDescriptors:sorting]; // 降順から昇順にソートする
+				[metadatas_ sortUsingDescriptors:sorting]; // 降順から昇順にソートする
 				[sorting release];
 			}
 			[ibTableView reloadData];
@@ -228,8 +228,8 @@
 - (void)restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error 
 {	// メタデータ読み込み失敗
     NSLog(@"Error loading metadata: %@", error);
-	[mMetadatas release];
-	mMetadatas = nil;
+	[metadatas_ release];
+	metadatas_ = nil;
 	[ibTableView reloadData];
 	//
 	[self alertIndicatorOff];
@@ -267,7 +267,7 @@
 {	// ファイル書き込み成功
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 	// Dropbox/App/CalcRoll 一覧表示
-	[[self restClient] loadMetadata:mRootPath];
+	[[self restClient_] loadMetadata:mRootPath];
 	[self alertIndicatorOff];
 	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SaveDone", nil) 
 												   message:nil  delegate:nil cancelButtonTitle:nil 
@@ -295,8 +295,8 @@
 {
 	switch (section) {
 		case 0:
-			if (0 < [mMetadatas count]) {
-				return [mMetadatas count];
+			if (0 < [metadatas_ count]) {
+				return [metadatas_ count];
 			} else {
 				return 1;
 			}
@@ -340,8 +340,8 @@
 	
 	switch (indexPath.section) {
 		case 0: {
-			if (0 < [mMetadatas count]) {
-				DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
+			if (0 < [metadatas_ count]) {
+				DBMetadata *dbm = [metadatas_ objectAtIndex:indexPath.row];
 				cell.textLabel.text = [dbm.filename stringByDeletingPathExtension]; // 拡張子を除く
 			} else {
 				cell.textLabel.text = NSLocalizedString(@"NoFile", nil);
@@ -395,12 +395,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (0<=indexPath.row && indexPath.row<[mMetadatas count]) 
+	if (0<=indexPath.row && indexPath.row<[metadatas_ count]) 
 	{
-		[mDidSelectRowAtIndexPath release], mDidSelectRowAtIndexPath = nil;
-		DBMetadata *dbm = [mMetadatas objectAtIndex:indexPath.row];
+		[didSelectRowAtIndexPath_ release], didSelectRowAtIndexPath_ = nil;
+		DBMetadata *dbm = [metadatas_ objectAtIndex:indexPath.row];
 		if (dbm) {
-			mDidSelectRowAtIndexPath = [indexPath copy];
+			didSelectRowAtIndexPath_ = [indexPath copy];
 			NSLog(@"dbm.filename=%@", dbm.filename);
 			ibTfName.text = [dbm.filename stringByDeletingPathExtension];
 			NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -454,9 +454,9 @@ replacementString:(NSString *)string
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-	if (mDidSelectRowAtIndexPath) {
+	if (didSelectRowAtIndexPath_) {
 		@try {
-			[ibTableView deselectRowAtIndexPath:mDidSelectRowAtIndexPath animated:YES]; // 選択解除
+			[ibTableView deselectRowAtIndexPath:didSelectRowAtIndexPath_ animated:YES]; // 選択解除
 		}
 		@catch (NSException *exception) {
 			NSLog(@"ERROR");
@@ -472,16 +472,16 @@ replacementString:(NSString *)string
 				filename = [filename stringByAppendingFormat:@".%@", [mLocalPath pathExtension]]; // 拡張子を付ける
 				NSLog(@"mLocalPath=%@, filename=%@", mLocalPath, filename);
 				[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-				[[self restClient] uploadFile:filename toPath:mRootPath withParentRev:nil fromPath:mLocalPath];
+				[[self restClient_] uploadFile:filename toPath:mRootPath withParentRev:nil fromPath:mLocalPath];
 			}
 			break;
 		case TAG_ACTION_Retrieve:		// このキーボードを採用する。
-			if (mDidSelectRowAtIndexPath && mDidSelectRowAtIndexPath.row < [mMetadatas count]) {
-				DBMetadata *dbm = [mMetadatas objectAtIndex:mDidSelectRowAtIndexPath.row];
+			if (didSelectRowAtIndexPath_ && didSelectRowAtIndexPath_.row < [metadatas_ count]) {
+				DBMetadata *dbm = [metadatas_ objectAtIndex:didSelectRowAtIndexPath_.row];
 				if (dbm) {
 					NSLog(@"dbm.path=%@ --> mLocalPath=%@", dbm.path, mLocalPath);
 					[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-					[[self restClient] loadFile:dbm.path intoPath:mLocalPath]; // DownLoad開始 ---> delagate loadedFile:
+					[[self restClient_] loadFile:dbm.path intoPath:mLocalPath]; // DownLoad開始 ---> delagate loadedFile:
 				}
 			}
 			break;
