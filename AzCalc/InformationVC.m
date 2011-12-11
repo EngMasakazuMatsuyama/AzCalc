@@ -198,6 +198,11 @@
 			zBody = [zBody stringByAppendingFormat:@"Device: %@   iOS: %@\n\n", 
 					 deviceID,
 					 [[UIDevice currentDevice] systemVersion]]; // OSの現在のバージョン
+
+			NSArray *languages = [NSLocale preferredLanguages];
+			zBody = [zBody stringByAppendingFormat:@"Locale: %@ (%@)\n\n",
+					 [[NSLocale currentLocale] objectForKey:NSLocaleIdentifier],
+					 [languages objectAtIndex:0]];
 			
 			zBody = [zBody stringByAppendingString:NSLocalizedString(@"Contact message",nil)];
 			[picker setMessageBody:zBody isHTML:NO];
