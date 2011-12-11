@@ -195,7 +195,7 @@
 #endif
 			UIDevice *device = [UIDevice currentDevice];
 			NSString* deviceID = [device platformString];	
-			zBody = [zBody stringByAppendingFormat:@"Device: %@   iOS: %@\n\n", 
+			zBody = [zBody stringByAppendingFormat:@"Device: %@   iOS: %@\n", 
 					 deviceID,
 					 [[UIDevice currentDevice] systemVersion]]; // OSの現在のバージョン
 

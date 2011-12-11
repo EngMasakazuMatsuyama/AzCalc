@@ -95,6 +95,21 @@
         }
         return YES;
     }
+	else if ([url isFileURL]) {	// .calcroll ファイルをタッチしたとき、
+		NSLog(@"File loaded into [url path]=%@", [url path]);
+		if ([[[url pathExtension] lowercaseString] isEqualToString:CALCROLL_EXT]) {	// ファイル・タッチ対応
+			// mKmPages リセット
+			[viewController GvCalcRollLoad:[url path]]; // .CalcRoll - Plist file
+			return YES;
+		} else {
+			UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AlertExtension", nil)
+														   message:NSLocalizedString(@"AlertExtensionMsg", nil)
+														  delegate:nil
+												 cancelButtonTitle:nil
+												 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+			[alv	show];
+		}
+	}
     // Add whatever other url handling code your app requires here
     return NO;
 }

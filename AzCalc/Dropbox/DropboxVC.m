@@ -200,7 +200,7 @@
 			//mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
 			metadatas_ = [NSMutableArray new];
 			for (DBMetadata *dbm in metadata.contents) {
-				if ([[dbm.filename pathExtension] caseInsensitiveCompare:@"CalcRoll"]==NSOrderedSame) { // 大小文字区別なく比較する
+				if ([[dbm.filename pathExtension] caseInsensitiveCompare:CALCROLL_EXT]==NSOrderedSame) { // 大小文字区別なく比較する
 					[metadatas_ addObject:dbm];
 				}
 			}
