@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
+   LastUpgradeVersion = "0430"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-               BuildableName = "AzCalcS1.app"
-               BlueprintName = "AzCalcS1"
-               ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
+               BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+               BuildableName = "AzCalc.app"
+               BlueprintName = "AzCalcFree"
+               ReferencedContainer = "container:AzCalc.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -31,28 +32,29 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-            BuildableName = "AzCalcS1.app"
-            BlueprintName = "AzCalcS1"
-            ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "AzCalc.app"
+            BlueprintName = "AzCalcFree"
+            ReferencedContainer = "container:AzCalc.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
    <LaunchAction
-      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
-      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      selectedDebuggerIdentifier = ""
+      selectedLauncherIdentifier = "Xcode.IDEFoundation.Launcher.PosixSpawn"
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
+      ignoresPersistentStateOnLaunch = "NO"
       debugDocumentVersioning = "YES"
       allowLocationSimulation = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-            BuildableName = "AzCalcS1.app"
-            BlueprintName = "AzCalcS1"
-            ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "AzCalc.app"
+            BlueprintName = "AzCalcFree"
+            ReferencedContainer = "container:AzCalc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -62,15 +64,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug"
       debugDocumentVersioning = "YES">
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "44BC4C461359E9A1009B995C"
-            BuildableName = "AzCalcS1.app"
-            BlueprintName = "AzCalcS1"
-            ReferencedContainer = "container:AzCalc-Xc4.2.xcodeproj">
+            BlueprintIdentifier = "1D6058900D05DD3D006BFB54"
+            BuildableName = "AzCalc.app"
+            BlueprintName = "AzCalcFree"
+            ReferencedContainer = "container:AzCalc.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

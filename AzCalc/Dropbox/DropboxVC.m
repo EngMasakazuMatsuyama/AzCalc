@@ -46,7 +46,7 @@
 
 #pragma mark - Dropbox DBRestClient
 
-- (DBRestClient *)restClient_ 
+- (DBRestClient *)restClient
 {
 	if (!restClient_) {
 		restClient_ = [[DBRestClient alloc] initWithSession:[DBSession sharedSession]];
@@ -88,7 +88,7 @@
 - (IBAction)ibSegSort:(UISegmentedControl *)segment
 {
 	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-	[[self restClient_] loadMetadata:mRootPath];
+	[[self restClient] loadMetadata:mRootPath];
 }
 
 
@@ -137,7 +137,7 @@
 	
 	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 	// Dropbox/App/CalcRoll 一覧表示
-	[[self restClient_] loadMetadata:mRootPath];
+	[[self restClient] loadMetadata:mRootPath];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -176,6 +176,10 @@
 
 - (void)dealloc 
 {
+	if (restClient_) {
+		restClient_.delegate = nil;
+		[restClient_ release];
+	}
 	[didSelectRowAtIndexPath_ release], didSelectRowAtIndexPath_ = nil;
 	[activityIndicator_ release];
 	[alert_ release], alert_ = nil;
@@ -267,7 +271,7 @@
 {	// ファイル書き込み成功
     NSLog(@"File uploaded successfully to path: %@", metadata.path);
 	// Dropbox/App/CalcRoll 一覧表示
-	[[self restClient_] loadMetadata:mRootPath];
+	[[self restClient] loadMetadata:mRootPath];
 	[self alertIndicatorOff];
 	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SaveDone", nil) 
 												   message:nil  delegate:nil cancelButtonTitle:nil 
@@ -340,7 +344,10 @@
 	
 	switch (indexPath.section) {
 		case 0: {
-			if (0 < [metadatas_ count]) {
+			if (metadatas_==nil) {
+				cell.textLabel.text = @"  Please wait.";
+			}
+			else if (0 < [metadatas_ count]) {
 				DBMetadata *dbm = [metadatas_ objectAtIndex:indexPath.row];
 				cell.textLabel.text = [dbm.filename stringByDeletingPathExtension]; // 拡張子を除く
 			} else {
@@ -472,7 +479,7 @@ replacementString:(NSString *)string
 				filename = [filename stringByAppendingFormat:@".%@", [mLocalPath pathExtension]]; // 拡張子を付ける
 				NSLog(@"mLocalPath=%@, filename=%@", mLocalPath, filename);
 				[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-				[[self restClient_] uploadFile:filename toPath:mRootPath withParentRev:nil fromPath:mLocalPath];
+				[[self restClient] uploadFile:filename toPath:mRootPath withParentRev:nil fromPath:mLocalPath];
 			}
 			break;
 		case TAG_ACTION_Retrieve:		// このキーボードを採用する。
@@ -481,7 +488,7 @@ replacementString:(NSString *)string
 				if (dbm) {
 					NSLog(@"dbm.path=%@ --> mLocalPath=%@", dbm.path, mLocalPath);
 					[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
-					[[self restClient_] loadFile:dbm.path intoPath:mLocalPath]; // DownLoad開始 ---> delagate loadedFile:
+					[[self restClient] loadFile:dbm.path intoPath:mLocalPath]; // DownLoad開始 ---> delagate loadedFile:
 				}
 			}
 			break;

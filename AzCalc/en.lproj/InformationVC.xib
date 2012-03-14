@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">800</int>
-		<string key="IBDocument.SystemVersion">10K549</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1038.36</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.SystemVersion">11D50</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2182</string>
+		<string key="IBDocument.AppKitVersion">1138.32</string>
+		<string key="IBDocument.HIToolboxVersion">568.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1179</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUIButton</string>
@@ -83,7 +83,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{101, 80}, {199, 37}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="422038035"/>
+						<reference key="NSNextKeyView" ref="152662311"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -111,23 +111,23 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{101, 110}, {199, 93}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="150900945"/>
+						<reference key="NSNextKeyView" ref="422038035"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<string key="IBUIText">Born on July 18 (C)2010-2011 Azukid Creator Sum Positive All Rights Reserved.</string>
+						<string key="IBUIText">Born on July 18 (C)2010-2012 Azukid Author: Sum Positive All Rights Reserved.</string>
 						<reference key="IBUITextColor" ref="999047234"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
-						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">6</int>
 						<int key="IBUITextAlignment">1</int>
 						<int key="IBUILineBreakMode">1</int>
 						<reference key="IBUIFontDescription" ref="37642869"/>
 						<reference key="IBUIFont" ref="267483635"/>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 					<object class="IBUILabel" id="534004765">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -144,7 +144,6 @@
 						<reference key="IBUITextColor" ref="999047234"/>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
-						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">6</int>
 						<int key="IBUILineBreakMode">1</int>
@@ -157,6 +156,7 @@
 							<double key="NSSize">12</double>
 							<int key="NSfFlags">16</int>
 						</object>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 					<object class="IBUILabel" id="950357638">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -181,19 +181,19 @@ ZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<string key="IBUIShadowOffset">{0, 0}</string>
-						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUINumberOfLines">9</int>
 						<int key="IBUILineBreakMode">0</int>
 						<reference key="IBUIFontDescription" ref="960763733"/>
 						<reference key="IBUIFont" ref="61578370"/>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 					<object class="IBUIButton" id="422038035">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 204}, {115, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSNextKeyView" ref="152662311"/>
+						<reference key="NSNextKeyView" ref="150900945"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -269,6 +269,7 @@ ZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 410}, {280, 30}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -290,7 +291,7 @@ ZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 				<reference key="NSNextKeyView" ref="896633924"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC41OTIxNTY4NjI3IDAuMzEzNzI1NDkwMiAwLjMwMTk2MDc4NDMgMC43NQA</bytes>
+					<bytes key="NSRGB">MC41OTIxNTY4NjI3IDAuMzEzNzI1NDkwMiAwLjMwMTk2MDc4NDMAA</bytes>
 				</object>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics"/>
 				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
@@ -301,7 +302,7 @@ ZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 							<integer value="1"/>
 							<integer value="3"/>
 						</array>
-						<array class="NSMutableArray" key="dict.values">
+						<array key="dict.values">
 							<string>{320, 480}</string>
 							<string>{480, 320}</string>
 						</array>
@@ -525,10 +526,10 @@ ZG8gbm90IGVudGVyIGNvbmZpZGVudGlhbCBpbmZvcm1hdGlvbi4</string>
 		</object>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDependencyDefaults">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaTouchPlugin.iPhoneOS</string>
-			<real value="1280" key="NS.object.0"/>
+			<real value="1296" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1179</string>
 	</data>
 </archive>
