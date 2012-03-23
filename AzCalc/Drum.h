@@ -38,10 +38,10 @@
 	float					MfTaxRate;
 }
 
-@property (nonatomic, retain) NSMutableString	*entryAnswer;	
-@property (nonatomic, retain) NSMutableString	*entryOperator;	
-@property (nonatomic, retain) NSMutableString	*entryNumber;	
-@property (nonatomic, retain) NSMutableString	*entryUnit;
+@property (nonatomic) NSMutableString	*entryAnswer;	
+@property (nonatomic) NSMutableString	*entryOperator;	
+@property (nonatomic) NSMutableString	*entryNumber;	
+@property (nonatomic) NSMutableString	*entryUnit;
 @property (nonatomic, assign) NSInteger			entryRow;
 
 - (id)init;											// 初期化

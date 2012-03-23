@@ -37,10 +37,10 @@
 
 - (void)alertCommError
 {
-	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CommError", nil) 
+	UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"CommError", nil) 
 												   message:NSLocalizedString(@"CommErrorMsg", nil) 
 												  delegate:nil cancelButtonTitle:nil 
-										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 	[alv show];
 }
 
@@ -67,19 +67,19 @@
 {
 	NSString *filename = [ibTfName.text stringByDeletingPathExtension]; // 拡張子を除く
 	if ([filename length] < 3) {
-		UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NameLeast", nil) 
+		UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"NameLeast", nil) 
 													  message:NSLocalizedString(@"NameLeastMsg", nil)  
 													  delegate:nil cancelButtonTitle:nil 
-											 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+											 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 		[alv show];
 		return;
 	}
 	
-	UIActionSheet *as = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
+	UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
 													delegate:self 
 										   cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
 									  destructiveButtonTitle:nil 
-											otherButtonTitles:NSLocalizedString(@"SaveKeyboard", nil), nil] autorelease];
+											otherButtonTitles:NSLocalizedString(@"SaveKeyboard", nil), nil];
 	as.tag = TAG_ACTION_Save;
 	[as showInView:self.view];
 	[ibTfName resignFirstResponder]; // キーボードを隠す
@@ -111,10 +111,8 @@
 	ibTfName.returnKeyType = UIReturnKeyDone;
 	
 	// alertIndicatorOn: alertIndicatorOff: のための準備
-	[alert_ release];
 	alert_ = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:nil]; // deallocにて解放
 	//[self.view addSubview:mAlert];　　alertIndicatorOn:にてaddSubviewしている。
-	[activityIndicator_ release];
 	activityIndicator_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
 	activityIndicator_.frame = CGRectMake(0, 0, 50, 50);
 	[alert_ addSubview:activityIndicator_];
@@ -178,13 +176,10 @@
 {
 	if (restClient_) {
 		restClient_.delegate = nil;
-		[restClient_ release];
 	}
-	[didSelectRowAtIndexPath_ release], didSelectRowAtIndexPath_ = nil;
-	[activityIndicator_ release];
-	[alert_ release], alert_ = nil;
-	[metadatas_ release], metadatas_ = nil;
-    [super dealloc];
+	didSelectRowAtIndexPath_ = nil;
+	alert_ = nil;
+	metadatas_ = nil;
 }
 
 
@@ -199,7 +194,7 @@
 			NSLog(@"\t%@", file.filename);
 		}
 #endif
-		[metadatas_ release], metadatas_ = nil;
+		metadatas_ = nil;
 		if (0 < [metadata.contents count]) {
 			//mMetadatas = [[NSMutableArray alloc] initWithArray:metadata.contents];
 			metadatas_ = [NSMutableArray new];
@@ -212,15 +207,11 @@
 			if (ibSegSort.selectedSegmentIndex==0) { // Name Asc
 				NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"filename" ascending:YES];
 				NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
-				[sort1 release];
 				[metadatas_ sortUsingDescriptors:sorting]; // 降順から昇順にソートする
-				[sorting release];
 			} else { // Date Desc
 				NSSortDescriptor *sort1 = [[NSSortDescriptor alloc] initWithKey:@"lastModifiedDate" ascending:NO];
 				NSArray *sorting = [[NSArray alloc] initWithObjects:sort1,nil];
-				[sort1 release];
 				[metadatas_ sortUsingDescriptors:sorting]; // 降順から昇順にソートする
-				[sorting release];
 			}
 			[ibTableView reloadData];
 		}
@@ -232,7 +223,6 @@
 - (void)restClient:(DBRestClient *)client loadMetadataFailedWithError:(NSError *)error 
 {	// メタデータ読み込み失敗
     NSLog(@"Error loading metadata: %@", error);
-	[metadatas_ release];
 	metadatas_ = nil;
 	[ibTableView reloadData];
 	//
@@ -251,11 +241,11 @@
 	// 閉じる
 	[self dismissModalViewControllerAnimated:YES];
 	// Done
-	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"QuoteDone", nil)
+	UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"QuoteDone", nil)
 												   message:nil
 												  delegate:nil
 										 cancelButtonTitle:nil
-										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 	[alv	show];
 }
 
@@ -273,9 +263,9 @@
 	// Dropbox/App/CalcRoll 一覧表示
 	[[self restClient] loadMetadata:mRootPath];
 	[self alertIndicatorOff];
-	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SaveDone", nil) 
+	UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SaveDone", nil) 
 												   message:nil  delegate:nil cancelButtonTitle:nil 
-										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 	[alv show];
 }
 
@@ -338,8 +328,8 @@
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-									   reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+									   reuseIdentifier:CellIdentifier];
     }
 	
 	switch (indexPath.section) {
@@ -404,7 +394,7 @@
 {
 	if (0<=indexPath.row && indexPath.row<[metadatas_ count]) 
 	{
-		[didSelectRowAtIndexPath_ release], didSelectRowAtIndexPath_ = nil;
+		didSelectRowAtIndexPath_ = nil;
 		DBMetadata *dbm = [metadatas_ objectAtIndex:indexPath.row];
 		if (dbm) {
 			didSelectRowAtIndexPath_ = [indexPath copy];
@@ -414,11 +404,11 @@
 			[userDef setObject:ibTfName.text  forKey:USER_KEYBOARD_FILENAME];
 			[userDef synchronize];
 			//
-			UIActionSheet *as = [[[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
+			UIActionSheet *as = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"Are you sure", nil) 
 															 delegate:self 
 													cancelButtonTitle:NSLocalizedString(@"Cancel", nil) 
 											   destructiveButtonTitle:NSLocalizedString(@"ChangeKeyboard", nil) 
-													otherButtonTitles:nil] autorelease];
+													otherButtonTitles:nil];
 			as.tag = TAG_ACTION_Retrieve;
 			[as showInView:self.view];
 		}
@@ -444,7 +434,7 @@
 replacementString:(NSString *)string 
 {
 	// senderは、MtfName だけ
-    NSMutableString *text = [[textField.text mutableCopy] autorelease];
+    NSMutableString *text = [textField.text mutableCopy];
     [text replaceCharactersInRange:range withString:string];
 	// 置き換えた後の長さをチェックする
 	if ([text length] <= 40) {

@@ -31,7 +31,7 @@
 		//id lastObject = [[[self lastObject] retain] autorelease];
 		id lastObject = [self lastObject];
 		if (lastObject) {
-			[[lastObject retain] autorelease];
+			//[[lastObject retain] autorelease];
 			[self removeLastObject];
 		}
 		return lastObject;	// nil if [self count] == 0
@@ -425,8 +425,8 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 	@finally {
 		//[autoPool release];
 		//-------------------------------------------------localPool END
-		[maRpn release];
-		[maStack release];
+		maRpn = nil;
+		maStack = nil;
 	}
 	//if ([zAnswer retainCount]==1) 
 	//	[zAnswer autorelease];  // @""ならば不要だから

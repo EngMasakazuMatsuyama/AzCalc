@@ -27,11 +27,11 @@
 	BOOL			bChangeKeyboard;	// YES=キー変更モード
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet AzCalcViewController *viewController;
-@property (nonatomic, retain) IBOutlet SettingVC *ibSettingVC;
-@property (nonatomic, retain) IBOutlet InformationVC *ibInformationVC;
-@property (nonatomic, retain) IBOutlet OptionVC *ibOptionVC;
+@property (nonatomic) IBOutlet UIWindow *window;
+@property (nonatomic) IBOutlet AzCalcViewController *viewController;
+@property (nonatomic) IBOutlet SettingVC *ibSettingVC;
+@property (nonatomic) IBOutlet InformationVC *ibInformationVC;
+@property (nonatomic) IBOutlet OptionVC *ibOptionVC;
 
 //@property (nonatomic, assign) double	dMemory;
 @property (nonatomic, assign) BOOL		bChangeKeyboard;

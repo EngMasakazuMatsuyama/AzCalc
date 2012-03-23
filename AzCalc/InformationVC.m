@@ -19,10 +19,6 @@
 
 #pragma mark - View dealloc
 
-- (void)dealloc 
-{
-    [super dealloc];
-}
 
 
 #pragma mark - View lifecicle
@@ -97,7 +93,7 @@
 										  otherButtonTitles:@"Go safari＞", nil];
 	alert.tag = ALERT_ToSupportSite;
 	[alert show];
-	[alert autorelease];
+	//[alert autorelease];
 }
 
 - (IBAction)ibBuPaidApp:(UIButton *)button
@@ -110,7 +106,7 @@
 										  otherButtonTitles:@"Go safari＞", nil];
 	alert.tag = ALERT_APP_PAID;
 	[alert show];
-	[alert autorelease];
+	//[alert autorelease];
 }
 
 - (IBAction)ibBuContact:(UIButton *)button
@@ -125,7 +121,6 @@
 											  cancelButtonTitle:nil
 											  otherButtonTitles:@"OK", nil];
 		[alert show];
-		[alert release];
         return;
     }
 
@@ -137,7 +132,7 @@
 										  otherButtonTitles:@"OK", nil];
 	alert.tag = ALERT_CONTACT;
 	[alert show];
-	[alert autorelease];
+	//[alert autorelease];
 }
 
 - (IBAction)ibBuOK:(UIButton *)button
@@ -208,7 +203,6 @@
 			[picker setMessageBody:zBody isHTML:NO];
 			
 			[self presentModalViewController:picker animated:YES];
-			[picker release];
 		}	break;
 	}
 }
@@ -233,7 +227,6 @@
 												  cancelButtonTitle:nil
 												  otherButtonTitles:@"OK", nil];
 			[alert show];
-			[alert release];
 		} break;
         case MFMailComposeResultFailed: {
             //[self setAlert:@"メール送信失敗！":@"メールの送信に失敗しました。ネットワークの設定などを確認して下さい"];
@@ -244,7 +237,6 @@
 												  cancelButtonTitle:nil
 												  otherButtonTitles:@"OK", nil];
 			[alert show];
-			[alert release];
         } break;
         default:
             break;

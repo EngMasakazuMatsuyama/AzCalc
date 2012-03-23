@@ -167,7 +167,7 @@
 	BOOL		bDirty;		// YES=キー配置変更あり ⇒ 保存が必要
 }
 
-@property (nonatomic, retain) NSString		*RzUnit;
+@property (nonatomic) NSString		*RzUnit;
 @property (nonatomic, assign) NSInteger		iPage;
 @property (nonatomic, assign) NSInteger		iCol;
 @property (nonatomic, assign) NSInteger		iRow;

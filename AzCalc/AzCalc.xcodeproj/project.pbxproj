@@ -17,6 +17,8 @@
 		440C19951446B50E008E9CB0 /* icon44-PageFilp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19921446B50E008E9CB0 /* icon44-PageFilp@2x.png */; };
 		440C19961446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
 		440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
+		44109329151CC7DE006BD4E6 /* Icon72free@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44109328151CC7DE006BD4E6 /* Icon72free@2x.png */; };
+		4410932B151CC7F1006BD4E6 /* Icon72s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4410932A151CC7F1006BD4E6 /* Icon72s1@2x.png */; };
 		44159C1C146EC10900906673 /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0D146EC10900906673 /* AzCalcViewController.mm */; };
 		44159C1D146EC10900906673 /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0D146EC10900906673 /* AzCalcViewController.mm */; };
 		44159C1E146EC10900906673 /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0F146EC10900906673 /* AzCalcAppDelegate.m */; };
@@ -62,7 +64,7 @@
 		44AF8AA4130578BF00D3594C /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA3130578BF00D3594C /* MediaPlayer.framework */; };
 		44AF8AA6130578BF00D3594C /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA5130578BF00D3594C /* MessageUI.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44AF8AA7130578BF00D3594C /* QuartzCore.framework */; };
-		44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; };
+		44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 44AF8D5911FC8F0700D4B206 /* SBCD.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		44B270BA146EB84C00450472 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270B7146EB84C00450472 /* SettingVC.xib */; };
 		44B270BB146EB84C00450472 /* SettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270B7146EB84C00450472 /* SettingVC.xib */; };
 		44B270BF146EB89E00450472 /* OptionVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44B270BC146EB89E00450472 /* OptionVC.xib */; };
@@ -115,7 +117,7 @@
 		44BC4C951359EA01009B995C /* Icon57s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C921359EA01009B995C /* Icon57s1@2x.png */; };
 		44BC4C961359EA01009B995C /* Icon72s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C931359EA01009B995C /* Icon72s1.png */; };
 		44C572931384B4B300490D58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C572921384B4B300490D58 /* SystemConfiguration.framework */; };
-		44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; };
+		44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; };
 		44CDB60D135AA80B00037C8E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D58131528FC0064EA93 /* Default.png */; };
 		44CDB60E135AA81100037C8E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D5A131529060064EA93 /* Default@2x.png */; };
@@ -183,6 +185,8 @@
 		32CA4F630368D1EE00C91783 /* AzCalc_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AzCalc_Prefix.pch; sourceTree = "<group>"; };
 		440C19921446B50E008E9CB0 /* icon44-PageFilp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon44-PageFilp@2x.png"; path = "Image/icon44-PageFilp@2x.png"; sourceTree = "<group>"; };
 		440C19931446B50E008E9CB0 /* icon44-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon44-PageFilp.png"; path = "Image/icon44-PageFilp.png"; sourceTree = "<group>"; };
+		44109328151CC7DE006BD4E6 /* Icon72free@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon72free@2x.png"; sourceTree = "<group>"; };
+		4410932A151CC7F1006BD4E6 /* Icon72s1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon72s1@2x.png"; sourceTree = "<group>"; };
 		44159C0B146EC0A900906673 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = SOURCE_ROOT; };
 		44159C0D146EC10900906673 /* AzCalcViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AzCalcViewController.mm; sourceTree = SOURCE_ROOT; };
 		44159C0F146EC10900906673 /* AzCalcAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AzCalcAppDelegate.m; sourceTree = SOURCE_ROOT; };
@@ -406,12 +410,14 @@
 				44B762F1146194850078AE1D /* AzKmPagesPad.plist */,
 				44B762F2146194850078AE1D /* AzKmPagesPhone.plist */,
 				444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */,
-				44BC4C911359EA01009B995C /* Icon57s1.png */,
-				44BC4C921359EA01009B995C /* Icon57s1@2x.png */,
-				44BC4C931359EA01009B995C /* Icon72s1.png */,
 				44BC4C8B1359E9F1009B995C /* Icon57free.png */,
 				44BC4C8C1359E9F1009B995C /* Icon57free@2x.png */,
 				44BC4C8D1359E9F1009B995C /* Icon72free.png */,
+				44109328151CC7DE006BD4E6 /* Icon72free@2x.png */,
+				44BC4C911359EA01009B995C /* Icon57s1.png */,
+				44BC4C921359EA01009B995C /* Icon57s1@2x.png */,
+				44BC4C931359EA01009B995C /* Icon72s1.png */,
+				4410932A151CC7F1006BD4E6 /* Icon72s1@2x.png */,
 				44377D58131528FC0064EA93 /* Default.png */,
 				44377D5A131529060064EA93 /* Default@2x.png */,
 				44377D56131528EE0064EA93 /* Default-Landscape.png */,
@@ -694,6 +700,7 @@
 				44B67243149479B200AC5D4B /* Dropbox-130x44.png in Resources */,
 				44AD65F21510A02E00F17D47 /* Default-Portrait@2x~ipad.png in Resources */,
 				44AD65F31510A03800F17D47 /* Default-Landscape@2x~ipad.png in Resources */,
+				44109329151CC7DE006BD4E6 /* Icon72free@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,6 +766,7 @@
 				44B67244149479B200AC5D4B /* Dropbox-130x44.png in Resources */,
 				44AD65EF15109F8C00F17D47 /* Default-Portrait@2x~ipad.png in Resources */,
 				44AD65F115109F9E00F17D47 /* Default-Landscape@2x~ipad.png in Resources */,
+				4410932B151CC7F1006BD4E6 /* Icon72s1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -915,6 +923,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -950,6 +959,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -983,6 +993,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1014,6 +1025,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1043,6 +1055,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1071,6 +1084,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masakazu Matsuyama";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;
@@ -1093,6 +1107,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1125,6 +1140,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
@@ -1147,6 +1163,7 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
+				CLANG_ENABLE_OBJC_ARC = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masakazu Matsuyama (RL5WRC28AG)";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_THUMB_SUPPORT = NO;

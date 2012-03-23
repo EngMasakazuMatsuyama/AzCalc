@@ -69,11 +69,11 @@
 - (void)aleartKeymapErrorMsg:(NSInteger)errNo
 {	// キーマップ関係のエラーあれば表示し、削除インストールを促す
 	NSString *title = [NSString stringWithFormat:@"%@\n#(%ld)#", NSLocalizedString(@"KeymapError", nil), (long)errNo];
-	UIAlertView *alv = [[[UIAlertView alloc] initWithTitle: title
+	UIAlertView *alv = [[UIAlertView alloc] initWithTitle: title
 												   message:NSLocalizedString(@"KeymapError msg", nil)
 												  delegate:nil
 										 cancelButtonTitle:nil
-										 otherButtonTitles:@"OK", nil] autorelease];
+										otherButtonTitles:@"OK", nil]; // autorelease];
 	[alv	show];
 }
 
@@ -133,7 +133,7 @@
 
 - (void)mKmMemoryReset
 {	// keymapLoad から呼び出される。
-	[mKmMemorys release], mKmMemorys = [NSMutableArray new]; // RootだけMutable
+	mKmMemorys = [NSMutableArray new]; // RootだけMutable
 	
 	if (mKmPages) 
 	{	// mKmPages にある[M]メモリキーを mKmMemorys から参照できるようにする
@@ -169,7 +169,7 @@
 - (void)mKmPagesFromKeyboardSet:(NSDictionary*)keybordSet
 {	// [1.0.9]以前の KeyboardSet を、mKmPages に変換する
 	// KeyMap へ変換する
-	[mKmPages release], mKmPages = [NSMutableArray new];	// RootだけMutable
+	mKmPages = [NSMutableArray new];	// RootだけMutable
 
 	NSInteger	iColOfs, iRowOfs; // AzKeySet仕様に合わせるため＜＜ iPad(0,0) iPhone(1,1) を原点にしていたため。
 	if (bPad) { // iPad
@@ -185,7 +185,6 @@
 			for (int iRow=iRowOfs ; iRow<iRowOfs+iKeyRows ; iRow++) {
 				NSString *zPCR = [[NSString alloc] initWithFormat:@"P%dC%dR%d", iPage, iCol, iRow];
 				NSDictionary *dicKey = [keybordSet objectForKey:zPCR];
-				[zPCR release];
 				if (dicKey) {
 					[maKeys addObject:dicKey];
 				} else {
@@ -199,14 +198,12 @@
 													   @"",															@"Unit",
 													   nil];
 					[maKeys addObject:dicKeyNull];
-					[dicKeyNull release];
 				}
 			}
 		}
 		if (0 < [maKeys count]) {
 			[mKmPages addObject:maKeys];
 		}
-		[maKeys release];
 	}
 	// KeyMap 変換完了
 }
@@ -227,19 +224,19 @@
 		}
 		if (array==nil OR [array count]<4) {  //iPad最小ページ数4
 			NSLog(@"ERROR: GvCalcRollLoad: zCalcRollPath=%@", zCalcRollPath);
-			UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Canceled", nil)
+			UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Canceled", nil)
 														   message:NSLocalizedString(@"CanceledMsg", nil)
 														  delegate:nil
 												 cancelButtonTitle:nil
-												 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+												 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 			[alv	show];
-			[dic release]; //---注意---＜＜Analize指摘
+			 //---注意---＜＜Analize指摘
 			return;
 		}
 		//
 		if (mKmPages) {
-			[mKmPages release], mKmPages = nil;
-			[mKmPadFunc release], mKmPadFunc = nil;
+			mKmPages = nil;
+			mKmPadFunc = nil;
 		}
 		mKmPages = [NSMutableArray new];	// 全てMutableにする
 		for (NSArray *aPage in array) {
@@ -247,10 +244,8 @@
 			for (NSDictionary *aKey in aPage) {
 				NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
 				[muKeys addObject:dKey];
-				[dKey release];
 			}
 			[mKmPages addObject:muKeys];
-			[muKeys release];
 		}
 		
 		if (bPad) {
@@ -260,11 +255,9 @@
 				for (NSDictionary *aKey in array) {
 					NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
 					[mKmPadFunc addObject:dKey];
-					[dKey release];
 				}
 			}
 		} 
-		[dic release];
 		// mKmPages と mKmPadFunc から mKmMemory を生成する
 		[self mKmMemoryReset]; 
 		//
@@ -278,8 +271,8 @@
 
 - (void)keymapLoad
 {
-	[mKmPages release], mKmPages = nil;
-	[mKmPadFunc release], mKmPadFunc = nil;
+	mKmPages = nil;
+	mKmPadFunc = nil;
 
 #ifdef AzMAKE_SPLASHFACE
 	return; // キー定義なし
@@ -298,10 +291,8 @@
 					for (NSDictionary *aKey in aPage) {
 						NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
 						[muKeys addObject:dKey];
-						[dKey release];
 					}
 					[mKmPages addObject:muKeys];
-					[muKeys release];
 				}
 			}
 			array = [userDef arrayForKey:GUD_KmPadFunc];
@@ -310,7 +301,6 @@
 				for (NSDictionary *aKey in array) {
 					NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
 					[mKmPadFunc addObject:dKey];
-					[dKey release];
 				}
 			}
 		} else {
@@ -322,10 +312,8 @@
 					for (NSDictionary *aKey in aPage) {
 						NSMutableDictionary *dKey = [[NSMutableDictionary alloc] initWithDictionary:aKey];
 						[muKeys addObject:dKey];
-						[dKey release];
 					}
 					[mKmPages addObject:muKeys];
-					[muKeys release];
 				}
 			}
 			mKmPadFunc = nil;
@@ -421,14 +409,14 @@
 							if (RaKeyMaster==nil) {
 								AzLOG(@"ERROR: AzKeyMaster.plist not Open");
 								[self aleartKeymapErrorMsg:501];
-								[keyView release]; //--注意---＜＜Analize指摘
+								 //--注意---＜＜Analize指摘
 								return nil;
 							}
 						}
 						@catch (NSException *exception) {
 							NSLog(@"AzCalcVC (500) Exception: %@: %@\n", [errEx name], [errEx reason]);
 							[self aleartKeymapErrorMsg:500];
-							[keyView release]; //--注意---＜＜Analize指摘
+							 //--注意---＜＜Analize指摘
 							return nil;
 						}
 					}
@@ -516,7 +504,7 @@
 			// タテヨコ連結処理は、viewWillAppearで処理されるので、ここでは不要
 			
 			[keyView addSubview:bu];
-			[bu release]; // init だから
+			 // init だから
 			
 			fy += (fKeyHeight + fKeyHeiGap*2);
 		}
@@ -536,7 +524,7 @@
 				if (RaKeyMaster==nil) {
 					AzLOG(@"ERROR: AzKeyMaster.plist not Open");
 					[self aleartKeymapErrorMsg:511];
-					[keyView release]; //--注意---＜＜Analize指摘
+					 //--注意---＜＜Analize指摘
 					return nil;
 				}
 				//buChangeKey = nil;
@@ -544,7 +532,7 @@
 			@catch (NSException *exception) {
 				NSLog(@"AzCalcVC (510) Exception: %@: %@\n", [errEx name], [errEx reason]);
 				[self aleartKeymapErrorMsg:510];
-				[keyView release]; //--注意---＜＜Analize指摘
+				 //--注意---＜＜Analize指摘
 				return nil;
 			}
 		}
@@ -603,7 +591,6 @@
 		@try {
 			ibScrollUpper.scrollEnabled = YES;
 			if (RaKeyMaster) {
-				[RaKeyMaster release];
 				RaKeyMaster = nil;
 			}
 			ibBuMemory.hidden = NO;
@@ -788,11 +775,11 @@
 		tap.numberOfTouchesRequired =1; // 指数
 		tap.numberOfTapsRequired = 2; // タップ数
 		[ibPvDrum addGestureRecognizer:tap];
-		[tap release], tap = nil;
+		tap = nil;
 		
 		//-----------------------------------------------------(0)ドラム ページ
 		if (RaDrumButtons) {
-			[RaDrumButtons release];	// viewDidUnloadされた後、ここを通る
+				// viewDidUnloadされた後、ここを通る
 			RaDrumButtons = nil;
 		}
 		NSMutableArray *maButtons = [NSMutableArray new];
@@ -814,7 +801,6 @@
 			//[bu release]; Auto
 		}
 		RaDrumButtons = [[NSArray alloc] initWithArray:maButtons];	
-		[maButtons release];
 		
 		if (RaDrums==nil) {
 			// Drumオブジェクトは、最初に1度だけ生成し、viewDidUnloadでは破棄しない。
@@ -824,10 +810,8 @@
 				// ドラムインスタンス生成
 				Drum *drum = [Drum new];
 				[mRaDrums addObject:drum];
-				[drum release];
 			}
 			RaDrums = [[NSArray alloc] initWithArray:mRaDrums];		
-			[mRaDrums release];
 			
 			entryComponent = 0;
 			bDramRevers = NO;
@@ -919,7 +903,7 @@
 #endif
 		swipe.direction = UISwipeGestureRecognizerDirectionLeft; //左
 		[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
-		[swipe release], swipe = nil;
+		swipe = nil;
 		// handleSwipeRight:ハンドラ登録　　2本指で右へスワイプされた
 		swipe = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowerSwipeRight:)];
 #if (TARGET_IPHONE_SIMULATOR)
@@ -930,7 +914,7 @@
 #endif
 		swipe.direction = UISwipeGestureRecognizerDirectionRight; //右
 		[ibScrollLower addGestureRecognizer:swipe];// スクロールビューに登録
-		[swipe release], swipe = nil;
+		swipe = nil;
 #if (TARGET_IPHONE_SIMULATOR)
 		// シミュレータで動作している場合のコード
 #else
@@ -1135,34 +1119,34 @@
 		//-------------------------------------------------------------------------キーボード生成
 		// キーボタン イメージ
 		if (RimgDrumButton) {
-			[RimgDrumButton release], RimgDrumButton = nil;
+			RimgDrumButton = nil;
 		}
 		if (RimgDrumPush) {
-			[RimgDrumPush release], RimgDrumPush = nil;
+			RimgDrumPush = nil;
 		}
 		switch ([defaults integerForKey:GUD_ButtonDesign]) {
 			case 1: // Oval
 				//[1.0.10]stretchableImageWithLeftCapWidth:により四隅を固定して伸縮する
 				if (bPad) {
-					RimgDrumButton = [[[UIImage imageNamed:@"KeyOvalUp@Pad"] stretchableImageWithLeftCapWidth:35 topCapHeight:35] retain];
-					RimgDrumPush = [[[UIImage imageNamed:@"KeyOvalDw@Pad"] stretchableImageWithLeftCapWidth:35 topCapHeight:35] retain];
+					RimgDrumButton = [[UIImage imageNamed:@"KeyOvalUp@Pad"] stretchableImageWithLeftCapWidth:35 topCapHeight:35];
+					RimgDrumPush = [[UIImage imageNamed:@"KeyOvalDw@Pad"] stretchableImageWithLeftCapWidth:35 topCapHeight:35];
 				} else {
-					RimgDrumButton = [[[UIImage imageNamed:@"KeyOvalUp"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
-					RimgDrumPush = [[[UIImage imageNamed:@"KeyOvalDw"] stretchableImageWithLeftCapWidth:20 topCapHeight:20] retain];
+					RimgDrumButton = [[UIImage imageNamed:@"KeyOvalUp"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
+					RimgDrumPush = [[UIImage imageNamed:@"KeyOvalDw"] stretchableImageWithLeftCapWidth:20 topCapHeight:20];
 				}
 				break;
 				
 			case 2: // Square
 				//[1.0.10]stretchableImageWithLeftCapWidth:により四隅を固定して伸縮する
-				RimgDrumButton = [[[UIImage imageNamed:@"KeySquareUp"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] retain];
-				RimgDrumPush = [[[UIImage imageNamed:@"KeySquareDw"] stretchableImageWithLeftCapWidth:10 topCapHeight:10] retain];
+				RimgDrumButton = [[UIImage imageNamed:@"KeySquareUp"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
+				RimgDrumPush = [[UIImage imageNamed:@"KeySquareDw"] stretchableImageWithLeftCapWidth:10 topCapHeight:10];
 				break;
 				
 			default: // 0=Roll
 				//[1.0.10]stretchableImageWithLeftCapWidth:によりボタンイメージ向上
 				//RimgDrumButton = [[UIImage imageNamed:@"KeyRollUp"] retain];
-				RimgDrumButton = [[[UIImage imageNamed:@"KeyRollUp"] stretchableImageWithLeftCapWidth:12 topCapHeight:0] retain];
-				RimgDrumPush = [[[UIImage imageNamed:@"KeyRollDw"] stretchableImageWithLeftCapWidth:12 topCapHeight:0] retain];
+				RimgDrumButton = [[UIImage imageNamed:@"KeyRollUp"] stretchableImageWithLeftCapWidth:12 topCapHeight:0];
+				RimgDrumPush = [[UIImage imageNamed:@"KeyRollDw"] stretchableImageWithLeftCapWidth:12 topCapHeight:0];
 				break;
 		}
 		
@@ -1186,7 +1170,7 @@
 		}
 		mKeyView = [self keyViewAlloc:rcBounds page:MiSvLowerPage];
 		assert(mKeyView);
-		[ibScrollLower addSubview:mKeyView], [mKeyView release];
+		[ibScrollLower addSubview:mKeyView];
 		[ibScrollLower scrollRectToVisible:rcBounds animated:NO]; // 中央 ＜＜ .y=0でも大丈夫
 		
 		// MEMORY BUTTON		＜＜これだけは、 @"KeyRollUp" に固定。高さが不足し、Ovalが正しく表示されないため。
@@ -1426,24 +1410,24 @@
 		[RiAdBanner cancelBannerViewAction];	// 停止
 		RiAdBanner.delegate = nil;							// 解放メソッドを呼び出さないように　　　[0.4.1]メモリ不足時に落ちた原因
 		[RiAdBanner removeFromSuperview];		// UIView解放		retainCount -1
-		[RiAdBanner release], RiAdBanner = nil;	// alloc解放			retainCount -1
+		RiAdBanner = nil;	// alloc解放			retainCount -1
 	}
 	
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
-		[RoAdMobView release], RoAdMobView = nil;
+		RoAdMobView = nil;
 	}
 #endif
 	
-	[RaKeyMaster release],			RaKeyMaster = nil;
-	[RaDrumButtons release],		RaDrumButtons = nil;
+	RaKeyMaster = nil;
+	RaDrumButtons = nil;
 	// RaDrums は破棄しない（ドラム記録を消さないため）deallocではreleaseすること。
-	[mPadMemoryKeyButtons release], mPadMemoryKeyButtons = nil;
+	mPadMemoryKeyButtons = nil;
 	
 	//[0.4.1]//"Received memory warning. Level=2" 回避するため一元化
-	[RimgDrumButton release],	RimgDrumButton = nil;
-	[RimgDrumPush release],		RimgDrumPush = nil;
+	RimgDrumButton = nil;
+	RimgDrumPush = nil;
 	//不要//[mKeyView release], mKeyView = nil;  ＜＜ ibScrollLowerがオーナーだから。
 	//不要//[mKeyViewPrev release], mKeyViewPrev = nil;  ＜＜ ibScrollLowerがオーナーだから。
 }
@@ -1464,16 +1448,11 @@
 	NSLog(@"--- dealloc ---");
 	[self unloadRelease];
 	
-	[mGvKeyUnitSI release];
-	[mGvKeyUnitSi2 release];
-	[mGvKeyUnitSi3 release];
 	
-	[mKmMemorys release], mKmMemorys = nil;
-	[mKmPadFunc release],	mKmPadFunc = nil;
-	[mKmPages release], mKmPages = nil;
+	mKmMemorys = nil;
+	mKmPadFunc = nil;
+	mKmPages = nil;
 	
-	[RaDrums release];
-    [super dealloc];
 }
 
 
@@ -1569,7 +1548,7 @@
 	//NG//[mKeyView removeFromSuperview]; これすると mKeyViewPrev が破棄されることになる。
 	// 新しいページを生成し、スクロール表示
 	mKeyView = [self keyViewAlloc:rect page:MiSvLowerPage];
-	[ibScrollLower addSubview:mKeyView], [mKeyView release];
+	[ibScrollLower addSubview:mKeyView];
 	[ibScrollLower scrollRectToVisible:rect animated:YES]; // rect.origin.y=0になっているが垂直移動しないので無視される
 	// キーレイアウト変更モードならば、直前ページを保存する
 	if (RaKeyMaster) {// !=nil キーレイアウト変更モード
@@ -1608,7 +1587,7 @@
 	//NG//[mKeyView removeFromSuperview]; これすると mKeyViewPrev が破棄されることになる。
 	// 新しいページを生成し、スクロール表示
 	mKeyView = [self keyViewAlloc:rect page:MiSvLowerPage];
-	[ibScrollLower addSubview:mKeyView], [mKeyView release];
+	[ibScrollLower addSubview:mKeyView];
 	[ibScrollLower scrollRectToVisible:rect animated:YES]; // rect.origin.y=0になっているが垂直移動しないので無視される
 	// キーレイアウト変更モードならば、直前ページを保存する
 	if (RaKeyMaster) {// !=nil キーレイアウト変更モード
@@ -1634,7 +1613,6 @@
 											  cancelButtonTitle:nil
 											  otherButtonTitles:@"OK", nil];
 		[alert show];
-		[alert release];
 	}
 }
 
@@ -1685,9 +1663,9 @@
 				  andSi3:(NSString *)unitSi3 // =nil:ハイライト解除
 {
 	NSLog(@"***GvKeyUnitGroupSI=%@,%@,%@", unitSI, unitSi2, unitSi3);
-	[mGvKeyUnitSI release];		if (unitSI) mGvKeyUnitSI = [unitSI copy];			else	mGvKeyUnitSI = nil;
-	[mGvKeyUnitSi2 release];	if (unitSi2) mGvKeyUnitSi2 = [unitSi2 copy];	else	mGvKeyUnitSi2 = nil;
-	[mGvKeyUnitSi3 release];	if (unitSi3) mGvKeyUnitSi3 = [unitSi3 copy];	else	mGvKeyUnitSi3 = nil;
+			if (unitSI) mGvKeyUnitSI = [unitSI copy];			else	mGvKeyUnitSI = nil;
+		if (unitSi2) mGvKeyUnitSi2 = [unitSi2 copy];	else	mGvKeyUnitSi2 = nil;
+		if (unitSi3) mGvKeyUnitSi3 = [unitSi3 copy];	else	mGvKeyUnitSi3 = nil;
 	NSLog(@"***mGvKeyUnitSI=%@,%@,%@", mGvKeyUnitSI, mGvKeyUnitSi2, mGvKeyUnitSi3);
 	[self MvKeyUnitGroupSI:mKeyView];
 }
@@ -1945,7 +1923,6 @@
 			[maBus addObject:kb];
 		}
 		mPadMemoryKeyButtons = [[NSArray alloc] initWithArray:maBus]; // 主に、ここでの配置変え（回転）のために記録する。
-		[maBus release];
 	}
 	
 	// 回転移動
@@ -2069,7 +2046,7 @@
 	AzLOG(@"buttonFormula: iKeyTag=(%d)", iKeyTag);
 	
 	// これ以降、localPool管理エリア
-	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
+	//NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
 	@try {
 		BOOL bCalcing = NO; // YES=再計算する
 		[self MvFormulaBlankMessage:NO];
@@ -2256,7 +2233,7 @@
 		[self MvFormulaBlankMessage:YES];
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
-		[localPool release];
+		//[localPool release];
 	}
 }
 
@@ -2338,7 +2315,6 @@
 											  cancelButtonTitle:nil
 											  otherButtonTitles:@"OK", nil];
 		[alert show];
-		[alert release];
 		return 0; // Memory Overflow
 	}
 	// 未使用メモリ（iTagMin）へ記録する
@@ -2513,7 +2489,6 @@
 				   nil];
 		}
 		[dic writeToFile:zPath atomically:YES];
-		[dic release];
 		
 		if (YES_iPad) {
 			DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC-iPad" bundle:nil];
@@ -2692,7 +2667,6 @@
 	kb.tag = KeyTAG_MPASTE; // [Paste]
 	[kb setTitle:@"Paste" forState:UIControlStateNormal];
 	[self ibButton:kb]; // Paste処理させる
-	[kb release];
 }
 
 
@@ -2800,7 +2774,7 @@
 
 	if (RaKeyMaster) { // キーボード変更モード
 		if (vi == nil) {
-			vi = [[[UIView alloc] initWithFrame:CGRectMake(0,0,sz.width,sz.height)] autorelease];
+			vi = [[UIView alloc] initWithFrame:CGRectMake(0,0,sz.width,sz.height)];
 			// lb addSubview
 			lb = [[UILabel alloc] initWithFrame:CGRectMake(5,0,sz.width-10,sz.height)];
 			lb.tag = 981;
@@ -2808,7 +2782,7 @@
 			lb.adjustsFontSizeToFitWidth = YES;
 			lb.minimumFontSize = 6;
 			lb.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
-			[vi addSubview:lb]; [lb release];
+			[vi addSubview:lb]; 
 		} else {
 			// vi再利用可能なとき
 			lb = (UILabel *)[vi viewWithTag:981];
@@ -2827,7 +2801,7 @@
 	// ドラタク通常モード
 	assert(component < MiSegDrums);
 	if (vi == nil) {
-		vi = [[[UIView alloc] initWithFrame:CGRectMake(0,0,sz.width,32)] autorelease];
+		vi = [[UIView alloc] initWithFrame:CGRectMake(0,0,sz.width,32)];
 		// addSubview
 		lb = [[UILabel alloc] initWithFrame:CGRectMake(5,0,sz.width-10,32)];
 		lb.tag = 991;
@@ -2835,7 +2809,7 @@
 		lb.adjustsFontSizeToFitWidth = YES;
 		lb.minimumFontSize = 6;
 		lb.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
-		[vi addSubview:lb]; [lb release];
+		[vi addSubview:lb]; 
 	}
 	if (lb == nil) {
 		lb = (UILabel *)[vi viewWithTag:991];
@@ -3162,14 +3136,12 @@
 {	// 再生が終了したとき、破棄する	＜＜ シミュレータでは呼び出されない
 	NSLog(@"- audioPlayerDidFinishPlaying -");
 	player.delegate = nil;
-    [player release];
 }
 
 - (void)audioPlayerDecodeErrorDidOccur: (AVAudioPlayer*)player error:(NSError*)error
 {	// エラー発生
 	NSLog(@"- audioPlayerDecodeErrorDidOccur -");
 	player.delegate = nil;
-	[player release];
 }
 
 #ifdef GD_Ad_ENABLED

@@ -28,11 +28,6 @@
 
 #pragma mark - Application dealloc
 
-- (void)dealloc 
-{
-    [window release];
-    [super dealloc];
-}
 
 
 #pragma mark - Application lifecycle
@@ -64,21 +59,19 @@
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 	[userDefaults registerDefaults:azOptDef];	// 未定義のKeyのみ更新される
 	[userDefaults synchronize]; // plistへ書き出す
-	[azOptDef release];
 	
 	//dMemory = 0.0;
 	bChangeKeyboard = NO;
 	
 	// Add the view controller's view to the window and display.
-	[window addSubview:viewController.view];    [viewController release];
+	[window addSubview:viewController.view];    
     [window makeKeyAndVisible];
 	
 	//[1.1.0]Dropbox
-	DBSession* dbSession = [[[DBSession alloc]
+	DBSession* dbSession = [[DBSession alloc]
 							 initWithAppKey:@"62f2rrofi788410"
 							 appSecret:@"s07scm6ifi1o035"
-							 root:kDBRootAppFolder] // either kDBRootAppFolder or kDBRootDropbox
-     autorelease];
+							 root:kDBRootAppFolder];
 	[DBSession setSharedSession:dbSession];
     
 	return YES;
@@ -102,11 +95,11 @@
 			[viewController GvCalcRollLoad:[url path]]; // .CalcRoll - Plist file
 			return YES;
 		} else {
-			UIAlertView *alv = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AlertExtension", nil)
+			UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AlertExtension", nil)
 														   message:NSLocalizedString(@"AlertExtensionMsg", nil)
 														  delegate:nil
 												 cancelButtonTitle:nil
-												 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil] autorelease];
+												 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 			[alv	show];
 		}
 	}

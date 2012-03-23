@@ -30,19 +30,6 @@
 
 #pragma mark - NSObject lifecicle
 
-- (void)dealloc 
-{
-	[entryUnit release];
-	[entryNumber release];
-	[entryOperator release];
-	[entryAnswer release];
-	
-	[formulaUnits release];
-	[formulaNumbers release];
-	[formulaOperators release];
-
-    [super dealloc];
-}
 
 - (id)init		// 初期化
 {
@@ -106,7 +93,7 @@
 	AzLOG(@"entryKeyButton: (%d)", keyButton.tag);
 	
 	// これ以降、localPool管理エリア
-	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
+	//NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
 	// 以後、return;使用禁止！すると@finallyを通らず、localPoolが解放されない。
 	
 	@try {
@@ -405,7 +392,7 @@
 		NSLog(@"entryKeyButton:Exception: %@: %@\n", [errEx name], [errEx reason]);
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
-		[localPool release];
+		//[localPool release];
 	}
 }
 
@@ -415,7 +402,7 @@
 	if ([keybu.RzUnit length]<=0) return;
 	
 	// これ以降、localPool管理エリア
-	NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];
+	//NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];
 	@try {
 		[entryUnit setString:keybu.titleLabel.text]; // 単位表示
 		[entryUnit appendString:KeyUNIT_DELIMIT];	// ;
@@ -443,7 +430,7 @@
 		NSLog(@"entryUnitKey:Exception: %@: %@\n", [errEx name], [errEx reason]);
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通る!!!!!!!!!!!!!!!!!!!
-		[localPool release];
+		//[localPool release];
 	}
 }
 
@@ -833,7 +820,6 @@
 											  cancelButtonTitle:nil
 											  otherButtonTitles:@"OK", nil];
 		[alert show];
-		[alert release];
 		if (DRUM_RECORDS <= [formulaOperators count]) { // 最終行オーバー：entry行に[=]回答を表示する
 			[entryOperator setString:OP_ANS];
 			[entryNumber setString:[self zAnswerDrum]]; 
@@ -845,20 +831,17 @@
 	// Operator: entryをarrayに追加し、entryを新規作成する
 	assert( entryOperator != nil );
 	[formulaOperators addObject:entryOperator];
-	[entryOperator release];
 	entryOperator = [[NSMutableString alloc] initWithString:zNextOperator];
 	entryRow = [formulaOperators count];
 	
 	// Number: entryをarrayに追加し、entryを新規作成する
 	assert( entryNumber != nil );
 	[formulaNumbers addObject:entryNumber];
-	[entryNumber release];
 	entryNumber = [NSMutableString new];
 	
 	// Unit: entryをarrayに追加し、entryを新規作成する
 	assert( entryUnit != nil );
 	[formulaUnits addObject:entryUnit];
-	[entryUnit release];
 	entryUnit = [NSMutableString new];
 
 	// Answer: addObjectしないのでクリアするだけ。
@@ -1014,7 +997,7 @@
 	NSString *zFormula = @"";
 	
 	//-------------------------------------------------localPool BEGIN >>> @finaly release
-	NSAutoreleasePool *autoPool = [NSAutoreleasePool new];
+	//NSAutoreleasePool *autoPool = [NSAutoreleasePool new];
 	@try {
 		NSInteger iRowStart = 0; // 最初から
 		if (2 <= entryRow) {
@@ -1116,7 +1099,7 @@
 		}
 		// 数値と演算子の間のスペースはあってもなくても大丈夫
 		// localPoolが解放される前に確保しておく
-		[zFormula retain];	// retainCount=1
+			// retainCount=1
 	}
 	@catch (NSException * errEx) {
 		NSLog(@"zFormulaFromDrum:Exception: %@: %@\n", [errEx name], [errEx reason]);
@@ -1127,11 +1110,11 @@
 		zFormula = @"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@finally {
-		[autoPool release];
+		//[autoPool release];
 	}
 	NSLog(@"zFormulaFromDrum: zFormula=%@", zFormula);
-	if ([zFormula retainCount]==1)
-		[zFormula autorelease];  // @""ならば不要だから
+	//if ([zFormula retainCount]==1)
+	//	[zFormula autorelease];  // @""ならば不要だから
 	return zFormula;
 }
 

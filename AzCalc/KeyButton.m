@@ -27,7 +27,7 @@
 		iColorNo = [[decoder decodeObjectForKey:@"iColorNo"] integerValue];
 		fFontSize = [[decoder decodeObjectForKey:@"fFontSize"] floatValue];
 		bDirty = [[decoder decodeObjectForKey:@"bDirty"] boolValue];
-		RzUnit = [[decoder decodeObjectForKey:@"RzUnit"] retain];
+		RzUnit = [decoder decodeObjectForKey:@"RzUnit"];
 	}
 	return self;
 }
@@ -47,11 +47,6 @@
 
 #pragma mark - UIButton lifecicle
 
-- (void)dealloc 
-{
-	[RzUnit release];
-    [super dealloc];
-}
 
 - (KeyButton *)initWithFrame:(CGRect)frame 
 {

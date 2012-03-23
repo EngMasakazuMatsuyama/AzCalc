@@ -39,9 +39,6 @@
 
 #pragma mark - View dealloc
 
-- (void)dealloc {
-    [super dealloc];
-}
 
 
 #pragma mark - View lifecicle
