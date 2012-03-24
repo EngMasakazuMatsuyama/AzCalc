@@ -47,6 +47,7 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
 	[super viewWillAppear:animated];
+	GA_TRACK_PAGE(@"OptionVC");
 	
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	

@@ -13,8 +13,8 @@
 
 #if defined (AzFREE) && !defined(AzMAKE_SPLASHFACE)
 #define GD_Ad_ENABLED
-#define AdMobID_CalcRollPAD		@"a14dd47ad31c249"		// ドラタク　Pad Free パブリッシャー ID
-#define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
+//#define AdMobID_CalcRollPAD		@"a14dd47ad31c249"		// ドラタク　Pad Free パブリッシャー ID
+//#define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
 #endif
 
 #define OR  ||
@@ -89,6 +89,36 @@
 // Global.m Functions
 //
 //void alertBox( NSString *zTitle, NSString *zMsg, NSString *zButton );
+
+
+//
+// Google Analytics
+//
+#import "GANTracker.h"
+
+#define __GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) \
+					[[GANTracker sharedTracker] startTrackerWithAccountID:ACCOUNT \
+					dispatchPeriod:PERIOD delegate:DELEGATE];
+#ifdef DEBUG
+#define GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) { \
+			__GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE); \
+						[GANTracker sharedTracker].debug = YES; \
+						[GANTracker sharedTracker].dryRun = YES; }
+#else
+#define GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) __GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE);
+#endif
+
+#define GA_TRACK_PAGE(PAGE) { NSError *error; if (![[GANTracker sharedTracker] \
+														trackPageview:[NSString stringWithFormat:@"/%@", PAGE] \
+														withError:&error]) { NSLog(@"%@",error.helpAnchor);  } };
+
+#define GA_TRACK_EVENT(EVENT,ACTION,LABEL,VALUE) { NSError *error; if (![[GANTracker sharedTracker] \
+														trackEvent:EVENT action:ACTION label:LABEL value:VALUE withError:&error]) \
+														{ NSLog(@"%@",error.helpAnchor); }  };
+
+#define GA_TRACK_CLASS  GA_TRACK_PAGE(NSStringFromClass([self class]));
+
+#define GA_TRACK_METHOD GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @””, -1); }
 
 
 //END

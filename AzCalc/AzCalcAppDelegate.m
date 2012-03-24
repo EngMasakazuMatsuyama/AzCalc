@@ -36,6 +36,8 @@
 {    
     // Override point for customization after application launch.
 
+	GA_INIT_TRACKER(@"UA-30305032-2", 10, nil);
+	
 	//-------------------------------------------------Option Setting Defult
 	// User Defaultsを使い，キー値を変更したり読み出す前に，NSUserDefaultsクラスのインスタンスメソッド
 	// registerDefaultsメソッドを使い，初期値を指定します。

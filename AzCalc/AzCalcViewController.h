@@ -11,8 +11,13 @@
 #import "AzCalcAppDelegate.h"
 
 #ifdef GD_Ad_ENABLED
-#import <iAd/iAd.h>
-#import "GADBannerView.h"
+//#import <iAd/iAd.h>
+//#import "GADBannerView.h"
+#import "AdWhirlView.h"
+#import "AdWhirlDelegateProtocol.h"
+#define GAD_SIZE_320x50     CGSizeMake(320, 50)
+#import "MasManagerViewController.h"
+#import "NADView.h"  //AppBank nend
 #endif
 
 #define KeyMemorys_MAX		20	// M1〜M20
@@ -22,7 +27,8 @@
 
 @interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate
 #ifdef GD_Ad_ENABLED
-		,ADBannerViewDelegate
+		//,ADBannerViewDelegate
+		, AdWhirlDelegate, NADViewDelegate
 #endif
 > {
 	IBOutlet UIPickerView	*ibPvDrum;
@@ -41,8 +47,11 @@
 @private
 	//----------------------------------------------dealloc時にrelese
 #ifdef GD_Ad_ENABLED
-	ADBannerView*		RiAdBanner;
-	GADBannerView*	RoAdMobView;
+	//ADBannerView*		RiAdBanner;
+	//GADBannerView*	RoAdMobView;
+	AdWhirlView							*mAdWhirlView;
+	NADView									*mNendView;
+	MasManagerViewController	*mMedibaAd; 
 #endif
 	NSArray				*RaDrums;
 	NSArray				*RaDrumButtons;
@@ -75,7 +84,7 @@
     BOOL				bPad;								// =YES:iPad  =NO:iPhone
 	BOOL				MbInformationOpen;
 #ifdef GD_Ad_ENABLED
-	BOOL				bADbannerIsVisible;		// iAd 広告内容があればYES
+	//BOOL				bADbannerIsVisible;		// iAd 広告内容があればYES
 	//BOOL				bADbannerFirstTime;		// iAd 広告内容があれば、起動時に表示するため
 	BOOL				bADbannerTopShow;		//[1.0.1]// =YES:トップの広告を表示する  =NO:入力が始まったので隠す
 #endif
