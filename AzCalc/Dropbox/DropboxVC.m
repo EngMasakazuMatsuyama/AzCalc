@@ -6,6 +6,7 @@
 //  Copyright (c) 2011 AzukiSoft. All rights reserved.
 //
 
+#import "Global.h"
 #import "DropboxVC.h"
 #import "AzCalcViewController.h"		// delegate GvCalcRollLoad
 
@@ -132,6 +133,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+	GA_TRACK_EVENT(@"Dropbox",@"View",@"viewDidAppear", 0);
 	
 	[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 	// Dropbox/App/CalcRoll 一覧表示
@@ -247,11 +249,14 @@
 										 cancelButtonTitle:nil
 										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 	[alv	show];
+	GA_TRACK_EVENT(@"Dropbox",@"Action",@"Loaded OK", 0);
 }
 
 - (void)restClient:(DBRestClient*)client loadFileFailedWithError:(NSError*)error 
 {	// ファイル読み込み失敗
     NSLog(@"There was an error loading the file - %@", error);
+	NSString *zz = [NSString stringWithFormat:@"loadFileFailedWithError: %@", error.description];
+	GA_TRACK_EVENT(@"Dropbox",@"ERROR",zz, 0);
 	[self alertIndicatorOff];
 	[self alertCommError];
 }
@@ -267,11 +272,14 @@
 												   message:nil  delegate:nil cancelButtonTitle:nil 
 										 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 	[alv show];
+	GA_TRACK_EVENT(@"Dropbox",@"Action",@"Saved OK", 0);
 }
 
 - (void)restClient:(DBRestClient*)client uploadFileFailedWithError:(NSError*)error 
 {	// ファイル書き込み失敗
     NSLog(@"File upload failed with error - %@", error);
+	NSString *zz = [NSString stringWithFormat:@"uploadFileFailedWithError: %@", error.description];
+	GA_TRACK_EVENT(@"Dropbox",@"ERROR",zz, 0);
 	[self alertIndicatorOff];
 	[self alertCommError];
 }
@@ -465,6 +473,7 @@ replacementString:(NSString *)string
 	switch (actionSheet.tag) {
 		case TAG_ACTION_Save:	// 保存
 			if (mLocalPath) {
+				GA_TRACK_EVENT(@"Dropbox",@"Action",@"Save", 0);
 				NSString *filename = [ibTfName.text stringByDeletingPathExtension]; // 拡張子を除く
 				filename = [filename stringByAppendingFormat:@".%@", [mLocalPath pathExtension]]; // 拡張子を付ける
 				NSLog(@"mLocalPath=%@, filename=%@", mLocalPath, filename);
@@ -476,6 +485,7 @@ replacementString:(NSString *)string
 			if (didSelectRowAtIndexPath_ && didSelectRowAtIndexPath_.row < [metadatas_ count]) {
 				DBMetadata *dbm = [metadatas_ objectAtIndex:didSelectRowAtIndexPath_.row];
 				if (dbm) {
+					GA_TRACK_EVENT(@"Dropbox",@"Action",@"Load", 0);
 					NSLog(@"dbm.path=%@ --> mLocalPath=%@", dbm.path, mLocalPath);
 					[self alertIndicatorOn:NSLocalizedString(@"Communicating", nil)];
 					[[self restClient] loadFile:dbm.path intoPath:mLocalPath]; // DownLoad開始 ---> delagate loadedFile:

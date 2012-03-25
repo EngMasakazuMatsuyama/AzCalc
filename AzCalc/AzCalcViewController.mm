@@ -1234,11 +1234,12 @@
 {
 	[super viewDidAppear:animated];
 	
-	if (RaKeyMaster) {
-		// キーレイアウト変更モード
-		GA_TRACK_PAGE(@"KeyboardChange");
+	if (RaKeyMaster) {	// キーレイアウト変更モード
+		GA_TRACK_PAGE(@"KeySetting");
+	} else if (MiSvUpperPage==1) {
+		GA_TRACK_PAGE(@"Formula");
 	} else {
-		GA_TRACK_PAGE(@"MainView");
+		GA_TRACK_PAGE(@"CalcRoll");
 	}
 	
 	@try {
@@ -2037,6 +2038,7 @@
 		[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
 		// ドラム幅を拡大する
 		bZoomEntryComponent = !bZoomEntryComponent;  // 拡大／均等トグル式
+		GA_TRACK_EVENT(@"Touch",@"Roll",@"Widening",0);
 	}
 #endif
 	
@@ -2045,6 +2047,8 @@
 		[self audioPlayer:@"SentMessage.caf"];  // SMSの送信音
 
 		entryComponent = button.tag;	// ドラム切り替え
+		NSString *zz = [NSString stringWithFormat:@"Comp=%ld",(long)entryComponent];
+		GA_TRACK_EVENT(@"Touch",@"Roll",zz,0);
 		bZoomEntryComponent = NO;  // 均等サイズに戻す
 		//bTouchAction = YES;
 		// ドラム切り替え時に、キーボードをページ(1)にする
@@ -2093,7 +2097,14 @@
 - (void)buttonFormula:(NSInteger)iKeyTag  // 数式へのキー入力処理
 {
 	AzLOG(@"buttonFormula: iKeyTag=(%d)", iKeyTag);
-	GA_TRACK_EVENT(@"LOG",@"Main-buttonFormula",@"iKeyTag", iKeyTag);
+	
+	NSString *zTouch = @"Calc";
+	if (RaKeyMaster) {
+		zTouch = @"Setting";
+	}
+	else if (MiSvUpperPage==1) {
+		zTouch = @"Fomula";
+	}
 	
 	// これ以降、localPool管理エリア
 	//NSAutoreleasePool *localPool = [[NSAutoreleasePool alloc] init];	// [0.3]autorelease独自解放のため
@@ -2114,6 +2125,7 @@
 			case 8:
 			case 9:
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingFormat:@"%d", (int)iKeyTag];
+				GA_TRACK_EVENT(zTouch,@"Num", ibTvFormula.text, 0);
 				bCalcing = YES; // 再計算する
 				break;
 				
@@ -2128,19 +2140,23 @@
 				
 			case KeyTAG_DECIMAL: // [.]小数点
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:NUM_DECI];
+				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
 				break;
 				
 			case KeyTAG_00: // [00]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"00"];
+				GA_TRACK_EVENT(zTouch,@"Num", ibTvFormula.text, 0);
 				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_000: // [000]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"000"];
+				GA_TRACK_EVENT(zTouch,@"Num", ibTvFormula.text, 0);
 				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_SIGN: // [+/-]
+				GA_TRACK_EVENT(zTouch,@"Func", @"+/-", 0);
 				if ([ibTvFormula.text hasSuffix:OP_ADD]) { // [+] ⇒ [-]
 					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1]; // BS
 					ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_SUB];
@@ -2188,39 +2204,54 @@
 				break;
 				
 			case KeyTAG_PERC: // [%]パーセント ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
+				GA_TRACK_EVENT(zTouch,@"Func", @"%", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"÷100"];
 				bCalcing = YES; // 再計算する
 				break;
 			case KeyTAG_PERM: // [‰]パーミル ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
+				GA_TRACK_EVENT(zTouch,@"Func", @"‰", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"÷1000"];
 				bCalcing = YES; // 再計算する
 				break;
 			case KeyTAG_ROOT: // [√]ルート
+				GA_TRACK_EVENT(zTouch,@"Func", @"√", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ROOT];
 				break;
 			case KeyTAG_LEFT: // [(]
+				GA_TRACK_EVENT(zTouch,@"Func", @"(", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"("];
 				break;
 			case KeyTAG_RIGHT: // [)]
+				GA_TRACK_EVENT(zTouch,@"Func", @")", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@")"];
 				bCalcing = YES; // 再計算する
 				break;
 				
 				//---------------------------------------------[100]-[199] Operators
 			case KeyTAG_ANSWER: // [=]
+				GA_TRACK_EVENT(zTouch,@"Func", @"=", 0);
 				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_PLUS: // [+]
-				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ADD];	break;
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ADD];	
+				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				break;
 			case KeyTAG_MINUS: // [-]
-				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_SUB];	break;
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_SUB];	
+				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				break;
 			case KeyTAG_MULTI: // [×]
-				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_MULT];	break;
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_MULT];	
+				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				break;
 			case KeyTAG_DIVID: // [÷]
-				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_DIVI];	break;
+				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_DIVI];
+				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				break;
 				
 			case KeyTAG_GT: // [GT] Ground Total: 1ドラムの全[=]回答値の合計
+				GA_TRACK_EVENT(zTouch,@"Func", @"GT", 0);
 				if ([ibTvFormula.text hasPrefix:@"("] && [ibTvFormula.text hasSuffix:@")"]) {
 					// 大外カッコを外す
 					NSRange rg = NSMakeRange(1, [ibTvFormula.text length]-2);
@@ -2233,11 +2264,13 @@
 				
 				//---------------------------------------------[200]-[299] Functions
 			case KeyTAG_AC: // [AC]
+				GA_TRACK_EVENT(zTouch,@"Func",@"AC", 0);
 				ibTvFormula.text = @"";
 				ibLbFormAnswer.text = @"=";
 				break;
 				
 			case KeyTAG_BS: { // [BS]
+				GA_TRACK_EVENT(zTouch,@"Func",@"BS", 0);
 				if (0 < [ibTvFormula.text length]) {
 					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1];
 					bCalcing = YES; // 再計算する
@@ -2245,6 +2278,7 @@
 			} break;
 				
 			case KeyTAG_SC: { // [SC] Section Clear：数式では1セクション（直前の演算子まで）クリア
+				GA_TRACK_EVENT(zTouch,@"Func",@"SC", 0);
 				NSString *z;
 				NSRange rg;
 				NSInteger idx = [ibTvFormula.text length] - 1;
@@ -2266,8 +2300,10 @@
 				NSString *zAns = stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES);
 				if (zAns) {
 					if (iKeyTag==KeyTAG_AddTAX) {
+						GA_TRACK_EVENT(zTouch,@"Func",@"+Tax", 0);
 						ibTvFormula.text = [NSString stringWithFormat:@"(%@)×%.3f", ibTvFormula.text, MfTaxRate];
 					} else {
+						GA_TRACK_EVENT(zTouch,@"Func",@"-Tax", 0);
 						ibTvFormula.text = [NSString stringWithFormat:@"(%@)÷%.3f", ibTvFormula.text, MfTaxRate];
 					}
 					bCalcing = YES; // 再計算する
@@ -2375,9 +2411,17 @@
 // Memory関係キー入力処理
 - (void)buttonMemory:(Drum *)drum withTag:(NSInteger)iKeyTag withCopyNumber:(NSString *)zCopyNumber
 {
-	GA_TRACK_EVENT(@"LOG",@"Main-buttonMemory",@"iKeyTag", iKeyTag);
+	NSString *zTouch = @"Calc";
+	if (RaKeyMaster) {
+		zTouch = @"Setting";
+	}
+	else if (MiSvUpperPage==1) {
+		zTouch = @"Fomula";
+	}
+
 	switch (iKeyTag) {
 		case KeyTAG_MCLEAR: { // [MClear]
+			GA_TRACK_EVENT(zTouch,@"Memory",@"MClear", 0);
 			if (0 < [[UIPasteboard generalPasteboard].string length]) {
 				[UIPasteboard generalPasteboard].string = @"";
 			} 
@@ -2393,6 +2437,7 @@
 		}	break;
 			
 		case KeyTAG_MCOPY: // [Memory]  ＜＜同じ値を続けて登録することも可とした＞＞
+			GA_TRACK_EVENT(zTouch,@"Memory",@"Memory", 0);
 			if (0 < [zCopyNumber length]) {
 				// ドラムを逆回転させた行の数値 zCopyNumber が有効ならば優先コピー
 				[UIPasteboard generalPasteboard].string = stringFormatter(zCopyNumber, YES);
@@ -2414,6 +2459,7 @@
 			break;
 			
 		case KeyTAG_MPASTE: { // [Paste]　　＜＜ibBuMemoryから呼び出しているので.tagの変更に注意＞＞
+			GA_TRACK_EVENT(zTouch,@"Memory",@"Paste", 0);
 			if (MiSvUpperPage==0) {
 				if ([drum.entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
 					if (![drum vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
@@ -2476,17 +2522,22 @@
 				switch (iKeyTag) {
 					case KeyTAG_M_PLUS: // [M+]
 						stringAddition( cAns, cNum1, cNum2 );
+						GA_TRACK_EVENT(zTouch,@"Memory",@"M+", 0);
 						break;
 					case KeyTAG_M_MINUS: // [M-]
 						stringSubtract( cAns, cNum1, cNum2 );
+						GA_TRACK_EVENT(zTouch,@"Memory",@"M-", 0);
 						break;
 					case KeyTAG_M_MULTI: // [M×]
 						stringMultiply( cAns, cNum1, cNum2 );
+						GA_TRACK_EVENT(zTouch,@"Memory",@"M×", 0);
 						break;
 					case KeyTAG_M_DIVID: // [M÷]
 						stringDivision( cAns, cNum1, cNum2 );
+						GA_TRACK_EVENT(zTouch,@"Memory",@"M÷", 0);
 						break;
 					default:
+						GA_TRACK_EVENT(@"Crash",@"Memory",@"iKeyTag", 0);
 						exit(-1); // iKeyTag 番号まちがい
 						break;
 				}
@@ -2523,6 +2574,7 @@
 	// 未認証の場合、認証処理後、AzCalcAppDelegate:handleOpenURL:から呼び出される
 	if ([[DBSession sharedSession] isLinked]) 
 	{	// Dropbox 認証済み
+		GA_TRACK_EVENT(@"Dropbox",@"Auth",@"Authenticated", 0);
 		NSString *zHome = NSHomeDirectory();
 		NSString *zTmp = [zHome stringByAppendingPathComponent:@"tmp"]; // "Documents"
 		NSString *zPath = [zTmp stringByAppendingPathComponent:@"MyKeyboard.CalcRoll"];
@@ -2555,6 +2607,7 @@
 			[self presentModalViewController:vc animated:YES];
 		}
 	} else {
+		GA_TRACK_EVENT(@"Dropbox",@"Auth",@"Unauthenticated", 0);
 		// Dropbox 未認証
 		[[DBSession sharedSession] link];
 	}
@@ -2699,6 +2752,7 @@
 
 - (IBAction)ibBuGetDrum:(UIButton *)button	// ドラム ⇒ 数式 転記
 {
+	GA_TRACK_METHOD
 	//[0.3]ドラム式を数式にして ibTvFormula へ送る
 	Drum *drum = [RaDrums objectAtIndex:entryComponent];
 	NSString *zFormula = [drum zFormulaCalculator];
@@ -2713,6 +2767,7 @@
 
 - (IBAction)ibBuMemory:(UIButton *)button
 {
+	GA_TRACK_METHOD
 	// [Paste]
 	KeyButton *kb = [[KeyButton alloc] initWithFrame:CGRectZero];
 	kb.tag = KeyTAG_MPASTE; // [Paste]
@@ -2992,6 +3047,7 @@
 		MiSvUpperPage = (NSInteger)(scrollView.contentOffset.x / scrollView.frame.size.width);
 
 		if (iPrevUpper!=1 && MiSvUpperPage==1) {
+			GA_TRACK_PAGE(@"Formula");
 			[CalcFunctions setCalcMethod:1]; // 数式側：常に (1)Formula にする
 			// 全単位ボタンを無効にする
 			[self GvKeyUnitGroupSI:@"" andSI:@""];
@@ -3000,6 +3056,7 @@
 #endif
 		}
 		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
+			GA_TRACK_PAGE(@"CalcRoll");
 			NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 			MiSegCalcMethod = (NSInteger)[userDef integerForKey:GUD_CalcMethod];
 			[CalcFunctions setCalcMethod:MiSegCalcMethod];	// ドラム側：設定方式に戻す

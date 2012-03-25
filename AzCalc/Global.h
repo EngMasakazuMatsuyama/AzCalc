@@ -99,7 +99,7 @@
 #define __GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) \
 					[[GANTracker sharedTracker] startTrackerWithAccountID:ACCOUNT \
 					dispatchPeriod:PERIOD delegate:DELEGATE];
-#ifdef DEBUG
+#ifdef DEBUGxxxxxxx
 #define GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) { \
 			__GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE); \
 						[GANTracker sharedTracker].debug = YES; \
@@ -110,15 +110,15 @@
 
 #define GA_TRACK_PAGE(PAGE) { NSError *error; if (![[GANTracker sharedTracker] \
 														trackPageview:[NSString stringWithFormat:@"/%@", PAGE] \
-														withError:&error]) { NSLog(@"%@",error.helpAnchor);  } };
+														withError:&error]) { NSLog(@"GA_TRACK_PAGE: error: %@",error.helpAnchor);  } }
 
 #define GA_TRACK_EVENT(EVENT,ACTION,LABEL,VALUE) { NSError *error; if (![[GANTracker sharedTracker] \
 														trackEvent:EVENT action:ACTION label:LABEL value:VALUE withError:&error]) \
-														{ NSLog(@"%@",error.helpAnchor); }  };
+														{ NSLog(@"GA_TRACK_EVENT: error: %@",error.helpAnchor); }  }
 
-#define GA_TRACK_CLASS  GA_TRACK_PAGE(NSStringFromClass([self class]));
+#define GA_TRACK_CLASS  { GA_TRACK_PAGE(NSStringFromClass([self class])) }
 
-#define GA_TRACK_METHOD GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @””, -1); }
+#define GA_TRACK_METHOD { GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"", -1); }
 
 
 //END
