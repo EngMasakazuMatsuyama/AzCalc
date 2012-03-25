@@ -11,7 +11,7 @@
 #import "AzCalcAppDelegate.h"
 
 #ifdef GD_Ad_ENABLED
-//#import <iAd/iAd.h>
+#import <iAd/iAd.h>
 //#import "GADBannerView.h"
 #import "AdWhirlView.h"
 #import "AdWhirlDelegateProtocol.h"
@@ -27,8 +27,7 @@
 
 @interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate
 #ifdef GD_Ad_ENABLED
-		//,ADBannerViewDelegate
-		, AdWhirlDelegate, NADViewDelegate
+		, AdWhirlDelegate, NADViewDelegate, ADBannerViewDelegate
 #endif
 > {
 	IBOutlet UIPickerView	*ibPvDrum;
@@ -47,7 +46,7 @@
 @private
 	//----------------------------------------------dealloc時にrelese
 #ifdef GD_Ad_ENABLED
-	//ADBannerView*		RiAdBanner;
+	ADBannerView						*RiAdBanner;  //iPadのみ
 	//GADBannerView*	RoAdMobView;
 	AdWhirlView							*mAdWhirlView;
 	NADView									*mNendView;
@@ -84,8 +83,8 @@
     BOOL				bPad;								// =YES:iPad  =NO:iPhone
 	BOOL				MbInformationOpen;
 #ifdef GD_Ad_ENABLED
-	//BOOL				bADbannerIsVisible;		// iAd 広告内容があればYES
-	//BOOL				bADbannerFirstTime;		// iAd 広告内容があれば、起動時に表示するため
+	BOOL				bADbannerIsVisible;		// iAd 広告内容があればYES
+	BOOL				bADbannerFirstTime;		// iAd 広告内容があれば、起動時に表示するため
 	BOOL				bADbannerTopShow;		//[1.0.1]// =YES:トップの広告を表示する  =NO:入力が始まったので隠す
 #endif
 	
@@ -128,7 +127,7 @@
 				  andSi3:(NSString *)unitSi3; // =nil:ハイライト解除
 
 #ifdef GD_Ad_ENABLED
-- (void)MvShowAdApple:(BOOL)bApple AdMob:(BOOL)bMob;
+- (void)MvShowAd:(BOOL)bShow;	// applicationDidEnterBackground:から呼び出される
 #endif
 
 // delegate

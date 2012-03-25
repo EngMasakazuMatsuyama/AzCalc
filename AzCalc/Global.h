@@ -112,13 +112,17 @@
 														trackPageview:[NSString stringWithFormat:@"/%@", PAGE] \
 														withError:&error]) { NSLog(@"GA_TRACK_PAGE: error: %@",error.helpAnchor);  } }
 
-#define GA_TRACK_EVENT(EVENT,ACTION,LABEL,VALUE) { NSError *error; if (![[GANTracker sharedTracker] \
-														trackEvent:EVENT action:ACTION label:LABEL value:VALUE withError:&error]) \
-														{ NSLog(@"GA_TRACK_EVENT: error: %@",error.helpAnchor); }  }
+#define GA_TRACK_EVENT(EVENT,ACTION,LABEL,VALUE) { \
+						NSError *error; if (![[GANTracker sharedTracker] trackEvent:EVENT action:ACTION label:LABEL value:VALUE withError:&error]) \
+						{ NSLog(@"GA_TRACK_EVENT: error: %@",error.helpAnchor); }  }
+
+#define GA_TRACK_EVENT_ERROR(LABEL,VALUE)  { \
+						NSString *_zAction_ = [NSString stringWithFormat:@"%@:%@",NSStringFromClass([self class]), NSStringFromSelector(_cmd)]; \
+						GA_TRACK_EVENT(@"ERROR",_zAction_,LABEL,VALUE); }
 
 #define GA_TRACK_CLASS  { GA_TRACK_PAGE(NSStringFromClass([self class])) }
 
-#define GA_TRACK_METHOD { GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"", -1); }
+#define GA_TRACK_METHOD { GA_TRACK_EVENT(NSStringFromClass([self class]),NSStringFromSelector(_cmd),@"",0); }
 
 
 //END

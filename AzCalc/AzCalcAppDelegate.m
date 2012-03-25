@@ -26,9 +26,10 @@
 @synthesize bChangeKeyboard;
 
 
-#pragma mark - Application dealloc
-
-
+- (void)dealloc
+{
+	[[GANTracker sharedTracker] stopTracker];
+}
 
 #pragma mark - Application lifecycle
 
@@ -36,7 +37,7 @@
 {    
     // Override point for customization after application launch.
 
-	GA_INIT_TRACKER(@"UA-30305032-2", 10, nil);
+	GA_INIT_TRACKER(@"UA-30305032-2", 10, nil);	//-2:CalcRoll
 	
 	//-------------------------------------------------Option Setting Defult
 	// User Defaultsを使い，キー値を変更したり読み出す前に，NSUserDefaultsクラスのインスタンスメソッド
@@ -118,7 +119,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application 
 {	//iOS4: アプリケーションがバックグラウンドになったら呼ばれる
 #ifdef GD_Ad_ENABLED
-	[viewController MvShowAdApple:NO AdMob:NO];
+	[viewController MvShowAd:NO];
 #endif
 	[self applicationWillTerminate:application]; //iOS3以前の終了処理
 }
@@ -127,7 +128,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application 
 {	//iOS4: アプリケーションがバックグラウンドから復帰する直前に呼ばれる
 #ifdef GD_Ad_ENABLED
-	[viewController MvShowAdApple:YES AdMob:YES];
+	[viewController MvShowAd:YES];
 #endif
 }
 

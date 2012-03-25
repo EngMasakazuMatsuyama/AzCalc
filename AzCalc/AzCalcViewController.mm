@@ -99,6 +99,7 @@
 	if (bSync) {
 		if ([userDef synchronize] != YES) {
 			NSLog(@"keymapSaveAndSync: synchronize: ERROR");
+			GA_TRACK_EVENT_ERROR(@"synchronize",0);
 		}
 	}
 	
@@ -213,6 +214,7 @@
 		NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:zCalcRollPath];
 		if (dic==nil) {
 			NSLog(@"GvKmPageLoadPath: ERROR: zCalcRollPath=%@", zCalcRollPath);
+			GA_TRACK_EVENT_ERROR(@"GvKmPageLoadPath",0);
 			return;
 		}
 		NSArray *array;
@@ -223,6 +225,7 @@
 		}
 		if (array==nil OR [array count]<4) {  //iPad最小ページ数4
 			NSLog(@"ERROR: GvCalcRollLoad: zCalcRollPath=%@", zCalcRollPath);
+			GA_TRACK_EVENT_ERROR(@"GvCalcRollLoad",0);
 			UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Canceled", nil)
 														   message:NSLocalizedString(@"CanceledMsg", nil)
 														  delegate:nil
@@ -263,7 +266,8 @@
 		[self viewWillAppear:YES];
 	}
 	@catch (NSException *exception) {
-		NSLog(@"AzCalcVC (800) Exception: %@: %@\n", [exception name], [exception reason]);
+		NSLog(@"AzCalcVC(800) Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(800)",0);
 		[self aleartKeymapErrorMsg:800];
 	}
 }
@@ -339,6 +343,7 @@
 				
 				if (mKmPages==nil) {
 					NSLog(@"ERROR: AzCalcRoll.plist Read error: zPath=%@", zPath);
+					GA_TRACK_EVENT_ERROR(@"AzCalcRoll.plist Read",0);
 					return;
 				}
 			}
@@ -348,6 +353,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (900) Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(900)",0);
 		[self aleartKeymapErrorMsg:900];
 	}
 }
@@ -407,6 +413,7 @@
 							RaKeyMaster = [[NSArray alloc] initWithContentsOfFile:zFile];
 							if (RaKeyMaster==nil) {
 								AzLOG(@"ERROR: AzKeyMaster.plist not Open");
+								GA_TRACK_EVENT_ERROR(@"AzCalcVC(501)",0);
 								[self aleartKeymapErrorMsg:501];
 								 //--注意---＜＜Analize指摘
 								return nil;
@@ -414,6 +421,7 @@
 						}
 						@catch (NSException *exception) {
 							NSLog(@"AzCalcVC (500) Exception: %@: %@\n", [exception name], [exception reason]);
+							GA_TRACK_EVENT_ERROR(@"AzCalcVC(500)",0);
 							[self aleartKeymapErrorMsg:500];
 							 //--注意---＜＜Analize指摘
 							return nil;
@@ -522,6 +530,7 @@
 				RaKeyMaster = [[NSArray alloc] initWithContentsOfFile:zFile];
 				if (RaKeyMaster==nil) {
 					AzLOG(@"ERROR: AzKeyMaster.plist not Open");
+					GA_TRACK_EVENT_ERROR(@"AzCalcVC(511)",0);
 					[self aleartKeymapErrorMsg:511];
 					 //--注意---＜＜Analize指摘
 					return nil;
@@ -530,6 +539,7 @@
 			}
 			@catch (NSException *exception) {
 				NSLog(@"AzCalcVC (510) Exception: %@: %@\n", [exception name], [exception reason]);
+				GA_TRACK_EVENT_ERROR(@"AzCalcVC(510)",0);
 				[self aleartKeymapErrorMsg:510];
 				 //--注意---＜＜Analize指摘
 				return nil;
@@ -577,11 +587,12 @@
 			}
 #ifdef GD_Ad_ENABLEDxxxxxxxxxx
 			// キーレイアウト変更モードでは常時ＯＦＦ
-			[self MvShowAdApple:NO AdMob:NO];
+			[self MvShowAd:NO];
 #endif
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (520) Exception: %@: %@\n", [exception name], [exception reason]);
+			GA_TRACK_EVENT_ERROR(@"AzCalcVC(520)",0);
 			[self aleartKeymapErrorMsg:520];
 		}
 	} 
@@ -616,6 +627,7 @@
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (530) Exception: %@: %@\n", [exception name], [exception reason]);
+			GA_TRACK_EVENT_ERROR(@"AzCalcVC(530)",0);
 			[self aleartKeymapErrorMsg:530];
 		}
 		
@@ -659,6 +671,7 @@
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (540) Exception: %@: %@\n", [exception name], [exception reason]);
+			GA_TRACK_EVENT_ERROR(@"AzCalcVC(540)",0);
 			[self aleartKeymapErrorMsg:540];
 		}
 		
@@ -702,6 +715,7 @@
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (550) Exception: %@: %@\n", [exception name], [exception reason]);
+			GA_TRACK_EVENT_ERROR(@"AzCalcVC(550)",0);
 			[self aleartKeymapErrorMsg:550];
 		}
 	}
@@ -744,7 +758,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (110) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewDidLoad",@"110", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(110)",0);
 		[self aleartKeymapErrorMsg:110];
 	}
 	
@@ -853,7 +867,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (120) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewDidLoad",@"120", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(120)",0);
 		[self aleartKeymapErrorMsg:120];
 	}
 	
@@ -934,7 +948,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (130) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewDidLoad",@"130", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(130)",0);
 		[self aleartKeymapErrorMsg:130];
 	}
 
@@ -968,7 +982,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (140) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewDidLoad",@"140", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(140)",0);
 		[self aleartKeymapErrorMsg:140];
 	}
 
@@ -981,8 +995,14 @@
 		//--------------------------------------------------------------------------------------------------------- AdWirl
 		if (mAdWhirlView==nil) {
 			mAdWhirlView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+			if (bPad) {
+				rcAd.origin.x = (ibScrollUpper.frame.size.width - rcAd.size.width)/2.0; // ページ中央へ
+			} else {
+				rcAd.origin.x = 0;
+			}
 			mAdWhirlView.frame = rcAd;
 			[self.view addSubview:mAdWhirlView];
+			//[ibScrollUpper addSubview:mAdWhirlView];＜＜スクロールされてしまう
 		}
 		
 		if ([NSLocalizedString(@"Country2code",nil) isEqualToString:@"ja"])
@@ -1032,43 +1052,36 @@
 			[self.view bringSubviewToFront:RoAdMobView]; // 上にする
 			//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 		}
+	 */
 		
 		//--------------------------------------------------------------------------------------------------------- iAd
-		//if (NSClassFromString(@"ADBannerView")) {
-		if (RiAdBanner==nil && [[[UIDevice currentDevice] systemVersion] compare:@"4.0"]!=NSOrderedAscending) { // !<  (>=) "4.0"
-			assert(NSClassFromString(@"ADBannerView"));
-			// iPad はここで生成する。　iPhoneはXIB生成済み。
-			NSLog(@"-1- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-			RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
-			NSLog(@"-2- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-			
-			if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
-				// iOS4.2より前
-				//[0.5.0]ヨコのときもタテと同じバナーを使用する
-				RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
-				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+		if (bPad) {
+			if (RiAdBanner==nil && [[[UIDevice currentDevice] systemVersion] compare:@"4.0"]!=NSOrderedAscending) { // !<  (>=) "4.0"
+				assert(NSClassFromString(@"ADBannerView"));
+				// iPad はここで生成する。　iPhoneはXIB生成済み。
+				RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
+				
+				if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
+					// iOS4.2より前
+					//[0.5.0]ヨコのときもタテと同じバナーを使用する
+					RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
+					RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
+				}
+				else {
+					// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
+					//[0.5.0]ヨコのときもタテと同じバナーを使用する
+					RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
+					RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+				}
+				RiAdBanner.delegate = self;
+				[self.view addSubview:RiAdBanner];
+				bADbannerIsVisible = NO;
 			}
-			else {
-				// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-				//[0.5.0]ヨコのときもタテと同じバナーを使用する
-				RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
-				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-			}
-			RiAdBanner.delegate = self;
-			CGRect theBannerFrame = self.view.frame;
-			theBannerFrame.origin.y = -70;  // viewの外へ出す (iPadの高さが66)
-			RiAdBanner.frame = theBannerFrame;	
-			[ibScrollUpper addSubview:RiAdBanner];
-			//retainCount +2 --> unloadRelease:にて　-2 している　　　　　unloadReleaseにて.delegate=nilしてからreleaseするため、自己管理する。
-			bADbannerIsVisible = NO;
 		}
-		//1.0.0//AdMob共用化
-		bADbannerTopShow = YES;
-	 */
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (150) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewDidLoad",@"150", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(150)",0);
 		[self aleartKeymapErrorMsg:150];
 	}
 #endif
@@ -1147,7 +1160,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (210) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewWillAppear",@"210", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(210)",0);
 		[self aleartKeymapErrorMsg:210];
 	}
 
@@ -1225,7 +1238,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (220) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewWillAppear",@"220", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(220)",0);
 		[self aleartKeymapErrorMsg:220];
 	}
 }
@@ -1244,7 +1257,7 @@
 	
 	@try {
 #ifdef GD_Ad_ENABLED
-		[self MvShowAdApple:YES AdMob:YES];
+		[self MvShowAd:YES];
 #endif
 		
 		if (MbInformationOpen) {	//initWithStyleにて判定処理している
@@ -1254,7 +1267,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (300) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-viewDidAppear",@"300", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(300)",0);
 		[self aleartKeymapErrorMsg:300];
 	}
 }
@@ -1304,7 +1317,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (600) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-MvDrumButtonShow",@"600", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(600)",0);
 		[self aleartKeymapErrorMsg:600];
 	}
 }
@@ -1358,7 +1371,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (700) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT(@"ERROR",@"Main-MvMemoryShow",@"700", 0);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(700)",0);
 		[self aleartKeymapErrorMsg:700];
 	}
 }
@@ -1378,37 +1391,32 @@
 // 回転の開始前にコールされる。 ＜＜OS 3.0以降の推奨＞＞
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)orientation duration:(NSTimeInterval)duration
 {
-#ifdef GD_Ad_ENABLEDxxxxxxxxxxx
-	if (RiAdBanner) {	//[0.4.1]
+#ifdef AzMAKE_SPLASHFACE
+	return;
+#endif
+	if (!bPad) return; // iPhone
+	//以下、iPadのみ
+	
+#ifdef GD_Ad_ENABLED
+	if (RiAdBanner) {
 		if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 			// iOS4.2より前
-			/*			if (UIInterfaceOrientationIsLandscape(orientation)) {
-			 RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier480x32;
-			 } else {
-			 RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-			 }*/
 			//[0.5.0]ヨコのときもタテと同じバナーを使用する
 			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 		} else {
 			// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-			/*			if (UIInterfaceOrientationIsLandscape(orientation)) {
-			 RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierLandscape;
-			 } else {
-			 RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-			 }*/
 			//[0.5.0]ヨコのときもタテと同じバナーを使用する
 			RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
 		}
 	}
 #endif
 	
-	if (bPad) {
-		// このタイミングでなければ、配置がズレる
-		[ibTvFormula resignFirstResponder]; // キーボードを隠す
-	}
+	// このタイミングでなければ、配置がズレる
+	[ibTvFormula resignFirstResponder]; // キーボードを隠す
 }
 
-// 回転アニメーションの開始直前に呼ばれる。 この直前の配置から、ここでの配置までの移動がアニメーション表示される。
+
+// 回転アニメーションが終了した配置を定義する。 　この直前の配置から、ここの配置までの移動がアニメーション表示される。
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
 										 duration:(NSTimeInterval)duration
 {
@@ -1416,9 +1424,9 @@
 	return;
 #endif
 	if (!bPad) return; // iPhone
-	
+
 	// iPad専用 メモリー(KeyMemorys_MAX=20)キー配置 および 回転処理
-	[self MvPadFuncShow]; 
+	[self MvPadFuncShow];	//＜＜この中で Ad回転処理もしている。
 	
 	// RaDrumButtons
 	[self MvDrumButtonShow];
@@ -1453,14 +1461,13 @@
 	ibTvFormula.delegate = nil;
 	
 #ifdef GD_Ad_ENABLED
-/*	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RiAdBanner) {
 		[RiAdBanner cancelBannerViewAction];	// 停止
 		RiAdBanner.delegate = nil;							// 解放メソッドを呼び出さないように　　　[0.4.1]メモリ不足時に落ちた原因
 		[RiAdBanner removeFromSuperview];		// UIView解放		retainCount -1
 		RiAdBanner = nil;	// alloc解放			retainCount -1
 	}
-	
+/*
 	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
@@ -1488,9 +1495,6 @@
 - (void)viewDidUnload
 {
 	NSLog(@"--- viewDidUnload ---");
-	//NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
-	//NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
-	
 	[self unloadRelease];
 	[super viewDidUnload];		// この後、viewDidLoadがコールされて、改めてOBJ生成される
 }
@@ -1924,7 +1928,7 @@
 
 - (void)MvPadFuncShow // iPad拡張 メモリー(KeyMemorys_MAX=20)キー配置 および 回転処理
 {
-	assert(bPad); // iPad
+	assert(bPad); // iPadのみ
 	if (mPadMemoryKeyButtons) {
 		// .titleに値を保持しているため、破棄せずに表示だけ変更する
 		for (KeyButton *kb in mPadMemoryKeyButtons) {
@@ -1999,6 +2003,28 @@
 			}
 		}
 	}
+	
+#ifdef GD_Ad_ENABLED
+	assert(bPad); // iPadのみ
+	if (mAdWhirlView) {
+		CGRect rcAdW = mAdWhirlView.frame;
+		if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+			rcAdW.origin.y = ibScrollUpper.frame.origin.y + 10;
+		} else {
+			rcAdW.origin.y = 10;
+		}
+		mAdWhirlView.frame = rcAdW;
+	}
+	if (RiAdBanner) {
+		CGRect rciAd = RiAdBanner.frame;
+		if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
+			rciAd.origin.y = ibScrollUpper.frame.origin.y;
+		} else {
+			rciAd.origin.y = 0;
+		}
+		RiAdBanner.frame = rciAd;
+	}
+#endif
 }
 
 
@@ -2098,12 +2124,12 @@
 {
 	AzLOG(@"buttonFormula: iKeyTag=(%d)", iKeyTag);
 	
-	NSString *zTouch = @"Calc";
+	NSString *zTouch = @"Touch Calc";
 	if (RaKeyMaster) {
-		zTouch = @"Setting";
+		zTouch = @"Touch Setting";
 	}
 	else if (MiSvUpperPage==1) {
-		zTouch = @"Fomula";
+		zTouch = @"Touch Fomula";
 	}
 	
 	// これ以降、localPool管理エリア
@@ -2125,8 +2151,9 @@
 			case 8:
 			case 9:
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingFormat:@"%d", (int)iKeyTag];
-				GA_TRACK_EVENT(zTouch,@"Num", ibTvFormula.text, 0);
 				bCalcing = YES; // 再計算する
+				{NSString *zz = [NSString stringWithFormat:@"[%d]", (int)iKeyTag];
+				  GA_TRACK_EVENT(zTouch,@"Num",zz, 0); }
 				break;
 				
 				/*	case 10: // [A]  ＜＜HEX対応のため保留＞＞
@@ -2140,23 +2167,23 @@
 				
 			case KeyTAG_DECIMAL: // [.]小数点
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:NUM_DECI];
-				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[.]", 0);
 				break;
 				
 			case KeyTAG_00: // [00]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"00"];
-				GA_TRACK_EVENT(zTouch,@"Num", ibTvFormula.text, 0);
+				GA_TRACK_EVENT(zTouch,@"Num",@"[00]", 0);
 				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_000: // [000]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"000"];
-				GA_TRACK_EVENT(zTouch,@"Num", ibTvFormula.text, 0);
+				GA_TRACK_EVENT(zTouch,@"Num",@"[000]", 0);
 				bCalcing = YES; // 再計算する
 				break;
 				
 			case KeyTAG_SIGN: // [+/-]
-				GA_TRACK_EVENT(zTouch,@"Func", @"+/-", 0);
+				GA_TRACK_EVENT(zTouch,@"Func", @"[+/-]", 0);
 				if ([ibTvFormula.text hasSuffix:OP_ADD]) { // [+] ⇒ [-]
 					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1]; // BS
 					ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_SUB];
@@ -2204,54 +2231,54 @@
 				break;
 				
 			case KeyTAG_PERC: // [%]パーセント ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
-				GA_TRACK_EVENT(zTouch,@"Func", @"%", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[%]", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"÷100"];
 				bCalcing = YES; // 再計算する
 				break;
 			case KeyTAG_PERM: // [‰]パーミル ------------------------------------次期計画では、entryUnitを用いて各種の単位対応する
-				GA_TRACK_EVENT(zTouch,@"Func", @"‰", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[‰]", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"÷1000"];
 				bCalcing = YES; // 再計算する
 				break;
 			case KeyTAG_ROOT: // [√]ルート
-				GA_TRACK_EVENT(zTouch,@"Func", @"√", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[√]", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ROOT];
 				break;
 			case KeyTAG_LEFT: // [(]
-				GA_TRACK_EVENT(zTouch,@"Func", @"(", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[(]", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@"("];
 				break;
 			case KeyTAG_RIGHT: // [)]
-				GA_TRACK_EVENT(zTouch,@"Func", @")", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[)]", 0);
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:@")"];
 				bCalcing = YES; // 再計算する
 				break;
 				
 				//---------------------------------------------[100]-[199] Operators
 			case KeyTAG_ANSWER: // [=]
-				GA_TRACK_EVENT(zTouch,@"Func", @"=", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[=]", 0);
 				bCalcing = YES; // 再計算する
 				break;
-				
+
 			case KeyTAG_PLUS: // [+]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_ADD];	
-				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[+]", 0);
 				break;
 			case KeyTAG_MINUS: // [-]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_SUB];	
-				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[-]", 0);
 				break;
 			case KeyTAG_MULTI: // [×]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_MULT];	
-				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[×]", 0);
 				break;
 			case KeyTAG_DIVID: // [÷]
 				ibTvFormula.text = [ibTvFormula.text stringByAppendingString:OP_DIVI];
-				GA_TRACK_EVENT(zTouch,@"Func", ibTvFormula.text, 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[÷]", 0);
 				break;
 				
 			case KeyTAG_GT: // [GT] Ground Total: 1ドラムの全[=]回答値の合計
-				GA_TRACK_EVENT(zTouch,@"Func", @"GT", 0);
+				GA_TRACK_EVENT(zTouch,@"Func", @"[GT]", 0);
 				if ([ibTvFormula.text hasPrefix:@"("] && [ibTvFormula.text hasSuffix:@")"]) {
 					// 大外カッコを外す
 					NSRange rg = NSMakeRange(1, [ibTvFormula.text length]-2);
@@ -2264,13 +2291,13 @@
 				
 				//---------------------------------------------[200]-[299] Functions
 			case KeyTAG_AC: // [AC]
-				GA_TRACK_EVENT(zTouch,@"Func",@"AC", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[AC]", 0);
 				ibTvFormula.text = @"";
 				ibLbFormAnswer.text = @"=";
 				break;
 				
 			case KeyTAG_BS: { // [BS]
-				GA_TRACK_EVENT(zTouch,@"Func",@"BS", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[BS]", 0);
 				if (0 < [ibTvFormula.text length]) {
 					ibTvFormula.text = [ibTvFormula.text substringToIndex:[ibTvFormula.text length]-1];
 					bCalcing = YES; // 再計算する
@@ -2278,7 +2305,7 @@
 			} break;
 				
 			case KeyTAG_SC: { // [SC] Section Clear：数式では1セクション（直前の演算子まで）クリア
-				GA_TRACK_EVENT(zTouch,@"Func",@"SC", 0);
+				GA_TRACK_EVENT(zTouch,@"Func",@"[SC]", 0);
 				NSString *z;
 				NSRange rg;
 				NSInteger idx = [ibTvFormula.text length] - 1;
@@ -2300,10 +2327,10 @@
 				NSString *zAns = stringFormatter([CalcFunctions zAnswerFromFormula:ibTvFormula.text], YES);
 				if (zAns) {
 					if (iKeyTag==KeyTAG_AddTAX) {
-						GA_TRACK_EVENT(zTouch,@"Func",@"+Tax", 0);
+						GA_TRACK_EVENT(zTouch,@"Func",@"[+Tax]", 0);
 						ibTvFormula.text = [NSString stringWithFormat:@"(%@)×%.3f", ibTvFormula.text, MfTaxRate];
 					} else {
-						GA_TRACK_EVENT(zTouch,@"Func",@"-Tax", 0);
+						GA_TRACK_EVENT(zTouch,@"Func",@"[-Tax]", 0);
 						ibTvFormula.text = [NSString stringWithFormat:@"(%@)÷%.3f", ibTvFormula.text, MfTaxRate];
 					}
 					bCalcing = YES; // 再計算する
@@ -2411,17 +2438,17 @@
 // Memory関係キー入力処理
 - (void)buttonMemory:(Drum *)drum withTag:(NSInteger)iKeyTag withCopyNumber:(NSString *)zCopyNumber
 {
-	NSString *zTouch = @"Calc";
+	NSString *zTouch = @"Touch Calc";
 	if (RaKeyMaster) {
-		zTouch = @"Setting";
+		zTouch = @"Touch Setting";
 	}
 	else if (MiSvUpperPage==1) {
-		zTouch = @"Fomula";
+		zTouch = @"Touch Fomula";
 	}
 
 	switch (iKeyTag) {
 		case KeyTAG_MCLEAR: { // [MClear]
-			GA_TRACK_EVENT(zTouch,@"Memory",@"MClear", 0);
+			GA_TRACK_EVENT(zTouch,@"Memory",@"[MClear]", 0);
 			if (0 < [[UIPasteboard generalPasteboard].string length]) {
 				[UIPasteboard generalPasteboard].string = @"";
 			} 
@@ -2437,7 +2464,7 @@
 		}	break;
 			
 		case KeyTAG_MCOPY: // [Memory]  ＜＜同じ値を続けて登録することも可とした＞＞
-			GA_TRACK_EVENT(zTouch,@"Memory",@"Memory", 0);
+			GA_TRACK_EVENT(zTouch,@"Memory",@"[Memory]", 0);
 			if (0 < [zCopyNumber length]) {
 				// ドラムを逆回転させた行の数値 zCopyNumber が有効ならば優先コピー
 				[UIPasteboard generalPasteboard].string = stringFormatter(zCopyNumber, YES);
@@ -2459,7 +2486,7 @@
 			break;
 			
 		case KeyTAG_MPASTE: { // [Paste]　　＜＜ibBuMemoryから呼び出しているので.tagの変更に注意＞＞
-			GA_TRACK_EVENT(zTouch,@"Memory",@"Paste", 0);
+			GA_TRACK_EVENT(zTouch,@"Memory",@"[Paste]", 0);
 			if (MiSvUpperPage==0) {
 				if ([drum.entryOperator isEqualToString:OP_ANS]) { // [=]ならば新セクションへ改行する
 					if (![drum vNewLine:OP_START]) break; // entryをarrayに追加し、entryを新規作成する
@@ -2522,22 +2549,22 @@
 				switch (iKeyTag) {
 					case KeyTAG_M_PLUS: // [M+]
 						stringAddition( cAns, cNum1, cNum2 );
-						GA_TRACK_EVENT(zTouch,@"Memory",@"M+", 0);
+						GA_TRACK_EVENT(zTouch,@"Memory",@"[M+]", 0);
 						break;
 					case KeyTAG_M_MINUS: // [M-]
 						stringSubtract( cAns, cNum1, cNum2 );
-						GA_TRACK_EVENT(zTouch,@"Memory",@"M-", 0);
+						GA_TRACK_EVENT(zTouch,@"Memory",@"[M-]", 0);
 						break;
 					case KeyTAG_M_MULTI: // [M×]
 						stringMultiply( cAns, cNum1, cNum2 );
-						GA_TRACK_EVENT(zTouch,@"Memory",@"M×", 0);
+						GA_TRACK_EVENT(zTouch,@"Memory",@"[M×]", 0);
 						break;
 					case KeyTAG_M_DIVID: // [M÷]
 						stringDivision( cAns, cNum1, cNum2 );
-						GA_TRACK_EVENT(zTouch,@"Memory",@"M÷", 0);
+						GA_TRACK_EVENT(zTouch,@"Memory",@"[M÷]", 0);
 						break;
 					default:
-						GA_TRACK_EVENT(@"Crash",@"Memory",@"iKeyTag", 0);
+						GA_TRACK_EVENT(@"CRASH",@"Memory",@"iKeyTag", 0);
 						exit(-1); // iKeyTag 番号まちがい
 						break;
 				}
@@ -2741,10 +2768,10 @@
 	if (MiSvUpperPage==0) { // [AC]
 		if (button.tag==KeyTAG_AC) { // [AC]
 			bADbannerTopShow = YES;
-			[self MvShowAdApple:YES AdMob:YES];
+			[self MvShowAd:YES];
 		} else {
 			bADbannerTopShow = NO; //[1.0.1]//入力が始まったので[AC]が押されるまで非表示にする
-			[self MvShowAdApple:NO AdMob:NO];
+			[self MvShowAd:NO];
 		}
 	}
 #endif
@@ -3052,7 +3079,7 @@
 			// 全単位ボタンを無効にする
 			[self GvKeyUnitGroupSI:@"" andSI:@""];
 #ifdef GD_Ad_ENABLED
-			[self MvShowAdApple:NO AdMob:YES];	
+			[self MvShowAd:YES];	
 #endif
 		}
 		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
@@ -3065,7 +3092,7 @@
 			//[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
 			[drum GvEntryUnitSet];
 #ifdef GD_Ad_ENABLED
-			[self MvShowAdApple:YES AdMob:YES];	
+			[self MvShowAd:YES];	
 #endif
 		}
 	}
@@ -3292,51 +3319,50 @@
 	}
 }
 
-/***
-#pragma mark - iAd, AdMob
-
+#pragma mark - iAd
 // iAd取得できたときに呼ばれる　⇒　表示する
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
 	//AzLOG(@"=== bannerViewDidLoadAd ===");
 	bADbannerIsVisible = YES; // iAd取得成功（広告内容あり）
-	[self MvShowAdApple:YES AdMob:YES];
+	[self MvShowAd:YES];
 }
 
 // iAd取得できなかったときに呼ばれる　⇒　非表示にする
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
 	AzLOG(@"=== didFailToReceiveAdWithError ===");
-	[self MvShowAdApple:NO AdMob:YES];		// iAdなし、AdMob表示
 	bADbannerIsVisible = NO; // iAd取得失敗（広告内容なし）
+	[self MvShowAd:YES];		// iAdなし、AdMob表示
 }
 
-***/
 
-- (void)MvShowAdApple:(BOOL)bApple AdMob:(BOOL)bMob
+// これは、applicationDidEnterBackground:からも呼び出される
+- (void)MvShowAd:(BOOL)bShow
 {
-	NSLog(@"=== MvShowAdApple[%d] AdMob[%d] ===", bApple, bMob);
+	NSLog(@"=== MvShowAd[%d] ===", bShow);
 	
 	if (bADbannerTopShow==NO) {
-		bApple = NO;
-		bMob = NO;
+		bShow = NO;
 	}
 	
 	[UIView beginAnimations:nil context:NULL];
 	[UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
 	[UIView setAnimationDuration:1.0];
 	
-/*	if (NSClassFromString(@"ADBannerView") && RiAdBanner) {
-		if (bApple && bADbannerIsVisible) {
-			RiAdBanner.frame = ibPvDrum.frame;
-			[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上層にする
-			bMob = NO; // iAd表示優先
+	if (RiAdBanner) {
+		if (bShow && (bADbannerIsVisible OR MiSvUpperPage==1)) {
+			//RiAdBanner.frame = ibPvDrum.frame;
+			RiAdBanner.alpha = 1;
+			//[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上層にする
+			[self.view  bringSubviewToFront:RiAdBanner]; // 上層にする
 		} else {
-			RiAdBanner.frame = CGRectMake(0,-70, 0,0);
+			//RiAdBanner.frame = CGRectMake(0,-70, 0,0);
+			RiAdBanner.alpha = 0;
 		}
 	}
 	
-	if (RoAdMobView) {
+/*	if (RoAdMobView) {
 		CGRect rc = RoAdMobView.frame;
 		if (bMob && MiSvUpperPage==0) { // Upper(0)pageに表示する
 			if (bPad) {
@@ -3356,19 +3382,15 @@
 		RoAdMobView.frame = rc;
 	}*/
 	
-	CGRect rc = mAdWhirlView.frame;
-	if (bPad) {
-		rc.origin.x = (ibScrollUpper.frame.size.width - rc.size.width)/2.0; // ページ中央へ
+	//CGRect rc = mAdWhirlView.frame;
+	if (bShow OR MiSvUpperPage==1) {
+		//rc.origin.y = 0; //表示
+		mAdWhirlView.alpha = 1;
 	} else {
-		rc.origin.x = 0;
+		//rc.origin.y = -70; //上に隠す
+		mAdWhirlView.alpha = 0;
 	}
-	if (bApple OR MiSvUpperPage!=0) {
-		rc.origin.y = 0; //表示
-		//[ibScrollUpper bringSubviewToFront:mAdWhirlView]; // 上層にする
-	} else {
-		rc.origin.y = -70; //上に隠す
-	}
-	mAdWhirlView.frame = rc;
+	//mAdWhirlView.frame = rc;
 	
 	[UIView commitAnimations];
 }

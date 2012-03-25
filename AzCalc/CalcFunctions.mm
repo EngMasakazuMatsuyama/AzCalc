@@ -416,10 +416,12 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 	}
 	@catch (NSException * errEx) {
 		NSLog(@"Calc:Exception: %@: %@\n", [errEx name], [errEx reason]);
+		GA_TRACK_EVENT_ERROR(@"Calc:Exception",0);
 		zAnswer = @"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@catch (NSString *msg) {
 		NSLog(@"Calc:@throw: %@\n", msg);
+		GA_TRACK_EVENT_ERROR(msg,0);
 		zAnswer = msg; //@"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@finally {

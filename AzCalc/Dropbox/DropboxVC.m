@@ -256,7 +256,7 @@
 {	// ファイル読み込み失敗
     NSLog(@"There was an error loading the file - %@", error);
 	NSString *zz = [NSString stringWithFormat:@"loadFileFailedWithError: %@", error.description];
-	GA_TRACK_EVENT(@"Dropbox",@"ERROR",zz, 0);
+	GA_TRACK_EVENT_ERROR(zz,0);
 	[self alertIndicatorOff];
 	[self alertCommError];
 }
@@ -279,7 +279,7 @@
 {	// ファイル書き込み失敗
     NSLog(@"File upload failed with error - %@", error);
 	NSString *zz = [NSString stringWithFormat:@"uploadFileFailedWithError: %@", error.description];
-	GA_TRACK_EVENT(@"Dropbox",@"ERROR",zz, 0);
+	GA_TRACK_EVENT_ERROR(zz,0);
 	[self alertIndicatorOff];
 	[self alertCommError];
 }
@@ -465,6 +465,7 @@ replacementString:(NSString *)string
 		}
 		@catch (NSException *exception) {
 			NSLog(@"ERROR");
+			GA_TRACK_EVENT_ERROR(@"Exception",0);
 		}
 	}
 
