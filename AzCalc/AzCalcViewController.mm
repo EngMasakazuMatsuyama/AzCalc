@@ -1008,11 +1008,12 @@
 		if ([NSLocalizedString(@"Country2code",nil) isEqualToString:@"ja"])
 		{	// これにより ja 以外はパスする
 			if (mNendView==nil) {	// AppBank nend
-				mNendView = [[NADView alloc] initWithFrame:CGRectMake(0,0, //高さ48なので下部表示では、+2する。
-																	NAD_ADVIEW_SIZE_320x48.width, NAD_ADVIEW_SIZE_320x48.height)];
+				mNendView = [[NADView alloc] initWithFrame:CGRectMake(0,0,
+																	NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
 				//[nadview setNendID:@"apiKeyを入れてね" spotID:@"広告枠IDを入れてね"];
 				[mNendView setNendID:@"a6bff4d0277665b616433661761c9a98b46b271e" spotID:@"6951"]; // CalcRoll
 				[mNendView setDelegate:self];
+				[mNendView setRootViewController:self];
 				[mNendView load:nil];
 			}
 			if (mMedibaAd==nil) {	// Mediba Ad
@@ -1060,7 +1061,7 @@
 				assert(NSClassFromString(@"ADBannerView"));
 				// iPad はここで生成する。　iPhoneはXIB生成済み。
 				RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
-				
+				RiAdBanner.delegate = self;
 				if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
 					// iOS4.2より前
 					//[0.5.0]ヨコのときもタテと同じバナーを使用する
@@ -1073,7 +1074,6 @@
 					RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
 					RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
 				}
-				RiAdBanner.delegate = self;
 				[self.view addSubview:RiAdBanner];
 				bADbannerIsVisible = NO;
 			}

@@ -2,11 +2,13 @@
 //  NADView.h
 //  NendAd
 //
+//  Ver 1.2.2
+//
 //  広告枠ベースビュークラス
 
 #import <UIKit/UIKit.h>
 
-#define NAD_ADVIEW_SIZE_320x48  CGSizeMake(320,48)
+#define NAD_ADVIEW_SIZE_320x50  CGSizeMake(320,50)
 
 @class NADView;
 
@@ -21,6 +23,7 @@
 @interface NADView : UIView {
     
     id delegate;
+    NSInteger retryTime;
     
 }
 
@@ -36,8 +39,6 @@
 // 広告のロード
 // 送信するパラメータをNSDictionaryの形で作成し、引数として渡す
 //
-// 例)年齢:30を送信したい場合
-//   [nadView load:[NSDictionary dictionaryWithObjectsAndKeys:@"31",@"age",nil]];
 //
 - (void)load:(NSDictionary *)parameter;
 
