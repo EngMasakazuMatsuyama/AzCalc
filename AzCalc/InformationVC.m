@@ -166,7 +166,7 @@
 			picker.mailComposeDelegate = self;
 			
 			// To: 宛先
-			NSArray *toRecipients = [NSArray arrayWithObject:@"CalcRoll@azukid.com"];
+			NSArray *toRecipients = [NSArray arrayWithObject:@"post@azukid.com"];
 			[picker setToRecipients:toRecipients];
 			//[picker setCcRecipients:nil];
 			//[picker setBccRecipients:nil];
