@@ -123,8 +123,6 @@
 		44B270EC146EBB2900450472 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44B270E9146EBB2900450472 /* Localizable.strings */; };
 		44B270ED146EBB2900450472 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 44B270E9146EBB2900450472 /* Localizable.strings */; };
 		44B56F21146244C200855BBF /* Icon57free@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C8C1359E9F1009B995C /* Icon57free@2x.png */; };
-		44B6723A1494783A00AC5D4B /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B672381494783A00AC5D4B /* libGoogleAdMobAds.a */; };
-		44B6723B1494783A00AC5D4B /* README-5.0.5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44B672391494783A00AC5D4B /* README-5.0.5.txt */; };
 		44B6723D1494797700AC5D4B /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B6723C1494797700AC5D4B /* DropboxSDK.framework */; };
 		44B6723E1494797700AC5D4B /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44B6723C1494797700AC5D4B /* DropboxSDK.framework */; };
 		44B67241149479B200AC5D4B /* Dropbox-130x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44B6723F149479B200AC5D4B /* Dropbox-130x44@2x.png */; };
@@ -209,6 +207,8 @@
 		44F90BDE1490A93600BA5020 /* DropboxVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F90BDB1490A93600BA5020 /* DropboxVC.xib */; };
 		44F90BE51490A95000BA5020 /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F90BE21490A95000BA5020 /* DropboxVC-iPad.xib */; };
 		44F90BE61490A95000BA5020 /* DropboxVC-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44F90BE21490A95000BA5020 /* DropboxVC-iPad.xib */; };
+		44F9288D152C83EF00EA91F1 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F9288B152C83EF00EA91F1 /* libGoogleAdMobAds.a */; };
+		44F9288E152C83EF00EA91F1 /* README-5.0.5.txt in Resources */ = {isa = PBXBuildFile; fileRef = 44F9288C152C83EF00EA91F1 /* README-5.0.5.txt */; };
 		44FBD2211451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
 		44FBD2221451BF7800886093 /* Tx-LzBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD21F1451BF7800886093 /* Tx-LzBack.png */; };
 		44FBD2231451BF7800886093 /* Tx-LzBack@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */; };
@@ -381,14 +381,6 @@
 		44B270E4146EBAED00450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		44B270EA146EBB2900450472 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		44B270EB146EBB2900450472 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		44B672321494783A00AC5D4B /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		44B672331494783A00AC5D4B /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		44B672341494783A00AC5D4B /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		44B672351494783A00AC5D4B /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		44B672361494783A00AC5D4B /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		44B672371494783A00AC5D4B /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		44B672381494783A00AC5D4B /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
-		44B672391494783A00AC5D4B /* README-5.0.5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README-5.0.5.txt"; sourceTree = "<group>"; };
 		44B6723C1494797700AC5D4B /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DropboxSDK.framework; path = "Dropbox/dropbox-ios-sdk-1.0/DropboxSDK.framework"; sourceTree = "<group>"; };
 		44B6723F149479B200AC5D4B /* Dropbox-130x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Dropbox-130x44@2x.png"; path = "Dropbox/Dropbox-130x44@2x.png"; sourceTree = "<group>"; };
 		44B67240149479B200AC5D4B /* Dropbox-130x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Dropbox-130x44.png"; path = "Dropbox/Dropbox-130x44.png"; sourceTree = "<group>"; };
@@ -429,6 +421,14 @@
 		44F90BDF1490A94100BA5020 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = Dropbox/ja.lproj/DropboxVC.xib; sourceTree = "<group>"; };
 		44F90BE31490A95000BA5020 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "Dropbox/en.lproj/DropboxVC-iPad.xib"; sourceTree = "<group>"; };
 		44F90BE41490A95000BA5020 /* ja */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ja; path = "Dropbox/ja.lproj/DropboxVC-iPad.xib"; sourceTree = "<group>"; };
+		44F92885152C83EF00EA91F1 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		44F92886152C83EF00EA91F1 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		44F92887152C83EF00EA91F1 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		44F92888152C83EF00EA91F1 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		44F92889152C83EF00EA91F1 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		44F9288A152C83EF00EA91F1 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		44F9288B152C83EF00EA91F1 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		44F9288C152C83EF00EA91F1 /* README-5.0.5.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README-5.0.5.txt"; sourceTree = "<group>"; };
 		44FBD21F1451BF7800886093 /* Tx-LzBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack.png"; path = "Image/Tx-LzBack.png"; sourceTree = "<group>"; };
 		44FBD2201451BF7800886093 /* Tx-LzBack@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBack@2x.png"; path = "Image/Tx-LzBack@2x.png"; sourceTree = "<group>"; };
 		44FBD2251451C19400886093 /* Tx-LzBrown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Tx-LzBrown.png"; path = "Image/Tx-LzBrown.png"; sourceTree = "<group>"; };
@@ -457,12 +457,12 @@
 				44AF8AA8130578BF00D3594C /* QuartzCore.framework in Frameworks */,
 				44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */,
 				44968E34146268F800F25305 /* Security.framework in Frameworks */,
-				44B6723A1494783A00AC5D4B /* libGoogleAdMobAds.a in Frameworks */,
 				44B6723D1494797700AC5D4B /* DropboxSDK.framework in Frameworks */,
 				44044614151DEDB6008221B4 /* libMedibaAdSDK.a in Frameworks */,
 				44044643151E1E69008221B4 /* libGoogleAnalytics.a in Frameworks */,
 				4404464A151E27C3008221B4 /* libsqlite3.0.dylib in Frameworks */,
 				441D182C1523567D008D1E68 /* libNendAd.a in Frameworks */,
+				44F9288D152C83EF00EA91F1 /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -601,10 +601,10 @@
 		440445BF151DECF1008221B4 /* Ads */ = {
 			isa = PBXGroup;
 			children = (
+				44F92884152C83EF00EA91F1 /* GoogleAdMobAdsSDKiOS-5.0.5 */,
 				441D18291523567D008D1E68 /* NendAd */,
 				440445C5151DEDB5008221B4 /* MedibaAd-SDK */,
 				440445CA151DEDB5008221B4 /* AdWhirl */,
-				44B672311494783A00AC5D4B /* GoogleAdMobAdsSDKiOS-5.0.5 */,
 			);
 			name = Ads;
 			sourceTree = "<group>";
@@ -843,22 +843,6 @@
 			name = SBCD;
 			sourceTree = "<group>";
 		};
-		44B672311494783A00AC5D4B /* GoogleAdMobAdsSDKiOS-5.0.5 */ = {
-			isa = PBXGroup;
-			children = (
-				44B672321494783A00AC5D4B /* GADBannerView.h */,
-				44B672331494783A00AC5D4B /* GADBannerViewDelegate.h */,
-				44B672341494783A00AC5D4B /* GADInterstitial.h */,
-				44B672351494783A00AC5D4B /* GADInterstitialDelegate.h */,
-				44B672361494783A00AC5D4B /* GADRequest.h */,
-				44B672371494783A00AC5D4B /* GADRequestError.h */,
-				44B672381494783A00AC5D4B /* libGoogleAdMobAds.a */,
-				44B672391494783A00AC5D4B /* README-5.0.5.txt */,
-			);
-			name = "GoogleAdMobAdsSDKiOS-5.0.5";
-			path = "../../AzBodyNote/AzBodyNote/AzBodyNote/GoogleAdMobAdsSDKiOS-5.0.5";
-			sourceTree = "<group>";
-		};
 		44CDB5CB135A807900037C8E /* OpenCode */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,6 +850,22 @@
 				44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */,
 			);
 			name = OpenCode;
+			sourceTree = "<group>";
+		};
+		44F92884152C83EF00EA91F1 /* GoogleAdMobAdsSDKiOS-5.0.5 */ = {
+			isa = PBXGroup;
+			children = (
+				44F92885152C83EF00EA91F1 /* GADBannerView.h */,
+				44F92886152C83EF00EA91F1 /* GADBannerViewDelegate.h */,
+				44F92887152C83EF00EA91F1 /* GADInterstitial.h */,
+				44F92888152C83EF00EA91F1 /* GADInterstitialDelegate.h */,
+				44F92889152C83EF00EA91F1 /* GADRequest.h */,
+				44F9288A152C83EF00EA91F1 /* GADRequestError.h */,
+				44F9288B152C83EF00EA91F1 /* libGoogleAdMobAds.a */,
+				44F9288C152C83EF00EA91F1 /* README-5.0.5.txt */,
+			);
+			name = "GoogleAdMobAdsSDKiOS-5.0.5";
+			path = "Ads/GoogleAdMobAdsSDKiOS-5.0.5";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1003,13 +1003,13 @@
 				440472641478AB4E00F42D41 /* SettingVC-iPad.xib in Resources */,
 				44F90BDD1490A93600BA5020 /* DropboxVC.xib in Resources */,
 				44F90BE51490A95000BA5020 /* DropboxVC-iPad.xib in Resources */,
-				44B6723B1494783A00AC5D4B /* README-5.0.5.txt in Resources */,
 				44B67241149479B200AC5D4B /* Dropbox-130x44@2x.png in Resources */,
 				44B67243149479B200AC5D4B /* Dropbox-130x44.png in Resources */,
 				44AD65F21510A02E00F17D47 /* Default-Portrait@2x~ipad.png in Resources */,
 				44AD65F31510A03800F17D47 /* Default-Landscape@2x~ipad.png in Resources */,
 				44109329151CC7DE006BD4E6 /* Icon72free@2x.png in Resources */,
 				44044625151DEDB6008221B4 /* AdWhirlWebBrowser.xib in Resources */,
+				44F9288E152C83EF00EA91F1 /* README-5.0.5.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

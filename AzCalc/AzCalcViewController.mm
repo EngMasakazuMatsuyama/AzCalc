@@ -1255,20 +1255,27 @@
 		GA_TRACK_PAGE(@"CalcRoll");
 	}
 	
-	@try {
 #ifdef GD_Ad_ENABLED
+	@try {
 		[self MvShowAd:YES];
+	}
+	@catch (NSException *exception) {
+		NSLog(@"AzCalcVC (300) Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(300) ",0);  //2012-04-04//75件
+		//[self aleartKeymapErrorMsg:300];
+	}
 #endif
-		
+
+	@try {
 		if (MbInformationOpen) {	//initWithStyleにて判定処理している
 			MbInformationOpen = NO;	// 以後、自動初期表示しない。
 			[self ibBuInformation:nil];
 		}
 	}
 	@catch (NSException *exception) {
-		NSLog(@"AzCalcVC (300) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(300)",0);
-		[self aleartKeymapErrorMsg:300];
+		NSLog(@"AzCalcVC (301) Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR(@"AzCalcVC(301) ",0);
+		//[self aleartKeymapErrorMsg:301];
 	}
 }
 
