@@ -38,6 +38,8 @@
     // Override point for customization after application launch.
 
 	GA_INIT_TRACKER(@"UA-30305032-2", 10, nil);	//-2:CalcRoll
+	GA_TRACK_EVENT(@"Device", @"model", [[UIDevice currentDevice] model], 0);
+	GA_TRACK_EVENT(@"Device", @"systemVersion", [[UIDevice currentDevice] systemVersion], 0);
 	
 	//-------------------------------------------------Option Setting Defult
 	// User Defaultsを使い，キー値を変更したり読み出す前に，NSUserDefaultsクラスのインスタンスメソッド
