@@ -10,7 +10,7 @@
 #import "AzCalcAppDelegate.h"
 #import "AzCalcViewController.h"
 #import "SettingVC.h"
-#import "InformationVC.h"
+//#import "InformationVC.h"
 #import "OptionVC.h"
 #import "DropboxVC.h"
 
@@ -20,7 +20,7 @@
 @synthesize window;
 @synthesize viewController;
 @synthesize ibSettingVC;
-@synthesize ibInformationVC;
+//@synthesize ibInformationVC;
 @synthesize ibOptionVC;
 //@synthesize dMemory;
 @synthesize bChangeKeyboard;

@@ -1,0 +1,33 @@
+
+【ご利用上の合意】
+　作者やAzukid関係者は、このアプリにより発生した損害についていかなる責任も負いません。
+ これに合意してご利用ください。
+
+【セキュリティ警告】
+　このアプリは、情報を暗号化しません。
+ 個人情報や機密情報は記入しないでください。
+ （パスワードは暗号化して保存されます）
+
+【個人情報保護方針】
+このアプリの作者およびAzukid関係者は、「個人を特定できる情報」を収集しません。
+このアプリは、「個人を特定できる情報」を生成や通信しません。ゆえに漏洩することもありません。
+
+このアプリには、下記各社のWebサービスが組み込まれています。
+いずれも「個人を特定できる情報」を生成や通信しないことを確認しています。
+・Apple - iAd,AppStore,iCloud　-　http://www.apple.com/jp/privacy/
+・Google - AdSence,AdMob,Analytics　-　http://www.google.com/intl/ja/policies/privacy/
+・AppBank - Ad Network　-　http://www.appbank.net/privacypolicy
+・mediba - mediba ad　-　http://medibaad.com/sp/privacy/privacy.html
+
+下記のWebサービスについては、ログイン情報が暗号通信されます。
+・Google - GData　-　http://www.google.com/intl/ja/policies/privacy/
+・Dropbox - http://www.dropbox.com/dmca#privacy
+
+（詳細：AzukiSoftが使用する認証鍵について）
+　デバイスMACアドレスにユーザ名やアプリ名などを混ぜてハッシュ化（不可逆変換）した文字列を鍵として使用することがあります。
+　ユーザがこの鍵を提示すれば持ち主である証明になりますが、この鍵からユーザを見つけることはできません。
+　名前や住所などの持ち主情報が全く含まれない鍵です。指紋も付きません。
+
+2012-04-01 Azukid +++ Sum Positive +++
+
+

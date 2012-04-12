@@ -6,6 +6,8 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
+#import "AZClass.h"
+
 //#define AzDEBUG  プロジェクト設定にて"GCC_PREPROCESSOR_DEFINITIONS"定義した
 
 //#define AzMAKE_SPLASHFACE  // 起動画面 Default.png を作るための作業オプション
@@ -17,19 +19,6 @@
 //#define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
 #endif
 
-#define OR  ||
-
-#ifdef DEBUG	//--------------------------------------------- DEBUG
-#define AzDEBUG
-#define AzLOG(...) NSLog(__VA_ARGS__)
-#define AzRETAIN_CHECK(zName,pObj,iAns)  { if ([pObj retainCount] > iAns) NSLog(@"AzRETAIN_CHECK> %@ %d > %d", zName, [pObj retainCount], iAns); }
-
-#else	//----------------------------------------------------- RELEASE
-// その他のフラグ：-DNS_BLOCK_ASSERTIONS=1　（NSAssertが除去される）
-#define AzLOG(...) 
-#define NSLog(...) 
-#define AzRETAIN_CHECK(...) 
-#endif
 
 #define YES_iPad   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 
@@ -89,40 +78,6 @@
 // Global.m Functions
 //
 //void alertBox( NSString *zTitle, NSString *zMsg, NSString *zButton );
-
-
-//
-// Google Analytics
-//
-#import "GANTracker.h"
-
-#define __GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) \
-					[[GANTracker sharedTracker] startTrackerWithAccountID:ACCOUNT \
-					dispatchPeriod:PERIOD delegate:DELEGATE];
-#ifdef DEBUGxxxxxxx
-#define GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) { \
-			__GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE); \
-						[GANTracker sharedTracker].debug = YES; \
-						[GANTracker sharedTracker].dryRun = YES; }
-#else
-#define GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE) __GA_INIT_TRACKER(ACCOUNT, PERIOD, DELEGATE);
-#endif
-
-#define GA_TRACK_PAGE(PAGE) { NSError *error; if (![[GANTracker sharedTracker] \
-														trackPageview:[NSString stringWithFormat:@"/%@", PAGE] \
-														withError:&error]) { NSLog(@"GA_TRACK_PAGE: error: %@",error.helpAnchor);  } }
-
-#define GA_TRACK_EVENT(EVENT,ACTION,LABEL,VALUE) { \
-						NSError *error; if (![[GANTracker sharedTracker] trackEvent:EVENT action:ACTION label:LABEL value:VALUE withError:&error]) \
-						{ NSLog(@"GA_TRACK_EVENT: error: %@",error.helpAnchor); }  }
-
-#define GA_TRACK_EVENT_ERROR(LABEL,VALUE)  { \
-						NSString *_zAction_ = [NSString stringWithFormat:@"%@:%@",NSStringFromClass([self class]), NSStringFromSelector(_cmd)]; \
-						GA_TRACK_EVENT(@"ERROR",_zAction_,LABEL,VALUE); }
-
-#define GA_TRACK_CLASS  { GA_TRACK_PAGE(NSStringFromClass([self class])) }
-
-#define GA_TRACK_METHOD { GA_TRACK_EVENT(NSStringFromClass([self class]),NSStringFromSelector(_cmd),@"",0); }
 
 
 //END

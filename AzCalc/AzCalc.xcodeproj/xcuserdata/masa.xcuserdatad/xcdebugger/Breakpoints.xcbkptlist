@@ -14,35 +14,7 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2845"
          endingLineNumber = "2845"
-         landmarkName = "-numberOfComponentsInPickerView:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "AzCalcViewController.mm"
-         timestampString = "355241078.113663"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2846"
-         endingLineNumber = "2846"
-         landmarkName = "-numberOfComponentsInPickerView:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "AzCalcViewController.mm"
-         timestampString = "355241078.113663"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2847"
-         endingLineNumber = "2847"
-         landmarkName = "-numberOfComponentsInPickerView:"
+         landmarkName = "-ibBuInformation:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -70,8 +42,8 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "2654"
          endingLineNumber = "2654"
-         landmarkName = "-buttonFunction:withTag:"
-         landmarkType = "5">
+         landmarkName = "@implementation AzCalcViewController"
+         landmarkType = "3">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"

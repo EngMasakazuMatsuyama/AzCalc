@@ -10,7 +10,7 @@
 
 @class AzCalcViewController;
 @class SettingVC;
-@class InformationVC;
+//@class InformationVC;
 @class OptionVC;
 
 @interface AzCalcAppDelegate : NSObject <UIApplicationDelegate>
@@ -18,7 +18,7 @@
     UIWindow		*window;
     AzCalcViewController *viewController;
 	SettingVC		*ibSettingVC;
-	InformationVC	*ibInformationVC;
+	//InformationVC	*ibInformationVC;
 	OptionVC		*ibOptionVC;
 	
 	// Drumオブジェクト共有変数
@@ -30,7 +30,7 @@
 @property (nonatomic) IBOutlet UIWindow *window;
 @property (nonatomic) IBOutlet AzCalcViewController *viewController;
 @property (nonatomic) IBOutlet SettingVC *ibSettingVC;
-@property (nonatomic) IBOutlet InformationVC *ibInformationVC;
+//@property (nonatomic) IBOutlet InformationVC *ibInformationVC;
 @property (nonatomic) IBOutlet OptionVC *ibOptionVC;
 
 //@property (nonatomic, assign) double	dMemory;

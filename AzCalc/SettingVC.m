@@ -10,7 +10,7 @@
 #import "AzCalcAppDelegate.h"
 #import "SettingVC.h"
 #import "OptionVC.h"
-#import "InformationVC.h"
+//#import "InformationVC.h"
 #import "AzCalcViewController.h"
 
 

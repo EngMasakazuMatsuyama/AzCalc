@@ -13,10 +13,12 @@
 #import "AzCalcViewController.h"
 #import "SettingVC.h"
 #import "OptionVC.h"
-#import "InformationVC.h"
+//#import "InformationVC.h"
 #import "KeyButton.h"
 #import <TargetConditionals.h>	// TARGET_IPHONE_SIMULATOR
 #import "DropboxVC.h"		// SBjsonが含まれている
+#import "AZAboutVC.h"
+
 
 #define	DRUMS_MAX				5		// この数のDrumsオブジェクトを常に生成する
 #define	PICKER_COMPONENT_WiMIN	40		// 1コンポーネントの表示最小幅
@@ -1261,7 +1263,8 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (300) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(300) ",0);  //2012-04-04//75件
+		//GA_TRACK_EVENT_ERROR(@"AzCalcVC(300) ",0);  //2012-04-04//75件
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		//[self aleartKeymapErrorMsg:300];
 	}
 #endif
@@ -1274,7 +1277,8 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (301) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(301) ",0);
+		//GA_TRACK_EVENT_ERROR(@"AzCalcVC(301) ",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		//[self aleartKeymapErrorMsg:301];
 	}
 }
@@ -2825,13 +2829,35 @@
 
 - (IBAction)ibBuInformation:(UIButton *)button
 {
-	//AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
+/*	//AzCalcAppDelegate *appDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
 	if (bPad) {
 		mAppDelegate.ibInformationVC.modalPresentationStyle = UIModalPresentationFormSheet; // iPad画面1/4サイズ
 	} else {
 		mAppDelegate.ibInformationVC.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 	}
 	[self presentModalViewController:mAppDelegate.ibInformationVC animated:YES];
+*/
+	// このアプリについて
+	AZAboutVC *vc = [[AZAboutVC alloc] init];
+	vc.ppProductTitle = @"CalcRoll";	// 世界共通名称
+#ifdef GD_Ad_ENABLED
+	vc.ppProductSubtitle = @"CalcRoll Free";
+	vc.ppImgIcon = [UIImage imageNamed:@"Icon57free"];
+#else
+	vc.ppProductSubtitle = @"CalcRoll Stable";  // ローカル名称
+	vc.ppImgIcon = [UIImage imageNamed:@"Icon57s1"];
+#endif
+	vc.ppSupportSite = @"calcroll.azukid.com";
+	//vc.hidesBottomBarWhenPushed = YES; //以降のタブバーを消す
+	//[self.navigationController pushViewController:vc animated:YES];
+	UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:vc];
+	if (bPad) {
+		nc.modalPresentationStyle = UIModalPresentationFormSheet; // iPad画面1/4サイズ
+		nc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	} else {
+		nc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	}
+	[self presentModalViewController:nc animated:YES];
 }
 
 
