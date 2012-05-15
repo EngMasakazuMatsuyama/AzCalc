@@ -465,7 +465,7 @@ replacementString:(NSString *)string
 		}
 		@catch (NSException *exception) {
 			NSLog(@"ERROR");
-			GA_TRACK_EVENT_ERROR(@"Exception",0);
+			GA_TRACK_EVENT_ERROR([exception description],0);
 		}
 	}
 

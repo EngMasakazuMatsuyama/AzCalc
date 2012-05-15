@@ -12,7 +12,7 @@
 #import "SettingVC.h"
 //#import "InformationVC.h"
 #import "OptionVC.h"
-#import "DropboxVC.h"
+//#import "DropboxVC.h"
 
 
 @implementation AzCalcAppDelegate
@@ -20,9 +20,7 @@
 @synthesize window;
 @synthesize viewController;
 @synthesize ibSettingVC;
-//@synthesize ibInformationVC;
 @synthesize ibOptionVC;
-//@synthesize dMemory;
 @synthesize bChangeKeyboard;
 
 
@@ -72,12 +70,13 @@
 	[window addSubview:viewController.view];    
     [window makeKeyAndVisible];
 	
+/*** AZDropboxへ
 	//[1.1.0]Dropbox
 	DBSession* dbSession = [[DBSession alloc]
 							 initWithAppKey:@"62f2rrofi788410"
 							 appSecret:@"s07scm6ifi1o035"
 							 root:kDBRootAppFolder];
-	[DBSession setSharedSession:dbSession];
+	[DBSession setSharedSession:dbSession];*/
     
 	return YES;
 }
@@ -97,8 +96,9 @@
 		NSLog(@"File loaded into [url path]=%@", [url path]);
 		if ([[[url pathExtension] lowercaseString] isEqualToString:CALCROLL_EXT]) {	// ファイル・タッチ対応
 			// mKmPages リセット
-			[viewController GvCalcRollLoad:[url path]]; // .CalcRoll - Plist file
-			return YES;
+			if ([viewController GzCalcRollLoad:[url path]]==nil) { // .CalcRoll - Plist file
+				return YES;
+			}
 		} else {
 			UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"AlertExtension", nil)
 														   message:NSLocalizedString(@"AlertExtensionMsg", nil)
@@ -121,7 +121,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application 
 {	//iOS4: アプリケーションがバックグラウンドになったら呼ばれる
 #ifdef GD_Ad_ENABLED
-	[viewController MvShowAd:NO];
+	[viewController adShow:NO];
 #endif
 	[self applicationWillTerminate:application]; //iOS3以前の終了処理
 }
@@ -130,7 +130,7 @@
 - (void)applicationWillEnterForeground:(UIApplication *)application 
 {	//iOS4: アプリケーションがバックグラウンドから復帰する直前に呼ばれる
 #ifdef GD_Ad_ENABLED
-	[viewController MvShowAd:YES];
+	[viewController adShow:YES];
 #endif
 }
 

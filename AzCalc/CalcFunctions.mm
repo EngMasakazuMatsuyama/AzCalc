@@ -414,9 +414,9 @@ int levelOperator( NSString *zOpe )  // 演算子の優先順位
 			@throw @"@ERROR1";  //@"[maStack count] != 1";
 		}
 	}
-	@catch (NSException * errEx) {
-		NSLog(@"Calc:Exception: %@: %@\n", [errEx name], [errEx reason]);
-		GA_TRACK_EVENT_ERROR(@"Calc:Exception",0);
+	@catch (NSException * exception) {
+		NSLog(@"Calc:Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		zAnswer = @"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@catch (NSString *msg) {

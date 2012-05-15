@@ -15,39 +15,15 @@
 
 #if defined (AzFREE) && !defined(AzMAKE_SPLASHFACE)
 #define GD_Ad_ENABLED
-//#define AdMobID_CalcRollPAD		@"a14dd47ad31c249"		// ドラタク　Pad Free パブリッシャー ID
-//#define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
+//[1.1.6] iAd優先 AdMob補助 方式に戻した。 iAdは30秒以上表示するだけでも収益あり
+#define AdMobID_CalcRollPAD		@"a14dd47ad31c249"		// ドラタク　Pad Free パブリッシャー ID
+#define AdMobID_CalcRoll				@"a14d4cec7480f76";		// ドラタク　Free パブリッシャー ID
 #endif
 
 
-#define YES_iPad   ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-
-
 #define GD_PRODUCTNAME	@"AzCalc"  // IMPORTANT PRODUCT NAME  和名「ドラタク」
-/*----- GD_PRODUCTNAME を変更するときに必要となる作業の覚書 -------------------------------
- ＊ソース変更
-	AppDelegete.m にて NSBundle名に GD_PRODUCTNAME が渡されている。以下適切に変更しなければ、ここでフリーズする
 
- *実体ファイル名変更と同時に、XCODEから各ファイルの情報を開いて、実体を再指定(リンク)する
-	AzCredit					ルートフォルダ名
-	AzCredit_Prefix.pch		プリコンパイルヘッダ
-	AzCredit.xcmappingmodel	データマッピング
-	AzCredit.xcdatamodeld		データモデル
-
- ＊XCODE＞プロジェクト＞アクティブターゲット"AzCredit"を編集
-		＞一般＞名前を変更
-		＞ビルド＞プリダクト名、GCC_PREFIX_HEADRER を変更
-		＞プロパティ＞旧名があれば変更
-
- *iPhoneシニュレータ＞コンテンツと設定をリセット
-
- *XCODE＞キャッシュを空にする
-
- *XCODE＞ビルド＞すべてのターゲットをクリーニング
-
- *XCODE＞ビルドして進行
-
- -----------------------------------------------------------------------*/
+#define CALCROLL_EXT			@"calcroll"		//小文字のみ！　　リリース済みにつき変更禁止 （変更するならば旧名にも対応すること）
 
 #define PLIST_CalcRoll							@"AzCalcRoll"						// .plistファイル名
 #define PLIST_CalcRollPad						@"AzCalcRollPad"				// .plistファイル名
@@ -72,12 +48,6 @@
 #define GUD_GroupingType				@"GUD_GroupingType"
 #define GUD_DecimalSeparator			@"GUD_DecimalSeparator"
 #define GUD_ButtonDesign				@"GUD_ButtonDesign"
-
-
-//
-// Global.m Functions
-//
-//void alertBox( NSString *zTitle, NSString *zMsg, NSString *zButton );
 
 
 //END

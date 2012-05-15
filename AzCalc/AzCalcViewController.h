@@ -8,26 +8,31 @@
 
 #import <UIKit/UIKit.h>
 #include <AVFoundation/AVFoundation.h>
-#import "AzCalcAppDelegate.h"
 
 #ifdef GD_Ad_ENABLED
+//[1.1.6] iAd優先 AdMob補助 方式に戻した。 iAdは30秒以上表示するだけでも収益あり
 #import <iAd/iAd.h>
-//#import "GADBannerView.h"
-#import "AdWhirlView.h"
-#import "AdWhirlDelegateProtocol.h"
-#define GAD_SIZE_320x50     CGSizeMake(320, 50)
-#import "MasManagerViewController.h"
-#import "NADView.h"  //AppBank nend
+#import "GADBannerView.h"
+//#import "AdWhirlView.h"
+//#import "AdWhirlDelegateProtocol.h"
+//#define GAD_SIZE_320x50     CGSizeMake(320, 50)
+//#import "MasManagerViewController.h"
+//#import "NADView.h"  //AppBank nend
 #endif
+
+#import "AzCalcAppDelegate.h"
+#import "AZDropboxVC.h"
+
 
 #define KeyMemorys_MAX		20	// M1〜M20
 
 
 @class KeyButton;
 
-@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate
+@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate, AZDropboxDelegate
 #ifdef GD_Ad_ENABLED
-		, AdWhirlDelegate, NADViewDelegate, ADBannerViewDelegate
+		//, AdWhirlDelegate, NADViewDelegate, ADBannerViewDelegate
+		, ADBannerViewDelegate, GADBannerViewDelegate
 #endif
 > {
 	IBOutlet UIPickerView	*ibPvDrum;
@@ -44,14 +49,6 @@
 	IBOutlet UIButton		*ibBuGetDrum;
 	
 @private
-	//----------------------------------------------dealloc時にrelese
-#ifdef GD_Ad_ENABLED
-	ADBannerView						*RiAdBanner;  //iPadのみ
-	//GADBannerView*	RoAdMobView;
-	AdWhirlView							*mAdWhirlView;
-	NADView									*mNendView;
-	MasManagerViewController	*mMedibaAd; 
-#endif
 	NSArray				*RaDrums;
 	NSArray				*RaDrumButtons;
 	NSArray				*RaKeyMaster;	// !=nil キーレイアウト変更モード
@@ -69,10 +66,6 @@
 	NSMutableArray		*mKmPadFunc;		// <--(NSMutableDictionary *) iPad拡張メモリキー配列
 	NSMutableArray		*mKmMemorys;		// <--(NSMutableDictionary *) mKmPagesとmKmPadFuncの[M]キーをリンクしている
 	
-	//----------------------------------------------Owner移管につきdealloc時のrelese不要
-	//UIView*			MviewKeyboard;
-
-	//----------------------------------------------assign
 	AzCalcAppDelegate	*mAppDelegate;
 	NSInteger		entryComponent;
 	BOOL				bDramRevers;		// これにより、ドラム逆転やりなおしモード時のキー連打不具合に対処している。
@@ -82,10 +75,20 @@
 	BOOL               bFormulaFilter;				// =YES:ペーストされたのでフィルタ処理する
     BOOL				bPad;								// =YES:iPad  =NO:iPhone
 	BOOL				MbInformationOpen;
+
 #ifdef GD_Ad_ENABLED
+	ADBannerView						*RiAdBanner;
+	GADBannerView						*RoAdMobView;
+	//GADBannerView*	RoAdMobView;
+	//AdWhirlView							*mAdWhirlView;
+	//NADView									*mNendView;
+	//MasManagerViewController	*mMedibaAd; 
+
 	BOOL				bADbannerIsVisible;		// iAd 広告内容があればYES
-	BOOL				bADbannerFirstTime;		// iAd 広告内容があれば、起動時に表示するため
-	BOOL				bADbannerTopShow;		//[1.0.1]// =YES:トップの広告を表示する  =NO:入力が始まったので隠す
+	BOOL				bAdShow;						// 広告表示可否
+	//BOOL				bADbannerFirstTime;		// iAd 広告内容があれば、起動時に表示するため
+	//[1.1.6]Ad隠さない、常時表示する。
+	//BOOL				bADbannerTopShow;		//[1.0.1]// =YES:トップの広告を表示する  =NO:入力が始まったので隠す
 #endif
 	
 	// Keyboard spec
@@ -127,11 +130,11 @@
 				  andSi3:(NSString *)unitSi3; // =nil:ハイライト解除
 
 #ifdef GD_Ad_ENABLED
-- (void)MvShowAd:(BOOL)bShow;	// applicationDidEnterBackground:から呼び出される
+- (void)adShow:(BOOL)bShow;	// applicationDidEnterBackground:から呼び出される
 #endif
 
 // delegate
-- (void)GvCalcRollLoad:(NSString*)zCalcRollPath;
+- (NSString*)GzCalcRollLoad:(NSString*)zCalcRollPath;
 - (void)GvDropbox;
 
 @end

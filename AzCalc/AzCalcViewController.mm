@@ -13,10 +13,9 @@
 #import "AzCalcViewController.h"
 #import "SettingVC.h"
 #import "OptionVC.h"
-//#import "InformationVC.h"
 #import "KeyButton.h"
 #import <TargetConditionals.h>	// TARGET_IPHONE_SIMULATOR
-#import "DropboxVC.h"		// SBjsonが含まれている
+//#import "DropboxVC.h"		// SBjsonが含まれている
 #import "AZAboutVC.h"
 
 
@@ -61,6 +60,7 @@
 - (void)buttonDragEnter:(UIButton *)button;
 - (void)MvSaveKeyView:(UIView*)keyView;
 - (void)audioPlayer:(NSString*)filename;
+- (void)adRefresh;
 @end
 
 @implementation AzCalcViewController
@@ -71,6 +71,7 @@
 - (void)aleartKeymapErrorMsg:(NSInteger)errNo
 {	// キーマップ関係のエラーあれば表示し、削除インストールを促す
 	NSString *title = [NSString stringWithFormat:@"%@\n#(%ld)#", NSLocalizedString(@"KeymapError", nil), (long)errNo];
+	GA_TRACK_EVENT_ERROR(title,0);
 	UIAlertView *alv = [[UIAlertView alloc] initWithTitle: title
 												   message:NSLocalizedString(@"KeymapError msg", nil)
 												  delegate:nil
@@ -210,14 +211,14 @@
 	// KeyMap 変換完了
 }
 
-- (void)GvCalcRollLoad:(NSString*)zCalcRollPath
+- (NSString*)GzCalcRollLoad:(NSString*)zCalcRollPath
 {	// zCalcRollPath.plist から mKmPages や mKmPadFunc を読み込む
 	@try {
 		NSDictionary *dic = [[NSDictionary alloc] initWithContentsOfFile:zCalcRollPath];
 		if (dic==nil) {
 			NSLog(@"GvKmPageLoadPath: ERROR: zCalcRollPath=%@", zCalcRollPath);
-			GA_TRACK_EVENT_ERROR(@"GvKmPageLoadPath",0);
-			return;
+			GA_TRACK_EVENT_ERROR(@"NG1",0);
+			return @"NG1";
 		}
 		NSArray *array;
 		if (bPad) {
@@ -226,8 +227,8 @@
 			array = [dic objectForKey:@"Pages"];
 		}
 		if (array==nil OR [array count]<4) {  //iPad最小ページ数4
-			NSLog(@"ERROR: GvCalcRollLoad: zCalcRollPath=%@", zCalcRollPath);
-			GA_TRACK_EVENT_ERROR(@"GvCalcRollLoad",0);
+			NSLog(@"ERROR: GzCalcRollLoad: zCalcRollPath=%@", zCalcRollPath);
+			GA_TRACK_EVENT_ERROR(@"NG2",0);
 			UIAlertView *alv = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Canceled", nil)
 														   message:NSLocalizedString(@"CanceledMsg", nil)
 														  delegate:nil
@@ -235,7 +236,7 @@
 												 otherButtonTitles:NSLocalizedString(@"Roger", nil), nil];
 			[alv	show];
 			 //---注意---＜＜Analize指摘
-			return;
+			return @"NG2";
 		}
 		//
 		if (mKmPages) {
@@ -266,11 +267,13 @@
 		[self mKmMemoryReset]; 
 		//
 		[self viewWillAppear:YES];
+		return nil; //OK
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC(800) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(800)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:800];
+		return @"NG3";
 	}
 }
 
@@ -341,7 +344,7 @@
 				} else {
 					zPath = [[NSBundle mainBundle] pathForResource:PLIST_CalcRoll ofType:@"plist"];
 				}
-				[self GvCalcRollLoad:zPath];
+				[self GzCalcRollLoad:zPath];
 				
 				if (mKmPages==nil) {
 					NSLog(@"ERROR: AzCalcRoll.plist Read error: zPath=%@", zPath);
@@ -355,7 +358,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (900) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(900)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:900];
 	}
 }
@@ -423,7 +426,7 @@
 						}
 						@catch (NSException *exception) {
 							NSLog(@"AzCalcVC (500) Exception: %@: %@\n", [exception name], [exception reason]);
-							GA_TRACK_EVENT_ERROR(@"AzCalcVC(500)",0);
+							GA_TRACK_EVENT_ERROR([exception description],0);
 							[self aleartKeymapErrorMsg:500];
 							 //--注意---＜＜Analize指摘
 							return nil;
@@ -541,7 +544,7 @@
 			}
 			@catch (NSException *exception) {
 				NSLog(@"AzCalcVC (510) Exception: %@: %@\n", [exception name], [exception reason]);
-				GA_TRACK_EVENT_ERROR(@"AzCalcVC(510)",0);
+				GA_TRACK_EVENT_ERROR([exception description],0);
 				[self aleartKeymapErrorMsg:510];
 				 //--注意---＜＜Analize指摘
 				return nil;
@@ -587,14 +590,14 @@
 					}
 				}
 			}
-#ifdef GD_Ad_ENABLEDxxxxxxxxxx
+#ifdef GD_Ad_ENABLED
 			// キーレイアウト変更モードでは常時ＯＦＦ
-			[self MvShowAd:NO];
+			//[self adShow:NO];
 #endif
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (520) Exception: %@: %@\n", [exception name], [exception reason]);
-			GA_TRACK_EVENT_ERROR(@"AzCalcVC(520)",0);
+			GA_TRACK_EVENT_ERROR([exception description],0);
 			[self aleartKeymapErrorMsg:520];
 		}
 	} 
@@ -629,7 +632,7 @@
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (530) Exception: %@: %@\n", [exception name], [exception reason]);
-			GA_TRACK_EVENT_ERROR(@"AzCalcVC(530)",0);
+			GA_TRACK_EVENT_ERROR([exception description],0);
 			[self aleartKeymapErrorMsg:530];
 		}
 		
@@ -673,7 +676,7 @@
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (540) Exception: %@: %@\n", [exception name], [exception reason]);
-			GA_TRACK_EVENT_ERROR(@"AzCalcVC(540)",0);
+			GA_TRACK_EVENT_ERROR([exception description],0);
 			[self aleartKeymapErrorMsg:540];
 		}
 		
@@ -717,7 +720,7 @@
 		}
 		@catch (NSException *exception) {
 			NSLog(@"AzCalcVC (550) Exception: %@: %@\n", [exception name], [exception reason]);
-			GA_TRACK_EVENT_ERROR(@"AzCalcVC(550)",0);
+			GA_TRACK_EVENT_ERROR([exception description],0);
 			[self aleartKeymapErrorMsg:550];
 		}
 	}
@@ -760,7 +763,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (110) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(110)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:110];
 	}
 	
@@ -869,7 +872,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (120) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(120)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:120];
 	}
 	
@@ -950,7 +953,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (130) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(130)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:130];
 	}
 
@@ -984,7 +987,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (140) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(140)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:140];
 	}
 
@@ -993,50 +996,15 @@
 
 #ifdef GD_Ad_ENABLED
 	@try {
-		CGRect rcAd = CGRectMake(0,0, 320, 50); // TOP
-		//--------------------------------------------------------------------------------------------------------- AdWirl
-		if (mAdWhirlView==nil) {
-			mAdWhirlView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
-			if (bPad) {
-				rcAd.origin.x = (ibScrollUpper.frame.size.width - rcAd.size.width)/2.0; // ページ中央へ
-			} else {
-				rcAd.origin.x = 0;
-			}
-			mAdWhirlView.frame = rcAd;
-			[self.view addSubview:mAdWhirlView];
-			//[ibScrollUpper addSubview:mAdWhirlView];＜＜スクロールされてしまう
-		}
-		
-		if ([NSLocalizedString(@"Country2code",nil) isEqualToString:@"ja"])
-		{	// これにより ja 以外はパスする
-			if (mNendView==nil) {	// AppBank nend
-				mNendView = [[NADView alloc] initWithFrame:CGRectMake(0,0,
-																	NAD_ADVIEW_SIZE_320x50.width, NAD_ADVIEW_SIZE_320x50.height)];
-				//[nadview setNendID:@"apiKeyを入れてね" spotID:@"広告枠IDを入れてね"];
-				[mNendView setNendID:@"a6bff4d0277665b616433661761c9a98b46b271e" spotID:@"6951"]; // CalcRoll
-				[mNendView setDelegate:self];
-				[mNendView setRootViewController:self];
-				[mNendView load:nil];
-			}
-			if (mMedibaAd==nil) {	// Mediba Ad
-				mMedibaAd = [[MasManagerViewController alloc] init];
-				//[self.view addSubview:pMedibaAd_.view];
-				[mMedibaAd setPosition:kMasMVPosition_bottom];
-				mMedibaAd.view.frame = mAdWhirlView.bounds; //これが無ければ変にスクロールする
-				mMedibaAd.auID = @"165127";  // CalcRoll Ad
-				[mMedibaAd loadRequest];
-			}
-		}
-		
-		bADbannerTopShow = YES;
+		//CGRect rcAd = CGRectMake(0,0, 320, 50); // TOP
+		//bADbannerTopShow = YES;
 
-	/*	//--------------------------------------------------------------------------------------------------------- AdMob
+		//--------------------------------------------------------------------------------------------------------- AdMob
 		if (RoAdMobView==nil) {
 			RoAdMobView = [[GADBannerView alloc] init];
 			RoAdMobView.rootViewController = self;
 			
 			if (bPad) { // iPad    GAD_SIZE_728x90, GAD_SIZE_468x60
-				//rc.origin.x = ibScrollUpper.frame.size.width * 1.5 - rc.size.width/2.0; // (1)ページ中央へ
 				RoAdMobView.adUnitID = AdMobID_CalcRollPAD;
 				//[1.0.5]大型
 				RoAdMobView.frame = CGRectMake(ibScrollUpper.frame.size.width+20,  0,
@@ -1051,39 +1019,39 @@
 			//[request setTesting:YES];
 			[RoAdMobView loadRequest:request];	
 			
-			[ibScrollUpper addSubview:RoAdMobView];
-			[self.view bringSubviewToFront:RoAdMobView]; // 上にする
+			//[ibScrollUpper addSubview:RoAdMobView];
+			[self.view addSubview:RoAdMobView];
+			//[self.view bringSubviewToFront:RoAdMobView]; // 上にする
 			//[RoAdMobView release] しない。 deallocにて 停止(.delegate=nil) & 破棄 するため。
 		}
-	 */
+	 
 		
 		//--------------------------------------------------------------------------------------------------------- iAd
-		if (bPad) {
-			if (RiAdBanner==nil && [[[UIDevice currentDevice] systemVersion] compare:@"4.0"]!=NSOrderedAscending) { // !<  (>=) "4.0"
-				assert(NSClassFromString(@"ADBannerView"));
-				// iPad はここで生成する。　iPhoneはXIB生成済み。
-				RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
-				RiAdBanner.delegate = self;
-				if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
-					// iOS4.2より前
-					//[0.5.0]ヨコのときもタテと同じバナーを使用する
-					RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
-					RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
-				}
-				else {
-					// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
-					//[0.5.0]ヨコのときもタテと同じバナーを使用する
-					RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
-					RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
-				}
-				[self.view addSubview:RiAdBanner];
-				bADbannerIsVisible = NO;
+		if (RiAdBanner==nil && NSClassFromString(@"ADBannerView") && [[[UIDevice currentDevice] systemVersion] compare:@"4.0"]!=NSOrderedAscending) { // !<  (>=) "4.0"
+			assert(NSClassFromString(@"ADBannerView"));
+			// iPad はここで生成する。　iPhoneはXIB生成済み。
+			RiAdBanner = [[ADBannerView alloc] initWithFrame:CGRectZero];
+			RiAdBanner.delegate = self;
+			if ([[[UIDevice currentDevice] systemVersion] compare:@"4.2"]==NSOrderedAscending) { // ＜ "4.2"
+				// iOS4.2より前
+				//[0.5.0]ヨコのときもタテと同じバナーを使用する
+				RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 			}
+			else {
+				// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
+				//[0.5.0]ヨコのときもタテと同じバナーを使用する
+				RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
+				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifierPortrait;
+			}
+			[self.view addSubview:RiAdBanner];
+			bADbannerIsVisible = NO;
+			RiAdBanner.alpha = 0;
 		}
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (150) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(150)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:150];
 	}
 #endif
@@ -1162,7 +1130,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (210) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(210)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:210];
 	}
 
@@ -1240,7 +1208,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (220) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(220)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:220];
 	}
 }
@@ -1259,7 +1227,7 @@
 	
 #ifdef GD_Ad_ENABLED
 	@try {
-		[self MvShowAd:YES];
+		[self adShow:YES];
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (300) Exception: %@: %@\n", [exception name], [exception reason]);
@@ -1328,7 +1296,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (600) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(600)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:600];
 	}
 }
@@ -1382,7 +1350,7 @@
 	}
 	@catch (NSException *exception) {
 		NSLog(@"AzCalcVC (700) Exception: %@: %@\n", [exception name], [exception reason]);
-		GA_TRACK_EVENT_ERROR(@"AzCalcVC(700)",0);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		[self aleartKeymapErrorMsg:700];
 	}
 }
@@ -1478,16 +1446,15 @@
 		[RiAdBanner removeFromSuperview];		// UIView解放		retainCount -1
 		RiAdBanner = nil;	// alloc解放			retainCount -1
 	}
-/*
-	NSLog(@"--- retainCount: RiAdBanner=%d", [RiAdBanner retainCount]);
+
 	if (RoAdMobView) {
 		RoAdMobView.delegate = nil;  //[0.4.20]受信STOP  ＜＜これが無いと破棄後に呼び出されて落ちる
 		RoAdMobView = nil;
-	}*/
+	}
 
-	mMedibaAd.delegate = nil,			mMedibaAd = nil;
-	mNendView.delegate = nil,		mNendView = nil;
-	mAdWhirlView.delegate = nil,	mAdWhirlView = nil;
+	//mMedibaAd.delegate = nil,			mMedibaAd = nil;
+	//mNendView.delegate = nil,		mNendView = nil;
+	//mAdWhirlView.delegate = nil,	mAdWhirlView = nil;
 #endif
 	
 	RaKeyMaster = nil;
@@ -2017,7 +1984,7 @@
 	
 #ifdef GD_Ad_ENABLED
 	assert(bPad); // iPadのみ
-	if (mAdWhirlView) {
+/*	if (mAdWhirlView) {
 		CGRect rcAdW = mAdWhirlView.frame;
 		if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
 			rcAdW.origin.y = ibScrollUpper.frame.origin.y + 10;
@@ -2025,7 +1992,7 @@
 			rcAdW.origin.y = 10;
 		}
 		mAdWhirlView.frame = rcAdW;
-	}
+	}*/
 	if (RiAdBanner) {
 		CGRect rciAd = RiAdBanner.frame;
 		if (UIInterfaceOrientationIsPortrait(self.interfaceOrientation)) {
@@ -2609,6 +2576,8 @@
 
 - (void)GvDropbox
 {	// SettingVC:から呼び出される
+	
+	/*****************AZDropboxVC
 	// 未認証の場合、認証処理後、AzCalcAppDelegate:handleOpenURL:から呼び出される
 	if ([[DBSession sharedSession] isLinked]) 
 	{	// Dropbox 認証済み
@@ -2619,7 +2588,7 @@
 		// 先に.plist保存する
 		NSLog(@"zPath=%@", zPath);
 		NSDictionary *dic = nil;
-		if (YES_iPad) {
+		if (iS_iPAD) {
 			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
 				   mKmPages,		@"PadPages", 
 				   mKmPadFunc,	@"PadFunc",
@@ -2631,7 +2600,7 @@
 		}
 		[dic writeToFile:zPath atomically:YES];
 		
-		if (YES_iPad) {
+		if (iS_iPAD) {
 			DropboxVC *vc = [[DropboxVC alloc] initWithNibName:@"DropboxVC-iPad" bundle:nil];
 			vc.modalPresentationStyle = UIModalPresentationFormSheet;
 			vc.mLocalPath = zPath;
@@ -2647,8 +2616,32 @@
 	} else {
 		GA_TRACK_EVENT(@"Dropbox",@"Auth",@"Unauthenticated", 0);
 		// Dropbox 未認証
-		[[DBSession sharedSession] link];
+		//[[DBSession sharedSession] link];
 	}
+	***********/
+
+	AZDropboxVC *vc = [[AZDropboxVC alloc] initWithAppKey: @"62f2rrofi788410"
+												appSecret: @"s07scm6ifi1o035"
+													 root: kDBRootAppFolder	//kDBRootAppFolder or kDBRootDropbox
+													 mode: AZDropboxUpDown	// Up & Down & Delete
+												extension: CALCROLL_EXT 
+												 delegate: self];	//<AZDropboxDelegate>が呼び出される
+
+	vc.title = NSLocalizedString(@"Dropbox Upload",nil);
+	[vc setHidesBottomBarWhenPushed:YES]; // 現在のToolBar状態をPushした上で、次画面では非表示にする
+	// Set up NEXT Left [Back] buttons.
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+											 initWithTitle: NSLocalizedString(@"Back", nil)
+											 style:UIBarButtonItemStylePlain
+											 target:nil  action:nil];
+	//表示開始		Naviへ突っ込む。iPad共通
+	UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:vc];
+	nc.modalPresentationStyle = UIModalPresentationFormSheet;  // 背景Viewが保持される
+	nc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;//	UIModalTransitionStyleFlipHorizontal
+	[self presentModalViewController:nc animated:YES];
+	//表示開始後にsetする
+	[vc setCryptHidden:YES	 Enabled:NO];////表示後にセットすること
+	[vc setUpFileName: @"My Keyboard"];
 }
 
 // Function関係キー入力処理
@@ -2776,15 +2769,15 @@
 	[self MvMemoryShow];
 	
 #ifdef GD_Ad_ENABLED
-	if (MiSvUpperPage==0) { // [AC]
+/*	if (MiSvUpperPage==0) { // [AC]
 		if (button.tag==KeyTAG_AC) { // [AC]
 			bADbannerTopShow = YES;
-			[self MvShowAd:YES];
+			[self adShow:YES];
 		} else {
 			bADbannerTopShow = NO; //[1.0.1]//入力が始まったので[AC]が押されるまで非表示にする
-			[self MvShowAd:NO];
+			[self adShow:NO];
 		}
-	}
+	}*/
 #endif
 }
 
@@ -3112,7 +3105,7 @@
 			// 全単位ボタンを無効にする
 			[self GvKeyUnitGroupSI:@"" andSI:@""];
 #ifdef GD_Ad_ENABLED
-			[self MvShowAd:YES];	
+			//[self adShow:YES];	
 #endif
 		}
 		else if (iPrevUpper!=0 && MiSvUpperPage==0) {
@@ -3125,7 +3118,7 @@
 			//[self GvKeyUnitGroupSI:[drum zUnitRebuild] andSI:nil];
 			[drum GvEntryUnitSet];
 #ifdef GD_Ad_ENABLED
-			[self MvShowAd:YES];	
+			//[self adShow:YES];	
 #endif
 		}
 	}
@@ -3281,6 +3274,48 @@
 	return YES;
 }
 
+#pragma mark - <AZDropboxDelegate>
+- (NSString*)azDropboxBeforeUpFilePath:(NSString*)filePath crypt:(BOOL)crypt
+{	//Up前処理＜UPするファイルを準備する＞
+	//NSUbiquitousKeyValueStore *kvs = [NSUbiquitousKeyValueStore defaultStore];
+	//[kvs synchronize]; // iCloud最新同期（取得）
+
+	// キーレイアウト を filePath へ書き出す           crypt未対応
+	@try {
+		// 先に.plist保存する
+		NSDictionary *dic = nil;
+		if (iS_iPAD) {
+			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+				   mKmPages,		@"PadPages", 
+				   mKmPadFunc,	@"PadFunc",
+				   nil];
+		} else {
+			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+				   mKmPages,		@"Pages", 
+				   nil];
+		}
+		[dic writeToFile:filePath atomically:YES];
+		return nil; //OK
+	}
+	@catch (NSException *exception) {
+		NSLog(@"azDropboxBeforeUpFilePath: NSException=%@", [exception description]);
+		GA_TRACK_EVENT_ERROR([exception description],0);
+		return @"NG";
+	}
+}
+
+- (NSString*)azDropboxDownAfterFilePath:(NSString*)filePath 
+{
+	// mKmPages リセット
+	return [self GzCalcRollLoad:filePath]; // .CalcRoll - Plist file
+}
+
+- (void)azDropboxDownCompleated 
+{	// キーレイアウトDL成功、再描画する
+	[self viewWillAppear:YES];
+}
+
+
 #pragma mark - AVAudioPlayer
 - (void)audioPlayer:(NSString*)filename
 {
@@ -3314,6 +3349,7 @@
 
 
 #ifdef GD_Ad_ENABLED
+/*
 #pragma mark - Ads <AdWhirlDelegate>
 - (NSString *)adWhirlApplicationKey
 {	//return @"ここにAdwhirl管理画面のアプリのページ上部に記載されているSDK Keyをコピペ";
@@ -3351,32 +3387,43 @@
 		[adWhirlView replaceBannerViewWith:mMedibaAd.view];
 	}
 }
+*/
 
 #pragma mark - iAd
 // iAd取得できたときに呼ばれる　⇒　表示する
 - (void)bannerViewDidLoadAd:(ADBannerView *)banner
 {
-	//AzLOG(@"=== bannerViewDidLoadAd ===");
+	NSLog(@"=== iAd: bannerViewDidLoadAd ===");
 	bADbannerIsVisible = YES; // iAd取得成功（広告内容あり）
-	[self MvShowAd:YES];
+	[self adRefresh];
 }
 
 // iAd取得できなかったときに呼ばれる　⇒　非表示にする
 - (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
 {
-	AzLOG(@"=== didFailToReceiveAdWithError ===");
+	NSLog(@"=== iAd: didFailToReceiveAdWithError ===");
 	bADbannerIsVisible = NO; // iAd取得失敗（広告内容なし）
-	[self MvShowAd:YES];		// iAdなし、AdMob表示
+	[self adRefresh];
 }
 
-
 // これは、applicationDidEnterBackground:からも呼び出される
-- (void)MvShowAd:(BOOL)bShow
+- (void)adShow:(BOOL)bShow
 {
-	NSLog(@"=== MvShowAd[%d] ===", bShow);
+	NSLog(@"=== adShow[%d] ===", bShow);
+	bAdShow = bShow;
+	[self adRefresh];
+}
+
+- (void)adRefresh
+{
+	NSLog(@"=== adRefresh ===");
+	//[1.1.6]Ad隠さない、常時表示する。
+	//if (bADbannerTopShow==NO) {
+	//	bShow = NO;
+	//}
 	
-	if (bADbannerTopShow==NO) {
-		bShow = NO;
+	if (bAdShow && RiAdBanner.alpha==1) {
+		return;
 	}
 	
 	[UIView beginAnimations:nil context:NULL];
@@ -3384,46 +3431,29 @@
 	[UIView setAnimationDuration:1.0];
 	
 	if (RiAdBanner) {
-		if (bShow && (bADbannerIsVisible OR MiSvUpperPage==1)) {
-			//RiAdBanner.frame = ibPvDrum.frame;
+		CGRect rc = RiAdBanner.frame;
+		rc.origin = ibScrollUpper.frame.origin;
+		RiAdBanner.frame = rc;
+		if (bAdShow && bADbannerIsVisible) {
 			RiAdBanner.alpha = 1;
-			//[ibScrollUpper bringSubviewToFront:RiAdBanner]; // 上層にする
 			[self.view  bringSubviewToFront:RiAdBanner]; // 上層にする
 		} else {
-			//RiAdBanner.frame = CGRectMake(0,-70, 0,0);
 			RiAdBanner.alpha = 0;
 		}
 	}
 	
-/*	if (RoAdMobView) {
+	if (RoAdMobView) {
 		CGRect rc = RoAdMobView.frame;
-		if (bMob && MiSvUpperPage==0) { // Upper(0)pageに表示する
-			if (bPad) {
-				rc.origin.x = (ibScrollUpper.frame.size.width - rc.size.width)/2.0; // (0)ページ中央へ
-			} else {
-				rc.origin.x = 0;
-			}
-		} else { // Upper(1)pageに表示する　AdMobは非表示無し
-			if (bPad) { // iPad
-				//rc.origin.x = ibScrollUpper.frame.size.width + 20; // (1)ページ左端へ
-				rc.origin.x = ibScrollUpper.frame.size.width + (ibScrollUpper.frame.size.width - rc.size.width)/2.0; // (1)ページ中央へ
-			} else {
-				rc.origin.x = ibScrollUpper.frame.size.width; // (1)ページ
-			}
-		}
-		rc.origin.y = 0;
+		rc.origin = ibScrollUpper.frame.origin;
+		rc.origin.x = ibScrollUpper.frame.size.width/2.0 - rc.size.width/2.0;
 		RoAdMobView.frame = rc;
-	}*/
-	
-	//CGRect rc = mAdWhirlView.frame;
-	if (bShow OR MiSvUpperPage==1) {
-		//rc.origin.y = 0; //表示
-		mAdWhirlView.alpha = 1;
-	} else {
-		//rc.origin.y = -70; //上に隠す
-		mAdWhirlView.alpha = 0;
+		if (bAdShow && (RiAdBanner==nil OR RiAdBanner.alpha==0)) {
+			RoAdMobView.alpha = 1;
+			[self.view  bringSubviewToFront:RoAdMobView]; // 上層にする
+		} else {
+			RoAdMobView.alpha = 0;
+		}
 	}
-	//mAdWhirlView.frame = rc;
 	
 	[UIView commitAnimations];
 }

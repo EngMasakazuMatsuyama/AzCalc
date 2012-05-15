@@ -119,20 +119,20 @@
 #define KeyTAG_UNIT_cm3			1301 // [c㎡]			0.000001㎡
 #define KeyTAG_UNIT_L			1302 // [L]		リットル	0.001㎡
 #define KeyTAG_UNIT_dL			1303 // [dL]	デシL	0.0001㎡
-#define KeyTAG_UNIT_mL			1304 // [mL]	ミリL	0.00001㎡
+#define KeyTAG_UNIT_mL		1304 // [mL]	ミリL	0.00001㎡
 #define KeyTAG_UNIT_cc			1305 // [cc]			0.00001㎡
 #define KeyTAG_UNIT_cuin		1310 // [cuin]	立方in	0.0016387064㎡
 #define KeyTAG_UNIT_cuft		1311 // [cuft]	立方ft	0.028316846592㎡
 #define KeyTAG_UNIT_galus		1312 // [galus]	ガロン	0.003785411784㎡
-#define KeyTAG_UNIT_bbl			1313 // [bbl] バレル石油	1.58987294928㎡
-#define KeyTAG_UNIT_GOU			1314 // [合]				0.00018039㎡
-#define KeyTAG_UNIT_MASU		1315 // [升]				0.0018039㎡
-#define KeyTAG_UNIT_TOU			1316 // [斗]				0.018039㎡
+#define KeyTAG_UNIT_bbl		1313 // [bbl] バレル石油	1.58987294928㎡
+#define KeyTAG_UNIT_GOU		1314 // [合]				0.00018039㎡
+#define KeyTAG_UNIT_MASU	1315 // [升]				0.0018039㎡
+#define KeyTAG_UNIT_TOU		1316 // [斗]				0.018039㎡
 
-#define KeyTAG_UNIT_rad			1400 // [rad]			1rad
-#define KeyTAG_UNIT_rDO			1401 // [°]		度		PI/180rad
+#define KeyTAG_UNIT_rad		1400 // [rad]			1rad
+#define KeyTAG_UNIT_rDO		1401 // [°]		度		PI/180rad
 #define KeyTAG_UNIT_rMI			1402 // [']		分		PI/10800rad = PI/180/60rad
-#define KeyTAG_UNIT_rSE			1403 // ["]		秒		PI/648000rad = PI/180/60/60rad
+#define KeyTAG_UNIT_rSE		1403 // ["]		秒		PI/648000rad = PI/180/60/60rad
 
 #define KeyTAG_UNIT_K			1500 // [K]		ケルビン	1K
 #define KeyTAG_UNIT_C			1501 // [°C]	摂氏		(#+273.15)K
@@ -140,7 +140,7 @@
 
 #define KeyTAG_UNIT_s			1600 // [s]		秒		1s
 #define KeyTAG_UNIT_ms			1601 // [ms]	ミリ秒	0.001s
-#define KeyTAG_UNIT_min			1602 // [min]	分		60s
+#define KeyTAG_UNIT_min		1602 // [min]	分		60s
 #define KeyTAG_UNIT_h			1603 // [h]		時		3600s
 #define KeyTAG_UNIT_d			1604 // [d]		日		86400s
 #define KeyTAG_UNIT_wk			1605 // [wk]	週		604800s

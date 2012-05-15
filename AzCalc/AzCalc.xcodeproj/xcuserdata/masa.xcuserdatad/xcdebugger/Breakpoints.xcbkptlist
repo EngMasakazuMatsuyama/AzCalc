@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AzCalcViewController.mm"
-         timestampString = "355241078.113663"
+         timestampString = "358793216.073221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2845"
-         endingLineNumber = "2845"
+         startingLineNumber = "2838"
+         endingLineNumber = "2838"
          landmarkName = "-ibBuInformation:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,25 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AzCalcViewController.mm"
-         timestampString = "355241078.113663"
+         timestampString = "358793216.073221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2633"
-         endingLineNumber = "2633"
-         landmarkName = "-GvDropbox"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "No"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "AzCalcViewController.mm"
-         timestampString = "355241078.113663"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2654"
-         endingLineNumber = "2654"
+         startingLineNumber = "2647"
+         endingLineNumber = "2647"
          landmarkName = "@implementation AzCalcViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -51,11 +37,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AzCalcViewController.mm"
-         timestampString = "355241078.113663"
+         timestampString = "358793216.073221"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "2668"
-         endingLineNumber = "2668"
+         startingLineNumber = "2661"
+         endingLineNumber = "2661"
          landmarkName = "@implementation AzCalcViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -65,11 +51,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AzCalcAppDelegate.m"
-         timestampString = "354357291.836898"
+         timestampString = "358792496.078318"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "97"
-         endingLineNumber = "97"
+         startingLineNumber = "96"
+         endingLineNumber = "96"
          landmarkName = "-application:handleOpenURL:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -79,7 +65,7 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "AzCalcAppDelegate.m"
-         timestampString = "354357291.836898"
+         timestampString = "358792496.078318"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "103"

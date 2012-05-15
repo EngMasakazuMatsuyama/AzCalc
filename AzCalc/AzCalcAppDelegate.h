@@ -10,7 +10,6 @@
 
 @class AzCalcViewController;
 @class SettingVC;
-//@class InformationVC;
 @class OptionVC;
 
 @interface AzCalcAppDelegate : NSObject <UIApplicationDelegate>

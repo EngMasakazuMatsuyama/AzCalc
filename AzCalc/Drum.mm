@@ -388,8 +388,9 @@
 				break;
 		}
 	}
-	@catch (NSException * errEx) {
-		NSLog(@"entryKeyButton:Exception: %@: %@\n", [errEx name], [errEx reason]);
+	@catch (NSException * exception) {
+		NSLog(@"entryKeyButton:Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通ること!!!!!!!!!!!!!!!!!!!
 		//[localPool release];
@@ -426,8 +427,9 @@
 			
 		}
 	}
-	@catch (NSException * errEx) {
-		NSLog(@"entryUnitKey:Exception: %@: %@\n", [errEx name], [errEx reason]);
+	@catch (NSException * exception) {
+		NSLog(@"entryUnitKey:Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 	}
 	@finally { //*****************************!!!!!!!!!!!!!!!!必ず通る!!!!!!!!!!!!!!!!!!!
 		//[localPool release];
@@ -637,11 +639,13 @@
 			[appDelegate.viewController GvKeyUnitGroupSI:@"" andSi2:nil andSi3:nil];
 		}
 	}
-	@catch (NSException * errEx) {
-		NSLog(@"*** GvEntryUnitSet:Exception: %@: %@\n", [errEx name], [errEx reason]);
+	@catch (NSException * exception) {
+		NSLog(@"*** GvEntryUnitSet:Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 	}
 	@catch (NSString *msg) {
 		NSLog(@"*** GvEntryUnitSet:@throw: %@\n", msg);
+		GA_TRACK_EVENT_ERROR(msg,0);
 	}
 }
 
@@ -1101,12 +1105,14 @@
 		// localPoolが解放される前に確保しておく
 			// retainCount=1
 	}
-	@catch (NSException * errEx) {
-		NSLog(@"zFormulaFromDrum:Exception: %@: %@\n", [errEx name], [errEx reason]);
+	@catch (NSException * exception) {
+		NSLog(@"zFormulaFromDrum:Exception: %@: %@\n", [exception name], [exception reason]);
+		GA_TRACK_EVENT_ERROR([exception description],0);
 		zFormula = @"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@catch (NSString *msg) {
 		NSLog(@"zFormulaFromDrum:@throw: %@\n", msg);
+		GA_TRACK_EVENT_ERROR(msg,0);
 		zFormula = @"";  // nilにすると、戻り値を使った setString:で落ちる
 	}
 	@finally {
