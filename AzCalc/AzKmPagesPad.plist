@@ -607,15 +607,15 @@
 		</dict>
 		<dict>
 			<key>Alpha</key>
-			<real>0.8</real>
+			<real>0.2</real>
 			<key>Color</key>
-			<integer>3</integer>
+			<integer>0</integer>
 			<key>Size</key>
 			<integer>10</integer>
 			<key>Tag</key>
-			<integer>502</integer>
+			<integer>-1</integer>
 			<key>Text</key>
-			<string>Dropbox</string>
+			<string>(Blank)</string>
 			<key>Unit</key>
 			<string></string>
 		</dict>

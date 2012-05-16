@@ -187,8 +187,8 @@
 - (IBAction)ibBuDropbox:(UIButton *)button
 {
 	appDelegate.bChangeKeyboard = NO;
-	[self dismissModalViewControllerAnimated:NO];
-	[appDelegate.viewController GvDropbox];
+	//[self dismissModalViewControllerAnimated:YES];
+	[appDelegate.viewController GvDropbox:self];
 }
 
 @end

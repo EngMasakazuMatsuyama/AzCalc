@@ -135,7 +135,7 @@
 
 // delegate
 - (NSString*)GzCalcRollLoad:(NSString*)zCalcRollPath;
-- (void)GvDropbox;
+- (void)GvDropbox:(UIViewController*)rootViewController;
 
 @end
 

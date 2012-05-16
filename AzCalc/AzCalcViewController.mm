@@ -265,8 +265,7 @@
 		} 
 		// mKmPages と mKmPadFunc から mKmMemory を生成する
 		[self mKmMemoryReset]; 
-		//
-		[self viewWillAppear:YES];
+		//NG//[self viewWillAppear:YES]; 落ちる
 		return nil; //OK
 	}
 	@catch (NSException *exception) {
@@ -1006,14 +1005,12 @@
 			
 			if (bPad) { // iPad    GAD_SIZE_728x90, GAD_SIZE_468x60
 				RoAdMobView.adUnitID = AdMobID_CalcRollPAD;
-				//[1.0.5]大型
-				RoAdMobView.frame = CGRectMake(ibScrollUpper.frame.size.width+20,  0,
-											   GAD_SIZE_468x60.width, GAD_SIZE_468x60.height);
+				RoAdMobView.frame = CGRectMake(ibScrollUpper.frame.size.width/2.0 - 468/2.0,
+											   ibScrollUpper.frame.origin.y, 468, 60);
 			}
-			else {
+			else {		// iPhone		GAD_SIZE_320x50
 				RoAdMobView.adUnitID = AdMobID_CalcRoll;
-				RoAdMobView.frame = CGRectMake(ibScrollUpper.frame.size.width,  0,
-											   GAD_SIZE_320x50.width, GAD_SIZE_320x50.height);
+				RoAdMobView.frame = CGRectMake(0, 0, 320, 50);
 			}
 			GADRequest *request = [GADRequest request];
 			//[request setTesting:YES];
@@ -1038,7 +1035,7 @@
 				RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifier320x50, nil];
 				RiAdBanner.currentContentSizeIdentifier = ADBannerContentSizeIdentifier320x50;
 			}
-			else {
+			else {	// iPhone: 320×50, 480×32			iPad: 768×66, 1024×66
 				// iOS4.2以降の仕様であるが、以前のOSでは落ちる！！！
 				//[0.5.0]ヨコのときもタテと同じバナーを使用する
 				RiAdBanner.requiredContentSizeIdentifiers = [NSSet setWithObjects:ADBannerContentSizeIdentifierPortrait, nil];
@@ -1224,6 +1221,8 @@
 	} else {
 		GA_TRACK_PAGE(@"CalcRoll");
 	}
+
+	[self MvMemoryShow]; // 改めて表示
 	
 #ifdef GD_Ad_ENABLED
 	@try {
@@ -1322,6 +1321,7 @@
 			// ボタンを出現させる
 			CGRect rc = ibBuMemory.frame; // Y位置はnib定義通り固定
 			// 文字数からボタンの幅を調整する
+			NSLog(@"ibBuMemory.titleLabel.font=%@", ibBuMemory.titleLabel.font);
 			CGSize sz = [zTitle sizeWithFont:ibBuMemory.titleLabel.font];
 			AzLOG(@"sizeWithFont = W%f, H%f", sz.width, sz.height);
 			rc.size.width = sz.width + 20;
@@ -2574,7 +2574,7 @@
 	}
 }
 
-- (void)GvDropbox
+- (void)GvDropbox:(UIViewController*)rootViewController
 {	// SettingVC:から呼び出される
 	
 	/*****************AZDropboxVC
@@ -2620,12 +2620,23 @@
 	}
 	***********/
 
+	if (rootViewController==nil) {
+		rootViewController = self;
+	}
+	
+	NSString *zRootPath;
+	if (iS_iPAD) {
+		zRootPath = @"/iPad/";
+	} else {
+		zRootPath = @"/iPhone/";
+	}
 	AZDropboxVC *vc = [[AZDropboxVC alloc] initWithAppKey: @"62f2rrofi788410"
 												appSecret: @"s07scm6ifi1o035"
-													 root: kDBRootAppFolder	//kDBRootAppFolder or kDBRootDropbox
-													 mode: AZDropboxUpDown	// Up & Down & Delete
+												root: kDBRootAppFolder	//kDBRootAppFolder or kDBRootDropbox
+												rootPath: zRootPath
+												mode: AZDropboxUpDown	// Up & Down & Delete
 												extension: CALCROLL_EXT 
-												 delegate: self];	//<AZDropboxDelegate>が呼び出される
+												delegate: self];	//<AZDropboxDelegate>が呼び出される
 
 	vc.title = NSLocalizedString(@"Dropbox Upload",nil);
 	[vc setHidesBottomBarWhenPushed:YES]; // 現在のToolBar状態をPushした上で、次画面では非表示にする
@@ -2638,7 +2649,7 @@
 	UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:vc];
 	nc.modalPresentationStyle = UIModalPresentationFormSheet;  // 背景Viewが保持される
 	nc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;//	UIModalTransitionStyleFlipHorizontal
-	[self presentModalViewController:nc animated:YES];
+	[rootViewController presentModalViewController:nc animated:YES];
 	//表示開始後にsetする
 	[vc setCryptHidden:YES	 Enabled:NO];////表示後にセットすること
 	[vc setUpFileName: @"My Keyboard"];
@@ -3312,7 +3323,7 @@
 
 - (void)azDropboxDownCompleated 
 {	// キーレイアウトDL成功、再描画する
-	[self viewWillAppear:YES];
+	//NG//[self viewWillAppear:YES];  ここで再描画すると落ちる
 }
 
 

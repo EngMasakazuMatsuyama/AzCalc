@@ -83,16 +83,7 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
 {	// CalcRoll free と Stable が共存している場合、free から戻ったとき Stableが呼ばれる。
-    if ([[DBSession sharedSession] handleOpenURL:url]) {
-        if ([[DBSession sharedSession] isLinked]) 
-		{	// Dropbox 認証成功
-            NSLog(@"App linked successfully!");
-			// DropboxTVC を開ける
-			[viewController GvDropbox];
-        }
-        return YES;
-    }
-	else if ([url isFileURL]) {	// .calcroll ファイルをタッチしたとき、
+	if ([url isFileURL]) {	// .calcroll ファイルをタッチしたとき、
 		NSLog(@"File loaded into [url path]=%@", [url path]);
 		if ([[[url pathExtension] lowercaseString] isEqualToString:CALCROLL_EXT]) {	// ファイル・タッチ対応
 			// mKmPages リセット
@@ -108,6 +99,9 @@
 			[alv	show];
 		}
 	}
+	else if ([[DBSession sharedSession] handleOpenURL:url]) { //OAuth結果：urlに認証キーが含まれる
+        return YES;
+    }
     // Add whatever other url handling code your app requires here
     return NO;
 }
