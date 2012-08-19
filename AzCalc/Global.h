@@ -6,6 +6,7 @@
 //  Copyright __MyCompanyName__ 2009. All rights reserved.
 //
 
+#define AZClass_GoogleAnalytics
 #import "AZClass.h"
 
 //#define AzDEBUG  プロジェクト設定にて"GCC_PREPROCESSOR_DEFINITIONS"定義した

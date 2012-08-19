@@ -59,7 +59,7 @@
 - (void)buttonTouchUp:(UIButton *)button;
 - (void)buttonDragEnter:(UIButton *)button;
 - (void)MvSaveKeyView:(UIView*)keyView;
-- (void)audioPlayer:(NSString*)filename;
+//- (void)audioPlayer:(NSString*)filename;
 - (void)adRefresh;
 @end
 
@@ -734,8 +734,14 @@
 	//NSLog(@"--- retainCount: ibScrollLower=%d", [ibScrollLower retainCount]);
     [super viewDidLoad];
 
+	//audioPlayer再生にてiPod演奏が停止しないようにするため
+	AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+	//[audioSession setDelegate:self];
+	[audioSession setCategory:AVAudioSessionCategoryAmbient error:nil];
+	[audioSession setActive:YES error:nil];
+	
+	//
 	mAppDelegate = (AzCalcAppDelegate *)[[UIApplication sharedApplication] delegate];
-
 	NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
 
 	@try {
@@ -1420,8 +1426,6 @@
 
 - (void)viewWillDisappear:(BOOL)animated // 非表示になる直前にコールされる
 {
-	[super viewWillDisappear:animated];
-	
 	/*
 	 if (buChangeKey) {
 	 //buChangeKey.backgroundColor = [UIColor clearColor]; // 前選択を戻す
@@ -1429,6 +1433,7 @@
 	 [buChangeKey setBackgroundImage:RimgDrumButton forState:UIControlStateNormal];
 	 buChangeKey = nil;
 	 }*/
+	[super viewWillDisappear:animated];
 }
 
 - (void)unloadRelease	// dealloc, viewDidUnload から呼び出される
@@ -1494,7 +1499,8 @@
 - (void)handleUpper2Taps: (UILongPressGestureRecognizer *) recognizer 
 {	// 上部で1指2タップ　＜＜指が離れたときにも呼び出される（2回）ことに注意
 	if (MiSvUpperPage==0) { // 選択中のロールを拡幅/縮小する
-		[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+		//[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+		[self soundSwipe];
 		// ドラム幅を拡大する
 		bZoomEntryComponent = !bZoomEntryComponent;  // 拡大／均等トグル式
 		
@@ -1515,42 +1521,8 @@
 		[UIView commitAnimations];
 	}
 }
-/*
-- (void)handleUpperSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
-{	// 1本指で左へスワイプされた
-	NSLog(@"handleUpperSwipeLeft -- Swipe Left 1 finger -- MiSvUpperPage=%d", (int)MiSvUpperPage);
-	if (ibScrollUpper.scrollEnabled) { // 数式編集中だけ NO で固定するため
-		// 次（右）ページ(1)へ
-		if (1 <= MiSvUpperPage) { // End
-			[self audioPlayer:@"short_double_low.caf"];  // 
-		} else {
-			MiSvUpperPage = 1;
-			[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
-			CGRect rect = ibScrollUpper.frame;
-			rect.origin.x = rect.size.width * MiSvUpperPage;
-			[ibScrollUpper scrollRectToVisible:rect animated:YES];
-		}
-	}
-}
 
-- (void)handleUpperSwipeRight: (UISwipeGestureRecognizer*) recognizer 
-{	// 1本指で右へスワイプされた
-	NSLog(@"handleUpperSwipeRight -- Swipe Right 1 finger -- MiSvUpperPage=%d", (int)MiSvUpperPage);
-	if (ibScrollUpper.scrollEnabled) { // 数式編集中だけ NO で固定するため
-		// 前（左）ページ(0)へ
-		if (MiSvUpperPage <= 0) {
-			[self audioPlayer:@"short_double_low.caf"];  // 
-		} else {
-			MiSvUpperPage = 0;
-			[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
-			CGRect rect = ibScrollUpper.frame;
-			rect.origin.x = rect.size.width * MiSvUpperPage;
-			[ibScrollUpper scrollRectToVisible:rect animated:YES];
-		}
-	}
-}
-*/
-- (void)handleLowerSwipeLeft: (UISwipeGestureRecognizer*) recognizer 
+- (void)handleLowerSwipeLeft: (UISwipeGestureRecognizer*) recognizer
 {	// 2本指で左へスワイプされた
 	NSLog(@"handleLowerSwipeLeft -- Swipe Left 2 finger -- MiSvLowerPage=%d", (int)MiSvLowerPage);
 	// 次（右）ページへ
@@ -1560,7 +1532,8 @@
 		MiSvLowerPage++; // Right
 	}
 	NSLog(@"-- MiSvLowerPage=%d", (int)MiSvLowerPage);
-	[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+	//[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+	[self soundSwipe];
 
 	//assert(mKeyViewPrev==nil);
 	if (mKeyViewPrev) {  // スクロールが完全停止しないうちにスワイプしたときのため
@@ -1598,7 +1571,8 @@
 		MiSvLowerPage--; // Left
 	}
 	NSLog(@"-- MiSvLowerPage=%d", (int)MiSvLowerPage);
-	[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+	//[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+	[self soundSwipe];
 
 	//assert(mKeyViewPrev==nil);
 	if (mKeyViewPrev) {  // スクロールが完全停止しないうちにスワイプしたときのため
@@ -2039,7 +2013,8 @@
 #else
 	// シングルタップ式
 	if (entryComponent == button.tag) {
-		[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+		//[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+		[self soundSwipe];
 		// ドラム幅を拡大する
 		bZoomEntryComponent = !bZoomEntryComponent;  // 拡大／均等トグル式
 		GA_TRACK_EVENT(@"Touch",@"Roll",@"Widening",0);
@@ -2048,7 +2023,8 @@
 	
 	//BOOL bTouchAction = NO;
 	if (entryComponent != button.tag) {
-		[self audioPlayer:@"SentMessage.caf"];  // SMSの送信音
+		//[self audioPlayer:@"SentMessage.caf"];  // SMSの送信音
+		[self soundRollex];
 
 		entryComponent = button.tag;	// ドラム切り替え
 		NSString *zz = [NSString stringWithFormat:@"Comp=%ld",(long)entryComponent];
@@ -2630,7 +2606,7 @@
 	} else {
 		zRootPath = @"/iPhone/";
 	}
-	AZDropboxVC *vc = [[AZDropboxVC alloc] initWithAppKey: @"62f2rrofi788410"
+	AZDropboxVC *vc = [[AZDropboxVC alloc] initWithAppKey: @"62f2rrofi788410"	//CalcRoll
 												appSecret: @"s07scm6ifi1o035"
 												root: kDBRootAppFolder	//kDBRootAppFolder or kDBRootDropbox
 												rootPath: zRootPath
@@ -2638,7 +2614,7 @@
 												extension: CALCROLL_EXT 
 												delegate: self];	//<AZDropboxDelegate>が呼び出される
 
-	vc.title = NSLocalizedString(@"Dropbox Upload",nil);
+	//vc.title = NSLocalizedString(@"Dropbox Upload",nil);
 	[vc setHidesBottomBarWhenPushed:YES]; // 現在のToolBar状態をPushした上で、次画面では非表示にする
 	// Set up NEXT Left [Back] buttons.
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
@@ -2683,7 +2659,8 @@
 {
 	bDrumRefresh = YES;
 	
-	[self audioPlayer:@"Tock.caf"];  // キークリック音
+	//[self audioPlayer:@"Tock.caf"];  // キークリック音
+	[self soundClick];
 	
 	if (RaKeyMaster) {				// キーレイアウト変更モード // ドラム選択中のキーを割り当てる
 		[self MvKeyLayoute:button];
@@ -3097,9 +3074,7 @@
 {
 	if (scrollView==ibScrollUpper) {
 		[ibTvFormula resignFirstResponder]; // キーボードを隠す
-
-		//[self audioPlayer:@"mail-sent.caf"];  // Mail.appの送信音
-		//[self audioPlayer:@"ReceivedMessage.caf"];  // Mail.appの受信音
+		//[self soundSwipe];
 	}
 }
 
@@ -3154,7 +3129,8 @@
 	AzLOG(@"--textViewDidBeginEditing:");
 	ibScrollUpper.scrollEnabled = NO; // [Done]するまでスクロール禁止にする
 
-	[self audioPlayer:@"unlock.caf"];  // ロック解除音
+	//[self audioPlayer:@"unlock.caf"];  // ロック解除音
+	[self soundUnlock];
 
 	//ibTvFormula.keyboardType = UIKeyboardTypeNumbersAndPunctuation;  どちらも効かず、上部ファンクションを消せない
 	//[ibTvFormula setKeyboardType:UIKeyboardTypeNumbersAndPunctuation]; どちらも効かず、上部ファンクションを消せない
@@ -3192,7 +3168,8 @@
 
 - (void)textViewAnimeDidStop
 {	// アニメ終了後、
-	[self audioPlayer:@"lock.caf"];  // ロック音
+	//[self audioPlayer:@"lock.caf"];  // ロック音
+	[self soundLock];
 }
 
 - (void)textViewDidEndEditing:(UITextView *)textView
@@ -3321,43 +3298,100 @@
 	return [self GzCalcRollLoad:filePath]; // .CalcRoll - Plist file
 }
 
-- (void)azDropboxDownCompleated 
-{	// キーレイアウトDL成功、再描画する
-	//NG//[self viewWillAppear:YES];  ここで再描画すると落ちる
+//結果　　ここで、成功後の再描画など行う
+- (void)azDropboxUpResult:(NSString*)result //=nil:Up成功
+{
+	//
+}
+- (void)azDropboxDownResult:(NSString*)result //=nil:Down成功
+{
+	//
 }
 
 
 #pragma mark - AVAudioPlayer
-- (void)audioPlayer:(NSString*)filename
-{
+- (void)soundClick {
 	if (MfAudioVolume <= 0.0 || 1.0 < MfAudioVolume) return;
+	if (mSoundClick==nil) {
+		mSoundClick = [self audioPlayer:@"Tock.caf"];
+	}
+	[mSoundClick setVolume:MfAudioVolume]; // 0.0〜1.0
+	[mSoundClick play];
+}
+- (void)soundSwipe {
+	if (MfAudioVolume <= 0.0 || 1.0 < MfAudioVolume) return;
+	if (mSoundSwipe==nil) {
+		mSoundSwipe = [self audioPlayer:@"ReceivedMessage.caf"];
+	}
+	[mSoundSwipe setVolume:MfAudioVolume]; // 0.0〜1.0
+	[mSoundSwipe play];
+}
+- (void)soundLock {
+	if (MfAudioVolume <= 0.0 || 1.0 < MfAudioVolume) return;
+	if (mSoundLock==nil) {
+		mSoundLock = [self audioPlayer:@"lock.caf"];
+	}
+	[mSoundLock setVolume:MfAudioVolume]; // 0.0〜1.0
+	[mSoundLock play];
+}
+- (void)soundUnlock {
+	if (MfAudioVolume <= 0.0 || 1.0 < MfAudioVolume) return;
+	if (mSoundUnlock==nil) {
+		mSoundUnlock = [self audioPlayer:@"unlock.caf"];
+	}
+	[mSoundUnlock setVolume:MfAudioVolume]; // 0.0〜1.0
+	[mSoundUnlock play];
+}
+- (void)soundRollex {
+	if (MfAudioVolume <= 0.0 || 1.0 < MfAudioVolume) return;
+	if (mSoundRollex==nil) {
+		mSoundRollex = [self audioPlayer:@"SentMessage.caf"];
+	}
+	[mSoundRollex setVolume:MfAudioVolume]; // 0.0〜1.0
+	[mSoundRollex play];
+}
+- (AVAudioPlayer *)audioPlayer:(NSString*)filename
+{
+	if (MfAudioVolume <= 0.0 || 1.0 < MfAudioVolume) return nil;
 #if (TARGET_IPHONE_SIMULATOR)
 	// シミュレータで動作している場合のコード
 	NSLog(@"AVAudioPlayer -　SIMULATOR");
 #else
 	// 実機で動作している場合のコード
+	//viewDidLoad:にて AVAudioSessionカテゴリ指定すること。さもなくばiPod演奏が止まる
  	NSURL *url = [NSURL fileURLWithPath:[NSString stringWithFormat:@"/System/Library/Audio/UISounds/%@", filename]];
-	AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:nil];
-	player.volume = MfAudioVolume;  // 0.0〜1.0
+	NSError *error = nil;
+	//NG//AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	//NG//AVAudioPlayer __strong *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	//ARCにより破棄されないようにするためにインスタンス変数に仮保持する
+	AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
+	if (player==nil OR error) {
+		GA_TRACK_ERROR([error description]);
+		return nil;
+	}
 	player.delegate = self;		// audioPlayerDidFinishPlaying:にて release するため。
-	[player play];
+	player.volume = MfAudioVolume;  // 0.0〜1.0
+	//[player play];
+	return player;
 #endif
 }
 
 #pragma mark  <AVAudioPlayerDelegate>
-
+/*
 - (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag
 {	// 再生が終了したとき、破棄する	＜＜ シミュレータでは呼び出されない
 	NSLog(@"- audioPlayerDidFinishPlaying -");
 	player.delegate = nil;
+	player = nil;
 }
 
 - (void)audioPlayerDecodeErrorDidOccur: (AVAudioPlayer*)player error:(NSError*)error
 {	// エラー発生
 	NSLog(@"- audioPlayerDecodeErrorDidOccur -");
 	player.delegate = nil;
+	player = nil;
 }
-
+*/
 
 #ifdef GD_Ad_ENABLED
 /*

@@ -22,36 +22,7 @@
 		440C19971446B50E008E9CB0 /* icon44-PageFilp.png in Resources */ = {isa = PBXBuildFile; fileRef = 440C19931446B50E008E9CB0 /* icon44-PageFilp.png */; };
 		44109329151CC7DE006BD4E6 /* Icon72free@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44109328151CC7DE006BD4E6 /* Icon72free@2x.png */; };
 		4410932B151CC7F1006BD4E6 /* Icon72s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4410932A151CC7F1006BD4E6 /* Icon72s1@2x.png */; };
-		4412AA5615626C7F00493EC2 /* AZLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5315626C7F00493EC2 /* AZLocalizable.strings */; };
-		4412AA5715626C7F00493EC2 /* AZLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5315626C7F00493EC2 /* AZLocalizable.strings */; };
-		4412AA5F15626C9A00493EC2 /* AZWeb-Back-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5B15626C9A00493EC2 /* AZWeb-Back-16.png */; };
-		4412AA6015626C9A00493EC2 /* AZWeb-Back-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5B15626C9A00493EC2 /* AZWeb-Back-16.png */; };
-		4412AA6115626C9A00493EC2 /* AZWeb-Back-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5C15626C9A00493EC2 /* AZWeb-Back-16@2x.png */; };
-		4412AA6215626C9A00493EC2 /* AZWeb-Back-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5C15626C9A00493EC2 /* AZWeb-Back-16@2x.png */; };
-		4412AA6315626C9A00493EC2 /* AZWeb-Forward-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5D15626C9A00493EC2 /* AZWeb-Forward-16.png */; };
-		4412AA6415626C9A00493EC2 /* AZWeb-Forward-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5D15626C9A00493EC2 /* AZWeb-Forward-16.png */; };
-		4412AA6515626C9A00493EC2 /* AZWeb-Forward-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5E15626C9A00493EC2 /* AZWeb-Forward-16@2x.png */; };
-		4412AA6615626C9A00493EC2 /* AZWeb-Forward-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AA5E15626C9A00493EC2 /* AZWeb-Forward-16@2x.png */; };
 		4412AAB11562845600493EC2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44044645151E1E95008221B4 /* CFNetwork.framework */; };
-		4412AAC21562AA4F00493EC2 /* AZDropbox-130x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB31562AA4F00493EC2 /* AZDropbox-130x44.png */; };
-		4412AAC31562AA4F00493EC2 /* AZDropbox-130x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB31562AA4F00493EC2 /* AZDropbox-130x44.png */; };
-		4412AAC41562AA4F00493EC2 /* AZDropbox-130x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB41562AA4F00493EC2 /* AZDropbox-130x44@2x.png */; };
-		4412AAC51562AA4F00493EC2 /* AZDropbox-130x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB41562AA4F00493EC2 /* AZDropbox-130x44@2x.png */; };
-		4412AAC61562AA4F00493EC2 /* AZDropbox-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB51562AA4F00493EC2 /* AZDropbox-32.png */; };
-		4412AAC71562AA4F00493EC2 /* AZDropbox-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB51562AA4F00493EC2 /* AZDropbox-32.png */; };
-		4412AAC81562AA4F00493EC2 /* AZDropbox-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB61562AA4F00493EC2 /* AZDropbox-32@2x.png */; };
-		4412AAC91562AA4F00493EC2 /* AZDropbox-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAB61562AA4F00493EC2 /* AZDropbox-32@2x.png */; };
-		4412AACA1562AA4F00493EC2 /* AZDropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4412AAB81562AA4F00493EC2 /* AZDropboxVC.m */; };
-		4412AACB1562AA4F00493EC2 /* AZDropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4412AAB81562AA4F00493EC2 /* AZDropboxVC.m */; };
-		4412AACD1562AA4F00493EC2 /* CHANGELOG in Resources */ = {isa = PBXBuildFile; fileRef = 4412AABA1562AA4F00493EC2 /* CHANGELOG */; };
-		4412AACE1562AA4F00493EC2 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4412AABB1562AA4F00493EC2 /* DropboxSDK.framework */; };
-		4412AACF1562AA4F00493EC2 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4412AABB1562AA4F00493EC2 /* DropboxSDK.framework */; };
-		4412AAD11562AA4F00493EC2 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4412AABC1562AA4F00493EC2 /* LICENSE */; };
-		4412AAD31562AA4F00493EC2 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 4412AABD1562AA4F00493EC2 /* README */; };
-		4412AAD41562AA4F00493EC2 /* AZDropboxDown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4412AABE1562AA4F00493EC2 /* AZDropboxDown.xib */; };
-		4412AAD51562AA4F00493EC2 /* AZDropboxDown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4412AABE1562AA4F00493EC2 /* AZDropboxDown.xib */; };
-		4412AAD61562AA4F00493EC2 /* AZDropboxUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAC01562AA4F00493EC2 /* AZDropboxUp.xib */; };
-		4412AAD71562AA4F00493EC2 /* AZDropboxUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4412AAC01562AA4F00493EC2 /* AZDropboxUp.xib */; };
 		44159C1C146EC10900906673 /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0D146EC10900906673 /* AzCalcViewController.mm */; };
 		44159C1D146EC10900906673 /* AzCalcViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0D146EC10900906673 /* AzCalcViewController.mm */; };
 		44159C1E146EC10900906673 /* AzCalcAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 44159C0F146EC10900906673 /* AzCalcAppDelegate.m */; };
@@ -72,27 +43,56 @@
 		44159C45146EC54300906673 /* AzCalcViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C42146EC54300906673 /* AzCalcViewController.xib */; };
 		44159C46146EC54300906673 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C43146EC54300906673 /* AzCalcViewController-iPad.xib */; };
 		44159C47146EC54300906673 /* AzCalcViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 44159C43146EC54300906673 /* AzCalcViewController-iPad.xib */; };
-		442409F415364CCD000981A2 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4424096C15364CCD000981A2 /* libGoogleAnalytics.a */; };
-		442409F515364CCD000981A2 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4424096C15364CCD000981A2 /* libGoogleAnalytics.a */; };
-		443A35191563D861007A9C55 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 443A35101563D861007A9C55 /* libGoogleAdMobAds.a */; };
+		4438EAFE15E0862D00252036 /* AZClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EAFA15E0862D00252036 /* AZClass.m */; };
+		4438EAFF15E0862D00252036 /* AZClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EAFA15E0862D00252036 /* AZClass.m */; };
+		4438EB0015E0862D00252036 /* AZLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4438EAFB15E0862D00252036 /* AZLocalizable.strings */; };
+		4438EB0115E0862D00252036 /* AZLocalizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4438EAFB15E0862D00252036 /* AZLocalizable.strings */; };
+		4438EB0C15E0864200252036 /* AZDropbox-130x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0315E0864200252036 /* AZDropbox-130x44.png */; };
+		4438EB0D15E0864200252036 /* AZDropbox-130x44.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0315E0864200252036 /* AZDropbox-130x44.png */; };
+		4438EB0E15E0864200252036 /* AZDropbox-130x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0415E0864200252036 /* AZDropbox-130x44@2x.png */; };
+		4438EB0F15E0864200252036 /* AZDropbox-130x44@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0415E0864200252036 /* AZDropbox-130x44@2x.png */; };
+		4438EB1015E0864200252036 /* AZDropbox-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0515E0864200252036 /* AZDropbox-32.png */; };
+		4438EB1115E0864200252036 /* AZDropbox-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0515E0864200252036 /* AZDropbox-32.png */; };
+		4438EB1215E0864200252036 /* AZDropbox-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0615E0864200252036 /* AZDropbox-32@2x.png */; };
+		4438EB1315E0864200252036 /* AZDropbox-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0615E0864200252036 /* AZDropbox-32@2x.png */; };
+		4438EB1415E0864200252036 /* AZDropboxDown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0715E0864200252036 /* AZDropboxDown.xib */; };
+		4438EB1515E0864200252036 /* AZDropboxDown.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0715E0864200252036 /* AZDropboxDown.xib */; };
+		4438EB1615E0864200252036 /* AZDropboxUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0815E0864200252036 /* AZDropboxUp.xib */; };
+		4438EB1715E0864200252036 /* AZDropboxUp.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB0815E0864200252036 /* AZDropboxUp.xib */; };
+		4438EB1815E0864200252036 /* AZDropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB0A15E0864200252036 /* AZDropboxVC.m */; };
+		4438EB1915E0864200252036 /* AZDropboxVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB0A15E0864200252036 /* AZDropboxVC.m */; };
+		4438EB1A15E0864200252036 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB0B15E0864200252036 /* DropboxSDK.framework */; };
+		4438EB1B15E0864200252036 /* DropboxSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB0B15E0864200252036 /* DropboxSDK.framework */; };
+		4438EB2615E0865A00252036 /* AZAbout-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB1D15E0865A00252036 /* AZAbout-32.png */; };
+		4438EB2715E0865A00252036 /* AZAbout-32.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB1D15E0865A00252036 /* AZAbout-32.png */; };
+		4438EB2815E0865A00252036 /* AZAbout-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB1E15E0865A00252036 /* AZAbout-32@2x.png */; };
+		4438EB2915E0865A00252036 /* AZAbout-32@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB1E15E0865A00252036 /* AZAbout-32@2x.png */; };
+		4438EB2A15E0865A00252036 /* AZAbout-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB1F15E0865A00252036 /* AZAbout-iPad.xib */; };
+		4438EB2B15E0865A00252036 /* AZAbout-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB1F15E0865A00252036 /* AZAbout-iPad.xib */; };
+		4438EB2C15E0865A00252036 /* AZAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB2015E0865A00252036 /* AZAbout.xib */; };
+		4438EB2D15E0865A00252036 /* AZAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB2015E0865A00252036 /* AZAbout.xib */; };
+		4438EB2E15E0865A00252036 /* AZAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB2215E0865A00252036 /* AZAboutVC.m */; };
+		4438EB2F15E0865A00252036 /* AZAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB2215E0865A00252036 /* AZAboutVC.m */; };
+		4438EB3015E0865A00252036 /* AZAbout_Agree.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB2315E0865A00252036 /* AZAbout_Agree.txt */; };
+		4438EB3115E0865A00252036 /* AZAbout_Agree.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB2315E0865A00252036 /* AZAbout_Agree.txt */; };
+		4438EB3915E0867D00252036 /* AZWeb-Back-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3315E0867D00252036 /* AZWeb-Back-16.png */; };
+		4438EB3A15E0867D00252036 /* AZWeb-Back-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3315E0867D00252036 /* AZWeb-Back-16.png */; };
+		4438EB3B15E0867D00252036 /* AZWeb-Back-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3415E0867D00252036 /* AZWeb-Back-16@2x.png */; };
+		4438EB3C15E0867D00252036 /* AZWeb-Back-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3415E0867D00252036 /* AZWeb-Back-16@2x.png */; };
+		4438EB3D15E0867D00252036 /* AZWeb-Forward-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3515E0867D00252036 /* AZWeb-Forward-16.png */; };
+		4438EB3E15E0867D00252036 /* AZWeb-Forward-16.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3515E0867D00252036 /* AZWeb-Forward-16.png */; };
+		4438EB3F15E0867D00252036 /* AZWeb-Forward-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3615E0867D00252036 /* AZWeb-Forward-16@2x.png */; };
+		4438EB4015E0867D00252036 /* AZWeb-Forward-16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4438EB3615E0867D00252036 /* AZWeb-Forward-16@2x.png */; };
+		4438EB4115E0867D00252036 /* AZWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB3815E0867D00252036 /* AZWebView.m */; };
+		4438EB4215E0867D00252036 /* AZWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB3815E0867D00252036 /* AZWebView.m */; };
+		4438EB4615E086B600252036 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB4515E086B600252036 /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4438EB4715E086B600252036 /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 4438EB4515E086B600252036 /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		4438EB4B15E086D200252036 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB4A15E086D200252036 /* libGoogleAnalytics.a */; };
+		4438EB4C15E086D200252036 /* libGoogleAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB4A15E086D200252036 /* libGoogleAnalytics.a */; };
+		4438EB5815E086E500252036 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB5715E086E500252036 /* libGoogleAdMobAds.a */; };
+		4438EB5915E086E600252036 /* libGoogleAdMobAds.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4438EB5715E086E500252036 /* libGoogleAdMobAds.a */; };
 		444187F4120EBCD600DE74B0 /* AzKeyMaster.plist in Resources */ = {isa = PBXBuildFile; fileRef = 444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */; };
-		44487E5B153694BA00AB6BBE /* AZClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44487E5A153694BA00AB6BBE /* AZClass.m */; };
-		44487E5C153694BA00AB6BBE /* AZClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 44487E5A153694BA00AB6BBE /* AZClass.m */; };
 		445184441303B8BE002820EA /* Icon16-Setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 445184431303B8BE002820EA /* Icon16-Setting.png */; };
-		445F33211554DEB4002A5765 /* AZAbout-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F33141554DEB4002A5765 /* AZAbout-iPad.xib */; };
-		445F33231554DEB4002A5765 /* AZAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F33151554DEB4002A5765 /* AZAbout.xib */; };
-		445F33251554DEB4002A5765 /* AZAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F33171554DEB4002A5765 /* AZAboutVC.m */; };
-		445F33271554DEB4002A5765 /* AZWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F331A1554DEB4002A5765 /* AZWebView.m */; };
-		445F333A1554DEED002A5765 /* AZAbout_Agree.txt in Resources */ = {isa = PBXBuildFile; fileRef = 445F33341554DEED002A5765 /* AZAbout_Agree.txt */; };
-		445F333B1554DEED002A5765 /* AZAbout_Agree.txt in Resources */ = {isa = PBXBuildFile; fileRef = 445F33341554DEED002A5765 /* AZAbout_Agree.txt */; };
-		445F333C1554DEED002A5765 /* AZAbout-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F33141554DEB4002A5765 /* AZAbout-iPad.xib */; };
-		445F333D1554DEED002A5765 /* AZAbout-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F33141554DEB4002A5765 /* AZAbout-iPad.xib */; };
-		445F333E1554DEED002A5765 /* AZAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F33151554DEB4002A5765 /* AZAbout.xib */; };
-		445F333F1554DEED002A5765 /* AZAbout.xib in Resources */ = {isa = PBXBuildFile; fileRef = 445F33151554DEB4002A5765 /* AZAbout.xib */; };
-		445F33401554DEED002A5765 /* AZAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F33171554DEB4002A5765 /* AZAboutVC.m */; };
-		445F33411554DEED002A5765 /* AZAboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F33171554DEB4002A5765 /* AZAboutVC.m */; };
-		445F33421554DEED002A5765 /* AZWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F331A1554DEB4002A5765 /* AZWebView.m */; };
-		445F33431554DEED002A5765 /* AZWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 445F331A1554DEB4002A5765 /* AZWebView.m */; };
 		446E08C7133450DF006859F4 /* Icon-Drum60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C3133450DF006859F4 /* Icon-Drum60x37.png */; };
 		446E08C8133450DF006859F4 /* Icon-Drum60x37@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C4133450DF006859F4 /* Icon-Drum60x37@2x.png */; };
 		446E08C9133450DF006859F4 /* Icon-DrumPush60x37.png in Resources */ = {isa = PBXBuildFile; fileRef = 446E08C5133450DF006859F4 /* Icon-DrumPush60x37.png */; };
@@ -155,8 +155,6 @@
 		44BC4C951359EA01009B995C /* Icon57s1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C921359EA01009B995C /* Icon57s1@2x.png */; };
 		44BC4C961359EA01009B995C /* Icon72s1.png in Resources */ = {isa = PBXBuildFile; fileRef = 44BC4C931359EA01009B995C /* Icon72s1.png */; };
 		44C572931384B4B300490D58 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44C572921384B4B300490D58 /* SystemConfiguration.framework */; };
-		44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */ = {isa = PBXBuildFile; fileRef = 44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		44CDB60D135AA80B00037C8E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D58131528FC0064EA93 /* Default.png */; };
 		44CDB60E135AA81100037C8E /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D5A131529060064EA93 /* Default@2x.png */; };
 		44CDB60F135AA82300037C8E /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 44377D54131528CF0064EA93 /* Default-Portrait.png */; };
@@ -226,24 +224,6 @@
 		440C19931446B50E008E9CB0 /* icon44-PageFilp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon44-PageFilp.png"; path = "Image/icon44-PageFilp.png"; sourceTree = "<group>"; };
 		44109328151CC7DE006BD4E6 /* Icon72free@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon72free@2x.png"; sourceTree = "<group>"; };
 		4410932A151CC7F1006BD4E6 /* Icon72s1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon72s1@2x.png"; sourceTree = "<group>"; };
-		4412AA5415626C7F00493EC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = ../../AZClass/en.lproj/AZLocalizable.strings; sourceTree = "<group>"; };
-		4412AA5515626C7F00493EC2 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ../../AZClass/ja.lproj/AZLocalizable.strings; sourceTree = "<group>"; };
-		4412AA5B15626C9A00493EC2 /* AZWeb-Back-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Back-16.png"; sourceTree = "<group>"; };
-		4412AA5C15626C9A00493EC2 /* AZWeb-Back-16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Back-16@2x.png"; sourceTree = "<group>"; };
-		4412AA5D15626C9A00493EC2 /* AZWeb-Forward-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Forward-16.png"; sourceTree = "<group>"; };
-		4412AA5E15626C9A00493EC2 /* AZWeb-Forward-16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Forward-16@2x.png"; sourceTree = "<group>"; };
-		4412AAB31562AA4F00493EC2 /* AZDropbox-130x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-130x44.png"; sourceTree = "<group>"; };
-		4412AAB41562AA4F00493EC2 /* AZDropbox-130x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-130x44@2x.png"; sourceTree = "<group>"; };
-		4412AAB51562AA4F00493EC2 /* AZDropbox-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-32.png"; sourceTree = "<group>"; };
-		4412AAB61562AA4F00493EC2 /* AZDropbox-32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-32@2x.png"; sourceTree = "<group>"; };
-		4412AAB71562AA4F00493EC2 /* AZDropboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZDropboxVC.h; sourceTree = "<group>"; };
-		4412AAB81562AA4F00493EC2 /* AZDropboxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZDropboxVC.m; sourceTree = "<group>"; };
-		4412AABA1562AA4F00493EC2 /* CHANGELOG */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
-		4412AABB1562AA4F00493EC2 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
-		4412AABC1562AA4F00493EC2 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		4412AABD1562AA4F00493EC2 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
-		4412AABF1562AA4F00493EC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AZDropboxDown.xib; sourceTree = "<group>"; };
-		4412AAC11562AA4F00493EC2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/AZDropboxUp.xib; sourceTree = "<group>"; };
 		44159C0B146EC0A900906673 /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = SOURCE_ROOT; };
 		44159C0D146EC10900906673 /* AzCalcViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AzCalcViewController.mm; sourceTree = SOURCE_ROOT; };
 		44159C0F146EC10900906673 /* AzCalcAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AzCalcAppDelegate.m; sourceTree = SOURCE_ROOT; };
@@ -274,34 +254,53 @@
 		44159C79146ECD5800906673 /* it */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = it; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/it.lproj/SettingVC-iPad.xib"; sourceTree = "<absolute>"; };
 		44159C7F146ECDFB00906673 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hans.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
 		44159C88146ECE2000906673 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "/Users/masa/AzukiSoft/AzCalc/AzCalc/zh-Hant.lproj/Localizable.strings"; sourceTree = "<absolute>"; };
-		4424096B15364CCD000981A2 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
-		4424096C15364CCD000981A2 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
 		44377D54131528CF0064EA93 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		44377D56131528EE0064EA93 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		44377D58131528FC0064EA93 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		44377D5A131529060064EA93 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
-		443A35071563D861007A9C55 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
-		443A35081563D861007A9C55 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
-		443A35091563D861007A9C55 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
-		443A350A1563D861007A9C55 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
-		443A350B1563D861007A9C55 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
-		443A350C1563D861007A9C55 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
-		443A350D1563D861007A9C55 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
-		443A350E1563D861007A9C55 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
-		443A350F1563D861007A9C55 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
-		443A35101563D861007A9C55 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
+		4438EAF915E0862D00252036 /* AZClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZClass.h; sourceTree = "<group>"; };
+		4438EAFA15E0862D00252036 /* AZClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZClass.m; sourceTree = "<group>"; };
+		4438EAFC15E0862D00252036 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/AZLocalizable.strings; sourceTree = "<group>"; };
+		4438EAFD15E0862D00252036 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/AZLocalizable.strings; sourceTree = "<group>"; };
+		4438EB0315E0864200252036 /* AZDropbox-130x44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-130x44.png"; sourceTree = "<group>"; };
+		4438EB0415E0864200252036 /* AZDropbox-130x44@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-130x44@2x.png"; sourceTree = "<group>"; };
+		4438EB0515E0864200252036 /* AZDropbox-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-32.png"; sourceTree = "<group>"; };
+		4438EB0615E0864200252036 /* AZDropbox-32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZDropbox-32@2x.png"; sourceTree = "<group>"; };
+		4438EB0715E0864200252036 /* AZDropboxDown.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AZDropboxDown.xib; sourceTree = "<group>"; };
+		4438EB0815E0864200252036 /* AZDropboxUp.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AZDropboxUp.xib; sourceTree = "<group>"; };
+		4438EB0915E0864200252036 /* AZDropboxVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZDropboxVC.h; sourceTree = "<group>"; };
+		4438EB0A15E0864200252036 /* AZDropboxVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZDropboxVC.m; sourceTree = "<group>"; };
+		4438EB0B15E0864200252036 /* DropboxSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DropboxSDK.framework; sourceTree = "<group>"; };
+		4438EB1D15E0865A00252036 /* AZAbout-32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZAbout-32.png"; sourceTree = "<group>"; };
+		4438EB1E15E0865A00252036 /* AZAbout-32@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZAbout-32@2x.png"; sourceTree = "<group>"; };
+		4438EB1F15E0865A00252036 /* AZAbout-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "AZAbout-iPad.xib"; sourceTree = "<group>"; };
+		4438EB2015E0865A00252036 /* AZAbout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AZAbout.xib; sourceTree = "<group>"; };
+		4438EB2115E0865A00252036 /* AZAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZAboutVC.h; sourceTree = "<group>"; };
+		4438EB2215E0865A00252036 /* AZAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZAboutVC.m; sourceTree = "<group>"; };
+		4438EB2415E0865A00252036 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/AZAbout_Agree.txt; sourceTree = "<group>"; };
+		4438EB2515E0865A00252036 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text; name = ja; path = ja.lproj/AZAbout_Agree.txt; sourceTree = "<group>"; };
+		4438EB3315E0867D00252036 /* AZWeb-Back-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Back-16.png"; sourceTree = "<group>"; };
+		4438EB3415E0867D00252036 /* AZWeb-Back-16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Back-16@2x.png"; sourceTree = "<group>"; };
+		4438EB3515E0867D00252036 /* AZWeb-Forward-16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Forward-16.png"; sourceTree = "<group>"; };
+		4438EB3615E0867D00252036 /* AZWeb-Forward-16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AZWeb-Forward-16@2x.png"; sourceTree = "<group>"; };
+		4438EB3715E0867D00252036 /* AZWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZWebView.h; sourceTree = "<group>"; };
+		4438EB3815E0867D00252036 /* AZWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZWebView.m; sourceTree = "<group>"; };
+		4438EB4415E086B600252036 /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
+		4438EB4515E086B600252036 /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
+		4438EB4915E086D200252036 /* GANTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GANTracker.h; sourceTree = "<group>"; };
+		4438EB4A15E086D200252036 /* libGoogleAnalytics.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalytics.a; sourceTree = "<group>"; };
+		4438EB4E15E086E500252036 /* GADAdMobExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdMobExtras.h; sourceTree = "<group>"; };
+		4438EB4F15E086E500252036 /* GADAdNetworkExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdNetworkExtras.h; sourceTree = "<group>"; };
+		4438EB5015E086E500252036 /* GADAdSize.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADAdSize.h; sourceTree = "<group>"; };
+		4438EB5115E086E500252036 /* GADBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerView.h; sourceTree = "<group>"; };
+		4438EB5215E086E500252036 /* GADBannerViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADBannerViewDelegate.h; sourceTree = "<group>"; };
+		4438EB5315E086E500252036 /* GADInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitial.h; sourceTree = "<group>"; };
+		4438EB5415E086E500252036 /* GADInterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADInterstitialDelegate.h; sourceTree = "<group>"; };
+		4438EB5515E086E500252036 /* GADRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequest.h; sourceTree = "<group>"; };
+		4438EB5615E086E500252036 /* GADRequestError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRequestError.h; sourceTree = "<group>"; };
+		4438EB5715E086E500252036 /* libGoogleAdMobAds.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAdMobAds.a; sourceTree = "<group>"; };
 		444187F3120EBCD600DE74B0 /* AzKeyMaster.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AzKeyMaster.plist; sourceTree = "<group>"; };
-		44487E59153694BA00AB6BBE /* AZClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AZClass.h; path = ../../AZClass/AZClass.h; sourceTree = "<group>"; };
-		44487E5A153694BA00AB6BBE /* AZClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AZClass.m; path = ../../AZClass/AZClass.m; sourceTree = "<group>"; };
 		445184431303B8BE002820EA /* Icon16-Setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon16-Setting.png"; path = "Image/Icon16-Setting.png"; sourceTree = "<group>"; };
-		445F33141554DEB4002A5765 /* AZAbout-iPad.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "AZAbout-iPad.xib"; sourceTree = "<group>"; };
-		445F33151554DEB4002A5765 /* AZAbout.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AZAbout.xib; sourceTree = "<group>"; };
-		445F33161554DEB4002A5765 /* AZAboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZAboutVC.h; sourceTree = "<group>"; };
-		445F33171554DEB4002A5765 /* AZAboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZAboutVC.m; sourceTree = "<group>"; };
-		445F33191554DEB4002A5765 /* AZWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AZWebView.h; sourceTree = "<group>"; };
-		445F331A1554DEB4002A5765 /* AZWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AZWebView.m; sourceTree = "<group>"; };
-		445F33351554DEED002A5765 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = ../../AZClass/en.lproj/AZAbout_Agree.txt; sourceTree = "<group>"; };
-		445F33371554DEED002A5765 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text; name = ja; path = ../../AZClass/ja.lproj/AZAbout_Agree.txt; sourceTree = "<group>"; };
 		446E08C3133450DF006859F4 /* Icon-Drum60x37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum60x37.png"; path = "Image/Icon-Drum60x37.png"; sourceTree = "<group>"; };
 		446E08C4133450DF006859F4 /* Icon-Drum60x37@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Drum60x37@2x.png"; path = "Image/Icon-Drum60x37@2x.png"; sourceTree = "<group>"; };
 		446E08C5133450DF006859F4 /* Icon-DrumPush60x37.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-DrumPush60x37.png"; path = "Image/Icon-DrumPush60x37.png"; sourceTree = "<group>"; };
@@ -341,8 +340,6 @@
 		44BC4C921359EA01009B995C /* Icon57s1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon57s1@2x.png"; sourceTree = "<group>"; };
 		44BC4C931359EA01009B995C /* Icon72s1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72s1.png; sourceTree = "<group>"; };
 		44C572921384B4B300490D58 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		44CDB5CC135A80BE00037C8E /* UIDevice-Hardware.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice-Hardware.h"; sourceTree = "<group>"; };
-		44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice-Hardware.m"; sourceTree = "<group>"; };
 		44CF04691462CF9300E80EFF /* AzCalc-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-Info.plist"; sourceTree = "<group>"; };
 		44CF046B1462CFA100E80EFF /* AzCalc-InfoS1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "AzCalc-InfoS1.plist"; sourceTree = "<group>"; };
 		44D32BD61424A79F0041523E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -385,9 +382,9 @@
 				44D32BD81424D36D0041523E /* AVFoundation.framework in Frameworks */,
 				44968E34146268F800F25305 /* Security.framework in Frameworks */,
 				4404464A151E27C3008221B4 /* libsqlite3.0.dylib in Frameworks */,
-				442409F415364CCD000981A2 /* libGoogleAnalytics.a in Frameworks */,
-				4412AACE1562AA4F00493EC2 /* DropboxSDK.framework in Frameworks */,
-				443A35191563D861007A9C55 /* libGoogleAdMobAds.a in Frameworks */,
+				4438EB1A15E0864200252036 /* DropboxSDK.framework in Frameworks */,
+				4438EB4B15E086D200252036 /* libGoogleAnalytics.a in Frameworks */,
+				4438EB5815E086E500252036 /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,8 +403,9 @@
 				44BC4C831359E9A1009B995C /* MessageUI.framework in Frameworks */,
 				44BC4C841359E9A1009B995C /* QuartzCore.framework in Frameworks */,
 				44968E321462684300F25305 /* Security.framework in Frameworks */,
-				442409F515364CCD000981A2 /* libGoogleAnalytics.a in Frameworks */,
-				4412AACF1562AA4F00493EC2 /* DropboxSDK.framework in Frameworks */,
+				4438EB1B15E0864200252036 /* DropboxSDK.framework in Frameworks */,
+				4438EB4C15E086D200252036 /* libGoogleAnalytics.a in Frameworks */,
+				4438EB5915E086E600252036 /* libGoogleAdMobAds.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -519,71 +517,108 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4412AAB21562AA4F00493EC2 /* AZDropbox */ = {
+		4438EAF815E0862D00252036 /* AZClass.relese */ = {
 			isa = PBXGroup;
 			children = (
-				4412AAB31562AA4F00493EC2 /* AZDropbox-130x44.png */,
-				4412AAB41562AA4F00493EC2 /* AZDropbox-130x44@2x.png */,
-				4412AAB51562AA4F00493EC2 /* AZDropbox-32.png */,
-				4412AAB61562AA4F00493EC2 /* AZDropbox-32@2x.png */,
-				4412AAB71562AA4F00493EC2 /* AZDropboxVC.h */,
-				4412AAB81562AA4F00493EC2 /* AZDropboxVC.m */,
-				4412AAB91562AA4F00493EC2 /* dropbox-ios-sdk-1.2.2-b4 */,
-				4412AABE1562AA4F00493EC2 /* AZDropboxDown.xib */,
-				4412AAC01562AA4F00493EC2 /* AZDropboxUp.xib */,
+				4438EAF915E0862D00252036 /* AZClass.h */,
+				4438EAFA15E0862D00252036 /* AZClass.m */,
+				4438EAFB15E0862D00252036 /* AZLocalizable.strings */,
 			);
-			name = AZDropbox;
-			path = ../../AZClass/AZDropbox;
+			name = AZClass.relese;
+			path = ../../AZClass/AZClass.relese;
 			sourceTree = "<group>";
 		};
-		4412AAB91562AA4F00493EC2 /* dropbox-ios-sdk-1.2.2-b4 */ = {
+		4438EB0215E0864200252036 /* AZDropbox.relese */ = {
 			isa = PBXGroup;
 			children = (
-				4412AABA1562AA4F00493EC2 /* CHANGELOG */,
-				4412AABB1562AA4F00493EC2 /* DropboxSDK.framework */,
-				4412AABC1562AA4F00493EC2 /* LICENSE */,
-				4412AABD1562AA4F00493EC2 /* README */,
+				4438EB0315E0864200252036 /* AZDropbox-130x44.png */,
+				4438EB0415E0864200252036 /* AZDropbox-130x44@2x.png */,
+				4438EB0515E0864200252036 /* AZDropbox-32.png */,
+				4438EB0615E0864200252036 /* AZDropbox-32@2x.png */,
+				4438EB0715E0864200252036 /* AZDropboxDown.xib */,
+				4438EB0815E0864200252036 /* AZDropboxUp.xib */,
+				4438EB0915E0864200252036 /* AZDropboxVC.h */,
+				4438EB0A15E0864200252036 /* AZDropboxVC.m */,
+				4438EB0B15E0864200252036 /* DropboxSDK.framework */,
 			);
-			path = "dropbox-ios-sdk-1.2.2-b4";
+			name = AZDropbox.relese;
+			path = ../../AZClass/AZDropbox/AZDropbox.relese;
 			sourceTree = "<group>";
 		};
-		4424096A15364CCD000981A2 /* GoogleAnalyticsiOS_1.4 */ = {
+		4438EB1C15E0865A00252036 /* AZAbout.relese */ = {
 			isa = PBXGroup;
 			children = (
-				4424096B15364CCD000981A2 /* GANTracker.h */,
-				4424096C15364CCD000981A2 /* libGoogleAnalytics.a */,
+				4438EB1D15E0865A00252036 /* AZAbout-32.png */,
+				4438EB1E15E0865A00252036 /* AZAbout-32@2x.png */,
+				4438EB1F15E0865A00252036 /* AZAbout-iPad.xib */,
+				4438EB2015E0865A00252036 /* AZAbout.xib */,
+				4438EB2115E0865A00252036 /* AZAboutVC.h */,
+				4438EB2215E0865A00252036 /* AZAboutVC.m */,
+				4438EB2315E0865A00252036 /* AZAbout_Agree.txt */,
 			);
-			name = GoogleAnalyticsiOS_1.4;
-			path = "../../OpenCode/Google Analytics/GoogleAnalyticsiOS_1.4";
+			name = AZAbout.relese;
+			path = ../../AZClass/AZAbout/AZAbout.relese;
 			sourceTree = "<group>";
 		};
-		443A35061563D861007A9C55 /* GoogleAdMobAdsSDK-6.0.3 */ = {
+		4438EB3215E0867D00252036 /* AZWebView.relese */ = {
 			isa = PBXGroup;
 			children = (
-				443A35071563D861007A9C55 /* GADAdMobExtras.h */,
-				443A35081563D861007A9C55 /* GADAdNetworkExtras.h */,
-				443A35091563D861007A9C55 /* GADAdSize.h */,
-				443A350A1563D861007A9C55 /* GADBannerView.h */,
-				443A350B1563D861007A9C55 /* GADBannerViewDelegate.h */,
-				443A350C1563D861007A9C55 /* GADInterstitial.h */,
-				443A350D1563D861007A9C55 /* GADInterstitialDelegate.h */,
-				443A350E1563D861007A9C55 /* GADRequest.h */,
-				443A350F1563D861007A9C55 /* GADRequestError.h */,
-				443A35101563D861007A9C55 /* libGoogleAdMobAds.a */,
+				4438EB3315E0867D00252036 /* AZWeb-Back-16.png */,
+				4438EB3415E0867D00252036 /* AZWeb-Back-16@2x.png */,
+				4438EB3515E0867D00252036 /* AZWeb-Forward-16.png */,
+				4438EB3615E0867D00252036 /* AZWeb-Forward-16@2x.png */,
+				4438EB3715E0867D00252036 /* AZWebView.h */,
+				4438EB3815E0867D00252036 /* AZWebView.m */,
 			);
-			name = "GoogleAdMobAdsSDK-6.0.3";
-			path = "../../OpenCode/Ads/GoogleAdMobAdsSDK-6.0.3";
+			name = AZWebView.relese;
+			path = ../../AZClass/AZWebView/AZWebView.relese;
+			sourceTree = "<group>";
+		};
+		4438EB4315E086B600252036 /* UIDevice-Hardware.release */ = {
+			isa = PBXGroup;
+			children = (
+				4438EB4415E086B600252036 /* UIDevice-Hardware.h */,
+				4438EB4515E086B600252036 /* UIDevice-Hardware.m */,
+			);
+			name = "UIDevice-Hardware.release";
+			path = "../../OpenCode/UIDevice-Hardware/UIDevice-Hardware.release";
+			sourceTree = "<group>";
+		};
+		4438EB4815E086D200252036 /* GoogleAnalytics.release */ = {
+			isa = PBXGroup;
+			children = (
+				4438EB4915E086D200252036 /* GANTracker.h */,
+				4438EB4A15E086D200252036 /* libGoogleAnalytics.a */,
+			);
+			name = GoogleAnalytics.release;
+			path = ../../OpenCode/GoogleAnalytics/GoogleAnalytics.release;
+			sourceTree = "<group>";
+		};
+		4438EB4D15E086E500252036 /* AdMob.release */ = {
+			isa = PBXGroup;
+			children = (
+				4438EB4E15E086E500252036 /* GADAdMobExtras.h */,
+				4438EB4F15E086E500252036 /* GADAdNetworkExtras.h */,
+				4438EB5015E086E500252036 /* GADAdSize.h */,
+				4438EB5115E086E500252036 /* GADBannerView.h */,
+				4438EB5215E086E500252036 /* GADBannerViewDelegate.h */,
+				4438EB5315E086E500252036 /* GADInterstitial.h */,
+				4438EB5415E086E500252036 /* GADInterstitialDelegate.h */,
+				4438EB5515E086E500252036 /* GADRequest.h */,
+				4438EB5615E086E500252036 /* GADRequestError.h */,
+				4438EB5715E086E500252036 /* libGoogleAdMobAds.a */,
+			);
+			name = AdMob.release;
+			path = ../../OpenCode/AdMob/AdMob.release;
 			sourceTree = "<group>";
 		};
 		44487E571536949100AB6BBE /* AZClass */ = {
 			isa = PBXGroup;
 			children = (
-				4412AAB21562AA4F00493EC2 /* AZDropbox */,
-				4412AA5315626C7F00493EC2 /* AZLocalizable.strings */,
-				44487E59153694BA00AB6BBE /* AZClass.h */,
-				44487E5A153694BA00AB6BBE /* AZClass.m */,
-				445F33131554DEB4002A5765 /* AZAbout */,
-				445F33181554DEB4002A5765 /* AZWebView */,
+				4438EB3215E0867D00252036 /* AZWebView.relese */,
+				4438EB1C15E0865A00252036 /* AZAbout.relese */,
+				4438EB0215E0864200252036 /* AZDropbox.relese */,
+				4438EAF815E0862D00252036 /* AZClass.relese */,
 			);
 			name = AZClass;
 			sourceTree = "<group>";
@@ -600,33 +635,6 @@
 				44B270BC146EB89E00450472 /* OptionVC.xib */,
 			);
 			name = SettingVC;
-			sourceTree = "<group>";
-		};
-		445F33131554DEB4002A5765 /* AZAbout */ = {
-			isa = PBXGroup;
-			children = (
-				445F33341554DEED002A5765 /* AZAbout_Agree.txt */,
-				445F33141554DEB4002A5765 /* AZAbout-iPad.xib */,
-				445F33151554DEB4002A5765 /* AZAbout.xib */,
-				445F33161554DEB4002A5765 /* AZAboutVC.h */,
-				445F33171554DEB4002A5765 /* AZAboutVC.m */,
-			);
-			name = AZAbout;
-			path = ../../AZClass/AZAbout;
-			sourceTree = "<group>";
-		};
-		445F33181554DEB4002A5765 /* AZWebView */ = {
-			isa = PBXGroup;
-			children = (
-				4412AA5B15626C9A00493EC2 /* AZWeb-Back-16.png */,
-				4412AA5C15626C9A00493EC2 /* AZWeb-Back-16@2x.png */,
-				4412AA5D15626C9A00493EC2 /* AZWeb-Forward-16.png */,
-				4412AA5E15626C9A00493EC2 /* AZWeb-Forward-16@2x.png */,
-				445F33191554DEB4002A5765 /* AZWebView.h */,
-				445F331A1554DEB4002A5765 /* AZWebView.m */,
-			);
-			name = AZWebView;
-			path = ../../AZClass/AZWebView;
 			sourceTree = "<group>";
 		};
 		44A2E47411EB29F5009FB007 /* Images */ = {
@@ -676,10 +684,9 @@
 		44CDB5CB135A807900037C8E /* OpenCode */ = {
 			isa = PBXGroup;
 			children = (
-				443A35061563D861007A9C55 /* GoogleAdMobAdsSDK-6.0.3 */,
-				4424096A15364CCD000981A2 /* GoogleAnalyticsiOS_1.4 */,
-				44CDB5CC135A80BE00037C8E /* UIDevice-Hardware.h */,
-				44CDB5CD135A80BE00037C8E /* UIDevice-Hardware.m */,
+				4438EB4D15E086E500252036 /* AdMob.release */,
+				4438EB4815E086D200252036 /* GoogleAnalytics.release */,
+				4438EB4315E086B600252036 /* UIDevice-Hardware.release */,
 			);
 			name = OpenCode;
 			sourceTree = "<group>";
@@ -727,7 +734,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0430;
+				LastUpgradeCheck = 0440;
 				ORGANIZATIONNAME = AzukiSoft;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "AzCalc" */;
@@ -818,20 +825,22 @@
 				44AD65F21510A02E00F17D47 /* Default-Portrait@2x~ipad.png in Resources */,
 				44AD65F31510A03800F17D47 /* Default-Landscape@2x~ipad.png in Resources */,
 				44109329151CC7DE006BD4E6 /* Icon72free@2x.png in Resources */,
-				445F333A1554DEED002A5765 /* AZAbout_Agree.txt in Resources */,
-				445F333C1554DEED002A5765 /* AZAbout-iPad.xib in Resources */,
-				445F333E1554DEED002A5765 /* AZAbout.xib in Resources */,
-				4412AA5615626C7F00493EC2 /* AZLocalizable.strings in Resources */,
-				4412AA5F15626C9A00493EC2 /* AZWeb-Back-16.png in Resources */,
-				4412AA6115626C9A00493EC2 /* AZWeb-Back-16@2x.png in Resources */,
-				4412AA6315626C9A00493EC2 /* AZWeb-Forward-16.png in Resources */,
-				4412AA6515626C9A00493EC2 /* AZWeb-Forward-16@2x.png in Resources */,
-				4412AAC21562AA4F00493EC2 /* AZDropbox-130x44.png in Resources */,
-				4412AAC41562AA4F00493EC2 /* AZDropbox-130x44@2x.png in Resources */,
-				4412AAC61562AA4F00493EC2 /* AZDropbox-32.png in Resources */,
-				4412AAC81562AA4F00493EC2 /* AZDropbox-32@2x.png in Resources */,
-				4412AAD41562AA4F00493EC2 /* AZDropboxDown.xib in Resources */,
-				4412AAD61562AA4F00493EC2 /* AZDropboxUp.xib in Resources */,
+				4438EB0015E0862D00252036 /* AZLocalizable.strings in Resources */,
+				4438EB0C15E0864200252036 /* AZDropbox-130x44.png in Resources */,
+				4438EB0E15E0864200252036 /* AZDropbox-130x44@2x.png in Resources */,
+				4438EB1015E0864200252036 /* AZDropbox-32.png in Resources */,
+				4438EB1215E0864200252036 /* AZDropbox-32@2x.png in Resources */,
+				4438EB1415E0864200252036 /* AZDropboxDown.xib in Resources */,
+				4438EB1615E0864200252036 /* AZDropboxUp.xib in Resources */,
+				4438EB2615E0865A00252036 /* AZAbout-32.png in Resources */,
+				4438EB2815E0865A00252036 /* AZAbout-32@2x.png in Resources */,
+				4438EB2A15E0865A00252036 /* AZAbout-iPad.xib in Resources */,
+				4438EB2C15E0865A00252036 /* AZAbout.xib in Resources */,
+				4438EB3015E0865A00252036 /* AZAbout_Agree.txt in Resources */,
+				4438EB3915E0867D00252036 /* AZWeb-Back-16.png in Resources */,
+				4438EB3B15E0867D00252036 /* AZWeb-Back-16@2x.png in Resources */,
+				4438EB3D15E0867D00252036 /* AZWeb-Forward-16.png in Resources */,
+				4438EB3F15E0867D00252036 /* AZWeb-Forward-16@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,25 +901,22 @@
 				44AD65EF15109F8C00F17D47 /* Default-Portrait@2x~ipad.png in Resources */,
 				44AD65F115109F9E00F17D47 /* Default-Landscape@2x~ipad.png in Resources */,
 				4410932B151CC7F1006BD4E6 /* Icon72s1@2x.png in Resources */,
-				445F33211554DEB4002A5765 /* AZAbout-iPad.xib in Resources */,
-				445F33231554DEB4002A5765 /* AZAbout.xib in Resources */,
-				445F333B1554DEED002A5765 /* AZAbout_Agree.txt in Resources */,
-				445F333D1554DEED002A5765 /* AZAbout-iPad.xib in Resources */,
-				445F333F1554DEED002A5765 /* AZAbout.xib in Resources */,
-				4412AA5715626C7F00493EC2 /* AZLocalizable.strings in Resources */,
-				4412AA6015626C9A00493EC2 /* AZWeb-Back-16.png in Resources */,
-				4412AA6215626C9A00493EC2 /* AZWeb-Back-16@2x.png in Resources */,
-				4412AA6415626C9A00493EC2 /* AZWeb-Forward-16.png in Resources */,
-				4412AA6615626C9A00493EC2 /* AZWeb-Forward-16@2x.png in Resources */,
-				4412AAC31562AA4F00493EC2 /* AZDropbox-130x44.png in Resources */,
-				4412AAC51562AA4F00493EC2 /* AZDropbox-130x44@2x.png in Resources */,
-				4412AAC71562AA4F00493EC2 /* AZDropbox-32.png in Resources */,
-				4412AAC91562AA4F00493EC2 /* AZDropbox-32@2x.png in Resources */,
-				4412AACD1562AA4F00493EC2 /* CHANGELOG in Resources */,
-				4412AAD11562AA4F00493EC2 /* LICENSE in Resources */,
-				4412AAD31562AA4F00493EC2 /* README in Resources */,
-				4412AAD51562AA4F00493EC2 /* AZDropboxDown.xib in Resources */,
-				4412AAD71562AA4F00493EC2 /* AZDropboxUp.xib in Resources */,
+				4438EB0115E0862D00252036 /* AZLocalizable.strings in Resources */,
+				4438EB0D15E0864200252036 /* AZDropbox-130x44.png in Resources */,
+				4438EB0F15E0864200252036 /* AZDropbox-130x44@2x.png in Resources */,
+				4438EB1115E0864200252036 /* AZDropbox-32.png in Resources */,
+				4438EB1315E0864200252036 /* AZDropbox-32@2x.png in Resources */,
+				4438EB1515E0864200252036 /* AZDropboxDown.xib in Resources */,
+				4438EB1715E0864200252036 /* AZDropboxUp.xib in Resources */,
+				4438EB2715E0865A00252036 /* AZAbout-32.png in Resources */,
+				4438EB2915E0865A00252036 /* AZAbout-32@2x.png in Resources */,
+				4438EB2B15E0865A00252036 /* AZAbout-iPad.xib in Resources */,
+				4438EB2D15E0865A00252036 /* AZAbout.xib in Resources */,
+				4438EB3115E0865A00252036 /* AZAbout_Agree.txt in Resources */,
+				4438EB3A15E0867D00252036 /* AZWeb-Back-16.png in Resources */,
+				4438EB3C15E0867D00252036 /* AZWeb-Back-16@2x.png in Resources */,
+				4438EB3E15E0867D00252036 /* AZWeb-Forward-16.png in Resources */,
+				4438EB4015E0867D00252036 /* AZWeb-Forward-16@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -923,7 +929,6 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				44AF8D5A11FC8F0700D4B206 /* SBCD.cpp in Sources */,
-				44CDB5CE135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
 				44159C1C146EC10900906673 /* AzCalcViewController.mm in Sources */,
 				44159C1E146EC10900906673 /* AzCalcAppDelegate.m in Sources */,
 				44159C20146EC10900906673 /* SettingVC.m in Sources */,
@@ -931,10 +936,11 @@
 				44159C24146EC10900906673 /* Drum.mm in Sources */,
 				44159C26146EC10900906673 /* CalcFunctions.mm in Sources */,
 				44159C3C146EC41B00906673 /* OptionVC.m in Sources */,
-				44487E5B153694BA00AB6BBE /* AZClass.m in Sources */,
-				445F33401554DEED002A5765 /* AZAboutVC.m in Sources */,
-				445F33421554DEED002A5765 /* AZWebView.m in Sources */,
-				4412AACA1562AA4F00493EC2 /* AZDropboxVC.m in Sources */,
+				4438EAFE15E0862D00252036 /* AZClass.m in Sources */,
+				4438EB1815E0864200252036 /* AZDropboxVC.m in Sources */,
+				4438EB2E15E0865A00252036 /* AZAboutVC.m in Sources */,
+				4438EB4115E0867D00252036 /* AZWebView.m in Sources */,
+				4438EB4615E086B600252036 /* UIDevice-Hardware.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -944,7 +950,6 @@
 			files = (
 				44BC4C671359E9A1009B995C /* main.m in Sources */,
 				44BC4C6E1359E9A1009B995C /* SBCD.cpp in Sources */,
-				44CDB5CF135A80BE00037C8E /* UIDevice-Hardware.m in Sources */,
 				44159C1D146EC10900906673 /* AzCalcViewController.mm in Sources */,
 				44159C1F146EC10900906673 /* AzCalcAppDelegate.m in Sources */,
 				44159C21146EC10900906673 /* SettingVC.m in Sources */,
@@ -952,51 +957,33 @@
 				44159C25146EC10900906673 /* Drum.mm in Sources */,
 				44159C27146EC10900906673 /* CalcFunctions.mm in Sources */,
 				44159C3D146EC41B00906673 /* OptionVC.m in Sources */,
-				44487E5C153694BA00AB6BBE /* AZClass.m in Sources */,
-				445F33251554DEB4002A5765 /* AZAboutVC.m in Sources */,
-				445F33271554DEB4002A5765 /* AZWebView.m in Sources */,
-				445F33411554DEED002A5765 /* AZAboutVC.m in Sources */,
-				445F33431554DEED002A5765 /* AZWebView.m in Sources */,
-				4412AACB1562AA4F00493EC2 /* AZDropboxVC.m in Sources */,
+				4438EAFF15E0862D00252036 /* AZClass.m in Sources */,
+				4438EB1915E0864200252036 /* AZDropboxVC.m in Sources */,
+				4438EB2F15E0865A00252036 /* AZAboutVC.m in Sources */,
+				4438EB4215E0867D00252036 /* AZWebView.m in Sources */,
+				4438EB4715E086B600252036 /* UIDevice-Hardware.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4412AA5315626C7F00493EC2 /* AZLocalizable.strings */ = {
+		4438EAFB15E0862D00252036 /* AZLocalizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4412AA5415626C7F00493EC2 /* en */,
-				4412AA5515626C7F00493EC2 /* ja */,
+				4438EAFC15E0862D00252036 /* en */,
+				4438EAFD15E0862D00252036 /* ja */,
 			);
 			name = AZLocalizable.strings;
 			sourceTree = "<group>";
 		};
-		4412AABE1562AA4F00493EC2 /* AZDropboxDown.xib */ = {
+		4438EB2315E0865A00252036 /* AZAbout_Agree.txt */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4412AABF1562AA4F00493EC2 /* en */,
-			);
-			name = AZDropboxDown.xib;
-			sourceTree = "<group>";
-		};
-		4412AAC01562AA4F00493EC2 /* AZDropboxUp.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				4412AAC11562AA4F00493EC2 /* en */,
-			);
-			name = AZDropboxUp.xib;
-			sourceTree = "<group>";
-		};
-		445F33341554DEED002A5765 /* AZAbout_Agree.txt */ = {
-			isa = PBXVariantGroup;
-			children = (
-				445F33351554DEED002A5765 /* en */,
-				445F33371554DEED002A5765 /* ja */,
+				4438EB2415E0865A00252036 /* en */,
+				4438EB2515E0865A00252036 /* ja */,
 			);
 			name = AZAbout_Agree.txt;
-			path = ../../AzCalc/AzCalc;
 			sourceTree = "<group>";
 		};
 		44B270B7146EB84C00450472 /* SettingVC.xib */ = {
@@ -1075,7 +1062,7 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../AZClass/AZDropbox/dropbox-ios-sdk-1.2.2-b4\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox/AZDropbox.relese\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1089,8 +1076,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Google Analytics/GoogleAnalyticsiOS_1.4\"",
-					"\"$(SRCROOT)/../../OpenCode/Ads/GoogleAdMobAdsSDK-6.0.3\"",
+					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
+					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1112,7 +1099,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../AZClass/AZDropbox/dropbox-ios-sdk-1.2.2-b4\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox/AZDropbox.relese\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
@@ -1123,8 +1110,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Google Analytics/GoogleAnalyticsiOS_1.4\"",
-					"\"$(SRCROOT)/../../OpenCode/Ads/GoogleAdMobAdsSDK-6.0.3\"",
+					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
+					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1147,8 +1134,8 @@
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Dropbox/dropbox-ios-sdk-1.2.1\"",
-					"\"$(SRCROOT)/../../AZClass/AZDropbox/dropbox-ios-sdk-1.2.2-b4\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox/AZDropbox.relese\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1161,7 +1148,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Google Analytics/GoogleAnalyticsiOS_1.4\"",
+					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
+					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
 				PRODUCT_NAME = AzCalcS1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1183,8 +1171,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Dropbox/dropbox-ios-sdk-1.2.1\"",
-					"\"$(SRCROOT)/../../AZClass/AZDropbox/dropbox-ios-sdk-1.2.2-b4\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox/AZDropbox.relese\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
@@ -1194,7 +1182,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Google Analytics/GoogleAnalyticsiOS_1.4\"",
+					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
+					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
 				PRODUCT_NAME = AzCalcS1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1217,8 +1206,8 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Dropbox/dropbox-ios-sdk-1.2.1\"",
-					"\"$(SRCROOT)/../../AZClass/AZDropbox/dropbox-ios-sdk-1.2.2-b4\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox/AZDropbox.relese\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
@@ -1228,7 +1217,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Google Analytics/GoogleAnalyticsiOS_1.4\"",
+					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
+					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
 				PRODUCT_NAME = AzCalcS1;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
@@ -1273,7 +1263,7 @@
 				COPY_PHASE_STRIP = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../AZClass/AZDropbox/dropbox-ios-sdk-1.2.2-b4\"",
+					"\"$(SRCROOT)/../../AZClass/AZDropbox/AZDropbox.relese\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = AzCalc_Prefix.pch;
@@ -1284,8 +1274,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../OpenCode/Google Analytics/GoogleAnalyticsiOS_1.4\"",
-					"\"$(SRCROOT)/../../OpenCode/Ads/GoogleAdMobAdsSDK-6.0.3\"",
+					"\"$(SRCROOT)/../../OpenCode/GoogleAnalytics/GoogleAnalytics.release\"",
+					"\"$(SRCROOT)/../../OpenCode/AdMob/AdMob.release\"",
 				);
 				PRODUCT_NAME = AzCalc;
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";

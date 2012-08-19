@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#include <AVFoundation/AVFoundation.h>
+#import <AVFoundation/AVFoundation.h>
 
 #ifdef GD_Ad_ENABLED
 //[1.1.6] iAd優先 AdMob補助 方式に戻した。 iAdは30秒以上表示するだけでも収益あり
@@ -114,6 +114,12 @@
 	NSInteger  MiSvLowerPage;	// ibScrollLower の現在表示ページを常に保持
 	NSInteger  MiSvUpperPage;	// ibScrollUpper の現在表示ページを常に保持
 	NSInteger  MiSwipe1fingerCount;		// 1指で3回スワイプされたらヘルプメッセージを出すため
+	
+	AVAudioPlayer	*mSoundClick;	//ARCにより破棄されないようにするため
+	AVAudioPlayer	*mSoundSwipe;
+	AVAudioPlayer	*mSoundLock;
+	AVAudioPlayer	*mSoundUnlock;
+	AVAudioPlayer	*mSoundRollex;	//Roll切替音
 }
 
 - (IBAction)ibBuMemory:(UIButton *)button;

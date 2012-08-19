@@ -17,8 +17,8 @@
    inkscape:version="0.48.1 r9760"
    sodipodi:docname="Icon--512x512.svg"
    inkscape:export-filename="/Users/masa/AzukiSoft/AzCalc/AzCalc/Icon72s1@2x.png"
-   inkscape:export-xdpi="25.3125"
-   inkscape:export-ydpi="25.3125"
+   inkscape:export-xdpi="25.309999"
+   inkscape:export-ydpi="25.309999"
    style="display:inline">
   <defs
      id="defs4">
@@ -3038,6 +3038,38 @@
          result="result2"
          operator="in" />
     </filter>
+    <filter
+       id="filter8031"
+       inkscape:label="Diffuse light"
+       inkscape:menu="ABCs"
+       inkscape:menu-tooltip="Basic diffuse bevel to use for building textures"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         id="feGaussianBlur8033"
+         stdDeviation="6"
+         in="SourceGraphic"
+         result="result0" />
+      <feDiffuseLighting
+         id="feDiffuseLighting8035"
+         diffuseConstant="1"
+         surfaceScale="10"
+         result="result5">
+        <feDistantLight
+           id="feDistantLight8037"
+           elevation="25"
+           azimuth="235" />
+      </feDiffuseLighting>
+      <feComposite
+         k4="0"
+         id="feComposite8039"
+         in2="SourceGraphic"
+         k1="1"
+         in="result5"
+         result="result4"
+         operator="arithmetic"
+         k2="0"
+         k3="0.6" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -3047,10 +3079,10 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.70910507"
-     inkscape:cx="4.979372"
+     inkscape:cx="50.942509"
      inkscape:cy="256"
      inkscape:document-units="px"
-     inkscape:current-layer="g3447"
+     inkscape:current-layer="layer6"
      showgrid="false"
      inkscape:window-width="1360"
      inkscape:window-height="1042"
@@ -3077,14 +3109,15 @@
      style="display:inline"
      sodipodi:insensitive="true">
     <rect
-       style="fill:#97504d;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline"
-       id="rect4551"
-       width="512"
-       height="512"
+       rx="93.161728"
+       ry="93.189163"
+       y="0"
        x="0"
-       y="-3.5527137e-15"
-       ry="90"
-       rx="90" />
+       height="512"
+       width="512"
+       id="rect7909"
+       style="fill:#97504d;fill-opacity:1;fill-rule:evenodd;stroke:none;display:inline;filter:url(#filter8031)"
+       transform="matrix(0.99417429,0,0,0.99388162,2.185185,2.484216)" />
   </g>
   <g
      inkscape:groupmode="layer"
