@@ -21,7 +21,6 @@
 #endif
 
 #import "AzCalcAppDelegate.h"
-#import "AZDropboxVC.h"
 
 
 #define KeyMemorys_MAX		20	// M1〜M20
@@ -29,7 +28,7 @@
 
 @class KeyButton;
 
-@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate, AZDropboxDelegate
+@interface AzCalcViewController : UIViewController  <UIPickerViewDelegate, UIPickerViewDataSource, UITextViewDelegate, UIScrollViewDelegate, AVAudioPlayerDelegate
 #ifdef GD_Ad_ENABLED
 		//, AdWhirlDelegate, NADViewDelegate, ADBannerViewDelegate
 		, ADBannerViewDelegate, GADBannerViewDelegate

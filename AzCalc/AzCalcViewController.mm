@@ -2611,35 +2611,35 @@
 		rootViewController = self;
 	}
 	
-	NSString *zRootPath;
-	if (iS_iPAD) {
-		zRootPath = @"/iPad/";
-	} else {
-		zRootPath = @"/iPhone/";
-	}
-	AZDropboxVC *vc = [[AZDropboxVC alloc] initWithAppKey: @"62f2rrofi788410"	//CalcRoll
-												appSecret: @"s07scm6ifi1o035"
-												root: kDBRootAppFolder	//kDBRootAppFolder or kDBRootDropbox
-												rootPath: zRootPath
-												mode: AZDropboxUpDown	// Up & Down & Delete
-												extension: CALCROLL_EXT 
-												delegate: self];	//<AZDropboxDelegate>が呼び出される
+//    NSString *zRootPath;
+//    if (iS_iPAD) {
+//        zRootPath = @"/iPad/";
+//    } else {
+//        zRootPath = @"/iPhone/";
+//    }
+//    AZDropboxVC *vc = [[AZDropboxVC alloc] initWithAppKey: @"62f2rrofi788410"    //CalcRoll
+//                                                appSecret: @"s07scm6ifi1o035"
+//                                                root: kDBRootAppFolder    //kDBRootAppFolder or kDBRootDropbox
+//                                                rootPath: zRootPath
+//                                                mode: AZDropboxUpDown    // Up & Down & Delete
+//                                                extension: CALCROLL_EXT
+//                                                delegate: self];    //<AZDropboxDelegate>が呼び出される
 
-	//vc.title = NSLocalizedString(@"Dropbox Upload",nil);
-	[vc setHidesBottomBarWhenPushed:YES]; // 現在のToolBar状態をPushした上で、次画面では非表示にする
-	// Set up NEXT Left [Back] buttons.
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
-											 initWithTitle: NSLocalizedString(@"Back", nil)
-											 style:UIBarButtonItemStylePlain
-											 target:nil  action:nil];
-	//表示開始		Naviへ突っ込む。iPad共通
-	UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:vc];
-	nc.modalPresentationStyle = UIModalPresentationFormSheet;  // 背景Viewが保持される
-	nc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;//	UIModalTransitionStyleFlipHorizontal
-	[rootViewController presentModalViewController:nc animated:YES];
-	//表示開始後にsetする
-	[vc setCryptHidden:YES	 Enabled:NO];////表示後にセットすること
-	[vc setUpFileName: @"My Keyboard"];
+//    //vc.title = NSLocalizedString(@"Dropbox Upload",nil);
+//    [vc setHidesBottomBarWhenPushed:YES]; // 現在のToolBar状態をPushした上で、次画面では非表示にする
+//    // Set up NEXT Left [Back] buttons.
+//    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc]
+//                                             initWithTitle: NSLocalizedString(@"Back", nil)
+//                                             style:UIBarButtonItemStylePlain
+//                                             target:nil  action:nil];
+//    //表示開始        Naviへ突っ込む。iPad共通
+//    UINavigationController* nc = [[UINavigationController alloc] initWithRootViewController:vc];
+//    nc.modalPresentationStyle = UIModalPresentationFormSheet;  // 背景Viewが保持される
+//    nc.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;//    UIModalTransitionStyleFlipHorizontal
+//    [rootViewController presentModalViewController:nc animated:YES];
+//    //表示開始後にsetする
+//    [vc setCryptHidden:YES     Enabled:NO];////表示後にセットすること
+//    [vc setUpFileName: @"My Keyboard"];
 }
 
 // Function関係キー入力処理
@@ -3273,51 +3273,51 @@
 	return YES;
 }
 
-#pragma mark - <AZDropboxDelegate>
-- (NSString*)azDropboxBeforeUpFilePath:(NSString*)filePath crypt:(BOOL)crypt
-{	//Up前処理＜UPするファイルを準備する＞
-	//NSUbiquitousKeyValueStore *kvs = [NSUbiquitousKeyValueStore defaultStore];
-	//[kvs synchronize]; // iCloud最新同期（取得）
-
-	// キーレイアウト を filePath へ書き出す           crypt未対応
-	@try {
-		// 先に.plist保存する
-		NSDictionary *dic = nil;
-		if (iS_iPAD) {
-			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-				   mKmPages,		@"PadPages", 
-				   mKmPadFunc,	@"PadFunc",
-				   nil];
-		} else {
-			dic = [[NSDictionary alloc] initWithObjectsAndKeys:
-				   mKmPages,		@"Pages", 
-				   nil];
-		}
-		[dic writeToFile:filePath atomically:YES];
-		return nil; //OK
-	}
-	@catch (NSException *exception) {
-		NSLog(@"azDropboxBeforeUpFilePath: NSException=%@", [exception description]);
-		GA_TRACK_EVENT_ERROR([exception description],0);
-		return @"NG";
-	}
-}
-
-- (NSString*)azDropboxDownAfterFilePath:(NSString*)filePath 
-{
-	// mKmPages リセット
-	return [self GzCalcRollLoad:filePath]; // .CalcRoll - Plist file
-}
-
-//結果　　ここで、成功後の再描画など行う
-- (void)azDropboxUpResult:(NSString*)result //=nil:Up成功
-{
-	//
-}
-- (void)azDropboxDownResult:(NSString*)result //=nil:Down成功
-{
-	//
-}
+//#pragma mark - <AZDropboxDelegate>
+//- (NSString*)azDropboxBeforeUpFilePath:(NSString*)filePath crypt:(BOOL)crypt
+//{    //Up前処理＜UPするファイルを準備する＞
+//    //NSUbiquitousKeyValueStore *kvs = [NSUbiquitousKeyValueStore defaultStore];
+//    //[kvs synchronize]; // iCloud最新同期（取得）
+//
+//    // キーレイアウト を filePath へ書き出す           crypt未対応
+//    @try {
+//        // 先に.plist保存する
+//        NSDictionary *dic = nil;
+//        if (iS_iPAD) {
+//            dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                   mKmPages,        @"PadPages", 
+//                   mKmPadFunc,    @"PadFunc",
+//                   nil];
+//        } else {
+//            dic = [[NSDictionary alloc] initWithObjectsAndKeys:
+//                   mKmPages,        @"Pages", 
+//                   nil];
+//        }
+//        [dic writeToFile:filePath atomically:YES];
+//        return nil; //OK
+//    }
+//    @catch (NSException *exception) {
+//        NSLog(@"azDropboxBeforeUpFilePath: NSException=%@", [exception description]);
+//        GA_TRACK_EVENT_ERROR([exception description],0);
+//        return @"NG";
+//    }
+//}
+//
+//- (NSString*)azDropboxDownAfterFilePath:(NSString*)filePath 
+//{
+//    // mKmPages リセット
+//    return [self GzCalcRollLoad:filePath]; // .CalcRoll - Plist file
+//}
+//
+////結果　　ここで、成功後の再描画など行う
+//- (void)azDropboxUpResult:(NSString*)result //=nil:Up成功
+//{
+//    //
+//}
+//- (void)azDropboxDownResult:(NSString*)result //=nil:Down成功
+//{
+//    //
+//}
 
 
 #pragma mark - AVAudioPlayer

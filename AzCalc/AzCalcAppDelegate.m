@@ -26,7 +26,7 @@
 
 - (void)dealloc
 {
-	[[GANTracker sharedTracker] stopTracker];
+	//[[GANTracker sharedTracker] stopTracker];
 }
 
 #pragma mark - Application lifecycle
@@ -100,9 +100,9 @@
 			[alv	show];
 		}
 	}
-	else if ([[DBSession sharedSession] handleOpenURL:url]) { //OAuth結果：urlに認証キーが含まれる
-        return YES;
-    }
+//    else if ([[DBSession sharedSession] handleOpenURL:url]) { //OAuth結果：urlに認証キーが含まれる
+//        return YES;
+//    }
     // Add whatever other url handling code your app requires here
     return NO;
 }
